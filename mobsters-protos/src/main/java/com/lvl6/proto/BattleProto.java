@@ -4216,6 +4216,42 @@ public final class BattleProto {
      */
     com.google.protobuf.ByteString
         getReplayIdBytes();
+
+    /**
+     * <code>optional int32 cashStolenFromStorage = 20;</code>
+     */
+    boolean hasCashStolenFromStorage();
+    /**
+     * <code>optional int32 cashStolenFromStorage = 20;</code>
+     */
+    int getCashStolenFromStorage();
+
+    /**
+     * <code>optional int32 cashStolenFromGenerators = 21;</code>
+     */
+    boolean hasCashStolenFromGenerators();
+    /**
+     * <code>optional int32 cashStolenFromGenerators = 21;</code>
+     */
+    int getCashStolenFromGenerators();
+
+    /**
+     * <code>optional int32 oilStolenFromStorage = 22;</code>
+     */
+    boolean hasOilStolenFromStorage();
+    /**
+     * <code>optional int32 oilStolenFromStorage = 22;</code>
+     */
+    int getOilStolenFromStorage();
+
+    /**
+     * <code>optional int32 oilStolenFromGenerators = 23;</code>
+     */
+    boolean hasOilStolenFromGenerators();
+    /**
+     * <code>optional int32 oilStolenFromGenerators = 23;</code>
+     */
+    int getOilStolenFromGenerators();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PvpHistoryProto}
@@ -4409,6 +4445,26 @@ public final class BattleProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00010000;
               replayId_ = bs;
+              break;
+            }
+            case 160: {
+              bitField0_ |= 0x00020000;
+              cashStolenFromStorage_ = input.readInt32();
+              break;
+            }
+            case 168: {
+              bitField0_ |= 0x00040000;
+              cashStolenFromGenerators_ = input.readInt32();
+              break;
+            }
+            case 176: {
+              bitField0_ |= 0x00080000;
+              oilStolenFromStorage_ = input.readInt32();
+              break;
+            }
+            case 184: {
+              bitField0_ |= 0x00100000;
+              oilStolenFromGenerators_ = input.readInt32();
               break;
             }
           }
@@ -4943,6 +4999,66 @@ public final class BattleProto {
       }
     }
 
+    public static final int CASHSTOLENFROMSTORAGE_FIELD_NUMBER = 20;
+    private int cashStolenFromStorage_;
+    /**
+     * <code>optional int32 cashStolenFromStorage = 20;</code>
+     */
+    public boolean hasCashStolenFromStorage() {
+      return ((bitField0_ & 0x00020000) == 0x00020000);
+    }
+    /**
+     * <code>optional int32 cashStolenFromStorage = 20;</code>
+     */
+    public int getCashStolenFromStorage() {
+      return cashStolenFromStorage_;
+    }
+
+    public static final int CASHSTOLENFROMGENERATORS_FIELD_NUMBER = 21;
+    private int cashStolenFromGenerators_;
+    /**
+     * <code>optional int32 cashStolenFromGenerators = 21;</code>
+     */
+    public boolean hasCashStolenFromGenerators() {
+      return ((bitField0_ & 0x00040000) == 0x00040000);
+    }
+    /**
+     * <code>optional int32 cashStolenFromGenerators = 21;</code>
+     */
+    public int getCashStolenFromGenerators() {
+      return cashStolenFromGenerators_;
+    }
+
+    public static final int OILSTOLENFROMSTORAGE_FIELD_NUMBER = 22;
+    private int oilStolenFromStorage_;
+    /**
+     * <code>optional int32 oilStolenFromStorage = 22;</code>
+     */
+    public boolean hasOilStolenFromStorage() {
+      return ((bitField0_ & 0x00080000) == 0x00080000);
+    }
+    /**
+     * <code>optional int32 oilStolenFromStorage = 22;</code>
+     */
+    public int getOilStolenFromStorage() {
+      return oilStolenFromStorage_;
+    }
+
+    public static final int OILSTOLENFROMGENERATORS_FIELD_NUMBER = 23;
+    private int oilStolenFromGenerators_;
+    /**
+     * <code>optional int32 oilStolenFromGenerators = 23;</code>
+     */
+    public boolean hasOilStolenFromGenerators() {
+      return ((bitField0_ & 0x00100000) == 0x00100000);
+    }
+    /**
+     * <code>optional int32 oilStolenFromGenerators = 23;</code>
+     */
+    public int getOilStolenFromGenerators() {
+      return oilStolenFromGenerators_;
+    }
+
     private void initFields() {
       battleEndTime_ = 0L;
       attacker_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
@@ -4962,6 +5078,10 @@ public final class BattleProto {
       attackerOilChange_ = 0;
       clanAvenged_ = false;
       replayId_ = "";
+      cashStolenFromStorage_ = 0;
+      cashStolenFromGenerators_ = 0;
+      oilStolenFromStorage_ = 0;
+      oilStolenFromGenerators_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5029,6 +5149,18 @@ public final class BattleProto {
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         output.writeBytes(19, getReplayIdBytes());
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        output.writeInt32(20, cashStolenFromStorage_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        output.writeInt32(21, cashStolenFromGenerators_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        output.writeInt32(22, oilStolenFromStorage_);
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        output.writeInt32(23, oilStolenFromGenerators_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5110,6 +5242,22 @@ public final class BattleProto {
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(19, getReplayIdBytes());
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(20, cashStolenFromStorage_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(21, cashStolenFromGenerators_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(22, oilStolenFromStorage_);
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(23, oilStolenFromGenerators_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5299,6 +5447,14 @@ public final class BattleProto {
         bitField0_ = (bitField0_ & ~0x00010000);
         replayId_ = "";
         bitField0_ = (bitField0_ & ~0x00020000);
+        cashStolenFromStorage_ = 0;
+        bitField0_ = (bitField0_ & ~0x00040000);
+        cashStolenFromGenerators_ = 0;
+        bitField0_ = (bitField0_ & ~0x00080000);
+        oilStolenFromStorage_ = 0;
+        bitField0_ = (bitField0_ & ~0x00100000);
+        oilStolenFromGenerators_ = 0;
+        bitField0_ = (bitField0_ & ~0x00200000);
         return this;
       }
 
@@ -5428,6 +5584,22 @@ public final class BattleProto {
           to_bitField0_ |= 0x00010000;
         }
         result.replayId_ = replayId_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00020000;
+        }
+        result.cashStolenFromStorage_ = cashStolenFromStorage_;
+        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+          to_bitField0_ |= 0x00040000;
+        }
+        result.cashStolenFromGenerators_ = cashStolenFromGenerators_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00080000;
+        }
+        result.oilStolenFromStorage_ = oilStolenFromStorage_;
+        if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
+          to_bitField0_ |= 0x00100000;
+        }
+        result.oilStolenFromGenerators_ = oilStolenFromGenerators_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5522,6 +5694,18 @@ public final class BattleProto {
           bitField0_ |= 0x00020000;
           replayId_ = other.replayId_;
           onChanged();
+        }
+        if (other.hasCashStolenFromStorage()) {
+          setCashStolenFromStorage(other.getCashStolenFromStorage());
+        }
+        if (other.hasCashStolenFromGenerators()) {
+          setCashStolenFromGenerators(other.getCashStolenFromGenerators());
+        }
+        if (other.hasOilStolenFromStorage()) {
+          setOilStolenFromStorage(other.getOilStolenFromStorage());
+        }
+        if (other.hasOilStolenFromGenerators()) {
+          setOilStolenFromGenerators(other.getOilStolenFromGenerators());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7260,6 +7444,134 @@ public final class BattleProto {
   }
   bitField0_ |= 0x00020000;
         replayId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int cashStolenFromStorage_ ;
+      /**
+       * <code>optional int32 cashStolenFromStorage = 20;</code>
+       */
+      public boolean hasCashStolenFromStorage() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
+      }
+      /**
+       * <code>optional int32 cashStolenFromStorage = 20;</code>
+       */
+      public int getCashStolenFromStorage() {
+        return cashStolenFromStorage_;
+      }
+      /**
+       * <code>optional int32 cashStolenFromStorage = 20;</code>
+       */
+      public Builder setCashStolenFromStorage(int value) {
+        bitField0_ |= 0x00040000;
+        cashStolenFromStorage_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 cashStolenFromStorage = 20;</code>
+       */
+      public Builder clearCashStolenFromStorage() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        cashStolenFromStorage_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int cashStolenFromGenerators_ ;
+      /**
+       * <code>optional int32 cashStolenFromGenerators = 21;</code>
+       */
+      public boolean hasCashStolenFromGenerators() {
+        return ((bitField0_ & 0x00080000) == 0x00080000);
+      }
+      /**
+       * <code>optional int32 cashStolenFromGenerators = 21;</code>
+       */
+      public int getCashStolenFromGenerators() {
+        return cashStolenFromGenerators_;
+      }
+      /**
+       * <code>optional int32 cashStolenFromGenerators = 21;</code>
+       */
+      public Builder setCashStolenFromGenerators(int value) {
+        bitField0_ |= 0x00080000;
+        cashStolenFromGenerators_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 cashStolenFromGenerators = 21;</code>
+       */
+      public Builder clearCashStolenFromGenerators() {
+        bitField0_ = (bitField0_ & ~0x00080000);
+        cashStolenFromGenerators_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int oilStolenFromStorage_ ;
+      /**
+       * <code>optional int32 oilStolenFromStorage = 22;</code>
+       */
+      public boolean hasOilStolenFromStorage() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      /**
+       * <code>optional int32 oilStolenFromStorage = 22;</code>
+       */
+      public int getOilStolenFromStorage() {
+        return oilStolenFromStorage_;
+      }
+      /**
+       * <code>optional int32 oilStolenFromStorage = 22;</code>
+       */
+      public Builder setOilStolenFromStorage(int value) {
+        bitField0_ |= 0x00100000;
+        oilStolenFromStorage_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 oilStolenFromStorage = 22;</code>
+       */
+      public Builder clearOilStolenFromStorage() {
+        bitField0_ = (bitField0_ & ~0x00100000);
+        oilStolenFromStorage_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int oilStolenFromGenerators_ ;
+      /**
+       * <code>optional int32 oilStolenFromGenerators = 23;</code>
+       */
+      public boolean hasOilStolenFromGenerators() {
+        return ((bitField0_ & 0x00200000) == 0x00200000);
+      }
+      /**
+       * <code>optional int32 oilStolenFromGenerators = 23;</code>
+       */
+      public int getOilStolenFromGenerators() {
+        return oilStolenFromGenerators_;
+      }
+      /**
+       * <code>optional int32 oilStolenFromGenerators = 23;</code>
+       */
+      public Builder setOilStolenFromGenerators(int value) {
+        bitField0_ |= 0x00200000;
+        oilStolenFromGenerators_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 oilStolenFromGenerators = 23;</code>
+       */
+      public Builder clearOilStolenFromGenerators() {
+        bitField0_ = (bitField0_ & ~0x00200000);
+        oilStolenFromGenerators_ = 0;
         onChanged();
         return this;
       }
@@ -11636,7 +11948,7 @@ public final class BattleProto {
       "mGenerator\030\r \001(\002\"m\n\017PvpMonsterProto\022@\n\017d" +
       "efenderMonster\030\001 \001(\0132\'.com.lvl6.proto.Mi" +
       "nimumUserMonsterProto\022\030\n\020monsterIdDroppe",
-      "d\030\002 \001(\005\"\267\005\n\017PvpHistoryProto\022\025\n\rbattleEnd" +
+      "d\030\002 \001(\005\"\267\006\n\017PvpHistoryProto\022\025\n\rbattleEnd" +
       "Time\030\t \001(\003\022/\n\010attacker\030\001 \001(\0132\035.com.lvl6." +
       "proto.FullUserProto\022:\n\021attackersMonsters" +
       "\030\002 \003(\0132\037.com.lvl6.proto.PvpMonsterProto\022" +
@@ -11653,24 +11965,27 @@ public final class BattleProto {
       "to\022/\n\010defender\030\016 \001(\0132\035.com.lvl6.proto.Fu" +
       "llUserProto\022\032\n\022attackerCashChange\030\017 \001(\005\022" +
       "\031\n\021attackerOilChange\030\020 \001(\005\022\023\n\013clanAvenge" +
-      "d\030\021 \001(\010\022\020\n\010replayId\030\023 \001(\t\"^\n\016PvpLeaguePr" +
-      "oto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueName\030\002 \001(" +
-      "\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013description\030\005 \001(",
-      "\t\"\237\002\n\022PvpClanAvengeProto\022\026\n\016clanAvengeUu" +
-      "id\030\001 \001(\t\022=\n\rusersAvenging\030\002 \003(\0132&.com.lv" +
-      "l6.proto.PvpUserClanAvengeProto\0222\n\010attac" +
-      "ker\030\003 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\0222\n\010defender\030\004 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\025\n\rbattleEndTime\030\005 \001(\003\022\031" +
-      "\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020defenderCla" +
-      "nUuid\030\007 \001(\t\"h\n\026PvpUserClanAvengeProto\022\020\n" +
-      "\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(\t\022\026\n\016cla" +
-      "nAvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030\004 \001(\003\"`\n",
-      "\021BattleReplayProto\022\022\n\nreplayUuid\030\001 \001(\t\022\023" +
-      "\n\013creatorUuid\030\002 \001(\t\022\016\n\006replay\030\003 \001(\014\022\022\n\nc" +
-      "reateTime\030\004 \001(\005*E\n\014BattleResult\022\020\n\014ATTAC" +
-      "KER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER_" +
-      "FLEE\020\003B\rB\013BattleProto"
+      "d\030\021 \001(\010\022\020\n\010replayId\030\023 \001(\t\022\035\n\025cashStolenF" +
+      "romStorage\030\024 \001(\005\022 \n\030cashStolenFromGenera" +
+      "tors\030\025 \001(\005\022\034\n\024oilStolenFromStorage\030\026 \001(\005",
+      "\022\037\n\027oilStolenFromGenerators\030\027 \001(\005\"^\n\016Pvp" +
+      "LeagueProto\022\020\n\010leagueId\030\001 \001(\005\022\022\n\nleagueN" +
+      "ame\030\002 \001(\t\022\021\n\timgPrefix\030\003 \001(\t\022\023\n\013descript" +
+      "ion\030\005 \001(\t\"\237\002\n\022PvpClanAvengeProto\022\026\n\016clan" +
+      "AvengeUuid\030\001 \001(\t\022=\n\rusersAvenging\030\002 \003(\0132" +
+      "&.com.lvl6.proto.PvpUserClanAvengeProto\022" +
+      "2\n\010attacker\030\003 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\0222\n\010defender\030\004 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022\025\n\rbattleEndTime" +
+      "\030\005 \001(\003\022\031\n\021avengeRequestTime\030\006 \001(\003\022\030\n\020def",
+      "enderClanUuid\030\007 \001(\t\"h\n\026PvpUserClanAvenge" +
+      "Proto\022\020\n\010userUuid\030\001 \001(\t\022\020\n\010clanUuid\030\002 \001(" +
+      "\t\022\026\n\016clanAvengeUuid\030\003 \001(\t\022\022\n\navengeTime\030" +
+      "\004 \001(\003\"`\n\021BattleReplayProto\022\022\n\nreplayUuid" +
+      "\030\001 \001(\t\022\023\n\013creatorUuid\030\002 \001(\t\022\016\n\006replay\030\003 " +
+      "\001(\014\022\022\n\ncreateTime\030\004 \001(\005*E\n\014BattleResult\022" +
+      "\020\n\014ATTACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rA" +
+      "TTACKER_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -11705,7 +12020,7 @@ public final class BattleProto {
     internal_static_com_lvl6_proto_PvpHistoryProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_PvpHistoryProto_descriptor,
-        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", "AttackerCashChange", "AttackerOilChange", "ClanAvenged", "ReplayId", });
+        new java.lang.String[] { "BattleEndTime", "Attacker", "AttackersMonsters", "AttackerWon", "DefenderCashChange", "DefenderOilChange", "ExactedRevenge", "ProspectiveCashWinnings", "ProspectiveOilWinnings", "AttackerBefore", "AttackerAfter", "DefenderBefore", "DefenderAfter", "Defender", "AttackerCashChange", "AttackerOilChange", "ClanAvenged", "ReplayId", "CashStolenFromStorage", "CashStolenFromGenerators", "OilStolenFromStorage", "OilStolenFromGenerators", });
     internal_static_com_lvl6_proto_PvpLeagueProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_PvpLeagueProto_fieldAccessorTable = new

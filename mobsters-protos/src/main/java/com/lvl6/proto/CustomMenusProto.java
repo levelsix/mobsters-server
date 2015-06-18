@@ -3,8 +3,8 @@
 
 package com.lvl6.proto;
 
-public final class CustomMenuesProto {
-  private CustomMenuesProto() {}
+public final class CustomMenusProto {
+  private CustomMenusProto() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
@@ -196,14 +196,14 @@ public final class CustomMenuesProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.CustomMenuesProto.internal_static_com_lvl6_proto_CustomMenuProto_descriptor;
+      return com.lvl6.proto.CustomMenusProto.internal_static_com_lvl6_proto_CustomMenuProto_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.CustomMenuesProto.internal_static_com_lvl6_proto_CustomMenuProto_fieldAccessorTable
+      return com.lvl6.proto.CustomMenusProto.internal_static_com_lvl6_proto_CustomMenuProto_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.lvl6.proto.CustomMenuesProto.CustomMenuProto.class, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder.class);
+              com.lvl6.proto.CustomMenusProto.CustomMenuProto.class, com.lvl6.proto.CustomMenusProto.CustomMenuProto.Builder.class);
     }
 
     public static com.google.protobuf.Parser<CustomMenuProto> PARSER =
@@ -469,53 +469,53 @@ public final class CustomMenuesProto {
       return super.writeReplace();
     }
 
-    public static com.lvl6.proto.CustomMenuesProto.CustomMenuProto parseFrom(
+    public static com.lvl6.proto.CustomMenusProto.CustomMenuProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.CustomMenuesProto.CustomMenuProto parseFrom(
+    public static com.lvl6.proto.CustomMenusProto.CustomMenuProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.CustomMenuesProto.CustomMenuProto parseFrom(byte[] data)
+    public static com.lvl6.proto.CustomMenusProto.CustomMenuProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.lvl6.proto.CustomMenuesProto.CustomMenuProto parseFrom(
+    public static com.lvl6.proto.CustomMenusProto.CustomMenuProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.lvl6.proto.CustomMenuesProto.CustomMenuProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.CustomMenusProto.CustomMenuProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.CustomMenuesProto.CustomMenuProto parseFrom(
+    public static com.lvl6.proto.CustomMenusProto.CustomMenuProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.CustomMenuesProto.CustomMenuProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.CustomMenusProto.CustomMenuProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.lvl6.proto.CustomMenuesProto.CustomMenuProto parseDelimitedFrom(
+    public static com.lvl6.proto.CustomMenusProto.CustomMenuProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.lvl6.proto.CustomMenuesProto.CustomMenuProto parseFrom(
+    public static com.lvl6.proto.CustomMenusProto.CustomMenuProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.lvl6.proto.CustomMenuesProto.CustomMenuProto parseFrom(
+    public static com.lvl6.proto.CustomMenusProto.CustomMenuProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -524,7 +524,7 @@ public final class CustomMenuesProto {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.CustomMenuesProto.CustomMenuProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.CustomMenusProto.CustomMenuProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -541,20 +541,20 @@ public final class CustomMenuesProto {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:com.lvl6.proto.CustomMenuProto)
-        com.lvl6.proto.CustomMenuesProto.CustomMenuProtoOrBuilder {
+        com.lvl6.proto.CustomMenusProto.CustomMenuProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.CustomMenuesProto.internal_static_com_lvl6_proto_CustomMenuProto_descriptor;
+        return com.lvl6.proto.CustomMenusProto.internal_static_com_lvl6_proto_CustomMenuProto_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.CustomMenuesProto.internal_static_com_lvl6_proto_CustomMenuProto_fieldAccessorTable
+        return com.lvl6.proto.CustomMenusProto.internal_static_com_lvl6_proto_CustomMenuProto_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.lvl6.proto.CustomMenuesProto.CustomMenuProto.class, com.lvl6.proto.CustomMenuesProto.CustomMenuProto.Builder.class);
+                com.lvl6.proto.CustomMenusProto.CustomMenuProto.class, com.lvl6.proto.CustomMenusProto.CustomMenuProto.Builder.class);
       }
 
-      // Construct using com.lvl6.proto.CustomMenuesProto.CustomMenuProto.newBuilder()
+      // Construct using com.lvl6.proto.CustomMenusProto.CustomMenuProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -599,23 +599,23 @@ public final class CustomMenuesProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.CustomMenuesProto.internal_static_com_lvl6_proto_CustomMenuProto_descriptor;
+        return com.lvl6.proto.CustomMenusProto.internal_static_com_lvl6_proto_CustomMenuProto_descriptor;
       }
 
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto getDefaultInstanceForType() {
-        return com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance();
+      public com.lvl6.proto.CustomMenusProto.CustomMenuProto getDefaultInstanceForType() {
+        return com.lvl6.proto.CustomMenusProto.CustomMenuProto.getDefaultInstance();
       }
 
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto build() {
-        com.lvl6.proto.CustomMenuesProto.CustomMenuProto result = buildPartial();
+      public com.lvl6.proto.CustomMenusProto.CustomMenuProto build() {
+        com.lvl6.proto.CustomMenusProto.CustomMenuProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.lvl6.proto.CustomMenuesProto.CustomMenuProto buildPartial() {
-        com.lvl6.proto.CustomMenuesProto.CustomMenuProto result = new com.lvl6.proto.CustomMenuesProto.CustomMenuProto(this);
+      public com.lvl6.proto.CustomMenusProto.CustomMenuProto buildPartial() {
+        com.lvl6.proto.CustomMenusProto.CustomMenuProto result = new com.lvl6.proto.CustomMenusProto.CustomMenuProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -656,16 +656,16 @@ public final class CustomMenuesProto {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.CustomMenuesProto.CustomMenuProto) {
-          return mergeFrom((com.lvl6.proto.CustomMenuesProto.CustomMenuProto)other);
+        if (other instanceof com.lvl6.proto.CustomMenusProto.CustomMenuProto) {
+          return mergeFrom((com.lvl6.proto.CustomMenusProto.CustomMenuProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.lvl6.proto.CustomMenuesProto.CustomMenuProto other) {
-        if (other == com.lvl6.proto.CustomMenuesProto.CustomMenuProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.CustomMenusProto.CustomMenuProto other) {
+        if (other == com.lvl6.proto.CustomMenusProto.CustomMenuProto.getDefaultInstance()) return this;
         if (other.hasCustomMenuId()) {
           setCustomMenuId(other.getCustomMenuId());
         }
@@ -704,11 +704,11 @@ public final class CustomMenuesProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.lvl6.proto.CustomMenuesProto.CustomMenuProto parsedMessage = null;
+        com.lvl6.proto.CustomMenusProto.CustomMenuProto parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.lvl6.proto.CustomMenuesProto.CustomMenuProto) e.getUnfinishedMessage();
+          parsedMessage = (com.lvl6.proto.CustomMenusProto.CustomMenuProto) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -1049,7 +1049,7 @@ public final class CustomMenuesProto {
       "positionX\030\002 \001(\005\022\021\n\tpositionY\030\003 \001(\005\022\021\n\tpo" +
       "sitionZ\030\004 \001(\005\022\020\n\010isJiggle\030\005 \001(\010\022\021\n\timage" +
       "Name\030\006 \001(\t\022\025\n\ripadPositionX\030\007 \001(\005\022\025\n\ripa" +
-      "dPositionY\030\010 \001(\005B\023B\021CustomMenuesProto"
+      "dPositionY\030\010 \001(\005B\022B\020CustomMenusProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

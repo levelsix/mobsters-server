@@ -16828,7 +16828,7 @@ public final class StaticDataStuffProto {
           com.lvl6.proto.BoosterPackStuffProto.getDescriptor(),
           com.lvl6.proto.CityProto.getDescriptor(),
           com.lvl6.proto.ClanProto.getDescriptor(),
-          com.lvl6.proto.CustomMenuesProto.getDescriptor(),
+          com.lvl6.proto.CustomMenusProto.getDescriptor(),
           com.lvl6.proto.ItemsProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.PrerequisiteProto.getDescriptor(),
@@ -16854,7 +16854,7 @@ public final class StaticDataStuffProto {
     com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
     com.lvl6.proto.CityProto.getDescriptor();
     com.lvl6.proto.ClanProto.getDescriptor();
-    com.lvl6.proto.CustomMenuesProto.getDescriptor();
+    com.lvl6.proto.CustomMenusProto.getDescriptor();
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.PrerequisiteProto.getDescriptor();

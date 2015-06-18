@@ -298,7 +298,11 @@ public class EndPvpBattleController extends EventController {
 				if (null != epba.getDefender()) {
 					if (null != battleJustEnded) {
 						PvpHistoryProto php = createPvpProto(attacker,
-								defender, curDate, battleJustEnded);
+								defender, curDate, battleJustEnded,
+								epba.getCashStolenFromStorage(),
+								epba.getCashStolenFromGenerators(),
+								epba.getOilStolenFromStorage(),
+								epba.getOilStolenFromGenerators());
 						log.info("gotAttackedHistory {}", php);
 						resBuilder.setBattleThatJustEnded(php);
 					}
@@ -445,7 +449,9 @@ public class EndPvpBattleController extends EventController {
 
 	//TODO: CLEAN UP: copied from SetPvpBattleHistoryAction, pasted, and modified
 	private PvpHistoryProto createPvpProto(User attacker, User defender,
-			Date curDate, PvpBattleHistoryPojo gotAttackedHistory) {
+			Date curDate, PvpBattleHistoryPojo gotAttackedHistory,
+			int cashStolenFromStorage, int cashStolenFromGenerators,
+			int oilStolenFromStorage, int oilStolenFromGenerators) {
 		if (null == defender) {
 			return null;
 		}
@@ -501,6 +507,15 @@ public class EndPvpBattleController extends EventController {
 		Map<String, Integer> attackerIdsToProspectiveOilWinnings = Collections
 				.singletonMap(attackerId,
 						potentialResult.getUnsignedOilAttackerWins());
+		Map<String, Integer> attackerIdsToCashStolenFromStorage = Collections.
+				singletonMap(attackerId, cashStolenFromStorage);
+		Map<String, Integer> attackerIdsToCashStolenFromGenerators = Collections.
+				singletonMap(attackerId, cashStolenFromGenerators);
+		Map<String, Integer> attackerIdsToOilStolenFromStorage = Collections.
+				singletonMap(attackerId, oilStolenFromStorage);
+		Map<String, Integer> attackerIdsToOilStolenFromGenerators = Collections.
+				singletonMap(attackerId, oilStolenFromGenerators);
+		
 
 		//this PvpHistoryProto contains information for a person who
 		//is going to attack
@@ -510,7 +525,9 @@ public class EndPvpBattleController extends EventController {
 						userIdsToUserMonsters,
 						userIdToUserMonsterIdToDroppedId,
 						attackerIdsToProspectiveCashWinnings,
-						attackerIdsToProspectiveOilWinnings);
+						attackerIdsToProspectiveOilWinnings,
+						attackerIdsToCashStolenFromStorage, attackerIdsToCashStolenFromGenerators,
+						attackerIdsToOilStolenFromStorage, attackerIdsToOilStolenFromGenerators);
 
 		if (null != historyProtoList && !historyProtoList.isEmpty()) {
 			PvpHistoryProto pp = historyProtoList.get(0);

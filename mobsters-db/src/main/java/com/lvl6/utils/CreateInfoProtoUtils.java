@@ -74,7 +74,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
-import com.lvl6.proto.CustomMenuesProto.CustomMenuProto;
+import com.lvl6.proto.CustomMenusProto.CustomMenuProto;
 import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.FileDownloadConstantProto;
@@ -661,7 +661,9 @@ public class CreateInfoProtoUtils {
 			Collection<MonsterForUser> userMonsters,
 			Map<String, Integer> userMonsterIdToDropped,
 			int prospectiveCashWinnings, int prospectiveOilWinnings,
-			String replayId)
+			String replayId, int cashStolenFromStorage,
+			int cashStolenFromGenerators, int oilStolenFromStorage,
+			int oilStolenFromGenerators)
 			//BattleReplayForUser brfu)
 	{
 		PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
@@ -676,6 +678,11 @@ public class CreateInfoProtoUtils {
 		phpb.setProspectiveCashWinnings(prospectiveCashWinnings);
 		phpb.setProspectiveOilWinnings(prospectiveOilWinnings);
 
+		phpb.setCashStolenFromStorage(cashStolenFromStorage);
+		phpb.setCashStolenFromGenerators(cashStolenFromGenerators);
+		phpb.setOilStolenFromStorage(oilStolenFromStorage);
+		phpb.setOilStolenFromGenerators(oilStolenFromGenerators);
+		
 		modifyPvpHistoryProto(phpb, info);
 
 //		if (null != brfu) {
@@ -695,7 +702,11 @@ public class CreateInfoProtoUtils {
 			Map<String, List<MonsterForUser>> attackerIdsToUserMonsters,
 			Map<String, Map<String, Integer>> userIdToUserMonsterIdToDropped,
 			Map<String, Integer> attackerIdsToProspectiveCashWinnings,
-			Map<String, Integer> attackerIdsToProspectiveOilWinnings)
+			Map<String, Integer> attackerIdsToProspectiveOilWinnings,
+			Map<String, Integer> cashStolenFromStorageMap, 
+			Map<String, Integer> cashStolenFromGeneratorsMap,
+			Map<String, Integer> oilStolenFromStorageMap, 
+			Map<String, Integer> oilStolenFromGeneratorsMap)
 	{
 
 		List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
@@ -727,10 +738,17 @@ public class CreateInfoProtoUtils {
 //				brfu = replayIdToReplay.get(replayId);
 //			}
 
+			int cashStolenFromStorage = cashStolenFromStorageMap.get(attackerId);
+			int cashStolenFromGenerators = cashStolenFromGeneratorsMap.get(attackerId);
+			int oilStolenFromStorage = oilStolenFromStorageMap.get(attackerId);
+			int oilStolenFromGenerators = oilStolenFromGeneratorsMap.get(attackerId);
+			
+			
 			PvpHistoryProto php = createGotAttackedPvpHistoryProto(attacker,
 					clan, history, attackerMonsters, userMonsterIdToDropped,
 					prospectiveCashWinnings, prospectiveOilWinnings,
-					replayId);// brfu);
+					replayId, cashStolenFromStorage, cashStolenFromGenerators,
+					oilStolenFromStorage, oilStolenFromGenerators);// brfu);
 			phpList.add(php);
 		}
 		return phpList;

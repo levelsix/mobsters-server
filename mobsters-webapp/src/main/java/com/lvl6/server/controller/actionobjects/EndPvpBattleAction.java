@@ -846,6 +846,39 @@ public class EndPvpBattleAction {
 	public void setUpdateList(List<StructureForUserPojo> updateList) {
 		this.updateList = updateList;
 	}
+
+	public int getOilStolenFromStorage() {
+		return oilStolenFromStorage;
+	}
+
+	public void setOilStolenFromStorage(int oilStolenFromStorage) {
+		this.oilStolenFromStorage = oilStolenFromStorage;
+	}
+
+	public int getCashStolenFromStorage() {
+		return cashStolenFromStorage;
+	}
+
+	public void setCashStolenFromStorage(int cashStolenFromStorage) {
+		this.cashStolenFromStorage = cashStolenFromStorage;
+	}
+
+	public int getOilStolenFromGenerators() {
+		return oilStolenFromGenerators;
+	}
+
+	public void setOilStolenFromGenerators(int oilStolenFromGenerators) {
+		this.oilStolenFromGenerators = oilStolenFromGenerators;
+	}
+
+	public int getCashStolenFromGenerators() {
+		return cashStolenFromGenerators;
+	}
+
+	public void setCashStolenFromGenerators(int cashStolenFromGenerators) {
+		this.cashStolenFromGenerators = cashStolenFromGenerators;
+	}
+	
 	
 	
 }
