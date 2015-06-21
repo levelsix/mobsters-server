@@ -16,8 +16,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 //shared logic between controllers where a user leaves a lcan
 public class ExitClanAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger( ExitClanAction.class);
 
 	private String userId;
 	private String clanId;

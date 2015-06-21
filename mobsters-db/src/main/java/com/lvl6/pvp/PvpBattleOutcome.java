@@ -9,8 +9,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 
 public class PvpBattleOutcome {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger( PvpBattleOutcome.class);
 	
 
 	private static double SCORING_CURVE_BIAS = 0D;

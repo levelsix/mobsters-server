@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.ChangeClanSettingsRequestProto;
 
 public class ChangeClanSettingsRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ChangeClanSettingsRequestEvent.class);
 
 	private ChangeClanSettingsRequestProto changeClanSettingsRequestProto;
 

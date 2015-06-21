@@ -13,8 +13,7 @@ import com.lvl6.server.controller.actionobjects.UserSegmentationGroupAction;
 
 public class UserSegmentationGroupTest {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UserSegmentationGroupTest.class);
 
 	@Test
 	public void testReturnAppropriateObjectGroup() {

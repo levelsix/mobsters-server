@@ -9,6 +9,9 @@ import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
@@ -29,22 +32,21 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class AwardClanGiftsAction {
+@Component@Scope("prototype")public class AwardClanGiftsAction {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(AwardClanGiftsAction.class);
+	private static final Logger log = LoggerFactory.getLogger(AwardClanGiftsAction.class);
 
 	private String gifterUserId;
 	private User gifterUser;
 	private String clanId;
 	private int giftId;
 	private String reasonForGift;
-	private GiftRetrieveUtils giftRetrieveUtil;
-	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
-	private RewardRetrieveUtils rewardRetrieveUtil;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private InsertUtil insertUtil;
-	private CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtil; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 	private Random rand;
 
 	public AwardClanGiftsAction() {

@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
@@ -28,27 +31,26 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class CollectGiftAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class CollectGiftAction {
+	private static Logger log = LoggerFactory.getLogger( CollectGiftAction.class);
 
 	private String userId;
 	private int maxCash;
 	private int maxOil;
 	private List<String> ugIds;
 	private Date clientTime;
-	private GiftForUserRetrieveUtils giftForUserRetrieveUtil;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private RewardRetrieveUtils rewardRetrieveUtil;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private InsertUtil insertUtil;
-	private UpdateUtil updateUtil;
-	private MonsterStuffUtils monsterStuffUtil;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private GiftRetrieveUtils giftRetrieveUtil;
-	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected GiftForUserRetrieveUtils giftForUserRetrieveUtil; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtil; 
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected MonsterStuffUtils monsterStuffUtil; 
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 
 	public CollectGiftAction(String userId, int maxCash, int maxOil,
 			List<String> ugIds, Date clientTime,

@@ -36,8 +36,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class NormStructWaitCompleteController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(NormStructWaitCompleteController.class);
 
 	@Autowired
 	protected Locker locker;

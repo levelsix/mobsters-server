@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobRequestProto;
 
 public class RedeemMiniJobRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RedeemMiniJobRequestEvent.class);
 
 	private RedeemMiniJobRequestProto redeemMiniJobRequestProto;
 

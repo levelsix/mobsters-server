@@ -29,8 +29,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class UserRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UserRetrieveUtils2.class);
 
 	private final String TABLE_NAME = DBConstants.TABLE_USER;
 	private static final UserForClientMapper rowMapper = new UserForClientMapper();

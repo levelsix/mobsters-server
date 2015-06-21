@@ -22,8 +22,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class BattleItemQueueForUserRetrieveUtil {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BattleItemQueueForUserRetrieveUtil.class);
 
 	private final String TABLE_NAME = DBConstants.TABLE_BATTLE_ITEM_QUEUE_FOR_USER;
 	private static final UserBattleItemQueueForClientMapper rowMapper = new UserBattleItemQueueForClientMapper();

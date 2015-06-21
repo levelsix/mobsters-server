@@ -30,8 +30,7 @@ import com.lvl6.server.eventsender.ToClientEvents;
 
 public class UpdateUserCurrencyController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UpdateUserCurrencyController.class);
 
 	@Autowired
 	protected Locker locker;

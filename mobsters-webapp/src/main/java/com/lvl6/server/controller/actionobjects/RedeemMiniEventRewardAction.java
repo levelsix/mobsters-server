@@ -8,6 +8,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MiniEventForPlayerLvl;
@@ -35,7 +38,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class RedeemMiniEventRewardAction {
+@Component@Scope("prototype")public class RedeemMiniEventRewardAction {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(RedeemMiniEventRewardAction.class);
@@ -47,20 +50,20 @@ public class RedeemMiniEventRewardAction {
 	private int mefplId;
 	private RewardTier rt;
 	private Date clientTime;
-	private GiftRetrieveUtils giftRetrieveUtil;
-	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private MiniEventForUserRetrieveUtil mefuRetrieveUtil;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private InsertUtil insertUtil;
-	private UpdateUtil updateUtil;
-	private MonsterStuffUtils monsterStuffUtils;
-	private MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
-	private MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
-	private RewardRetrieveUtils rewardRetrieveUtils;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected MiniEventForUserRetrieveUtil mefuRetrieveUtil; 
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
+	@Autowired protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils; 
+	@Autowired protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils; 
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtils; 
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 
 	public RedeemMiniEventRewardAction(String userId, User user,
 			int maxCash, int maxOil, int mefplId, RewardTier rt,

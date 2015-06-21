@@ -20,8 +20,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class StructureMoneyTreeRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(StructureMoneyTreeRetrieveUtils.class);
 
 	private static Map<Integer, StructureMoneyTree> structIdsToMoneyTrees;
 

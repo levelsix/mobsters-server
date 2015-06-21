@@ -62,6 +62,7 @@ import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -70,8 +71,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class RequestJoinClanController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RequestJoinClanController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -241,12 +241,8 @@ public class RequestJoinClanController extends EventController {
 				StartUpResource fillMe = new StartUpResource(
 						getUserRetrieveUtils(), getClanRetrieveUtils());
 
-				SetClanDataProtoAction scdpa = new SetClanDataProtoAction(
-						clanId, rjca.getClan(), rjca.getUser(), userId, lastChatTimeContainer,
-						fillMe, clanHelpRetrieveUtil, clanAvengeRetrieveUtil,
-						clanAvengeUserRetrieveUtil, clanChatPostRetrieveUtils,
-						clanMemberTeamDonationRetrieveUtil,
-						monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
+				SetClanDataProtoAction scdpa = AppContext.getBean(SetClanDataProtoAction.class);
+				scdpa.wire(clanId, rjca.getClan(), rjca.getUser(), userId, lastChatTimeContainer, fillMe);
 				cdp = scdpa.execute();
 
 				//update clan cache

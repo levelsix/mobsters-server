@@ -18,8 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TimeUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(TimeUtils.class);
 	private static String[] days = { "MONDAY", "TUESDAY", "WEDNESDAY",
 			"THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY", };
 

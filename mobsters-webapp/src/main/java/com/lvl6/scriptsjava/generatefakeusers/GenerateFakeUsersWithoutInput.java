@@ -75,7 +75,7 @@ public class GenerateFakeUsersWithoutInput {
 		}
 
 		InsertUtil insertUtils = (InsertUtil) AppContext
-				.getApplicationContext().getBean("insertUtils");
+				.get().getBean("insertUtils");
 		String facebookId = null;
 		int avatarMonsterId = ControllerConstants.TUTORIAL__STARTING_MONSTER_ID;
 		if (insertUtils.insertUser(name, null, level, 0, 0, 0, 0, true, null,

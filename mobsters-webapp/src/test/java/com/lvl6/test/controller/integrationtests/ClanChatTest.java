@@ -49,8 +49,7 @@ package com.lvl6.test.controller.integrationtests;
 //	private MinimumUserProto mup;
 //	private String userId;
 //
-//	private static Logger log = LoggerFactory.getLogger(new Object() {
-//	}.getClass().getEnclosingClass());
+//	private static Logger log = LoggerFactory.getLogger(//	}.getClass().getEnclosingClass());
 //
 //	@Autowired
 //	UserRetrieveUtils2 userRetrieveUtil;

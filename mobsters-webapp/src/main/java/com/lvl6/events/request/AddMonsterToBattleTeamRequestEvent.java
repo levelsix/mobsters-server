@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamRequestProto;
 
 public class AddMonsterToBattleTeamRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(AddMonsterToBattleTeamRequestEvent.class);
 
 	private AddMonsterToBattleTeamRequestProto addMonsterToBattleTeamRequestProto;
 

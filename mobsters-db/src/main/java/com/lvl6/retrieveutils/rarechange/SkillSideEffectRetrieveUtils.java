@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class SkillSideEffectRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SkillSideEffectRetrieveUtils.class);
 
 	private static Map<Integer, SkillSideEffect> idsToSkillSideEffects;
 

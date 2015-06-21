@@ -21,8 +21,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class BoosterDisplayItemRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BoosterDisplayItemRetrieveUtils.class);
 
 	private static Map<Integer, BoosterDisplayItem> boosterDisplayItemIdsToBoosterDisplayItems;
 	//key:booster pack id --> value:(key: booster item id --> value: booster item)

@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.User;
@@ -20,9 +23,8 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class CreateBattleItemAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class CreateBattleItemAction {
+	private static Logger log = LoggerFactory.getLogger( CreateBattleItemAction.class);
 
 	private String userId;
 	private List<BattleItemQueueForUser> deletedList; //completed queue items
@@ -33,11 +35,11 @@ public class CreateBattleItemAction {
 	private int oilChange;
 	private int maxOil;
 	private int gemCostForCreating;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
-	protected InsertUtil insertUtil;
-	protected UpdateUtil updateUtil;
-	protected DeleteUtil deleteUtil;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected DeleteUtil deleteUtil;
 	private MiscMethods miscMethods;
 
 	public CreateBattleItemAction(

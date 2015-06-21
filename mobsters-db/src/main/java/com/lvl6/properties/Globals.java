@@ -167,34 +167,34 @@ public class Globals {
 	public static final int DEFAULT_CONTROLLER_WORKERS = 2;
 
 	public static final boolean IS_SANDBOX() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.getSandbox();
 	};
 
 	public static final boolean ALLOW_CHEATS() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.isAllowCheats();
 	};
 
 	public static final boolean KABAM_ENABLED() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.isKabamEnabled();
 	};
 
 	public static final boolean OFFERCHART_ENABLED() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.isOfferChartEnabled();
 	};
 
 	public static final int NUM_MINUTES_DIFFERENCE_LEEWAY_FOR_CLIENT_TIME = 10;
 
 	public static final String APP_STORE_URL() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.getAppStoreUrl();
 	};//"itms-apps://itunes.com/apps/ageofchaos";
 
 	public static final String REVIEW_PAGE_URL() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.getReviewPageUrl();
 	};//= "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=548520325&pageNumber=0&sortOrdering=1&type=Purple+Software";
 
@@ -205,42 +205,42 @@ public class Globals {
 	public static final int NUM_SECONDS_FOR_CONTROLLER_PROCESS_EVENT_LONGTIME_LOG_WARNING = 1;
 
 	public static final String APPLE_BUNDLE_ID() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.getAppleBundleId();
 	};
 
 	public static final float VERSION_NUMBER() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.getVersionNumber();
 	};
 
 	public static int HEALTH_CHECK_TIMEOUT() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.getHealthCheckTimeoutSeconds();
 	};
 
 	public static final Integer INITIAL_DIAMONDS() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.getInitialDiamonds();
 	};
 
 	public static final Integer VERSION_SUPER_NUMBER() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.getVersionSuperNumber();
 	};
 
 	public static final Integer VERSION_MAJOR_NUMBER() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.getVersionMajorNumber();
 	};
 
 	public static final Integer VERSION_MINOR_NUMBER() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.getVersionMinorNumber();
 	};
 
 	public static final boolean IDDICTION_ON() {
-		return AppContext.getApplicationContext().getBean(Globals.class)
+		return AppContext.get().getBean(Globals.class)
 				.isIddictionOn();
 	};;
 

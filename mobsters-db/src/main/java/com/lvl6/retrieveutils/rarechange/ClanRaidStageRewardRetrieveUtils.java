@@ -20,8 +20,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class ClanRaidStageRewardRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ClanRaidStageRewardRetrieveUtils.class);
 
 	private static Map<Integer, Map<Integer, ClanRaidStageReward>> clanRaidStageIdsToIdsToRewards;
 	private static Map<Integer, ClanRaidStageReward> idsToRewards;

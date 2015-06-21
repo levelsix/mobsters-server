@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.User;
@@ -14,15 +17,14 @@ import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.Discar
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class DiscardBattleItemAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class DiscardBattleItemAction {
+	private static Logger log = LoggerFactory.getLogger( DiscardBattleItemAction.class);
 
 	private String userId;
 	private User user;
 	private Map<Integer, Integer> deletedBattleItemIdsToQuantity;
-	private BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
-	protected UpdateUtil updateUtil;
+	@Autowired protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil; 
+	@Autowired protected UpdateUtil updateUtil;
 
 	public DiscardBattleItemAction(String userId, User user,
 			Map<Integer, Integer> deletedBattleItemIdsToQuantity,

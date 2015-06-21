@@ -12,8 +12,7 @@ import com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto;
 
 public class TradeItemForResourcesRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(TradeItemForResourcesRequestEvent.class);
 
 	private TradeItemForResourcesRequestProto tradeItemForResourcesRequestProto;
 

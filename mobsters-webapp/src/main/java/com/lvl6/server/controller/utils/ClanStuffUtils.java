@@ -31,8 +31,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 @Component
 public class ClanStuffUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ClanStuffUtils.class);
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;

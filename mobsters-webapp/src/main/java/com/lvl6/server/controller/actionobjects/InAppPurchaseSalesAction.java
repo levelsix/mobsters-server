@@ -11,6 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Reward;
@@ -38,7 +41,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class InAppPurchaseSalesAction {
+@Component@Scope("prototype")public class InAppPurchaseSalesAction {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(InAppPurchaseSalesAction.class);
@@ -48,24 +51,24 @@ public class InAppPurchaseSalesAction {
 	private JSONObject receiptFromApple;
 	private Date now;
 	private String uuid;
-	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
-	private GiftRetrieveUtils giftRetrieveUtil;
-	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private MonsterStuffUtils monsterStuffUtils;
-	protected InsertUtil insertUtil;
-	protected UpdateUtil updateUtil;
-	private CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil; 
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 	private MiscMethods miscMethods;
-	private SalesPackageRetrieveUtils salesPackageRetrieveUtils;
-	private SalesItemRetrieveUtils salesItemRetrieveUtils;
-	private MonsterRetrieveUtils monsterRetrieveUtils;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	@Autowired protected SalesPackageRetrieveUtils salesPackageRetrieveUtils; 
+	@Autowired protected SalesItemRetrieveUtils salesItemRetrieveUtils; 
+	@Autowired protected MonsterRetrieveUtils monsterRetrieveUtils; 
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
 	private SalesPackage salesPackage;
-	private InAppPurchaseUtils inAppPurchaseUtils;
-	private RewardRetrieveUtils rewardRetrieveUtils;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private UserRetrieveUtils2 userRetrieveUtil;
+	@Autowired protected InAppPurchaseUtils inAppPurchaseUtils; 
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtils; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
 
 	public InAppPurchaseSalesAction() {
 		super();

@@ -48,8 +48,7 @@ public class PrivateChatPostTest {
 	private MinimumUserProto mup2;
 	private String userId2;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(	}.getClass().getEnclosingClass());
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;

@@ -6,19 +6,21 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
-public class VoidTeamDonationSolicitationAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class VoidTeamDonationSolicitationAction {
+	private static Logger log = LoggerFactory.getLogger( VoidTeamDonationSolicitationAction.class);
 
 	private String userId;
 	private Map<String, List<MonsterSnapshotForUser>> donationIdsToSnapshots;
-	private DeleteUtil deleteUtil;
+	@Autowired protected DeleteUtil deleteUtil; 
 
 	public VoidTeamDonationSolicitationAction(String userId,
 			Map<String, List<MonsterSnapshotForUser>> donationIdsToSnapshots,

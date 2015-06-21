@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto;
 
 public class HealMonsterRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(HealMonsterRequestEvent.class);
 
 	private HealMonsterRequestProto healMonsterRequestProto;
 

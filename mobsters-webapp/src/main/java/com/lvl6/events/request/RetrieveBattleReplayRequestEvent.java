@@ -12,8 +12,7 @@ import com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto;
 
 public class RetrieveBattleReplayRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(RetrieveBattleReplayRequestEvent.class);
 
 	private RetrieveBattleReplayRequestProto retrieveBattleReplayRequestProto;
 

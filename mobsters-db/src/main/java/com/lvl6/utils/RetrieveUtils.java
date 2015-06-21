@@ -11,27 +11,27 @@ import com.lvl6.spring.AppContext;
 public class RetrieveUtils {
 
 	public static UserRetrieveUtils2 userRetrieveUtils() {
-		return AppContext.getApplicationContext().getBean(
+		return AppContext.get().getBean(
 				UserRetrieveUtils2.class);
 	}
 
 	public static UserClanRetrieveUtils2 userClanRetrieveUtils() {
-		return AppContext.getApplicationContext().getBean(
+		return AppContext.get().getBean(
 				UserClanRetrieveUtils2.class);
 	}
 
 	public static MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils() {
-		return AppContext.getApplicationContext().getBean(
+		return AppContext.get().getBean(
 				MonsterForUserRetrieveUtils2.class);
 	}
 
 	public static QuestForUserRetrieveUtils2 questForUserRetrieveUtils() {
-		return AppContext.getApplicationContext().getBean(
+		return AppContext.get().getBean(
 				QuestForUserRetrieveUtils2.class);
 	}
 
 	public static StructureForUserRetrieveUtils2 userStructRetrieveUtils() {
-		return AppContext.getApplicationContext().getBean(
+		return AppContext.get().getBean(
 				StructureForUserRetrieveUtils2.class);
 	}
 
@@ -42,7 +42,7 @@ public class RetrieveUtils {
 	//	}
 	//	
 	public static StatisticsRetrieveUtil statisticsRetrieveUtils() {
-		return AppContext.getApplicationContext().getBean(
+		return AppContext.get().getBean(
 				StatisticsRetrieveUtil.class);
 	}
 }

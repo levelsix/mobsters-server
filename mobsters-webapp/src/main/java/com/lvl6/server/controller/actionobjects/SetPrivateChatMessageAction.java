@@ -10,6 +10,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.PrivateChatPost;
@@ -23,37 +26,33 @@ import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class SetPrivateChatMessageAction implements StartUpAction {
+@Component@Scope("prototype")public class SetPrivateChatMessageAction implements StartUpAction {
+	private static final Logger log = LoggerFactory.getLogger(SetPrivateChatMessageAction.class);
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	@Autowired
+	protected PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	private final StartupResponseProto.Builder resBuilder;
-	private final User user;
-	private final String userId;
-	private final PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils;
-	private final boolean tsfuListIsNull;
-	protected final InsertUtil insertUtil;
-	private final TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
-	private List<TranslationSettingsForUser> tsfuList;
+	
+	protected StartupResponseProto.Builder resBuilder;
+	protected User user;
+	protected String userId;
+	protected boolean tsfuListIsNull;
+	protected List<TranslationSettingsForUser> tsfuList;
 
-	private final CreateInfoProtoUtils createInfoProtoUtils;
-
-	public SetPrivateChatMessageAction(StartupResponseProto.Builder resBuilder,
-			User user, String userId,
-			PrivateChatPostRetrieveUtils2 privateChatPostRetrieveUtils,
-			boolean tsfuListIsNull, InsertUtil insertUtil,
-			CreateInfoProtoUtils createInfoProtoUtils,
-			TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil,
+	
+	public void wire(
+			StartupResponseProto.Builder resBuilder,
+			User user, 
+			String userId,
+			boolean tsfuListIsNull, 
 			List<TranslationSettingsForUser> tsfuList) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
-		this.privateChatPostRetrieveUtils = privateChatPostRetrieveUtils;
 		this.tsfuListIsNull = tsfuListIsNull;
-		this.insertUtil = insertUtil;
-		this.createInfoProtoUtils = createInfoProtoUtils;
-		this.translationSettingsForUserRetrieveUtil = translationSettingsForUserRetrieveUtil;
 		this.tsfuList = tsfuList;
 	}
 

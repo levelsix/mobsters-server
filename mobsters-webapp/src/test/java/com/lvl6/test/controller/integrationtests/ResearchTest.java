@@ -44,8 +44,7 @@ package com.lvl6.test.controller.integrationtests;
 //@ContextConfiguration("/test-spring-application-context.xml")
 //public class ResearchTest {
 //
-//	private static Logger log = LoggerFactory.getLogger(new Object() {
-//	}.getClass().getEnclosingClass());
+//	private static Logger log = LoggerFactory.getLogger(//	}.getClass().getEnclosingClass());
 //
 //	private JdbcTemplate jdbcTemplate;
 //	private static boolean endOfTesting;

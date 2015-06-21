@@ -12,8 +12,7 @@ import com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto;
 
 public class AchievementRedeemRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(AchievementRedeemRequestEvent.class);
 
 	private AchievementRedeemRequestProto achievementRedeemRequestProto;
 

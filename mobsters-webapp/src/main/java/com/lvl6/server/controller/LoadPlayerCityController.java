@@ -34,8 +34,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
 public class LoadPlayerCityController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(LoadPlayerCityController.class);
 
 	@Autowired
 	protected Locker locker;

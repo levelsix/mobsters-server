@@ -59,8 +59,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class RetrieveUserMonsterTeamTest extends TestCase {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(	}.getClass().getEnclosingClass());
 
 	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;

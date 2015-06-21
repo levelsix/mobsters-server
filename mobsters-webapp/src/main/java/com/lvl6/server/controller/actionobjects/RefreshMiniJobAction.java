@@ -10,6 +10,9 @@ import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
@@ -28,9 +31,8 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class RefreshMiniJobAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class RefreshMiniJobAction {
+	private static Logger log = LoggerFactory.getLogger( RefreshMiniJobAction.class);
 
 	private String userId;
 	private List<String> deleteUserMiniJobIds;
@@ -41,14 +43,14 @@ public class RefreshMiniJobAction {
 	private Date clientTime;
 	private int structId;
 	private Random randGen;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private ItemRetrieveUtils itemRetrieveUtil;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private MiniJobRetrieveUtils miniJobRetrieveUtil;
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected ItemRetrieveUtils itemRetrieveUtil; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected MiniJobRetrieveUtils miniJobRetrieveUtil; 
 
-	private UpdateUtil updateUtil;
-	private InsertUtil insertUtil;
-	private DeleteUtil deleteUtil;
+	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected DeleteUtil deleteUtil; 
 
 	public RefreshMiniJobAction(String userId,
 			List<String> deleteUserMiniJobIds, int itemIdUsed, int numToSpawn,

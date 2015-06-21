@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationRequestProto;
 
 public class VoidTeamDonationSolicitationRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(VoidTeamDonationSolicitationRequestEvent.class);
 
 	private VoidTeamDonationSolicitationRequestProto voidTeamDonationSolicitationRequestProto;
 

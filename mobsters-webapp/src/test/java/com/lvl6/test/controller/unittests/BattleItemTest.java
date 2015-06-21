@@ -88,8 +88,7 @@ package com.lvl6.test.controller.unittests;
 //	@Autowired
 //	protected MiscMethods miscMethods;
 //	
-//	private static Logger log = LoggerFactory.getLogger(new Object() {
-//	}.getClass().getEnclosingClass());
+//	private static Logger log = LoggerFactory.getLogger(//	}.getClass().getEnclosingClass());
 //
 //	@Before
 //	public void setUp() {

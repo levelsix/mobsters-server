@@ -30,8 +30,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class DungeonTest {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(DungeonTest.class);
 
 	private JdbcTemplate jdbcTemplate;
 	private static boolean endOfTesting;

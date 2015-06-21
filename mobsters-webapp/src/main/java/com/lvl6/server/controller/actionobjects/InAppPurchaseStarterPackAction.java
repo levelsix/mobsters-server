@@ -34,29 +34,28 @@
 //import com.lvl6.utils.utilmethods.InsertUtil;
 //import com.lvl6.utils.utilmethods.UpdateUtil;
 //
-//public class InAppPurchaseStarterPackAction {
+//@Component//@Scope("prototype")//public class InAppPurchaseStarterPackAction {
 //
-//	private static Logger log = LoggerFactory.getLogger(new Object() {
-//	}.getClass().getEnclosingClass());
+//	private static Logger log = LoggerFactory.getLogger(//	}.getClass().getEnclosingClass());
 //
 //	private String userId;
 //	private User user;
 //	private JSONObject receiptFromApple;
 //	private Date now;
 //	private String uuid;
-//	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
-//	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-//	private MonsterStuffUtils monsterStuffUtils;
-//	protected InsertUtil insertUtil;
-//	protected UpdateUtil updateUtil;
-//	private CreateInfoProtoUtils createInfoProtoUtils;
+//	@Autowired protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil; 
+//	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+//	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
+//	@Autowired protected InsertUtil insertUtil;
+//	@Autowired protected UpdateUtil updateUtil;
+//	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 //	private MiscMethods miscMethods;
-//	private BoosterItemRetrieveUtils boosterItemRetrieveUtils;
-//	private MonsterRetrieveUtils monsterRetrieveUtils;
-//	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-//	private InAppPurchaseUtils inAppPurchaseUtils;
-//	private BoosterItemUtils boosterItemUtils;
-//	private RewardRetrieveUtils rewardRetrieveUtils;
+//	@Autowired protected BoosterItemRetrieveUtils boosterItemRetrieveUtils; 
+//	@Autowired protected MonsterRetrieveUtils monsterRetrieveUtils; 
+//	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
+//	@Autowired protected InAppPurchaseUtils inAppPurchaseUtils; 
+//	@Autowired protected BoosterItemUtils boosterItemUtils; 
+//	@Autowired protected RewardRetrieveUtils rewardRetrieveUtils; 
 //
 //	public InAppPurchaseStarterPackAction() {
 //		super();

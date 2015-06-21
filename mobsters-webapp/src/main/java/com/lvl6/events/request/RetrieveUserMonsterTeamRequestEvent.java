@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamRequestProto;
 
 public class RetrieveUserMonsterTeamRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(RetrieveUserMonsterTeamRequestEvent.class);
 
 	private RetrieveUserMonsterTeamRequestProto retrieveUserMonsterTeamRequestProto;
 

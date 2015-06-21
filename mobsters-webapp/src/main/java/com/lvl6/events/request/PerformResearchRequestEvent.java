@@ -12,8 +12,7 @@ import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 
 public class PerformResearchRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(PerformResearchRequestEvent.class);
 
 	private PerformResearchRequestProto performResearchRequestProto;
 

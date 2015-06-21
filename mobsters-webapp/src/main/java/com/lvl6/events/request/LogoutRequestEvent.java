@@ -12,8 +12,7 @@ import com.lvl6.proto.EventUserProto.LogoutRequestProto;
 
 public class LogoutRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(LogoutRequestEvent.class);
 
 	private LogoutRequestProto logoutRequestProto;
 

@@ -14,8 +14,7 @@ import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 @Component
 public class AchievementStuffUtil {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(AchievementStuffUtil.class);
 
 	public Map<Integer, UserAchievementProto> achievementIdsToUap(
 			Collection<UserAchievementProto> uapCollection) {

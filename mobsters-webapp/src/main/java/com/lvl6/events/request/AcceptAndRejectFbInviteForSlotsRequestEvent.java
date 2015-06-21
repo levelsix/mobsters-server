@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsRequestPr
 
 public class AcceptAndRejectFbInviteForSlotsRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(AcceptAndRejectFbInviteForSlotsRequestEvent.class);
 
 	private AcceptAndRejectFbInviteForSlotsRequestProto acceptAndRejectFbInviteForSlotsRequestProto;
 

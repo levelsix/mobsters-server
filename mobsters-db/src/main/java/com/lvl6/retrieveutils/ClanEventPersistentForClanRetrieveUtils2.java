@@ -24,8 +24,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class ClanEventPersistentForClanRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ClanEventPersistentForClanRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
 	private static final ClanEventPersistentForClanForClientMapper rowMapper = new ClanEventPersistentForClanForClientMapper();

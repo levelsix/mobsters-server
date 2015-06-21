@@ -9,6 +9,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
@@ -25,9 +28,8 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class AcceptOrRejectClanInviteAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class AcceptOrRejectClanInviteAction {
+	private static Logger log = LoggerFactory.getLogger( AcceptOrRejectClanInviteAction.class);
 
 	private String acceptedInviteId;
 	private String prospectiveMemberId;
@@ -35,13 +37,13 @@ public class AcceptOrRejectClanInviteAction {
 	private String clanId;
 	private Date clientTime;
 	private List<String> rejectedInviteIds;
-	private UserRetrieveUtils2 userRetrieveUtils;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private InsertUtil insertUtil;
-	private DeleteUtil deleteUtil;
-	private ClanRetrieveUtils2 clanRetrieveUtil;
-	private ClanInviteRetrieveUtil clanInviteRetrieveUtil;
-	private CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected DeleteUtil deleteUtil; 
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtil; 
+	@Autowired protected ClanInviteRetrieveUtil clanInviteRetrieveUtil; 
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 
 	public AcceptOrRejectClanInviteAction(String acceptedInviteId,
 			String prospectiveMemberId, String inviterId, String clanId,

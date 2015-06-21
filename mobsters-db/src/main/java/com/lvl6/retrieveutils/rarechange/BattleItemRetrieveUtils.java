@@ -20,8 +20,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class BattleItemRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BattleItemRetrieveUtils.class);
 
 	private static Map<Integer, BattleItem> idsToBattleItems;
 	private static final String TABLE_NAME = DBConstants.TABLE_BATTLE_ITEM_CONFIG;

@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.RequestJoinClanRequestProto;
 
 public class RequestJoinClanRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RequestJoinClanRequestEvent.class);
 
 	private RequestJoinClanRequestProto requestJoinClanRequestProto;
 

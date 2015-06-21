@@ -8,6 +8,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.MiniEventForPlayerLvl;
@@ -36,7 +39,7 @@ import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class RetrieveMiniEventAction {
+@Component@Scope("prototype")public class RetrieveMiniEventAction {
 
 	private static final Logger log = LoggerFactory.getLogger(RetrieveMiniEventAction.class);
 
@@ -44,18 +47,18 @@ public class RetrieveMiniEventAction {
 	private Date now;
 	private boolean completedClanAchievements;
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	private AchievementForUserRetrieveUtil achievementForUserRetrieveUtil;
-	private MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
-	private MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
-	private InsertUtil insertUtil;
-	private DeleteUtil deleteUtil;
-	private MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
-	private MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
-	private MiniEventRetrieveUtils miniEventRetrieveUtils;
-	private MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
-	private MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
-	private MiniEventTimetableRetrieveUtils miniEventTimetableRetrieveUtil;
-	private TimeUtils timeUtil;
+	@Autowired protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil; 
+	@Autowired protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil; 
+	@Autowired protected MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected DeleteUtil deleteUtil; 
+	@Autowired protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils; 
+	@Autowired protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils; 
+	@Autowired protected MiniEventRetrieveUtils miniEventRetrieveUtils; 
+	@Autowired protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils; 
+	@Autowired protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils; 
+	@Autowired protected MiniEventTimetableRetrieveUtils miniEventTimetableRetrieveUtil; 
+	@Autowired protected TimeUtils timeUtil; 
 
 	public RetrieveMiniEventAction(
 			String userId,

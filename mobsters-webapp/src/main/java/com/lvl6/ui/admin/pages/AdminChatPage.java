@@ -28,7 +28,7 @@ public class AdminChatPage extends TemplatePage {
 	protected List<AdminChatPost> getAdminChatMessages() {
 		if (messages == null) {
 			messages = AppContext
-					.getApplicationContext()
+					.get()
 					.getBean(AdminChatUtil.class)
 					.getMessagesToAndFromAdmin(page * itemsPerPage,
 							itemsPerPage);

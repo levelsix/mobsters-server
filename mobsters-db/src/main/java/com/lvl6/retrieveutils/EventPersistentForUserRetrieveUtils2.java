@@ -24,8 +24,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class EventPersistentForUserRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(EventPersistentForUserRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_EVENT_PERSISTENT_FOR_USER;
 	private static final UserEventPersistentForClientMapper rowMapper = new UserEventPersistentForClientMapper();

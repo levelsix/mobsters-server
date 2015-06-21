@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProt
 
 public class ApproveOrRejectRequestToJoinClanRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ApproveOrRejectRequestToJoinClanRequestEvent.class);
 
 	private ApproveOrRejectRequestToJoinClanRequestProto approveOrRejectRequestToJoinClanRequestProto;
 

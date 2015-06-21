@@ -34,8 +34,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
 public class ObstacleRemovalCompleteController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ObstacleRemovalCompleteController.class);
 
 	@Autowired
 	protected Locker locker;

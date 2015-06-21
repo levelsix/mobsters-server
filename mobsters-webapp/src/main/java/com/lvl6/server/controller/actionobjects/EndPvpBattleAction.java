@@ -9,6 +9,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.info.BattleReplayForUser;
@@ -46,9 +49,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class EndPvpBattleAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class EndPvpBattleAction {
+	private static Logger log = LoggerFactory.getLogger( EndPvpBattleAction.class);
 
 	private String attackerId;
 	private String defenderId;
@@ -64,27 +66,27 @@ public class EndPvpBattleAction {
 	private Date curDateTime;
 	private Timestamp curTime;
 	private ByteString replay;
-	private ResourceUtil resourceUtil;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtil;
-	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
-	private ClanRetrieveUtils2 clanRetrieveUtil;
-	private MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	private MonsterStuffUtils monsterStuffUtils;
-	private PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
-	private CreateInfoProtoUtils createInfoProtoUtils;
-	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil;
+	@Autowired protected ResourceUtil resourceUtil; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected PvpBattleForUserRetrieveUtils2 pvpBattleForUserRetrieveUtil; 
+	@Autowired protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil; 
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtil; 
+	@Autowired protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil; 
+	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
+	@Autowired protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils; 
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
+	@Autowired protected ServerToggleRetrieveUtils serverToggleRetrieveUtil; 
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtil; 
 	private MiscMethods miscMethods;
-	private HazelcastPvpUtil hazelcastPvpUtil;
-	private TimeUtils timeUtil;
-	private InsertUtil insertUtil;
-	private UpdateUtil updateUtil;
+	@Autowired protected HazelcastPvpUtil hazelcastPvpUtil; 
+	@Autowired protected TimeUtils timeUtil; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
 	private List<StructStolen> listOfGenerators;
 	private int oilStolenFromGenerators;
 	private int cashStolenFromGenerators;
 	private StructureForUserDao2 sfuDao;
-	private HistoryUtils historyUtils;
+	@Autowired protected HistoryUtils historyUtils; 
 	private PvpBattleHistoryDao pbhDao;
 	private UserCurrencyHistoryDao uchDao;
 

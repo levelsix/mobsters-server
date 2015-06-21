@@ -61,8 +61,7 @@ import com.memetix.mst.language.Language;
 @DependsOn("gameServer")
 public class SendGroupChatController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SendGroupChatController.class);
 
 	public static int CHAT_MESSAGES_MAX_SIZE = 50;
 

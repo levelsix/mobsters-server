@@ -16,7 +16,7 @@ public class HealthCheckPage extends TemplatePage {
 	public HealthCheckPage() {
 		super();
 		log.info("Health check");
-		HealthCheck hc = AppContext.getApplicationContext().getBean(
+		HealthCheck hc = AppContext.get().getBean(
 				HealthCheck.class);
 		if (!hc.check()) {
 			log.error("Health check failed");

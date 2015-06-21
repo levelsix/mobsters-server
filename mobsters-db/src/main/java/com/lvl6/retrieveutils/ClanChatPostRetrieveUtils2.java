@@ -27,8 +27,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class ClanChatPostRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ClanChatPostRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_CHAT_POST;
 	private static final ClanChatPostForClientMapper rowMapper = new ClanChatPostForClientMapper();

@@ -12,8 +12,7 @@ import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 
 public class SendGroupChatRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SendGroupChatRequestEvent.class);
 
 	private SendGroupChatRequestProto sendGroupChatRequestProto;
 

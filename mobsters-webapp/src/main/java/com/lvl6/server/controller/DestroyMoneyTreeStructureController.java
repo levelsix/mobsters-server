@@ -29,8 +29,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 
 public class DestroyMoneyTreeStructureController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(DestroyMoneyTreeStructureController.class);
 
 	@Autowired
 	protected Locker locker;

@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.EndClanHelpRequestProto;
 
 public class EndClanHelpRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(EndClanHelpRequestEvent.class);
 
 	private EndClanHelpRequestProto endClanHelpRequestProto;
 

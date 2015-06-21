@@ -2,14 +2,15 @@ package com.lvl6.server.controller.actionobjects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.User;
 
-public class UserSegmentationGroupAction {
+@Component@Scope("prototype")public class UserSegmentationGroupAction {
 
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UserSegmentationGroupAction.class);
 
 	private Object[] arrayOfObjects;
 	private Float[] arrayOfFloats;

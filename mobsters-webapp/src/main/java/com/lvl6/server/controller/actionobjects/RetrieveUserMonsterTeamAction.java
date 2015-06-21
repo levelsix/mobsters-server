@@ -13,6 +13,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanMemberTeamDonation;
@@ -41,25 +44,24 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 
-public class RetrieveUserMonsterTeamAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class RetrieveUserMonsterTeamAction {
+	private static Logger log = LoggerFactory.getLogger( RetrieveUserMonsterTeamAction.class);
 	private static String typeDonation = SnapshotType.TEAM_DONATE.name();
 
 	private String retrieverUserId;
 	private Collection<String> userUuids;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private ClanRetrieveUtils2 clanRetrieveUtil;
-	private MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	private ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	private MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	private HazelcastPvpUtil hazelcastPvpUtil;
-	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
-	private PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
-	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
-	private MonsterStuffUtils monsterStuffUtils;
-	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtil; 
+	@Autowired protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil; 
+	@Autowired protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil; 
+	@Autowired protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil; 
+	@Autowired protected HazelcastPvpUtil hazelcastPvpUtil; 
+	@Autowired protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil; 
+	@Autowired protected PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil; 
+	@Autowired protected ResearchForUserRetrieveUtils researchForUserRetrieveUtil; 
+	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
+	@Autowired protected ServerToggleRetrieveUtils serverToggleRetrieveUtil; 
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
 
 	public RetrieveUserMonsterTeamAction(
 			String retrieverUserId,

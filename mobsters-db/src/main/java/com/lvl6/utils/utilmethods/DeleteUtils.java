@@ -23,7 +23,7 @@ public class DeleteUtils implements DeleteUtil {
 			.getLogger(DeleteUtils.class);
 
 	public static DeleteUtil get() {
-		return (DeleteUtil) AppContext.getApplicationContext().getBean(
+		return (DeleteUtil) AppContext.get().getBean(
 				"deleteUtils");
 	}
 

@@ -23,8 +23,7 @@ import com.lvl6.utils.RetrieveUtils;
 @DependsOn("gameServer")
 public class StartupStuffRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(StartupStuffRetrieveUtils.class);
 
 	private static List<String> notices;
 

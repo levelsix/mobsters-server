@@ -12,8 +12,7 @@ import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto;
 
 public class MoveOrRotateNormStructureRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MoveOrRotateNormStructureRequestEvent.class);
 
 	private MoveOrRotateNormStructureRequestProto moveOrRotateNormStructureRequestProto;
 

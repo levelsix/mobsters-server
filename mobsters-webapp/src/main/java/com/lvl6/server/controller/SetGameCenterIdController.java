@@ -25,8 +25,7 @@ import com.lvl6.server.eventsender.ToClientEvents;
 
 public class SetGameCenterIdController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SetGameCenterIdController.class);
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;

@@ -12,8 +12,7 @@ import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
 
 public class EndPvpBattleRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(EndPvpBattleRequestEvent.class);
 
 	private EndPvpBattleRequestProto endPvpBattleRequestProto;
 

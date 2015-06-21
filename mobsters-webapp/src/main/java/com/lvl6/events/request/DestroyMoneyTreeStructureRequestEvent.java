@@ -12,8 +12,7 @@ import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureRequestProto;
 
 public class DestroyMoneyTreeStructureRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(DestroyMoneyTreeStructureRequestEvent.class);
 
 	private DestroyMoneyTreeStructureRequestProto destroyMoneyTreeStructureRequestProto;
 

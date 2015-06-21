@@ -28,8 +28,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class LeaveClanAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger( LeaveClanAction.class);
 
 	private String userId;
 	private String clanId;

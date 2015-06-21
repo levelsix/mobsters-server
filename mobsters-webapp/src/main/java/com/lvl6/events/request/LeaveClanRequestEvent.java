@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.LeaveClanRequestProto;
 
 public class LeaveClanRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(LeaveClanRequestEvent.class);
 
 	private LeaveClanRequestProto leaveClanRequestProto;
 

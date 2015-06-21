@@ -21,8 +21,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class SalesDisplayItemRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SalesDisplayItemRetrieveUtils.class);
 
 	private static Map<Integer, SalesDisplayItem> salesDisplayItemIdsToSalesDisplayItems;
 	//key:sales pack id --> value:(key: sales item id --> value: sales item)

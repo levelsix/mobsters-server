@@ -8,6 +8,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
@@ -42,7 +45,7 @@ import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class PurchaseBoosterPackAction {
+@Component@Scope("prototype")public class PurchaseBoosterPackAction {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(PurchaseBoosterPackAction.class);
@@ -55,26 +58,26 @@ public class PurchaseBoosterPackAction {
 	private boolean buyingInBulk;
 	private int gemsSpent;
 	private int gachaCreditsChange;
-	private TimeUtils timeUtil;
-	private GiftRetrieveUtils giftRetrieveUtil;
-	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private BoosterPackRetrieveUtils boosterPackRetrieveUtils;
-	private BoosterItemRetrieveUtils boosterItemRetrieveUtils;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private MonsterStuffUtils monsterStuffUtils;
-	private UpdateUtil updateUtil;
+	@Autowired protected TimeUtils timeUtil; 
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected BoosterPackRetrieveUtils boosterPackRetrieveUtils; 
+	@Autowired protected BoosterItemRetrieveUtils boosterItemRetrieveUtils; 
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
+	@Autowired protected UpdateUtil updateUtil; 
 	private MiscMethods miscMethods;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private MonsterRetrieveUtils monsterRetrieveUtils;
-	private RewardRetrieveUtils rewardRetrieveUtils;
-	private InsertUtil insertUtil;
-	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
-	private BoosterItemUtils boosterItemUtils;
-	private CreateInfoProtoUtils createInfoProtoUtils;
-	private HistoryUtils historyUtils;
-	private ResourceUtil resourceUtil;
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
+	@Autowired protected MonsterRetrieveUtils monsterRetrieveUtils; 
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtils; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected ServerToggleRetrieveUtils serverToggleRetrieveUtils; 
+	@Autowired protected BoosterItemUtils boosterItemUtils; 
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
+	@Autowired protected HistoryUtils historyUtils; 
+	@Autowired protected ResourceUtil resourceUtil; 
 
 	public PurchaseBoosterPackAction(String userId, int boosterPackId,
 			Date now, Timestamp clientTime, boolean freeBoosterPack,
@@ -185,7 +188,7 @@ public class PurchaseBoosterPackAction {
 	
 	public void setUpDaos() {
 		//Configuration config = new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
-		uchDao = AppContext.getApplicationContext().getBean(UserCurrencyHistoryDao.class);//TODO: These actions should be created in spring
+		uchDao = AppContext.get().getBean(UserCurrencyHistoryDao.class);//TODO: These actions should be created in spring
 		//I will modify them to support autowiring
 	}
 

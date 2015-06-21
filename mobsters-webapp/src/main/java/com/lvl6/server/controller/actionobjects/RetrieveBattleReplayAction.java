@@ -2,19 +2,21 @@ package com.lvl6.server.controller.actionobjects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.Builder;
 import com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus;
 import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
 
-public class RetrieveBattleReplayAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class RetrieveBattleReplayAction {
+	private static Logger log = LoggerFactory.getLogger( RetrieveBattleReplayAction.class);
 
 	private String userId;
 	private String replayId;
-	private BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
+	@Autowired protected BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil; 
 
 	public RetrieveBattleReplayAction(
 			String userId, String replayId,

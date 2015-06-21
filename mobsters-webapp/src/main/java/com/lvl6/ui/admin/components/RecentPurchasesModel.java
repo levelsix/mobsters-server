@@ -15,7 +15,7 @@ public class RecentPurchasesModel extends
 
 	@Override
 	protected List<InAppPurchase> load() {
-		StatisticsRetrieveUtil statsUtil = AppContext.getApplicationContext()
+		StatisticsRetrieveUtil statsUtil = AppContext.get()
 				.getBean(StatisticsRetrieveUtil.class);
 		return statsUtil.getTopInAppPurchases(20);
 	}

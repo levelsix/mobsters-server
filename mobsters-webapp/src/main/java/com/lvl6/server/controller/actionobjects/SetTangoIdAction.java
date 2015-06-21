@@ -2,19 +2,21 @@ package com.lvl6.server.controller.actionobjects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.User;
 import com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 
-public class SetTangoIdAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class SetTangoIdAction {
+	private static Logger log = LoggerFactory.getLogger( SetTangoIdAction.class);
 
 	private String userId;
 	private String tangoId;
-	private UserRetrieveUtils2 userRetrieveUtil;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
 
 	public SetTangoIdAction(String userId,
 			String tangoId, UserRetrieveUtils2 userRetrieveUtil) {

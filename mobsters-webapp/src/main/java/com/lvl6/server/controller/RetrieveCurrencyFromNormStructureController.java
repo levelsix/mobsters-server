@@ -41,8 +41,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 public class RetrieveCurrencyFromNormStructureController extends
 		EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RetrieveCurrencyFromNormStructureController.class);
 
 	@Autowired
 	protected Locker locker;

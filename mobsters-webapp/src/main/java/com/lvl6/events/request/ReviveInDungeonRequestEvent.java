@@ -12,8 +12,7 @@ import com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto;
 
 public class ReviveInDungeonRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ReviveInDungeonRequestEvent.class);
 
 	private ReviveInDungeonRequestProto reviveInDungeonRequestProto;
 

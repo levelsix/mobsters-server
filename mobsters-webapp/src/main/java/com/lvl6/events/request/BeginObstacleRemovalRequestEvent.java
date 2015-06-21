@@ -12,8 +12,7 @@ import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto;
 
 public class BeginObstacleRemovalRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BeginObstacleRemovalRequestEvent.class);
 
 	private BeginObstacleRemovalRequestProto beginObstacleRemovalRequestProto;
 

@@ -11,7 +11,7 @@ public class StatsModel extends LoadableDetachableModel<ApplicationStats> {
 
 	@Override
 	protected ApplicationStats load() {
-		ApplicationUtils utils = AppContext.getApplicationContext().getBean(
+		ApplicationUtils utils = AppContext.get().getBean(
 				ApplicationUtils.class);
 		return utils.getStats();
 	}

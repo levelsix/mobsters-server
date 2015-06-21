@@ -12,8 +12,7 @@ import com.lvl6.proto.EventUserProto.UpdateUserStrengthRequestProto;
 
 public class UpdateUserStrengthRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UpdateUserStrengthRequestEvent.class);
 
 	private UpdateUserStrengthRequestProto updateUserStrengthRequestProto;
 

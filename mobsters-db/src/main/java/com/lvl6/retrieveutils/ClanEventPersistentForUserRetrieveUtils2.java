@@ -26,8 +26,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class ClanEventPersistentForUserRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ClanEventPersistentForUserRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
 	private static final UserClientEventPersistentForClientMapper rowMapper = new UserClientEventPersistentForClientMapper();

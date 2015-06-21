@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class MiniJobRefreshItemRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MiniJobRefreshItemRetrieveUtils.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MINI_JOB_REFRESH_ITEM_CONFIG;
 

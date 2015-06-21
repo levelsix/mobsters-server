@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Research;
 import com.lvl6.info.User;
@@ -21,22 +24,21 @@ import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class PerformResearchAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class PerformResearchAction {
+	private static Logger log = LoggerFactory.getLogger( PerformResearchAction.class);
 
 	private String userId;
-	private UserRetrieveUtils2 userRetrieveUtils;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
 	private int researchId;
 	private String userResearchUuid; //update the row when researchs are upgraded
 	private int gemsCost;
 	private int resourceCost;
 	private ResourceType resourceType;
 	private Date now;
-	protected InsertUtil insertUtil;
-	protected UpdateUtil updateUtil;
-	private ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
-	private ResearchRetrieveUtils researchRetrieveUtils;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected ResearchForUserRetrieveUtils researchForUserRetrieveUtil; 
+	@Autowired protected ResearchRetrieveUtils researchRetrieveUtils; 
 	private MiscMethods miscMethods;
 
 	public PerformResearchAction(String userId,

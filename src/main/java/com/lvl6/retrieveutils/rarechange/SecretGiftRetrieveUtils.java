@@ -24,8 +24,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class SecretGiftRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SecretGiftRetrieveUtils.class);
 	private static final SecretGiftSecretGiftComparator comparator = new SecretGiftSecretGiftComparator();
 
 	private static final class SecretGiftSecretGiftComparator implements

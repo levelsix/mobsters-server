@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class BoosterPackRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BoosterPackRetrieveUtils.class);
 
 	private static Map<Integer, BoosterPack> boosterPackIdsToBoosterPacks;
 

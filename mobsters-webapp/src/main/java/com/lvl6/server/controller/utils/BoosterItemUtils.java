@@ -24,8 +24,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 @Component
 public class BoosterItemUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BoosterItemUtils.class);
 
 	public boolean checkIfMonstersExist(
 			List<BoosterItem> itemsUserReceives,

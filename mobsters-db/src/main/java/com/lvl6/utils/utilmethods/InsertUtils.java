@@ -68,7 +68,7 @@ public class InsertUtils implements InsertUtil {
 			.getLogger(InsertUtils.class);
 
 	public static InsertUtil get() {
-		return (InsertUtil) AppContext.getApplicationContext().getBean(
+		return (InsertUtil) AppContext.get().getBean(
 				"insertUtils");
 	}
 

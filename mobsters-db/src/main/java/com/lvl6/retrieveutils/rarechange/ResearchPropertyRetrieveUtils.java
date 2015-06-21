@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class ResearchPropertyRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ResearchPropertyRetrieveUtils.class);
 
 	private static Map<Integer, Map<Integer, ResearchProperty>> researchIdsToIdsToResearchProperties;
 	private static Map<Integer, ResearchProperty> researchPropertyIdsToResearchProperties;

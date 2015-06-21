@@ -176,6 +176,8 @@ import com.lvl6.utils.DBConnection;
 @Component
 public class StaticDataContainer {
 
+	private static Logger log = LoggerFactory.getLogger(StaticDataContainer.class);
+	
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -374,8 +376,7 @@ public class StaticDataContainer {
 
 
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
 
 	private static StaticDataProto.Builder staticDataBuilder = null;
 

@@ -16,8 +16,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class AvailableReferralCodeRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(AvailableReferralCodeRetrieveUtils.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_REFERRAL_CODE_AVAILABLE_CONFIG;
 

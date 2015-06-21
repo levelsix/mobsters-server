@@ -18,8 +18,7 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class EloFunctionsTest extends TestCase {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(	}.getClass().getEnclosingClass());
 
 	@Autowired
 	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;

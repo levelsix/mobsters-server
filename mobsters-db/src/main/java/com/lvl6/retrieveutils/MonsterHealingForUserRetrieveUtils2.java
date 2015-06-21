@@ -26,8 +26,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class MonsterHealingForUserRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MonsterHealingForUserRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_HEALING_FOR_USER;
 	private static final UserMonsterHealingForClientMapper rowMapper = new UserMonsterHealingForClientMapper();

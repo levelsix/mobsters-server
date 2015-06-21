@@ -8,6 +8,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureMoneyTree;
@@ -25,20 +28,19 @@ import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class RetrieveCurrencyFromNormStructureAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class RetrieveCurrencyFromNormStructureAction {
+	private static Logger log = LoggerFactory.getLogger( RetrieveCurrencyFromNormStructureAction.class);
 
 	private String userId;
 	private int maxCash;
 	private int maxOil;
 	private List<String> duplicates;
 	private Map<String, StructureRetrieval> userStructIdsToStructRetrievals;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private StructureForUserRetrieveUtils2 userStructRetrieveUtil;
-	private StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
-	private StructureResourceGeneratorRetrieveUtils structureResourceGeneratorRetrieveUtils;
-	private UpdateUtil updateUtil;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected StructureForUserRetrieveUtils2 userStructRetrieveUtil; 
+	@Autowired protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils; 
+	@Autowired protected StructureResourceGeneratorRetrieveUtils structureResourceGeneratorRetrieveUtils; 
+	@Autowired protected UpdateUtil updateUtil; 
 	private MiscMethods miscMethods;
 
 	public RetrieveCurrencyFromNormStructureAction(String userId, int maxCash,

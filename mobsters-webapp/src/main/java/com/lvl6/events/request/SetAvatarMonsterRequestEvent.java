@@ -12,8 +12,7 @@ import com.lvl6.proto.EventUserProto.SetAvatarMonsterRequestProto;
 
 public class SetAvatarMonsterRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SetAvatarMonsterRequestEvent.class);
 
 	private SetAvatarMonsterRequestProto setAvatarMonsterRequestProto;
 

@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
 
 public class EvolveMonsterRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(EvolveMonsterRequestEvent.class);
 
 	private EvolveMonsterRequestProto evolveMonsterRequestProto;
 

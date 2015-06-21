@@ -21,7 +21,7 @@ public class ReloadStaticDataLink extends Link<String> {
 	@Override
 	public void onClick() {
 		log.info("An Admin requested a purge of all static data");
-		ServerAdmin sa = AppContext.getApplicationContext().getBean(
+		ServerAdmin sa = AppContext.get().getBean(
 				ServerAdmin.class);
 		sa.reloadAllStaticData();
 		setResponsePage(AdminPage.class);

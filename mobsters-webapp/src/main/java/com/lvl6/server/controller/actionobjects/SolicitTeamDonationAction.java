@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.User;
@@ -19,9 +22,8 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class SolicitTeamDonationAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class SolicitTeamDonationAction {
+	private static Logger log = LoggerFactory.getLogger( SolicitTeamDonationAction.class);
 
 	private String userId;
 	private String clanId;
@@ -29,10 +31,10 @@ public class SolicitTeamDonationAction {
 	private int powerLimit;
 	private Date clientTime;
 	private int gemsSpent;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	private InsertUtil insertUtil;
-	private UpdateUtil updateUtil;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
 	private MiscMethods miscMethods;
 
 	public SolicitTeamDonationAction(

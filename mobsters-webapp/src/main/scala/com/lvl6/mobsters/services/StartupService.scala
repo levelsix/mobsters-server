@@ -9,19 +9,16 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
-
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
 import scala.concurrent.Await
 import scala.concurrent.Future
 import scala.concurrent.duration.DurationInt
-
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -45,7 +42,7 @@ import com.lvl6.info.User
 import com.lvl6.info.UserClan
 import com.lvl6.leaderboards.LeaderBoardImpl
 import com.lvl6.misc.MiscMethods
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo
 import com.lvl6.properties.ControllerConstants
 import com.lvl6.properties.Globals
 import com.lvl6.properties.IAPValues
@@ -161,8 +158,12 @@ import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
-
 import javax.annotation.Resource
+import scala.util.Success
+import scala.util.Failure
+import com.lvl6.server.eventsender.AsyncResponder
+import com.lvl6.spring.AppContext
+import scala.beans.BeanProperty
 
 case class StartupData(
   resBuilder: Builder,
@@ -186,20 +187,19 @@ class StartupService extends LazyLogging {
   @Autowired var achievementForUserRetrieveUtil: AchievementForUserRetrieveUtil = null
   @Autowired var battleItemQueueForUserRetrieveUtil: BattleItemQueueForUserRetrieveUtil = null
   @Autowired var battleItemForUserRetrieveUtil: BattleItemForUserRetrieveUtil = null
-  @Autowired var battleReplayForUserRetrieveUtil: BattleReplayForUserRetrieveUtil = null
+
   @Autowired var cepfuRaidStageHistoryRetrieveUtils: CepfuRaidStageHistoryRetrieveUtils2 = null
-  @Autowired var clanAvengeRetrieveUtil: ClanAvengeRetrieveUtil = null
-  @Autowired var clanAvengeUserRetrieveUtil: ClanAvengeUserRetrieveUtil = null
-  @Autowired var clanChatPostRetrieveUtils: ClanChatPostRetrieveUtils2 = null
+
+
+
   @Autowired var clanEventPersistentForClanRetrieveUtils: ClanEventPersistentForClanRetrieveUtils2 = null
   @Autowired var clanEventPersistentForUserRetrieveUtils: ClanEventPersistentForUserRetrieveUtils2 = null
   @Autowired var clanEventPersistentUserRewardRetrieveUtils: ClanEventPersistentUserRewardRetrieveUtils2 = null
-  @Autowired var clanHelpRetrieveUtil: ClanHelpRetrieveUtil = null
-  @Autowired var clanMemberTeamDonationRetrieveUtil: ClanMemberTeamDonationRetrieveUtil = null
+
+
   @Autowired var clanRetrieveUtils: ClanRetrieveUtils2 = null
   @Autowired var eventPersistentForUserRetrieveUtils: EventPersistentForUserRetrieveUtils2 = null
-  @Autowired var giftForUserRetrieveUtil: GiftForUserRetrieveUtils = null
-  @Autowired var giftForTangoUserRetrieveUtil: GiftForTangoUserRetrieveUtil = null;
+
   @Autowired var itemForUserRetrieveUtil: ItemForUserRetrieveUtil = null
   @Autowired var itemForUserUsageRetrieveUtil: ItemForUserUsageRetrieveUtil = null
   @Autowired var iapHistoryRetrieveUtils: IAPHistoryRetrieveUtils = null
@@ -210,11 +210,11 @@ class StartupService extends LazyLogging {
   @Autowired var monsterEvolvingForUserRetrieveUtils: MonsterEvolvingForUserRetrieveUtils2 = null
   @Autowired var monsterForUserRetrieveUtils: MonsterForUserRetrieveUtils2 = null
   @Autowired var monsterHealingForUserRetrieveUtils: MonsterHealingForUserRetrieveUtils2 = null
-  @Autowired var monsterSnapshotForUserRetrieveUtil: MonsterSnapshotForUserRetrieveUtil = null
-  @Autowired var privateChatPostRetrieveUtils: PrivateChatPostRetrieveUtils2 = null
+
+
   @Autowired var pvpBattleForUserRetrieveUtils: PvpBattleForUserRetrieveUtils2 = null
   @Autowired var pvpLeagueForUserRetrieveUtil: PvpLeagueForUserRetrieveUtil2 = null
-  @Autowired var pvpBattleHistoryRetrieveUtil: PvpBattleHistoryRetrieveUtil2 = null
+
   @Autowired var pvpBoardObstacleForUserRetrieveUtil: PvpBoardObstacleForUserRetrieveUtil = null
   @Autowired var questForUserRetrieveUtils: QuestForUserRetrieveUtils2 = null
   @Autowired var questJobForUserRetrieveUtil: QuestJobForUserRetrieveUtil = null
@@ -226,11 +226,10 @@ class StartupService extends LazyLogging {
   @Autowired var taskStageForUserRetrieveUtils: TaskStageForUserRetrieveUtils2 = null
   @Autowired var translationSettingsForUserRetrieveUtil: TranslationSettingsForUserRetrieveUtil = null
   @Autowired var userClanRetrieveUtils: UserClanRetrieveUtils2 = null
-  @Autowired var userFacebookInviteForSlotRetrieveUtils: UserFacebookInviteForSlotRetrieveUtils2 = null
+
   @Autowired var userRetrieveUtils: UserRetrieveUtils2 = null
 
   @Autowired var customMenuRetrieveUtil: CustomMenuRetrieveUtils = null
-  @Autowired var giftRetrieveUtil : GiftRetrieveUtils = null;
   @Autowired var inAppPurchaseUtil: InAppPurchaseUtils = null
   @Autowired var miniEventRetrieveUtil: MiniEventRetrieveUtils = null
   @Autowired var miniEventForPlayerLvlRetrieveUtil: MiniEventForPlayerLvlRetrieveUtils = null
@@ -238,14 +237,14 @@ class StartupService extends LazyLogging {
   @Autowired var miniEventLeaderboardRewardRetrieveUtil: MiniEventLeaderboardRewardRetrieveUtils = null
   @Autowired var miniEventTierRewardRetrieveUtil: MiniEventTierRewardRetrieveUtils = null
   @Autowired var miniEventTimetableRetrieveUtil: MiniEventTimetableRetrieveUtils = null
-  @Autowired var monsterLevelInfoRetrieveUtil: MonsterLevelInfoRetrieveUtils = null
+
   @Autowired var pvpLeagueRetrieveUtil: PvpLeagueRetrieveUtils = null
   @Autowired var questRetrieveUtil: QuestRetrieveUtils = null
   @Autowired var rewardRetrieveUtil: RewardRetrieveUtils = null
   @Autowired var salesDisplayItemRetrieveUtil: SalesDisplayItemRetrieveUtils = null
   @Autowired var salesItemRetrieveUtil: SalesItemRetrieveUtils = null
   @Autowired var salesPackageRetrieveUtil: SalesPackageRetrieveUtils = null
-  @Autowired var serverToggleRetrieveUtil: ServerToggleRetrieveUtils = null
+
   @Autowired var startupStuffRetrieveUtil: StartupStuffRetrieveUtils = null
 
   @Autowired var createInfoProtoUtils: CreateInfoProtoUtils = null
@@ -259,9 +258,9 @@ class StartupService extends LazyLogging {
   @Autowired var miscMethods: MiscMethods = null
   @Autowired var locker: Locker = null
   @Autowired var leaderBoard: LeaderBoardImpl = null
-  @Autowired var historyUtils: HistoryUtils = null
 
-  @Autowired var pbhDao: PvpBattleHistoryDao2 = null
+
+
 
   @Autowired var globals: Globals = null
   @Resource(name = "globalChat") var chatMessages: IList[GroupChatMessageProto] = null
@@ -481,29 +480,28 @@ class StartupService extends LazyLogging {
         sttslb <- setTopThreeStrengthLeaderBoard(resBuilder)
         plfu <- pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
       } yield plfu
-      
-      
-      //TODO: Change responses to be non-blocking
-      try {
-        val plfu = Await.result(userInfo, 90.seconds);
-        finishLoginExisting(resBuilder, user, userId, nowDate, plfu, sd, responses)
-      }catch{
-        case t: Throwable => {
+
+      userInfo onComplete{
+        case Success(plfu)=>{
+          finishLoginExisting(resBuilder, user, userId, nowDate, plfu, sd, responses)  
+        }
+        case Failure(t) =>{
           logger.error("Error running login futures", t)
-          loginFinished(playerId)
           exceptionInStartup(sd, responses)
+          loginFinished(playerId, responses)
         }
       }
-
+      
     } catch {
       case t: Throwable =>
         logger.error(s"", t)
-        loginFinished(playerId)
+        loginFinished(playerId, responses)
     }
   }
 
-  def loginFinished(playerId: String) = {
+  def loginFinished(playerId: String, responses:ToClientEvents) = {
     locker.unlockPlayer(UUID.fromString(playerId), this.getClass().getSimpleName());
+    AsyncResponder.sendResponses(responses)
   }
 
   def finishLoginExisting(resBuilder: Builder, user: User, playerId: String, nowDate: Date, plfu: PvpLeagueForUser, sd: StartupData, responses: ToClientEvents) = {
@@ -532,76 +530,34 @@ class StartupService extends LazyLogging {
 
         val updatedTsfuList = translationSettingsForUserRetrieveUtil.getUserTranslationSettingsForUser(playerId);
 
-        val spcma = new SetPrivateChatMessageAction(
-          resBuilder,
-          user,
-          playerId,
-          privateChatPostRetrieveUtils,
-          tsfuListIsNull,
-          insertUtil,
-          createInfoProtoUtils,
-          translationSettingsForUserRetrieveUtil,
-          updatedTsfuList);
+        val spcma = AppContext.getBean(classOf[SetPrivateChatMessageAction])
+        spcma.wire(resBuilder, user, playerId, tsfuListIsNull, updatedTsfuList);
         spcma.setUp(fillMe);
 
-        val sfesa = new SetFacebookExtraSlotsAction(
-          resBuilder,
-          user,
-          playerId,
-          userFacebookInviteForSlotRetrieveUtils,
-          createInfoProtoUtils);
+        val sfesa = AppContext.getBean(classOf[SetFacebookExtraSlotsAction]) 
+        sfesa.wire(resBuilder, user, playerId);
         sfesa.setUp(fillMe);
 
-        val spbha = new SetPvpBattleHistoryAction(
-          resBuilder,
-          user,
-          playerId,
-          pvpBattleHistoryRetrieveUtil,
-          monsterForUserRetrieveUtils,
-          clanRetrieveUtils,
-          hazelcastPvpUtil,
-          monsterStuffUtil,
-          createInfoProtoUtils,
-          serverToggleRetrieveUtil,
-          monsterLevelInfoRetrieveUtil,
-          battleReplayForUserRetrieveUtil,
-          historyUtils,
-          pbhDao);
+        val spbha = AppContext.getBean(classOf[SetPvpBattleHistoryAction])
+        spbha.wire(resBuilder, user, playerId);
         spbha.setUp(fillMe);
 
         //CLAN DATA
         val cdpb = ClanDataProto.newBuilder();
-        val sccma = new SetClanChatMessageAction(
-          cdpb,
-          user,
-          clanChatPostRetrieveUtils,
-          createInfoProtoUtils);
+        val sccma = AppContext.getBean(classOf[SetClanChatMessageAction])
+        sccma.wire(cdpb, user);
         sccma.setUp(fillMe);
 
-        val scha = new SetClanHelpingsAction(
-          cdpb,
-          user,
-          playerId,
-          clanHelpRetrieveUtil,
-          createInfoProtoUtils);
+        val scha = AppContext.getBean(classOf[SetClanHelpingsAction])
+        scha.wire(cdpb, user, playerId);
         scha.setUp(fillMe);
 
-        val scra = new SetClanRetaliationsAction(
-          cdpb,
-          user,
-          playerId,
-          clanAvengeRetrieveUtil,
-          clanAvengeUserRetrieveUtil,
-          createInfoProtoUtils);
+        val scra = AppContext.getBean(classOf[SetClanRetaliationsAction]);
+        scra.wire(cdpb, user, playerId);
         scra.setUp(fillMe);
 
-        val scmtda = new SetClanMemberTeamDonationAction(
-          cdpb,
-          user,
-          playerId,
-          clanMemberTeamDonationRetrieveUtil,
-          monsterSnapshotForUserRetrieveUtil,
-          createInfoProtoUtils);
+        val scmtda = AppContext.getBean(classOf[SetClanMemberTeamDonationAction])
+        scmtda.wire(cdpb, user, playerId);
         scmtda.setUp(fillMe);
 
         //SETTING CLAN GIFTS, it adds protos straight to resbuilder
@@ -613,15 +569,8 @@ class StartupService extends LazyLogging {
 //          createInfoProtoUtils);
 //        scga.setUp(fillMe);
 
-        val sga = new SetGiftsAction(
-          resBuilder,
-          user,
-          playerId,
-          giftForUserRetrieveUtil,
-          giftForTangoUserRetrieveUtil,
-          giftRetrieveUtil,
-          rewardRetrieveUtil,
-          createInfoProtoUtils)
+        val sga = AppContext.getBean(classOf[SetGiftsAction])
+        sga.wire(resBuilder, user, playerId)
         sga.setUp(fillMe);
 
         //Now since all the ids of resources are known, get them from db
@@ -659,7 +608,7 @@ class StartupService extends LazyLogging {
       } catch {
         case t: Throwable => logger.error("Error finishing login for user: $playerId", t)
       } finally {
-        loginFinished(playerId)
+        loginFinished(playerId, responses)
       }
     }
   }

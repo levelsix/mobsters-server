@@ -34,7 +34,7 @@ object HazelcastUtil extends LazyLogging {
   private var _hazelcast:HazelcastInstance  = null
   private def hazelcast:HazelcastInstance = {
     if(_hazelcast == null){
-      _hazelcast = AppContext.getApplicationContext.getBean(classOf[HazelcastInstance])
+      _hazelcast = AppContext.get.getBean(classOf[HazelcastInstance])
     }
     return _hazelcast;
   }

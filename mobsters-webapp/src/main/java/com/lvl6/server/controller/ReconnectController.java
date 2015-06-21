@@ -27,8 +27,7 @@ public class ReconnectController extends EventController {
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ReconnectController.class);
 
 	public ReconnectController() {
 

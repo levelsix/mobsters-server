@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class LoginHistoryRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(LoginHistoryRetrieveUtils.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_LOGIN_HISTORY;
 

@@ -30,8 +30,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class UserFacebookInviteForSlotRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UserFacebookInviteForSlotRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
 	private static final UserFbInviteForClientMapper rowMapper = new UserFbInviteForClientMapper();

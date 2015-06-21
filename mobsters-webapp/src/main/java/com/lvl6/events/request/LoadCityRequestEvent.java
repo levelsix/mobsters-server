@@ -12,8 +12,7 @@ import com.lvl6.proto.EventCityProto.LoadCityRequestProto;
 
 public class LoadCityRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(LoadCityRequestEvent.class);
 
 	private LoadCityRequestProto loadCityRequestProto;
 

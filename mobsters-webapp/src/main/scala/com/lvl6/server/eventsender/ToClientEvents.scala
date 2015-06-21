@@ -6,6 +6,9 @@ import com.google.protobuf.GeneratedMessage
 import scala.beans.BeanProperty
 
 case class ToClientEvents(
+    sourceConnectionId:String,
+    requestUuid:String,
+    playerId:Option[String],
     normalResponseEvents:java.util.List[ResponseEvent[_ <: GeneratedMessage]]= new ArrayList[ResponseEvent[_ <: GeneratedMessage]](),
     globalChatResponseEvents:java.util.List[ResponseEvent[_ <: GeneratedMessage]]= new ArrayList[ResponseEvent[_ <: GeneratedMessage]](),
     preDBResponseEvents:java.util.List[PreDBResponseEvent]= new ArrayList[PreDBResponseEvent](),

@@ -11,6 +11,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.MiniJob;
 import com.lvl6.info.MiniJobForUser;
@@ -37,7 +40,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class RedeemMiniJobAction {
+@Component@Scope("prototype")public class RedeemMiniJobAction {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(RedeemMiniJobAction.class);
@@ -45,22 +48,22 @@ public class RedeemMiniJobAction {
 	private String userId;
 	private String userMiniJobId;
 	private Timestamp clientTime;
-	private GiftRetrieveUtils giftRetrieveUtil;
-	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private DeleteUtil deleteUtil;
-	private UpdateUtil updateUtil;
-	private InsertUtil insertUtil;
-	private MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil;
-	private MiniJobRetrieveUtils miniJobRetrieveUtils;
-	private MonsterStuffUtils monsterStuffUtils;
-	private MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected DeleteUtil deleteUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected MiniJobForUserRetrieveUtil miniJobForUserRetrieveUtil; 
+	@Autowired protected MiniJobRetrieveUtils miniJobRetrieveUtils; 
+	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
+	@Autowired protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils; 
 	private List<UserMonsterCurrentHealthProto> umchpList;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private RewardRetrieveUtils rewardRetrieveUtils;
-	private CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtils; 
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 
 	public RedeemMiniJobAction(
 			String userId,

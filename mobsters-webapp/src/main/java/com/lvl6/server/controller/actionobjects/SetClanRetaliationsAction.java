@@ -8,6 +8,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanAvenge;
@@ -19,28 +22,22 @@ import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil;
 import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetClanRetaliationsAction implements StartUpAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class SetClanRetaliationsAction implements StartUpAction {
+	private static Logger log = LoggerFactory.getLogger( SetClanRetaliationsAction.class);
 
-	private final ClanDataProto.Builder cdpBuilder;
-	private final User user;
-	private final String userId;
-	private final ClanAvengeRetrieveUtil clanAvengeRetrieveUtil;
-	private final ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
-	private final CreateInfoProtoUtils createInfoProtoUtils;
+	
+	@Autowired protected ClanAvengeRetrieveUtil clanAvengeRetrieveUtil;
+	@Autowired protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	public SetClanRetaliationsAction(ClanDataProto.Builder cdpBuilder,
-			User user, String userId,
-			ClanAvengeRetrieveUtil clanAvengeRetrieveUtil,
-			ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil,
-			CreateInfoProtoUtils createInfoProtoUtils) {
+	protected ClanDataProto.Builder cdpBuilder;
+	protected User user;
+	protected String userId;
+
+	public void wire(ClanDataProto.Builder cdpBuilder,	User user, String userId) {
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.userId = userId;
-		this.clanAvengeRetrieveUtil = clanAvengeRetrieveUtil;
-		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state

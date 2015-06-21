@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventRequestProto;
 
 public class UpdateMiniEventRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(UpdateMiniEventRequestEvent.class);
 
 	private UpdateMiniEventRequestProto updateMiniEventRequestProto;
 

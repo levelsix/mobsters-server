@@ -28,8 +28,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class UpdateUserStrengthController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UpdateUserStrengthController.class);
 
 	@Autowired
 	protected Locker locker;

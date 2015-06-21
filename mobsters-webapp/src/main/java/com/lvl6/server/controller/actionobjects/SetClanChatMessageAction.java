@@ -8,6 +8,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
@@ -18,22 +21,21 @@ import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetClanChatMessageAction implements StartUpAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
 
-	private final ClanDataProto.Builder cdpBuilder;
-	private final User user;
-	private final ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
-	private final CreateInfoProtoUtils createInfoProtoUtils;
+@Component@Scope("prototype")public class SetClanChatMessageAction implements StartUpAction {
 
-	public SetClanChatMessageAction(ClanDataProto.Builder cdpBuilder,
-			User user, ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils,
-			CreateInfoProtoUtils createInfoProtoUtils) {
+	private static final Logger log = LoggerFactory.getLogger(SetClanChatMessageAction.class);
+
+	@Autowired
+	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
+	
+	protected ClanDataProto.Builder cdpBuilder;
+	protected User user;
+
+	public void wire(ClanDataProto.Builder cdpBuilder,User user) {
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
-		this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state
