@@ -49,7 +49,7 @@ trait GameEventHandler extends LazyLogging  {
         if(appMode.isMaintenanceMode()){
           handleMaintenanceMode(parsedEvent)                
         }else{
-          logger.info(s"Processing event: $parsedEvent")
+          logger.debug(s"Processing event: $parsedEvent")
           updatePlayerToServerMaps(parsedEvent)
           val eventUuid = parsedEvent.eventProto.getEventUuid
           val plyrId = parsedEvent.event.getPlayerId

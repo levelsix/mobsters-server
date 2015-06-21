@@ -43,7 +43,7 @@ object EventParser extends LazyLogging{
   
   def parseEventProtos(eventBytes:Array[Byte], byteOrder:ByteOrder=ByteOrder.LITTLE_ENDIAN):Vector[ParsedEventProto]={
     //parse first event from batch
-    logger.info(s"Parsing event from bytes: ${eventBytes.size}")
+    logger.debug(s"Parsing event from bytes: ${eventBytes.size}")
     var events:Vector[ParsedEventProto] = Vector()
     val sizeOfFirstEvent:Int = eventBytes.slice(0, Integer.BYTES)
     var startOfNextEvent = Integer.BYTES + sizeOfFirstEvent 

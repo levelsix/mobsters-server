@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class PvpLeagueRetrieveUtilTest extends TestCase {
 
-	private static Logger log = LoggerFactory.getLogger(	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(PvpLeagueRetrieveUtilTest.class);
 
 	@Test
 	public void testLeagueIdForElo() {

@@ -45,7 +45,7 @@ public class SendGroupChatTest {
 	private MinimumUserProto mup;
 	private String userId;
 
-	private static Logger log = LoggerFactory.getLogger(	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SendGroupChatTest.class);
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
@@ -162,7 +162,7 @@ public class SendGroupChatTest {
 		SendGroupChatRequestEvent sgcre = new SendGroupChatRequestEvent();
 		sgcre.setTag(1);
 		sgcre.setSendGroupChatRequestProto(sgcrpb.build());
-		sendGroupChatController.processRequestEvent(sgcre, EventsUtil.getToClientEvents());
+		sendGroupChatController.processRequestEvent(sgcre, EventsUtil.getToClientEventsForUnitTest());
 
 //		log.info(" receive group chat response proto: {} ", sendGroupChatController.getRgcrp());
 

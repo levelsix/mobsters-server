@@ -57,7 +57,7 @@ public class BattleItemTest {
 	private MinimumUserProto mup;
 	private String userId;
 
-	private static Logger log = LoggerFactory.getLogger(	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BattleItemTest.class);
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
@@ -173,7 +173,7 @@ public class BattleItemTest {
 		CreateBattleItemRequestEvent cbire = new CreateBattleItemRequestEvent();
 		cbire.setTag(1);
 		cbire.setCreateBattleItemRequestProto(cbirpb.build());
-		createBattleItemController.processRequestEvent(cbire, EventsUtil.getToClientEvents());
+		createBattleItemController.processRequestEvent(cbire, EventsUtil.getToClientEventsForUnitTest());
 
 		User user2 = userRetrieveUtil.getUserById(user.getId());
 
@@ -246,7 +246,7 @@ public class BattleItemTest {
 		CreateBattleItemRequestEvent cbire2 = new CreateBattleItemRequestEvent();
 		cbire2.setTag(1);
 		cbire2.setCreateBattleItemRequestProto(cbirpb2.build());
-		createBattleItemController.processRequestEvent(cbire2, EventsUtil.getToClientEvents());
+		createBattleItemController.processRequestEvent(cbire2, EventsUtil.getToClientEventsForUnitTest());
 
 		User user3 = userRetrieveUtil.getUserById(userId);
 
@@ -279,6 +279,7 @@ public class BattleItemTest {
 				.createBattleItemQueueForUserProto(biqfu6);
 		removedList3.add(biqfup6);
 
+		
 		//updated list
 		List<BattleItemQueueForUserProto> updatedList3 = new ArrayList<BattleItemQueueForUserProto>();
 		BattleItemQueueForUser biqfu7 = new BattleItemQueueForUser();
@@ -310,7 +311,7 @@ public class BattleItemTest {
 		CreateBattleItemRequestEvent cbire3 = new CreateBattleItemRequestEvent();
 		cbire3.setTag(1);
 		cbire3.setCreateBattleItemRequestProto(cbirpb3.build());
-		createBattleItemController.processRequestEvent(cbire3, EventsUtil.getToClientEvents());
+		createBattleItemController.processRequestEvent(cbire3, EventsUtil.getToClientEventsForUnitTest());
 
 		User user4 = userRetrieveUtil.getUserById(userId);
 
@@ -334,7 +335,7 @@ public class BattleItemTest {
 		CompleteBattleItemRequestEvent cobire = new CompleteBattleItemRequestEvent();
 		cobire.setTag(1);
 		cobire.setCompleteBattleItemRequestProto(cobirpb.build());
-		completeBattleItemController.processRequestEvent(cobire, EventsUtil.getToClientEvents());
+		completeBattleItemController.processRequestEvent(cobire, EventsUtil.getToClientEventsForUnitTest());
 
 		User user5 = userRetrieveUtil.getUserById(userId);
 
@@ -361,7 +362,7 @@ public class BattleItemTest {
 		DiscardBattleItemRequestEvent dbire = new DiscardBattleItemRequestEvent();
 		dbire.setTag(1);
 		dbire.setDiscardBattleItemRequestProto(dbirpb.build());
-		discardBattleItemController.processRequestEvent(dbire, EventsUtil.getToClientEvents());
+		discardBattleItemController.processRequestEvent(dbire, EventsUtil.getToClientEventsForUnitTest());
 
 		List<BattleItemForUser> listOfBattleItems2 = battleItemForUserRetrieveUtil
 				.getUserBattleItemsForUser(userId);

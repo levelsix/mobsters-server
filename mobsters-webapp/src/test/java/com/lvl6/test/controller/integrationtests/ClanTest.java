@@ -27,7 +27,6 @@ import com.lvl6.events.request.ApproveOrRejectRequestToJoinClanRequestEvent;
 import com.lvl6.events.request.BootPlayerFromClanRequestEvent;
 import com.lvl6.events.request.ChangeClanSettingsRequestEvent;
 import com.lvl6.events.request.CreateClanRequestEvent;
-import com.lvl6.events.request.LeaveClanRequestEvent;
 import com.lvl6.events.request.PromoteDemoteClanMemberRequestEvent;
 import com.lvl6.events.request.RequestJoinClanRequestEvent;
 import com.lvl6.events.request.RetractRequestJoinClanRequestEvent;
@@ -42,7 +41,6 @@ import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProt
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanRequestProto;
 import com.lvl6.proto.EventClanProto.ChangeClanSettingsRequestProto;
 import com.lvl6.proto.EventClanProto.CreateClanRequestProto;
-import com.lvl6.proto.EventClanProto.LeaveClanRequestProto;
 import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberRequestProto;
 import com.lvl6.proto.EventClanProto.RequestJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProto;
@@ -302,7 +300,7 @@ public class ClanTest {
 		CreateClanRequestEvent ccre = new CreateClanRequestEvent();
 		ccre.setTag(1);
 		ccre.setCreateClanRequestProto(ccrpb.build());
-		createClanController.processRequestEvent(ccre, EventsUtil.getToClientEvents());
+		createClanController.processRequestEvent(ccre, EventsUtil.getToClientEventsForUnitTest());
 
 		User user2 = userRetrieveUtil.getUserById(userId1);
 		assertEquals(userGems - 100, user2.getGems());
@@ -337,7 +335,7 @@ public class ClanTest {
 		ChangeClanSettingsRequestEvent ccsre = new ChangeClanSettingsRequestEvent();
 		ccsre.setTag(1);
 		ccsre.setChangeClanSettingsRequestProto(ccsrpb.build());
-		changeClanSettingsController.processRequestEvent(ccsre, EventsUtil.getToClientEvents());
+		changeClanSettingsController.processRequestEvent(ccsre, EventsUtil.getToClientEventsForUnitTest());
 
 		Clan testClan2 = clanRetrieveUtil.getClanWithNameOrTag(
 				"test clan2", "tc2");
@@ -360,7 +358,7 @@ public class ClanTest {
 		RequestJoinClanRequestEvent rjcre = new RequestJoinClanRequestEvent();
 		rjcre.setTag(1);
 		rjcre.setRequestJoinClanRequestProto(rjcrpb.build());
-		requestJoinClanController.processRequestEvent(rjcre, EventsUtil.getToClientEvents());
+		requestJoinClanController.processRequestEvent(rjcre, EventsUtil.getToClientEventsForUnitTest());
 
 		List<Clan> clanList3 = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 				"test clan2", "tc2");
@@ -386,7 +384,7 @@ public class ClanTest {
 		ApproveOrRejectRequestToJoinClanRequestEvent aorrtjcre = new ApproveOrRejectRequestToJoinClanRequestEvent();
 		aorrtjcre.setTag(1);
 		aorrtjcre.setApproveOrRejectRequestToJoinClanRequestProto(aorrtjcrpb.build());
-		approveOrRejectRequestToJoinClanController.processRequestEvent(aorrtjcre, EventsUtil.getToClientEvents());
+		approveOrRejectRequestToJoinClanController.processRequestEvent(aorrtjcre, EventsUtil.getToClientEventsForUnitTest());
 
 		List<Clan> clanList4 = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 				"test clan2", "tc2");
@@ -408,7 +406,7 @@ public class ClanTest {
 		TransferClanOwnershipRequestEvent tcore = new TransferClanOwnershipRequestEvent();
 		tcore.setTag(1);
 		tcore.setTransferClanOwnershipRequestProto(tcorpb.build());
-		transferClanOwnershipController.processRequestEvent(tcore, EventsUtil.getToClientEvents());
+		transferClanOwnershipController.processRequestEvent(tcore, EventsUtil.getToClientEventsForUnitTest());
 
 		UserClan uc4 = userClanRetrieveUtil.getSpecificUserClan(userId2, clanUuid);
 		assertTrue(uc4.getStatus().equals("LEADER"));
@@ -430,7 +428,7 @@ public class ClanTest {
 		PromoteDemoteClanMemberRequestEvent pdcmre = new PromoteDemoteClanMemberRequestEvent();
 		pdcmre.setTag(1);
 		pdcmre.setPromoteDemoteClanMemberRequestProto(pdcmrpb.build());
-		promoteDemoteClanMemberController.processRequestEvent(pdcmre, EventsUtil.getToClientEvents());
+		promoteDemoteClanMemberController.processRequestEvent(pdcmre, EventsUtil.getToClientEventsForUnitTest());
 
 		UserClan uc6 = userClanRetrieveUtil.getSpecificUserClan(userId1, clanUuid);
 		assertTrue(uc6.getStatus().equals("CAPTAIN"));
@@ -449,7 +447,7 @@ public class ClanTest {
 		PromoteDemoteClanMemberRequestEvent pdcmre2 = new PromoteDemoteClanMemberRequestEvent();
 		pdcmre2.setTag(1);
 		pdcmre2.setPromoteDemoteClanMemberRequestProto(pdcmrpb2.build());
-		promoteDemoteClanMemberController.processRequestEvent(pdcmre2, EventsUtil.getToClientEvents());
+		promoteDemoteClanMemberController.processRequestEvent(pdcmre2, EventsUtil.getToClientEventsForUnitTest());
 
 		UserClan uc7 = userClanRetrieveUtil.getSpecificUserClan(userId1, clanUuid);
 		assertTrue(uc7.getStatus().equals("MEMBER"));
@@ -467,7 +465,7 @@ public class ClanTest {
 		RequestJoinClanRequestEvent rjcre2 = new RequestJoinClanRequestEvent();
 		rjcre2.setTag(1);
 		rjcre2.setRequestJoinClanRequestProto(rjcrpb2.build());
-		requestJoinClanController.processRequestEvent(rjcre2, EventsUtil.getToClientEvents());
+		requestJoinClanController.processRequestEvent(rjcre2, EventsUtil.getToClientEventsForUnitTest());
 
 		List<Clan> clanList5 = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 				"test clan2", "tc2");
@@ -489,7 +487,7 @@ public class ClanTest {
 		RetractRequestJoinClanRequestEvent rrjcre = new RetractRequestJoinClanRequestEvent();
 		rrjcre.setTag(1);
 		rrjcre.setRetractRequestJoinClanRequestProto(rrjcrpb.build());
-		retractRequestJoinClanController.processRequestEvent(rrjcre, EventsUtil.getToClientEvents());
+		retractRequestJoinClanController.processRequestEvent(rrjcre, EventsUtil.getToClientEventsForUnitTest());
 		
 		List<Clan> clanList6 = clanRetrieveUtil.getClansWithSimilarNameOrTag(
 				"test clan2", "tc2");
@@ -512,7 +510,7 @@ public class ClanTest {
 		BootPlayerFromClanRequestEvent bpfcre = new BootPlayerFromClanRequestEvent();
 		bpfcre.setTag(1);
 		bpfcre.setBootPlayerFromClanRequestProto(bpfcrpb.build());
-		bootPlayerFromClanController.processRequestEvent(bpfcre, EventsUtil.getToClientEvents());
+		bootPlayerFromClanController.processRequestEvent(bpfcre, EventsUtil.getToClientEventsForUnitTest());
 
 		User leader = userRetrieveUtil.getUserById(userId2);
 		assertTrue(leader.getClanId().equals(clanUuid));
@@ -530,7 +528,7 @@ public class ClanTest {
 		BootPlayerFromClanRequestEvent bpfcre2 = new BootPlayerFromClanRequestEvent();
 		bpfcre2.setTag(1);
 		bpfcre2.setBootPlayerFromClanRequestProto(bpfcrpb2.build());
-		bootPlayerFromClanController.processRequestEvent(bpfcre2, EventsUtil.getToClientEvents());
+		bootPlayerFromClanController.processRequestEvent(bpfcre2, EventsUtil.getToClientEventsForUnitTest());
 		
 		UserClan uc10 = userClanRetrieveUtil.getSpecificUserClan(userId1, clanUuid);
 		assertTrue(uc10 == null);		

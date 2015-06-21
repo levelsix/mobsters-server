@@ -163,7 +163,7 @@ package com.lvl6.test.controller.integrationtests;
 //		SendGroupChatRequestEvent sgcre = new SendGroupChatRequestEvent();
 //		sgcre.setTag(1);
 //		sgcre.setSendGroupChatRequestProto(sgcrpb.build());
-//		sendGroupChatController.processRequestEvent(sgcre, EventsUtil.getToClientEvents());
+//		sendGroupChatController.processRequestEvent(sgcre, EventsUtil.getToClientEventsForUnitTest());
 //		
 //		Map<String, ChatTranslations> chatTranslationsMap2 = ChatTranslationsRetrieveUtils.getChatTranslationsIdsToChatTranslationss();
 //		int newSize = chatTranslationsMap2.size();
