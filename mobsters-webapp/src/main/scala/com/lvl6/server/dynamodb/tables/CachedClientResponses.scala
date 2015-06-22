@@ -24,10 +24,10 @@ class CachedClientResponses extends TableDefinition {
   def tableName = "CachedClientResponses"
   def attributes = List(
       AttributeDef(hashKeyName, ScalarAttributeType.S),
-      AttributeDef(rangeKeyName.get, ScalarAttributeType.S),
+      AttributeDef(rangeKeyName.get, ScalarAttributeType.S)/*,
       AttributeDef(eventColumn, ScalarAttributeType.B),
       AttributeDef(eventTypeColumn, ScalarAttributeType.N),
-      AttributeDef(dateColumn, ScalarAttributeType.N))
+      AttributeDef(dateColumn, ScalarAttributeType.N)*/)
  
   override def itemTTL = Some(TTLDef(180l, TimeUnit.SECONDS, dateColumn))
 }
