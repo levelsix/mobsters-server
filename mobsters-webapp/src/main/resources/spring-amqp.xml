@@ -70,13 +70,13 @@
 		connection-factory="amqpConnectionFactory" 
 		concurrency="1"
 		error-handler="amqpErrorHandler"
-		message-converter="jsonConverter">
+		message-converter="messageConverter">
 		<rabbit:listener queues="serverMessagesQueue" ref="serverEventHandler"	method="onMessage" />
 	</rabbit:listener-container>
 
 	<rabbit:template id="serverMessagesTemplate"
 		connection-factory="amqpConnectionFactory" channel-transacted="true"
-		exchange="serverMessages" message-converter="jsonConverter" routing-key="messageForAllServers" />
+		exchange="serverMessages" message-converter="messageConverter" routing-key="messageForAllServers" />
 
 	<bean id="messageConverter"
 		class="org.springframework.amqp.support.converter.SerializerMessageConverter">
