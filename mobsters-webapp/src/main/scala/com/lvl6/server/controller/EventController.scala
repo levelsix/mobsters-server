@@ -29,7 +29,7 @@ abstract class EventController {
         MDCUtil.setMDCProperties("", event.getPlayerId, "")
         //logger.info(s"Received event: ${event.getClass.getSimpleName}")
         processRequestEvent(event, responses)
-        if(isAsync)
+        if(!isAsync)
           Some(responses)
         else
           None
