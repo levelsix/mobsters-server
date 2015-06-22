@@ -78,8 +78,8 @@
 		connection-factory="amqpConnectionFactory" channel-transacted="true"
 		exchange="serverMessages" message-converter="jsonConverter" routing-key="messageForAllServers" />
 
-	<bean id="jsonConverter"
-		class="org.springframework.amqp.support.converter.JsonMessageConverter">
+	<bean id="messageConverter"
+		class="org.springframework.amqp.support.converter.SerializerMessageConverter">
 	</bean>
 
 	<rabbit:listener-container
