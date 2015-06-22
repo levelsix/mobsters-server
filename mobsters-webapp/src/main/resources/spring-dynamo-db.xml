@@ -11,5 +11,5 @@
     	http://www.springframework.org/schema/context/spring-context.xsd
 		">
 
-	<context:property-placeholder location="classpath*:random.properties"/>
+	<context:property-placeholder location="classpath*:dynamodb.properties"/>
 </beans>
