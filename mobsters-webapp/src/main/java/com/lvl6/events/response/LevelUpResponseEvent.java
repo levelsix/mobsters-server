@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class LevelUpResponseEvent extends NormalResponseEvent<LevelUpResponseProto> {
 
-	
+
 
 	public LevelUpResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class LevelUpResponseEvent extends NormalResponseEvent<LevelUpResponsePro
 		return b.size();
 	}
 
-	public void setLevelUpResponseProto(
-			LevelUpResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

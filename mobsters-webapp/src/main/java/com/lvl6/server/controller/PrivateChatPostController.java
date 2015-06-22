@@ -53,7 +53,7 @@ import com.memetix.mst.language.Language;
 @Component
 public class PrivateChatPostController extends EventController {
 
-	
+
 	private static final Logger log = LoggerFactory.getLogger(PrivateChatPostController.class);
 
 	@Autowired
@@ -85,18 +85,18 @@ public class PrivateChatPostController extends EventController {
 
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected TranslationUtils translationUtils;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils toggle;
-	
+
 
 	private PrivateChatPostResponseProto pcprp;
 
 	public PrivateChatPostController() {
-		
+
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class PrivateChatPostController extends EventController {
 				.getPrivateChatPostRequestProto();
 
 		log.info("reqProto: {}", reqProto);
-		
+
 		// from client
 		MinimumUserProto senderProto = reqProto.getSender();
 		String posterId = senderProto.getUserUuid();
@@ -323,7 +323,7 @@ public class PrivateChatPostController extends EventController {
 					PrivateChatPostResponseEvent resEvent2 = new PrivateChatPostResponseEvent(
 							recipientId);
 					pcprp = resBuilder.build();
-					resEvent2.setPrivateChatPostResponseProto(pcprp);
+					resEvent2.setResponseProto(pcprp);
 					responses.apnsResponseEvents().add(resEvent2);
 				}
 			}

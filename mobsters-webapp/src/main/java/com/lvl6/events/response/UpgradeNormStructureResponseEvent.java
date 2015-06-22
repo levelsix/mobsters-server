@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpgradeNormStructureResponseEvent extends NormalResponseEvent<UpgradeNormStructureResponseProto> {
 
-	
+
 
 	public UpgradeNormStructureResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class UpgradeNormStructureResponseEvent extends NormalResponseEvent<Upgra
 		return b.size();
 	}
 
-	public void setUpgradeNormStructureResponseProto(
-			UpgradeNormStructureResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

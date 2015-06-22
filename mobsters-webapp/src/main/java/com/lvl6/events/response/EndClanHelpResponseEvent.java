@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EndClanHelpResponseEvent extends NormalResponseEvent<EndClanHelpResponseProto> {
 
-	
+
 
 	public EndClanHelpResponseEvent(String playerId) {
 		super(playerId);
@@ -23,12 +23,7 @@ public class EndClanHelpResponseEvent extends NormalResponseEvent<EndClanHelpRes
 		return b.size();
 	}
 
-	public void setEndClanHelpResponseProto(
-			EndClanHelpResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
-
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

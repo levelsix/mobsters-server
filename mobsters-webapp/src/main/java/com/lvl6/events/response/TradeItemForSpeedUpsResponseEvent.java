@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent<TradeItemForSpeedUpsResponseProto> {
 
-	
+
 
 	public TradeItemForSpeedUpsResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class TradeItemForSpeedUpsResponseEvent extends NormalResponseEvent<Trade
 		return b.size();
 	}
 
-	public void setTradeItemForSpeedUpsResponseProto(
-			TradeItemForSpeedUpsResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

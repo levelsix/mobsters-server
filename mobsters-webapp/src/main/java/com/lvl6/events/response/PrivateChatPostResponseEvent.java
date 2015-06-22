@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PrivateChatPostResponseEvent extends NormalResponseEvent<PrivateChatPostResponseProto> {
 
-	
+
 
 	public PrivateChatPostResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class PrivateChatPostResponseEvent extends NormalResponseEvent<PrivateCha
 		return b.size();
 	}
 
-	public void setPrivateChatPostResponseProto(
-			PrivateChatPostResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public PrivateChatPostResponseProto getPrivateChatPostResponseProto() { //required for APNS
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

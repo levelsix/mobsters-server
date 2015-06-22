@@ -309,7 +309,7 @@ public class MiscMethods {
 						createInfoProtoUtils.createFullUserProtoFromUser(user,
 								plfu, clan))
 				.setTimeOfUserUpdate(new Date().getTime()).build();
-		resEvent.setUpdateClientUserResponseProto(resProto);
+		resEvent.setResponseProto(resProto);
 		return resEvent;
 	}
 
@@ -343,7 +343,7 @@ public class MiscMethods {
 						createInfoProtoUtils.createFullUserProtoFromUser(user,
 								plfu, clan))
 				.setTimeOfUserUpdate(new Date().getTime()).build();
-		resEvent.setUpdateClientUserResponseProto(resProto);
+		resEvent.setResponseProto(resProto);
 		return resEvent;
 	}
 
@@ -882,7 +882,7 @@ public class MiscMethods {
 
 		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent(
 				"");
-		aNotification.setGeneralNotificationResponseProto(notificationProto
+		aNotification.setResponseProto(notificationProto
 				.build());
 		return aNotification;
 	}
@@ -900,7 +900,7 @@ public class MiscMethods {
 				.generateNotificationBuilder();
 		GeneralNotificationResponseEvent aNotification = new GeneralNotificationResponseEvent(
 				userId);
-		aNotification.setGeneralNotificationResponseProto(notificationProto
+		aNotification.setResponseProto(notificationProto
 				.build());
 
 		return aNotification;

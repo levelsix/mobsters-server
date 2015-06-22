@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SendGroupChatResponseEvent extends NormalResponseEvent<SendGroupChatResponseProto> {
 
-	
+
 
 	public SendGroupChatResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class SendGroupChatResponseEvent extends NormalResponseEvent<SendGroupCha
 		return b.size();
 	}
 
-	public void setSendGroupChatResponseProto(
-			SendGroupChatResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public SendGroupChatResponseProto getSendGroupChatResponseProto() { //required for APNS
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

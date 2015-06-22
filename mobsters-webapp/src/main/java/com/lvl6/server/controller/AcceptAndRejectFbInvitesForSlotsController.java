@@ -53,7 +53,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -197,7 +197,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 							inviterId);
 					newResEvent.setTag(0);
 					newResEvent
-							.setAcceptAndRejectFbInviteForSlotsResponseProto(responseProto);
+							.setResponseProto(responseProto);
 					responses.normalResponseEvents().add(newResEvent);
 
 				}
@@ -229,7 +229,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 
 	/*
 	 * Return true if user request is valid; false otherwise and set the
-	 * builder status to the appropriate value. accepetedInviteIds, 
+	 * builder status to the appropriate value. accepetedInviteIds,
 	 * rejectedInviteIds, and idsToAcceptedInvites might be modified
 	 */
 	private boolean checkLegit(Builder resBuilder, String userId,
@@ -273,7 +273,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 
 		//check to make sure this user is not accepting any invites from an inviter
 		//this user has already accepted, or in other words
-		//check to make sure this user has not previously accepted any invites from 
+		//check to make sure this user has not previously accepted any invites from
 		//any of the inviters of the acceptedInviteIds
 
 		//pair up inviterUserIds with the acceptedInviteIds
@@ -345,12 +345,12 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 		//recordedInviterIds, delete inviteId from the
 		//acceptedInviteIds list and put the inviteId into the rejectedInviteIds list
 
-		//keep track of the inviterIds that this user has previously already accepted  
+		//keep track of the inviterIds that this user has previously already accepted
 		Map<String, String> invalidInviteIdsToUserIds = new HashMap<String, String>();
 		for (String potentialNewInviterId : acceptedInviterIdsToInviteIds
 				.keySet()) {
 			if (recordedInviterIds.contains(potentialNewInviterId)) {
-				//userA trying to accept an invite from a person userA has already 
+				//userA trying to accept an invite from a person userA has already
 				//accepted an invite from
 				String inviteId = acceptedInviterIdsToInviteIds
 						.get(potentialNewInviterId);

@@ -120,25 +120,25 @@ public class EndPvpBattleController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
-	
+
 	@Autowired
 	protected StructureForUserDao2 sfuDao;
-	
+
 	@Autowired
 	protected HistoryUtils historyUtils;
-	
+
 	@Autowired
 	protected PvpBattleHistoryDao pbhDao;
-	
+
 	@Autowired
 	protected UserCurrencyHistoryDao uchDao;
-	
+
 
 	public EndPvpBattleController() {
-		
+
 	}
 
 	@Override
@@ -223,7 +223,7 @@ public class EndPvpBattleController extends EventController {
 
 		if (invalidUuids) {
 			resBuilder.setStatus(EndPvpBattleStatus.FAIL_OTHER); //default
-			resEvent.setEndPvpBattleResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -309,7 +309,7 @@ public class EndPvpBattleController extends EventController {
 					EndPvpBattleResponseEvent resEventDefender = new EndPvpBattleResponseEvent(
 							defenderId);
 					resEventDefender.setTag(0);
-					resEventDefender.setEndPvpBattleResponseProto(resBuilder
+					resEventDefender.setResponseProto(resBuilder
 							.build());
 					responses.normalResponseEvents().add(resEventDefender);
 				}
@@ -514,7 +514,7 @@ public class EndPvpBattleController extends EventController {
 				singletonMap(attackerId, oilStolenFromStorage);
 		Map<String, Integer> attackerIdsToOilStolenFromGenerators = Collections.
 				singletonMap(attackerId, oilStolenFromGenerators);
-		
+
 
 		//this PvpHistoryProto contains information for a person who
 		//is going to attack

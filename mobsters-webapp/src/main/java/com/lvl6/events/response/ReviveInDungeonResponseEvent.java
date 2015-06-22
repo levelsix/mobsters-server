@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ReviveInDungeonResponseEvent extends NormalResponseEvent<ReviveInDungeonResponseProto> {
 
-	
+
 
 	public ReviveInDungeonResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class ReviveInDungeonResponseEvent extends NormalResponseEvent<ReviveInDu
 		return b.size();
 	}
 
-	public void setReviveInDungeonResponseProto(
-			ReviveInDungeonResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public ReviveInDungeonResponseProto getReviveInDungeonResponseProto() {   //because APNS required
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

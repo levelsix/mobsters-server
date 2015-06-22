@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpdateClientTaskStateResponseEvent extends NormalResponseEvent<UpdateClientTaskStateResponseProto> {
 
-	
+
 
 	public UpdateClientTaskStateResponseEvent(String playerId) {
 		super(playerId);
@@ -23,14 +23,10 @@ public class UpdateClientTaskStateResponseEvent extends NormalResponseEvent<Upda
 		return b.size();
 	}
 
-	public void setUpdateClientTaskStateResponseProto(
-			UpdateClientTaskStateResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public UpdateClientTaskStateResponseProto getUpdateClientTaskStateResponseProto() {   //because APNS required
 		return responseProto;
 	}
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

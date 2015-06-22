@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent<UpdateUserCurrencyResponseProto> {
 
-	
+
 
 	public UpdateUserCurrencyResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class UpdateUserCurrencyResponseEvent extends NormalResponseEvent<UpdateU
 		return b.size();
 	}
 
-	public void setUpdateUserCurrencyResponseProto(
-			UpdateUserCurrencyResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public UpdateUserCurrencyResponseProto getUpdateUserCurrencyResponseProto() {   //because APNS required
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

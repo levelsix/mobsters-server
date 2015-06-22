@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SetDefendingMsgResponseEvent extends NormalResponseEvent<SetDefendingMsgResponseProto> {
 
-	
+
 
 	public SetDefendingMsgResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class SetDefendingMsgResponseEvent extends NormalResponseEvent<SetDefendi
 		return b.size();
 	}
 
-	public void setSetDefendingMsgResponseProto(
-			SetDefendingMsgResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

@@ -74,7 +74,7 @@ public class MessagingUtil {
 		samrp.setMessage(message);
 		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
 		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent("");
-		ev.setSendAdminMessageResponseProto(samrp.build());
+		ev.setResponseProto(samrp.build());
 		eventWriter.sendPreDBResponseEvent(udid, EventParser.getResponseBytes(uuid, ev));
 		//eventWriter.processPreDBResponseEvent(ev, udid);
 	}
@@ -89,7 +89,7 @@ public class MessagingUtil {
 		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
 		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(
 				playerId);
-		ev.setSendAdminMessageResponseProto(samrp.build());
+		ev.setResponseProto(samrp.build());
 		eventWriter.sendToSinglePlayer(playerId, EventParser.getResponseBytes(uuid, ev));
 	}
 
@@ -102,7 +102,7 @@ public class MessagingUtil {
 		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
 		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(
 				samrp.getSenderUuid());
-		ev.setSendAdminMessageResponseProto(samrp.build());
+		ev.setResponseProto(samrp.build());
 		//eventWriter.processGlobalChatResponseEvent(ev);
 		//send regular global˙ chat
 		log.info("Sending admin message global chat");
@@ -122,7 +122,7 @@ public class MessagingUtil {
 			ReceivedGroupChatResponseProto.Builder chatProto, int tag, long time) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
 				senderId);
-		ce.setReceivedGroupChatResponseProto(chatProto.build());
+		ce.setResponseProto(chatProto.build());
 		ce.setTag(tag);
 		log.info("Sending global chat ");
 		//add new message to front of list

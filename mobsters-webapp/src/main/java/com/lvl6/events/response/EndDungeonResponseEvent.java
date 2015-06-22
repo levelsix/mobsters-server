@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EndDungeonResponseEvent extends NormalResponseEvent<EndDungeonResponseProto> {
 
-	
+
 
 	public EndDungeonResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class EndDungeonResponseEvent extends NormalResponseEvent<EndDungeonRespo
 		return b.size();
 	}
 
-	public void setEndDungeonResponseProto(
-			EndDungeonResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public EndDungeonResponseProto getEndDungeonResponseProto() {   //because APNS required
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

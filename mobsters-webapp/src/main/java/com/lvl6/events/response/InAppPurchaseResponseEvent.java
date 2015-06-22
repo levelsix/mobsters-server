@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class InAppPurchaseResponseEvent extends NormalResponseEvent<InAppPurchaseResponseProto> {
 
-	
+
 
 	public InAppPurchaseResponseEvent(String playerId) {
 		super(playerId);
@@ -18,7 +18,7 @@ public class InAppPurchaseResponseEvent extends NormalResponseEvent<InAppPurchas
 
 	/**
 	 * write the event to the given ByteBuffer
-	 * 
+	 *
 	 * note we are using 1.4 ByteBuffers for both client and server depending on
 	 * the deployment you may need to support older java versions on the client
 	 * and use old-style socket input/output streams
@@ -30,11 +30,7 @@ public class InAppPurchaseResponseEvent extends NormalResponseEvent<InAppPurchas
 		return b.size();
 	}
 
-	public void setInAppPurchaseResponseProto(
-			InAppPurchaseResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

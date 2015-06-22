@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ApproveOrRejectRequestToJoinClanResponseEvent extends NormalResponseEvent<ApproveOrRejectRequestToJoinClanResponseProto> {
 
-	
+
 
 	public ApproveOrRejectRequestToJoinClanResponseEvent(String playerId) {
 		super(playerId);
@@ -24,11 +24,7 @@ public class ApproveOrRejectRequestToJoinClanResponseEvent extends NormalRespons
 		return b.size();
 	}
 
-	public void setApproveOrRejectRequestToJoinClanResponseProto(
-			ApproveOrRejectRequestToJoinClanResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

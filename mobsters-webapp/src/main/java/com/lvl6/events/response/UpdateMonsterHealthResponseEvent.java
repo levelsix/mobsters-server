@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpdateMonsterHealthResponseEvent extends NormalResponseEvent<UpdateMonsterHealthResponseProto> {
 
-	
+
 
 	public UpdateMonsterHealthResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class UpdateMonsterHealthResponseEvent extends NormalResponseEvent<Update
 		return b.size();
 	}
 
-	public void setUpdateMonsterHealthResponseProto(
-			UpdateMonsterHealthResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public UpdateMonsterHealthResponseProto getUpdateMonsterHealthResponseProto() {   //because APNS required
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

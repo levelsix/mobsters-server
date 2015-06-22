@@ -17,7 +17,7 @@ public class ForceLogoutResponseEvent extends NormalResponseEvent<ForceLogoutRes
 
 	/**
 	 * write the event to the given ByteBuffer
-	 * 
+	 *
 	 * note we are using 1.4 ByteBuffers for both client and server depending on
 	 * the deployment you may need to support older java versions on the client
 	 * and use old-style socket input/output streams
@@ -29,11 +29,7 @@ public class ForceLogoutResponseEvent extends NormalResponseEvent<ForceLogoutRes
 		return b.size();
 	}
 
-	public void setForceLogoutResponseProto(
-			ForceLogoutResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

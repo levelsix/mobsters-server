@@ -45,7 +45,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -56,7 +56,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 	protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
 
 	public InviteFbFriendsForSlotsController() {
-		
+
 	}
 
 	@Override
@@ -133,8 +133,8 @@ public class InviteFbFriendsForSlotsController extends EventController {
 
 			//will contain the facebook ids of new users the user can invite
 			//new is defined as: for each facebookId the tuple
-			//(inviterId, recipientId)=(userId, facebookId) 
-			//doesn't already exist in the table 
+			//(inviterId, recipientId)=(userId, facebookId)
+			//doesn't already exist in the table
 			List<String> newFacebookIdsToInvite = new ArrayList<String>();
 			boolean legit = checkLegit(resBuilder, userId, aUser,
 					fbIdsOfFriends, idsToInvites, newFacebookIdsToInvite);
@@ -192,7 +192,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 							recipientUserId);
 					newResEvent.setTag(0);
 					newResEvent
-							.setInviteFbFriendsForSlotsResponseProto(responseProto);
+							.setResponseProto(responseProto);
 					responses.normalResponseEvents().add(newResEvent);
 				}
 			}
@@ -240,7 +240,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 
 	/*
 	 * Return true if user request is valid; false otherwise and set the
-	 * builder status to the appropriate value. newUserIdsToInvite will be 
+	 * builder status to the appropriate value. newUserIdsToInvite will be
 	 * modified
 	 */
 	private boolean checkLegit(Builder resBuilder, String userId, User u,

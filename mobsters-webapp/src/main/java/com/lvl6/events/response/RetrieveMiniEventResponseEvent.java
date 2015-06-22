@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrieveMiniEventResponseEvent extends NormalResponseEvent<RetrieveMiniEventResponseProto> {
 
-	
+
 
 	public RetrieveMiniEventResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class RetrieveMiniEventResponseEvent extends NormalResponseEvent<Retrieve
 		return b.size();
 	}
 
-	public void setRetrieveMiniEventResponseProto(
-			RetrieveMiniEventResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

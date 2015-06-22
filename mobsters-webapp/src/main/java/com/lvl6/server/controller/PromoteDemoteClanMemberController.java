@@ -40,13 +40,13 @@ public class PromoteDemoteClanMemberController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanStuffUtils clanStuffUtils;
 
@@ -55,16 +55,16 @@ public class PromoteDemoteClanMemberController extends EventController {
 
 	@Autowired
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
-	
+
 	@Autowired
 	protected UpdateUtil updateUtil;
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
-	
+
+
 	public PromoteDemoteClanMemberController() {
-		
+
 	}
 
 	@Override
@@ -133,9 +133,9 @@ public class PromoteDemoteClanMemberController extends EventController {
 		if (clanUuid != null) {
 			lockedClan = getLocker().lockClan(clanUuid);
 		}
-		try {			
+		try {
 			PromoteDemoteClanMemberAction pdcma = new PromoteDemoteClanMemberAction(userId, victimId,
-					newUserClanStatus, lockedClan, userRetrieveUtils, updateUtil, deleteUtil, 
+					newUserClanStatus, lockedClan, userRetrieveUtils, updateUtil, deleteUtil,
 					userClanRetrieveUtils, clanStuffUtils);
 			pdcma.execute(resBuilder);
 
@@ -144,7 +144,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
 			if (!PromoteDemoteClanMemberStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				resEvent.setPromoteDemoteClanMemberResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 

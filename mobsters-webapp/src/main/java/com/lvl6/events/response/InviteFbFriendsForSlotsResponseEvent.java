@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class InviteFbFriendsForSlotsResponseEvent extends NormalResponseEvent<InviteFbFriendsForSlotsResponseProto> {
 
-	
+
 
 	public InviteFbFriendsForSlotsResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class InviteFbFriendsForSlotsResponseEvent extends NormalResponseEvent<In
 		return b.size();
 	}
 
-	public void setInviteFbFriendsForSlotsResponseProto(
-			InviteFbFriendsForSlotsResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public InviteFbFriendsForSlotsResponseProto getInviteFbFriendsForSlotsResponseProto() {   //because APNS required
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

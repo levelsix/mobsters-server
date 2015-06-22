@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent<PurchaseBoosterPackResponseProto> {
 
-	
+
 
 	public PurchaseBoosterPackResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent<Purcha
 		return b.size();
 	}
 
-	public void setPurchaseBoosterPackResponseProto(
-			PurchaseBoosterPackResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

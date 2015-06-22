@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SetFacebookIdResponseEvent extends NormalResponseEvent<SetFacebookIdResponseProto> {
 
-	
+
 
 	public SetFacebookIdResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class SetFacebookIdResponseEvent extends NormalResponseEvent<SetFacebookI
 		return b.size();
 	}
 
-	public void setSetFacebookIdResponseProto(
-			SetFacebookIdResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

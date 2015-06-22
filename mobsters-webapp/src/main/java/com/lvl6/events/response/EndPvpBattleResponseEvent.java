@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EndPvpBattleResponseEvent extends NormalResponseEvent<EndPvpBattleResponseProto> {
 
-	
+
 
 	public EndPvpBattleResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class EndPvpBattleResponseEvent extends NormalResponseEvent<EndPvpBattleR
 		return b.size();
 	}
 
-	public void setEndPvpBattleResponseProto(
-			EndPvpBattleResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public EndPvpBattleResponseProto getEndPvpBattleResponseProto() {   //because APNS required
 		return responseProto;
 	}
 
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

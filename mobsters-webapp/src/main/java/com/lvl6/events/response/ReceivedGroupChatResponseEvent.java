@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ReceivedGroupChatResponseEvent extends NormalResponseEvent<ReceivedGroupChatResponseProto> {
 
-	
+
 
 	public ReceivedGroupChatResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class ReceivedGroupChatResponseEvent extends NormalResponseEvent<Received
 		return b.size();
 	}
 
-	public void setReceivedGroupChatResponseProto(
-			ReceivedGroupChatResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SubmitMonsterEnhancementResponseEvent extends NormalResponseEvent<SubmitMonsterEnhancementResponseProto> {
 
-	
+
 
 	public SubmitMonsterEnhancementResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class SubmitMonsterEnhancementResponseEvent extends NormalResponseEvent<S
 		return b.size();
 	}
 
-	public void setSubmitMonsterEnhancementResponseProto(
-			SubmitMonsterEnhancementResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

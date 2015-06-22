@@ -26,7 +26,7 @@ import com.lvl6.server.eventsender.ToClientEvents;
 @DependsOn("gameServer")
 public class SetTangoIdController extends EventController {
 
-	
+
 	private static final Logger log = LoggerFactory.getLogger(SetTangoIdController.class);
 
 	@Autowired
@@ -85,7 +85,7 @@ public class SetTangoIdController extends EventController {
 			SetTangoIdResponseEvent resEvent = new SetTangoIdResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setSetTangoIdResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -98,7 +98,7 @@ public class SetTangoIdController extends EventController {
 			SetTangoIdResponseProto resProto = resBuilder.build();
 			SetTangoIdResponseEvent resEvent = new SetTangoIdResponseEvent(
 					senderProto.getUserUuid());
-			resEvent.setSetTangoIdResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 			if ( SetTangoIdStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
@@ -119,7 +119,7 @@ public class SetTangoIdController extends EventController {
 				SetTangoIdResponseEvent resEvent = new SetTangoIdResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setSetTangoIdResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

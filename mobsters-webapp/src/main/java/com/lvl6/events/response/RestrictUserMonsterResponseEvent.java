@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RestrictUserMonsterResponseEvent extends NormalResponseEvent<RestrictUserMonsterResponseProto> {
 
-	
+
 
 	public RestrictUserMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class RestrictUserMonsterResponseEvent extends NormalResponseEvent<Restri
 		return b.size();
 	}
 
-	public void setRestrictUserMonsterResponseProto(
-			RestrictUserMonsterResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public RestrictUserMonsterResponseProto getRestrictUserMonsterResponseProto() {   //because APNS required
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

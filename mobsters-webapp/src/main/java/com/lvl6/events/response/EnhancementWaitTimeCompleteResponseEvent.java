@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EnhancementWaitTimeCompleteResponseEvent extends NormalResponseEvent<EnhancementWaitTimeCompleteResponseProto> {
 
-	
+
 
 	public EnhancementWaitTimeCompleteResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class EnhancementWaitTimeCompleteResponseEvent extends NormalResponseEven
 		return b.size();
 	}
 
-	public void setEnhancementWaitTimeCompleteResponseProto(
-			EnhancementWaitTimeCompleteResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

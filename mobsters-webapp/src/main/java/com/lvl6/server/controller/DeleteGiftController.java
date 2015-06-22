@@ -134,7 +134,7 @@ public class DeleteGiftController extends EventController {
 			DeleteGiftResponseEvent resEvent = new DeleteGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDeleteGiftResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -149,7 +149,7 @@ public class DeleteGiftController extends EventController {
 			DeleteGiftResponseEvent resEvent = new DeleteGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setDeleteGiftResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -161,7 +161,7 @@ public class DeleteGiftController extends EventController {
 				DeleteGiftResponseEvent resEvent = new DeleteGiftResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setDeleteGiftResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
 				log.error(

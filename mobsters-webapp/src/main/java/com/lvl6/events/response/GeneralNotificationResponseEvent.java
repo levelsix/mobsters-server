@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class GeneralNotificationResponseEvent extends NormalResponseEvent<GeneralNotificationResponseProto> {
 
-	
+
 
 	//The input argument is not used.
 	public GeneralNotificationResponseEvent(String playerId) {
@@ -24,15 +24,11 @@ public class GeneralNotificationResponseEvent extends NormalResponseEvent<Genera
 		return b.size();
 	}
 
-	public void setGeneralNotificationResponseProto(
-			GeneralNotificationResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public GeneralNotificationResponseProto getGeneralNotificationResponseProto() {
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

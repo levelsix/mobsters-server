@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class FinishPerformingResearchResponseEvent extends NormalResponseEvent<FinishPerformingResearchResponseProto> {
 
-	
+
 
 	public FinishPerformingResearchResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class FinishPerformingResearchResponseEvent extends NormalResponseEvent<F
 		return b.size();
 	}
 
-	public void setFinishPerformingResearchResponseProto(
-			FinishPerformingResearchResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurgeClientStaticDataResponseEvent extends NormalResponseEvent<PurgeClientStaticDataResponseProto>{
 
-	
+
 
 	public PurgeClientStaticDataResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class PurgeClientStaticDataResponseEvent extends NormalResponseEvent<Purg
 		return b.size();
 	}
 
-	public void setPurgeClientStaticDataResponseProto(
-			PurgeClientStaticDataResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

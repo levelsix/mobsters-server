@@ -39,7 +39,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected LeaderBoardImpl leaderBoard;
 
@@ -92,7 +92,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 			RetrieveStrengthLeaderBoardResponseEvent resEvent = new RetrieveStrengthLeaderBoardResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveStrengthLeaderBoardResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -100,7 +100,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 		//		server.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		try {
 
-			RetrieveStrengthLeaderBoardAction rslba = new RetrieveStrengthLeaderBoardAction(userId, 
+			RetrieveStrengthLeaderBoardAction rslba = new RetrieveStrengthLeaderBoardAction(userId,
 					minRank, maxRank, leaderBoard, userRetrieveUtil, createInfoProtoUtils);
 			rslba.execute(resBuilder);
 
@@ -108,7 +108,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 			RetrieveStrengthLeaderBoardResponseEvent resEvent = new RetrieveStrengthLeaderBoardResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setRetrieveStrengthLeaderBoardResponseProto(resProto);
+			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
 		} catch (Exception e) {
@@ -120,7 +120,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 				RetrieveStrengthLeaderBoardResponseEvent resEvent = new RetrieveStrengthLeaderBoardResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
-				resEvent.setRetrieveStrengthLeaderBoardResponseProto(resBuilder
+				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {

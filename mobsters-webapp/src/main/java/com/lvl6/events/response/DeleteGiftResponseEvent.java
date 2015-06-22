@@ -23,11 +23,6 @@ public class DeleteGiftResponseEvent extends NormalResponseEvent<DeleteGiftRespo
 		return b.size();
 	}
 
-	public void setDeleteGiftResponseProto(
-			DeleteGiftResponseProto deleteGiftResponseProto) {
-		this.deleteGiftResponseProto = deleteGiftResponseProto;
-	}
-
 	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();

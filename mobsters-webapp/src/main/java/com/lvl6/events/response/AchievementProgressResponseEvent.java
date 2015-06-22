@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class AchievementProgressResponseEvent extends NormalResponseEvent<AchievementProgressResponseProto> {
 
-	
+
 
 	public AchievementProgressResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class AchievementProgressResponseEvent extends NormalResponseEvent<Achiev
 		return b.size();
 	}
 
-	public void setAchievementProgressResponseProto(
-			AchievementProgressResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

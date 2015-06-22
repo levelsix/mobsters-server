@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent<CombineUserMonsterPiecesResponseProto> {
 
-	
+
 
 	public CombineUserMonsterPiecesResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class CombineUserMonsterPiecesResponseEvent extends NormalResponseEvent<C
 		return b.size();
 	}
 
-	public void setCombineUserMonsterPiecesResponseProto(
-			CombineUserMonsterPiecesResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public CombineUserMonsterPiecesResponseProto getCombineUserMonsterPiecesResponseProto() {   //because APNS required
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

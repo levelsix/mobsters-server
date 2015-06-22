@@ -38,6 +38,9 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentForClanHist
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentUserReward;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanGiftRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelp;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelpCountForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanIconConfig;
@@ -63,6 +66,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.IapHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ItemForUserUsage;
+import com.lvl6.mobsters.db.jooq.generated.tables.ItemSecretGiftForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.LoadTestingEvents;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventForUser;
@@ -141,6 +145,8 @@ import com.lvl6.mobsters.db.jooq.generated.tables.StructureResourceGeneratorConf
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureResourceStorageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureTeamCenterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureTownHallConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.TangoGiftRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskForUserClientState;
 import com.lvl6.mobsters.db.jooq.generated.tables.TaskForUserCompleted;
@@ -190,7 +196,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
-	private static final long serialVersionUID = 1177084752;
+	private static final long serialVersionUID = -1171730830;
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -247,6 +253,9 @@ public class Mobsters extends SchemaImpl {
 			ClanEventPersistentForUser.CLAN_EVENT_PERSISTENT_FOR_USER,
 			ClanEventPersistentUserReward.CLAN_EVENT_PERSISTENT_USER_REWARD,
 			ClanForUser.CLAN_FOR_USER,
+			ClanGiftConfig.CLAN_GIFT_CONFIG,
+			ClanGiftForUser.CLAN_GIFT_FOR_USER,
+			ClanGiftRewardConfig.CLAN_GIFT_REWARD_CONFIG,
 			ClanHelp.CLAN_HELP,
 			ClanHelpCountForUser.CLAN_HELP_COUNT_FOR_USER,
 			ClanIconConfig.CLAN_ICON_CONFIG,
@@ -272,6 +281,7 @@ public class Mobsters extends SchemaImpl {
 			ItemConfig.ITEM_CONFIG,
 			ItemForUser.ITEM_FOR_USER,
 			ItemForUserUsage.ITEM_FOR_USER_USAGE,
+			ItemSecretGiftForUser.ITEM_SECRET_GIFT_FOR_USER,
 			LoadTestingEvents.LOAD_TESTING_EVENTS,
 			LockBoxEventConfig.LOCK_BOX_EVENT_CONFIG,
 			LockBoxEventForUser.LOCK_BOX_EVENT_FOR_USER,
@@ -350,6 +360,8 @@ public class Mobsters extends SchemaImpl {
 			StructureResourceStorageConfig.STRUCTURE_RESOURCE_STORAGE_CONFIG,
 			StructureTeamCenterConfig.STRUCTURE_TEAM_CENTER_CONFIG,
 			StructureTownHallConfig.STRUCTURE_TOWN_HALL_CONFIG,
+			TangoGiftConfig.TANGO_GIFT_CONFIG,
+			TangoGiftRewardConfig.TANGO_GIFT_REWARD_CONFIG,
 			TaskConfig.TASK_CONFIG,
 			TaskForUserClientState.TASK_FOR_USER_CLIENT_STATE,
 			TaskForUserCompleted.TASK_FOR_USER_COMPLETED,

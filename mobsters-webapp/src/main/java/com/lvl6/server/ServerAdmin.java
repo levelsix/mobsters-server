@@ -221,7 +221,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 				purgeProto.setSenderUuid(playa);
 				purgeProto.setStaticDataStuff(sdp);
 
-				pcsd.setPurgeClientStaticDataResponseProto(purgeProto.build());
+				pcsd.setResponseProto(purgeProto.build());
 				//TODO: this has to be changed for websockets
 				//writer.sendToSinglePlayer(playa, EventParser.getResponseBytes("", pcsd));//handleEvent(pcsd);
 			}

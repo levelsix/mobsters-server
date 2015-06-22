@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SellUserMonsterResponseEvent extends NormalResponseEvent<SellUserMonsterResponseProto> {
 
-	
+
 
 	public SellUserMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class SellUserMonsterResponseEvent extends NormalResponseEvent<SellUserMo
 		return b.size();
 	}
 
-	public void setSellUserMonsterResponseProto(
-			SellUserMonsterResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public SellUserMonsterResponseProto getSellUserMonsterResponseProto() {   //because APNS required
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

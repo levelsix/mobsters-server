@@ -75,7 +75,7 @@ public class RequestJoinClanController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -120,25 +120,25 @@ public class RequestJoinClanController extends EventController {
 
 	@Autowired
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
+
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanSearch clanSearch;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils toggle;
 
@@ -254,14 +254,14 @@ public class RequestJoinClanController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
 			/* I think I meant write to the clan leader if leader is not on
-			 
+
 			//in case user is not online write an apns
 			responses.apnsResponseEvents().add((resEvent);
 			//responses.normalResponseEvents().add(resEvent);
 			 */
 			responses.normalResponseEvents().add(resEvent);
 
-			if (RequestJoinClanStatus.SUCCESS_JOIN.equals(resBuilder.getStatus()) || 
+			if (RequestJoinClanStatus.SUCCESS_JOIN.equals(resBuilder.getStatus()) ||
 					RequestJoinClanStatus.SUCCESS_REQUEST.equals(resBuilder.getStatus())) {
 				List<String> userIds = new ArrayList<String>();
 				userIds.add(userId);
@@ -276,7 +276,7 @@ public class RequestJoinClanController extends EventController {
 				resBuilder.clearEventDetails(); //could just get rid of this line
 				resBuilder.clearClanUsersDetails(); //could just get rid of this line
 
-				resEvent.setRequestJoinClanResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
 				if (!rjca.isRequestToJoinRequired()) {
@@ -351,7 +351,7 @@ public class RequestJoinClanController extends EventController {
 		//    GeneralNotificationResponseEvent aNotification =
 		//        new GeneralNotificationResponseEvent(clanOwnerId);
 		//    aNotification.setGeneralNotificationResponseProto(notificationProto.build());
-		//    
+		//
 		//    responses.apnsResponseEvents().add((aNotification);
 	}
 
@@ -410,7 +410,7 @@ public class RequestJoinClanController extends EventController {
 	//	  ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 	//	  StartUpResource fillMe = new StartUpResource(
 	//		  userRetrieveUtil, clanRetrieveUtil );
-	//	  
+	//
 	//	  SetClanChatMessageAction sccma = new SetClanChatMessageAction(
 	//		  cdpb, u, clanChatPostRetrieveUtils);
 	//	  sccma.setUp(fillMe);
@@ -429,9 +429,9 @@ public class RequestJoinClanController extends EventController {
 	//	  sccma.execute(fillMe);
 	//	  scha.execute(fillMe);
 	//	  scra.execute(fillMe);
-	//	  
+	//
 	//	  lastChatTimeContainer.add(sccma.getLastClanChatPostTime());
-	//	  
+	//
 	//	  return cdpb.build();
 	//  }
 
@@ -446,7 +446,7 @@ public class RequestJoinClanController extends EventController {
 		}
 		else {
 			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
-		}		
+		}
 	}
 
 	private void sendClanData(RequestEvent event, MinimumUserProto senderProto,	String userId, ClanDataProto cdp, ToClientEvents responses) {
@@ -461,7 +461,7 @@ public class RequestJoinClanController extends EventController {
 		rcdrpb.setMup(senderProto);
 		rcdrpb.setClanData(cdp);
 
-		rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
+		rcdre.setResponseProto(rcdrpb.build());
 		responses.normalResponseEvents().add(rcdre);
 	}
 
