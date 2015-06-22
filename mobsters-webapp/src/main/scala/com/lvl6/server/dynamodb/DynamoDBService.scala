@@ -155,6 +155,7 @@ class DynamoDBService extends LazyLogging {
        client = new AmazonDynamoDBClient()
     }
     dynamoDB = new DynamoDB(client)
+    createTables
   }
   
 }
