@@ -65,7 +65,7 @@ trait GameEventHandler extends LazyLogging  {
               
               cachedResponses match {
                 case Some(responses) => responses.foreach{ cr => eventWriter.sendToSinglePlayer(plyrId, cr.event)}
-                case None =>
+                case None => logger.info("Cached responses was empty")
               }
             }
           }else{

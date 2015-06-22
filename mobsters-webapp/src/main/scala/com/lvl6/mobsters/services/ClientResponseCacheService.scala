@@ -41,6 +41,7 @@ class ClientResponseCacheService extends LazyLogging{
       )
     }
     if(!cachedResponses.isEmpty){
+      logger.info(s"Found ${cachedResponses.size} cached responses")
       Some(cachedResponses)
     }else{
       None
