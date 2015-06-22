@@ -24,6 +24,7 @@ import com.amazonaws.services.dynamodbv2.document.Item
 import com.lvl6.server.dynamodb.Converter._
 import scala.beans.BeanProperty
 import org.springframework.beans.factory.annotation.Value
+import com.amazonaws.auth.BasicAWSCredentials
 
 
 @Component
@@ -147,8 +148,12 @@ class DynamoDBService extends LazyLogging {
   
   @PostConstruct
   def setup={
-    client = new AmazonDynamoDBClient()
-    if(isLocal) client.setEndpoint("http://localhost:8000")
+    if(isLocal) {
+    	client = new AmazonDynamoDBClient(new BasicAWSCredentials("Fake", "Fake"))
+      client.setEndpoint("http://localhost:8000")
+    }else {
+       client = new AmazonDynamoDBClient()
+    }
     dynamoDB = new DynamoDB(client)
   }
   
