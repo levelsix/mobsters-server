@@ -168,6 +168,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       logger.debug("Sending apnsResponse event")
       apnsWriter.handleEvent(revent)
     }
+    cacheResponses(responses)
   }
   
   override def updatePlayerToServerMaps(parsedEvent:ParsedEvent)={
