@@ -26,6 +26,7 @@ import com.lvl6.server.APNSWriter
 import com.lvl6.server.dynamodb.tables.CachedClientResponse
 import java.util.Date
 import scala.beans.BeanProperty
+import org.springframework.beans.factory.annotation.Value
 
 
 trait GameEventHandler extends LazyLogging  {
@@ -39,6 +40,7 @@ trait GameEventHandler extends LazyLogging  {
   @Autowired var eventWriter:EventWriter = null
   @Autowired var apnsWriter:APNSWriter = null
   
+  //@Value("dynamodb.response.caching.enabled")
   @BeanProperty
   var responseCachingEnabled = false
   
@@ -65,7 +67,7 @@ trait GameEventHandler extends LazyLogging  {
               
               cachedResponses match {
                 case Some(responses) => responses.foreach{ cr => eventWriter.sendToSinglePlayer(plyrId, cr.event)}
-                case None =>
+                case None => logger.info("Cached responses was empty")
               }
             }
           }else{
@@ -123,13 +125,15 @@ trait GameEventHandler extends LazyLogging  {
   def handleMaintenanceMode(parsedEvent:ParsedEvent)={
     val re = parsedEvent.event
     val playerId = re.getPlayerId
-    val user = userRetrieveUtils.getUserById(playerId)
-    if(!user.isAdmin){
+    if(playerId != null && !playerId.isEmpty) {
+      val user = userRetrieveUtils.getUserById(playerId)
+      if(user != null && !user.isAdmin){
+        messagingUtil.sendMaintanenceModeMessage(appMode.getMessageForUsers, playerId, parsedEvent.eventProto.getEventUuid)
+      }
+    }else {
       if(re.isInstanceOf[PreDatabaseRequestEvent] ){
         val udid = re.asInstanceOf[PreDatabaseRequestEvent].getUdid
-        //messagingUtil.sendMaintanenceModeMessageUdid(appMode.getMessageForUsers, udid)
-      }else{
-        //messagingUtil.sendMaintanenceModeMessage(appMode.getMessageForUsers, playerId)
+        messagingUtil.sendMaintanenceModeMessageUdid(appMode.getMessageForUsers, udid, parsedEvent.eventProto.getEventUuid)
       }
     }
   } 
