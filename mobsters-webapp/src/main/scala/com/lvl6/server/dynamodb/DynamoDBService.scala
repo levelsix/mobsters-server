@@ -23,6 +23,7 @@ import com.amazonaws.services.dynamodbv2.document.PutItemOutcome
 import com.amazonaws.services.dynamodbv2.document.Item
 import com.lvl6.server.dynamodb.Converter._
 import scala.beans.BeanProperty
+import org.springframework.beans.factory.annotation.Value
 
 
 @Component
@@ -33,10 +34,13 @@ class DynamoDBService extends LazyLogging {
   protected var dynamoDB:DynamoDB = null
 
   @BeanProperty
+  @Value("${dynamodb.table.prefix}")
   var tablePrefix:String = ""
   
   @BeanProperty
+  @Value("${dynamodb.isLocal}")
   var isLocal = false//for testing dynamo locally
+  
   
   
   def provisionedThroughput:ProvisionedThroughput = {
