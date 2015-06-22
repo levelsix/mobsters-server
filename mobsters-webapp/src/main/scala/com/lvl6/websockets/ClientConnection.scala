@@ -109,7 +109,6 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   }
   
   override def sendResponses(responses:ToClientEvents)={
-    logger.info(s"abcd");
     if(userId.isEmpty) {
       if(!responses.userId.isEmpty) {
         userId = Some(responses.userId)
