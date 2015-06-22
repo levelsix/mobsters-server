@@ -16,11 +16,12 @@
 	<security:http pattern="/client/connection*" security="none"/>
 
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/chat*" access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/logs*" access="hasRole('ROLE_ADMIN')" />
-		<security:intercept-url pattern="/stat*" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/chat**" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/logs**" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/stat**" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/"	access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:csrf disabled="true"/>
 	</security:http>
 	
 
