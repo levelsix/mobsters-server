@@ -26,6 +26,7 @@ import com.lvl6.server.APNSWriter
 import com.lvl6.server.dynamodb.tables.CachedClientResponse
 import java.util.Date
 import scala.beans.BeanProperty
+import org.springframework.beans.factory.annotation.Value
 
 
 trait GameEventHandler extends LazyLogging  {
@@ -39,6 +40,7 @@ trait GameEventHandler extends LazyLogging  {
   @Autowired var eventWriter:EventWriter = null
   @Autowired var apnsWriter:APNSWriter = null
   
+  @Value("dynamodb.response.caching.enabled")
   @BeanProperty
   var responseCachingEnabled = false
   
