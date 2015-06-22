@@ -40,7 +40,7 @@ trait GameEventHandler extends LazyLogging  {
   @Autowired var eventWriter:EventWriter = null
   @Autowired var apnsWriter:APNSWriter = null
   
-  @Value("dynamodb.response.caching.enabled")
+  //@Value("dynamodb.response.caching.enabled")
   @BeanProperty
   var responseCachingEnabled = false
   
