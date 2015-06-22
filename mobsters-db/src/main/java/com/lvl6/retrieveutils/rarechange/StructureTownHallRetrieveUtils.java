@@ -21,8 +21,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class StructureTownHallRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(StructureTownHallRetrieveUtils.class);
 	
 	@Autowired
 	StructureRetrieveUtils structureRetrieveUtils;

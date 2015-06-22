@@ -46,6 +46,7 @@ public class SalesTest {
 
 	private static Logger log = LoggerFactory.getLogger(SalesTest.class);
 
+	
 	private JdbcTemplate jdbcTemplate;
 	private boolean endOfTesting;
 	private User user;
@@ -187,7 +188,7 @@ public class SalesTest {
 		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 		iapre.setTag(1);
 		iapre.setInAppPurchaseRequestProto(iaprpb.build());
-		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEvents());
+		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEventsForUnitTest());
 
 		List<MonsterForUser> userMonsterList = monsterForUserRetrieveUtil.getMonstersForUser(userId);
 		
@@ -322,7 +323,7 @@ public class SalesTest {
 //		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 //		iapre.setTag(1);
 //		iapre.setInAppPurchaseRequestProto(iaprpb.build());
-//		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEvents());
+//		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEventsForUnitTest());
 //		conditionParams.put(DBConstants.BATTLE_ITEM_QUEUE_FOR_USER__USER_ID,
 //				userId);
 //		int numDeleted = DBConnection.get().deleteRows(tableName,
@@ -383,7 +384,7 @@ public class SalesTest {
 ////		InAppPurchaseRequestEvent iapre2 = new InAppPurchaseRequestEvent();
 ////		iapre2.setTag(1);
 ////		iapre2.setInAppPurchaseRequestProto(iaprpb2.build());
-////		inAppPurchaseController.processRequestEvent(iapre2, EventsUtil.getToClientEvents());
+////		inAppPurchaseController.processRequestEvent(iapre2, EventsUtil.getToClientEventsForUnitTest());
 ////		String userStructId = "";
 ////
 ////		List<StructureForUser> sfuList2 = structureForUserRetrieveUtils2
@@ -409,7 +410,7 @@ public class SalesTest {
 ////		DestroySalesStructureRequestEvent dmtsre = new DestroySalesStructureRequestEvent();
 ////		dmtsre.setTag(1);
 ////		dmtsre.setDestroySalesStructureRequestProto(dmtsrpb.build());
-////		destroySalesStructureController.processRequestEvent(dmtsre, EventsUtil.getToClientEvents());
+////		destroySalesStructureController.processRequestEvent(dmtsre, EventsUtil.getToClientEventsForUnitTest());
 ////
 ////		User user4 = userRetrieveUtil.getUserById(user.getId());
 ////		List<StructureForUser> sfuList3 = structureForUserRetrieveUtils2

@@ -43,8 +43,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 @Component
 public class RefreshMiniJobController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RefreshMiniJobController.class);
 
 	@Autowired
 	protected Locker locker;

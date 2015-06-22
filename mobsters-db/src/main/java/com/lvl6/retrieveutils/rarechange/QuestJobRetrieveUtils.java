@@ -21,8 +21,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class QuestJobRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(QuestJobRetrieveUtils.class);
 
 	private static Map<Integer, QuestJob> questJobIdsToQuestJobs;
 	private static Map<Integer, Map<Integer, QuestJob>> questIdsToQuestJobIdsToJobs;

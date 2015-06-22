@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.AvengeClanMateRequestProto;
 
 public class AvengeClanMateRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(AvengeClanMateRequestEvent.class);
 
 	private AvengeClanMateRequestProto avengeClanMateRequestProto;
 

@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProto;
 
 public class RetractRequestJoinClanRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RetractRequestJoinClanRequestEvent.class);
 
 	private RetractRequestJoinClanRequestProto retractRequestJoinClanRequestProto;
 

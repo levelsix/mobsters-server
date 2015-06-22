@@ -23,8 +23,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class MonsterLevelInfoRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MonsterLevelInfoRetrieveUtils.class);
 
 	private static Map<Integer, Map<Integer, MonsterLevelInfo>> monsterIdToLevelToInfo;
 

@@ -219,6 +219,8 @@ import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 @DependsOn("gameServer")
 public class CreateInfoProtoUtils {
 
+	private static Logger log = LoggerFactory.getLogger(CreateInfoProtoUtils.class);
+	
 	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
 
@@ -258,8 +260,7 @@ public class CreateInfoProtoUtils {
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
 
 
 	/** Achievement.proto ***************************************************/

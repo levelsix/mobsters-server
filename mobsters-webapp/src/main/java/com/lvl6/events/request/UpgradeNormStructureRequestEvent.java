@@ -12,8 +12,7 @@ import com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProto;
 
 public class UpgradeNormStructureRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UpgradeNormStructureRequestEvent.class);
 
 	private UpgradeNormStructureRequestProto upgradeNormStructureRequestProto;
 

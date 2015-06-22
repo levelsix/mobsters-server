@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
@@ -21,24 +24,23 @@ import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class CreateClanAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class CreateClanAction {
+	private static Logger log = LoggerFactory.getLogger( CreateClanAction.class);
 
 	private String userId;
 	private int cashChange;
 	private int gemsSpent;
-	private UserRetrieveUtils2 userRetrieveUtils;
-	protected InsertUtil insertUtil;
-	protected DeleteUtil deleteUtil;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected DeleteUtil deleteUtil;
 	private MiscMethods miscMethods;
 	private String clanName;
 	private String tag;
 	private boolean requestToJoinRequired;
 	private String description;
 	private int clanIconId;
-	private ClanRetrieveUtils2 clanRetrieveUtils;
-	private ResourceUtil resourceUtil;
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtils; 
+	@Autowired protected ResourceUtil resourceUtil; 
 
 
 	public CreateClanAction(

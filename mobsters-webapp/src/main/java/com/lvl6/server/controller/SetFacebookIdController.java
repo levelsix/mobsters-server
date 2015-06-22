@@ -31,8 +31,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
 public class SetFacebookIdController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SetFacebookIdController.class);
 
 	@Autowired
 	protected Locker locker;

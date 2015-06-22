@@ -25,7 +25,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 public class DBConnection {
 
 	public static DBConnection get() {
-		return (DBConnection) AppContext.getApplicationContext().getBean(
+		return (DBConnection) AppContext.get().getBean(
 				"dbConnection");
 	}
 

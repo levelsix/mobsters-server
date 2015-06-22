@@ -26,8 +26,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class MonsterEnhancingForUserRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MonsterEnhancingForUserRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
 	private static final UserMonsterEnhancingForClientMapper rowMapper = new UserMonsterEnhancingForClientMapper();

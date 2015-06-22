@@ -28,8 +28,7 @@ import com.lvl6.retrieveutils.util.QueryConstructionUtil;
 @Component
 public class PvpUserRetrieveUtil {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(PvpUserRetrieveUtil.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_PVP_LEAGUE_FOR_USER;
 	private JdbcTemplate jdbcTemplate;

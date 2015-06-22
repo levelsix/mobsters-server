@@ -12,7 +12,7 @@ object Metrics {
     reg = registree
   }
   def registry = {
-   //if(reg == null) reg = AppContext.getApplicationContext.getBean("metrics").asInstanceOf[MetricRegistry]
+   //if(reg == null) reg = AppContext.get.getBean("metrics").asInstanceOf[MetricRegistry]
    reg
   }
   

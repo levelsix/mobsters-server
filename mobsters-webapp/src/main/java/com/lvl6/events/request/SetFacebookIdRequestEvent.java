@@ -12,8 +12,7 @@ import com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto;
 
 public class SetFacebookIdRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SetFacebookIdRequestEvent.class);
 
 	private SetFacebookIdRequestProto setFacebookIdRequestProto;
 

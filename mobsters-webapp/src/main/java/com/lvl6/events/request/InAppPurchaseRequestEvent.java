@@ -12,8 +12,7 @@ import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 
 public class InAppPurchaseRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(InAppPurchaseRequestEvent.class);
 
 	private InAppPurchaseRequestProto inAppPurchaseRequestProto;
 

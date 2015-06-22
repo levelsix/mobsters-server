@@ -9,6 +9,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.TranslatedText;
@@ -27,23 +30,22 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.memetix.mst.language.Language;
 
-public class TranslateSelectMessagesAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class TranslateSelectMessagesAction {
+	private static Logger log = LoggerFactory.getLogger( TranslateSelectMessagesAction.class);
 
 	private String recipientUserId;
 	private String senderUserId;
 	private TranslateLanguages languageEnum;
 	private List<PrivateChatPost> listOfPrivateChatPosts;
 	private ChatScope chatType;
-	private TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
+	@Autowired protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil; 
 	private boolean translateOn;
-	protected InsertUtil insertUtil;
-	protected UpdateUtil updateUtil;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected UpdateUtil updateUtil;
 	private MiscMethods miscMethods;
-	private ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils;
-	private TranslationUtils translationUtils;
-	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	@Autowired protected ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils; 
+	@Autowired protected TranslationUtils translationUtils; 
+	@Autowired protected ServerToggleRetrieveUtils serverToggleRetrieveUtils; 
 
 
 	public TranslateSelectMessagesAction(String recipientUserId,

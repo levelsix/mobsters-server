@@ -21,8 +21,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class MonsterBattleDialogueRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MonsterBattleDialogueRetrieveUtils.class);
 
 	private static Map<Integer, List<MonsterBattleDialogue>> monsterIdToBattleDialogue;
 

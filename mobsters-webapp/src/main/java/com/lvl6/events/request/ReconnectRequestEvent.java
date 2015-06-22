@@ -12,8 +12,7 @@ import com.lvl6.proto.EventStartupProto.ReconnectRequestProto;
 
 public class ReconnectRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ReconnectRequestEvent.class);
 
 	private ReconnectRequestProto reconnectRequestProto;
 

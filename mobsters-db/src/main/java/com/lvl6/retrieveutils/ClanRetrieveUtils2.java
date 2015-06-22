@@ -30,8 +30,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class ClanRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ClanRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CLANS;
 	private static final ClanForClientMapper rowMapper = new ClanForClientMapper();

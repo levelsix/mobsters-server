@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto;
 
 public class BeginClanAvengingRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BeginClanAvengingRequestEvent.class);
 
 	private BeginClanAvengingRequestProto beginClanAvengingRequestProto;
 

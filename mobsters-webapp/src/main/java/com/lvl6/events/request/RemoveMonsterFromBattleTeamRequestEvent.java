@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamRequestProto;
 
 public class RemoveMonsterFromBattleTeamRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RemoveMonsterFromBattleTeamRequestEvent.class);
 
 	private RemoveMonsterFromBattleTeamRequestProto removeMonsterFromBattleTeamRequestProto;
 

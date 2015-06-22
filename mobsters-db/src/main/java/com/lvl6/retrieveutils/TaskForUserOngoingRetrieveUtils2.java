@@ -24,8 +24,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class TaskForUserOngoingRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(TaskForUserOngoingRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_TASK_FOR_USER_ONGOING;
 	private static final OngoingUserTaskForClientMapper rowMapper = new OngoingUserTaskForClientMapper();

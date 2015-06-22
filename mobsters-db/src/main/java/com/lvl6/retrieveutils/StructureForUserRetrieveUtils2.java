@@ -34,12 +34,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class StructureForUserRetrieveUtils2 {
 
+	private static Logger log = LoggerFactory.getLogger(StructureForUserRetrieveUtils2.class);
 	
 	@Autowired
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
 	
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
 
 	private final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_FOR_USER;
 	private static final UserStructureForClientMapper rowMapper = new UserStructureForClientMapper();

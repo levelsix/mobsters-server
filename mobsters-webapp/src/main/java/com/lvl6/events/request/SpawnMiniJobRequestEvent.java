@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobRequestProto;
 
 public class SpawnMiniJobRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SpawnMiniJobRequestEvent.class);
 
 	private SpawnMiniJobRequestProto spawnMiniJobRequestProto;
 

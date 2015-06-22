@@ -12,8 +12,7 @@ import com.lvl6.proto.EventDungeonProto.EndDungeonRequestProto;
 
 public class EndDungeonRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(EndDungeonRequestEvent.class);
 
 	private EndDungeonRequestProto endDungeonRequestProto;
 

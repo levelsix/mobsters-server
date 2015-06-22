@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.Builder;
@@ -13,16 +16,15 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class CustomizePvpBoardObstacleAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class CustomizePvpBoardObstacleAction {
+	private static Logger log = LoggerFactory.getLogger( CustomizePvpBoardObstacleAction.class);
 
 	private String userId;
 	private Collection<PvpBoardObstacleForUser> nuOrUpdated;
 	private List<Integer> removeUserPvpBoardObstacleIds;
-	protected PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
-	protected InsertUtil insertUtil;
-	protected DeleteUtil deleteUtil;
+	@Autowired protected PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected DeleteUtil deleteUtil;
 
 	public CustomizePvpBoardObstacleAction(
 			String userId,

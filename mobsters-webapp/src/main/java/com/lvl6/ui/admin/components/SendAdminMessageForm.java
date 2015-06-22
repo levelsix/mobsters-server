@@ -24,7 +24,7 @@ public class SendAdminMessageForm extends Form<AdminChatPost> {
 	@Override
 	protected void onSubmit() {
 		super.onSubmit();
-		AdminChatUtil acu = AppContext.getApplicationContext().getBean(
+		AdminChatUtil acu = AppContext.get().getBean(
 				AdminChatUtil.class);
 		acu.sendAdminChatMessage(getModelObject());
 	}

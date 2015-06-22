@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.RecordClanRaidStatsRequestProto;
 
 public class RecordClanRaidStatsRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RecordClanRaidStatsRequestEvent.class);
 
 	private RecordClanRaidStatsRequestProto recordClanRaidStatsRequestProto;
 

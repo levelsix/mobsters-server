@@ -12,8 +12,7 @@ import com.lvl6.proto.EventRewardProto.SendTangoGiftRequestProto;
 
 public class SendTangoGiftRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SendTangoGiftRequestEvent.class);
 
 	private SendTangoGiftRequestProto sendTangoGiftRequestProto;
 

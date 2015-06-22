@@ -24,8 +24,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class SalesPackageRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SalesPackageRetrieveUtils.class);
 
 	private static Map<Integer, SalesPackage> salesPackageIdsToSalesPackages;
 

@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.info.ClanAvengeUser;
@@ -23,20 +26,19 @@ import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class AvengeClanMateAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class AvengeClanMateAction {
+	private static Logger log = LoggerFactory.getLogger( AvengeClanMateAction.class);
 
 	private String avengerId;
 	private String avengerClanId;
 	private String clanAvengeId;
 	private ClanAvengeUser cau;
-	private ClanAvengeRetrieveUtil clanAvengeRetrieveUtil;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private HazelcastPvpUtil hazelcastPvpUtil;
-	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
-	private MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	private InsertUtil insertUtil;
+	@Autowired protected ClanAvengeRetrieveUtil clanAvengeRetrieveUtil; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected HazelcastPvpUtil hazelcastPvpUtil; 
+	@Autowired protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil; 
+	@Autowired protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil; 
 
 	public AvengeClanMateAction(String avengerId, String clanId,
 			String clanAvengeId, ClanAvengeUser cau,

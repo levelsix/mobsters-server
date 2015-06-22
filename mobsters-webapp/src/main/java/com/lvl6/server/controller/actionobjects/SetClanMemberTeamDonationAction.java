@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanMemberTeamDonation;
@@ -19,33 +22,22 @@ import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetClanMemberTeamDonationAction implements StartUpAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class SetClanMemberTeamDonationAction implements StartUpAction {
+	private static Logger log = LoggerFactory.getLogger( SetClanMemberTeamDonationAction.class);
 
 	private static String typeDonation = SnapshotType.TEAM_DONATE.name();
 
-	private final ClanDataProto.Builder cdpBuilder;
-	private final User user;
-	private final String userId;
-	private final ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	private final MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	private final CreateInfoProtoUtils createInfoProtoUtils;
+	protected ClanDataProto.Builder cdpBuilder;
+	protected User user;
+	protected String userId;
+	@Autowired protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
+	@Autowired protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	public SetClanMemberTeamDonationAction(
-			ClanDataProto.Builder cdpBuilder,
-			User user,
-			String userId,
-			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
-			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil,
-			CreateInfoProtoUtils createInfoProtoUtils) {
-		super();
+	public void wire(ClanDataProto.Builder cdpBuilder,	User user, String userId) {
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.userId = userId;
-		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
-		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state

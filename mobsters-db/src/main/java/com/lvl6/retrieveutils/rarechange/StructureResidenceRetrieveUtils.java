@@ -21,8 +21,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class StructureResidenceRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(StructureResidenceRetrieveUtils.class);
 	
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;

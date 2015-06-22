@@ -6,6 +6,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.Tables;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.IapHistoryDao;
@@ -23,15 +26,14 @@ import com.lvl6.spring.AppContext;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 
-public class InAppPurchaseMultiSpinAction {
+@Component@Scope("prototype")public class InAppPurchaseMultiSpinAction {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(InAppPurchaseMultiSpinAction.class);
 
 	private String userId;
 	private JSONObject receiptFromApple;
-	protected InsertUtil insertUtil;
-	private HistoryUtils historyUtils;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected HistoryUtils historyUtils; 
 	
 	public InAppPurchaseMultiSpinAction() {
 		super();
@@ -84,7 +86,7 @@ public class InAppPurchaseMultiSpinAction {
 	}
 	
 	public void setUpDaos() {
-		Configuration config = AppContext.getApplicationContext().getBean(DefaultConfiguration.class);//new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
+		Configuration config = AppContext.get().getBean(DefaultConfiguration.class);//new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
 		userDao = new UserDao(config);
 		itemConfigDao = new ItemConfigDao(config);
 		itemForUserDao = new ItemForUserDao(config);

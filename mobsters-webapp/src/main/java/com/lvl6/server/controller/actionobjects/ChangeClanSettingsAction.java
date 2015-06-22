@@ -9,6 +9,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanIcon;
@@ -24,9 +27,8 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class ChangeClanSettingsAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class ChangeClanSettingsAction {
+	private static Logger log = LoggerFactory.getLogger( ChangeClanSettingsAction.class);
 
 	private String userId;
 	private boolean isChangeDescription;
@@ -36,12 +38,12 @@ public class ChangeClanSettingsAction {
 	private boolean isChangeIcon;
 	private int iconId;
 	private boolean lockedClan;
-	private UserRetrieveUtils2 userRetrieveUtils;
-	protected UpdateUtil updateUtil;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
+	@Autowired protected UpdateUtil updateUtil;
 	private MiscMethods miscMethods;
-	private ClanRetrieveUtils2 clanRetrieveUtils;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private ClanIconRetrieveUtils clanIconRetrieveUtils;
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtils; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected ClanIconRetrieveUtils clanIconRetrieveUtils; 
 
 
 	public ChangeClanSettingsAction(String userId, boolean isChangeDescription,

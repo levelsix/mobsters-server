@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class CustomTranslationRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(CustomTranslationRetrieveUtils.class);
 
 	private static Map<Integer, CustomTranslationsPojo> idsToCustomTranslationss;
 

@@ -12,8 +12,7 @@ import com.lvl6.proto.EventChatProto.PrivateChatPostRequestProto;
 
 public class PrivateChatPostRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(PrivateChatPostRequestEvent.class);
 
 	private PrivateChatPostRequestProto privateChatPostRequestProto;
 

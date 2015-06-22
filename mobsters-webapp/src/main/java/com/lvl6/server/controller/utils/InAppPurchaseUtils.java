@@ -33,8 +33,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 @Component
 public class InAppPurchaseUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(InAppPurchaseUtils.class);
 
 
     @Autowired

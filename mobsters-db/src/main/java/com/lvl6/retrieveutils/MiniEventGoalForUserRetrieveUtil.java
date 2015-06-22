@@ -23,8 +23,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class MiniEventGoalForUserRetrieveUtil {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MiniEventGoalForUserRetrieveUtil.class);
 
 	private final String TABLE_NAME = DBConstants.TABLE_MINI_EVENT_GOAL_FOR_USER;
 	private static final UserMiniEventForClientMapper rowMapper = new UserMiniEventForClientMapper();

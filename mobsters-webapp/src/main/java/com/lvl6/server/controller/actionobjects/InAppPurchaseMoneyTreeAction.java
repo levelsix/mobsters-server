@@ -11,6 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.StructureForUser;
@@ -31,25 +34,27 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class InAppPurchaseMoneyTreeAction {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+
+@Component@Scope("prototype")public class InAppPurchaseMoneyTreeAction {
+
+	private static Logger log = LoggerFactory.getLogger(InAppPurchaseMoneyTreeAction.class);
 
 	private String userId;
 	private User user;
 	private JSONObject receiptFromApple;
 	private Date now;
 	private String uuid;
-	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	protected InsertUtil insertUtil;
-	protected UpdateUtil updateUtil;
-	private CreateInfoProtoUtils createInfoProtoUtils;
-	private MiscMethods miscMethods;
-	private StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
-	private StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
-	private InAppPurchaseUtils inAppPurchaseUtils;
+	
+	@Autowired protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil; 
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
+	@Autowired protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils; 
+	@Autowired protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils; 
+	@Autowired protected InAppPurchaseUtils inAppPurchaseUtils; 
+	@Autowired protected MiscMethods miscMethods;
 
 	public StructureMoneyTreeRetrieveUtils getStructureMoneyTreeRetrieveUtils() {
 		return structureMoneyTreeRetrieveUtils;

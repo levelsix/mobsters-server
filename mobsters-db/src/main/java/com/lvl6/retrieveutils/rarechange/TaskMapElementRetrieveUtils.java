@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class TaskMapElementRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(TaskMapElementRetrieveUtils.class);
 
 	private static Map<Integer, TaskMapElement> idToTaskMapElement;
 	private static Map<Integer, TaskMapElement> taskIdToTaskMapElement;

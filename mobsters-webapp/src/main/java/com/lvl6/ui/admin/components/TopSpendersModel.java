@@ -14,7 +14,7 @@ public class TopSpendersModel extends LoadableDetachableModel<List<Spender>> {
 
 	@Override
 	protected List<Spender> load() {
-		StatisticsRetrieveUtil statsUtil = AppContext.getApplicationContext()
+		StatisticsRetrieveUtil statsUtil = AppContext.get()
 				.getBean(StatisticsRetrieveUtil.class);
 		return statsUtil.getTopSpenders(50);
 	}

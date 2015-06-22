@@ -36,8 +36,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 @Component
 public class BeginMiniJobController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BeginMiniJobController.class);
 
 	//	@Autowired
 	//	protected Locker locker;

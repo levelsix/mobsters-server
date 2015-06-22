@@ -12,8 +12,7 @@ import com.lvl6.proto.EventUserProto.UpdateUserCurrencyRequestProto;
 
 public class UpdateUserCurrencyRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UpdateUserCurrencyRequestEvent.class);
 
 	private UpdateUserCurrencyRequestProto updateUserCurrencyRequestProto;
 

@@ -18,8 +18,7 @@ import com.lvl6.properties.ControllerConstants;
 
 @Component
 public class ClanSearch {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger( ClanSearch.class);
 
 	//	private static Long DAY = 24L*60L*60L*1000L;
 	private static Double ONE_DAY_IN_HOURS = 24D;

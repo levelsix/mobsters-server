@@ -27,8 +27,7 @@ import com.lvl6.utils.TimeUtils;
 @DependsOn("gameServer")
 public class CepfuRaidHistoryRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(CepfuRaidHistoryRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CEPFU_RAID_HISTORY;
 	private static final CepfuRaidHistoryForClientMapper rowMapper = new CepfuRaidHistoryForClientMapper();

@@ -24,8 +24,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class TaskStageRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(TaskStageRetrieveUtils.class);
 
 	private static Map<Integer, Map<Integer, TaskStage>> taskIdsToTaskStageIdsToTaskStages;
 	private static Map<Integer, TaskStage> taskStageIdsToTaskStages;

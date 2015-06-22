@@ -51,8 +51,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 @DependsOn("gameServer")
 public class ApproveOrRejectRequestToJoinClanController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ApproveOrRejectRequestToJoinClanController.class);
 
 	@Autowired
 	protected Locker locker;

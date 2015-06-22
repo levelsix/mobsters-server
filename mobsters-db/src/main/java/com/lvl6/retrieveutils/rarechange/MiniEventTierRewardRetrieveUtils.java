@@ -21,8 +21,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class MiniEventTierRewardRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MiniEventTierRewardRetrieveUtils.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MINI_EVENT_TIER_REWARD_CONFIG;
 

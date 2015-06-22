@@ -21,8 +21,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class StructureClanHouseRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(StructureClanHouseRetrieveUtils.class);
 	
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;

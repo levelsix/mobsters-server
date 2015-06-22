@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProto;
 
 public class CombineUserMonsterPiecesRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(CombineUserMonsterPiecesRequestEvent.class);
 
 	private CombineUserMonsterPiecesRequestProto combineMonsterPiecesRequestProto;
 

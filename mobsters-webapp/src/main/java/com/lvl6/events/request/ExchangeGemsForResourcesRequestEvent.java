@@ -12,8 +12,7 @@ import com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestPro
 
 public class ExchangeGemsForResourcesRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ExchangeGemsForResourcesRequestEvent.class);
 
 	private ExchangeGemsForResourcesRequestProto exchangeGemsForResourcesRequestProto;
 

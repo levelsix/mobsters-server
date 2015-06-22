@@ -48,14 +48,15 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class InAppPurchaseSalesTest {
 
+	private static Logger log = LoggerFactory.getLogger(InAppPurchaseSalesTest.class);
+
+	
 	private JdbcTemplate jdbcTemplate;
 
 	private User user;
 	private MinimumUserProto mup;
 	private String userId;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
@@ -218,7 +219,7 @@ public class InAppPurchaseSalesTest {
 		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 		iapre.setTag(1);
 		iapre.setInAppPurchaseRequestProto(iaprpb.build());
-		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEvents());
+		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEventsForUnitTest());
 
 		User user2 = userRetrieveUtil.getUserById(user.getId());
 

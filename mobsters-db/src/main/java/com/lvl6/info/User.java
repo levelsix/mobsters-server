@@ -18,8 +18,7 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = -858952596036387308L;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(User.class);
 
 	private String id;
 	private String name;

@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
@@ -27,21 +30,20 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-public class LeaveClanAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class LeaveClanAction {
+	private static Logger log = LoggerFactory.getLogger( LeaveClanAction.class);
 
 	private String userId;
 	private String clanId;
 	private boolean lockedClan;
-	private UserRetrieveUtils2 userRetrieveUtils;
-	protected InsertUtil insertUtil;
-	protected DeleteUtil deleteUtil;
-	private ClanRetrieveUtils2 clanRetrieveUtils;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected DeleteUtil deleteUtil;
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtils; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
 	private HazelcastClanSearchImpl hzClanSearch;
-	private ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
-	private TimeUtils timeUtils;
+	@Autowired protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil; 
+	@Autowired protected TimeUtils timeUtils; 
 	private ClanSearch clanSearch;
 	private ServerToggleRetrieveUtils toggle;
 	

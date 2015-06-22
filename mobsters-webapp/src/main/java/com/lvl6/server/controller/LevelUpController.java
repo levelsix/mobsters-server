@@ -26,8 +26,7 @@ import com.lvl6.server.eventsender.ToClientEvents;
 @Component
 public class LevelUpController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(LevelUpController.class);
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;

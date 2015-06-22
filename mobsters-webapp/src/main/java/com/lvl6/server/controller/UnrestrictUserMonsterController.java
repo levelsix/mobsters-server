@@ -28,8 +28,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class UnrestrictUserMonsterController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UnrestrictUserMonsterController.class);
 
 	@Autowired
 	protected Locker locker;

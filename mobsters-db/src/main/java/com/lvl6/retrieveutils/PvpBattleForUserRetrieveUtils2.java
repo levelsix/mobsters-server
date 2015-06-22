@@ -24,8 +24,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class PvpBattleForUserRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(PvpBattleForUserRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_PVP_BATTLE_FOR_USER;
 	private static final UserPvpBattleForClientMapper rowMapper = new UserPvpBattleForClientMapper();

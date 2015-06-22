@@ -12,8 +12,7 @@ import com.lvl6.proto.EventDevProto.DevRequestProto;
 
 public class DevRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(DevRequestEvent.class);
 
 	private DevRequestProto devRequestProto;
 

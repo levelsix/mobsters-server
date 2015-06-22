@@ -22,8 +22,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class TaskForUserCompletedRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(TaskForUserCompletedRetrieveUtils.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_TASK_FOR_USER_COMPLETED;
 	private static final UserTaskCompletedForClientMapper rowMapper = new UserTaskCompletedForClientMapper();

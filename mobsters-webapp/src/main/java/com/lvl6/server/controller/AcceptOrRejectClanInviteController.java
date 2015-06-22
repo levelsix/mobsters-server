@@ -41,6 +41,7 @@ import com.lvl6.server.controller.actionobjects.SetClanDataProtoAction;
 import com.lvl6.server.controller.actionobjects.StartUpResource;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -50,8 +51,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 public class AcceptOrRejectClanInviteController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(AcceptOrRejectClanInviteController.class);
 
 	@Autowired
 	protected Locker locker;
@@ -197,12 +197,8 @@ public class AcceptOrRejectClanInviteController extends EventController {
 				StartUpResource fillMe = new StartUpResource(userRetrieveUtil,
 						clanRetrieveUtil);
 
-				SetClanDataProtoAction scdpa = new SetClanDataProtoAction(
-						clanId, clan, user, userId, lastChatTimeContainer,
-						fillMe, clanHelpRetrieveUtil, clanAvengeRetrieveUtil,
-						clanAvengeUserRetrieveUtil, clanChatPostRetrieveUtils,
-						clanMemberTeamDonationRetrieveUtil,
-						monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
+				SetClanDataProtoAction scdpa = AppContext.getBean(SetClanDataProtoAction.class); 
+				scdpa.wire(clanId, clan, user, userId, lastChatTimeContainer,fillMe);
 				ClanDataProto cdp = scdpa.execute();
 
 				sendClanData(event, senderProto, userId, cdp, responses);

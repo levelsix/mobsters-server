@@ -10,6 +10,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Reward;
@@ -32,7 +35,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class AwardRewardAction {
+@Component@Scope("prototype")public class AwardRewardAction {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(AwardRewardAction.class);
@@ -44,17 +47,17 @@ public class AwardRewardAction {
 	private Date now;
 	private String awardReason;
 	private Collection<Reward> rewards;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private InsertUtil insertUtil;
-	private UpdateUtil updateUtil;
-	private MonsterStuffUtils monsterStuffUtils;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private GiftRetrieveUtils giftRetrieveUtil;
-	private GiftRewardRetrieveUtils giftRewardRetrieveUtils;
-	private RewardRetrieveUtils rewardRetrieveUtil; //only here because of recursive rewards
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtil;  //only here because of recursive rewards
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 	private String awardReasonDetail;
 
 	//TODO: Figure out a way to not have all these arguments as a requirement

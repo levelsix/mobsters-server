@@ -16,8 +16,7 @@ import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 @Component
 public class ItemUtil {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ItemUtil.class);
 
 	public static List<ItemForUserUsage> javafyUserItemUsageProto(
 			List<UserItemUsageProto> itemsUsedProtos) {

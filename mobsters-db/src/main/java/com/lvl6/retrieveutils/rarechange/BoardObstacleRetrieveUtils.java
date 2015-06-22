@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class BoardObstacleRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BoardObstacleRetrieveUtils.class);
 
 	private static Map<Integer, BoardObstacle> idsToBoardObstacles;
 

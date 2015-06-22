@@ -11,6 +11,9 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DefaultConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Item;
 import com.lvl6.info.ItemForUser;
@@ -29,22 +32,21 @@ import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class TradeItemForResourcesAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class TradeItemForResourcesAction {
+	private static Logger log = LoggerFactory.getLogger( TradeItemForResourcesAction.class);
 
 	private String userId;
 	private List<Integer> itemIdsUsed;
 	private List<ItemForUser> nuUserItems;
 	private int maxCash;
 	private int maxOil;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private ItemRetrieveUtils itemRetrieveUtils;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private UpdateUtil updateUtil;
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected ItemRetrieveUtils itemRetrieveUtils; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
 	private MiscMethods miscMethods;
 	private int gemsSpent;
-	private HistoryUtils historyUtils;
+	@Autowired protected HistoryUtils historyUtils; 
 	
 	public TradeItemForResourcesAction(String userId,
 			List<Integer> itemIdsUsed, List<ItemForUser> nuUserItems,

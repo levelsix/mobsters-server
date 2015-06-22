@@ -12,8 +12,7 @@ import com.lvl6.proto.EventChatProto.TranslateSelectMessagesRequestProto;
 
 public class TranslateSelectMessagesRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(TranslateSelectMessagesRequestEvent.class);
 
 	private TranslateSelectMessagesRequestProto translateSelectMessagesRequestProto;
 

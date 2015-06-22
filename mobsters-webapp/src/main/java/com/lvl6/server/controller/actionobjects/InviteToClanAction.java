@@ -22,18 +22,17 @@
 //import com.lvl6.utils.RetrieveUtils;
 //import com.lvl6.utils.utilmethods.InsertUtil;
 //
-//public class InviteToClanAction
+//@Component/*@Scope("prototype")public class InviteToClanAction*/
 //{
-//	private static Logger log = LoggerFactory.getLogger(new Object() {
-//	}.getClass().getEnclosingClass());
+//	private static Logger log = LoggerFactory.getLogger(//	}.getClass().getEnclosingClass());
 //
 //	private int inviterId;
 //	private int prospectiveMemberId;
 //	private int clanId;
 //	private Date inviteTime;
-//	private UserClanRetrieveUtils userClanRetrieveUtils;
-//	private InsertUtil insertUtil;
-//	private ClanInviteRetrieveUtil clanInviteRetrieveUtil;
+//	@Autowired protected UserClanRetrieveUtils userClanRetrieveUtils; 
+//	@Autowired protected InsertUtil insertUtil; 
+//	@Autowired protected ClanInviteRetrieveUtil clanInviteRetrieveUtil; 
 //	
 //	public InviteToClanAction(int inviterId, int prospectiveMemberId,
 //		int clanId, Date inviteTime,

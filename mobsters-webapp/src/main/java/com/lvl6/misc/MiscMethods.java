@@ -294,7 +294,7 @@ public class MiscMethods {
 		if (clan == null && user.getClanId() != null
 				&& !user.getClanId().isEmpty()) {
 			ClanRetrieveUtils2 clanRetrieveUtils = AppContext
-					.getApplicationContext().getBean(ClanRetrieveUtils2.class);
+					.get().getBean(ClanRetrieveUtils2.class);
 			clan = clanRetrieveUtils.getClanWithId(user.getClanId());
 		} else if (clan != null && !clan.getId().equals(user.getClanId())) {
 			log.error("Trying to set clan for user with different clan id.");
@@ -328,7 +328,7 @@ public class MiscMethods {
 		if (clan == null && user.getClanId() != null
 				&& !user.getClanId().isEmpty()) {
 			ClanRetrieveUtils2 clanRetrieveUtils = AppContext
-					.getApplicationContext().getBean(ClanRetrieveUtils2.class);
+					.get().getBean(ClanRetrieveUtils2.class);
 			clan = clanRetrieveUtils.getClanWithId(user.getClanId());
 		} else if (clan != null && !clan.getId().equals(user.getClanId())) {
 			log.error("Trying to set clan for user with different clan id.");

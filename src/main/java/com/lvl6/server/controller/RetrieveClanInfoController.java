@@ -55,8 +55,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 @DependsOn("gameServer")
 public class RetrieveClanInfoController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RetrieveClanInfoController.class);
 
 	@Autowired
 	protected TimeUtils timeUtils;

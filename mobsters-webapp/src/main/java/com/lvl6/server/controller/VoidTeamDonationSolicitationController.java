@@ -35,8 +35,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
 public class VoidTeamDonationSolicitationController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(VoidTeamDonationSolicitationController.class);
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;

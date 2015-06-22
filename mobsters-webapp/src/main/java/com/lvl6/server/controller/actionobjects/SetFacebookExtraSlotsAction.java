@@ -9,6 +9,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
@@ -19,28 +22,23 @@ import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetFacebookExtraSlotsAction implements StartUpAction {
+@Component@Scope("prototype")public class SetFacebookExtraSlotsAction implements StartUpAction {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(SetFacebookExtraSlotsAction.class);
 
-	private final StartupResponseProto.Builder resBuilder;
-	private final User user;
-	private final String userId;
-	private final UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
-	private final CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired
+	protected UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	public SetFacebookExtraSlotsAction(
-			StartupResponseProto.Builder resBuilder,
-			User user,
-			String userId,
-			UserFacebookInviteForSlotRetrieveUtils2 userFacebookInviteForSlotRetrieveUtils,
-			CreateInfoProtoUtils createInfoProtoUtils) {
+	protected StartupResponseProto.Builder resBuilder;
+	protected User user;
+	protected String userId;
+
+	public void wire(StartupResponseProto.Builder resBuilder, User user,String userId) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
-		this.userFacebookInviteForSlotRetrieveUtils = userFacebookInviteForSlotRetrieveUtils;
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state

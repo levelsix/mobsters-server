@@ -48,14 +48,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class PurchaseBoosterPackTest {
 
+	private static Logger log = LoggerFactory.getLogger(PurchaseBoosterPackTest.class);
 	private JdbcTemplate jdbcTemplate;
 
 	private User user;
 	private MinimumUserProto mup;
 	private String userId;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
@@ -175,7 +174,7 @@ public class PurchaseBoosterPackTest {
 		PurchaseBoosterPackRequestEvent pbpre = new PurchaseBoosterPackRequestEvent();
 		pbpre.setTag(1);
 		pbpre.setPurchaseBoosterPackRequestProto(pbprpb.build());
-		purchaseBoosterPackController.processRequestEvent(pbpre, EventsUtil.getToClientEvents());
+		purchaseBoosterPackController.processRequestEvent(pbpre, EventsUtil.getToClientEventsForUnitTest());
 
 		User user2 = userRetrieveUtil.getUserById(user.getId());
 
@@ -228,7 +227,7 @@ public class PurchaseBoosterPackTest {
 		PurchaseBoosterPackRequestEvent pbpre = new PurchaseBoosterPackRequestEvent();
 		pbpre.setTag(1);
 		pbpre.setPurchaseBoosterPackRequestProto(pbprp.build());
-		purchaseBoosterPackController.processRequestEvent(pbpre, EventsUtil.getToClientEvents());
+		purchaseBoosterPackController.processRequestEvent(pbpre, EventsUtil.getToClientEventsForUnitTest());
 
 		User user2 = userRetrieveUtil.getUserById(userId);
 
@@ -256,7 +255,7 @@ public class PurchaseBoosterPackTest {
 		PurchaseBoosterPackRequestEvent pbpre2 = new PurchaseBoosterPackRequestEvent();
 		pbpre2.setTag(1);
 		pbpre2.setPurchaseBoosterPackRequestProto(pbprp2.build());
-		purchaseBoosterPackController.processRequestEvent(pbpre2, EventsUtil.getToClientEvents());
+		purchaseBoosterPackController.processRequestEvent(pbpre2, EventsUtil.getToClientEventsForUnitTest());
 
 		User user3 = userRetrieveUtil.getUserById(user.getId());
 
@@ -284,7 +283,7 @@ public class PurchaseBoosterPackTest {
 		PurchaseBoosterPackRequestEvent pbpre3 = new PurchaseBoosterPackRequestEvent();
 		pbpre3.setTag(1);
 		pbpre3.setPurchaseBoosterPackRequestProto(pbprp3.build());
-		purchaseBoosterPackController.processRequestEvent(pbpre3, EventsUtil.getToClientEvents());
+		purchaseBoosterPackController.processRequestEvent(pbpre3, EventsUtil.getToClientEventsForUnitTest());
 
 		User user4 = userRetrieveUtil.getUserById(user.getId());
 

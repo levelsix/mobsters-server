@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class ClanRaidRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ClanRaidRetrieveUtils.class);
 
 	private static Map<Integer, ClanRaid> clanRaidIdToClanRaid;
 

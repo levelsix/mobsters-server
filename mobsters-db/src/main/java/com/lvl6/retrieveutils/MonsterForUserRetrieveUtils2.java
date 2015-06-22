@@ -29,8 +29,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class MonsterForUserRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MonsterForUserRetrieveUtils2.class);
 
 	private final String TABLE_NAME = DBConstants.TABLE_MONSTER_FOR_USER;
 	private static final UserMonsterForClientMapper rowMapper = new UserMonsterForClientMapper();

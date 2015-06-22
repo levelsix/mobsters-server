@@ -43,8 +43,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
 public class RetrieveUserMonsterTeamController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RetrieveUserMonsterTeamController.class);
 
 	@Autowired
 	private UserRetrieveUtils2 userRetrieveUtil;

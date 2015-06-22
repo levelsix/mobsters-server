@@ -12,8 +12,7 @@ import com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto;
 
 public class RemoveUserItemUsedRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(RemoveUserItemUsedRequestEvent.class);
 
 	private RemoveUserItemUsedRequestProto removeUserItemUsedRequestProto;
 

@@ -9,6 +9,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.EloPair;
 import com.lvl6.info.MonsterForPvp;
@@ -25,18 +28,17 @@ import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-public class QueueUpAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class QueueUpAction {
+	private static Logger log = LoggerFactory.getLogger( QueueUpAction.class);
 
 	private String attackerId;
 	private Set<String> userIdBlackList;
 	private Date clientDate;
-	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
-	private HazelcastPvpUtil hazelcastPvpUtil;
-	private MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil;
-	private TimeUtils timeUtil;
-	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	@Autowired protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil; 
+	@Autowired protected HazelcastPvpUtil hazelcastPvpUtil; 
+	@Autowired protected MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtil; 
+	@Autowired protected TimeUtils timeUtil; 
+	@Autowired protected ServerToggleRetrieveUtils serverToggleRetrieveUtils; 
 
 	public QueueUpAction(String attackerId, Set<String> userIdBlackList,
 			Date clientDate,

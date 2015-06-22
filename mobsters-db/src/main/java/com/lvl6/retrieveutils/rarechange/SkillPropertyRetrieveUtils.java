@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class SkillPropertyRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SkillPropertyRetrieveUtils.class);
 
 	private static Map<Integer, Map<Integer, SkillProperty>> skillIdsToIdsToSkillPropertys;
 	private static Map<Integer, SkillProperty> skillPropertyIdsToSkillPropertys;

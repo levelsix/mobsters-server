@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.StrengthLeaderBoard;
 import com.lvl6.leaderboards.LeaderBoardImpl;
@@ -13,16 +16,15 @@ import com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class RetrieveStrengthLeaderBoardAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class RetrieveStrengthLeaderBoardAction {
+	private static Logger log = LoggerFactory.getLogger( RetrieveStrengthLeaderBoardAction.class);
 
 	private String retrieverUserId;
 	private int minRank;
 	private int maxRank;
 	private LeaderBoardImpl leaderBoard;
-	private UserRetrieveUtils2 userRetrieveUtils;
-	private CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 
 	public RetrieveStrengthLeaderBoardAction( String retrieverUserId, 
 			int minRank, int maxRank, LeaderBoardImpl leaderBoard,

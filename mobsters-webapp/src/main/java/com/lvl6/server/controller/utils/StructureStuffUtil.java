@@ -16,8 +16,7 @@ import com.lvl6.proto.StructureProto.StructOrientation;
 @Component
 public class StructureStuffUtil {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(StructureStuffUtil.class);
 
 	public List<ObstacleForUser> createObstacleForUserFromUserObstacleProtos(
 			String userId, List<MinimumObstacleProto> mopList) {

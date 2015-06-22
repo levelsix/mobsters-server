@@ -22,8 +22,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class TaskStageForUserRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(TaskStageForUserRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_FOR_USER;
 	private static final UserTaskStageForClientMapper rowMapper = new UserTaskStageForClientMapper();

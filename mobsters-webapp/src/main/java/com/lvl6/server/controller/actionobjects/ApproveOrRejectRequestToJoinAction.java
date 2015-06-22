@@ -8,6 +8,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
@@ -21,19 +24,18 @@ import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class ApproveOrRejectRequestToJoinAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class ApproveOrRejectRequestToJoinAction {
+	private static Logger log = LoggerFactory.getLogger( ApproveOrRejectRequestToJoinAction.class);
 
 	private String userId;
 	private String requesterId;
 	private boolean accept;
 	private boolean lockedClan;
-	private UserRetrieveUtils2 userRetrieveUtils;
-	protected UpdateUtil updateUtil;
-	protected DeleteUtil deleteUtil;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private ClanStuffUtils clanStuffUtils;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected DeleteUtil deleteUtil;
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected ClanStuffUtils clanStuffUtils; 
 
 
 	public ApproveOrRejectRequestToJoinAction(String userId, String requesterId,

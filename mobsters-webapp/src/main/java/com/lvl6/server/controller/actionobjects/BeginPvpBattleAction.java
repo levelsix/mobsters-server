@@ -8,6 +8,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpLeagueForUser;
@@ -25,9 +28,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-public class BeginPvpBattleAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class BeginPvpBattleAction {
+	private static Logger log = LoggerFactory.getLogger( BeginPvpBattleAction.class);
 
 	private String attackerId;
 	private String defenderId;
@@ -35,12 +37,12 @@ public class BeginPvpBattleAction {
 	private Date clientDate;
 	private boolean exactingRevenge;
 	private Timestamp previousBattleEndTime;
-	private PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
-	private HazelcastPvpUtil hazelcastPvpUtil;
-	private TimeUtils timeUtil;
-	private InsertUtil insertUtil;
-	private UpdateUtil updateUtil;
-	private ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+	@Autowired protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil; 
+	@Autowired protected HazelcastPvpUtil hazelcastPvpUtil; 
+	@Autowired protected TimeUtils timeUtil; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected ServerToggleRetrieveUtils serverToggleRetrieveUtil; 
 
 	public BeginPvpBattleAction(String attackerId, String defenderId,
 			int defenderElo, Date clientDate, boolean exactingRevenge,

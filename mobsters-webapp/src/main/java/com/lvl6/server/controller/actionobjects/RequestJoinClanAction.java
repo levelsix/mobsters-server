@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
@@ -20,19 +23,18 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class RequestJoinClanAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class RequestJoinClanAction {
+	private static Logger log = LoggerFactory.getLogger( RequestJoinClanAction.class);
 
 	private String userId;
 	private String clanId;
 	private Timestamp clientTime;
 	private boolean lockedClan;
-	private UserRetrieveUtils2 userRetrieveUtils;
-	protected InsertUtil insertUtil;
-	protected DeleteUtil deleteUtil;
-	private ClanRetrieveUtils2 clanRetrieveUtils;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected DeleteUtil deleteUtil;
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtils; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
 
 	public RequestJoinClanAction(
 			String userId, String clanId, Timestamp clientTime,

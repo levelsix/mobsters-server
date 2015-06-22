@@ -28,8 +28,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class UserClanRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UserClanRetrieveUtils2.class);
 
 	private final String TABLE_NAME = DBConstants.TABLE_CLAN_FOR_USER;
 	private static final UserClanForClientMapper rowMapper = new UserClanForClientMapper();

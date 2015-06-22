@@ -12,8 +12,7 @@ import com.lvl6.proto.EventPvpProto.SetDefendingMsgRequestProto;
 
 public class SetDefendingMsgRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(SetDefendingMsgRequestEvent.class);
 
 	private SetDefendingMsgRequestProto setDefendingMsgRequestProto;
 

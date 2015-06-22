@@ -35,8 +35,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 @Component
 public class SpawnObstacleController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SpawnObstacleController.class);
 
 	@Autowired
 	protected StructureStuffUtil structureStuffUtil;

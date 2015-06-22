@@ -5,83 +5,67 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil;
 import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil;
-import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
-import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetClanDataProtoAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class SetClanDataProtoAction {
+	private static Logger log = LoggerFactory.getLogger( SetClanDataProtoAction.class);
 
+	@Autowired protected ClanAvengeRetrieveUtil clanAvengeRetrieveUtil;
+	@Autowired protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
+	@Autowired protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
+	@Autowired protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
+
+	
 	private String clanId;
 	private Clan clan;
 	private User user;
 	private String userId;
 	private List<Date> lastChatTimeContainer;
 	private StartUpResource fillMe;
-	private ClanHelpRetrieveUtil clanHelpRetrieveUtil;
-	private ClanAvengeRetrieveUtil clanAvengeRetrieveUtil;
-	private ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
-	private ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils;
-	private ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	private MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	private CreateInfoProtoUtils createInfoProtoUtils;
 
-	public SetClanDataProtoAction(
+	public void wire(
 			String clanId,
 			Clan clan,
 			User user,
 			String userId,
 			List<Date> lastChatTimeContainer,
-			StartUpResource fillMe,
-			ClanHelpRetrieveUtil clanHelpRetrieveUtil,
-			ClanAvengeRetrieveUtil clanAvengeRetrieveUtil,
-			ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil,
-			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtils,
-			ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil,
-			MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil,
-			CreateInfoProtoUtils createInfoProtoUtils) {
-		super();
+			StartUpResource fillMe) {
 		this.clanId = clanId;
 		this.clan = clan;
 		this.user = user;
 		this.userId = userId;
 		this.lastChatTimeContainer = lastChatTimeContainer;
 		this.fillMe = fillMe;
-		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
-		this.clanAvengeRetrieveUtil = clanAvengeRetrieveUtil;
-		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
-		this.clanChatPostRetrieveUtils = clanChatPostRetrieveUtils;
-		this.clanMemberTeamDonationRetrieveUtil = clanMemberTeamDonationRetrieveUtil;
-		this.monsterSnapshotForUserRetrieveUtil = monsterSnapshotForUserRetrieveUtil;
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	public ClanDataProto execute() {
 		log.info("setting clanData proto for clan {}", clan);
 		ClanDataProto.Builder cdpb = ClanDataProto.newBuilder();
 
-		SetClanChatMessageAction sccma = new SetClanChatMessageAction(cdpb,
-				user, clanChatPostRetrieveUtils, createInfoProtoUtils);
+		SetClanChatMessageAction sccma = AppContext.getBean(SetClanChatMessageAction.class); 
+		sccma.wire(cdpb, user);
 		sccma.setUp(fillMe);
-		SetClanHelpingsAction scha = new SetClanHelpingsAction(cdpb, user,
-				userId, clanHelpRetrieveUtil, createInfoProtoUtils);
+		SetClanHelpingsAction scha = AppContext.getBean(SetClanHelpingsAction.class); 
+		scha.wire(cdpb, user,userId);
 		scha.setUp(fillMe);
-		SetClanRetaliationsAction scra = new SetClanRetaliationsAction(cdpb,
-				user, userId, clanAvengeRetrieveUtil,
-				clanAvengeUserRetrieveUtil, createInfoProtoUtils);
+		SetClanRetaliationsAction scra = AppContext.getBean(SetClanRetaliationsAction.class); 
+		scra.wire(cdpb,	user, userId);
 		scra.setUp(fillMe);
-		SetClanMemberTeamDonationAction scmtda = new SetClanMemberTeamDonationAction(
-				cdpb, user, userId, clanMemberTeamDonationRetrieveUtil,
-				monsterSnapshotForUserRetrieveUtil, createInfoProtoUtils);
+		SetClanMemberTeamDonationAction scmtda = AppContext.getBean(SetClanMemberTeamDonationAction.class);
+		scmtda.wire(cdpb, user, userId);
 		scmtda.setUp(fillMe);
 
 		fillMe.fetchUsersOnly();

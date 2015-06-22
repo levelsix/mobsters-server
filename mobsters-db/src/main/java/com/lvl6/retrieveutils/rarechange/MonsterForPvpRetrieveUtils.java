@@ -9,9 +9,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,10 +27,9 @@ import com.lvl6.pvp.PvpConstants;
 import com.lvl6.utils.DBConnection;
 
 @Component
-public class MonsterForPvpRetrieveUtils implements InitializingBean {
+public class MonsterForPvpRetrieveUtils {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(MonsterForPvpRetrieveUtils.class);
 
 	private static Map<Integer, MonsterForPvp> idsToMonsterForPvps;
 
@@ -72,7 +72,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 		return returnMonsters;
 	}
 
-	@Override
+	@PostConstruct
 	public void afterPropertiesSet() throws Exception {
 		populateMonsterForPvpMap();
 	}

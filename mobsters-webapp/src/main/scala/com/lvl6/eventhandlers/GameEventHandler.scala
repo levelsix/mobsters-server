@@ -49,27 +49,32 @@ trait GameEventHandler extends LazyLogging  {
         if(appMode.isMaintenanceMode()){
           handleMaintenanceMode(parsedEvent)                
         }else{
-          logger.info(s"Processing event: $parsedEvent")
+          logger.debug(s"Processing event: $parsedEvent")
           updatePlayerToServerMaps(parsedEvent)
           val eventUuid = parsedEvent.eventProto.getEventUuid
-          val playerId = parsedEvent.event.getPlayerId
+          val plyrId = parsedEvent.event.getPlayerId
+          var playerId:Option[String] = None
+          if(plyrId != null && !plyrId.isEmpty) {
+            playerId = Some(plyrId)
+          }
+          val toClientEvents = newToClientEvents(eventUuid, playerId)
           if(responseCachingEnabled) {
             if(responseCacheService.isResponseCached(eventUuid)) {
               logger.info(s"Event $eventUuid was already cached.. sending cached responses")
               val cachedResponses = responseCacheService.getCachedResponses(eventUuid)
-              val toClientEvents = new ToClientEvents()
+              
               cachedResponses match {
-                case Some(responses) => responses.foreach{ cr => eventWriter.sendToSinglePlayer(playerId, cr.event)}
+                case Some(responses) => responses.foreach{ cr => eventWriter.sendToSinglePlayer(plyrId, cr.event)}
                 case None =>
               }
             }
           }else{
-            parsedEvent.eventController.processEvent(parsedEvent.event) match{
+            parsedEvent.eventController.processEvent(parsedEvent.event, toClientEvents) match{
               case Some(events)=>{
-                sendResponses(eventUuid, playerId, events)
-                cacheResponses(eventUuid, playerId, events)
+                sendResponses(events)
+                cacheResponses(events)
               }
-              case None => logger.error("No events returned from parseEvent")
+              case None => //logger.error("No events returned from parseEvent")
             }
           }
         }
@@ -80,35 +85,39 @@ trait GameEventHandler extends LazyLogging  {
   }
   
   
-  def sendResponses(uuid:String, playerId:String, responses:ToClientEvents)={
+  def sendResponses(responses:ToClientEvents)={
     responses.normalResponseEvents.foreach{ revent =>
-        eventWriter.sendToSinglePlayer(playerId, EventParser.getResponseBytes(uuid, revent))
+      responses.playerId match{
+        case Some(plyrId)=> eventWriter.sendToSinglePlayer(plyrId, EventParser.getResponseBytes(responses.requestUuid, revent))
+        case None => logger.error("Error sending normal responses. No playerId to send to.")
+      }
     }
     responses.preDBResponseEvents.foreach{ revent =>
-      eventWriter.sendPreDBResponseEvent(revent.udid, EventParser.getResponseBytes(uuid, revent.event))
+      eventWriter.sendPreDBResponseEvent(revent.udid, EventParser.getResponseBytes(responses.requestUuid, revent.event))
     }
     responses.preDBFacebookEvents.foreach{ revent =>
-      eventWriter.sendPreDBFacebookEvent(revent.fbid, EventParser.getResponseBytes(uuid, revent.event))  
+      eventWriter.sendPreDBFacebookEvent(revent.fbid, EventParser.getResponseBytes(responses.requestUuid, revent.event))  
     }
     responses.clanResponseEvents.foreach{ revent =>
-      eventWriter.sendToClan(revent.clanId, EventParser.getResponseBytes(uuid, revent.event))  
+      eventWriter.sendToClan(revent.clanId, EventParser.getResponseBytes(responses.requestUuid, revent.event))  
     }
     responses.globalChatResponseEvents.foreach{ revent =>
-      eventWriter.sendGlobalChat(EventParser.getResponseBytes(uuid, revent))
+      eventWriter.sendGlobalChat(EventParser.getResponseBytes(responses.requestUuid, revent))
     }
     responses.apnsResponseEvents.foreach{ revent =>
       apnsWriter.handleEvent(revent)
     }
   }
   
-  def cacheResponses(request_uuid:String, playerId:String, responses:ToClientEvents)={
+  def cacheResponses(responses:ToClientEvents)={
     if(responseCachingEnabled){
       responses.normalResponseEvents.foreach{ response =>
-        responseCacheService.cacheResponse(new CachedClientResponse(request_uuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(request_uuid, response)))
+        responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response)))
       }
     }
   }
     
+  def newToClientEvents(eventUuid:String, playerId:Option[String]):ToClientEvents
   
   
   def handleMaintenanceMode(parsedEvent:ParsedEvent)={

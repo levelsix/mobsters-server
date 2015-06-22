@@ -56,8 +56,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class BeginClanRaidController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BeginClanRaidController.class);
 
 	@Autowired
 	protected Locker locker;

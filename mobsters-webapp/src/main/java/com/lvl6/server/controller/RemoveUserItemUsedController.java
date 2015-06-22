@@ -27,8 +27,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 public class RemoveUserItemUsedController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RemoveUserItemUsedController.class);
 
 	public RemoveUserItemUsedController() {
 		

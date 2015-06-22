@@ -12,8 +12,7 @@ import com.lvl6.proto.EventRewardProto.CollectGiftRequestProto;
 
 public class CollectGiftRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(CollectGiftRequestEvent.class);
 
 	private CollectGiftRequestProto collectGiftRequestProto;
 

@@ -2,6 +2,9 @@ package com.lvl6.server.controller.actionobjects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -9,13 +12,12 @@ import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto.Builder;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto.SetDefendingMsgStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 
-public class SetDefendingMsgAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class SetDefendingMsgAction {
+	private static Logger log = LoggerFactory.getLogger( SetDefendingMsgAction.class);
 
 	private String userId;
 	private String msg;
-	private UserRetrieveUtils2 userRetrieveUtil;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
 	private MiscMethods miscMethods;
 
 	public SetDefendingMsgAction(String userId, String msg,

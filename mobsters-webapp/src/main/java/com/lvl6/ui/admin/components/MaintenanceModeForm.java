@@ -12,7 +12,7 @@ public class MaintenanceModeForm extends Form<ApplicationMode> {
 
 	public MaintenanceModeForm(String id) {
 		super(id, new CompoundPropertyModel<ApplicationMode>(AppContext
-				.getApplicationContext().getBean(ApplicationMode.class)));
+				.get().getBean(ApplicationMode.class)));
 		setup();
 	}
 

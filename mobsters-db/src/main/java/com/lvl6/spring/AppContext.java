@@ -25,8 +25,12 @@ public class AppContext {
 	 *
 	 * @return
 	 */
-	public static ApplicationContext getApplicationContext() {
+	public static ApplicationContext get() {
 		return ctx;
+	}
+	
+	public static <T> T getBean(Class<T> type) {
+		return get().getBean(type);
 	}
 
 }

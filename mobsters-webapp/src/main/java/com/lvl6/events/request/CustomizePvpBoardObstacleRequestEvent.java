@@ -12,8 +12,7 @@ import com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto;
 
 public class CustomizePvpBoardObstacleRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(CustomizePvpBoardObstacleRequestEvent.class);
 
 	private CustomizePvpBoardObstacleRequestProto customizePvpBoardObstacleRequestProto;
 

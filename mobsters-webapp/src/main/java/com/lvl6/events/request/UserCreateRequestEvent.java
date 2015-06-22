@@ -12,8 +12,7 @@ import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
 
 public class UserCreateRequestEvent extends PreDatabaseRequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UserCreateRequestEvent.class);
 
 	private UserCreateRequestProto userCreateRequestProto;
 

@@ -62,7 +62,7 @@ public class AdminPage extends TemplatePage {
 		protected void onSubmit() {
 			super.onSubmit();
 			log.info("Setting maintenance mode");
-			ServerAdmin admin = AppContext.getApplicationContext().getBean(
+			ServerAdmin admin = AppContext.get().getBean(
 					ServerAdmin.class);
 			admin.setApplicationMode(getModelObject().isMaintenanceMode(),
 					getModelObject().getMessageForUsers());
@@ -119,7 +119,7 @@ public class AdminPage extends TemplatePage {
 			@Override
 			protected void onSubmit() {
 				super.onSubmit();
-				MessagingUtil util = AppContext.getApplicationContext()
+				MessagingUtil util = AppContext.get()
 						.getBean(MessagingUtil.class);
 				//TODO: Fix this
 				//util.sendAdminMessage(message.getModelObject());

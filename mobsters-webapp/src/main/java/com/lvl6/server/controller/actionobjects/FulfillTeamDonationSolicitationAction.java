@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.MonsterSnapshotForUser;
@@ -17,18 +20,17 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-public class FulfillTeamDonationSolicitationAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class FulfillTeamDonationSolicitationAction {
+	private static Logger log = LoggerFactory.getLogger( FulfillTeamDonationSolicitationAction.class);
 
 	private String donatorId;
 	private String clanId;
 	private MonsterSnapshotForUser msfu;
 	private ClanMemberTeamDonation cmtd;
 	private Date clientTime;
-	private ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	private UpdateUtil updateUtil;
-	private InsertUtil insertUtil;
+	@Autowired protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected InsertUtil insertUtil; 
 
 	public FulfillTeamDonationSolicitationAction(
 			String donatorId,

@@ -37,8 +37,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class TradeItemForResourcesController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(TradeItemForResourcesController.class);
 
 	public TradeItemForResourcesController() {
 		

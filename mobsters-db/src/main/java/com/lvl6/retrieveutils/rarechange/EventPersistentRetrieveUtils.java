@@ -19,8 +19,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class EventPersistentRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(EventPersistentRetrieveUtils.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_EVENT_PERSISTENT_CONFIG;
 

@@ -27,8 +27,7 @@ import com.lvl6.utils.TimeUtils;
 @DependsOn("gameServer")
 public class ClanEventPersistentUserRewardRetrieveUtils2 {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ClanEventPersistentUserRewardRetrieveUtils2.class);
 
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD;
 	private static final ClanEventPersistentUserRewardsForClientMapper rowMapper = new ClanEventPersistentUserRewardsForClientMapper();

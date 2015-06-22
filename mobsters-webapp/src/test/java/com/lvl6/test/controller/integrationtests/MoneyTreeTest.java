@@ -46,9 +46,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class MoneyTreeTest {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MoneyTreeTest.class);
 
+	
 	private JdbcTemplate jdbcTemplate;
 	private boolean endOfTesting;
 	private User user;
@@ -188,7 +188,7 @@ public class MoneyTreeTest {
 		InAppPurchaseRequestEvent iapre = new InAppPurchaseRequestEvent();
 		iapre.setTag(1);
 		iapre.setInAppPurchaseRequestProto(iaprpb.build());
-		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEvents());
+		inAppPurchaseController.processRequestEvent(iapre, EventsUtil.getToClientEventsForUnitTest());
 
 		List<StructureForUser> sfuList = structureForUserRetrieveUtils2
 				.getUserStructsForUser(user.getId());
@@ -250,7 +250,7 @@ public class MoneyTreeTest {
 		InAppPurchaseRequestEvent iapre2 = new InAppPurchaseRequestEvent();
 		iapre2.setTag(1);
 		iapre2.setInAppPurchaseRequestProto(iaprpb2.build());
-		inAppPurchaseController.processRequestEvent(iapre2, EventsUtil.getToClientEvents());
+		inAppPurchaseController.processRequestEvent(iapre2, EventsUtil.getToClientEventsForUnitTest());
 		String userStructId = "";
 
 		List<StructureForUser> sfuList2 = structureForUserRetrieveUtils2
@@ -276,7 +276,7 @@ public class MoneyTreeTest {
 		DestroyMoneyTreeStructureRequestEvent dmtsre = new DestroyMoneyTreeStructureRequestEvent();
 		dmtsre.setTag(1);
 		dmtsre.setDestroyMoneyTreeStructureRequestProto(dmtsrpb.build());
-		destroyMoneyTreeStructureController.processRequestEvent(dmtsre, EventsUtil.getToClientEvents());
+		destroyMoneyTreeStructureController.processRequestEvent(dmtsre, EventsUtil.getToClientEventsForUnitTest());
 
 		User user4 = userRetrieveUtil.getUserById(user.getId());
 		List<StructureForUser> sfuList3 = structureForUserRetrieveUtils2

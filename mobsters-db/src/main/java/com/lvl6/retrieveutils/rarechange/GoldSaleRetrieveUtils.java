@@ -22,8 +22,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class GoldSaleRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(GoldSaleRetrieveUtils.class);
 
 	private static Map<Integer, GoldSale> goldSaleIdsToGoldSales;
 

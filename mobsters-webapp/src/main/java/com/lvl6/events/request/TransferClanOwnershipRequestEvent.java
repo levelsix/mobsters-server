@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 
 public class TransferClanOwnershipRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(TransferClanOwnershipRequestEvent.class);
 
 	private TransferClanOwnershipRequestProto transferClanOwnershipRequestProto;
 

@@ -28,8 +28,7 @@ import com.lvl6.properties.DBConstants;
 @Component
 public class LeaderBoardImpl {
 	
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(LeaderBoardImpl.class);
 	
 	protected JdbcTemplate jdbc; 
 

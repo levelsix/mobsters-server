@@ -31,8 +31,7 @@
 //
 //public class RetrieveTournamentRankingsController extends EventController {
 //
-//  private static Logger log = LoggerFactory.getLogger(new Object() {
-//  }.getClass().getEnclosingClass());
+//  private static Logger log = LoggerFactory.getLogger(//  }.getClass().getEnclosingClass());
 //
 //  @Autowired
 //  public LeaderBoardUtilImpl leader;

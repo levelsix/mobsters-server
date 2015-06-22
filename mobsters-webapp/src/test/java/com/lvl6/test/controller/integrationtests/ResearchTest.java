@@ -44,8 +44,7 @@ package com.lvl6.test.controller.integrationtests;
 //@ContextConfiguration("/test-spring-application-context.xml")
 //public class ResearchTest {
 //
-//	private static Logger log = LoggerFactory.getLogger(new Object() {
-//	}.getClass().getEnclosingClass());
+//	private static Logger log = LoggerFactory.getLogger(//	}.getClass().getEnclosingClass());
 //
 //	private JdbcTemplate jdbcTemplate;
 //	private static boolean endOfTesting;
@@ -163,7 +162,7 @@ package com.lvl6.test.controller.integrationtests;
 //		PerformResearchRequestEvent prre = new PerformResearchRequestEvent();
 //		prre.setTag(1);
 //		prre.setPerformResearchRequestProto(prrpb.build());
-//		performResearchController.processRequestEvent(prre, EventsUtil.getToClientEvents());
+//		performResearchController.processRequestEvent(prre, EventsUtil.getToClientEventsForUnitTest());
 //
 //		List<ResearchForUser> rfuList = researchForUserRetrieveUtil
 //				.getAllResearchForUser(user1.getId());
@@ -204,7 +203,7 @@ package com.lvl6.test.controller.integrationtests;
 //		PerformResearchRequestEvent prre2 = new PerformResearchRequestEvent();
 //		prre2.setTag(1);
 //		prre2.setPerformResearchRequestProto(prrpb.build());
-//		performResearchController.processRequestEvent(prre2, EventsUtil.getToClientEvents());
+//		performResearchController.processRequestEvent(prre2, EventsUtil.getToClientEventsForUnitTest());
 //
 //		List<ResearchForUser> rfuList = researchForUserRetrieveUtil
 //				.getAllResearchForUser(user1.getId());
@@ -236,7 +235,7 @@ package com.lvl6.test.controller.integrationtests;
 //		FinishPerformingResearchRequestEvent fprre = new FinishPerformingResearchRequestEvent();
 //		fprre.setTag(1);
 //		fprre.setFinishPerformingResearchRequestProto(fprrpb.build());
-//		finishPerformingResearchController.processRequestEvent(fprre, EventsUtil.getToClientEvents());
+//		finishPerformingResearchController.processRequestEvent(fprre, EventsUtil.getToClientEventsForUnitTest());
 //
 //		List<ResearchForUser> rfuList = researchForUserRetrieveUtil
 //				.getAllResearchForUser(user1.getId());

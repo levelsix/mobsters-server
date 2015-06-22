@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMonsterProto.RestrictUserMonsterRequestProto;
 
 public class RestrictUserMonsterRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RestrictUserMonsterRequestEvent.class);
 
 	private RestrictUserMonsterRequestProto restrictUserMonsterRequestProto;
 

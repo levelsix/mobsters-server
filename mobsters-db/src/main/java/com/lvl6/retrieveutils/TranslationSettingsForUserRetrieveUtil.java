@@ -27,8 +27,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class TranslationSettingsForUserRetrieveUtil {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(TranslationSettingsForUserRetrieveUtil.class);
 
 	private final static String TABLE_NAME = DBConstants.TABLE_TRANSLATION_SETTINGS_FOR_USER;
 	private static final UserTranslationSettingsForClientMapper rowMapper = new UserTranslationSettingsForClientMapper();

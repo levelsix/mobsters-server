@@ -43,8 +43,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 public class SellUserMonsterController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SellUserMonsterController.class);
 
 	@Autowired
 	protected Locker locker;

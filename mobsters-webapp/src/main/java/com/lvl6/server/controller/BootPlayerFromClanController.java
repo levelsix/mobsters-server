@@ -38,8 +38,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class BootPlayerFromClanController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BootPlayerFromClanController.class);
 
 	@Autowired
 	protected Locker locker;

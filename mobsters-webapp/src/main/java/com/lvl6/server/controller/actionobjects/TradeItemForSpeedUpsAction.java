@@ -10,14 +10,17 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DefaultConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
@@ -27,19 +30,18 @@ import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class TradeItemForSpeedUpsAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class TradeItemForSpeedUpsAction {
+	private static Logger log = LoggerFactory.getLogger( TradeItemForSpeedUpsAction.class);
 
 	private String userId;
 	private List<ItemForUserUsage> itemsUsed;
 	private List<ItemForUser> nuUserItems;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private InsertUtil insertUtil;
-	private UpdateUtil updateUtil;
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
 	private int gemsSpent;
 	private MiscMethods miscMethods;
-	private HistoryUtils historyUtils;
+	@Autowired protected HistoryUtils historyUtils; 
 
 	public TradeItemForSpeedUpsAction(String userId,
 			List<ItemForUserUsage> itemsUsed, List<ItemForUser> nuUserItems,

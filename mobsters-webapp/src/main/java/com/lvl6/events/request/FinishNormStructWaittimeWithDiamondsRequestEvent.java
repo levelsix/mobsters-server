@@ -13,8 +13,7 @@ import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRe
 public class FinishNormStructWaittimeWithDiamondsRequestEvent extends
 		RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(FinishNormStructWaittimeWithDiamondsRequestEvent.class);
 
 	private FinishNormStructWaittimeWithDiamondsRequestProto finishNormStructWaittimeWithDiamondsRequestProto;
 

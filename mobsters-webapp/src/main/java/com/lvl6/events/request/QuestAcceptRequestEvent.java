@@ -12,8 +12,7 @@ import com.lvl6.proto.EventQuestProto.QuestAcceptRequestProto;
 
 public class QuestAcceptRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(QuestAcceptRequestEvent.class);
 
 	private QuestAcceptRequestProto questAcceptRequestProto;
 

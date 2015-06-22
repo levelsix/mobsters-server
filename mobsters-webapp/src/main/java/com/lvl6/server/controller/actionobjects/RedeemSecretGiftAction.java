@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
@@ -30,7 +33,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class RedeemSecretGiftAction {
+@Component@Scope("prototype")public class RedeemSecretGiftAction {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(RedeemSecretGiftAction.class);
@@ -38,20 +41,20 @@ public class RedeemSecretGiftAction {
 	private String userId;
 	private List<String> rewardIdsRedeemed;
 	private Date clientTime;
-	private SecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	private MonsterStuffUtils monsterStuffUtil;
-	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private GiftRetrieveUtils giftRetrieveUtil;
-	private GiftRewardRetrieveUtils giftRewardsRetrieveUtils;
-	private RewardRetrieveUtils rewardRetrieveUtil;
-	private UserClanRetrieveUtils2 userClanRetrieveUtils;
-	private CreateInfoProtoUtils createInfoProtoUtils;
-	private SecretGiftUtils secretGiftUtils;
-	private DeleteUtil deleteUtil;
-	private UpdateUtil updateUtil;
-	private InsertUtil insertUtil;
+	@Autowired protected SecretGiftForUserRetrieveUtil secretGiftForUserRetrieveUtil; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
+	@Autowired protected MonsterStuffUtils monsterStuffUtil; 
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
+	@Autowired protected GiftRewardRetrieveUtils giftRewardsRetrieveUtils; 
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtil; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
+	@Autowired protected SecretGiftUtils secretGiftUtils; 
+	@Autowired protected DeleteUtil deleteUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected InsertUtil insertUtil; 
 
 	public RedeemSecretGiftAction(
 			String userId,

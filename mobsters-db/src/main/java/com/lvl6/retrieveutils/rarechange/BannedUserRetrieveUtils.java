@@ -18,8 +18,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class BannedUserRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BannedUserRetrieveUtils.class);
 
 	private static Set<Integer> userIds;
 

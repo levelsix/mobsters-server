@@ -12,8 +12,7 @@ import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemRequestProto;
 
 public class DiscardBattleItemRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(DiscardBattleItemRequestEvent.class);
 
 	private DiscardBattleItemRequestProto discardBattleItemRequestProto;
 

@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanHelp;
@@ -16,25 +19,21 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetClanHelpingsAction implements StartUpAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class SetClanHelpingsAction implements StartUpAction {
+	private static Logger log = LoggerFactory.getLogger( SetClanHelpingsAction.class);
 
-	private final ClanDataProto.Builder cdpBuilder;
-	private final User user;
-	private final String userId;
-	private final ClanHelpRetrieveUtil clanHelpRetrieveUtil;
-	private final CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected ClanHelpRetrieveUtil clanHelpRetrieveUtil;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	public SetClanHelpingsAction(ClanDataProto.Builder cdpBuilder, User user,
-			String userId, ClanHelpRetrieveUtil clanHelpRetrieveUtil,
-			CreateInfoProtoUtils createInfoProtoUtils) {
-		super();
+	
+	protected ClanDataProto.Builder cdpBuilder;
+	protected User user;
+	protected String userId;
+
+	public void wire(ClanDataProto.Builder cdpBuilder, User user, String userId) {
 		this.cdpBuilder = cdpBuilder;
 		this.user = user;
 		this.userId = userId;
-		this.clanHelpRetrieveUtil = clanHelpRetrieveUtil;
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state

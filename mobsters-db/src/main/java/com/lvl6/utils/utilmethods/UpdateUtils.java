@@ -46,7 +46,7 @@ public class UpdateUtils implements UpdateUtil {
 			.getLogger(UpdateUtils.class);
 
 	public static UpdateUtil get() {
-		return (UpdateUtil) AppContext.getApplicationContext().getBean(
+		return (UpdateUtil) AppContext.get().getBean(
 				"updateUtils");
 	}
 

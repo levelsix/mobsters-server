@@ -38,8 +38,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
 public class RetrieveUsersForUserIdsController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RetrieveUsersForUserIdsController.class);
 
 	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;

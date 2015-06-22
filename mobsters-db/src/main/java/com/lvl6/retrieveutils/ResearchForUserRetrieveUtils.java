@@ -27,8 +27,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 @DependsOn("gameServer")
 public class ResearchForUserRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ResearchForUserRetrieveUtils.class);
 
 	private final String TABLE_NAME = DBConstants.TABLE_RESEARCH_FOR_USER;
 	private static final UserResearchForClientMapper rowMapper = new UserResearchForClientMapper();

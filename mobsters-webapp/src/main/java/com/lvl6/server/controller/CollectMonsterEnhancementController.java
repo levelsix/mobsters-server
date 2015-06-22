@@ -45,8 +45,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class CollectMonsterEnhancementController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(CollectMonsterEnhancementController.class);
 
 	@Autowired
 	protected Locker locker;

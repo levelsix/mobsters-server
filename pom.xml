@@ -85,7 +85,7 @@
 
 		<dynamodb.table.prefix>local</dynamodb.table.prefix>
 		<dynamodb.isLocal>true</dynamodb.isLocal>
-		<dynamodb.response.caching.enabled>false</dynamodb.response.caching.enabled>
+		<dynamodb.response.caching.enabled>true</dynamodb.response.caching.enabled>
 
 		<hazelcast.ec2.security.group></hazelcast.ec2.security.group>
 		<hazelcast.ec2.region></hazelcast.ec2.region>

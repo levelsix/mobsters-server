@@ -12,8 +12,7 @@ import com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto;
 
 public class AchievementProgressRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(AchievementProgressRequestEvent.class);
 
 	private AchievementProgressRequestProto achievementProgressRequestProto;
 

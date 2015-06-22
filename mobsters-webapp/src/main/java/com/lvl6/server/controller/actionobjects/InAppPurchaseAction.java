@@ -7,6 +7,9 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -20,7 +23,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class InAppPurchaseAction {
+@Component@Scope("prototype")public class InAppPurchaseAction {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(InAppPurchaseAction.class);
@@ -31,12 +34,12 @@ public class InAppPurchaseAction {
 	private Date now;
 	private String uuid;
     private String packageName;
-	private IAPHistoryRetrieveUtils iapHistoryRetrieveUtil;
-	protected InsertUtil insertUtil;
-	protected UpdateUtil updateUtil;
-	private CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected IAPHistoryRetrieveUtils iapHistoryRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 	private MiscMethods miscMethods;
-	private InAppPurchaseUtils inAppPurchaseUtils;
+	@Autowired protected InAppPurchaseUtils inAppPurchaseUtils; 
 
 
 	public InAppPurchaseAction() {

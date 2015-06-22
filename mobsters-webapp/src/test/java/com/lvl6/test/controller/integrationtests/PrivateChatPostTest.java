@@ -38,6 +38,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class PrivateChatPostTest {
 
+	private static Logger log = LoggerFactory.getLogger(PrivateChatPostTest.class);
+
+	
 	private JdbcTemplate jdbcTemplate;
 
 	private User user;
@@ -48,8 +51,6 @@ public class PrivateChatPostTest {
 	private MinimumUserProto mup2;
 	private String userId2;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
 
 	@Autowired
 	UserRetrieveUtils2 userRetrieveUtil;
@@ -191,7 +192,7 @@ public class PrivateChatPostTest {
 		PrivateChatPostRequestEvent pcpre = new PrivateChatPostRequestEvent();
 		pcpre.setTag(1);
 		pcpre.setPrivateChatPostRequestProto(pcprpb.build());
-		privateChatPostController.processRequestEvent(pcpre, EventsUtil.getToClientEvents());
+		privateChatPostController.processRequestEvent(pcpre, EventsUtil.getToClientEventsForUnitTest());
 
 		log.info("private chat post responseproto : {}", privateChatPostController.getPcprp());
 	}

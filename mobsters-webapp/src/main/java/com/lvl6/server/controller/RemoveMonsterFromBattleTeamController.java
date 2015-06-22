@@ -26,8 +26,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class RemoveMonsterFromBattleTeamController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RemoveMonsterFromBattleTeamController.class);
 
 	@Autowired
 	protected Locker locker;

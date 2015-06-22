@@ -27,8 +27,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 public class EndClanHelpController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(EndClanHelpController.class);
 
 	@Autowired
 	protected Locker locker;

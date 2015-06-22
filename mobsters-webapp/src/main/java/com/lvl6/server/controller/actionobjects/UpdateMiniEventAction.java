@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.MiniEventGoal;
 import com.lvl6.info.MiniEventGoalForUser;
@@ -12,14 +15,13 @@ import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMin
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class UpdateMiniEventAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class UpdateMiniEventAction {
+	private static Logger log = LoggerFactory.getLogger( UpdateMiniEventAction.class);
 
 	private String userId;
 	private List<MiniEventGoalForUser> megfuList;
-	private InsertUtil insertUtil;
-	private MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils; 
 
 	public UpdateMiniEventAction(String userId,
 			List<MiniEventGoalForUser> megfuList,

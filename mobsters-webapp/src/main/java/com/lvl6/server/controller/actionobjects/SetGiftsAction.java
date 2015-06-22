@@ -9,6 +9,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
@@ -26,35 +29,23 @@ import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetGiftsAction implements StartUpAction {
+@Component@Scope("prototype")public class SetGiftsAction implements StartUpAction {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(SetGiftsAction.class);
+	private static final Logger log = LoggerFactory.getLogger(SetGiftsAction.class);
 
-	private final StartupResponseProto.Builder resBuilder;
-	private final User user;
-	private final String userId;
-	private final GiftForUserRetrieveUtils giftForUserRetrieveUtil;
-	private final GiftForTangoUserRetrieveUtil giftForTangoUserRetrieveUtil;
-	private final GiftRetrieveUtils giftRetrieveUtil;
-	private final RewardRetrieveUtils rewardRetrieveUtil;
-	private final CreateInfoProtoUtils createInfoProtoUtils;
+	protected StartupResponseProto.Builder resBuilder;
+	protected User user;
+	protected String userId;
+	@Autowired protected GiftForUserRetrieveUtils giftForUserRetrieveUtil;
+	@Autowired protected GiftForTangoUserRetrieveUtil giftForTangoUserRetrieveUtil;
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil;
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtil;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	public SetGiftsAction(Builder resBuilder, User user, String userId,
-			GiftForUserRetrieveUtils giftForUserRetrieveUtil,
-			GiftForTangoUserRetrieveUtil giftForTangoUserRetrieveUtil,
-			GiftRetrieveUtils giftRetrieveUtil,
-			RewardRetrieveUtils rewardRetrieveUtil,
-			CreateInfoProtoUtils createInfoProtoUtils) {
-		super();
+	public void wire(Builder resBuilder, User user, String userId) {
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
-		this.giftForUserRetrieveUtil = giftForUserRetrieveUtil;
-		this.giftForTangoUserRetrieveUtil = giftForTangoUserRetrieveUtil;
-		this.giftRetrieveUtil = giftRetrieveUtil;
-		this.rewardRetrieveUtil = rewardRetrieveUtil;
-		this.createInfoProtoUtils = createInfoProtoUtils;
 	}
 
 	//derived state

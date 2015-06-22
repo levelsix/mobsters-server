@@ -104,14 +104,24 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     logger.debug(s"Error in ClientConnection", t)
   }
   
+  def newToClientEvents(eventUuid:String, playerId:Option[String]):ToClientEvents= {
+    new ToClientEvents(connectionId, eventUuid, playerId)
+  }
   
-  override def sendResponses(uuid:String, playerId:String, responses:ToClientEvents)={
+  override def sendResponses(responses:ToClientEvents)={
+    logger.info(s"abcd");
     if(userId.isEmpty) {
       if(!responses.userId.isEmpty) {
         userId = Some(responses.userId)
         setupRabbitListeners
       }else {
-        logger.error(s"UserId is not set and responses didn't contain a userId. It should be in the startup request responses. $this")
+        responses.playerId match{
+          case Some(plyrId) =>{
+            userId = responses.playerId
+            setupRabbitListeners    
+          }
+          case None => logger.error(s"UserId is not set and responses didn't contain a userId. It should be in the startup request responses. $this")
+        }
       }
     }
     if(responses.clanChanged) {
@@ -119,9 +129,9 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     }
     //Normal responses can be a response to the requesting player or to another player
     responses.normalResponseEvents.foreach{ revent =>
-      logger.debug(s"Sending normal response: $revent")
+      logger.info(s"Sending normal response: $revent")
       val plyrId = revent.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId
-      val bytes = EventParser.getResponseBytes(uuid, revent)
+      val bytes = EventParser.getResponseBytes(responses.requestUuid, revent)
       //If it's the requester this should be their connection
       if(userId.get.equals(plyrId)) {
         sendToThisSocket(bytes)
@@ -131,33 +141,34 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
           case Some(lc)=> lc.sendToThisSocket(bytes)
      		  //If they are not on this server send to amqp
           case None=> {
-            logger.debug(s"No connection found on this server for playerId: plyrId  sending to amqp")
+            logger.info(s"No connection found on this server for playerId: plyrId  sending to amqp")
             eventWriter.sendToSinglePlayer(plyrId, bytes)
           }
         }
       }
     }
     responses.preDBResponseEvents.foreach{ revent =>
-      logger.debug(s"Sending preDbResponse event: $revent")
-      sendToThisSocket(EventParser.getResponseBytes(uuid, revent.event))
+      logger.info(s"Sending preDbResponse event: $revent")
+      sendToThisSocket(EventParser.getResponseBytes(responses.requestUuid, revent.event))
     }
     responses.preDBFacebookEvents.foreach{ revent =>
-      logger.debug(s"Sending preDbFacebookResponse event: $revent")
-      val bytes = EventParser.getResponseBytes(uuid, revent.event)
+      logger.info(s"Sending preDbFacebookResponse event: $revent")
+      val bytes = EventParser.getResponseBytes(responses.requestUuid, revent.event)
       eventWriter.sendToSinglePlayer(revent.event.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId(), bytes)  
     }
     responses.clanResponseEvents.foreach{ revent =>
-      logger.debug(s"Sending clanResponse event to amqp: $revent")
-      eventWriter.sendToClan(revent.clanId, EventParser.getResponseBytes(uuid, revent.event))  
+      logger.info(s"Sending clanResponse event to amqp: $revent")
+      eventWriter.sendToClan(revent.clanId, EventParser.getResponseBytes(responses.requestUuid, revent.event))  
     }
     responses.globalChatResponseEvents.foreach{ revent =>
-      logger.debug("Sending globalChatResponse event to amqp")
-      eventWriter.sendGlobalChat(EventParser.getResponseBytes(uuid, revent))
+      logger.info("Sending globalChatResponse event to amqp")
+      eventWriter.sendGlobalChat(EventParser.getResponseBytes(responses.requestUuid, revent))
     }
     responses.apnsResponseEvents.foreach{ revent =>
       logger.debug("Sending apnsResponse event")
       apnsWriter.handleEvent(revent)
     }
+    cacheResponses(responses)
   }
   
   override def updatePlayerToServerMaps(parsedEvent:ParsedEvent)={
@@ -329,11 +340,11 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   }
   
   def wireBeans= {
-    val factory = AppContext.getApplicationContext.getAutowireCapableBeanFactory();
+    val factory = AppContext.get.getAutowireCapableBeanFactory();
     factory.autowireBean(this);
     factory.initializeBean(this, this.connectionId );
-    //rabbitConnectionFactory = AppContext.getApplicationContext.getBean(classOf[ConnectionFactory])
-    //amqpAdmin = AppContext.getApplicationContext.getBean(classOf[AmqpAdmin])
+    //rabbitConnectionFactory = AppContext.get.getBean(classOf[ConnectionFactory])
+    //amqpAdmin = AppContext.get.getBean(classOf[AmqpAdmin])
   }
   
   

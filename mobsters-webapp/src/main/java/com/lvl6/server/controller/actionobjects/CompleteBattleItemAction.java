@@ -8,6 +8,9 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
@@ -21,17 +24,16 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class CompleteBattleItemAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class CompleteBattleItemAction {
+	private static Logger log = LoggerFactory.getLogger( CompleteBattleItemAction.class);
 
 	private String userId;
 	private List<BattleItemQueueForUser> completedList; //completed queue items
 	private int gemsForSpeedUp;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
-	protected InsertUtil insertUtil;
-	protected DeleteUtil deleteUtil;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected DeleteUtil deleteUtil;
 	private MiscMethods miscMethods;
 
 	public CompleteBattleItemAction(

@@ -13,6 +13,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -29,7 +32,7 @@ import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-public class SendTangoGiftAction {
+@Component@Scope("prototype")public class SendTangoGiftAction {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(SendTangoGiftAction.class);
@@ -40,10 +43,10 @@ public class SendTangoGiftAction {
 	private int gemReward;
 	private Date clientTime;
 	private Set<String> tangoUserIds;
-	private UserRetrieveUtils2 userRetrieveUtil;
-	private GiftRetrieveUtils giftRetrieveUtil;
-	private GiftRewardRetrieveUtils giftRewardRetrieveUtil;
-	private InsertUtil insertUtil;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtil; 
+	@Autowired protected InsertUtil insertUtil; 
 
 	public SendTangoGiftAction(String userId, String senderTangoUserId,
 			String gifterTangoName, int gemReward, Date clientTime,

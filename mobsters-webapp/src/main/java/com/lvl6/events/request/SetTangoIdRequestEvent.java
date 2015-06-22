@@ -12,8 +12,7 @@ import com.lvl6.proto.EventUserProto.SetTangoIdRequestProto;
 
 public class SetTangoIdRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(SetTangoIdRequestEvent.class);
 
 	private SetTangoIdRequestProto setTangoIdRequestProto;
 

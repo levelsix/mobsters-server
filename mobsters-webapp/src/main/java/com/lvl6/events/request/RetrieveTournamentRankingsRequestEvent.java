@@ -12,8 +12,7 @@ import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsRequestProt
 
 public class RetrieveTournamentRankingsRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RetrieveTournamentRankingsRequestEvent.class);
 
 	private RetrieveTournamentRankingsRequestProto retrieveTournamentRankingsRequestProto;
 

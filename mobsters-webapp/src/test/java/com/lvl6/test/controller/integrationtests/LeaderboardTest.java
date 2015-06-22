@@ -25,14 +25,15 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class LeaderboardTest {
 
+	private static Logger log = LoggerFactory.getLogger(LeaderboardTest.class);
+
+	
 	private JdbcTemplate jdbcTemplate;
 
 	private User user;
 	private MinimumUserProto mup;
 	private String userId;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
 
 	@Resource
 	public void setDataSource(DataSource dataSource) {

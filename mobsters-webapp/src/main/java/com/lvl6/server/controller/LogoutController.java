@@ -30,8 +30,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 public class LogoutController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(LogoutController.class);
 
 	public LogoutController() {
 		

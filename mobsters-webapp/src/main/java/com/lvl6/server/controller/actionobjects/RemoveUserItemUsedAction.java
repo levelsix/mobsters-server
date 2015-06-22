@@ -4,18 +4,20 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.Builder;
 import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
-public class RemoveUserItemUsedAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class RemoveUserItemUsedAction {
+	private static Logger log = LoggerFactory.getLogger( RemoveUserItemUsedAction.class);
 
 	private String userId;
 	private List<String> userItemUsedIdList;
-	private DeleteUtil deleteUtil;
+	@Autowired protected DeleteUtil deleteUtil; 
 
 	public RemoveUserItemUsedAction(String userId,
 			List<String> userItemUsedIdList, DeleteUtil deleteUtil) {

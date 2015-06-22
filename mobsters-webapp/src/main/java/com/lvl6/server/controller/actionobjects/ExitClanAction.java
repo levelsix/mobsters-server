@@ -5,6 +5,9 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
@@ -15,16 +18,15 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 //shared logic between controllers where a user leaves a lcan
-public class ExitClanAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class ExitClanAction {
+	private static Logger log = LoggerFactory.getLogger( ExitClanAction.class);
 
 	private String userId;
 	private String clanId;
 	private int clanSize;
 	private Date lastChatPost;
-	private TimeUtils timeUtil;
-	private UpdateUtil updateUtil;
+	@Autowired protected TimeUtils timeUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
 	private HazelcastClanSearchImpl hzClanSearch;
 	private ClanSearch clanSearch;
 	private ServerToggleRetrieveUtils toggle;

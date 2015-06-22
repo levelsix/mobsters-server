@@ -29,8 +29,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class RetractRequestJoinClanController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(RetractRequestJoinClanController.class);
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;

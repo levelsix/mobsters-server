@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus;
@@ -14,16 +17,15 @@ import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.Builder;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-public class BeginClanAvengingAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class BeginClanAvengingAction {
+	private static Logger log = LoggerFactory.getLogger( BeginClanAvengingAction.class);
 
 	private String defenderId;
 	private String clanId;
 	private Date clientTime;
 	private List<ClanAvenge> caList;
-	private InsertUtil insertUtil;
-	private UpdateUtil updateUtil;
+	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected UpdateUtil updateUtil; 
 
 	public BeginClanAvengingAction(String defenderId, String clanId,
 			Date clientTime, List<ClanAvenge> caList, UpdateUtil updateUtil,

@@ -8,15 +8,16 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IList;
 import com.lvl6.info.User;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 
-public class SetGlobalChatMessageAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class SetGlobalChatMessageAction {
+	private static Logger log = LoggerFactory.getLogger( SetGlobalChatMessageAction.class);
 
 	private static final GroupChatComparator comparator = new GroupChatComparator();
 
@@ -34,8 +35,8 @@ public class SetGlobalChatMessageAction {
 		}
 	}
 
-	private final StartupResponseProto.Builder resBuilder;
-	private final IList<GroupChatMessageProto> chatMessages;
+	protected StartupResponseProto.Builder resBuilder;
+	protected IList<GroupChatMessageProto> chatMessages;
 
 	public SetGlobalChatMessageAction(StartupResponseProto.Builder resBuilder,
 			User user, IList<GroupChatMessageProto> chatMessages) {

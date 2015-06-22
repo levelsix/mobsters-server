@@ -24,8 +24,7 @@ import com.lvl6.properties.DBConstants;
 @DependsOn("gameServer")
 public class QuestForUserRetrieveUtils2 {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(QuestForUserRetrieveUtils2.class);
 	private final String TABLE_NAME = DBConstants.TABLE_QUEST_FOR_USER;
 	private static final UserQuestForClientMapper rowMapper = new UserQuestForClientMapper();
 	private JdbcTemplate jdbcTemplate;

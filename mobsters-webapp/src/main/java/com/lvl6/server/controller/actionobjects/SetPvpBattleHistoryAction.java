@@ -10,6 +10,9 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
@@ -32,52 +35,31 @@ import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
-public class SetPvpBattleHistoryAction implements StartUpAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+@Component@Scope("prototype")public class SetPvpBattleHistoryAction implements StartUpAction {
 
-	private final StartupResponseProto.Builder resBuilder;
-	private final User user;
-	private final String userId;
-	private final PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil;
-	private final MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
-	private final ClanRetrieveUtils2 clanRetrieveUtils;
-	private final HazelcastPvpUtil hazelcastPvpUtil;
-	private final MonsterStuffUtils monsterStuffUtils;
-	private final CreateInfoProtoUtils createInfoProtoUtils;
-	private final ServerToggleRetrieveUtils serverToggleRetrieveUtil;
-	private final MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	private final BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
-	private final HistoryUtils historyUtils;
-	private final PvpBattleHistoryDao2 pbhDao;
+	private static final Logger log = LoggerFactory.getLogger(SetPvpBattleHistoryAction.class);
+	@Autowired protected PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil;
+	@Autowired protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtils;
+	@Autowired protected HazelcastPvpUtil hazelcastPvpUtil;
+	@Autowired protected MonsterStuffUtils monsterStuffUtils;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	@Autowired protected BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
+	@Autowired protected HistoryUtils historyUtils;
+	@Autowired protected PvpBattleHistoryDao2 pbhDao;
 
-	public SetPvpBattleHistoryAction(StartupResponseProto.Builder resBuilder,
-			User user, String userId,
-			PvpBattleHistoryRetrieveUtil2 pvpBattleHistoryRetrieveUtil,
-			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils,
-			ClanRetrieveUtils2 clanRetrieveUtils,
-			HazelcastPvpUtil hazelcastPvpUtil,
-			MonsterStuffUtils monsterStuffUtils,
-			CreateInfoProtoUtils createInfoProtoUtils,
-			ServerToggleRetrieveUtils serverToggleRetrieveUtil,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
-			BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil,
-			HistoryUtils historyUtils, PvpBattleHistoryDao2 pbhDao)
+	
+	protected StartupResponseProto.Builder resBuilder;
+	protected User user;
+	protected String userId;
+
+	public void wire(StartupResponseProto.Builder resBuilder, User user, String userId)
 	{
 		this.resBuilder = resBuilder;
 		this.user = user;
 		this.userId = userId;
-		this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil;
-		this.hazelcastPvpUtil = hazelcastPvpUtil;
-		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
-		this.clanRetrieveUtils = clanRetrieveUtils;
-		this.monsterStuffUtils = monsterStuffUtils;
-		this.createInfoProtoUtils = createInfoProtoUtils;
-		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
-		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
-		this.battleReplayForUserRetrieveUtil = battleReplayForUserRetrieveUtil;
-		this.historyUtils = historyUtils;
-		this.pbhDao = pbhDao;
 	}
 
 	//derived state

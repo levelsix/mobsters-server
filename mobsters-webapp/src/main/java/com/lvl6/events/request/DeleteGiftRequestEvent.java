@@ -12,8 +12,7 @@ import com.lvl6.proto.EventRewardProto.DeleteGiftRequestProto;
 
 public class DeleteGiftRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(DeleteGiftRequestEvent.class);
 
 	private DeleteGiftRequestProto deleteGiftRequestProto;
 

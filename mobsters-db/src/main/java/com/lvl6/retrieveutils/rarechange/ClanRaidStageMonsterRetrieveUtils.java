@@ -22,8 +22,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class ClanRaidStageMonsterRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(ClanRaidStageMonsterRetrieveUtils.class);
 
 	private static Map<Integer, Map<Integer, ClanRaidStageMonster>> clanRaidStageIdsToIdsToMonsters;
 	private static Map<Integer, Map<Integer, ClanRaidStageMonster>> crsIdsToMonsterNumsToMonsters;

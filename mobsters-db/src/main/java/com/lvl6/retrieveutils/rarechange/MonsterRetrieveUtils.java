@@ -18,8 +18,7 @@ import com.lvl6.utils.DBConnection;
 @Component
 public class MonsterRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(MonsterRetrieveUtils.class);
 
 	private static Map<Integer, Monster> monsterIdsToMonsters;
 

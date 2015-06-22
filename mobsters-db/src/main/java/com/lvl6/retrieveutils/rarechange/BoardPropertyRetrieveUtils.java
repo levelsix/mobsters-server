@@ -21,8 +21,7 @@ import com.lvl6.utils.DBConnection;
 @DependsOn("gameServer")
 public class BoardPropertyRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BoardPropertyRetrieveUtils.class);
 
 	private static Map<Integer, BoardProperty> idsToBoardProperties;
 	private static Map<Integer, Collection<BoardProperty>> boardIdsToProperties;

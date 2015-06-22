@@ -12,8 +12,7 @@ import com.lvl6.proto.EventUserProto.UpdateClientTaskStateRequestProto;
 
 public class UpdateClientTaskStateRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(UpdateClientTaskStateRequestEvent.class);
 
 	private UpdateClientTaskStateRequestProto updateClientTaskStateRequestProto;
 

@@ -23,8 +23,7 @@ import com.lvl6.utils.DBConnection;
 @Component
 public class PvpLeagueRetrieveUtils {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(PvpLeagueRetrieveUtils.class);
 
 	private static Random random = new Random();
 

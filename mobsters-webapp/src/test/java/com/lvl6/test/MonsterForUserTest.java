@@ -28,8 +28,7 @@
 //@ContextConfiguration("/test-spring-application-context.xml")
 //public class MonsterForUserTest extends TestCase {
 //
-//	private static Logger log = LoggerFactory.getLogger(new Object() {
-//	}.getClass().getEnclosingClass());
+//	private static Logger log = LoggerFactory.getLogger(//	}.getClass().getEnclosingClass());
 //
 //	@Autowired
 //	protected MonsterForUserRetrieveUtils2 mfuRetrieveUtil;

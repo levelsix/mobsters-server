@@ -32,8 +32,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class BeginPvpBattleController extends EventController {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(BeginPvpBattleController.class);
 
 	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;

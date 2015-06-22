@@ -12,8 +12,7 @@ import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto;
 
 public class RedeemMiniEventRewardRequestEvent extends RequestEvent {
 
-	private Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private Logger log = LoggerFactory.getLogger(RedeemMiniEventRewardRequestEvent.class);
 
 	private RedeemMiniEventRewardRequestProto redeemMiniEventRewardRequestProto;
 

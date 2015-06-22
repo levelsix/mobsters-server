@@ -12,8 +12,7 @@ import com.lvl6.proto.EventCityProto.PurchaseCityExpansionRequestProto;
 
 public class PurchaseCityExpansionRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(PurchaseCityExpansionRequestEvent.class);
 
 	private PurchaseCityExpansionRequestProto purchaseCityExpansionRequestProto;
 

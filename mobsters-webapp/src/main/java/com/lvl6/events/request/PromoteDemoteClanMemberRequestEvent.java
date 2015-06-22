@@ -12,8 +12,7 @@ import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberRequestProto;
 
 public class PromoteDemoteClanMemberRequestEvent extends RequestEvent {
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(PromoteDemoteClanMemberRequestEvent.class);
 
 	private PromoteDemoteClanMemberRequestProto promoteDemoteClanMemberRequestProto;
 

@@ -28,8 +28,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 public class BootPlayerFromClanAction {
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger( BootPlayerFromClanAction.class);
 
 	private String userId;
 	private String bootedUserId;

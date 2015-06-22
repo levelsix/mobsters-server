@@ -41,6 +41,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class MonsterStuffUtils {
 
+	private static Logger log = LoggerFactory.getLogger(MonsterStuffUtils.class);
 
 
 	@Autowired
@@ -49,8 +50,6 @@ public class MonsterStuffUtils {
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	private static Logger log = LoggerFactory.getLogger(new Object() {
-	}.getClass().getEnclosingClass());
 
 	//extract and return the ids from the UserMonsterCurrentHealthProtos, also
 	//return mapping of userMonsterIdToExpectedHealth
