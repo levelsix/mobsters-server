@@ -23,7 +23,8 @@ class CachedClientResponses extends TableDefinition {
   def rangeKeyName:Option[String] = Some("response_uuid")
   def tableName = "CachedClientResponses"
   def attributes = List(
-      AttributeDef(hashKeyName, ScalarAttributeType.S), 
+      AttributeDef(hashKeyName, ScalarAttributeType.S),
+      AttributeDef(rangeKeyName.get, ScalarAttributeType.S),
       AttributeDef(eventColumn, ScalarAttributeType.B),
       AttributeDef(eventTypeColumn, ScalarAttributeType.N),
       AttributeDef(dateColumn, ScalarAttributeType.N))
