@@ -50,7 +50,7 @@ object EventParser extends LazyLogging{
     events = events :+ parseSingleEvent(eventBytes.slice(Integer.BYTES, startOfNextEvent))
     if(startOfNextEvent < eventBytes.size){
       //batch has more events so recurse
-      logger.info("more bytes... recursing")
+      logger.debug("more bytes... recursing")
       events = events ++ EventParser.parseEventProtos(eventBytes.splitAt(startOfNextEvent)._2)
     }
     events
