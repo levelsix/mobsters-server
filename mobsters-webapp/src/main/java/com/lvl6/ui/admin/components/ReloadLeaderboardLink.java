@@ -16,19 +16,19 @@ public class ReloadLeaderboardLink extends Link<String> {
 		super(id);
 	}
 	
-	@Autowired
-	protected LeaderBoardImpl leaderBoardImpl;
+//	@Autowired
+//	protected LeaderBoardImpl leaderBoardImpl;
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void onClick() {
 		log.info("An Admin requested a reload for leaderboard");
-		leaderBoardImpl.reload();
+//		leaderBoardImpl.reload();
 		
-//		ServerAdmin sa = AppContext.getApplicationContext().getBean(
-//				ServerAdmin.class);
-//		sa.reloadLeaderboard();
+		ServerAdmin sa = AppContext.get().getBean(
+				ServerAdmin.class);
+		sa.reloadLeaderboard();
 		setResponsePage(AdminPage.class);
 	}
 
