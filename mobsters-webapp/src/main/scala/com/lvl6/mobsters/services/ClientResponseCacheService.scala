@@ -29,7 +29,7 @@ class ClientResponseCacheService extends LazyLogging{
   
   def cacheResponse(response:CachedClientResponse)={
     val pio = dynamoService.putItem(cachedClientResponses, response)
-    logger.info(s"Dynamo - caching client response consumed capacity: ${pio.getPutItemResult.getConsumedCapacity}")
+    logger.info(s"Dynamo - caching client response consumed capacity: ${pio.getPutItemResult.getConsumedCapacity} response: $response")
   }
   
   def getCachedResponses(request_uuid:String):Option[Vector[CachedClientResponse]]={
