@@ -65,7 +65,7 @@ public class MessagingUtil {
 				null);
 	}
 
-	public void sendMaintanenceModeMessageUdid(String message, String udid, String uuid) {
+	public byte[] getMaintanenceModeMessageUdid(String message, String udid, String uuid) {
 		log.info("Sending maintenance mode message: \"{}\" to player {}",
 				message, udid);
 		//send admin message
@@ -75,11 +75,11 @@ public class MessagingUtil {
 		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
 		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent("");
 		ev.setSendAdminMessageResponseProto(samrp.build());
-		eventWriter.sendPreDBResponseEvent(udid, EventParser.getResponseBytes(uuid, ev));
+		return EventParser.getResponseBytes(uuid, ev);
 		//eventWriter.processPreDBResponseEvent(ev, udid);
 	}
 
-	public void sendMaintanenceModeMessage(String message, String playerId, String uuid) {
+	public byte[] getMaintanenceModeMessage(String message, String playerId, String uuid) {
 		log.info("Sending maintenance mode message: \"{}\" to player {}",
 				message, playerId);
 		//send admin message
@@ -87,10 +87,9 @@ public class MessagingUtil {
 				.newBuilder();
 		samrp.setMessage(message);
 		samrp.setSenderUuid(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(
-				playerId);
+		SendAdminMessageResponseEvent ev = new SendAdminMessageResponseEvent(playerId);
 		ev.setSendAdminMessageResponseProto(samrp.build());
-		eventWriter.sendToSinglePlayer(playerId, EventParser.getResponseBytes(uuid, ev));
+		return EventParser.getResponseBytes(uuid, ev);
 	}
 
 	public void sendAdminMessage(String message, String uuid) {

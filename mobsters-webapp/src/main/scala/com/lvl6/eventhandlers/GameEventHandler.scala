@@ -123,16 +123,17 @@ trait GameEventHandler extends LazyLogging  {
   
   def handleMaintenanceMode(parsedEvent:ParsedEvent)={
     val re = parsedEvent.event
+    val eventUuid = parsedEvent.eventProto.getEventUuid
     val playerId = re.getPlayerId
     if(playerId != null && !playerId.isEmpty) {
       val user = userRetrieveUtils.getUserById(playerId)
       if(user != null && !user.isAdmin){
-        messagingUtil.sendMaintanenceModeMessage(appMode.getMessageForUsers, playerId, parsedEvent.eventProto.getEventUuid)
+        eventWriter.sendToSinglePlayer(eventUuid, messagingUtil.getMaintanenceModeMessage(appMode.getMessageForUsers, playerId, eventUuid))
       }
     }else {
       if(re.isInstanceOf[PreDatabaseRequestEvent] ){
         val udid = re.asInstanceOf[PreDatabaseRequestEvent].getUdid
-        messagingUtil.sendMaintanenceModeMessageUdid(appMode.getMessageForUsers, udid, parsedEvent.eventProto.getEventUuid)
+        eventWriter.sendPreDBResponseEvent(eventUuid, messagingUtil.getMaintanenceModeMessageUdid(appMode.getMessageForUsers, udid, parsedEvent.eventProto.getEventUuid))
       }
     }
   } 
