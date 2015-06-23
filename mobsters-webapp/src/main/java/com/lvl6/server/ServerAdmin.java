@@ -182,6 +182,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 		if(appMode.isMaintenanceMode()) {
 			hzClanSearch.reload();
 		}
+		else log.error("clan search is attemping to be reloaded when not in maintenance mode!!!");
 	}
 
 	public void setApplicationMode(Boolean maintenanceMode,
