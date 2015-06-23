@@ -100,7 +100,7 @@ public class ServerEventHandler implements MessageListener<ServerMessage>,
 		if (msg.getMessageObject().equals(ServerMessage.RELOAD_STATIC_DATA)) {
 			log.info("Reloading all static data");
 			reloadAllRareChangeStaticData.reloadAllRareChangeStaticData();
-			if(serverToggleRetrieveUtils.getToggleValueForName(
+			if(toggle.getToggleValueForName(
 					ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH) {
 				reloadRecommendedClans();
 			}
