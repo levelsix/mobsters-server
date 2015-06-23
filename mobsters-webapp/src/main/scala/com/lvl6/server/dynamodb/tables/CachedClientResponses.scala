@@ -17,7 +17,7 @@ case class CachedClientResponse(request_uuid:String, date:Long, eventType:Int, e
 @Component
 class CachedClientResponses extends TableDefinition {
   
-  val dateColumn = "date"
+  val dateColumn = "saved_date"
   val eventColumn = "event"
   val eventTypeColumn = "eventType"
   def hashKeyName = "request_uuid"
@@ -30,5 +30,5 @@ class CachedClientResponses extends TableDefinition {
       AttributeDef(eventTypeColumn, ScalarAttributeType.N),
       AttributeDef(dateColumn, ScalarAttributeType.N)*/)
  
-  override def itemTTL = Some(TTLDef(180l, TimeUnit.SECONDS, dateColumn))
+  override def itemTTL = Some(TTLDef(360l, TimeUnit.SECONDS, dateColumn))
 }
