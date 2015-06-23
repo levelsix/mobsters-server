@@ -20,7 +20,7 @@ class ClientResponseCacheService extends LazyLogging{
   @Autowired var dynamoService:DynamoDBService = null
   
   def isResponseCached(request_uuid:String):Boolean={
-    logger.info("Checking for cached responses")
+    logger.info(s"Checking for cached responses for $request_uuid")
     val table = dynamoService.getTable(cachedClientResponses)
     val items = table.query(cachedClientResponses.hashKeyName, request_uuid)
     logger.info(s"Found ${items.getTotalCount} cached responses for request: $request_uuid")
@@ -49,6 +49,7 @@ class ClientResponseCacheService extends LazyLogging{
       logger.info(s"Found ${cachedResponses.size} cached responses")
       Some(cachedResponses)
     }else{
+      logger.info(s"Didn't find any cached responses for $request_uuid")
       None
     }
   }

@@ -72,7 +72,6 @@ trait GameEventHandler extends LazyLogging  {
             parsedEvent.eventController.processEvent(parsedEvent.event, toClientEvents) match{
               case Some(events)=>{
                 sendResponses(events)
-                cacheResponses(events)
               }
               case None => //logger.error("No events returned from parseEvent")
             }
@@ -107,10 +106,12 @@ trait GameEventHandler extends LazyLogging  {
     responses.apnsResponseEvents.foreach{ revent =>
       apnsWriter.handleEvent(revent)
     }
+    cacheResponses(responses)
   }
   
   def cacheResponses(responses:ToClientEvents)={
     if(responseCachingEnabled){
+      logger.info(s"Caching ${responses.normalResponseEvents.size} responses for request ${responses.requestUuid}")
       responses.normalResponseEvents.foreach{ response =>
         responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response)))
       }
