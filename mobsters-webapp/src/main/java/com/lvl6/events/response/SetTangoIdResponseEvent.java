@@ -23,11 +23,6 @@ public class SetTangoIdResponseEvent extends NormalResponseEvent<SetTangoIdRespo
 		return b.size();
 	}
 
-	public void setSetTangoIdResponseProto(
-			SetTangoIdResponseProto setTangoIdResponseProto) {
-		this.setTangoIdResponseProto = setTangoIdResponseProto;
-	}
-
 	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();

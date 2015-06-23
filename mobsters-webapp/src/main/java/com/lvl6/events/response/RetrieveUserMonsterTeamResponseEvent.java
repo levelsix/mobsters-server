@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrieveUserMonsterTeamResponseEvent extends NormalResponseEvent<RetrieveUserMonsterTeamResponseProto> {
 
-	
+
 
 	public RetrieveUserMonsterTeamResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class RetrieveUserMonsterTeamResponseEvent extends NormalResponseEvent<Re
 		return b.size();
 	}
 
-	public void setRetrieveUserMonsterTeamResponseProto(
-			RetrieveUserMonsterTeamResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

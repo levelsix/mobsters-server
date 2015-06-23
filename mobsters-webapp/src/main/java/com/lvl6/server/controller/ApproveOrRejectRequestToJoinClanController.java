@@ -57,7 +57,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -84,16 +84,16 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	@Autowired
 	protected HazelcastClanSearchImpl hzClanSearch;
-	
+
 	@Autowired
 	protected ClanStuffUtils clanStuffUtils;
-	
+
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
+
 	@Autowired
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
 
@@ -102,19 +102,19 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 	@Autowired
 	protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected PvpLeagueForUserDao pvpLeagueForUserDao;
-	
+
 	@Autowired
 	protected ClanSearch clanSearch;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
-	
+
 
 	public ApproveOrRejectRequestToJoinClanController() {
-		
+
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		boolean lockedClan = getLocker().lockClan(clanUuid);
 		try {
 			ApproveOrRejectRequestToJoinAction aorrtja = new ApproveOrRejectRequestToJoinAction(userId,
-					requesterId, accept, lockedClan, userRetrieveUtil, updateUtil, deleteUtil, 
+					requesterId, accept, lockedClan, userRetrieveUtil, updateUtil, deleteUtil,
 					userClanRetrieveUtils, clanStuffUtils);
 			aorrtja.execute(resBuilder);
 
@@ -240,7 +240,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 				ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 = new ApproveOrRejectRequestToJoinClanResponseEvent(
 						requesterId);
 				resEvent2
-						.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder
+						.setResponseProto(resBuilder
 								.build());
 				//in case user is not online write an apns
 				responses.apnsResponseEvents().add(resEvent2);
@@ -318,7 +318,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		rcdrpb.setMup(requesterMup);
 		rcdrpb.setClanData(cdp);
 
-		rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
+		rcdre.setResponseProto(rcdrpb.build());
 		responses.normalResponseEvents().add(rcdre);
 	}
 

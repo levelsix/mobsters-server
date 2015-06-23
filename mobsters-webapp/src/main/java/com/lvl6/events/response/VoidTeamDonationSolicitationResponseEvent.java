@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class VoidTeamDonationSolicitationResponseEvent extends	NormalResponseEvent<VoidTeamDonationSolicitationResponseProto> {
 
-	
+
 
 	public VoidTeamDonationSolicitationResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class VoidTeamDonationSolicitationResponseEvent extends	NormalResponseEve
 		return b.size();
 	}
 
-	public void setVoidTeamDonationSolicitationResponseProto(
-			VoidTeamDonationSolicitationResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

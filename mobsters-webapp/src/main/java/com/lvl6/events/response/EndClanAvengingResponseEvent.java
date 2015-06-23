@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EndClanAvengingResponseEvent extends NormalResponseEvent<EndClanAvengingResponseProto> {
 
-	
+
 
 	public EndClanAvengingResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class EndClanAvengingResponseEvent extends NormalResponseEvent<EndClanAve
 		return b.size();
 	}
 
-	public void setEndClanAvengingResponseProto(
-			EndClanAvengingResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

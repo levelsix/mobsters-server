@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SpawnObstacleResponseEvent extends NormalResponseEvent<SpawnObstacleResponseProto> {
 
-	
+
 
 	public SpawnObstacleResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class SpawnObstacleResponseEvent extends NormalResponseEvent<SpawnObstacl
 		return b.size();
 	}
 
-	public void setSpawnObstacleResponseProto(
-			SpawnObstacleResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

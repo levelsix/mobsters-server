@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class QuestRedeemResponseEvent extends NormalResponseEvent<QuestRedeemResponseProto> {
 
-	
+
 
 	public QuestRedeemResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class QuestRedeemResponseEvent extends NormalResponseEvent<QuestRedeemRes
 		return b.size();
 	}
 
-	public void setQuestRedeemResponseProto(
-			QuestRedeemResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

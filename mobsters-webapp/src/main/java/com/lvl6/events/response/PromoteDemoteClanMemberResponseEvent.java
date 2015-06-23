@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PromoteDemoteClanMemberResponseEvent extends NormalResponseEvent<PromoteDemoteClanMemberResponseProto> {
 
-	
+
 
 	public PromoteDemoteClanMemberResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class PromoteDemoteClanMemberResponseEvent extends NormalResponseEvent<Pr
 		return b.size();
 	}
 
-	public void setPromoteDemoteClanMemberResponseProto(
-			PromoteDemoteClanMemberResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

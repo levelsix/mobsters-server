@@ -9,15 +9,10 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SendAdminMessageResponseEvent extends NormalResponseEvent<SendAdminMessageResponseProto> {
 
-	
+
 
 	public SendAdminMessageResponseProto getSendAdminMessageResponseProto() {
 		return responseProto;
-	}
-
-	public void setSendAdminMessageResponseProto(
-			SendAdminMessageResponseProto responseProto) {
-		this.responseProto = responseProto;
 	}
 
 	public SendAdminMessageResponseEvent(String playerId) {
@@ -32,6 +27,7 @@ public class SendAdminMessageResponseEvent extends NormalResponseEvent<SendAdmin
 		return b.size();
 	}
 
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

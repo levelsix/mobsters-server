@@ -55,7 +55,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -197,7 +197,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 				StartUpResource fillMe = new StartUpResource(userRetrieveUtil,
 						clanRetrieveUtil);
 
-				SetClanDataProtoAction scdpa = AppContext.getBean(SetClanDataProtoAction.class); 
+				SetClanDataProtoAction scdpa = AppContext.getBean(SetClanDataProtoAction.class);
 				scdpa.wire(clanId, clan, user, userId, lastChatTimeContainer,fillMe);
 				ClanDataProto cdp = scdpa.execute();
 
@@ -253,7 +253,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	//			clanAvengeUserRetrieveUtil);
 	//		scra.setUp(fillMe);
 	//
-	//		
+	//
 	//		fillMe.fetchUsersOnly();
 	//		fillMe.addClan(clanId, c);
 	//
@@ -262,7 +262,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	//		scra.execute(fillMe);
 	//
 	//		lastChatTimeContainer.add(sccma.getLastClanChatPostTime());
-	//		
+	//
 	//		return cdpb.build();
 	//	}
 
@@ -279,7 +279,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 		rcdrpb.setMup(senderProto);
 		rcdrpb.setClanData(cdp);
 
-		rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
+		rcdre.setResponseProto(rcdrpb.build());
 		responses.normalResponseEvents().add(rcdre);
 	}
 

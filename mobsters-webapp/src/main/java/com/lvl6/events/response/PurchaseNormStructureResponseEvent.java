@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurchaseNormStructureResponseEvent extends NormalResponseEvent<PurchaseNormStructureResponseProto> {
 
-	
+
 
 	public PurchaseNormStructureResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class PurchaseNormStructureResponseEvent extends NormalResponseEvent<Purc
 		return b.size();
 	}
 
-	public void setPurchaseNormStructureResponseProto(
-			PurchaseNormStructureResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

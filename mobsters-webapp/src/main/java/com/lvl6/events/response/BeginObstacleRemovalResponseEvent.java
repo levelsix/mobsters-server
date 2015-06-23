@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class BeginObstacleRemovalResponseEvent extends NormalResponseEvent<BeginObstacleRemovalResponseProto> {
 
-	
+
 
 	public BeginObstacleRemovalResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class BeginObstacleRemovalResponseEvent extends NormalResponseEvent<Begin
 		return b.size();
 	}
 
-	public void setBeginObstacleRemovalResponseProto(
-			BeginObstacleRemovalResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

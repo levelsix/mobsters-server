@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class IncreaseMonsterInventorySlotResponseEvent extends	NormalResponseEvent<IncreaseMonsterInventorySlotResponseProto> {
 
-	
+
 
 	public IncreaseMonsterInventorySlotResponseEvent(String playerId) {
 		super(playerId);
@@ -23,15 +23,11 @@ public class IncreaseMonsterInventorySlotResponseEvent extends	NormalResponseEve
 		return b.size();
 	}
 
-	public void setIncreaseMonsterInventorySlotResponseProto(
-			IncreaseMonsterInventorySlotResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public IncreaseMonsterInventorySlotResponseProto getIncreaseMonsterInventorySlotResponseProto() {   //because APNS required
 		return responseProto;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

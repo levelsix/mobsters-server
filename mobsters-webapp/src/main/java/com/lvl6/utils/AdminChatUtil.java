@@ -43,10 +43,10 @@ public class AdminChatUtil {
 
 	@Autowired
 	protected InsertUtil insertUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -201,7 +201,7 @@ public class AdminChatUtil {
 		// send to recipient of the private chat post
 		PrivateChatPostResponseEvent resEvent2 = new PrivateChatPostResponseEvent(
 				recipientId);
-		resEvent2.setPrivateChatPostResponseProto(resBuilder.build());
+		resEvent2.setResponseProto(resBuilder.build());
 		log.info("player " + resEvent2.getPlayerId() + " "
 				+ server.getPlayerById(resEvent2.getPlayerId()));
 		server.writeAPNSNotificationOrEvent(resEvent2);

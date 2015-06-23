@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class DiscardBattleItemResponseEvent extends NormalResponseEvent<DiscardBattleItemResponseProto> {
 
-	
+
 
 	public DiscardBattleItemResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class DiscardBattleItemResponseEvent extends NormalResponseEvent<DiscardB
 		return b.size();
 	}
 
-	public void setDiscardBattleItemResponseProto(
-			DiscardBattleItemResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

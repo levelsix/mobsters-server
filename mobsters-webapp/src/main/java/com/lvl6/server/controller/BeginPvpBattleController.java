@@ -123,7 +123,7 @@ public class BeginPvpBattleController extends EventController {
 		if (invalidUuids) {
 			resBuilder.setStatus(BeginPvpBattleStatus.FAIL_OTHER);
 			resEvent.setTag(event.getTag());
-			resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

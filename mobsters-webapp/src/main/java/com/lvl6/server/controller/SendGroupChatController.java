@@ -105,10 +105,10 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected CustomTranslationRetrieveUtils customTranslationRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanSearch clanSearch;
-		
+
 
 	public SendGroupChatController() {
 
@@ -284,7 +284,7 @@ public class SendGroupChatController extends EventController {
 			boolean isForClan, String clanId, ReceivedGroupChatResponseProto rgcr, ToClientEvents responses) {
 		ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(
 				senderId);
-		ce.setReceivedGroupChatResponseProto(rgcr);
+		ce.setResponseProto(rgcr);
 		if (isForClan) {
 			log.info("Sending event to clan " + clanId);
 			//eventWriter.handleClanEvent(ce, clanId);
@@ -376,7 +376,7 @@ public class SendGroupChatController extends EventController {
 			}
 			else {
 				hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 1, 0);
-			}	
+			}
 		}
 	}
 

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent<CustomizePvpBoardObstacleResponseProto> {
 
-	
+
 
 	public CustomizePvpBoardObstacleResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class CustomizePvpBoardObstacleResponseEvent extends NormalResponseEvent<
 		return b.size();
 	}
 
-	public void setCustomizePvpBoardObstacleResponseProto(
-			CustomizePvpBoardObstacleResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RequestJoinClanResponseEvent extends NormalResponseEvent<RequestJoinClanResponseProto> {
 
-	
+
 
 	public RequestJoinClanResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class RequestJoinClanResponseEvent extends NormalResponseEvent<RequestJoi
 		return b.size();
 	}
 
-	public void setRequestJoinClanResponseProto(
-			RequestJoinClanResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

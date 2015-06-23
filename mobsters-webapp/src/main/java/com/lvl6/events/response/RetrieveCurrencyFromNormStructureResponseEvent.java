@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RetrieveCurrencyFromNormStructureResponseEvent extends	NormalResponseEvent<RetrieveCurrencyFromNormStructureResponseProto> {
 
-	
+
 
 	public RetrieveCurrencyFromNormStructureResponseEvent(String playerId) {
 		super(playerId);
@@ -18,7 +18,7 @@ public class RetrieveCurrencyFromNormStructureResponseEvent extends	NormalRespon
 
 	/**
 	 * write the event to the given ByteBuffer
-	 * 
+	 *
 	 * note we are using 1.4 ByteBuffers for both client and server depending on
 	 * the deployment you may need to support older java versions on the client
 	 * and use old-style socket input/output streams
@@ -31,11 +31,7 @@ public class RetrieveCurrencyFromNormStructureResponseEvent extends	NormalRespon
 		return b.size();
 	}
 
-	public void setRetrieveCurrencyFromNormStructureResponseProto(
-			RetrieveCurrencyFromNormStructureResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

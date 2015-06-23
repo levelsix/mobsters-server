@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class EnableAPNSResponseEvent extends NormalResponseEvent<EnableAPNSResponseProto> {
 
-	
+
 
 	public EnableAPNSResponseEvent(String playerId) {
 		super(playerId);
@@ -23,12 +23,7 @@ public class EnableAPNSResponseEvent extends NormalResponseEvent<EnableAPNSRespo
 		return b.size();
 	}
 
-	public void setEnableAPNSResponseProto(
-			EnableAPNSResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

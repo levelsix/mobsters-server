@@ -57,22 +57,22 @@ public class LeaveClanController extends EventController {
 
 	@Autowired
 	protected HazelcastClanSearchImpl hzClanSearch;
-	
+
 	@Autowired
 	protected InsertUtil insertUtil;
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
+
 	@Autowired
 	protected ClanSearch clanSearch;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils toggle;
-	
-	
+
+
 	public LeaveClanController() {
-		
+
 	}
 
 	@Override
@@ -138,26 +138,26 @@ public class LeaveClanController extends EventController {
 			}*/
 		try {
 			LeaveClanAction lca = new LeaveClanAction(userId, clanId, lockedClan,
-					userRetrieveUtils, insertUtil, deleteUtil, clanRetrieveUtils, 
-					userClanRetrieveUtils, hzClanSearch, clanChatPostRetrieveUtil, 
+					userRetrieveUtils, insertUtil, deleteUtil, clanRetrieveUtils,
+					userClanRetrieveUtils, hzClanSearch, clanChatPostRetrieveUtil,
 					timeUtils, clanSearch, toggle);
 			lca.execute(resBuilder);
-			
+
 			LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
 			if (!LeaveClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				resEvent.setLeaveClanResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 
 			} else {
 				//only write to clan if success
-				resEvent.setLeaveClanResponseProto(resBuilder.build());
+				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				responses.setUserId(userId);
 				responses.setClanChanged(true);
 				responses.setNewClanId(clanId);
-				//this works for other clan members, but not for the person 
+				//this works for other clan members, but not for the person
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
 			}
@@ -185,11 +185,11 @@ public class LeaveClanController extends EventController {
 	/*
 	private void notifyClan(User aUser, Clan aClan) {
 	  int clanId = aClan.getId();
-	  
+
 	  int level = aUser.getLevel();
 	  String deserter = aUser.getName();
 	  Notification aNote = new Notification();
-	  
+
 	  aNote.setAsUserLeftClan(level, deserter);
 	  MiscMethods.writeClanApnsNotification(aNote, server, clanId);
 	}*/

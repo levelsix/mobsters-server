@@ -21,11 +21,7 @@ public class ReconnectResponseEvent extends NormalResponseEvent<ReconnectRespons
 		return b.size();
 	}
 
-	public void setReconnectResponseProto(
-			ReconnectResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

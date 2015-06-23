@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class MoveOrRotateNormStructureResponseEvent extends NormalResponseEvent<MoveOrRotateNormStructureResponseProto> {
 
-	
+
 
 	public MoveOrRotateNormStructureResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class MoveOrRotateNormStructureResponseEvent extends NormalResponseEvent<
 		return b.size();
 	}
 
-	public void setMoveOrRotateNormStructureResponseProto(
-			MoveOrRotateNormStructureResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

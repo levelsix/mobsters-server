@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SetGameCenterIdResponseEvent extends NormalResponseEvent<SetGameCenterIdResponseProto> {
 
-	
+
 
 	public SetGameCenterIdResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class SetGameCenterIdResponseEvent extends NormalResponseEvent<SetGameCen
 		return b.size();
 	}
 
-	public void setSetGameCenterIdResponseProto(
-			SetGameCenterIdResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

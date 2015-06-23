@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class BootPlayerFromClanResponseEvent extends NormalResponseEvent<BootPlayerFromClanResponseProto> {
 
-	
+
 
 	public BootPlayerFromClanResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class BootPlayerFromClanResponseEvent extends NormalResponseEvent<BootPla
 		return b.size();
 	}
 
-	public void setBootPlayerFromClanResponseProto(
-			BootPlayerFromClanResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

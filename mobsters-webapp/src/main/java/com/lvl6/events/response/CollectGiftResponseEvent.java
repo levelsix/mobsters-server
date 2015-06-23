@@ -23,11 +23,6 @@ public class CollectGiftResponseEvent extends NormalResponseEvent<CollectGiftRes
 		return b.size();
 	}
 
-	public void setCollectGiftResponseProto(
-			CollectGiftResponseProto collectGiftResponseProto) {
-		this.collectGiftResponseProto = collectGiftResponseProto;
-	}
-
 	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();

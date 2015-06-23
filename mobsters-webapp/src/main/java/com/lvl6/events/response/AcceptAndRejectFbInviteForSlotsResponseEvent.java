@@ -9,13 +9,14 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class AcceptAndRejectFbInviteForSlotsResponseEvent extends NormalResponseEvent<AcceptAndRejectFbInviteForSlotsResponseProto> {
 
-	
+
 
 	public AcceptAndRejectFbInviteForSlotsResponseEvent(String playerId) {
 		super(playerId);
 		eventType = EventProtocolResponse.S_ACCEPT_AND_REJECT_FB_INVITE_FOR_SLOTS_EVENT;
 	}
-	
+
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}
@@ -26,11 +27,6 @@ public class AcceptAndRejectFbInviteForSlotsResponseEvent extends NormalResponse
 				.toByteString();
 		b.copyTo(bb);
 		return b.size();
-	}
-
-	public void setAcceptAndRejectFbInviteForSlotsResponseProto(
-			AcceptAndRejectFbInviteForSlotsResponseProto responseProto) {
-		this.responseProto = responseProto;
 	}
 
 	public AcceptAndRejectFbInviteForSlotsResponseProto getAcceptAndRejectFbInviteForSlotsResponseProto() {   //because APNS required

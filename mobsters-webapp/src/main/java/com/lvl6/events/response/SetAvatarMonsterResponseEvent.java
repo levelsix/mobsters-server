@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class SetAvatarMonsterResponseEvent extends NormalResponseEvent<SetAvatarMonsterResponseProto> {
 
-	
+
 
 	public SetAvatarMonsterResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class SetAvatarMonsterResponseEvent extends NormalResponseEvent<SetAvatar
 		return b.size();
 	}
 
-	public void setSetAvatarMonsterResponseProto(
-			SetAvatarMonsterResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

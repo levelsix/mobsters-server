@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class RemoveUserItemUsedResponseEvent extends NormalResponseEvent<RemoveUserItemUsedResponseProto> {
 
-	
+
 
 	public RemoveUserItemUsedResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class RemoveUserItemUsedResponseEvent extends NormalResponseEvent<RemoveU
 		return b.size();
 	}
 
-	public void setRemoveUserItemUsedResponseProto(
-			RemoveUserItemUsedResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

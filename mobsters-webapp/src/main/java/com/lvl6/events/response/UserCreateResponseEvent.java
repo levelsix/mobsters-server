@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UserCreateResponseEvent extends PreDatabaseResponseEvent<UserCreateResponseProto> {
 
-	
+
 
 	public UserCreateResponseEvent(String udid) {
 		super(udid);
@@ -18,7 +18,7 @@ public class UserCreateResponseEvent extends PreDatabaseResponseEvent<UserCreate
 
 	/**
 	 * write the event to the given ByteBuffer
-	 * 
+	 *
 	 * note we are using 1.4 ByteBuffers for both client and server depending on
 	 * the deployment you may need to support older java versions on the client
 	 * and use old-style socket input/output streams
@@ -30,11 +30,7 @@ public class UserCreateResponseEvent extends PreDatabaseResponseEvent<UserCreate
 		return b.size();
 	}
 
-	public void setUserCreateResponseProto(
-			UserCreateResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

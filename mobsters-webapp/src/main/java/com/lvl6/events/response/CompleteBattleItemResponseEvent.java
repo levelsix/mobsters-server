@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class CompleteBattleItemResponseEvent extends NormalResponseEvent<CompleteBattleItemResponseProto> {
 
-	
+
 
 	public CompleteBattleItemResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class CompleteBattleItemResponseEvent extends NormalResponseEvent<Complet
 		return b.size();
 	}
 
-	public void setCompleteBattleItemResponseProto(
-			CompleteBattleItemResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

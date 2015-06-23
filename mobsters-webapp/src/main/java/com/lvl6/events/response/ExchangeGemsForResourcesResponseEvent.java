@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent<ExchangeGemsForResourcesResponseProto> {
 
-	
+
 
 	public ExchangeGemsForResourcesResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class ExchangeGemsForResourcesResponseEvent extends NormalResponseEvent<E
 		return b.size();
 	}
 
-	public void setExchangeGemsForResourcesResponseProto(
-			ExchangeGemsForResourcesResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

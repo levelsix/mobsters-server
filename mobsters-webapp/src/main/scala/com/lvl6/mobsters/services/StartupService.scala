@@ -629,7 +629,7 @@ class StartupService extends LazyLogging {
     logoutResponse.setPreviousLoginTime(user.getLastLogin.getTime)
     logoutResponse.setUdid(udid)
     val logoutEvent = new ForceLogoutResponseEvent(playerId)
-    logoutEvent.setForceLogoutResponseProto(logoutResponse.build())
+    logoutEvent.setResponseProto(logoutResponse.build())
     responses.preDBResponseEvents.add(new PreDBResponseEvent(logoutEvent, udid))
     responses.normalResponseEvents.add(logoutEvent)
     if (fbId != null && !fbId.isEmpty()) {

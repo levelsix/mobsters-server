@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class BeginMiniJobResponseEvent extends NormalResponseEvent<BeginMiniJobResponseProto> {
 
-	
+
 
 	public BeginMiniJobResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class BeginMiniJobResponseEvent extends NormalResponseEvent<BeginMiniJobR
 		return b.size();
 	}
 
-	public void setBeginMiniJobResponseProto(
-			BeginMiniJobResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

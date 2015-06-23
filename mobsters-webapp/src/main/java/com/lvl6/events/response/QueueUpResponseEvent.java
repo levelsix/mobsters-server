@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class QueueUpResponseEvent extends NormalResponseEvent<QueueUpResponseProto> {
 
-	
+
 
 	public QueueUpResponseEvent(String playerId) {
 		super(playerId);
@@ -23,16 +23,11 @@ public class QueueUpResponseEvent extends NormalResponseEvent<QueueUpResponsePro
 		return b.size();
 	}
 
-	public void setQueueUpResponseProto(
-			QueueUpResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-
 	public QueueUpResponseProto getQueueUpResponseProto() {   //because APNS required
 		return responseProto;
 	}
-	
 
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}

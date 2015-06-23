@@ -9,7 +9,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class TranslateSelectMessagesResponseEvent extends NormalResponseEvent<TranslateSelectMessagesResponseProto> {
 
-	
+
 
 	public TranslateSelectMessagesResponseEvent(String playerId) {
 		super(playerId);
@@ -23,11 +23,7 @@ public class TranslateSelectMessagesResponseEvent extends NormalResponseEvent<Tr
 		return b.size();
 	}
 
-	public void setTranslateSelectMessagesResponseProto(
-			TranslateSelectMessagesResponseProto responseProto) {
-		this.responseProto = responseProto;
-	}
-	
+	@Override
 	public int eventSize() {
 		return responseProto.getSerializedSize();
 	}
