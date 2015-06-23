@@ -22,6 +22,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.ServerMessage;
 
 public class ServerEventHandler implements MessageListener<ServerMessage>,
@@ -101,7 +102,7 @@ public class ServerEventHandler implements MessageListener<ServerMessage>,
 			log.info("Reloading all static data");
 			reloadAllRareChangeStaticData.reloadAllRareChangeStaticData();
 			if(toggle.getToggleValueForName(
-					ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH) {
+					ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
 				reloadRecommendedClans();
 			}
 			getStaticDataReloadDone().publish(
@@ -158,3 +159,4 @@ public class ServerEventHandler implements MessageListener<ServerMessage>,
 	}
 
 }
+
