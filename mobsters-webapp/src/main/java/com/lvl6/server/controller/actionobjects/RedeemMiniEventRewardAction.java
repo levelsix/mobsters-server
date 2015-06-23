@@ -206,6 +206,28 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			log.error("user has no MiniEventForUser, userId={}", userId);
 			return false;
 		}
+		
+		if(rewardTier == 1) {
+			if(mefu.isTierOneRedeemed() || mefu.isTierTwoRedeemed() || mefu.isTierThreeRedeemed()) {
+				log.error("trying to redeem tier 1 reward when already redeemed t1, t2, or t3, "
+						+ "mefu {}", mefu);
+				return false;
+			}
+		}
+		if(rewardTier == 2) {
+			if(!mefu.isTierOneRedeemed() || mefu.isTierTwoRedeemed() || mefu.isTierThreeRedeemed()) {
+				log.error("trying to redeem tier 2 reward when havent redeemed t1, or alrdy redeem"
+						+ " t2 or t3, mefu {}", mefu);
+				return false;
+			}
+		}
+		if(rewardTier == 3) {
+			if(!mefu.isTierOneRedeemed() || !mefu.isTierTwoRedeemed() || mefu.isTierThreeRedeemed()) {
+				log.error("trying to redeem tier 3 reward when haven't redeemed t1 or t2,"
+						+ "or already redeemed t3, mefu {}", mefu);
+				return false;
+			}
+		}
 
 		return true;
 	}
