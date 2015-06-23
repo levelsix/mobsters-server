@@ -1,17 +1,18 @@
 package com.lvl6.mobsters.services
 
-import com.lvl6.server.dynamodb.tables.CachedClientResponses
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
+
+import com.amazonaws.services.dynamodbv2.document.Item
+import com.amazonaws.services.dynamodbv2.document.PutItemOutcome
+import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec
+import com.lvl6.server.dynamodb.Converter._
 import com.lvl6.server.dynamodb.DynamoDBService
 import com.lvl6.server.dynamodb.tables.CachedClientResponse
 import com.lvl6.server.dynamodb.tables.CachedClientResponse
-import com.lvl6.server.dynamodb.Converter._
-import com.amazonaws.services.dynamodbv2.document.Item
+import com.lvl6.server.dynamodb.tables.CachedClientResponses
 import com.lvl6.server.dynamodb.tables.TableDefinition
-import com.amazonaws.services.dynamodbv2.document.PutItemOutcome
 import com.typesafe.scalalogging.slf4j.LazyLogging
-import org.springframework.stereotype.Component
-import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec
 
 @Component
 class ClientResponseCacheService extends LazyLogging{
@@ -19,7 +20,9 @@ class ClientResponseCacheService extends LazyLogging{
   @Autowired var dynamoService:DynamoDBService = null
   
   def isResponseCached(request_uuid:String):Boolean={
-    dynamoService.getTable(cachedClientResponses).getItem(cachedClientResponses.hashKeyName, request_uuid) != null
+    val table = dynamoService.getTable(cachedClientResponses)
+    val items = table.query(cachedClientResponses.hashKeyName, request_uuid)
+    items.getTotalCount > 0
   }
   
   def cacheResponse(response:CachedClientResponse)={
