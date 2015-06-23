@@ -175,6 +175,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 		if(appMode.isMaintenanceMode()) {
 			leaderboard.reload();
 		}
+		else log.error("leaderboard is attemping to be reloaded when not in maintenance mode!!!");
 	}
 	
 	public void reloadClanSearch() {
