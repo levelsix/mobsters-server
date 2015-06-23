@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -19,6 +20,7 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.ILock;
 import com.lvl6.datastructures.DistributedZSet;
 import com.lvl6.datastructures.DistributedZSetHazelcast;
 import com.lvl6.datastructures.ZSetMember;
@@ -31,6 +33,8 @@ public class LeaderBoardImpl {
 	private static Logger log = LoggerFactory.getLogger(LeaderBoardImpl.class);
 	
 	protected JdbcTemplate jdbc; 
+	
+	protected ILock leaderboardReloadLock;
 
 	@Resource
 	protected DataSource dataSource;
@@ -58,6 +62,7 @@ public class LeaderBoardImpl {
 		this.hazelcastInstance = hazelcastInstance;
 		strLeaderboard = new DistributedZSetHazelcast("strength leaderboard", 
 				hazelcastInstance);
+		leaderboardReloadLock = hazelcastInstance.getLock("leaderboard reload lock");
 	}
 	
 	
@@ -99,6 +104,30 @@ public class LeaderBoardImpl {
 	}
 	
 	public void reload() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				boolean gotLock = false;
+				try {
+					if(leaderboardReloadLock.tryLock(1, TimeUnit.SECONDS)) {
+						log.info("got the reload lock");
+						gotLock = true;
+						queryForUserStrengths();
+					}
+				}
+				catch (Throwable e) {
+					log.error("Error processing str leaderboard reload", e);
+				}
+				finally {
+					if(gotLock) {
+						leaderboardReloadLock.forceUnlock();
+					}
+				}
+			}
+		}).start();
+	}
+		
+	public void queryForUserStrengths() {
 		jdbc.query(new StreamingStatementCreator("SELECT id, total_strength FROM user"),
 				new RowCallbackHandler() {
 			public void processRow(ResultSet resultSet) throws SQLException {
