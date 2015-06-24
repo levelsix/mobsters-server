@@ -74,11 +74,19 @@ public class SetPrivateChatMessageAction implements StartUpAction {
 		boolean isRecipient = true;
 
 		//get all the most recent posts sent to this user
-		postsUserReceived = privateChatPostRetrieveUtils
-				.getMostRecentPrivateChatPostsByOrToUser(
-						userId,
-						isRecipient,
-						ControllerConstants.STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED);
+		if (null != userId && userId.equals(ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID)) {
+			postsUserReceived = privateChatPostRetrieveUtils
+					.getMostRecentPrivateChatPostsByOrToUser(
+							userId,
+							isRecipient,
+							2 * ControllerConstants.STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED);
+		} else {
+			postsUserReceived = privateChatPostRetrieveUtils
+					.getMostRecentPrivateChatPostsByOrToUser(
+							userId,
+							isRecipient,
+							ControllerConstants.STARTUP__MAX_PRIVATE_CHAT_POSTS_RECEIVED);
+		}
 
 		//get all the most recent posts this user sent
 		isRecipient = false;
