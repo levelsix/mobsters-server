@@ -3,7 +3,9 @@ package com.lvl6.ui.admin.components;
 import org.apache.wicket.markup.html.link.Link;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.server.ServerAdmin;
 import com.lvl6.spring.AppContext;
 import com.lvl6.ui.admin.pages.AdminPage;
@@ -15,9 +17,6 @@ public class ReloadLeaderboardLink extends Link<String> {
 	public ReloadLeaderboardLink(String id) {
 		super(id);
 	}
-	
-//	@Autowired
-//	protected LeaderBoardImpl leaderBoardImpl;
 
 	private static final long serialVersionUID = 1L;
 
