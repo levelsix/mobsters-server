@@ -252,13 +252,18 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			}
 
 			if (GiftType.CLAN_GIFT.name().equals(gcp.getGiftType())) {
-				//NOTE: Only awards one clan gift at the moment
-				//If ever to give out multiplie clan gifts, the clan gifts should be aggregated
-				acga = new AwardClanGiftsAction(userId, u, staticDataId, "clan gift",
-						giftRetrieveUtil, giftRewardRetrieveUtils,
-						rewardRetrieveUtil, userClanRetrieveUtils,
-						insertUtil, createInfoProtoUtils);
-				existsClanGift = true;
+				String clanId = u.getClanId();
+				if (null != clanId && !clanId.isEmpty()) {
+					//NOTE: Only awards one clan gift at the moment
+					//If ever to give out multiplie clan gifts, the clan gifts should be aggregated
+					acga = new AwardClanGiftsAction(userId, u, staticDataId,
+							"clan gift", giftRetrieveUtil,
+							giftRewardRetrieveUtils, rewardRetrieveUtil,
+							userClanRetrieveUtils, insertUtil,
+							createInfoProtoUtils);
+					existsClanGift = true;
+				}
+
 			} else {
 				log.warn("no implementation for awarding gift {}", gcp);
 				return;
