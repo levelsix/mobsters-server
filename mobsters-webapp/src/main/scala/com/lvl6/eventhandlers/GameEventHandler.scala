@@ -40,11 +40,11 @@ trait GameEventHandler extends LazyLogging  {
   @Autowired var eventWriter:EventWriter = null
   @Autowired var apnsWriter:APNSWriter = null
   
-  //@Value("dynamodb.response.caching.enabled")
+  @Value("${dynamodb.response.caching.enabled}")
   @BeanProperty
   var responseCachingEnabled = false
   
-  def processEvent(eventBytes:Array[Byte])={
+  def processEvent(eventBytes:Array[Byte]):Unit={
     try{
       val parsedEvents = parser.parseEvents(eventBytes)
       parsedEvents.foreach{ parsedEvent => 
@@ -60,21 +60,21 @@ trait GameEventHandler extends LazyLogging  {
             playerId = Some(plyrId)
           }
           val toClientEvents = newToClientEvents(eventUuid, playerId)
+          var isCached = false
           if(responseCachingEnabled) {
-            if(responseCacheService.isResponseCached(eventUuid)) {
-              logger.info(s"Event $eventUuid was already cached.. sending cached responses")
-              val cachedResponses = responseCacheService.getCachedResponses(eventUuid)
-              
-              cachedResponses match {
-                case Some(responses) => responses.foreach{ cr => eventWriter.sendToSinglePlayer(plyrId, cr.event)}
-                case None => logger.info("Cached responses was empty")
+            responseCacheService.getCachedResponses(eventUuid) match {
+              case Some(responses) => {
+            	  logger.info(s"Event $eventUuid was already cached.. sending cached responses")
+                responses.foreach{ cr => eventWriter.sendToSinglePlayer(plyrId, cr.event)}
+                isCached = true
               }
+              case None => logger.info("Cached responses was empty")
             }
-          }else{
+          }
+          if(!isCached) {
             parsedEvent.eventController.processEvent(parsedEvent.event, toClientEvents) match{
               case Some(events)=>{
                 sendResponses(events)
-                cacheResponses(events)
               }
               case None => //logger.error("No events returned from parseEvent")
             }
@@ -109,10 +109,12 @@ trait GameEventHandler extends LazyLogging  {
     responses.apnsResponseEvents.foreach{ revent =>
       apnsWriter.handleEvent(revent)
     }
+    cacheResponses(responses)
   }
   
   def cacheResponses(responses:ToClientEvents)={
     if(responseCachingEnabled){
+      logger.info(s"Caching ${responses.normalResponseEvents.size} responses for request ${responses.requestUuid}")
       responses.normalResponseEvents.foreach{ response =>
         responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response)))
       }
@@ -124,16 +126,17 @@ trait GameEventHandler extends LazyLogging  {
   
   def handleMaintenanceMode(parsedEvent:ParsedEvent)={
     val re = parsedEvent.event
+    val eventUuid = parsedEvent.eventProto.getEventUuid
     val playerId = re.getPlayerId
     if(playerId != null && !playerId.isEmpty) {
       val user = userRetrieveUtils.getUserById(playerId)
       if(user != null && !user.isAdmin){
-        messagingUtil.sendMaintanenceModeMessage(appMode.getMessageForUsers, playerId, parsedEvent.eventProto.getEventUuid)
+        eventWriter.sendToSinglePlayer(eventUuid, messagingUtil.getMaintanenceModeMessage(appMode.getMessageForUsers, playerId, eventUuid))
       }
     }else {
       if(re.isInstanceOf[PreDatabaseRequestEvent] ){
         val udid = re.asInstanceOf[PreDatabaseRequestEvent].getUdid
-        messagingUtil.sendMaintanenceModeMessageUdid(appMode.getMessageForUsers, udid, parsedEvent.eventProto.getEventUuid)
+        eventWriter.sendPreDBResponseEvent(eventUuid, messagingUtil.getMaintanenceModeMessageUdid(appMode.getMessageForUsers, udid, parsedEvent.eventProto.getEventUuid))
       }
     }
   } 

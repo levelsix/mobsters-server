@@ -14,7 +14,7 @@ import "MonsterStuff.proto";
 import "Prerequisite.proto";
 import "Quest.proto";
 import "Research.proto";
-//import "Reward.proto";
+import "Reward.proto";
 //import "Sales.proto";
 import "Skill.proto";
 import "Structure.proto";
@@ -96,7 +96,7 @@ message StaticDataProto {
 	//repeated BattleItemFactoryProto allBattleItemFactorys = 42; defined above
 	
 	//repeated RewardProto reward = 45 [deprecated = true];	
-	//repeated GiftProto gifts = 46 [deprecated = true];
+	repeated GiftProto gifts = 46;
 	
 	repeated ItemGemPriceProto structureItemPrices = 47;
 	

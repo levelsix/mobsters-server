@@ -184,6 +184,23 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     }
   }
   
+  
+  override def handleMaintenanceMode(parsedEvent:ParsedEvent)={
+    val re = parsedEvent.event
+    val playerId = re.getPlayerId
+    if(playerId != null && !playerId.isEmpty) {
+      val user = userRetrieveUtils.getUserById(playerId)
+      if(user != null && !user.isAdmin){
+        sendToThisSocket(messagingUtil.getMaintanenceModeMessage(appMode.getMessageForUsers, playerId, parsedEvent.eventProto.getEventUuid))
+      }
+    }else {
+      if(re.isInstanceOf[PreDatabaseRequestEvent] ){
+        val udid = re.asInstanceOf[PreDatabaseRequestEvent].getUdid
+        sendToThisSocket(messagingUtil.getMaintanenceModeMessageUdid(appMode.getMessageForUsers, udid, parsedEvent.eventProto.getEventUuid))
+      }
+    }
+  } 
+  
   def sendPing= {
     session match{
       case Some(sess)=>{

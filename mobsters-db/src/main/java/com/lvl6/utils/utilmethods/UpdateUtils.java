@@ -32,6 +32,7 @@ import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureRetrieval;
 import com.lvl6.info.UserFacebookInviteForSlot;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventPvpProto.StructStolen;
@@ -2083,9 +2084,8 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	/*
 	@Override
-	public boolean updateUserGiftHasBeenCollected(String userId, Collection<GiftForUser> gfuList) {
+	public boolean updateUserGiftHasBeenCollected(String userId, Collection<GiftForUserPojo> gfuList) {
 		String tableName = DBConstants.TABLE_GIFT_FOR_USER;
 
 		log.debug("updating GiftForUser collect status for userId {}",
@@ -2098,20 +2098,20 @@ public class UpdateUtils implements UpdateUtil {
 		List<String> questionsList = Collections.nCopies(gfuList.size(),"(?)");
 		String questionMarks = StringUtils.csvList(questionsList);
 
-		for(GiftForUser gfu : gfuList) {
+		for(GiftForUserPojo gfu : gfuList) {
 			values.add(gfu.getId());
 		}
 
 		sb.append(questionMarks);
 		sb.append(" on duplicate key update %s = %s");
 
-		log.info("updateQuery={}, values={}", sb.toString(), values);
+//		log.info("updateQuery={}, values={}", sb.toString(), values);
 
 		String query = String.format(sb.toString(), tableName,
 				DBConstants.GIFT_FOR_USER__ID, DBConstants.GIFT_FOR_USER__COLLECTED,
 				true);
 
-		log.info(query);
+//		log.info(query);
 
 		try {
 			this.jdbcTemplate.update(query, values.toArray());
@@ -2122,8 +2122,9 @@ public class UpdateUtils implements UpdateUtil {
 		}
 
 		return true;
-	}*/
+	}
 
+	@Override
 	public boolean updateUserStructAfterPvp(List<StructStolen> listOfGenerators) {
 		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
 

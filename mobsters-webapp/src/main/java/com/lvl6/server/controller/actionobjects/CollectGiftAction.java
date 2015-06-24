@@ -39,18 +39,18 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private int maxOil;
 	private List<String> ugIds;
 	private Date clientTime;
-	@Autowired protected GiftForUserRetrieveUtils giftForUserRetrieveUtil; 
-	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
-	@Autowired protected RewardRetrieveUtils rewardRetrieveUtil; 
-	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
-	@Autowired protected InsertUtil insertUtil; 
-	@Autowired protected UpdateUtil updateUtil; 
-	@Autowired protected MonsterStuffUtils monsterStuffUtil; 
-	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
-	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
-	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
-	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
-	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
+	@Autowired protected GiftForUserRetrieveUtils giftForUserRetrieveUtil;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil;
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtil;
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected MonsterStuffUtils monsterStuffUtil;
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil;
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils;
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public CollectGiftAction(String userId, int maxCash, int maxOil,
 			List<String> ugIds, Date clientTime,
@@ -146,7 +146,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		//get the secret gifts to redeem, check to see if they exist
 		gfuIdToGiftForUserPojo = giftForUserRetrieveUtil
-				.getUserGiftsForUserMap(ugIds);
+				.getUncollectedUserGiftsForUserMap(ugIds);
 		if (ugIds.isEmpty()) {
 			log.error("no GiftForUserPojo in db with ids={}", ugIds);
 			return false;
@@ -183,10 +183,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return false;
 		}
 
-//		boolean success = updateUtil.updateUserGiftHasBeenCollected(
-//				userId, gfuIdToGiftForUserPojo.values());
-//		return success;
-		return true;
+		boolean success = updateUtil.updateUserGiftHasBeenCollected(
+				userId, gfuIdToGiftForUserPojo.values());
+		return success;
 	}
 
 	private void calculateRewards() {
