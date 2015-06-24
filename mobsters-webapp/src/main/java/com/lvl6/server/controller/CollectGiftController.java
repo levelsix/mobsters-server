@@ -115,7 +115,7 @@ public class CollectGiftController extends EventController {
 		MinimumUserProtoWithMaxResources senderProtoMaxResources = reqProto.getSender();
 		MinimumUserProto senderProto = senderProtoMaxResources.getMinUserProto();
 		String userId = senderProto.getUserUuid();
-		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
+		Date clientTime = new Timestamp(reqProto.getClientTime());
 		List<String> ugIds = reqProto.getUgUuidsList();
 
 		int maxCash = senderProtoMaxResources.getMaxCash();
