@@ -1159,6 +1159,50 @@ public final class StaticDataStuffProto {
         int index);
 
     /**
+     * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+     *
+     * <pre>
+     *repeated RewardProto reward = 45 [deprecated = true];	
+     * </pre>
+     */
+    java.util.List<com.lvl6.proto.RewardsProto.GiftProto> 
+        getGiftsList();
+    /**
+     * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+     *
+     * <pre>
+     *repeated RewardProto reward = 45 [deprecated = true];	
+     * </pre>
+     */
+    com.lvl6.proto.RewardsProto.GiftProto getGifts(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+     *
+     * <pre>
+     *repeated RewardProto reward = 45 [deprecated = true];	
+     * </pre>
+     */
+    int getGiftsCount();
+    /**
+     * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+     *
+     * <pre>
+     *repeated RewardProto reward = 45 [deprecated = true];	
+     * </pre>
+     */
+    java.util.List<? extends com.lvl6.proto.RewardsProto.GiftProtoOrBuilder> 
+        getGiftsOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+     *
+     * <pre>
+     *repeated RewardProto reward = 45 [deprecated = true];	
+     * </pre>
+     */
+    com.lvl6.proto.RewardsProto.GiftProtoOrBuilder getGiftsOrBuilder(
+        int index);
+
+    /**
      * <code>repeated .com.lvl6.proto.ItemGemPriceProto structureItemPrices = 47;</code>
      */
     java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> 
@@ -1581,10 +1625,18 @@ public final class StaticDataStuffProto {
               battleItem_.add(input.readMessage(com.lvl6.proto.BattleItemsProto.BattleItemProto.PARSER, extensionRegistry));
               break;
             }
-            case 378: {
+            case 370: {
               if (!((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
-                structureItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>();
+                gifts_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.GiftProto>();
                 mutable_bitField1_ |= 0x00000400;
+              }
+              gifts_.add(input.readMessage(com.lvl6.proto.RewardsProto.GiftProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 378: {
+              if (!((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
+                structureItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>();
+                mutable_bitField1_ |= 0x00000800;
               }
               structureItemPrices_.add(input.readMessage(com.lvl6.proto.ItemsProto.ItemGemPriceProto.PARSER, extensionRegistry));
               break;
@@ -1718,6 +1770,9 @@ public final class StaticDataStuffProto {
           battleItem_ = java.util.Collections.unmodifiableList(battleItem_);
         }
         if (((mutable_bitField1_ & 0x00000400) == 0x00000400)) {
+          gifts_ = java.util.Collections.unmodifiableList(gifts_);
+        }
+        if (((mutable_bitField1_ & 0x00000800) == 0x00000800)) {
           structureItemPrices_ = java.util.Collections.unmodifiableList(structureItemPrices_);
         }
         this.unknownFields = unknownFields.build();
@@ -3354,6 +3409,61 @@ public final class StaticDataStuffProto {
       return pvpBoardObstacleProtos_.get(index);
     }
 
+    public static final int GIFTS_FIELD_NUMBER = 46;
+    private java.util.List<com.lvl6.proto.RewardsProto.GiftProto> gifts_;
+    /**
+     * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+     *
+     * <pre>
+     *repeated RewardProto reward = 45 [deprecated = true];	
+     * </pre>
+     */
+    public java.util.List<com.lvl6.proto.RewardsProto.GiftProto> getGiftsList() {
+      return gifts_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+     *
+     * <pre>
+     *repeated RewardProto reward = 45 [deprecated = true];	
+     * </pre>
+     */
+    public java.util.List<? extends com.lvl6.proto.RewardsProto.GiftProtoOrBuilder> 
+        getGiftsOrBuilderList() {
+      return gifts_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+     *
+     * <pre>
+     *repeated RewardProto reward = 45 [deprecated = true];	
+     * </pre>
+     */
+    public int getGiftsCount() {
+      return gifts_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+     *
+     * <pre>
+     *repeated RewardProto reward = 45 [deprecated = true];	
+     * </pre>
+     */
+    public com.lvl6.proto.RewardsProto.GiftProto getGifts(int index) {
+      return gifts_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+     *
+     * <pre>
+     *repeated RewardProto reward = 45 [deprecated = true];	
+     * </pre>
+     */
+    public com.lvl6.proto.RewardsProto.GiftProtoOrBuilder getGiftsOrBuilder(
+        int index) {
+      return gifts_.get(index);
+    }
+
     public static final int STRUCTUREITEMPRICES_FIELD_NUMBER = 47;
     private java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> structureItemPrices_;
     /**
@@ -3432,6 +3542,7 @@ public final class StaticDataStuffProto {
       research_ = java.util.Collections.emptyList();
       battleItem_ = java.util.Collections.emptyList();
       pvpBoardObstacleProtos_ = java.util.Collections.emptyList();
+      gifts_ = java.util.Collections.emptyList();
       structureItemPrices_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -3572,6 +3683,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < battleItem_.size(); i++) {
         output.writeMessage(43, battleItem_.get(i));
+      }
+      for (int i = 0; i < gifts_.size(); i++) {
+        output.writeMessage(46, gifts_.get(i));
       }
       for (int i = 0; i < structureItemPrices_.size(); i++) {
         output.writeMessage(47, structureItemPrices_.get(i));
@@ -3753,6 +3867,10 @@ public final class StaticDataStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(43, battleItem_.get(i));
       }
+      for (int i = 0; i < gifts_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(46, gifts_.get(i));
+      }
       for (int i = 0; i < structureItemPrices_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(47, structureItemPrices_.get(i));
@@ -3908,6 +4026,7 @@ public final class StaticDataStuffProto {
           getResearchFieldBuilder();
           getBattleItemFieldBuilder();
           getPvpBoardObstacleProtosFieldBuilder();
+          getGiftsFieldBuilder();
           getStructureItemPricesFieldBuilder();
         }
       }
@@ -4169,9 +4288,15 @@ public final class StaticDataStuffProto {
         } else {
           pvpBoardObstacleProtosBuilder_.clear();
         }
+        if (giftsBuilder_ == null) {
+          gifts_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000400);
+        } else {
+          giftsBuilder_.clear();
+        }
         if (structureItemPricesBuilder_ == null) {
           structureItemPrices_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000400);
+          bitField1_ = (bitField1_ & ~0x00000800);
         } else {
           structureItemPricesBuilder_.clear();
         }
@@ -4580,10 +4705,19 @@ public final class StaticDataStuffProto {
         } else {
           result.pvpBoardObstacleProtos_ = pvpBoardObstacleProtosBuilder_.build();
         }
-        if (structureItemPricesBuilder_ == null) {
+        if (giftsBuilder_ == null) {
           if (((bitField1_ & 0x00000400) == 0x00000400)) {
-            structureItemPrices_ = java.util.Collections.unmodifiableList(structureItemPrices_);
+            gifts_ = java.util.Collections.unmodifiableList(gifts_);
             bitField1_ = (bitField1_ & ~0x00000400);
+          }
+          result.gifts_ = gifts_;
+        } else {
+          result.gifts_ = giftsBuilder_.build();
+        }
+        if (structureItemPricesBuilder_ == null) {
+          if (((bitField1_ & 0x00000800) == 0x00000800)) {
+            structureItemPrices_ = java.util.Collections.unmodifiableList(structureItemPrices_);
+            bitField1_ = (bitField1_ & ~0x00000800);
           }
           result.structureItemPrices_ = structureItemPrices_;
         } else {
@@ -5651,11 +5785,37 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (giftsBuilder_ == null) {
+          if (!other.gifts_.isEmpty()) {
+            if (gifts_.isEmpty()) {
+              gifts_ = other.gifts_;
+              bitField1_ = (bitField1_ & ~0x00000400);
+            } else {
+              ensureGiftsIsMutable();
+              gifts_.addAll(other.gifts_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.gifts_.isEmpty()) {
+            if (giftsBuilder_.isEmpty()) {
+              giftsBuilder_.dispose();
+              giftsBuilder_ = null;
+              gifts_ = other.gifts_;
+              bitField1_ = (bitField1_ & ~0x00000400);
+              giftsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getGiftsFieldBuilder() : null;
+            } else {
+              giftsBuilder_.addAllMessages(other.gifts_);
+            }
+          }
+        }
         if (structureItemPricesBuilder_ == null) {
           if (!other.structureItemPrices_.isEmpty()) {
             if (structureItemPrices_.isEmpty()) {
               structureItemPrices_ = other.structureItemPrices_;
-              bitField1_ = (bitField1_ & ~0x00000400);
+              bitField1_ = (bitField1_ & ~0x00000800);
             } else {
               ensureStructureItemPricesIsMutable();
               structureItemPrices_.addAll(other.structureItemPrices_);
@@ -5668,7 +5828,7 @@ public final class StaticDataStuffProto {
               structureItemPricesBuilder_.dispose();
               structureItemPricesBuilder_ = null;
               structureItemPrices_ = other.structureItemPrices_;
-              bitField1_ = (bitField1_ & ~0x00000400);
+              bitField1_ = (bitField1_ & ~0x00000800);
               structureItemPricesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getStructureItemPricesFieldBuilder() : null;
@@ -16113,12 +16273,324 @@ public final class StaticDataStuffProto {
         return pvpBoardObstacleProtosBuilder_;
       }
 
+      private java.util.List<com.lvl6.proto.RewardsProto.GiftProto> gifts_ =
+        java.util.Collections.emptyList();
+      private void ensureGiftsIsMutable() {
+        if (!((bitField1_ & 0x00000400) == 0x00000400)) {
+          gifts_ = new java.util.ArrayList<com.lvl6.proto.RewardsProto.GiftProto>(gifts_);
+          bitField1_ |= 0x00000400;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.RewardsProto.GiftProto, com.lvl6.proto.RewardsProto.GiftProto.Builder, com.lvl6.proto.RewardsProto.GiftProtoOrBuilder> giftsBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.RewardsProto.GiftProto> getGiftsList() {
+        if (giftsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(gifts_);
+        } else {
+          return giftsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public int getGiftsCount() {
+        if (giftsBuilder_ == null) {
+          return gifts_.size();
+        } else {
+          return giftsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public com.lvl6.proto.RewardsProto.GiftProto getGifts(int index) {
+        if (giftsBuilder_ == null) {
+          return gifts_.get(index);
+        } else {
+          return giftsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public Builder setGifts(
+          int index, com.lvl6.proto.RewardsProto.GiftProto value) {
+        if (giftsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGiftsIsMutable();
+          gifts_.set(index, value);
+          onChanged();
+        } else {
+          giftsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public Builder setGifts(
+          int index, com.lvl6.proto.RewardsProto.GiftProto.Builder builderForValue) {
+        if (giftsBuilder_ == null) {
+          ensureGiftsIsMutable();
+          gifts_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          giftsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public Builder addGifts(com.lvl6.proto.RewardsProto.GiftProto value) {
+        if (giftsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGiftsIsMutable();
+          gifts_.add(value);
+          onChanged();
+        } else {
+          giftsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public Builder addGifts(
+          int index, com.lvl6.proto.RewardsProto.GiftProto value) {
+        if (giftsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGiftsIsMutable();
+          gifts_.add(index, value);
+          onChanged();
+        } else {
+          giftsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public Builder addGifts(
+          com.lvl6.proto.RewardsProto.GiftProto.Builder builderForValue) {
+        if (giftsBuilder_ == null) {
+          ensureGiftsIsMutable();
+          gifts_.add(builderForValue.build());
+          onChanged();
+        } else {
+          giftsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public Builder addGifts(
+          int index, com.lvl6.proto.RewardsProto.GiftProto.Builder builderForValue) {
+        if (giftsBuilder_ == null) {
+          ensureGiftsIsMutable();
+          gifts_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          giftsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public Builder addAllGifts(
+          java.lang.Iterable<? extends com.lvl6.proto.RewardsProto.GiftProto> values) {
+        if (giftsBuilder_ == null) {
+          ensureGiftsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, gifts_);
+          onChanged();
+        } else {
+          giftsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public Builder clearGifts() {
+        if (giftsBuilder_ == null) {
+          gifts_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000400);
+          onChanged();
+        } else {
+          giftsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public Builder removeGifts(int index) {
+        if (giftsBuilder_ == null) {
+          ensureGiftsIsMutable();
+          gifts_.remove(index);
+          onChanged();
+        } else {
+          giftsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public com.lvl6.proto.RewardsProto.GiftProto.Builder getGiftsBuilder(
+          int index) {
+        return getGiftsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public com.lvl6.proto.RewardsProto.GiftProtoOrBuilder getGiftsOrBuilder(
+          int index) {
+        if (giftsBuilder_ == null) {
+          return gifts_.get(index);  } else {
+          return giftsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public java.util.List<? extends com.lvl6.proto.RewardsProto.GiftProtoOrBuilder> 
+           getGiftsOrBuilderList() {
+        if (giftsBuilder_ != null) {
+          return giftsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(gifts_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public com.lvl6.proto.RewardsProto.GiftProto.Builder addGiftsBuilder() {
+        return getGiftsFieldBuilder().addBuilder(
+            com.lvl6.proto.RewardsProto.GiftProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public com.lvl6.proto.RewardsProto.GiftProto.Builder addGiftsBuilder(
+          int index) {
+        return getGiftsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.RewardsProto.GiftProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.GiftProto gifts = 46;</code>
+       *
+       * <pre>
+       *repeated RewardProto reward = 45 [deprecated = true];	
+       * </pre>
+       */
+      public java.util.List<com.lvl6.proto.RewardsProto.GiftProto.Builder> 
+           getGiftsBuilderList() {
+        return getGiftsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.RewardsProto.GiftProto, com.lvl6.proto.RewardsProto.GiftProto.Builder, com.lvl6.proto.RewardsProto.GiftProtoOrBuilder> 
+          getGiftsFieldBuilder() {
+        if (giftsBuilder_ == null) {
+          giftsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.RewardsProto.GiftProto, com.lvl6.proto.RewardsProto.GiftProto.Builder, com.lvl6.proto.RewardsProto.GiftProtoOrBuilder>(
+                  gifts_,
+                  ((bitField1_ & 0x00000400) == 0x00000400),
+                  getParentForChildren(),
+                  isClean());
+          gifts_ = null;
+        }
+        return giftsBuilder_;
+      }
+
       private java.util.List<com.lvl6.proto.ItemsProto.ItemGemPriceProto> structureItemPrices_ =
         java.util.Collections.emptyList();
       private void ensureStructureItemPricesIsMutable() {
-        if (!((bitField1_ & 0x00000400) == 0x00000400)) {
+        if (!((bitField1_ & 0x00000800) == 0x00000800)) {
           structureItemPrices_ = new java.util.ArrayList<com.lvl6.proto.ItemsProto.ItemGemPriceProto>(structureItemPrices_);
-          bitField1_ |= 0x00000400;
+          bitField1_ |= 0x00000800;
          }
       }
 
@@ -16268,7 +16740,7 @@ public final class StaticDataStuffProto {
       public Builder clearStructureItemPrices() {
         if (structureItemPricesBuilder_ == null) {
           structureItemPrices_ = java.util.Collections.emptyList();
-          bitField1_ = (bitField1_ & ~0x00000400);
+          bitField1_ = (bitField1_ & ~0x00000800);
           onChanged();
         } else {
           structureItemPricesBuilder_.clear();
@@ -16345,7 +16817,7 @@ public final class StaticDataStuffProto {
           structureItemPricesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ItemsProto.ItemGemPriceProto, com.lvl6.proto.ItemsProto.ItemGemPriceProto.Builder, com.lvl6.proto.ItemsProto.ItemGemPriceProtoOrBuilder>(
                   structureItemPrices_,
-                  ((bitField1_ & 0x00000400) == 0x00000400),
+                  ((bitField1_ & 0x00000800) == 0x00000800),
                   getParentForChildren(),
                   isClean());
           structureItemPrices_ = null;
@@ -16384,69 +16856,71 @@ public final class StaticDataStuffProto {
       "f.proto\032\nCity.proto\032\nClan.proto\032\020CustomM" +
       "enu.proto\032\nItem.proto\032\022MonsterStuff.prot" +
       "o\032\022Prerequisite.proto\032\013Quest.proto\032\016Rese" +
-      "arch.proto\032\013Skill.proto\032\017Structure.proto" +
-      "\032\nTask.proto\032\nUser.proto\"\363\022\n\017StaticDataP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022>\n\016expansionCosts\030\002 \003(\0132&",
-      ".com.lvl6.proto.CityExpansionCostProto\0220" +
-      "\n\tallCities\030\003 \003(\0132\035.com.lvl6.proto.FullC" +
-      "ityProto\022/\n\010allTasks\030\004 \003(\0132\035.com.lvl6.pr" +
-      "oto.FullTaskProto\022?\n\022allTaskMapElements\030" +
-      "\034 \003(\0132#.com.lvl6.proto.TaskMapElementPro" +
-      "to\0221\n\013allMonsters\030\005 \003(\0132\034.com.lvl6.proto" +
-      ".MonsterProto\0226\n\004slip\030\006 \003(\0132(.com.lvl6.p" +
-      "roto.StaticUserLevelInfoProto\0228\n\020inProgr" +
-      "essQuests\030\007 \003(\0132\036.com.lvl6.proto.FullQue" +
-      "stProto\0228\n\020unredeemedQuests\030\010 \003(\0132\036.com.",
-      "lvl6.proto.FullQuestProto\0227\n\017availableQu" +
-      "ests\030\t \003(\0132\036.com.lvl6.proto.FullQuestPro" +
-      "to\0226\n\014boosterPacks\030\013 \003(\0132 .com.lvl6.prot" +
-      "o.BoosterPackProto\0225\n\013starterPack\030$ \001(\0132" +
-      " .com.lvl6.proto.BoosterPackProto\022=\n\rall" +
-      "Generators\030\014 \003(\0132&.com.lvl6.proto.Resour" +
-      "ceGeneratorProto\0229\n\013allStorages\030\r \003(\0132$." +
-      "com.lvl6.proto.ResourceStorageProto\0223\n\014a" +
-      "llHospitals\030\016 \003(\0132\035.com.lvl6.proto.Hospi" +
-      "talProto\0225\n\rallResidences\030\017 \003(\0132\036.com.lv",
-      "l6.proto.ResidenceProto\0223\n\014allTownHalls\030" +
-      "\020 \003(\0132\035.com.lvl6.proto.TownHallProto\022)\n\007" +
-      "allLabs\030\021 \003(\0132\030.com.lvl6.proto.LabProto\022" +
-      "=\n\021allMiniJobCenters\030\033 \003(\0132\".com.lvl6.pr" +
-      "oto.MiniJobCenterProto\0227\n\016allEvoChambers" +
-      "\030\035 \003(\0132\037.com.lvl6.proto.EvoChamberProto\022" +
-      "7\n\016allTeamCenters\030\036 \003(\0132\037.com.lvl6.proto" +
-      ".TeamCenterProto\0225\n\rallClanHouses\030  \003(\0132" +
-      "\036.com.lvl6.proto.ClanHouseProto\0225\n\rallMo" +
-      "neyTrees\030& \003(\0132\036.com.lvl6.proto.MoneyTre",
-      "eProto\022=\n\021allPvpBoardHouses\030\' \003(\0132\".com." +
-      "lvl6.proto.PvpBoardHouseProto\022=\n\021allRese" +
-      "archHouses\030) \003(\0132\".com.lvl6.proto.Resear" +
-      "chHouseProto\022E\n\025allBattleItemFactorys\030* " +
-      "\003(\0132&.com.lvl6.proto.BattleItemFactoryPr" +
-      "oto\022>\n\020persistentEvents\030\022 \003(\0132$.com.lvl6" +
-      ".proto.PersistentEventProto\0228\n\004mbds\030\023 \003(" +
-      "\0132*.com.lvl6.proto.MonsterBattleDialogue" +
-      "Proto\022,\n\005raids\030\024 \003(\0132\035.com.lvl6.proto.Cl" +
-      "anRaidProto\022F\n\024persistentClanEvents\030\025 \003(",
-      "\0132(.com.lvl6.proto.PersistentClanEventPr" +
-      "oto\022(\n\005items\030\026 \003(\0132\031.com.lvl6.proto.Item" +
-      "Proto\0220\n\tobstacles\030\027 \003(\0132\035.com.lvl6.prot" +
-      "o.ObstacleProto\0220\n\tclanIcons\030\030 \003(\0132\035.com" +
-      ".lvl6.proto.ClanIconProto\022/\n\007leagues\030\031 \003" +
-      "(\0132\036.com.lvl6.proto.PvpLeagueProto\0226\n\014ac" +
-      "hievements\030\032 \003(\0132 .com.lvl6.proto.Achiev" +
-      "ementProto\022*\n\006skills\030\037 \003(\0132\032.com.lvl6.pr" +
-      "oto.SkillProto\0229\n\013sideEffects\030% \003(\0132$.co" +
-      "m.lvl6.proto.SkillSideEffectProto\022,\n\007pre",
-      "reqs\030! \003(\0132\033.com.lvl6.proto.PrereqProto\022" +
-      "0\n\006boards\030\" \003(\0132 .com.lvl6.proto.BoardLa" +
-      "youtProto\022/\n\010research\030# \003(\0132\035.com.lvl6.p" +
-      "roto.ResearchProto\0223\n\nbattleItem\030+ \003(\0132\037" +
-      ".com.lvl6.proto.BattleItemProto\022E\n\026pvpBo" +
-      "ardObstacleProtos\030( \003(\0132%.com.lvl6.proto" +
-      ".PvpBoardObstacleProto\022>\n\023structureItemP" +
-      "rices\030/ \003(\0132!.com.lvl6.proto.ItemGemPric" +
-      "eProtoB\026B\024StaticDataStuffProto"
+      "arch.proto\032\014Reward.proto\032\013Skill.proto\032\017S" +
+      "tructure.proto\032\nTask.proto\032\nUser.proto\"\235" +
+      "\023\n\017StaticDataProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022>\n\016expansio",
+      "nCosts\030\002 \003(\0132&.com.lvl6.proto.CityExpans" +
+      "ionCostProto\0220\n\tallCities\030\003 \003(\0132\035.com.lv" +
+      "l6.proto.FullCityProto\022/\n\010allTasks\030\004 \003(\013" +
+      "2\035.com.lvl6.proto.FullTaskProto\022?\n\022allTa" +
+      "skMapElements\030\034 \003(\0132#.com.lvl6.proto.Tas" +
+      "kMapElementProto\0221\n\013allMonsters\030\005 \003(\0132\034." +
+      "com.lvl6.proto.MonsterProto\0226\n\004slip\030\006 \003(" +
+      "\0132(.com.lvl6.proto.StaticUserLevelInfoPr" +
+      "oto\0228\n\020inProgressQuests\030\007 \003(\0132\036.com.lvl6" +
+      ".proto.FullQuestProto\0228\n\020unredeemedQuest",
+      "s\030\010 \003(\0132\036.com.lvl6.proto.FullQuestProto\022" +
+      "7\n\017availableQuests\030\t \003(\0132\036.com.lvl6.prot" +
+      "o.FullQuestProto\0226\n\014boosterPacks\030\013 \003(\0132 " +
+      ".com.lvl6.proto.BoosterPackProto\0225\n\013star" +
+      "terPack\030$ \001(\0132 .com.lvl6.proto.BoosterPa" +
+      "ckProto\022=\n\rallGenerators\030\014 \003(\0132&.com.lvl" +
+      "6.proto.ResourceGeneratorProto\0229\n\013allSto" +
+      "rages\030\r \003(\0132$.com.lvl6.proto.ResourceSto" +
+      "rageProto\0223\n\014allHospitals\030\016 \003(\0132\035.com.lv" +
+      "l6.proto.HospitalProto\0225\n\rallResidences\030",
+      "\017 \003(\0132\036.com.lvl6.proto.ResidenceProto\0223\n" +
+      "\014allTownHalls\030\020 \003(\0132\035.com.lvl6.proto.Tow" +
+      "nHallProto\022)\n\007allLabs\030\021 \003(\0132\030.com.lvl6.p" +
+      "roto.LabProto\022=\n\021allMiniJobCenters\030\033 \003(\013" +
+      "2\".com.lvl6.proto.MiniJobCenterProto\0227\n\016" +
+      "allEvoChambers\030\035 \003(\0132\037.com.lvl6.proto.Ev" +
+      "oChamberProto\0227\n\016allTeamCenters\030\036 \003(\0132\037." +
+      "com.lvl6.proto.TeamCenterProto\0225\n\rallCla" +
+      "nHouses\030  \003(\0132\036.com.lvl6.proto.ClanHouse" +
+      "Proto\0225\n\rallMoneyTrees\030& \003(\0132\036.com.lvl6.",
+      "proto.MoneyTreeProto\022=\n\021allPvpBoardHouse" +
+      "s\030\' \003(\0132\".com.lvl6.proto.PvpBoardHousePr" +
+      "oto\022=\n\021allResearchHouses\030) \003(\0132\".com.lvl" +
+      "6.proto.ResearchHouseProto\022E\n\025allBattleI" +
+      "temFactorys\030* \003(\0132&.com.lvl6.proto.Battl" +
+      "eItemFactoryProto\022>\n\020persistentEvents\030\022 " +
+      "\003(\0132$.com.lvl6.proto.PersistentEventProt" +
+      "o\0228\n\004mbds\030\023 \003(\0132*.com.lvl6.proto.Monster" +
+      "BattleDialogueProto\022,\n\005raids\030\024 \003(\0132\035.com" +
+      ".lvl6.proto.ClanRaidProto\022F\n\024persistentC",
+      "lanEvents\030\025 \003(\0132(.com.lvl6.proto.Persist" +
+      "entClanEventProto\022(\n\005items\030\026 \003(\0132\031.com.l" +
+      "vl6.proto.ItemProto\0220\n\tobstacles\030\027 \003(\0132\035" +
+      ".com.lvl6.proto.ObstacleProto\0220\n\tclanIco" +
+      "ns\030\030 \003(\0132\035.com.lvl6.proto.ClanIconProto\022" +
+      "/\n\007leagues\030\031 \003(\0132\036.com.lvl6.proto.PvpLea" +
+      "gueProto\0226\n\014achievements\030\032 \003(\0132 .com.lvl" +
+      "6.proto.AchievementProto\022*\n\006skills\030\037 \003(\013" +
+      "2\032.com.lvl6.proto.SkillProto\0229\n\013sideEffe" +
+      "cts\030% \003(\0132$.com.lvl6.proto.SkillSideEffe",
+      "ctProto\022,\n\007prereqs\030! \003(\0132\033.com.lvl6.prot" +
+      "o.PrereqProto\0220\n\006boards\030\" \003(\0132 .com.lvl6" +
+      ".proto.BoardLayoutProto\022/\n\010research\030# \003(" +
+      "\0132\035.com.lvl6.proto.ResearchProto\0223\n\nbatt" +
+      "leItem\030+ \003(\0132\037.com.lvl6.proto.BattleItem" +
+      "Proto\022E\n\026pvpBoardObstacleProtos\030( \003(\0132%." +
+      "com.lvl6.proto.PvpBoardObstacleProto\022(\n\005" +
+      "gifts\030. \003(\0132\031.com.lvl6.proto.GiftProto\022>" +
+      "\n\023structureItemPrices\030/ \003(\0132!.com.lvl6.p" +
+      "roto.ItemGemPriceProtoB\026B\024StaticDataStuf",
+      "fProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16472,6 +16946,7 @@ public final class StaticDataStuffProto {
           com.lvl6.proto.PrerequisiteProto.getDescriptor(),
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.ResearchsProto.getDescriptor(),
+          com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.SkillsProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.TaskProto.getDescriptor(),
@@ -16482,7 +16957,7 @@ public final class StaticDataStuffProto {
     internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "PvpBoardObstacleProtos", "StructureItemPrices", });
+        new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllTaskMapElements", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "StarterPack", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", "AllLabs", "AllMiniJobCenters", "AllEvoChambers", "AllTeamCenters", "AllClanHouses", "AllMoneyTrees", "AllPvpBoardHouses", "AllResearchHouses", "AllBattleItemFactorys", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", "Leagues", "Achievements", "Skills", "SideEffects", "Prereqs", "Boards", "Research", "BattleItem", "PvpBoardObstacleProtos", "Gifts", "StructureItemPrices", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.BattleItemsProto.getDescriptor();
@@ -16496,6 +16971,7 @@ public final class StaticDataStuffProto {
     com.lvl6.proto.PrerequisiteProto.getDescriptor();
     com.lvl6.proto.QuestProto.getDescriptor();
     com.lvl6.proto.ResearchsProto.getDescriptor();
+    com.lvl6.proto.RewardsProto.getDescriptor();
     com.lvl6.proto.SkillsProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.TaskProto.getDescriptor();
