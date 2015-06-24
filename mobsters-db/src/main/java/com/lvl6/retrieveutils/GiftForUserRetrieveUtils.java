@@ -42,7 +42,8 @@ public class GiftForUserRetrieveUtils {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public Map<String, GiftForUserPojo> getUserGiftsForUserMap(Collection<String> gfuIds)
+	public Map<String, GiftForUserPojo> getUncollectedUserGiftsForUserMap(
+			Collection<String> gfuIds)
 	{
 		log.debug("retrieving GiftForUser map for ids {}",
 				gfuIds);
@@ -52,10 +53,27 @@ public class GiftForUserRetrieveUtils {
 
 		Map<String, GiftForUserPojo> idToGfu =
 				new HashMap<String, GiftForUserPojo>();
-		List<GiftForUserPojo> gfuList = getUserGiftsForUser(gfuIds);
-		for (GiftForUserPojo gfu : gfuList) {
-			String id = gfu.getId();
-			idToGfu.put(id, gfu);
+		try {
+			int amount = gfuIds.size();
+			List<String> questions = Collections.nCopies(amount, "?");
+			String questionMarkStr = StringUtils.csvList(questions);
+			String query = String.format("select * from %s where %s in (%s) and %s=?",
+					TABLE_NAME,
+					DBConstants.GIFT_FOR_USER__ID, questionMarkStr,
+					DBConstants.GIFT_FOR_USER__COLLECTED);
+
+			List<Object> values = new ArrayList<>();
+			values.addAll(gfuIds);
+			values.add(false);
+			List<GiftForUserPojo> gfuList = this.jdbcTemplate.query(query, values.toArray(), rowMapper);
+			for (GiftForUserPojo gfu : gfuList) {
+				String id = gfu.getId();
+				idToGfu.put(id, gfu);
+			}
+
+		} catch (Exception e) {
+			log.error(String.format(
+					"GiftForUser retrieve db error, ids=%s", gfuIds), e);
 		}
 
 		return idToGfu;

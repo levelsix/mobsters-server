@@ -20,6 +20,7 @@ import com.lvl6.info.QuestJobForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureRetrieval;
 import com.lvl6.info.UserFacebookInviteForSlot;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.StructureProto.StructOrientation;
@@ -253,8 +254,8 @@ public interface UpdateUtil {
 
 	public abstract boolean updateUserSalesLastPurchaseTime(String userId, Timestamp ts);
 
-//	public abstract boolean updateUserGiftHasBeenCollected(String userId, Collection<GiftForUser> gfuList);
+	public abstract boolean updateUserGiftHasBeenCollected(String userId, Collection<GiftForUserPojo> gfuList);
 
 	public abstract boolean updateUserStructAfterPvp(List<StructStolen> listOfGenerators);
-	
+
 }
