@@ -47,17 +47,17 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private Date now;
 	private String awardReason;
 	private Collection<Reward> rewards;
-	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
-	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
-	@Autowired protected InsertUtil insertUtil; 
-	@Autowired protected UpdateUtil updateUtil; 
-	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
-	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
-	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
-	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil;
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected MonsterStuffUtils monsterStuffUtils;
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil;
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils;
 	@Autowired protected RewardRetrieveUtils rewardRetrieveUtil;  //only here because of recursive rewards
-	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
-	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 	private String awardReasonDetail;
 
 	//TODO: Figure out a way to not have all these arguments as a requirement
@@ -222,6 +222,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		success = awardMonsters(monsterIdToQuantity, monsterIdToLvlToQuantity);
 		if(!success) {
 			log.error("error awarding monsters for userId {}", userId);
+		}
+
+		if (!success) {
+			awardClanGifts();
 		}
 
 		//save to reward history
@@ -540,11 +544,30 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		} catch (Exception e) {
 			log.error(
 				String.format(
-					"unable to award monsters. rewards=%s. awardReason",
+					"unable to award monsters. rewards=%s. awardReason=%s",
 					rewards, awardReason),
 				e);
 		}
 
+		return success;
+	}
+
+	public boolean awardClanGifts() {
+		if (!existsClanGift) {
+			return true;
+		}
+
+		boolean success = false;
+		try {
+			acga.execute();
+			success = true;
+		} catch (Exception e) {
+			log.error(
+				String.format(
+						"unable to award clanGifts. rewards=%s. awardReason=%s",
+						rewards, awardReason),
+					e);
+		}
 		return success;
 	}
 
