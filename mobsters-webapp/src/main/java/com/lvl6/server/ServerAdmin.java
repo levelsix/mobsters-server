@@ -20,7 +20,9 @@ import com.hazelcast.core.ILock;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
+import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.response.PurgeClientStaticDataResponseEvent;
+import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
@@ -46,6 +48,13 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 	}
 	@Autowired
 	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected LeaderBoardImpl leaderboard;
+	
+	@Autowired
+	protected HazelcastClanSearchImpl hzClanSearch;
+	
 
 	@Resource
 	protected ApplicationMode appMode;
@@ -163,35 +172,15 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 	}
 
 	public void reloadLeaderboard() {
-		/*executor.execute(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					UserRetrieveUtils2 uru = RetrieveUtils.userRetrieveUtils();
-					List<String> ids = jdbc.query("select " + DBConstants.USER__ID + " from " + DBConstants.TABLE_USER
-							+ " where " + DBConstants.USER__IS_FAKE + "=0;", new RowMapper<String>() {
-						@Override
-						public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-							return rs.getString(DBConstants.USER__ID);
-						}
-					});
-					log.info("Reloading leaderboard stats for {} users", ids.size());
-					//Map<Integer, User> users = uru.getUsersByIds(ids);
-					for (final String id : ids) {
-						try {
-							User usr = uru.getUserById(id);
-							log.info("Batch reloading leaderboard for user {}", usr.getId());
-							//null for pvpLeagueForUser, will pull it from hazelcast
-							//leaderboard.updateLeaderboardForUser(usr, null);
-						} catch (Exception e) {
-							log.error("Error updating leaderboard for user: {}", id, e);
-						}
-					}
-				}catch(Exception e) {
-					log.error("Error reloading leaderboard",e);
-				}
-			}
-		});*/
+		if(appMode.isMaintenanceMode()) {
+			leaderboard.reload();
+		}
+	}
+	
+	public void reloadClanSearch() {
+		if(appMode.isMaintenanceMode()) {
+			hzClanSearch.reload();
+		}
 	}
 
 	public void setApplicationMode(Boolean maintenanceMode,

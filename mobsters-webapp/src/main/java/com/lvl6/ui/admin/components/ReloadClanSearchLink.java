@@ -8,11 +8,11 @@ import com.lvl6.server.ServerAdmin;
 import com.lvl6.spring.AppContext;
 import com.lvl6.ui.admin.pages.AdminPage;
 
-public class ReloadLeaderboardLink extends Link<String> {
+public class ReloadClanSearchLink extends Link<String> {
 
 	Logger log = LoggerFactory.getLogger(getClass());
 
-	public ReloadLeaderboardLink(String id) {
+	public ReloadClanSearchLink(String id) {
 		super(id);
 	}
 
@@ -20,10 +20,10 @@ public class ReloadLeaderboardLink extends Link<String> {
 
 	@Override
 	public void onClick() {
-		log.info("An Admin requested a reload for leaderboard");		
+		log.info("An Admin requested a reload for clan search");		
 		ServerAdmin sa = AppContext.get().getBean(
 				ServerAdmin.class);
-		sa.reloadLeaderboard();
+		sa.reloadClanSearch();
 		setResponsePage(AdminPage.class);
 	}
 
