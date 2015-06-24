@@ -59,6 +59,7 @@ import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskMapElement;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.MiniJobRefreshItemConfigDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfigPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
@@ -177,7 +178,7 @@ import com.lvl6.utils.DBConnection;
 public class StaticDataContainer {
 
 	private static Logger log = LoggerFactory.getLogger(StaticDataContainer.class);
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -376,7 +377,7 @@ public class StaticDataContainer {
 
 
 
-	
+
 
 	private static StaticDataProto.Builder staticDataBuilder = null;
 
@@ -420,7 +421,7 @@ public class StaticDataContainer {
 		setBattleItem(sdpb);
 //		setRewards(sdpb);
 //		setSales(sdpb);
-//		setClanGifts(sdpb);
+		setGifts(sdpb);
 		setRefreshMiniJobItemPrices(sdpb);
 
 		staticDataBuilder = sdpb;
@@ -1162,27 +1163,26 @@ public class StaticDataContainer {
 		}
 	}
 */
-/*
+
 	private void setGifts(Builder sdpb) {
-		Map<Integer, GiftConfig> idsToReward = giftRetrieveUtil
+		Map<Integer, GiftConfigPojo> idsToGift = giftRetrieveUtil
 				.getIdsToGifts();
 
-		if (null == idsToReward || idsToReward.isEmpty()) {
+		if (null == idsToGift || idsToGift.isEmpty()) {
 			log.warn("setGift() no Gifts");
 			return;
 		}
 
-		for (Integer id : idsToReward.keySet()) {
-			GiftConfig r = idsToReward.get(id);
+		for (Integer id : idsToGift.keySet()) {
+			GiftConfigPojo r = idsToGift.get(id);
 
 			GiftProto rp = createInfoProtoUtils
 					.createGiftProto(r);
 
-			sdpb.addReward(rp);
+			sdpb.addGifts(rp);
 		}
 	}
- */
-	
+
 	private void setRefreshMiniJobItemPrices(Builder sdpb) {
 		Configuration config = new DefaultConfiguration().set(DBConnection.get()
 				.getConnection()).set(SQLDialect.MYSQL);
