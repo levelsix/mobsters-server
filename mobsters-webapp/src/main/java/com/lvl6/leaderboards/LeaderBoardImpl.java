@@ -110,9 +110,12 @@ public class LeaderBoardImpl {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				log.info("i am in the run method");
 				if(!completedReload) {
 					boolean gotLock = false;
+					log.info("i just set gotlock");
 					try {
+						log.info("i am in the try block");
 						if(leaderboardReloadLock.tryLock(1, TimeUnit.SECONDS)) {
 							log.info("got the reload lock");
 							gotLock = true;
