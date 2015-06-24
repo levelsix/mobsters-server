@@ -23,6 +23,8 @@ import com.amazonaws.services.dynamodbv2.document.PutItemOutcome
 import com.amazonaws.services.dynamodbv2.document.Item
 import com.lvl6.server.dynamodb.Converter._
 import scala.beans.BeanProperty
+import org.springframework.beans.factory.annotation.Value
+import com.amazonaws.auth.BasicAWSCredentials
 
 
 @Component
@@ -33,10 +35,13 @@ class DynamoDBService extends LazyLogging {
   protected var dynamoDB:DynamoDB = null
 
   @BeanProperty
+  @Value("${dynamodb.table.prefix}")
   var tablePrefix:String = ""
   
   @BeanProperty
+  @Value("${dynamodb.isLocal}")
   var isLocal = false//for testing dynamo locally
+  
   
   
   def provisionedThroughput:ProvisionedThroughput = {
@@ -95,7 +100,7 @@ class DynamoDBService extends LazyLogging {
   }
   
   val ttlFilterKey = ":ttlTime"
-  //@Scheduled(fixedDelay=300000l)
+  @Scheduled(fixedDelay=300000l)
   def checkTTL={
      tableDefinitions.foreach(checkTTLForTable)   
   }
@@ -133,19 +138,33 @@ class DynamoDBService extends LazyLogging {
   def putItem(tableDef:TableDefinition, caseClass:AnyRef):PutItemOutcome={
     val item:Item = new Item();
     caseClassToMap(caseClass).foreach{ case (key, value) =>
-      if(key.equals(tableDef.hashKeyName))
+      if(key.equals(tableDef.hashKeyName)) {
         item.withPrimaryKey(key, value)
-      else
-        item.`with`(key, value)
+      }
+      else {
+        if(value.isInstanceOf[String]) {
+          item.withString(key, value.asInstanceOf[String])
+        }else if(value.isInstanceOf[Number]) {
+          item.withNumber(key, value.asInstanceOf[Number])
+        }else {
+          item.`with`(key, value)
+        }
+      }
     }
+    logger.info(s"Putting item: ${item} into table: $tableDef")
     getTable(tableDef).putItem(item)
   }
   
   @PostConstruct
   def setup={
-    client = new AmazonDynamoDBClient()
-    if(isLocal) client.setEndpoint("http://localhost:8000")
+    if(isLocal) {
+    	client = new AmazonDynamoDBClient(new BasicAWSCredentials("Fake", "Fake"))
+      client.setEndpoint("http://localhost:8000")
+    }else {
+       client = new AmazonDynamoDBClient()
+    }
     dynamoDB = new DynamoDB(client)
+    createTables
   }
   
 }
