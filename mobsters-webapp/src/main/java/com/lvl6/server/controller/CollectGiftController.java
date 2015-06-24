@@ -1,6 +1,6 @@
 package com.lvl6.server.controller;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -115,7 +115,7 @@ public class CollectGiftController extends EventController {
 		MinimumUserProtoWithMaxResources senderProtoMaxResources = reqProto.getSender();
 		MinimumUserProto senderProto = senderProtoMaxResources.getMinUserProto();
 		String userId = senderProto.getUserUuid();
-		Date clientTime = new Timestamp(reqProto.getClientTime());
+		Date clientTime = new Date(reqProto.getClientTime());
 		List<String> ugIds = reqProto.getUgUuidsList();
 
 		int maxCash = senderProtoMaxResources.getMaxCash();
