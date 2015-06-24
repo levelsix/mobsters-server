@@ -24,6 +24,12 @@ class ClientResponseCacheService extends LazyLogging{
     val table = dynamoService.getTable(cachedClientResponses)
     val items = table.query(cachedClientResponses.hashKeyName, request_uuid)
     logger.info(s"Found ${items.getTotalCount} cached responses for request: $request_uuid")
+    val iterator = items.iterator();
+    var item:Item = null;
+    while (iterator.hasNext()) {
+      item = iterator.next();
+      logger.info(item.toJSONPretty());
+    }
     items.getTotalCount > 0
   }
   

@@ -138,10 +138,18 @@ class DynamoDBService extends LazyLogging {
   def putItem(tableDef:TableDefinition, caseClass:AnyRef):PutItemOutcome={
     val item:Item = new Item();
     caseClassToMap(caseClass).foreach{ case (key, value) =>
-      if(key.equals(tableDef.hashKeyName))
+      if(key.equals(tableDef.hashKeyName)) {
         item.withPrimaryKey(key, value)
-      else
-        item.`with`(key, value)
+      }
+      else {
+        if(value.isInstanceOf[String]) {
+          item.withString(key, value.asInstanceOf[String])
+        }else if(value.isInstanceOf[Number]) {
+          item.withNumber(key, value.asInstanceOf[Number])
+        }else {
+          item.`with`(key, value)
+        }
+      }
     }
     logger.info(s"Putting item: ${item} into table: $tableDef")
     getTable(tableDef).putItem(item)
