@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 import java.util.UUID
 
 
-case class CachedClientResponse(request_uuid:String, date:Long, eventType:Int, event:Array[Byte], response_uuid:String=UUID.randomUUID.toString)
+case class CachedClientResponse(request_uuid:String, saved_date:Long, eventType:Int, event:Array[Byte], response_uuid:String=UUID.randomUUID.toString)
 
 
 @Component
