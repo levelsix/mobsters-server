@@ -9,16 +9,19 @@ import java.util.Date
 import java.util.HashMap
 import java.util.HashSet
 import java.util.UUID
+
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.asScalaSet
 import scala.collection.JavaConversions.collectionAsScalaIterable
 import scala.concurrent.Await
 import scala.concurrent.Future
 import scala.concurrent.duration.DurationInt
+
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+
 import com.hazelcast.core.IList
 import com.lvl6.events.RequestEvent
 import com.lvl6.events.request.StartupRequestEvent
@@ -158,6 +161,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil
 import com.lvl6.utils.utilmethods.InsertUtil
 import com.lvl6.utils.utilmethods.UpdateUtil
 import com.typesafe.scalalogging.slf4j.LazyLogging
+
 import javax.annotation.Resource
 import scala.util.Success
 import scala.util.Failure

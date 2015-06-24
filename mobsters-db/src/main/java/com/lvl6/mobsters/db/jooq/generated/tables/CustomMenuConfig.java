@@ -33,7 +33,11 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CustomMenuConfig extends TableImpl<CustomMenuConfigRecord> {
 
+<<<<<<< HEAD:mobsters-db/src/main/java/com/lvl6/mobsters/db/jooq/generated/tables/CustomMenuConfig.java
 	private static final long serialVersionUID = 667728645;
+=======
+	private static final long serialVersionUID = 1777684261;
+>>>>>>> created research utils, moved protos there, add research to retrieve users for userids controller:src/main/java/com/lvl6/mobsters/db/jooq/generated/tables/CustomMenuConfig.java
 
 	/**
 	 * The reference instance of <code>mobsters.custom_menu_config</code>
@@ -81,12 +85,20 @@ public class CustomMenuConfig extends TableImpl<CustomMenuConfigRecord> {
 	/**
 	 * The column <code>mobsters.custom_menu_config.ipad_position_x</code>.
 	 */
+<<<<<<< HEAD:mobsters-db/src/main/java/com/lvl6/mobsters/db/jooq/generated/tables/CustomMenuConfig.java
 	public final TableField<CustomMenuConfigRecord, Integer> IPAD_POSITION_X = createField("ipad_position_x", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
+=======
+	public final TableField<CustomMenuConfigRecord, Integer> IPAD_POSITION_X = createField("ipad_position_x", org.jooq.impl.SQLDataType.INTEGER, this, "");
+>>>>>>> created research utils, moved protos there, add research to retrieve users for userids controller:src/main/java/com/lvl6/mobsters/db/jooq/generated/tables/CustomMenuConfig.java
 
 	/**
 	 * The column <code>mobsters.custom_menu_config.ipad_position_y</code>.
 	 */
+<<<<<<< HEAD:mobsters-db/src/main/java/com/lvl6/mobsters/db/jooq/generated/tables/CustomMenuConfig.java
 	public final TableField<CustomMenuConfigRecord, Integer> IPAD_POSITION_Y = createField("ipad_position_y", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
+=======
+	public final TableField<CustomMenuConfigRecord, Integer> IPAD_POSITION_Y = createField("ipad_position_y", org.jooq.impl.SQLDataType.INTEGER, this, "");
+>>>>>>> created research utils, moved protos there, add research to retrieve users for userids controller:src/main/java/com/lvl6/mobsters/db/jooq/generated/tables/CustomMenuConfig.java
 
 	/**
 	 * Create a <code>mobsters.custom_menu_config</code> table reference

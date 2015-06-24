@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class CustomMenuConfigPojo implements ICustomMenuConfig {
 
-	private static final long serialVersionUID = -1313067363;
+	private static final long serialVersionUID = 976554705;
 
 	private Integer customMenuId;
 	private Integer positionX;

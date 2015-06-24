@@ -190,7 +190,11 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
+<<<<<<< HEAD:mobsters-db/src/main/java/com/lvl6/mobsters/db/jooq/generated/Mobsters.java
 	private static final long serialVersionUID = 1177084752;
+=======
+	private static final long serialVersionUID = 568465681;
+>>>>>>> created research utils, moved protos there, add research to retrieve users for userids controller:src/main/java/com/lvl6/mobsters/db/jooq/generated/Mobsters.java
 
 	/**
 	 * The reference instance of <code>mobsters</code>
