@@ -6,14 +6,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lvl6.leaderboards.LeaderBoardImpl;
-import com.lvl6.server.ServerAdmin;
-import com.lvl6.spring.AppContext;
 import com.lvl6.ui.admin.pages.AdminPage;
 
 public class ReloadLeaderboardLink extends Link<String> {
 
 	Logger log = LoggerFactory.getLogger(getClass());
 
+	@Autowired
+	protected LeaderBoardImpl leaderboard;
+	
 	public ReloadLeaderboardLink(String id) {
 		super(id);
 	}
