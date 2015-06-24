@@ -8,9 +8,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MiniEventForPlayerLvl;
@@ -27,8 +24,7 @@ import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.GiftRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanGiftRewardsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventForPlayerLvlRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MiniEventTierRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -38,10 +34,9 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-@Component@Scope("prototype")public class RedeemMiniEventRewardAction {
-
-	private static final Logger log = LoggerFactory
-			.getLogger(RedeemMiniEventRewardAction.class);
+public class RedeemMiniEventRewardAction {
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+	}.getClass().getEnclosingClass());
 
 	private String userId;
 	private User user;
@@ -50,25 +45,23 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private int mefplId;
 	private RewardTier rt;
 	private Date clientTime;
-	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
-	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
-	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
-	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
-	@Autowired protected MiniEventForUserRetrieveUtil mefuRetrieveUtil; 
-	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
-	@Autowired protected InsertUtil insertUtil; 
-	@Autowired protected UpdateUtil updateUtil; 
-	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
-	@Autowired protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils; 
-	@Autowired protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils; 
-	@Autowired protected RewardRetrieveUtils rewardRetrieveUtils; 
-	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
-	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
+	private ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils;
+	private UserClanRetrieveUtils2 userClanRetrieveUtils;
+	private UserRetrieveUtils2 userRetrieveUtil;
+	private MiniEventForUserRetrieveUtil mefuRetrieveUtil;
+	private ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	private InsertUtil insertUtil;
+	private UpdateUtil updateUtil;
+	private MonsterStuffUtils monsterStuffUtils;
+	private MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+	private MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
+	private RewardRetrieveUtils rewardRetrieveUtils;
+	private MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	private CreateInfoProtoUtils createInfoProtoUtils;
 
 	public RedeemMiniEventRewardAction(String userId, User user,
 			int maxCash, int maxOil, int mefplId, RewardTier rt,
-			Date clientTime, GiftRetrieveUtils giftRetrieveUtil,
-			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
+			Date clientTime, ClanGiftRewardsRetrieveUtils clanGiftRewardsRetrieveUtils,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
 			UserRetrieveUtils2 userRetrieveUtil,
 			MiniEventForUserRetrieveUtil mefuRetrieveUtil,
@@ -89,8 +82,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.mefplId = mefplId;
 		this.rt = rt;
 		this.clientTime = clientTime;
-		this.giftRetrieveUtil = giftRetrieveUtil;
-		this.giftRewardRetrieveUtils = giftRewardRetrieveUtils;
+		this.clanGiftRewardsRetrieveUtils = clanGiftRewardsRetrieveUtils;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
 		this.userRetrieveUtil = userRetrieveUtil;
 		this.mefuRetrieveUtil = mefuRetrieveUtil;
@@ -206,7 +198,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			log.error("user has no MiniEventForUser, userId={}", userId);
 			return false;
 		}
-		
+
 		if(rewardTier == 1) {
 			if(mefu.isTierOneRedeemed() || mefu.isTierTwoRedeemed() || mefu.isTierThreeRedeemed()) {
 				log.error("trying to redeem tier 1 reward when already redeemed t1, t2, or t3, "
@@ -228,7 +220,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				return false;
 			}
 		}
-
+		
 		return true;
 	}
 
@@ -268,8 +260,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				userRetrieveUtil, itemForUserRetrieveUtil,
 				insertUtil, updateUtil, monsterStuffUtils,
 				monsterLevelInfoRetrieveUtils,
-				giftRetrieveUtil,
-				giftRewardRetrieveUtils, rewardRetrieveUtils,
+				clanGiftRewardsRetrieveUtils, rewardRetrieveUtils,
 				userClanRetrieveUtils, createInfoProtoUtils, null);
 
 		boolean awardedRewards = ara.execute();
@@ -357,13 +348,4 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 		return null;
 	}
-
-	public AwardRewardAction getAra() {
-		return ara;
-	}
-
-	public void setAra(AwardRewardAction ara) {
-		this.ara = ara;
-	}
-
 }
