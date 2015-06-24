@@ -4317,6 +4317,842 @@ public final class ResearchsProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserResearchProto)
   }
 
+  public interface AllUserResearchProtoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.lvl6.proto.AllUserResearchProto)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    boolean hasUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    java.lang.String getUserUuid();
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserUuidBytes();
+
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     */
+    java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> 
+        getUserResearchList();
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     */
+    com.lvl6.proto.ResearchsProto.ResearchProto getUserResearch(int index);
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     */
+    int getUserResearchCount();
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     */
+    java.util.List<? extends com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+        getUserResearchOrBuilderList();
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     */
+    com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder getUserResearchOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code com.lvl6.proto.AllUserResearchProto}
+   */
+  public static final class AllUserResearchProto extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.lvl6.proto.AllUserResearchProto)
+      AllUserResearchProtoOrBuilder {
+    // Use AllUserResearchProto.newBuilder() to construct.
+    private AllUserResearchProto(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private AllUserResearchProto(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AllUserResearchProto defaultInstance;
+    public static AllUserResearchProto getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public AllUserResearchProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AllUserResearchProto(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              userUuid_ = bs;
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                userResearch_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.ResearchProto>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              userResearch_.add(input.readMessage(com.lvl6.proto.ResearchsProto.ResearchProto.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          userResearch_ = java.util.Collections.unmodifiableList(userResearch_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.ResearchsProto.internal_static_com_lvl6_proto_AllUserResearchProto_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.ResearchsProto.internal_static_com_lvl6_proto_AllUserResearchProto_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.lvl6.proto.ResearchsProto.AllUserResearchProto.class, com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<AllUserResearchProto> PARSER =
+        new com.google.protobuf.AbstractParser<AllUserResearchProto>() {
+      public AllUserResearchProto parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AllUserResearchProto(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AllUserResearchProto> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int USERUUID_FIELD_NUMBER = 1;
+    private java.lang.Object userUuid_;
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public boolean hasUserUuid() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public java.lang.String getUserUuid() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userUuid_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userUuid = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserUuidBytes() {
+      java.lang.Object ref = userUuid_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userUuid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERRESEARCH_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> userResearch_;
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     */
+    public java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> getUserResearchList() {
+      return userResearch_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     */
+    public java.util.List<? extends com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+        getUserResearchOrBuilderList() {
+      return userResearch_;
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     */
+    public int getUserResearchCount() {
+      return userResearch_.size();
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     */
+    public com.lvl6.proto.ResearchsProto.ResearchProto getUserResearch(int index) {
+      return userResearch_.get(index);
+    }
+    /**
+     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     */
+    public com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder getUserResearchOrBuilder(
+        int index) {
+      return userResearch_.get(index);
+    }
+
+    private void initFields() {
+      userUuid_ = "";
+      userResearch_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserUuidBytes());
+      }
+      for (int i = 0; i < userResearch_.size(); i++) {
+        output.writeMessage(2, userResearch_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserUuidBytes());
+      }
+      for (int i = 0; i < userResearch_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, userResearch_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.lvl6.proto.ResearchsProto.AllUserResearchProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ResearchsProto.AllUserResearchProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ResearchsProto.AllUserResearchProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.lvl6.proto.ResearchsProto.AllUserResearchProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.lvl6.proto.ResearchsProto.AllUserResearchProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ResearchsProto.AllUserResearchProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ResearchsProto.AllUserResearchProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.lvl6.proto.ResearchsProto.AllUserResearchProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.lvl6.proto.ResearchsProto.AllUserResearchProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.lvl6.proto.ResearchsProto.AllUserResearchProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.ResearchsProto.AllUserResearchProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.lvl6.proto.AllUserResearchProto}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.lvl6.proto.AllUserResearchProto)
+        com.lvl6.proto.ResearchsProto.AllUserResearchProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.ResearchsProto.internal_static_com_lvl6_proto_AllUserResearchProto_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.ResearchsProto.internal_static_com_lvl6_proto_AllUserResearchProto_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.lvl6.proto.ResearchsProto.AllUserResearchProto.class, com.lvl6.proto.ResearchsProto.AllUserResearchProto.Builder.class);
+      }
+
+      // Construct using com.lvl6.proto.ResearchsProto.AllUserResearchProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getUserResearchFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userUuid_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (userResearchBuilder_ == null) {
+          userResearch_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          userResearchBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.ResearchsProto.internal_static_com_lvl6_proto_AllUserResearchProto_descriptor;
+      }
+
+      public com.lvl6.proto.ResearchsProto.AllUserResearchProto getDefaultInstanceForType() {
+        return com.lvl6.proto.ResearchsProto.AllUserResearchProto.getDefaultInstance();
+      }
+
+      public com.lvl6.proto.ResearchsProto.AllUserResearchProto build() {
+        com.lvl6.proto.ResearchsProto.AllUserResearchProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.lvl6.proto.ResearchsProto.AllUserResearchProto buildPartial() {
+        com.lvl6.proto.ResearchsProto.AllUserResearchProto result = new com.lvl6.proto.ResearchsProto.AllUserResearchProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userUuid_ = userUuid_;
+        if (userResearchBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            userResearch_ = java.util.Collections.unmodifiableList(userResearch_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.userResearch_ = userResearch_;
+        } else {
+          result.userResearch_ = userResearchBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.ResearchsProto.AllUserResearchProto) {
+          return mergeFrom((com.lvl6.proto.ResearchsProto.AllUserResearchProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.lvl6.proto.ResearchsProto.AllUserResearchProto other) {
+        if (other == com.lvl6.proto.ResearchsProto.AllUserResearchProto.getDefaultInstance()) return this;
+        if (other.hasUserUuid()) {
+          bitField0_ |= 0x00000001;
+          userUuid_ = other.userUuid_;
+          onChanged();
+        }
+        if (userResearchBuilder_ == null) {
+          if (!other.userResearch_.isEmpty()) {
+            if (userResearch_.isEmpty()) {
+              userResearch_ = other.userResearch_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureUserResearchIsMutable();
+              userResearch_.addAll(other.userResearch_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.userResearch_.isEmpty()) {
+            if (userResearchBuilder_.isEmpty()) {
+              userResearchBuilder_.dispose();
+              userResearchBuilder_ = null;
+              userResearch_ = other.userResearch_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              userResearchBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUserResearchFieldBuilder() : null;
+            } else {
+              userResearchBuilder_.addAllMessages(other.userResearch_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.lvl6.proto.ResearchsProto.AllUserResearchProto parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.lvl6.proto.ResearchsProto.AllUserResearchProto) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object userUuid_ = "";
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public boolean hasUserUuid() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public java.lang.String getUserUuid() {
+        java.lang.Object ref = userUuid_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            userUuid_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserUuidBytes() {
+        java.lang.Object ref = userUuid_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userUuid_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuid(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder clearUserUuid() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userUuid_ = getDefaultInstance().getUserUuid();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userUuid = 1;</code>
+       */
+      public Builder setUserUuidBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> userResearch_ =
+        java.util.Collections.emptyList();
+      private void ensureUserResearchIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          userResearch_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.ResearchProto>(userResearch_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> userResearchBuilder_;
+
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> getUserResearchList() {
+        if (userResearchBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(userResearch_);
+        } else {
+          return userResearchBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public int getUserResearchCount() {
+        if (userResearchBuilder_ == null) {
+          return userResearch_.size();
+        } else {
+          return userResearchBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.ResearchProto getUserResearch(int index) {
+        if (userResearchBuilder_ == null) {
+          return userResearch_.get(index);
+        } else {
+          return userResearchBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public Builder setUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.ResearchProto value) {
+        if (userResearchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserResearchIsMutable();
+          userResearch_.set(index, value);
+          onChanged();
+        } else {
+          userResearchBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public Builder setUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.ResearchProto.Builder builderForValue) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          userResearchBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public Builder addUserResearch(com.lvl6.proto.ResearchsProto.ResearchProto value) {
+        if (userResearchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserResearchIsMutable();
+          userResearch_.add(value);
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public Builder addUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.ResearchProto value) {
+        if (userResearchBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserResearchIsMutable();
+          userResearch_.add(index, value);
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public Builder addUserResearch(
+          com.lvl6.proto.ResearchsProto.ResearchProto.Builder builderForValue) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.add(builderForValue.build());
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public Builder addUserResearch(
+          int index, com.lvl6.proto.ResearchsProto.ResearchProto.Builder builderForValue) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          userResearchBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public Builder addAllUserResearch(
+          java.lang.Iterable<? extends com.lvl6.proto.ResearchsProto.ResearchProto> values) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, userResearch_);
+          onChanged();
+        } else {
+          userResearchBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public Builder clearUserResearch() {
+        if (userResearchBuilder_ == null) {
+          userResearch_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          userResearchBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public Builder removeUserResearch(int index) {
+        if (userResearchBuilder_ == null) {
+          ensureUserResearchIsMutable();
+          userResearch_.remove(index);
+          onChanged();
+        } else {
+          userResearchBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.ResearchProto.Builder getUserResearchBuilder(
+          int index) {
+        return getUserResearchFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder getUserResearchOrBuilder(
+          int index) {
+        if (userResearchBuilder_ == null) {
+          return userResearch_.get(index);  } else {
+          return userResearchBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public java.util.List<? extends com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+           getUserResearchOrBuilderList() {
+        if (userResearchBuilder_ != null) {
+          return userResearchBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(userResearch_);
+        }
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.ResearchProto.Builder addUserResearchBuilder() {
+        return getUserResearchFieldBuilder().addBuilder(
+            com.lvl6.proto.ResearchsProto.ResearchProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public com.lvl6.proto.ResearchsProto.ResearchProto.Builder addUserResearchBuilder(
+          int index) {
+        return getUserResearchFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ResearchsProto.ResearchProto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       */
+      public java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto.Builder> 
+           getUserResearchBuilderList() {
+        return getUserResearchFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+          getUserResearchFieldBuilder() {
+        if (userResearchBuilder_ == null) {
+          userResearchBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder>(
+                  userResearch_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          userResearch_ = null;
+        }
+        return userResearchBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AllUserResearchProto)
+    }
+
+    static {
+      defaultInstance = new AllUserResearchProto(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.AllUserResearchProto)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ResearchProto_descriptor;
   private static
@@ -4332,6 +5168,11 @@ public final class ResearchsProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserResearchProto_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_AllUserResearchProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_AllUserResearchProto_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4359,22 +5200,24 @@ public final class ResearchsProto {
       "UserResearchProto\022\030\n\020userResearchUuid\030\001 " +
       "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(" +
       "\005\022\025\n\rtimePurchased\030\004 \001(\003\022\020\n\010complete\030\005 \001" +
-      "(\010*\326\003\n\014ResearchType\022\017\n\013NO_RESEARCH\020\001\022\017\n\013" +
-      "HP_INCREASE\020\002\022\023\n\017ATTACK_INCREASE\020\003\022\022\n\016SP",
-      "EED_INCREASE\020\004\022\020\n\014HEALING_COST\020\005\022\021\n\rHEAL" +
-      "ING_SPEED\020\006\022\020\n\014ENHANCE_COST\020\007\022\031\n\025DECREAS" +
-      "E_ENHANCE_TIME\020\010\022\014\n\010XP_BONUS\020\t\022\033\n\027INCREA" +
-      "SE_HOSPITAL_QUEUE\020\n\022\032\n\026INCREASE_ENHANCE_" +
-      "QUEUE\020\013\022\027\n\023NUMBER_OF_HOSPITALS\020\014\022\037\n\033INCR" +
-      "EASE_CONSTRUCTION_SPEED\020\r\022\031\n\025ITEM_PRODUC" +
-      "TION_SPEED\020\016\022\030\n\024ITEM_PRODUCTION_COST\020\017\022\027" +
-      "\n\023RESOURCE_PRODUCTION\020\020\022\024\n\020RESOURCE_STOR" +
-      "AGE\020\021\022\017\n\013UNLOCK_ITEM\020\022\022\023\n\017UNLOCK_OBSTACL" +
-      "E\020\023\022\036\n\032RESOURCE_GENERATOR_STORAGE\020\024*z\n\016R",
-      "esearchDomain\022\r\n\tNO_DOMAIN\020\001\022\013\n\007HEALING\020" +
-      "\002\022\r\n\tENHANCING\020\003\022\n\n\006BATTLE\020\004\022\r\n\tRESOURCE" +
-      "S\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRAPS_AND_OBSTACLES\020\007B" +
-      "\020B\016ResearchsProto"
+      "(\010\"]\n\024AllUserResearchProto\022\020\n\010userUuid\030\001" +
+      " \001(\t\0223\n\014userResearch\030\002 \003(\0132\035.com.lvl6.pr",
+      "oto.ResearchProto*\326\003\n\014ResearchType\022\017\n\013NO" +
+      "_RESEARCH\020\001\022\017\n\013HP_INCREASE\020\002\022\023\n\017ATTACK_I" +
+      "NCREASE\020\003\022\022\n\016SPEED_INCREASE\020\004\022\020\n\014HEALING" +
+      "_COST\020\005\022\021\n\rHEALING_SPEED\020\006\022\020\n\014ENHANCE_CO" +
+      "ST\020\007\022\031\n\025DECREASE_ENHANCE_TIME\020\010\022\014\n\010XP_BO" +
+      "NUS\020\t\022\033\n\027INCREASE_HOSPITAL_QUEUE\020\n\022\032\n\026IN" +
+      "CREASE_ENHANCE_QUEUE\020\013\022\027\n\023NUMBER_OF_HOSP" +
+      "ITALS\020\014\022\037\n\033INCREASE_CONSTRUCTION_SPEED\020\r" +
+      "\022\031\n\025ITEM_PRODUCTION_SPEED\020\016\022\030\n\024ITEM_PROD" +
+      "UCTION_COST\020\017\022\027\n\023RESOURCE_PRODUCTION\020\020\022\024",
+      "\n\020RESOURCE_STORAGE\020\021\022\017\n\013UNLOCK_ITEM\020\022\022\023\n" +
+      "\017UNLOCK_OBSTACLE\020\023\022\036\n\032RESOURCE_GENERATOR" +
+      "_STORAGE\020\024*z\n\016ResearchDomain\022\r\n\tNO_DOMAI" +
+      "N\020\001\022\013\n\007HEALING\020\002\022\r\n\tENHANCING\020\003\022\n\n\006BATTL" +
+      "E\020\004\022\r\n\tRESOURCES\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRAPS_A" +
+      "ND_OBSTACLES\020\007B\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4407,6 +5250,12 @@ public final class ResearchsProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserResearchProto_descriptor,
         new java.lang.String[] { "UserResearchUuid", "UserUuid", "ResearchId", "TimePurchased", "Complete", });
+    internal_static_com_lvl6_proto_AllUserResearchProto_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_lvl6_proto_AllUserResearchProto_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_lvl6_proto_AllUserResearchProto_descriptor,
+        new java.lang.String[] { "UserUuid", "UserResearch", });
     com.lvl6.proto.StructureProto.getDescriptor();
   }
 
