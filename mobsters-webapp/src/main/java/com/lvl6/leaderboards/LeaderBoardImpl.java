@@ -138,6 +138,7 @@ public class LeaderBoardImpl {
 	public void queryForUserStrengths() {
 		if(strLeaderboard.size() != 0) {
 			strLeaderboard.clear();
+			log.info("leaderboard not empty, cleared it");
 		}
 		
 		jdbc.query(new StreamingStatementCreator("SELECT id, total_strength FROM user"),
