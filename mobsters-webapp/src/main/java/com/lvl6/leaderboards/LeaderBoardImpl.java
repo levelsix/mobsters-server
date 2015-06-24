@@ -136,6 +136,10 @@ public class LeaderBoardImpl {
 	}
 		
 	public void queryForUserStrengths() {
+		if(strLeaderboard.size() != 0) {
+			strLeaderboard.clear();
+		}
+		
 		jdbc.query(new StreamingStatementCreator("SELECT id, total_strength FROM user"),
 				new RowCallbackHandler() {
 			public void processRow(ResultSet resultSet) throws SQLException {
