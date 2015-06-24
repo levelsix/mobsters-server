@@ -65,6 +65,7 @@ public class LeaderBoardImpl {
 		strLeaderboard = new DistributedZSetHazelcast("strength leaderboard", 
 				hazelcastInstance);
 		leaderboardReloadLock = hazelcastInstance.getLock("leaderboard reload lock");
+		completedReload = false;
 	}
 	
 	
