@@ -120,6 +120,8 @@ public class HazelcastClanSearchImpl {
 	protected HazelcastInstance hazelcastInstance;
 	
 	protected ILock clanSearchReloadLock;
+	
+	private boolean completedReload;
 
 	
 	public HazelcastInstance getHazelcastInstance() {
@@ -265,20 +267,22 @@ public class HazelcastClanSearchImpl {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				boolean gotLock = false;
-				try {
-					if(clanSearchReloadLock.tryLock(1, TimeUnit.SECONDS)) {
-						log.info("got the clan search reload lock");
-						gotLock = true;
-						reloadClans();
+				if(!completedReload) {
+					boolean gotLock = false;
+					try {
+						if(clanSearchReloadLock.tryLock(1, TimeUnit.SECONDS)) {
+							log.info("got the clan search reload lock");
+							gotLock = true;
+							reloadClans();
+						}
 					}
-				}
-				catch (Throwable e) {
-					log.error("Error processing str leaderboard reload", e);
-				}
-				finally {
-					if(gotLock) {
-						clanSearchReloadLock.forceUnlock();
+					catch (Throwable e) {
+						log.error("Error processing str leaderboard reload", e);
+					}
+					finally {
+						if(gotLock) {
+							clanSearchReloadLock.forceUnlock();
+						}
 					}
 				}
 			}
@@ -376,5 +380,6 @@ public class HazelcastClanSearchImpl {
 			clanSearchRanking.add(clanId, clanStrength2Long);
 			log.info("added to clan search ranking, clanId {}, clanStrength{}", clanId, clanStrength2);
 		}
+		completedReload = true;
 	}	
 }

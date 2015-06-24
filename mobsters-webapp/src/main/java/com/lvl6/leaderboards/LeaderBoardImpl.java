@@ -35,6 +35,8 @@ public class LeaderBoardImpl {
 	protected JdbcTemplate jdbc; 
 	
 	protected ILock leaderboardReloadLock;
+	
+	private boolean completedReload;
 
 	@Resource
 	protected DataSource dataSource;
@@ -107,20 +109,22 @@ public class LeaderBoardImpl {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				boolean gotLock = false;
-				try {
-					if(leaderboardReloadLock.tryLock(1, TimeUnit.SECONDS)) {
-						log.info("got the reload lock");
-						gotLock = true;
-						queryForUserStrengths();
+				if(!completedReload) {
+					boolean gotLock = false;
+					try {
+						if(leaderboardReloadLock.tryLock(1, TimeUnit.SECONDS)) {
+							log.info("got the reload lock");
+							gotLock = true;
+							queryForUserStrengths();
+						}
 					}
-				}
-				catch (Throwable e) {
-					log.error("Error processing str leaderboard reload", e);
-				}
-				finally {
-					if(gotLock) {
-						leaderboardReloadLock.forceUnlock();
+					catch (Throwable e) {
+						log.error("Error processing str leaderboard reload", e);
+					}
+					finally {
+						if(gotLock) {
+							leaderboardReloadLock.forceUnlock();
+						}
 					}
 				}
 			}
@@ -136,6 +140,7 @@ public class LeaderBoardImpl {
 				long strength = resultSet.getLong(DBConstants.USER__TOTAL_STRENGTH);
 				addToLeaderboard(userId, strength);
 			}
+			completedReload = true;
 			}
 			});
 	}
