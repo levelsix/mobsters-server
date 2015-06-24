@@ -41,12 +41,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private String clanId;
 	private int giftId;
 	private String reasonForGift;
-	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
-	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
-	@Autowired protected RewardRetrieveUtils rewardRetrieveUtil; 
-	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
-	@Autowired protected InsertUtil insertUtil; 
-	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil;
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils;
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtil;
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 	private Random rand;
 
 	public AwardClanGiftsAction() {
@@ -152,6 +152,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 //			if(!uc.getStatus().equalsIgnoreCase(UserClanStatus.REQUESTING.toString())) {
 			String receiverUserId = uc.getUserId();
 
+			//don't give the gifterUserId anything
+			if(receiverUserId.equalsIgnoreCase(gifterUserId)) {
+				continue;
+			}
+
 			GiftRewardConfigPojo grc = determineReward();
 			int rewardId = grc.getRewardId();
 
@@ -164,9 +169,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			gfu.setTimeOfEntry(toe);
 			gfu.setCollected(false);
 
-			if(receiverUserId.equalsIgnoreCase(gifterUserId)) {
-				giftersClanGift = gfu;
-			}
+//			if(receiverUserId.equalsIgnoreCase(gifterUserId)) {
+//				giftersClanGift = gfu;
+//			}
 //			}
 		}
 

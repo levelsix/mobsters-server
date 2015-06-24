@@ -2,6 +2,7 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "MonsterStuff.proto";
+import "Research.proto";
 import "Structure.proto";
 import "User.proto";
 
@@ -78,6 +79,7 @@ message RetrieveUsersForUserIdsResponseProto {
     optional MinimumUserProto sender = 1;
 	repeated FullUserProto requestedUsers = 2;
 	repeated UserCurrentMonsterTeamProto curTeam = 3;
+	repeated AllUserResearchProto userResearch = 4;
 }
 
 //------------------------------------------------------------------------------------------

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
 import com.lvl6.datastructures.DistributedZSet;
 import com.lvl6.datastructures.DistributedZSetHazelcast;
@@ -118,6 +119,9 @@ public class HazelcastClanSearchImpl {
 	@Autowired
 	protected HazelcastInstance hazelcastInstance;
 	
+	protected ILock clanSearchReloadLock;
+
+	
 	public HazelcastInstance getHazelcastInstance() {
 		return hazelcastInstance;
 	}
@@ -127,6 +131,7 @@ public class HazelcastClanSearchImpl {
 		this.hazelcastInstance = hazelcastInstance;
 		clanSearchRanking = new DistributedZSetHazelcast("clan search ranking",
 				hazelcastInstance);
+		clanSearchReloadLock = hazelcastInstance.getLock("clan search reload lock");
 	}
 	
 	private static int minuteIntervals = 5;
@@ -257,6 +262,30 @@ public class HazelcastClanSearchImpl {
 	}
 	
 	public void reload() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				boolean gotLock = false;
+				try {
+					if(clanSearchReloadLock.tryLock(1, TimeUnit.SECONDS)) {
+						log.info("got the clan search reload lock");
+						gotLock = true;
+						reloadClans();
+					}
+				}
+				catch (Throwable e) {
+					log.error("Error processing str leaderboard reload", e);
+				}
+				finally {
+					if(gotLock) {
+						clanSearchReloadLock.forceUnlock();
+					}
+				}
+			}
+		}).start();
+	}
+	
+	public void reloadClans() {
 		//retrieve all the data relevant (past hour or 24 hrs)
 		Date hourAgo = timeUtils.createDateAddHours(new Date(), -1);
 		Date dayAgo = timeUtils.createDateAddHours(new Date(), -24);
