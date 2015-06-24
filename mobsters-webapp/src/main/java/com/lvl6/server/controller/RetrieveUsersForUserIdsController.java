@@ -20,7 +20,8 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ResearchForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ResearchForUserPojo;
+//import com.lvl6.mobsters.db.jooq.generated.tables.ResearchForUser;
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsRequestProto;
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
@@ -41,7 +42,6 @@ import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
-
 public class RetrieveUsersForUserIdsController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(RetrieveUsersForUserIdsController.class);
@@ -210,7 +210,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 	}
 	
 	public List<AllUserResearchProto> createResearchProtos(List<String> userIds) {
-		Map<String, List<ResearchForUser>> rfuMap = rfuDao.fetchByUserIds(userIds);
+		Map<String, List<ResearchForUserPojo>> rfuMap = rfuDao.fetchByUserIds(userIds);
 		return researchUtil.createAllUserResearchProto(rfuMap, researchRetrieveUtils, researchPropertyRetrieveUtils);
 	}
 	

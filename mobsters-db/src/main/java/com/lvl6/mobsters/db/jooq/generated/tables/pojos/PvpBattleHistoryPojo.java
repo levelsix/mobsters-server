@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class PvpBattleHistoryPojo implements IPvpBattleHistory {
 
-	private static final long serialVersionUID = 1959022862;
+	private static final long serialVersionUID = 1389305326;
 
 	private String    attackerId;
 	private String    defenderId;

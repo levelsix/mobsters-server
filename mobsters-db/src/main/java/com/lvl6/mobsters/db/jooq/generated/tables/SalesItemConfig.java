@@ -14,6 +14,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -33,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SalesItemConfig extends TableImpl<SalesItemConfigRecord> {
 
-	private static final long serialVersionUID = 147913170;
+	private static final long serialVersionUID = 1503891153;
 
 	/**
 	 * The reference instance of <code>mobsters.sales_item_config</code>
@@ -83,6 +84,14 @@ public class SalesItemConfig extends TableImpl<SalesItemConfigRecord> {
 
 	private SalesItemConfig(String alias, Table<SalesItemConfigRecord> aliased, Field<?>[] parameters) {
 		super(alias, Mobsters.MOBSTERS, aliased, parameters, "");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Identity<SalesItemConfigRecord, Integer> getIdentity() {
+		return Keys.IDENTITY_SALES_ITEM_CONFIG;
 	}
 
 	/**
