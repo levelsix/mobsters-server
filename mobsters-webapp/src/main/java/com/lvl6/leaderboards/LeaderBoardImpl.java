@@ -105,33 +105,34 @@ public class LeaderBoardImpl {
 		return strLeaderboard.size();
 	}
 	
-	public void reload() {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				if(!completedReload) {
-					boolean gotLock = false;
-					try {
-						if(leaderboardReloadLock.tryLock(1, TimeUnit.SECONDS)) {
-							log.info("got the reload lock");
-							gotLock = true;
-							queryForUserStrengths();
-						}
-					}
-					catch (Throwable e) {
-						log.error("Error processing str leaderboard reload", e);
-					}
-					finally {
-						if(gotLock) {
-							leaderboardReloadLock.forceUnlock();
-						}
-					}
-				}
-			}
-		}).start();
-	}
+//	public void reload() {
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				if(!completedReload) {
+//					boolean gotLock = false;
+//					try {
+//						if(leaderboardReloadLock.tryLock(1, TimeUnit.SECONDS)) {
+//							log.info("got the reload lock");
+//							gotLock = true;
+//							queryForUserStrengths();
+//						}
+//					}
+//					catch (Throwable e) {
+//						log.error("Error processing str leaderboard reload", e);
+//					}
+//					finally {
+//						if(gotLock) {
+//							leaderboardReloadLock.forceUnlock();
+//						}
+//					}
+//				}
+//			}
+//		}).start();
+//	}
 		
-	public void queryForUserStrengths() {
+//	public void queryForUserStrengths() {
+	public void reload() {
 		jdbc.query(new StreamingStatementCreator("SELECT id, total_strength FROM user"),
 				new RowCallbackHandler() {
 			public void processRow(ResultSet resultSet) throws SQLException {
