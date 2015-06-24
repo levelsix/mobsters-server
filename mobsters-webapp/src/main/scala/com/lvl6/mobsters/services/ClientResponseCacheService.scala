@@ -2,7 +2,6 @@ package com.lvl6.mobsters.services
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-
 import com.amazonaws.services.dynamodbv2.document.Item
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec
@@ -13,6 +12,7 @@ import com.lvl6.server.dynamodb.tables.CachedClientResponse
 import com.lvl6.server.dynamodb.tables.CachedClientResponses
 import com.lvl6.server.dynamodb.tables.TableDefinition
 import com.typesafe.scalalogging.slf4j.LazyLogging
+import com.amazonaws.services.dynamodbv2.document.internal.IteratorSupport
 
 @Component
 class ClientResponseCacheService extends LazyLogging{
@@ -25,9 +25,8 @@ class ClientResponseCacheService extends LazyLogging{
     val items = table.query(cachedClientResponses.hashKeyName, request_uuid)
     logger.info(s"Found ${items.getTotalCount} cached responses for request: $request_uuid")
     val iterator = items.iterator();
-    var item:Item = null;
     while (iterator.hasNext()) {
-      item = iterator.next();
+      val item = iterator.next();
       logger.info(item.toJSONPretty());
     }
     items.getTotalCount > 0
