@@ -4336,27 +4336,27 @@ public final class ResearchsProto {
         getUserUuidBytes();
 
     /**
-     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
      */
-    java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> 
+    java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> 
         getUserResearchList();
     /**
-     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
      */
-    com.lvl6.proto.ResearchsProto.ResearchProto getUserResearch(int index);
+    com.lvl6.proto.ResearchsProto.UserResearchProto getUserResearch(int index);
     /**
-     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
      */
     int getUserResearchCount();
     /**
-     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
      */
-    java.util.List<? extends com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+    java.util.List<? extends com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder> 
         getUserResearchOrBuilderList();
     /**
-     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
      */
-    com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder getUserResearchOrBuilder(
+    com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder getUserResearchOrBuilder(
         int index);
   }
   /**
@@ -4419,10 +4419,10 @@ public final class ResearchsProto {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                userResearch_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.ResearchProto>();
+                userResearch_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.UserResearchProto>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              userResearch_.add(input.readMessage(com.lvl6.proto.ResearchsProto.ResearchProto.PARSER, extensionRegistry));
+              userResearch_.add(input.readMessage(com.lvl6.proto.ResearchsProto.UserResearchProto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -4511,36 +4511,36 @@ public final class ResearchsProto {
     }
 
     public static final int USERRESEARCH_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> userResearch_;
+    private java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> userResearch_;
     /**
-     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
      */
-    public java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> getUserResearchList() {
+    public java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> getUserResearchList() {
       return userResearch_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
      */
-    public java.util.List<? extends com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+    public java.util.List<? extends com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder> 
         getUserResearchOrBuilderList() {
       return userResearch_;
     }
     /**
-     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
      */
     public int getUserResearchCount() {
       return userResearch_.size();
     }
     /**
-     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
      */
-    public com.lvl6.proto.ResearchsProto.ResearchProto getUserResearch(int index) {
+    public com.lvl6.proto.ResearchsProto.UserResearchProto getUserResearch(int index) {
       return userResearch_.get(index);
     }
     /**
-     * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+     * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
      */
-    public com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder getUserResearchOrBuilder(
+    public com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder getUserResearchOrBuilder(
         int index) {
       return userResearch_.get(index);
     }
@@ -4902,22 +4902,22 @@ public final class ResearchsProto {
         return this;
       }
 
-      private java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> userResearch_ =
+      private java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> userResearch_ =
         java.util.Collections.emptyList();
       private void ensureUserResearchIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          userResearch_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.ResearchProto>(userResearch_);
+          userResearch_ = new java.util.ArrayList<com.lvl6.proto.ResearchsProto.UserResearchProto>(userResearch_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> userResearchBuilder_;
+          com.lvl6.proto.ResearchsProto.UserResearchProto, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder, com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder> userResearchBuilder_;
 
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
-      public java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto> getUserResearchList() {
+      public java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto> getUserResearchList() {
         if (userResearchBuilder_ == null) {
           return java.util.Collections.unmodifiableList(userResearch_);
         } else {
@@ -4925,7 +4925,7 @@ public final class ResearchsProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
       public int getUserResearchCount() {
         if (userResearchBuilder_ == null) {
@@ -4935,9 +4935,9 @@ public final class ResearchsProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
-      public com.lvl6.proto.ResearchsProto.ResearchProto getUserResearch(int index) {
+      public com.lvl6.proto.ResearchsProto.UserResearchProto getUserResearch(int index) {
         if (userResearchBuilder_ == null) {
           return userResearch_.get(index);
         } else {
@@ -4945,10 +4945,10 @@ public final class ResearchsProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
       public Builder setUserResearch(
-          int index, com.lvl6.proto.ResearchsProto.ResearchProto value) {
+          int index, com.lvl6.proto.ResearchsProto.UserResearchProto value) {
         if (userResearchBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4962,10 +4962,10 @@ public final class ResearchsProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
       public Builder setUserResearch(
-          int index, com.lvl6.proto.ResearchsProto.ResearchProto.Builder builderForValue) {
+          int index, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder builderForValue) {
         if (userResearchBuilder_ == null) {
           ensureUserResearchIsMutable();
           userResearch_.set(index, builderForValue.build());
@@ -4976,9 +4976,9 @@ public final class ResearchsProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
-      public Builder addUserResearch(com.lvl6.proto.ResearchsProto.ResearchProto value) {
+      public Builder addUserResearch(com.lvl6.proto.ResearchsProto.UserResearchProto value) {
         if (userResearchBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4992,10 +4992,10 @@ public final class ResearchsProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
       public Builder addUserResearch(
-          int index, com.lvl6.proto.ResearchsProto.ResearchProto value) {
+          int index, com.lvl6.proto.ResearchsProto.UserResearchProto value) {
         if (userResearchBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5009,10 +5009,10 @@ public final class ResearchsProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
       public Builder addUserResearch(
-          com.lvl6.proto.ResearchsProto.ResearchProto.Builder builderForValue) {
+          com.lvl6.proto.ResearchsProto.UserResearchProto.Builder builderForValue) {
         if (userResearchBuilder_ == null) {
           ensureUserResearchIsMutable();
           userResearch_.add(builderForValue.build());
@@ -5023,10 +5023,10 @@ public final class ResearchsProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
       public Builder addUserResearch(
-          int index, com.lvl6.proto.ResearchsProto.ResearchProto.Builder builderForValue) {
+          int index, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder builderForValue) {
         if (userResearchBuilder_ == null) {
           ensureUserResearchIsMutable();
           userResearch_.add(index, builderForValue.build());
@@ -5037,10 +5037,10 @@ public final class ResearchsProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
       public Builder addAllUserResearch(
-          java.lang.Iterable<? extends com.lvl6.proto.ResearchsProto.ResearchProto> values) {
+          java.lang.Iterable<? extends com.lvl6.proto.ResearchsProto.UserResearchProto> values) {
         if (userResearchBuilder_ == null) {
           ensureUserResearchIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -5052,7 +5052,7 @@ public final class ResearchsProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
       public Builder clearUserResearch() {
         if (userResearchBuilder_ == null) {
@@ -5065,7 +5065,7 @@ public final class ResearchsProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
       public Builder removeUserResearch(int index) {
         if (userResearchBuilder_ == null) {
@@ -5078,16 +5078,16 @@ public final class ResearchsProto {
         return this;
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
-      public com.lvl6.proto.ResearchsProto.ResearchProto.Builder getUserResearchBuilder(
+      public com.lvl6.proto.ResearchsProto.UserResearchProto.Builder getUserResearchBuilder(
           int index) {
         return getUserResearchFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
-      public com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder getUserResearchOrBuilder(
+      public com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder getUserResearchOrBuilder(
           int index) {
         if (userResearchBuilder_ == null) {
           return userResearch_.get(index);  } else {
@@ -5095,9 +5095,9 @@ public final class ResearchsProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
-      public java.util.List<? extends com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder> 
            getUserResearchOrBuilderList() {
         if (userResearchBuilder_ != null) {
           return userResearchBuilder_.getMessageOrBuilderList();
@@ -5106,33 +5106,33 @@ public final class ResearchsProto {
         }
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
-      public com.lvl6.proto.ResearchsProto.ResearchProto.Builder addUserResearchBuilder() {
+      public com.lvl6.proto.ResearchsProto.UserResearchProto.Builder addUserResearchBuilder() {
         return getUserResearchFieldBuilder().addBuilder(
-            com.lvl6.proto.ResearchsProto.ResearchProto.getDefaultInstance());
+            com.lvl6.proto.ResearchsProto.UserResearchProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
-      public com.lvl6.proto.ResearchsProto.ResearchProto.Builder addUserResearchBuilder(
+      public com.lvl6.proto.ResearchsProto.UserResearchProto.Builder addUserResearchBuilder(
           int index) {
         return getUserResearchFieldBuilder().addBuilder(
-            index, com.lvl6.proto.ResearchsProto.ResearchProto.getDefaultInstance());
+            index, com.lvl6.proto.ResearchsProto.UserResearchProto.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.lvl6.proto.ResearchProto userResearch = 2;</code>
+       * <code>repeated .com.lvl6.proto.UserResearchProto userResearch = 2;</code>
        */
-      public java.util.List<com.lvl6.proto.ResearchsProto.ResearchProto.Builder> 
+      public java.util.List<com.lvl6.proto.ResearchsProto.UserResearchProto.Builder> 
            getUserResearchBuilderList() {
         return getUserResearchFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder> 
+          com.lvl6.proto.ResearchsProto.UserResearchProto, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder, com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder> 
           getUserResearchFieldBuilder() {
         if (userResearchBuilder_ == null) {
           userResearchBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.ResearchsProto.ResearchProto, com.lvl6.proto.ResearchsProto.ResearchProto.Builder, com.lvl6.proto.ResearchsProto.ResearchProtoOrBuilder>(
+              com.lvl6.proto.ResearchsProto.UserResearchProto, com.lvl6.proto.ResearchsProto.UserResearchProto.Builder, com.lvl6.proto.ResearchsProto.UserResearchProtoOrBuilder>(
                   userResearch_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -5200,24 +5200,24 @@ public final class ResearchsProto {
       "UserResearchProto\022\030\n\020userResearchUuid\030\001 " +
       "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(" +
       "\005\022\025\n\rtimePurchased\030\004 \001(\003\022\020\n\010complete\030\005 \001" +
-      "(\010\"]\n\024AllUserResearchProto\022\020\n\010userUuid\030\001" +
-      " \001(\t\0223\n\014userResearch\030\002 \003(\0132\035.com.lvl6.pr",
-      "oto.ResearchProto*\326\003\n\014ResearchType\022\017\n\013NO" +
-      "_RESEARCH\020\001\022\017\n\013HP_INCREASE\020\002\022\023\n\017ATTACK_I" +
-      "NCREASE\020\003\022\022\n\016SPEED_INCREASE\020\004\022\020\n\014HEALING" +
-      "_COST\020\005\022\021\n\rHEALING_SPEED\020\006\022\020\n\014ENHANCE_CO" +
-      "ST\020\007\022\031\n\025DECREASE_ENHANCE_TIME\020\010\022\014\n\010XP_BO" +
-      "NUS\020\t\022\033\n\027INCREASE_HOSPITAL_QUEUE\020\n\022\032\n\026IN" +
-      "CREASE_ENHANCE_QUEUE\020\013\022\027\n\023NUMBER_OF_HOSP" +
-      "ITALS\020\014\022\037\n\033INCREASE_CONSTRUCTION_SPEED\020\r" +
-      "\022\031\n\025ITEM_PRODUCTION_SPEED\020\016\022\030\n\024ITEM_PROD" +
-      "UCTION_COST\020\017\022\027\n\023RESOURCE_PRODUCTION\020\020\022\024",
-      "\n\020RESOURCE_STORAGE\020\021\022\017\n\013UNLOCK_ITEM\020\022\022\023\n" +
-      "\017UNLOCK_OBSTACLE\020\023\022\036\n\032RESOURCE_GENERATOR" +
-      "_STORAGE\020\024*z\n\016ResearchDomain\022\r\n\tNO_DOMAI" +
-      "N\020\001\022\013\n\007HEALING\020\002\022\r\n\tENHANCING\020\003\022\n\n\006BATTL" +
-      "E\020\004\022\r\n\tRESOURCES\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRAPS_A" +
-      "ND_OBSTACLES\020\007B\020B\016ResearchsProto"
+      "(\010\"a\n\024AllUserResearchProto\022\020\n\010userUuid\030\001" +
+      " \001(\t\0227\n\014userResearch\030\002 \003(\0132!.com.lvl6.pr",
+      "oto.UserResearchProto*\326\003\n\014ResearchType\022\017" +
+      "\n\013NO_RESEARCH\020\001\022\017\n\013HP_INCREASE\020\002\022\023\n\017ATTA" +
+      "CK_INCREASE\020\003\022\022\n\016SPEED_INCREASE\020\004\022\020\n\014HEA" +
+      "LING_COST\020\005\022\021\n\rHEALING_SPEED\020\006\022\020\n\014ENHANC" +
+      "E_COST\020\007\022\031\n\025DECREASE_ENHANCE_TIME\020\010\022\014\n\010X" +
+      "P_BONUS\020\t\022\033\n\027INCREASE_HOSPITAL_QUEUE\020\n\022\032" +
+      "\n\026INCREASE_ENHANCE_QUEUE\020\013\022\027\n\023NUMBER_OF_" +
+      "HOSPITALS\020\014\022\037\n\033INCREASE_CONSTRUCTION_SPE" +
+      "ED\020\r\022\031\n\025ITEM_PRODUCTION_SPEED\020\016\022\030\n\024ITEM_" +
+      "PRODUCTION_COST\020\017\022\027\n\023RESOURCE_PRODUCTION",
+      "\020\020\022\024\n\020RESOURCE_STORAGE\020\021\022\017\n\013UNLOCK_ITEM\020" +
+      "\022\022\023\n\017UNLOCK_OBSTACLE\020\023\022\036\n\032RESOURCE_GENER" +
+      "ATOR_STORAGE\020\024*z\n\016ResearchDomain\022\r\n\tNO_D" +
+      "OMAIN\020\001\022\013\n\007HEALING\020\002\022\r\n\tENHANCING\020\003\022\n\n\006B" +
+      "ATTLE\020\004\022\r\n\tRESOURCES\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRA" +
+      "PS_AND_OBSTACLES\020\007B\020B\016ResearchsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

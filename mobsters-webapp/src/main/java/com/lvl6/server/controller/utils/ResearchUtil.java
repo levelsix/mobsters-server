@@ -38,13 +38,7 @@ public class ResearchUtil {
 			AllUserResearchProto.Builder b = AllUserResearchProto.newBuilder();
 			b.setUserUuid(userId);
 			List<ResearchForUserPojo> rfuList = mapOfResearches.get(userId);
-			for(ResearchForUserPojo rfu : rfuList) {
-				Research r = researchRetrieveUtils.getResearchForId(rfu.getResearchId());
-				Map<Integer, ResearchProperty> researchPropertyMap = 
-						researchPropertyRetrieveUtils.getResearchPropertiesForResearchId(rfu.getResearchId());
-				ResearchProto rp = createResearchProto(r, researchPropertyMap.values());
-				b.addUserResearch(rp);
-			}
+			b.addAllUserResearch(createUserResearchProto(rfuList));
 			returnList.add(b.build());
 		}
 		return returnList;

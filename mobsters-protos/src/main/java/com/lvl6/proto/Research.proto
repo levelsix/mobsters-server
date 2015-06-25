@@ -106,7 +106,7 @@ message UserResearchProto {
 
 message AllUserResearchProto {
 	optional string userUuid = 1;
-	repeated ResearchProto userResearch = 2;
+	repeated UserResearchProto userResearch = 2;
 }
 
 
