@@ -25,6 +25,8 @@ import com.lvl6.server.dynamodb.Converter._
 import scala.beans.BeanProperty
 import org.springframework.beans.factory.annotation.Value
 import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.regions.Regions
+import com.amazonaws.regions.Region
 
 
 @Component
@@ -162,6 +164,7 @@ class DynamoDBService extends LazyLogging {
       client.setEndpoint("http://localhost:8000")
     }else {
        client = new AmazonDynamoDBClient()
+       client.setRegion(Region.getRegion(Regions.US_WEST_2))
     }
     dynamoDB = new DynamoDB(client)
     createTables

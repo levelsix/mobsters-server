@@ -592,17 +592,16 @@ public class InAppPurchaseController extends EventController {
     		int gachaCreditsGained = iapsa.getAra().getGachaCreditsGained();
 
     		AwardRewardAction ara = iapsa.getAra();
-    		//protofy the gifts the clan members get, NOTE:
-    		//clan gifts are sent later as well, in a ReceivedGiftResponseEvent
+    		//NOTE: clan gifts are sent later in a ReceivedGiftResponseEvent
 
-    		Collection<UserGiftProto> clanGifts = null;
-    		if( null != ara && ara.existsClanGift() ) {
-    			clanGifts = ara.getClanGift().getUserGiftsList();
-    		}
+//    		Collection<UserGiftProto> clanGifts = null;
+//    		if( null != ara && ara.existsClanGift() ) {
+//    			clanGifts = ara.getClanGift().getUserGiftsList();
+//    		}
 
     		urp = createInfoProtoUtils.createUserRewardProto(
     				nuOrUpdatedItems, fumpList, gemsGained, cashGained, oilGained,
-    				gachaCreditsGained, clanGifts);
+    				gachaCreditsGained, null); //clanGifts);
     		//        log.info("proto for reward: {}", urp);
     	}
     	else if(iapmsa != null) {
