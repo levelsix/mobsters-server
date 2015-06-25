@@ -139,6 +139,11 @@ public class GiftRewardRetrieveUtils {
 			return null;
 		}
 
+		log.info("idsToGiftRewards={}", idsToGiftRewards);
+		log.info("giftIdToProbabilitySum={}", giftIdToProbabilitySum);
+		log.info("giftIdToGiftRewards={}", giftIdToGiftRewards);
+		log.info("giftIdToGiftRewardsTree={}", giftIdToGiftRewardsTree);
+
 		TreeSet<GiftRewardConfigWrapper> rewardTree = giftIdToGiftRewardsTree.get(giftId);
 
 		//selects the GiftReward with the least probability that is still
