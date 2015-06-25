@@ -53,7 +53,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		super();
 	}
 
-	public AwardClanGiftsAction(String gifterUserId, User gifterUser, int giftId,
+	public AwardClanGiftsAction(String gifterUserId, User gifterUser,
+			String clanId, int giftId,
 			String reasonForGift, GiftRetrieveUtils giftRetrieveUtil,
 			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
 			RewardRetrieveUtils rewardRetrieveUtil,
@@ -62,6 +63,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		super();
 		this.gifterUserId = gifterUserId;
 		this.gifterUser = gifterUser;
+		this.clanId = clanId;
 		this.giftId = giftId;
 		this.reasonForGift = reasonForGift;
 		this.giftRetrieveUtil = giftRetrieveUtil;

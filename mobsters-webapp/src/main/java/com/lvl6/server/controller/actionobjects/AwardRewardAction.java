@@ -246,6 +246,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			Reward r, int id, String type, int staticDataId, int amt)
 	{
 		if(RewardType.GIFT.name().equals(type)) {
+			log.info("awarding reward of type GIFT. {}", r);
 			GiftConfigPojo gcp = giftRetrieveUtil.getGift(staticDataId);
 			if (null == gcp) {
 				log.error("invalid reward={}. No associated gift.", r);
@@ -253,11 +254,13 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			}
 
 			if (GiftType.CLAN_GIFT.name().equals(gcp.getGiftType())) {
+				log.info("awarding GIFT of type CLAN_GIFT");
 				String clanId = u.getClanId();
 				if (null != clanId && !clanId.isEmpty()) {
 					//NOTE: Only awards one clan gift at the moment
 					//If ever to give out multiplie clan gifts, the clan gifts should be aggregated
-					acga = new AwardClanGiftsAction(userId, u, staticDataId,
+					acga = new AwardClanGiftsAction(userId, u,
+							clanId, staticDataId,
 							"clan gift", giftRetrieveUtil,
 							giftRewardRetrieveUtils, rewardRetrieveUtil,
 							userClanRetrieveUtils, insertUtil,
