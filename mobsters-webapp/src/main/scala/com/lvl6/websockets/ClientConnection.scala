@@ -220,9 +220,16 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
           case true =>  {
             //logger.info(s"Sending message to this socket: $this")
             synchronized{
+              try {
               val buff = ByteBuffer.allocate(8).putLong(System.currentTimeMillis())
               buff.flip
               sess.getBasicRemote.sendPing(buff)
+              }catch{
+                case t:Throwable => {
+                  //logger.error()
+                  closeConnection
+                }
+              }
             }
           }
           case false => logger.warn(s"Cannot send ping. Socket is closed. $this")
