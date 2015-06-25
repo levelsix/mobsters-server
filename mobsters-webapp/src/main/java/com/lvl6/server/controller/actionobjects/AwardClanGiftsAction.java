@@ -177,6 +177,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 //				giftersClanGift = gfu;
 //			}
 //			}
+			gifts.add(gfu);
 		}
 
 		//insert all the clan gifts for users into table
