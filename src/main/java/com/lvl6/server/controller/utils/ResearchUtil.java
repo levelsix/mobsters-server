@@ -4,23 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import com.lvl6.info.Research;
-import com.lvl6.info.ResearchProperty;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ResearchForUser;
-import com.lvl6.proto.ResearchsProto.AllUserResearchProto;
-import com.lvl6.proto.ResearchsProto.ResearchDomain;
-import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
-import com.lvl6.proto.ResearchsProto.ResearchProto;
-import com.lvl6.proto.ResearchsProto.ResearchType;
-import com.lvl6.proto.ResearchsProto.UserResearchProto;
-import com.lvl6.proto.StructureProto.ResourceType;
-import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
+import java.util.logging.Logger;
 
 @Component
 public class ResearchUtil {

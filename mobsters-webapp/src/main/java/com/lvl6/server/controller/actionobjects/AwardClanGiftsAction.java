@@ -53,7 +53,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		super();
 	}
 
-	public AwardClanGiftsAction(String gifterUserId, User gifterUser, int giftId,
+	public AwardClanGiftsAction(String gifterUserId, User gifterUser,
+			String clanId, int giftId,
 			String reasonForGift, GiftRetrieveUtils giftRetrieveUtil,
 			GiftRewardRetrieveUtils giftRewardRetrieveUtils,
 			RewardRetrieveUtils rewardRetrieveUtil,
@@ -62,6 +63,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		super();
 		this.gifterUserId = gifterUserId;
 		this.gifterUser = gifterUser;
+		this.clanId = clanId;
 		this.giftId = giftId;
 		this.reasonForGift = reasonForGift;
 		this.giftRetrieveUtil = giftRetrieveUtil;
@@ -148,6 +150,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		Timestamp toe = new Timestamp((new Date()).getTime());
 		Collection<GiftForUserPojo> gifts = new ArrayList<GiftForUserPojo>();
 
+		int minsTillExp = gc.getHoursUntilExpiration() * 60;
 		for(UserClan uc : clanMembers) {
 //			if(!uc.getStatus().equalsIgnoreCase(UserClanStatus.REQUESTING.toString())) {
 			String receiverUserId = uc.getUserId();
@@ -158,21 +161,25 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			}
 
 			GiftRewardConfigPojo grc = determineReward();
+			log.info("uc={}, giftRewardId={}", uc, grc.getRewardId());
+
 			int rewardId = grc.getRewardId();
 
 			GiftForUserPojo gfu = new GiftForUserPojo();
-			gfu.setGiftId(giftId);
 			gfu.setGifterUserId(gifterUserId);
-			gfu.setReasonForGift(reasonForGift);
 			gfu.setReceiverUserId(receiverUserId);
-			gfu.setRewardId(rewardId);
+			gfu.setGiftId(giftId);
 			gfu.setTimeOfEntry(toe);
+			gfu.setRewardId(rewardId);
 			gfu.setCollected(false);
+			gfu.setMinutesTillExpiration(minsTillExp);
+			gfu.setReasonForGift(reasonForGift);
 
 //			if(receiverUserId.equalsIgnoreCase(gifterUserId)) {
 //				giftersClanGift = gfu;
 //			}
 //			}
+			gifts.add(gfu);
 		}
 
 		//insert all the clan gifts for users into table
