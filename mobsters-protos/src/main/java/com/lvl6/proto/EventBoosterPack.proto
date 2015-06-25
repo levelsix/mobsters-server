@@ -2,6 +2,7 @@
 
 import "BoosterPackStuff.proto";
 import "Reward.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -34,7 +35,7 @@ message PurchaseBoosterPackRequestProto {
 
 message PurchaseBoosterPackResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional PurchaseBoosterPackStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 	//if user received, say, two pieces of a monster
 	//and he needs one to complete an existing monster
@@ -44,13 +45,7 @@ message PurchaseBoosterPackResponseProto {
 	repeated BoosterItemProto prize = 4;
 	
 	optional UserRewardProto reward = 6;
-	
-	enum PurchaseBoosterPackStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_GACHA_CREDITS = 2;
-		FAIL_OTHER = 3;
-		FAIL_INSUFFICIENT_GEMS  = 4;
-	}
+
 }
 
 //------------------------------------------------------------------------------------------

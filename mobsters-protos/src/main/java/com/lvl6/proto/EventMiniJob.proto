@@ -27,12 +27,8 @@ message SpawnMiniJobResponseProto {
      optional MinimumUserProto sender = 1;
      
      repeated UserMiniJobProto miniJobs = 2;
-     optional SpawnMiniJobStatus status = 3;
+     optional ResponseStatus status = 3;
      
-     enum SpawnMiniJobStatus {
-     	SUCCESS = 1;
-     	FAIL_OTHER = 2;
-     }
 }
 
 //------------------------------------------------------------------------------------------
@@ -49,11 +45,6 @@ message BeginMiniJobResponseProto {
      optional MinimumUserProto sender = 1;
      optional BeginMiniJobStatus status = 2;    
      
-     enum BeginMiniJobStatus {
-          SUCCESS = 1;
-          FAIL_OTHER = 2;
-          FAIL_NO_MINI_JOB_EXISTS = 3;
-     }
 }
 
 //------------------------------------------------------------------------------------------
@@ -73,14 +64,8 @@ message CompleteMiniJobRequestProto {
 																						//DONE
 message CompleteMiniJobResponseProto {
      optional MinimumUserProto sender = 1;
-     optional CompleteMiniJobStatus status = 2;    
+     optional ResponseStatus status = 2;    
      
-     enum CompleteMiniJobStatus {
-          SUCCESS = 1;
-          FAIL_OTHER = 2;
-          FAIL_INSUFFICIENT_GEMS = 3;
-          FAIL_NO_MINI_JOB_EXISTS = 4;
-     }
 }
 
 //------------------------------------------------------------------------------------------
@@ -98,16 +83,10 @@ message RedeemMiniJobResponseProto {
      optional MinimumUserProtoWithMaxResources sender = 1;
      optional FullUserMonsterProto fump = 2 [deprecated = true]; //this is if the mini job gives monster
      
-     optional RedeemMiniJobStatus status = 3;    
+     optional ResponseStatus status = 3;    
      
      optional UserRewardProto rewards = 4;
      
-     enum RedeemMiniJobStatus {
-          SUCCESS = 1;
-          FAIL_OTHER = 2;
-          FAIL_NO_MINI_JOB_EXISTS = 3;
-          FAIL_MINI_JOB_INCOMPLETE = 4;
-     }
 }
 
 //------------------------------------------------------------------------------------------
@@ -132,12 +111,7 @@ message RefreshMiniJobResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated UserMiniJobProto miniJobs = 2;
 	
-	optional RefreshMiniJobStatus status = 3;
+	optional ResponseStatus status = 3;
 	
-	enum RefreshMiniJobStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_GEMS = 2;
-		FAIL_INSUFFICIENT_ITEMS = 3;
-		FAIL_OTHER = 4;
-	}
+
 }

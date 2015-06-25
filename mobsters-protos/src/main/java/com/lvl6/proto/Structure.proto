@@ -61,17 +61,7 @@ message StructureInfoProto {
 	}
 }
 
-enum ResourceType {
-	NO_RESOURCE = 4;
-	CASH = 1;
-	OIL = 2;
-	GEMS = 3;
-	GACHA_CREDITS=  5;
-	
-	//NO_RESOURCE = 4; defined above
-	
-	MONSTER = 20;
-}
+
 
 //------------------------------------------------------------------------------------------
 

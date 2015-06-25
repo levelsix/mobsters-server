@@ -3,6 +3,7 @@
 
 import "MonsterStuff.proto";
 import "Research.proto";
+import "SharedEnumConfig.proto";
 import "Structure.proto";
 import "User.proto";
 
@@ -34,16 +35,8 @@ message UserCreateRequestProto {
 message UserCreateResponseProto {
 	//optional FullUserProto sender = 1;
 	//just need success, since client calls startup after this anyway
-	optional UserCreateStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-    enum UserCreateStatus {
-		SUCCESS = 1;
-		FAIL_INVALID_NAME = 2; //not checking
-		FAIL_USER_WITH_UDID_ALREADY_EXISTS = 3;
-     	FAIL_INVALID_REFER_CODE = 4; //not checking
-     	FAIL_USER_WITH_FACEBOOK_ID_EXISTS = 5;
-		FAIL_OTHER = 6;
-	}  
 }
 
 //------------------------------------------------------------------------------------------
@@ -57,13 +50,9 @@ message LevelUpRequestProto {
 
 message LevelUpResponseProto {
      optional MinimumUserProto sender = 1;
-     optional LevelUpStatus status = 2;
+     optional ResponseStatus status = 2;
      //repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
 
-	enum LevelUpStatus {
-     	SUCCESS = 1;
-     	FAIL_OTHER = 2;
-     }
 }
 
 //------------------------------------------------------------------------------------------
@@ -108,16 +97,10 @@ message SetFacebookIdRequestProto {
 
 message SetFacebookIdResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional SetFacebookIdStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 	optional MinimumUserProto existing = 3;
-	
-	enum SetFacebookIdStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_FB_ID_EXISTS = 3;
-		FAIL_USER_FB_ID_ALREADY_SET = 4;
-	}
+
 }
 	
 
@@ -145,16 +128,8 @@ message UpdateUserCurrencyRequestProto {
 
 message UpdateUserCurrencyResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional UpdateUserCurrencyStatus status = 2;
-	
-	
-	enum UpdateUserCurrencyStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_INSUFFICIENT_CASH = 3;
-		FAIL_INSUFFICIENT_OIL = 4;
-		FAIL_INSUFFICIENT_GEMS = 5;
-	}
+	optional ResponseStatus status = 2;
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -168,12 +143,8 @@ message SetGameCenterIdResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional string gameCenterId = 2;
 	
-	optional SetGameCenterIdStatus status = 3;
-	
-	enum SetGameCenterIdStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
+	optional ResponseStatus status = 3;
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -186,12 +157,8 @@ message SetAvatarMonsterRequestProto {
 message SetAvatarMonsterResponseProto {
 	optional MinimumUserProto sender = 1;
 	
-	optional SetAvatarMonsterStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum SetAvatarMonsterStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -205,12 +172,8 @@ message UpdateClientTaskStateRequestProto {
 message UpdateClientTaskStateResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional bytes taskState = 2;
-	optional UpdateClientTaskStateStatus status = 3;
+	optional ResponseStatus status = 3;
 	
-	enum UpdateClientTaskStateStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -224,12 +187,8 @@ message UpdateUserStrengthRequestProto {
 
 message UpdateUserStrengthResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional UpdateUserStrengthStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum UpdateUserStrengthStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 	
 //------------------------------------------------------------------------------------------
@@ -243,11 +202,7 @@ message SetTangoIdResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional string tangoId = 2;
 	
-	optional SetTangoIdStatus status = 3;
+	optional ResponseStatus status = 3;
 	
-	enum SetTangoIdStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 	

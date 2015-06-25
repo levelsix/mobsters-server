@@ -70,4 +70,254 @@ enum GameType {
 	BOARD_OBSTACLE = 7;
 }
 
-// the ResourceType enum in Structure.proto, should be in here
+//If I don't make it...tell my parents I love them
+enum ResourceType {
+	NO_RESOURCE = 4;
+	CASH = 1;
+	OIL = 2;
+	GEMS = 3;
+	GACHA_CREDITS=  5;
+	
+	//NO_RESOURCE = 4; defined above
+	
+	MONSTER = 20;
+}
+
+enum ResponseStatus {
+	SUCCESS = 1;
+	FAIL_OTHER = 2;
+	FAIL_TIME_OUT_OF_SYNC = 3;
+	
+	//used by CreateBattleItem, CompleteBattleItem, CreateClan, ReviveInDungeon, EndPersistentEventCoolDownTimer, EvolveMonster,
+	//EnhancementWaitTimeComplete, UpdateMonsterHealth, HealMonster, HealMonsterWaitTimeComplete, IncreaseMonsterInventorySlot,
+	//BeginObstacleRemoval
+	FAIL_INSUFFICIENT_FUNDS = 4;
+	
+	//used by CreateClan, QueueUp, PerformResearch, PurchaseNormStructure, UpgradeNormStructure, UpdateUserCurrency
+	FAIL_INSUFFICIENT_CASH = 5;
+	
+	//used by SubmitMonsterEnhancement, PerformResearch, PurchaseNormStructure, UpgradeNormStructure, UpdateUserCurrency
+	FAIL_INSUFFICIENT_OIL = 6;
+	
+	//used by PurchaseBoosterPack, SolicitTeamDonation, ExchangeGemsForResources, CompleteMiniJob, RefreshMiniJob, EvolveMonster,
+	//EvolutionFinished, SubmitMonsterEnhancement, CombineUserMonsterPieces, QueueUp, PerformResearch, FinishPerformingResearch,
+	//PurchaseNormStructure, UpgradeNormStructure, FinishNormStructWaittime, BeginObstacleRemoval, ObstacleRemovalComplete,
+	//UpdateUserCurrency
+	FAIL_INSUFFICIENT_GEMS = 7;
+	
+	//used by AchievementRedeem, RedeemMiniJob, CollectMonsterEnhancement
+	FAIL_NOT_COMPLETE = 8;
+	
+	//used by TradeItemForBooster, RefreshMiniJob, RedeemSecretGift
+	FAIL_INSUFFICIENT_ITEM = 9;
+	
+	//used by BeginMiniJob, CompleteMiniJob, RedeemMiniJob, FulfillTeamDonationSolicitation, EvolveMonster, HealMonster
+	FAIL_DOESNT_EXIST = 10;
+	
+	//--------------------------EventAchievement--------------------
+	
+	//used by AchievementRedeem, 
+	FAIL_ALREADY_REDEEMED = 100;
+	
+	//--------------------------EventApns--------------------
+	
+	//used by EnableAPNS
+	FAIL_NOT_ENABLED = 200;
+	
+	//--------------------------EventBattleItem---------------------
+	
+	//used by CompleteBattleItem, DiscardBattleItem
+	FAIL_INVALID_BATTLE_ITEMS = 300;
+
+	//--------------------------EventBoosterPack--------------------
+
+	//used by PurchaseBoosterPack
+	FAIL_INSUFFICIENT_GACHA_CREDITS = 400;
+	
+	//--------------------------EventChat---------------------------
+	
+	//used by SendGroupChat, PrivateChatPost
+	FAIL_TOO_LONG = 500;
+	
+	//used by SendGroupChat, PrivateChatPost
+	FAIL_BANNED = 501;
+	
+	//used by PrivateChatPost,
+	FAIL_NO_CONTENT_SENT = 502;
+	
+	//used by TranslateSelectMessages
+	FAIL_NOT_VALID_LANGUAGE = 503;
+	
+	//--------------------------EventCity---------------------------
+	
+	//used by LoadPlayerCity,
+	FAIL_NO_SUCH_PLAYER = 600;
+	
+	//--------------------------EventClan---------------------------
+	
+	//used by RequestJoinClan
+	SUCCESS_REQUEST = 701;
+	
+	//used by RequestJoinClan
+	SUCCESS_JOIN = 702;
+	
+	//used by AttackClanRaidMonster
+	SUCCESS_MONSTER_JUST_DIED = 703;
+
+	//used by CreateClan, UserCreate
+	FAIL_NAME_TAKEN = 704;
+	
+	//used by CreateClan, RequestJoinClan, RetractRequestJoinClan, ApproveOrRejectRequestToJoinClan
+	FAIL_ALREADY_IN_CLAN = 705;
+	
+	//used by CreateClan,
+	FAIL_INVALID_TAG_LENGTH = 706;
+	
+	//used by CreateClan,
+	FAIL_TAG_TAKEN = 707;
+	
+	//used by BeginClanRaid,
+	FAIL_ALREADY_STARTED = 708;
+	
+	//used by LeaveCLan, SolicitClanHelp
+	FAIL_NOT_IN_CLAN = 709;
+	
+	//used by LeaveClan
+	FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 710;	
+	
+	//used by FulFIllTeamDonationSolicitation
+	FAIL_ALREADY_FULFILLED = 711;
+	
+	//used by RequestJoinClan 
+	FAIL_REQUEST_ALREADY_FILED = 712;
+	
+	//used by RequestJoinClan, ApproveOrRejectRequestToJoinClan, AcceptOrRejectClanInvite
+	FAIL_CLAN_IS_FULL = 713;
+	
+	//used by RetractRequestJoinClan, ApproveOrRejectRequestToJoinClan, 
+	FAIL_DID_NOT_REQUEST = 714;
+	
+	//used by ApproveOrRejectRequestToJoinClan, TransferClanOwnership, BootPlayerFromClan, ChangeClanSettings, BeginClanRaid,
+	//PromoteDemoteClanMember, InviteToClan, 
+	FAIL_NOT_AUTHORIZED = 715;
+	
+	//used by TransferClanOwnership, BootPlayerFromClan, ChangeClanSettings, AttackClanRaidMonster, PromoteDemoteClanMember
+	FAIL_NOT_IN_CLAN = 716;
+	
+	//used by BeginClanRaid, AttackClanRaidMonster
+	FAIL_NO_ACTIVE_CLAN_RAID = 717;
+	
+	//used by BeginClanRaid,
+	FAIL_NO_MONSTERS_SENT = 718;
+	
+	//used by AttackClanRaidMonster, RecordClanRaidStats
+	FAIL_MONSTER_ALREADY_DEAD = 719;
+	
+	//used by SolicitTeamDonation,
+	FAIL_FULFILLED_REQUEST_EXISTS = 720;
+	
+	//--------------------------EventInAppPurchase-------------------
+		
+	//used by InAppPurchase
+	FAIL_DUPLICATE_RECEIPT = 800;
+	
+	//used by EarnFreeDiamonds
+	FAIL_METHOD_NOT_SUPPORTED = 801;
+	
+	//--------------------------EventLeaderBoard---------------------
+		
+	//used by RetrieveStrengthLeaderBoard
+	FAIL_NO_RESULTS = 900;
+	
+	//--------------------------EventMonster-------------------------
+	
+	//used by EvolveMonster
+	FAIL_MONSTER_REACHED_EVOLVING_LIMIT = 1000;
+	FAIL_MAX_NUM_EVOLUTIONS_REACHED = 1001;
+	
+	//used by SubmitMonsterEnhancement
+	FAIL_MONSTER_IN_ENHANCING = 1002;
+	FAIL_MONSTER_IN_EVOLUTION = 1003;
+	FAIL_MONSTER_NONEXISTENT = 1004;
+	FAIL_MONSTER_RESTRICTED = 1005;
+	
+	//used by SubmitMonsterEnhancement, HealMonster
+	FAIL_MONSTER_ALREADY_IN_HEALING = 1006;
+			
+	//used by HealMonster, HealMonsterWaitTimeComplete
+	FAIL_HEALING_NOT_COMPLETE = 1007;
+	
+	//used by IncreaseMonsterInventorySlot
+	FAIL_INSUFFICIENT_FACEBOOK_INVITES = 1008;
+	FAIL_INCONSISTENT_INVITE_DATA = 1009;
+	FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL = 1010;
+		
+	//used by CombineUserMonsterPieces
+	FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP = 1011;
+	
+	//used by AcceptAndRejectFbInviteForSlots
+	FAIL_EXPIRED = 1012;
+	
+	//used by AcceptAndRejectFbInviteForSlots
+	FAIL_ALREADY_BEEN_USED = 1013;
+	
+	//--------------------------EventPvp-----------------------------
+	
+	//used by BeginPvpBattle
+	FAIL_ENEMY_UNAVAILABLE = 1100;
+	
+	//used by EndPvpBattle
+	FAIL_BATTLE_TOOK_TOO_LONG = 1101;
+	
+	//--------------------------EventStructure-----------------------
+	
+	//used by UpgradeNormStructure, NormStructWaitComplete
+	FAIL_NOT_BUILT_YET = 1200;
+	
+	//used by UpgradeNormStructure
+	FAIL_NOT_USERS_STRUCT = 1201;
+	FAIL_AT_MAX_LEVEL_ALREADY = 1202;
+	
+	//used by DestroyMoneyTreeStructure
+	FAIL_NOT_EXPIRED_YET = 1203;
+	
+	//--------------------------EventUser----------------------------
+	
+	//used by UserCreate
+	FAIL_USER_WITH_UDID_ALREADY_EXISTS = 1300;
+	FAIL_INVALID_REFER_CODE = 1301;
+	FAIL_USER_WITH_FACEBOOK_ID_EXISTS = 1302;
+	
+	//used by SetFacebookId
+	FAIL_FB_ID_EXISTS = 1303;
+	FAIL_USER_FB_ID_ALREADY_SET = 1304;
+	
+	
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+

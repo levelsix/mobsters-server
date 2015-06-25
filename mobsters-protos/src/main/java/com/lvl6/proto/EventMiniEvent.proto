@@ -3,6 +3,7 @@
 
 import "MiniEvent.proto";
 import "Reward.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -30,12 +31,8 @@ message RetrieveMiniEventResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional UserMiniEventProto userMiniEvent = 2;
 	
-	optional RetrieveMiniEventStatus status = 3;
+	optional ResponseStatus status = 3;
 	
-	enum RetrieveMiniEventStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -46,12 +43,8 @@ message UpdateMiniEventRequestProto {
 
 message UpdateMiniEventResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional UpdateMiniEventStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum UpdateMiniEventStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -75,14 +68,9 @@ message RedeemMiniEventRewardRequestProto {
 																						//DONE
 message RedeemMiniEventRewardResponseProto {
      optional MinimumUserProto sender = 1;
-     optional RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];
+     optional ResponseStatus status = 2 [default = FAIL_OTHER];
      optional UserRewardProto rewards = 3;
      
-
-     enum RedeemMiniEventRewardStatus {
-     	SUCCESS = 1;
-     	FAIL_OTHER = 2;
-     }
 }
 
 //------------------------------------------------------------------------------------------

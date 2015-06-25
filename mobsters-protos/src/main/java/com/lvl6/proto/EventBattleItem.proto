@@ -2,6 +2,7 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "BattleItem.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -37,13 +38,9 @@ message CreateBattleItemRequestProto {
 message CreateBattleItemResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated UserBattleItemProto userBattleItems = 2;
-	optional CreateBattleItemStatus status = 3;
+	optional ResponseStatus status = 3;
 	
-	enum CreateBattleItemStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_INSUFFICIENT_FUNDS = 3;
-	}
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -59,17 +56,11 @@ message CompleteBattleItemRequestProto {
 
 message CompleteBattleItemResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional CompleteBattleItemStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 	//total battle items: total amount for the ones that finished
 	repeated UserBattleItemProto ubiUpdated = 3;
 	
-	enum CompleteBattleItemStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_INVALID_BATTLE_ITEMS = 3;
-		FAIL_INSUFFICIENT_FUNDS = 4;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -85,13 +76,8 @@ message DiscardBattleItemRequestProto {
 
 message DiscardBattleItemResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional DiscardBattleItemStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum DiscardBattleItemStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_BATTLE_ITEMS_DONT_EXIST = 3;
-	}
 }	
 
 

@@ -1,5 +1,6 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -15,12 +16,8 @@ message EnableAPNSRequestProto {
 																						//DONE
 message EnableAPNSResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional EnableAPNSStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum EnableAPNSStatus {
-		SUCCESS = 1;
-		NOT_ENABLED = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------

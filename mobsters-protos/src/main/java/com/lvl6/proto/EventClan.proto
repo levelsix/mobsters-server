@@ -3,6 +3,7 @@
 import "Battle.proto";
 import "Clan.proto";
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -29,19 +30,9 @@ message CreateClanRequestProto {
 
 message CreateClanResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional CreateClanStatus status = 2;
+	optional ResponseStatus status = 2;
 	optional MinimumClanProto clanInfo = 3;	
 	
-	enum CreateClanStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_NOT_ENOUGH_CASH = 3;
-		FAIL_NAME_TAKEN = 4;
-		FAIL_ALREADY_IN_CLAN = 5;
-		FAIL_INVALID_TAG_LENGTH = 6;
-		FAIL_TAG_TAKEN = 7;
-		FAIL_INSUFFICIENT_FUNDS = 8;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -53,14 +44,9 @@ message LeaveClanRequestProto {
 
 message LeaveClanResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional LeaveClanStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum LeaveClanStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_NOT_IN_CLAN = 3;
-		FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 4;
-	}	
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -75,7 +61,7 @@ message RequestJoinClanRequestProto {
 //two successes: request_success, join_success
 message RequestJoinClanResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional RequestJoinClanStatus status = 2;
+	optional ResponseStatus status = 2;
 	optional string clanUuid = 3;
 	optional MinimumUserProtoForClans requester = 4;
 	optional MinimumClanProto minClan = 5;
@@ -89,14 +75,6 @@ message RequestJoinClanResponseProto {
 	
 	optional int64 clientTime = 10;
 	
-	enum RequestJoinClanStatus {
-		SUCCESS_REQUEST = 1;
-		SUCCESS_JOIN = 2;
-		FAIL_ALREADY_IN_CLAN = 3;
-		FAIL_REQUEST_ALREADY_FILED = 4;
-		FAIL_CLAN_IS_FULL = 5;
-		FAIL_OTHER = 6;
-	}	
 }
 
 //------------------------------------------------------------------------------------------
@@ -108,15 +86,9 @@ message RetractRequestJoinClanRequestProto {
 
 message RetractRequestJoinClanResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional RetractRequestJoinClanStatus status = 2;
+	optional ResponseStatus status = 2;
 	optional string clanUuid = 3;
 	
-	enum RetractRequestJoinClanStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_ALREADY_IN_CLAN = 3;
-		FAIL_DID_NOT_REQUEST = 4;
-	}	
 }	
 
 //------------------------------------------------------------------------------------------
@@ -130,20 +102,12 @@ message ApproveOrRejectRequestToJoinClanRequestProto {
 
 message ApproveOrRejectRequestToJoinClanResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional ApproveOrRejectRequestToJoinClanStatus status = 2;
+	optional ResponseStatus status = 2;
 	optional MinimumUserProto requester = 3;
 	optional bool accept = 4;
 	optional MinimumClanProto minClan = 5;
 	optional FullClanProtoWithClanSize fullClan = 6;
-	
-	enum ApproveOrRejectRequestToJoinClanStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_NOT_AUTHORIZED = 3;
-		FAIL_NOT_A_REQUESTER = 4;
-		FAIL_ALREADY_IN_A_CLAN = 5;
-		FAIL_CLAN_IS_FULL = 6;
-	}	
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -169,7 +133,7 @@ message RetrieveClanInfoResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated MinimumUserProtoForClans members = 2;
 	repeated FullClanProtoWithClanSize clanInfo = 3;
-	optional RetrieveClanInfoStatus status = 4;
+	optional ResponseStatus status = 4;
 	optional bool isForSearch = 5;
 	optional bool isForBrowsingList = 6;
 	optional string clanUuid = 7;
@@ -177,10 +141,6 @@ message RetrieveClanInfoResponseProto {
 	optional int32 beforeThisClanId = 9 [deprecated = true];
 	repeated UserCurrentMonsterTeamProto monsterTeams = 10;
 	
-	enum RetrieveClanInfoStatus {
-		SUCCESS = 1;
-		OTHER_FAIL = 2;
-	}	
 }
 
 //------------------------------------------------------------------------------------------
@@ -192,18 +152,12 @@ message TransferClanOwnershipRequestProto {
 
 message TransferClanOwnershipResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional TransferClanOwnershipStatus status = 2;
+	optional ResponseStatus status = 2;
 	optional MinimumClanProto minClan = 3;
 	optional FullClanProtoWithClanSize fullClan = 4;
 	
 	optional MinimumUserProto clanOwnerNew = 5;
 	
-	enum TransferClanOwnershipStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_NOT_AUTHORIZED = 3;
-		FAIL_NEW_OWNER_NOT_IN_CLAN = 4;
-	}	
 }
 
 //------------------------------------------------------------------------------------------
@@ -216,14 +170,8 @@ message BootPlayerFromClanRequestProto {
 message BootPlayerFromClanResponseProto {
      optional MinimumUserProto sender = 1;
 	 optional MinimumUserProto playerToBoot = 2;
-	 optional BootPlayerFromClanStatus status = 3;
+	 optional ResponseStatus status = 3;
      
-     enum BootPlayerFromClanStatus {
-     	SUCCESS = 1;
-     	FAIL_OTHER = 2;
-     	FAIL_NOT_AUTHORIZED = 3;
-     	FAIL_BOOTED_NOT_IN_CLAN = 4;
-     }
 }
 
 //------------------------------------------------------------------------------------------
@@ -246,17 +194,13 @@ message ChangeClanSettingsRequestProto {
 
 message ChangeClanSettingsResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional ChangeClanSettingsStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 	optional MinimumClanProto minClan = 3;
 	optional FullClanProtoWithClanSize fullClan = 4;
 	
-	enum ChangeClanSettingsStatus {
-		SUCCESS = 1; //if all requested changes succeed 
-		FAIL_NOT_AUTHORIZED = 2;
-		FAIL_NOT_IN_CLAN = 3;
-		FAIL_OTHER = 4; //if one requested change fails, but server still process all of them
-	}	
+	//SUCCESS : if all requested changes succeed 
+	//FAIL_OTHER: if one requested change fails, but server still process all of them
 	
 }
 
@@ -288,18 +232,9 @@ message BeginClanRaidResponseProto {
 	//must be sent every time user wants to attack a clan raid stage monster or end a raid
 	optional PersistentClanEventClanInfoProto eventDetails = 2;
 	
-	optional BeginClanRaidStatus status = 3;
+	optional ResponseStatus status = 3;
 	
 	optional PersistentClanEventUserInfoProto userDetails = 4;
-	
-	enum BeginClanRaidStatus {
-		SUCCESS = 1;
-		FAIL_ALREADY_STARTED = 2;
-		FAIL_NOT_AUTHORIZED = 3; //regular members can't start it
-		FAIL_NO_ACTIVE_CLAN_RAID = 4; //should be EVENT, NOT RAID. Oh well
-		FAIL_NO_MONSTERS_SENT = 5;
-		FAIL_OTHER = 6;
-	}
 	
 }
 
@@ -343,18 +278,8 @@ message AttackClanRaidMonsterResponseProto {
 	repeated PersistentClanEventUserInfoProto clanUsersDetails = 4;
 	
 	optional FullUserMonsterProto userMonsterThatAttacked = 5;
-	optional AttackClanRaidMonsterStatus status = 6;
+	optional ResponseStatus status = 6;
 	
-	
-	
-	enum AttackClanRaidMonsterStatus {
-		SUCCESS = 1;
-		SUCCESS_MONSTER_JUST_DIED = 2;
-		FAIL_USER_NOT_IN_CLAN = 3;
-		FAIL_NO_STAGE_RAID_IN_PROGRESS = 4;
-		FAIL_MONSTER_ALREADY_DEAD = 5;
-		FAIL_OTHER = 6;
-	}
 }
 
 message AwardClanRaidStageRewardResponseProto {
@@ -377,13 +302,10 @@ message RecordClanRaidStatsRequestProto {
 
 message RecordClanRaidStatsResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional RecordClanRaidStatsStatus status = 2; 
-	
-	enum RecordClanRaidStatsStatus {
-		SUCCESS = 1;
-		FAIL_MONSTER_ALREADY_DEAD = 2; //even though time ended, clan still progresses to next stage
-		FAIL_OTHER = 3;
-	}
+	optional ResponseStatus status = 2; 
+
+	// FAIL_MONSTER_ALREADY_DEAD :even though time ended, clan still progresses to next stage
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -400,14 +322,8 @@ message PromoteDemoteClanMemberResponseProto {
 	optional UserClanStatus userClanStatus = 3 [default = MEMBER];
 	optional UserClanStatus prevUserClanStatus = 5 [default = MEMBER];
 	
-	optional PromoteDemoteClanMemberStatus status = 4;
+	optional ResponseStatus status = 4;
 	
-	enum PromoteDemoteClanMemberStatus {
-		SUCCESS = 1;
-		FAIL_NOT_IN_CLAN = 2;
-		FAIL_NOT_AUTHORIZED = 3;
-		FAIL_OTHER = 4;		
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -422,15 +338,10 @@ message SolicitClanHelpRequestProto {
 message SolicitClanHelpResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated ClanHelpProto helpProto = 2;
-	optional SolicitClanHelpStatus status = 3; 
+	optional ResponseStatus status = 3; 
 	
 	//SEND TO ALL CLAN MEMBERS IF SUCCESS
 	
-	enum SolicitClanHelpStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_NOT_IN_CLAN = 3;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -444,14 +355,10 @@ message GiveClanHelpRequestProto {
 message GiveClanHelpResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated ClanHelpProto clanHelps = 2;
-	optional GiveClanHelpStatus status = 3; 
+	optional ResponseStatus status = 3; 
 	
 	//SEND TO ALL CLAN MEMBERS ON SUCCESS
-	
-	enum GiveClanHelpStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -465,13 +372,9 @@ message EndClanHelpResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated string clanHelpUuids = 2;
 	
-	optional EndClanHelpStatus status = 3;
+	optional ResponseStatus status = 3;
 	//SEND TO ALL CLAN MEMBERS ON SUCCESS
 	
-	enum EndClanHelpStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -485,14 +388,9 @@ message InviteToClanRequestProto {
 
 message InviteToClanResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional InviteToClanStatus status = 2;
+	optional ResponseStatus status = 2;
 	optional ClanInviteProto invite = 3;
-	
-	enum InviteToClanStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_NOT_AUTHORIZED = 3;
-	}
+
 }
 
 message AcceptOrRejectClanInviteRequestProto {
@@ -506,16 +404,11 @@ message AcceptOrRejectClanInviteRequestProto {
 
 message AcceptOrRejectClanInviteResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional AcceptOrRejectClanInviteStatus status = 2;
+	optional ResponseStatus status = 2;
 	optional FullClanProtoWithClanSize fullClan = 3;
 	 
 	//send to clan only if accept
 	
-	enum AcceptOrRejectClanInviteStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_CLAN_IS_FULL = 3;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -537,14 +430,9 @@ message BeginClanAvengingRequestProto {
 message BeginClanAvengingResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated PvpClanAvengeProto clanAvengings = 2;
-	optional BeginClanAvengingStatus status = 3;
+	optional ResponseStatus status = 3;
 	
 	//SEND TO CLAN
-	
-	enum BeginClanAvengingStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -558,15 +446,10 @@ message EndClanAvengingRequestProto {
 message EndClanAvengingResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated string clanAvengeUuids = 2;	
-	optional EndClanAvengingStatus status = 3;
+	optional ResponseStatus status = 3;
 
 	//SEND TO WHOLE CLAN
 	
-	
-	enum EndClanAvengingStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -581,12 +464,7 @@ message AvengeClanMateRequestProto {
 message AvengeClanMateResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional PvpProto victim = 2 [deprecated = true]; //call RetrieveUserMonsterTeamRequestProto in EventClan.proto instead
-	optional AvengeClanMateStatus status = 3;
-	
-	enum AvengeClanMateStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
+	optional ResponseStatus status = 3;
 	
 }
 
@@ -605,16 +483,10 @@ message SolicitTeamDonationRequestProto {
 
 message SolicitTeamDonationResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional SolicitTeamDonationStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 	optional ClanMemberTeamDonationProto solicitation = 3;
 	
-	enum SolicitTeamDonationStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_INSUFFICIENT_GEMS = 3;
-		FAIL_FULFILLED_REQUEST_EXISTS = 4;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -630,15 +502,9 @@ message FulfillTeamDonationSolicitationRequestProto {
 
 message FulfillTeamDonationSolicitationResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional FulfillTeamDonationSolicitationStatus status = 2;
+	optional ResponseStatus status = 2;
 	optional ClanMemberTeamDonationProto solicitation = 3;
-   
-	enum FulfillTeamDonationSolicitationStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_NONEXISTENT_SOLICITATION = 3;
-		FAIL_ALREADY_FULFILLED = 4;
-	}
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -650,13 +516,9 @@ message VoidTeamDonationSolicitationRequestProto {
 
 message VoidTeamDonationSolicitationResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional VoidTeamDonationSolicitationStatus status = 2;
+	optional ResponseStatus status = 2;
 	repeated string clanTeamDonateUuid = 3;
-   
-	enum VoidTeamDonationSolicitationStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -670,12 +532,8 @@ message CollectClanGiftsRequestProto {
 message CollectClanGiftsResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional UserRewardProto reward = 2;
-	optional CollectClanGiftsStatus status = 3;
-	
-	enum CollectClanGiftsStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
+	optional ResponseStatus status = 3;
+
 }
 */
 //------------------------------------------------------------------------------------------
@@ -688,12 +546,8 @@ message DeleteClanGiftsRequestProto {
 
 message DeleteClanGiftsResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional DeleteClanGiftsStatus status = 2;
-	
-	enum DeleteClanGiftsStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
+	optional ResponseStatus status = 2;
+
 }
 */
 //------------------------------------------------------------------------------------------

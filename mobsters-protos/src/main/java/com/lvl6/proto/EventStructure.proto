@@ -2,6 +2,7 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "City.proto";
+import "SharedEnumConfig.proto";
 import "Structure.proto";
 import "User.proto";
 
@@ -30,16 +31,9 @@ message PurchaseNormStructureRequestProto {
 
 message PurchaseNormStructureResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional PurchaseNormStructureStatus status = 2;
+	optional ResponseStatus status = 2;
 	optional string userStructUuid = 3;
 	
-	enum PurchaseNormStructureStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_CASH = 2;
-		FAIL_INSUFFICIENT_GEMS = 3;
-		FAIL_INSUFFICIENT_OIL = 4;
-		FAIL_OTHER = 5;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -58,12 +52,8 @@ message MoveOrRotateNormStructureRequestProto {
 																						//DONE
 message MoveOrRotateNormStructureResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional MoveOrRotateNormStructureStatus status = 2;
-	
-	enum MoveOrRotateNormStructureStatus {
-		SUCCESS = 1;
-		OTHER_FAIL = 2;
-	}
+	optional ResponseStatus status = 2;
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -85,22 +75,8 @@ message UpgradeNormStructureRequestProto {
 																						//DONE
 message UpgradeNormStructureResponseProto {	
 	optional MinimumUserProto sender = 1;
-	optional UpgradeNormStructureStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum UpgradeNormStructureStatus {
-		SUCCESS = 1;
-		FAIL_NOT_ENOUGH_CASH = 2;
-		FAIL_NOT_ENOUGH_GEMS = 3;
-		FAIL_NOT_ENOUGH_OIL = 4;
-		FAIL_NOT_BUILT_YET = 5;
-		FAIL_NOT_USERS_STRUCT = 6;
-		
-		//client will do this, since it already knows if a user is upgrading something
-		//FAIL_ANOTHER_STRUCT_STILL_UPGRADING = 7; 
-		
-		FAIL_AT_MAX_LEVEL_ALREADY = 8;
-		FAIL_OTHER = 9;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -118,13 +94,8 @@ message FinishNormStructWaittimeWithDiamondsRequestProto {
 																						//DONE
 message FinishNormStructWaittimeWithDiamondsResponseProto {
      optional MinimumUserProto sender = 1;
-     optional FinishNormStructWaittimeStatus status = 2;
-     
-     enum FinishNormStructWaittimeStatus {
-     	SUCCESS = 1;
-     	FAIL_NOT_ENOUGH_GEMS = 2;
-     	FAIL_OTHER = 3;
-     }
+     optional ResponseStatus status = 2;
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -153,14 +124,9 @@ message NormStructWaitCompleteRequestProto {
 																						//DONE
 message NormStructWaitCompleteResponseProto {
      optional MinimumUserProto sender = 1;
-     optional NormStructWaitCompleteStatus status = 2;
+     optional ResponseStatus status = 2;
      repeated FullUserStructureProto userStruct = 3;
      
-     enum NormStructWaitCompleteStatus {
-     	SUCCESS = 1;
-     	FAIL_NOT_DONE_YET = 2;
-     	FAIL_OTHER = 3;
-     }
 }
 
 //------------------------------------------------------------------------------------------
@@ -179,12 +145,8 @@ message RetrieveCurrencyFromNormStructureRequestProto {
 																						//DONE
 message RetrieveCurrencyFromNormStructureResponseProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
-	optional RetrieveCurrencyFromNormStructureStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum RetrieveCurrencyFromNormStructureStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -196,13 +158,8 @@ message DestroyMoneyTreeStructureRequestProto {
 
 message DestroyMoneyTreeStructureResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional DestroyMoneyTreeStructureStatus status = 2;
+	optional ResponseStatus status = 2;
 
-	enum DestroyMoneyTreeStructureStatus {
-		SUCCESS = 1;
-		FAIL_NOT_EXPIRED_YET = 2;
-		FAIL_OTHER = 3;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -247,11 +204,8 @@ message SpawnObstacleResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated UserObstacleProto spawnedObstacles = 2;
 	
-	optional SpawnObstacleStatus status = 3;
-	enum SpawnObstacleStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
+	optional ResponseStatus status = 3;
+
 }
 
 
@@ -272,14 +226,8 @@ message BeginObstacleRemovalRequestProto {
 
 message BeginObstacleRemovalResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional BeginObstacleRemovalStatus status = 2;
-	
-	enum BeginObstacleRemovalStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_GEMS = 2;
-		FAIL_INSUFFICIENT_RESOURCE = 3;
-		FAIL_OTHER = 4;
-	}
+	optional ResponseStatus status = 2;
+
 	
 }
 
@@ -302,11 +250,6 @@ message ObstacleRemovalCompleteRequestProto {
 
 message ObstacleRemovalCompleteResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional ObstacleRemovalCompleteStatus status = 2;
-	
-	enum ObstacleRemovalCompleteStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_GEMS = 2;
-		FAIL_OTHER = 3;
-	}
+	optional ResponseStatus status = 2;
+
 }

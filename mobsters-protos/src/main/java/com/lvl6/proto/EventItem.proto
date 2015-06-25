@@ -4,6 +4,7 @@ import "BoosterPackStuff.proto";
 import "Item.proto";
 import "MonsterStuff.proto";
 import "Reward.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -20,7 +21,7 @@ message TradeItemForBoosterRequestProto {
 																						//DONE
 message TradeItemForBoosterResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional TradeItemForBoosterStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 	//if user received, say, two pieces of a monster
 	//and he needs one to complete an existing monster
@@ -33,12 +34,6 @@ message TradeItemForBoosterResponseProto {
 	
 	optional UserRewardProto rewards = 6;
 	
-	
-	enum TradeItemForBoosterStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_INSUFFICIENT_ITEM = 3;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -54,15 +49,10 @@ message TradeItemForSpeedUpsRequestProto {
 
 message TradeItemForSpeedUpsResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional TradeItemForSpeedUpsStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 	repeated UserItemUsageProto itemsUsed = 3; //usageIds are now set
 	
-	enum TradeItemForSpeedUpsStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -74,12 +64,8 @@ message RemoveUserItemUsedRequestProto {
 
 message RemoveUserItemUsedResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional RemoveUserItemUsedStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum RemoveUserItemUsedStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -98,10 +84,6 @@ message TradeItemForResourcesRequestProto {
 
 message TradeItemForResourcesResponseProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
-	optional TradeItemForResourcesStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum TradeItemForResourcesStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }

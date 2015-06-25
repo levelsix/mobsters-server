@@ -2,6 +2,7 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "LeaderBoard.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 
@@ -27,12 +28,7 @@ message RetrieveStrengthLeaderBoardResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional StrengthLeaderBoardProto senderLeaderBoardInfo = 2;
 	repeated StrengthLeaderBoardProto leaderBoardInfo = 3;
-	optional RetrieveStrengthLeaderBoardStatus status = 4;
+	optional ResponseStatus status = 4;
 	
-	enum RetrieveStrengthLeaderBoardStatus {
-     	SUCCESS = 1;
-     	FAIL_OTHER = 2;
-     	FAIL_NO_RESULTS = 3;
-    }
 
 }

@@ -3,6 +3,7 @@
 
 import "Battle.proto";
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -31,18 +32,8 @@ message EvolveMonsterRequestProto {
 message EvolveMonsterResponseProto {
 	optional MinimumUserProto sender = 1;
 	
-	optional EvolveMonsterStatus status = 2;
-	
-	enum EvolveMonsterStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_GEMS = 2;
-		FAIL_INSUFFICIENT_RESOURCES = 3;
-		FAIL_MONSTER_REACHED_EVOLVING_LIMIT = 4;
-		//user is already evolving some number of monsters and reached the limit.
-		FAIL_MAX_NUM_EVOLUTIONS_REACHED = 5;
-		FAIL_NONEXISTENT_MONSTERS = 6;
-		FAIL_OTHER = 7;
-	}
+	optional ResponseStatus status = 2;
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -58,13 +49,8 @@ message EvolutionFinishedRequestProto {
 message EvolutionFinishedResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional FullUserMonsterProto evolvedMonster = 2;
-	optional EvolutionFinishedStatus status = 3;
+	optional ResponseStatus status = 3;
 	
-	enum EvolutionFinishedStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_GEMS = 2;
-		FAIL_OTHER = 3;
-	}
 } 
 
 //------------------------------------------------------------------------------------------
@@ -91,21 +77,9 @@ message SubmitMonsterEnhancementRequestProto {
 
 message SubmitMonsterEnhancementResponseProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
-	optional SubmitMonsterEnhancementStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 
-	enum SubmitMonsterEnhancementStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_GEMS = 2;
-		FAIL_INSUFFICIENT_OIL = 3;
-		FAIL_OTHER = 4;
-		//TRYING_TO_SURPASS_MAX_LEVEL = 5;
-		FAIL_MONSTER_IN_ENHANCING = 6;
-		FAIL_MONSTER_IN_HEALING = 7;
-		FAIL_MONSTER_IN_EVOLUTION = 8;
-		FAIL_MONSTER_NONEXISTENT = 9;
-		FAIL_MONSTER_RESTRICTED = 10;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -130,13 +104,8 @@ message EnhancementWaitTimeCompleteRequestProto {
 
 message EnhancementWaitTimeCompleteResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional EnhancementWaitTimeCompleteStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum EnhancementWaitTimeCompleteStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_FUNDS = 3;
-		FAIL_OTHER = 4;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -154,13 +123,8 @@ message CollectMonsterEnhancementRequestProto {
 
 message CollectMonsterEnhancementResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional CollectMonsterEnhancementStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum CollectMonsterEnhancementStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_ENHANCEMENT_INCOMPLETE = 3;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -221,13 +185,8 @@ message UpdateMonsterHealthRequestProto {
 
 message UpdateMonsterHealthResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional UpdateMonsterHealthStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum UpdateMonsterHealthStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_FUNDS = 2;
-		FAIL_OTHER = 3;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -264,17 +223,8 @@ message HealMonsterRequestProto {
 
 message HealMonsterResponseProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
-	optional HealMonsterStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum HealMonsterStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_FUNDS = 2;
-		FAIL_ALL_MONSTERS_ALREADY_HEALING = 3;
-		FAIL_ALL_MONSTERS_NONEXISTENT = 4;
-		FAIL_OTHER = 5;
-		
-		FAIL_HEALING_NOT_COMPLETE = 6;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -292,14 +242,8 @@ message HealMonsterWaitTimeCompleteRequestProto {
 
 message HealMonsterWaitTimeCompleteResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional HealMonsterWaitTimeCompleteStatus status = 2;
-	
-	enum HealMonsterWaitTimeCompleteStatus {
-		SUCCESS = 1;
-		FAIL_HEALING_NOT_COMPLETE = 2;
-		FAIL_INSUFFICIENT_FUNDS = 3;
-		FAIL_OTHER = 4;
-	}
+	optional ResponseStatus status = 2;
+
 }
 */
 //------------------------------------------------------------------------------------------
@@ -312,12 +256,8 @@ message AddMonsterToBattleTeamRequestProto {
 
 message AddMonsterToBattleTeamResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional AddMonsterToBattleTeamStatus status = 2;
-	
-	enum AddMonsterToBattleTeamStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
+	optional ResponseStatus status = 2;
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -329,12 +269,8 @@ message RemoveMonsterFromBattleTeamRequestProto {
 
 message RemoveMonsterFromBattleTeamResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional RemoveMonsterFromBattleTeamStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum RemoveMonsterFromBattleTeamStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -358,19 +294,8 @@ message IncreaseMonsterInventorySlotRequestProto {
 
 message IncreaseMonsterInventorySlotResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional IncreaseMonsterInventorySlotStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	
-	
-	 enum IncreaseMonsterInventorySlotStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_FUNDS = 2;
-		FAIL_INSUFFICIENT_FACEBOOK_INVITES = 3;
-		FAIL_OTHER = 4;
-		//user struct id/fb lvl not consistent across invites
-		FAIL_INCONSISTENT_INVITE_DATA = 5;
-		FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL = 6;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -396,14 +321,10 @@ message InviteFbFriendsForSlotsRequestProto {
 //server sends this to all the recipients in fbFriendIds that have a user id
 message InviteFbFriendsForSlotsResponseProto {
 	optional MinimumUserProtoWithFacebookId sender = 1;
-	optional InviteFbFriendsForSlotsStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 	repeated UserFacebookInviteForSlotProto invitesNew = 3;
 	
-	enum InviteFbFriendsForSlotsStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -418,16 +339,10 @@ message AcceptAndRejectFbInviteForSlotsRequestProto {
 //server sends this to all the inviters in acceptedInviteIds
 message AcceptAndRejectFbInviteForSlotsResponseProto {
 	optional MinimumUserProtoWithFacebookId sender = 1;
-	optional AcceptAndRejectFbInviteForSlotsStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 	repeated UserFacebookInviteForSlotProto acceptedInvites = 3;
-	
-	enum AcceptAndRejectFbInviteForSlotsStatus {
-		SUCCESS = 1;
-		FAIL_EXPIRED = 2; //3 PEOPLE ALREADY ACCEPTED INVITE
-		FAIL_ALREADY_BEEN_USED = 3;
-		FAIL_OTHER = 4;
-	}
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -443,15 +358,8 @@ message CombineUserMonsterPiecesRequestProto {
 
 message CombineUserMonsterPiecesResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional CombineUserMonsterPiecesStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum CombineUserMonsterPiecesStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFUCIENT_GEMS = 2;
-		//user can only speed up combining the pieces of ONE monster
-		FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP = 3;
-		FAIL_OTHER = 4;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -463,12 +371,8 @@ message SellUserMonsterRequestProto {
 
 message SellUserMonsterResponseProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
-	optional SellUserMonsterStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum SellUserMonsterStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -480,12 +384,8 @@ message RestrictUserMonsterRequestProto {
 
 message RestrictUserMonsterResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional RestrictUserMonsterStatus status = 2;
-	
-	enum RestrictUserMonsterStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
+	optional ResponseStatus status = 2;
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -497,12 +397,8 @@ message UnrestrictUserMonsterRequestProto {
 
 message UnrestrictUserMonsterResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional UnrestrictUserMonsterStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum UnrestrictUserMonsterStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -514,11 +410,7 @@ message RetrieveUserMonsterTeamRequestProto {
 
 message RetrieveUserMonsterTeamResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional RetrieveUserMonsterTeamStatus status = 2;
+	optional ResponseStatus status = 2;
 	repeated PvpProto userMonsterTeam = 3;
 	
-	enum RetrieveUserMonsterTeamStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }

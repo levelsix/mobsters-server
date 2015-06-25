@@ -27,7 +27,7 @@ message InAppPurchaseRequestProto {
 																						//DONE
 message InAppPurchaseResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional InAppPurchaseStatus status = 2;
+	optional ResponseStatus status = 2;
 	//should be renamed gemsGained
 	optional int32 diamondsGained = 3;
 	optional int32 coinsGained = 4 [deprecated = true];
@@ -49,11 +49,6 @@ message InAppPurchaseResponseProto {
 	optional SalesPackageProto purchasedSalesPackage = 12;
 	optional UserRewardProto rewards = 13;
 		
-	enum InAppPurchaseStatus {
-		SUCCESS = 1;
-		FAIL = 2;
-		DUPLICATE_RECEIPT = 3;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -67,15 +62,9 @@ message EarnFreeDiamondsRequestProto {
 
 message EarnFreeDiamondsResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional EarnFreeDiamondsStatus status = 2;
+	optional ResponseStatus status = 2;
 	optional EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];
-	
-	enum EarnFreeDiamondsStatus {
-		SUCCESS = 1;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 2;
-		METHOD_NOT_SUPPORTED = 3;
-		OTHER_FAIL = 4;
-	}
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -94,13 +83,9 @@ message ExchangeGemsForResourcesRequestProto {
 
 message ExchangeGemsForResourcesResponseProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
-	optional ExchangeGemsForResourcesStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum ExchangeGemsForResourcesStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_INSUFFICIENT_GEMS = 3;
-	}
+
 }
 
 //------------------------------------------------------------------------------------------

@@ -3,6 +3,7 @@
 
 import "Chat.proto";
 import "Reward.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -24,16 +25,12 @@ message SendTangoGiftRequestProto {
 																						//DONE
 message SendTangoGiftResponseProto {
      optional MinimumUserProto sender = 1;
-     optional SendTangoGiftStatus status = 2;
+     optional ResponseStatus status = 2;
      repeated string tangoUserIdsNotInToonSquad = 3;
      repeated string tangoUserIdsInToonSquad = 4;
      
      //ReceivedGiftResponseProto is sent to the users tied to tangoUserIds
      
-     enum SendTangoGiftStatus {
-     	SUCCESS = 1;
-     	FAIL_OTHER = 2;
-     }
 }
 
 //------------------------------------------------------------------------------------------
@@ -53,12 +50,8 @@ message DeleteGiftRequestProto {
 
 message DeleteGiftResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional DeleteGiftStatus status = 2;
-	
-	enum DeleteGiftStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
+	optional ResponseStatus status = 2;
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -76,12 +69,8 @@ message CollectGiftResponseProto {
      optional MinimumUserProtoWithMaxResources sender = 1;
      optional UserRewardProto reward = 2;
      
-     optional CollectGiftStatus status = 3;    
+     optional ResponseStatus status = 3;    
      
-     enum CollectGiftStatus {
-          SUCCESS = 1;
-          FAIL_OTHER = 2;
-     }
 }
 
 //------------------------------------------------------------------------------------------
@@ -96,13 +85,8 @@ message RedeemSecretGiftResponseProto {
 	optional MinimumUserProto mup = 1;
 	repeated UserSecretGiftProto nuGifts = 2; //new gifts after redeeming cur one
 	
-	optional RedeemSecretGiftStatus status = 3;
+	optional ResponseStatus status = 3;
 	optional UserRewardProto reward = 4;
-	
-	enum RedeemSecretGiftStatus {
-		SUCCESS = 1;
-		FAIL_ITEMS_NONEXISTENT = 2;
-		FAIL_OTHER = 3;
-	}
+
 }
 //------------------------------------------------------------------------------------------

@@ -56,12 +56,8 @@ message BeginDungeonResponseProto {
 	repeated TaskStageProto tsp = 2;
 	optional string userTaskUuid = 3;
 	optional int32 taskId = 4;
-	optional BeginDungeonStatus status = 5;
+	optional ResponseStatus status = 5;
 	
-	enum BeginDungeonStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -86,7 +82,7 @@ message EndDungeonRequestProto {
 
 message EndDungeonResponseProto {
 	optional MinimumUserProtoWithMaxResources sender = 1;
-	optional EndDungeonStatus status = 2;
+	optional ResponseStatus status = 2;
 	//repeated FullUserMonsterProto newOrUpdated = 3; //BAD!!! DON'T START NAMES WITH NEW OR COPY
 	repeated FullUserMonsterProto updatedOrNew = 3;
 	optional int32 taskId = 4; //TODO: REMOVE
@@ -98,10 +94,6 @@ message EndDungeonResponseProto {
 	//contains the cash and oil remaining in the task
 	optional UserTaskCompletedProto utcp = 8;
 	
-	enum EndDungeonStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -120,13 +112,8 @@ message ReviveInDungeonRequestProto {
 
 message ReviveInDungeonResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional ReviveInDungeonStatus status = 2;
-	
-	enum ReviveInDungeonStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_FUNDS = 2;
-		FAIL_OTHER = 3;
-	}
+	optional ResponseStatus status = 2;
+
 }
 
 //------------------------------------------------------------------------------------------
@@ -144,12 +131,8 @@ message EndPersistentEventCoolDownTimerRequestProto {
 
 message EndPersistentEventCoolDownTimerResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional EndPersistentEventCoolDownTimerStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum EndPersistentEventCoolDownTimerStatus {
-		SUCCESS = 1;
-		FAIL_INSUFFICIENT_FUNDS = 2;
-		FAIL_OTHER = 3;
-	}
+
 }
 */

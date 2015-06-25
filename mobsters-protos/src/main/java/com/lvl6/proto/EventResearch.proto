@@ -1,6 +1,7 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "SharedEnumConfig.proto";
 import "Structure.proto";
 import "User.proto";
 
@@ -27,16 +28,9 @@ message PerformResearchRequestProto {
 
 message PerformResearchResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional PerformResearchStatus status = 2;
-    optional string userResearchUuid = 3;
-	
-	enum PerformResearchStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_INSUFFICIENT_CASH = 3;
-		FAIL_INSUFFICIENT_GEMS = 4;
-		FAIL_INSUFFICIENT_OIL = 5;
-	}
+	optional ResponseStatus status = 2;
+    optional string userResearchUuid = 3;	
+
 }
 
 
@@ -50,13 +44,8 @@ message FinishPerformingResearchRequestProto {
 																						//DONE
 message FinishPerformingResearchResponseProto {
      optional MinimumUserProto sender = 1;
-     optional FinishPerformingResearchStatus status = 2;
-     
-     enum FinishPerformingResearchStatus {
-     	SUCCESS = 1;
-     	FAIL_OTHER = 2;
-     	FAIL_NOT_ENOUGH_GEMS = 3;
-     }
+     optional ResponseStatus status = 2;
+
 }
 
 

@@ -2,6 +2,7 @@
 
 import "City.proto";
 //import "Quest.proto";
+import "SharedEnumConfig.proto";
 import "Structure.proto";
 import "User.proto";
 
@@ -20,17 +21,12 @@ message LoadPlayerCityRequestProto {
 message LoadPlayerCityResponseProto {
     optional MinimumUserProto sender = 1;
     optional MinimumUserProto cityOwner = 2;
-	optional LoadPlayerCityStatus status = 3;
+	optional ResponseStatus status = 3;
 	repeated FullUserStructureProto ownerNormStructs = 4;
 
 	repeated UserCityExpansionDataProto userCityExpansionDataProtoList = 5;
 	repeated UserObstacleProto obstacles = 6;
      
-    enum LoadPlayerCityStatus {
-     	SUCCESS = 1;
-     	FAIL_NO_SUCH_PLAYER = 2;
-     	FAIL_OTHER = 3;
-     }
 }
 
 //------------------------------------------------------------------------------------------

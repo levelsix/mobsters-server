@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "Chat.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -34,14 +35,8 @@ message SendGroupChatRequestProto {
 
 message SendGroupChatResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional SendGroupChatStatus status = 2;
+	optional ResponseStatus status = 2;
 	
-	enum SendGroupChatStatus {
-		SUCCESS = 1;
-		TOO_LONG = 2;
-		OTHER_FAIL = 3;
-		BANNED = 4;
-	}
 }
 
 message ReceivedGroupChatResponseProto {
@@ -65,18 +60,11 @@ message PrivateChatPostRequestProto {
 																						//DONE
 message PrivateChatPostResponseProto {
 	 optional MinimumUserProto sender = 1;
-     optional PrivateChatPostStatus status = 2;
+     optional ResponseStatus status = 2;
 	 optional PrivateChatPostProto post = 3;
 	 optional PrivateChatDefaultLanguageProto translationSetting = 4;
 	 optional GroupChatMessageProto adminMessage = 5;
 	
-     enum PrivateChatPostStatus {
-     	SUCCESS = 1;
-     	NO_CONTENT_SENT = 2;
-     	POST_TOO_LARGE = 3;
-     	OTHER_FAIL = 4;
-     	BANNED = 5;
-	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -99,13 +87,9 @@ message RetrievePrivateChatPostsResponseProto {
 	
 	//switch to UUIDs makes this obsolete; consider repeated string blackListIds or date
 	optional int32 beforePrivateChatId = 3 [deprecated = true ];
-	optional RetrievePrivateChatPostsStatus status = 4;
+	optional ResponseStatus status = 4;
 	optional string otherUserUuid = 5;
-
-	enum RetrievePrivateChatPostsStatus {
-		SUCCESS = 1;
-		FAIL = 2;
-	}	
+	
 }
 
 //------------------------------------------------------------------------------------
@@ -123,13 +107,8 @@ message TranslateSelectMessagesRequestProto {
 message TranslateSelectMessagesResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated PrivateChatPostProto messagesTranslated = 2;
-	optional TranslateSelectMessagesStatus status = 3;
+	optional ResponseStatus status = 3;
 
-	enum TranslateSelectMessagesStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-		FAIL_NOT_VALID_LANGUAGE = 3;
-	}
 }
 
 

@@ -3,6 +3,7 @@
 import "Dev.proto";
 import "Item.proto";
 import "MonsterStuff.proto";
+import "SharedEnumConfig.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -24,15 +25,11 @@ message DevRequestProto {
 																						//DONE
 message DevResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional DevStatus status = 2;
+	optional ResponseStatus status = 2;
 	
 	repeated FullUserMonsterProto fump = 3;
 	optional UserItemProto uip = 4;
 	
-	enum DevStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
 }
 
 //------------------------------------------------------------------------------------------
