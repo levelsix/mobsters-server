@@ -101,7 +101,19 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   
   @OnError
   def error(t:Throwable)={
-    logger.debug(s"Error in ClientConnection", t)
+    logger.debug(s"Error in ClientConnection. Closing connection.", t)
+    closeConnection
+  }
+  
+  def closeConnection= {
+    session match{
+      case Some(sess)=> {
+       sess.close() 
+       session = None
+      }
+      case None =>
+    }
+    ClientConnections.removeConnection(this)    
   }
   
   def newToClientEvents(eventUuid:String, playerId:Option[String]):ToClientEvents= {
@@ -231,7 +243,14 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
         	  val buff = ByteBuffer.allocate(bytes.length).put(bytes)
             buff.flip()
             synchronized{
+              try {
               sess.getBasicRemote.sendBinary(buff)
+              }catch{
+                case t:Throwable =>     {
+                  logger.error(s"Error sending ${bytes.size} bytes. Closing connection", t)
+                  closeConnection
+                }            
+              }
               //logger.debug(s"Message sent: $buff")
             }
           }
@@ -244,26 +263,6 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     }
   }
   
-  def sendToThisSocket(bytes:String) = {
-    session match{
-      case Some(sess)=>{
-        sess.isOpen() match{
-          case true =>  {
-            logger.info(s"Sending message to this socket: $this")
-            //val buff = ByteBuffer.allocate(bytes.length).put(bytes)
-            sess.synchronized{
-              sess.getBasicRemote.sendText(bytes)
-              //logger.info(s"Message sent: $bytes")
-            }
-          }
-          case false => logger.warn(s"Cannot send message. Socket is closed. $this")
-        }
-      }
-      case None=>{
-        logger.warn(s"Cannot send message. There is no session: $this")
-      }
-    }
-  }
   
   //rabbit listener
   def onMessage(msg:Message) = {
