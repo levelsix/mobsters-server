@@ -70,32 +70,49 @@ public class LeaderBoardImpl {
 	
 	
 	public void addToLeaderboard(String userId, long strength) {
-		strLeaderboard.add(userId, strength);
-		log.info("adding to leaderboard userId{}, str {}", userId, strength);
+		if(!leaderboardReloadLock.isLocked()) { 
+			strLeaderboard.add(userId, strength);
+			log.info("adding to leaderboard userId{}, str {}", userId, strength);
+		}
+		else {
+			log.info("attempted to add to leaderboard when locked/reloading");
+		}
 	}
 	
 	public List<StrengthLeaderBoard> getStrengths(int minRank, int maxRank) {
-		List<StrengthLeaderBoard> returnList = new ArrayList<StrengthLeaderBoard>();
-		for(ZSetMember m : strLeaderboard.range(minRank, maxRank)) {
-			int rank = m.getRank() + 1;
-			String userId = m.getKey();
-			long strength = m.getScore();
-			StrengthLeaderBoard slb = new StrengthLeaderBoard(rank, userId, strength);
-			returnList.add(slb);
+		if(!leaderboardReloadLock.isLocked()) { 
+			List<StrengthLeaderBoard> returnList = new ArrayList<StrengthLeaderBoard>();
+			for(ZSetMember m : strLeaderboard.range(minRank, maxRank)) {
+				int rank = m.getRank() + 1;
+				String userId = m.getKey();
+				long strength = m.getScore();
+				StrengthLeaderBoard slb = new StrengthLeaderBoard(rank, userId, strength);
+				returnList.add(slb);
+			}
+			return returnList;
 		}
-		return returnList;
+		else {
+			log.info("attemping to retrieve from leaderboard when locked/reloading");
+			return null;
+		}
 	}
 	
 	public List<StrengthLeaderBoard> getTopNStrengths(int num) {
-		List<StrengthLeaderBoard> returnList = new ArrayList<StrengthLeaderBoard>();
-		for(ZSetMember m : strLeaderboard.range(0, num)) {
-			int rank = m.getRank() + 1;
-			String userId = m.getKey();
-			long strength = m.getScore();
-			StrengthLeaderBoard slb = new StrengthLeaderBoard(rank, userId, strength);
-			returnList.add(slb);
+		if(!leaderboardReloadLock.isLocked()) { 
+			List<StrengthLeaderBoard> returnList = new ArrayList<StrengthLeaderBoard>();
+			for(ZSetMember m : strLeaderboard.range(0, num)) {
+				int rank = m.getRank() + 1;
+				String userId = m.getKey();
+				long strength = m.getScore();
+				StrengthLeaderBoard slb = new StrengthLeaderBoard(rank, userId, strength);
+				returnList.add(slb);
+			}
+			return returnList;
 		}
-		return returnList;
+		else {
+			log.info("attemping to retrieve from leaderboard when locked/reloading");
+			return null;
+		}
 	}
 	
 	public int getUserRank(String userId) {
@@ -128,6 +145,7 @@ public class LeaderBoardImpl {
 					finally {
 						if(gotLock) {
 							leaderboardReloadLock.forceUnlock();
+							gotLock = false;
 						}
 					}
 				}
