@@ -101,8 +101,11 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		resBuilder.setSenderLeaderBoardInfo(b.build());
 		
 		List<StrengthLeaderBoard> slbpList = leaderBoard.getStrengths(minRank, maxRank);
-		resBuilder.addAllLeaderBoardInfo(createInfoProtoUtils.
-                createStrengthLeaderBoardProtos(slbpList, userRetrieveUtils));
+		if(slbpList != null && !slbpList.isEmpty()) {
+			resBuilder.addAllLeaderBoardInfo(createInfoProtoUtils.
+					createStrengthLeaderBoardProtos(slbpList, userRetrieveUtils));
+		}
+		else resBuilder.setStatus(RetrieveStrengthLeaderBoardStatus.FAIL_NO_RESULTS);
 	}
 
 
