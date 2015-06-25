@@ -257,11 +257,14 @@ public class GiftRewardRetrieveUtils {
 
 		double runningSum = 0D;
 		for (Integer id : idsList) {
+			GiftRewardConfigPojo grc = getGiftReward(id);
+			runningSum += grc.getChanceOfDrop();
+
 			GiftRewardConfigWrapper grcw = idToGiftRewardWrappers.get(id);
-			runningSum += grcw.getNormalizedProbability();
 			double normalizedProbability = runningSum / probSum;
 
 			grcw.setNormalizedProbability(normalizedProbability);
+			log.info("giftId={}, added to tree: {}", giftId, grcw);
 			boolean added = grcwTree.add(grcw);
 			if (!added) {
 				log.error("unable to add {} to TreeSet={}", grcw, grcwTree);
