@@ -160,6 +160,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			}
 
 			GiftRewardConfigPojo grc = determineReward();
+			log.info("uc={}, giftRewardId={}", uc, grc.getRewardId());
+
 			int rewardId = grc.getRewardId();
 
 			GiftForUserPojo gfu = new GiftForUserPojo();

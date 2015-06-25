@@ -653,6 +653,7 @@ public class InAppPurchaseController extends EventController {
 			AwardRewardAction ara = iapsa.getAra();
 			if (null != ara && ara.existsClanGift()) {
 				ReceivedGiftResponseProto rgrp = ara.getClanGift();
+				log.info("rgrp={}", rgrp);
 				ReceivedGiftResponseEvent rgre = new ReceivedGiftResponseEvent(userId);
 				rgre.setResponseProto(rgrp);
 				String clanId = iapsa.getUser().getClanId();

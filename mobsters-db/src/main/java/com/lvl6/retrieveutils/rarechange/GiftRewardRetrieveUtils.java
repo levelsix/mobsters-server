@@ -139,10 +139,10 @@ public class GiftRewardRetrieveUtils {
 			return null;
 		}
 
-		log.info("idsToGiftRewards={}", idsToGiftRewards);
-		log.info("giftIdToProbabilitySum={}", giftIdToProbabilitySum);
-		log.info("giftIdToGiftRewards={}", giftIdToGiftRewards);
-		log.info("giftIdToGiftRewardsTree={}", giftIdToGiftRewardsTree);
+//		log.info("idsToGiftRewards={}", idsToGiftRewards);
+//		log.info("giftIdToProbabilitySum={}", giftIdToProbabilitySum);
+//		log.info("giftIdToGiftRewards={}", giftIdToGiftRewards);
+//		log.info("giftIdToGiftRewardsTree={}", giftIdToGiftRewardsTree);
 
 		TreeSet<GiftRewardConfigWrapper> rewardTree = giftIdToGiftRewardsTree.get(giftId);
 
@@ -158,6 +158,8 @@ public class GiftRewardRetrieveUtils {
 			return null;
 		}
 		int giftRewardId = nextGiftReward.getGiftRewardConfigId();
+
+		log.info("selected GiftReward={}", nextGiftReward);
 		return getGiftReward(giftRewardId);
 	}
 
@@ -264,7 +266,7 @@ public class GiftRewardRetrieveUtils {
 			double normalizedProbability = runningSum / probSum;
 
 			grcw.setNormalizedProbability(normalizedProbability);
-			log.info("giftId={}, added to tree: {}", giftId, grcw);
+//			log.info("giftId={}, added to tree: {}", giftId, grcw);
 			boolean added = grcwTree.add(grcw);
 			if (!added) {
 				log.error("unable to add {} to TreeSet={}", grcw, grcwTree);
