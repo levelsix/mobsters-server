@@ -147,6 +147,7 @@ public class SendTangoGiftController extends EventController {
 			}
 
 			SendTangoGiftResponseProto resProto = resBuilder.build();
+			log.info("resProto={}", resProto);
 			SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setResponseProto(resProto);
@@ -156,6 +157,7 @@ public class SendTangoGiftController extends EventController {
 			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
 
 				List<GiftForUserPojo> receiverGifts = stga.getReceiverGifts();
+				log.info("receiverGifts={}", receiverGifts);
 				if (null != receiverGifts && !receiverGifts.isEmpty()) {
 					//notify users who did get gifts
 					Map<String, GiftForTangoUserPojo> gfuIdToGftu = stga
@@ -173,6 +175,7 @@ public class SendTangoGiftController extends EventController {
 
 						rgre.setResponseProto(rgrp.build());
 
+						log.info("sending responseProto={}", rgrp.build());
 						responses.normalResponseEvents().add(rgre);
 					}
 				}
