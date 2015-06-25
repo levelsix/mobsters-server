@@ -224,8 +224,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			log.error("error awarding monsters for userId {}", userId);
 		}
 
+		success = awardClanGifts();
 		if (!success) {
-			awardClanGifts();
+			log.error("error awarding ClanGifts for userId {}", userId);
 		}
 
 		//save to reward history
