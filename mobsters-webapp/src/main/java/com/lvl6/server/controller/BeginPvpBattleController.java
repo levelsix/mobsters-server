@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginPvpBattleRequestEvent;
 import com.lvl6.events.response.BeginPvpBattleResponseEvent;
+import com.lvl6.events.response.ReviveInDungeonResponseEvent;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventPvpProto.BeginPvpBattleRequestProto;
 import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto;
@@ -101,6 +103,15 @@ public class BeginPvpBattleController extends EventController {
 		BeginPvpBattleResponseEvent resEvent = new BeginPvpBattleResponseEvent(
 				attackerId);
 		resEvent.setTag(event.getTag());
+		
+		if(timeUtil.numMinutesDifference(new Date(reqProto.getAttackStartTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID enemyUserUuid = null;
 		boolean invalidUuids = true;

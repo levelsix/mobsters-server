@@ -23,15 +23,16 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto;
 import com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -54,6 +55,9 @@ public class AchievementRedeemController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public AchievementRedeemController() {
 		
@@ -94,6 +98,18 @@ public class AchievementRedeemController extends EventController {
 			invalidUuids = true;
 		}
 
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(
+					senderProto.getUserUuid());
+			resEvent.setTag(event.getTag());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
+		
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);

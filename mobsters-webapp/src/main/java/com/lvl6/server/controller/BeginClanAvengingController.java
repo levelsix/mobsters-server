@@ -15,12 +15,13 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginClanAvengingRequestEvent;
 import com.lvl6.events.response.BeginClanAvengingResponseEvent;
 import com.lvl6.info.ClanAvenge;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto;
 import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
@@ -29,6 +30,7 @@ import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -46,6 +48,10 @@ public class BeginClanAvengingController extends EventController {
 
 	@Autowired
 	protected ClanStuffUtils clanStuffUtils;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
+	
 
 	public BeginClanAvengingController() {
 
@@ -84,6 +90,16 @@ public class BeginClanAvengingController extends EventController {
 			if (null != mcp && mcp.hasClanUuid()) {
 				clanId = mcp.getClanUuid();
 			}
+		}
+
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			BeginClanAvengingResponseEvent resEvent = new BeginClanAvengingResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		UUID userUuid = null;

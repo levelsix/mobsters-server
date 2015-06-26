@@ -38,8 +38,8 @@ import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
@@ -52,6 +52,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.TranslationUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.memetix.mst.language.Language;
@@ -108,6 +109,9 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected ClanSearch clanSearch;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 
 	public SendGroupChatController() {
@@ -134,7 +138,7 @@ public class SendGroupChatController extends EventController {
 		String userId = senderProto.getUserUuid();
 		final ChatScope scope = reqProto.getScope();
 		String chatMessage = reqProto.getChatMessage();
-		final Timestamp timeOfPost = new Timestamp(new Date().getTime());
+		final Timestamp timeOfPost = new Timestamp(reqProto.getClientTime());
 		TranslateLanguages globalLanguage = reqProto.getGlobalLanguage();
 
 		SendGroupChatResponseProto.Builder resBuilder = SendGroupChatResponseProto
@@ -144,6 +148,15 @@ public class SendGroupChatController extends EventController {
 		SendGroupChatResponseEvent resEvent = new SendGroupChatResponseEvent(
 				senderProto.getUserUuid());
 		resEvent.setTag(event.getTag());
+
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

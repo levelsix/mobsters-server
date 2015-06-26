@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PromoteDemoteClanMemberRequestEvent;
+import com.lvl6.events.response.BeginClanRaidResponseEvent;
 import com.lvl6.events.response.PromoteDemoteClanMemberResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberRequestProto;
 import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto;
@@ -101,6 +104,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 			clanId = senderProto.getClan().getClanUuid();
 		}
 
+		
 		UUID userUuid = null;
 		UUID victimUuid = null;
 		UUID clanUuid = null;

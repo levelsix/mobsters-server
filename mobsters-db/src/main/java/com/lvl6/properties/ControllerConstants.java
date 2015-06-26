@@ -71,7 +71,8 @@ public class ControllerConstants {
 	public static final float[] CLAN_HELP__PERCENT_REMOVED = { 0.01F, 0.01F,
 			0.01F, 0.01F, 0.01F, 0.01F, 0.01F };
 
-
+	public static final int CLIENT_TIME_MINUTES_CONSTANT_CHECK = 120;
+	
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
 

@@ -17,12 +17,14 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginClanRaidRequestEvent;
 import com.lvl6.events.response.BeginClanRaidResponseEvent;
+import com.lvl6.events.response.RequestJoinClanResponseEvent;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanRaidStage;
 import com.lvl6.info.ClanRaidStageMonster;
 import com.lvl6.info.UserClan;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
@@ -155,6 +157,16 @@ public class BeginClanRaidController extends EventController {
 			}
 		}
 
+		if(timeUtils.numMinutesDifference(curDate, new Date()) > 
+				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
+		
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);

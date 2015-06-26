@@ -14,12 +14,13 @@ import com.lvl6.events.request.FulfillTeamDonationSolicitationRequestEvent;
 import com.lvl6.events.response.FulfillTeamDonationSolicitationResponseEvent;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.MonsterSnapshotForUser;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationRequestProto;
 import com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -30,6 +31,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -60,6 +62,10 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 	
 	@Autowired
 	protected HazelcastClanSearchImpl hzClanSearch;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
+	
 
 	public FulfillTeamDonationSolicitationController() {
 		
@@ -104,6 +110,17 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 
 		if (null != senderProto.getClan()) {
 			clanId = senderProto.getClan().getClanUuid();
+		}
+
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			FulfillTeamDonationSolicitationResponseEvent resEvent = 
+					new FulfillTeamDonationSolicitationResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		boolean invalidUuids = true;

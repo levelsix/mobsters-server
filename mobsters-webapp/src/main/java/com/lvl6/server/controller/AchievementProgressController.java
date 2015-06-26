@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -16,18 +17,20 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AchievementProgressRequestEvent;
 import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.info.AchievementForUser;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto;
 import com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.AchievementRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.AchievementStuffUtil;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
@@ -50,6 +53,10 @@ public class AchievementProgressController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
+	
 
 	public AchievementProgressController() {
 		
@@ -87,6 +94,18 @@ public class AchievementProgressController extends EventController {
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+			ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
+					senderProto.getUserUuid());
+			resEvent.setTag(event.getTag());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}	
+		
 		UUID userUuid = null;
 		boolean invalidUuids = true;
 
@@ -112,7 +131,7 @@ public class AchievementProgressController extends EventController {
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			//retrieve whatever is necessary from the db
-
+			
 			//achievementIdsToUap might be modified
 			boolean legitProgress = checkLegitProgress(resBuilder, userId,
 					uapList, achievementIdsToUap);

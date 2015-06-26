@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.hazelcast.core.IList;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseBoosterPackRequestEvent;
+import com.lvl6.events.response.AchievementRedeemResponseEvent;
 import com.lvl6.events.response.PurchaseBoosterPackResponseEvent;
 import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -23,6 +24,7 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
@@ -171,6 +173,17 @@ public class PurchaseBoosterPackController extends EventController {
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
+		if(timeUtils.numMinutesDifference(now, new Date()) > 
+				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
+					senderProto.getUserUuid());
+			resEvent.setTag(event.getTag());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+		}
+		
 		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {

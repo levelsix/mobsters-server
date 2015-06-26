@@ -31,10 +31,10 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils2;
@@ -49,6 +49,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -90,6 +91,9 @@ public class BeginDungeonController extends EventController {
 
 	@Autowired
 	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public BeginDungeonController() {
 
@@ -142,6 +146,17 @@ public class BeginDungeonController extends EventController {
 		resBuilder.setTaskId(taskId);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			BeginDungeonResponseEvent resEvent = 
+					new BeginDungeonResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
+		
 		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {

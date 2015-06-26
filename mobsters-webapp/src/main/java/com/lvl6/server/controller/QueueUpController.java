@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.QueueUpRequestEvent;
 import com.lvl6.events.response.QueueUpResponseEvent;
+import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.User;
@@ -109,6 +110,9 @@ public class QueueUpController extends EventController {
 	
 	@Autowired
 	protected StructureForUserDao2 structureForUserDao;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 
 	//	@Autowired
@@ -158,6 +162,17 @@ public class QueueUpController extends EventController {
 				.newBuilder();
 		resBuilder.setAttacker(attackerProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", attackerProto.getUserUuid());
+			QueueUpResponseEvent resEvent = 
+					new QueueUpResponseEvent(attackerProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		boolean invalidUuids = true;
 		try {

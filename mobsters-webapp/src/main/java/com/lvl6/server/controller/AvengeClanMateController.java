@@ -12,11 +12,12 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AvengeClanMateRequestEvent;
 import com.lvl6.events.response.AvengeClanMateResponseEvent;
 import com.lvl6.info.ClanAvengeUser;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.EventClanProto.AvengeClanMateRequestProto;
 import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
@@ -27,6 +28,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AvengeClanMateAction;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
@@ -53,6 +55,9 @@ public class AvengeClanMateController extends EventController {
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
 
+	@Autowired
+	protected TimeUtils timeUtils;
+	
 	public AvengeClanMateController() {
 		
 	}
@@ -90,6 +95,16 @@ public class AvengeClanMateController extends EventController {
 			if (null != mcp && mcp.hasClanUuid()) {
 				clanId = mcp.getClanUuid();
 			}
+		}
+
+		if(timeUtils.numMinutesDifference(new Date(clientTime), new Date()) > 
+				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			AvengeClanMateResponseEvent resEvent = new AvengeClanMateResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		UUID userUuid = null;
