@@ -2471,33 +2471,33 @@ public final class MiniEventProtos {
        */
       COMPLETE_EPIC_JOB(37, 37),
       /**
-       * <code>USE_HEALTH_POTION = 39;</code>
+       * <code>USE_HEALTH_POTION_IN_PVP = 39;</code>
        */
-      USE_HEALTH_POTION(38, 39),
+      USE_HEALTH_POTION_IN_PVP(38, 39),
       /**
-       * <code>USE_CHILL_ANTIDOTE = 40;</code>
+       * <code>USE_CHILL_ANTIDOTE_IN_PVP = 40;</code>
        */
-      USE_CHILL_ANTIDOTE(39, 40),
+      USE_CHILL_ANTIDOTE_IN_PVP(39, 40),
       /**
-       * <code>USE_POISON_ANTIDOTE = 41;</code>
+       * <code>USE_POISON_ANTIDOTE_IN_PVP = 41;</code>
        */
-      USE_POISON_ANTIDOTE(40, 41),
+      USE_POISON_ANTIDOTE_IN_PVP(40, 41),
       /**
-       * <code>USE_ORB_HAMMER = 42;</code>
+       * <code>USE_ORB_HAMMER_IN_PVP = 42;</code>
        */
-      USE_ORB_HAMMER(41, 42),
+      USE_ORB_HAMMER_IN_PVP(41, 42),
       /**
-       * <code>USE_HAND_SWAP = 43;</code>
+       * <code>USE_HAND_SWAP_IN_PVP = 43;</code>
        */
-      USE_HAND_SWAP(42, 43),
+      USE_HAND_SWAP_IN_PVP(42, 43),
       /**
-       * <code>USE_BOARD_SHUFFLE = 44;</code>
+       * <code>USE_BOARD_SHUFFLE_IN_PVP = 44;</code>
        */
-      USE_BOARD_SHUFFLE(43, 44),
+      USE_BOARD_SHUFFLE_IN_PVP(43, 44),
       /**
-       * <code>USE_PUTTY = 45;</code>
+       * <code>USE_PUTTY_IN_PVP = 45;</code>
        */
-      USE_PUTTY(44, 45),
+      USE_PUTTY_IN_PVP(44, 45),
       ;
 
       /**
@@ -2657,33 +2657,33 @@ public final class MiniEventProtos {
        */
       public static final int COMPLETE_EPIC_JOB_VALUE = 37;
       /**
-       * <code>USE_HEALTH_POTION = 39;</code>
+       * <code>USE_HEALTH_POTION_IN_PVP = 39;</code>
        */
-      public static final int USE_HEALTH_POTION_VALUE = 39;
+      public static final int USE_HEALTH_POTION_IN_PVP_VALUE = 39;
       /**
-       * <code>USE_CHILL_ANTIDOTE = 40;</code>
+       * <code>USE_CHILL_ANTIDOTE_IN_PVP = 40;</code>
        */
-      public static final int USE_CHILL_ANTIDOTE_VALUE = 40;
+      public static final int USE_CHILL_ANTIDOTE_IN_PVP_VALUE = 40;
       /**
-       * <code>USE_POISON_ANTIDOTE = 41;</code>
+       * <code>USE_POISON_ANTIDOTE_IN_PVP = 41;</code>
        */
-      public static final int USE_POISON_ANTIDOTE_VALUE = 41;
+      public static final int USE_POISON_ANTIDOTE_IN_PVP_VALUE = 41;
       /**
-       * <code>USE_ORB_HAMMER = 42;</code>
+       * <code>USE_ORB_HAMMER_IN_PVP = 42;</code>
        */
-      public static final int USE_ORB_HAMMER_VALUE = 42;
+      public static final int USE_ORB_HAMMER_IN_PVP_VALUE = 42;
       /**
-       * <code>USE_HAND_SWAP = 43;</code>
+       * <code>USE_HAND_SWAP_IN_PVP = 43;</code>
        */
-      public static final int USE_HAND_SWAP_VALUE = 43;
+      public static final int USE_HAND_SWAP_IN_PVP_VALUE = 43;
       /**
-       * <code>USE_BOARD_SHUFFLE = 44;</code>
+       * <code>USE_BOARD_SHUFFLE_IN_PVP = 44;</code>
        */
-      public static final int USE_BOARD_SHUFFLE_VALUE = 44;
+      public static final int USE_BOARD_SHUFFLE_IN_PVP_VALUE = 44;
       /**
-       * <code>USE_PUTTY = 45;</code>
+       * <code>USE_PUTTY_IN_PVP = 45;</code>
        */
-      public static final int USE_PUTTY_VALUE = 45;
+      public static final int USE_PUTTY_IN_PVP_VALUE = 45;
 
 
       public final int getNumber() { return value; }
@@ -2728,13 +2728,13 @@ public final class MiniEventProtos {
           case 35: return COMPLETE_SUPER_JOB;
           case 36: return COMPLETE_ULTRA_JOB;
           case 37: return COMPLETE_EPIC_JOB;
-          case 39: return USE_HEALTH_POTION;
-          case 40: return USE_CHILL_ANTIDOTE;
-          case 41: return USE_POISON_ANTIDOTE;
-          case 42: return USE_ORB_HAMMER;
-          case 43: return USE_HAND_SWAP;
-          case 44: return USE_BOARD_SHUFFLE;
-          case 45: return USE_PUTTY;
+          case 39: return USE_HEALTH_POTION_IN_PVP;
+          case 40: return USE_CHILL_ANTIDOTE_IN_PVP;
+          case 41: return USE_POISON_ANTIDOTE_IN_PVP;
+          case 42: return USE_ORB_HAMMER_IN_PVP;
+          case 43: return USE_HAND_SWAP_IN_PVP;
+          case 44: return USE_BOARD_SHUFFLE_IN_PVP;
+          case 45: return USE_PUTTY_IN_PVP;
           default: return null;
         }
       }
@@ -8576,13 +8576,13 @@ public final class MiniEventProtos {
       "MiniEventGoalProto\022K\n\022leaderboardRewards" +
       "\030\006 \003(\0132/.com.lvl6.proto.MiniEventLeaderb" +
       "oardRewardProto\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 " +
-      "\001(\t\022\013\n\003img\030\t \001(\t\022\014\n\004icon\030\n \001(\t\"\353\t\n\022MiniE",
+      "\001(\t\022\013\n\003img\030\t \001(\t\022\014\n\004icon\030\n \001(\t\"\234\n\n\022MiniE",
       "ventGoalProto\022\027\n\017miniEventGoalId\030\001 \001(\005\022\023" +
       "\n\013miniEventId\030\002 \001(\005\022O\n\010goalType\030\003 \001(\01624." +
       "com.lvl6.proto.MiniEventGoalProto.MiniEv" +
       "entGoalType:\007NO_GOAL\022\017\n\007goalAmt\030\004 \001(\005\022\020\n" +
       "\010goalDesc\030\005 \001(\t\022\024\n\014pointsGained\030\006 \001(\005\022\031\n" +
-      "\021actionDescription\030\007 \001(\t\"\201\010\n\021MiniEventGo" +
+      "\021actionDescription\030\007 \001(\t\"\262\010\n\021MiniEventGo" +
       "alType\022\013\n\007NO_GOAL\020\001\022\032\n\026GAIN_BUILDING_STR" +
       "ENGTH\020\002\022\032\n\026GAIN_RESEARCH_STRENGTH\020\003\022\023\n\017S" +
       "PIN_BASIC_GRAB\020\004\022\026\n\022SPIN_ULTIMATE_GRAB\020\005" +
@@ -8604,33 +8604,34 @@ public final class MiniEventProtos {
       "VP_WIN_AGAINST_DIAMOND\020 \022\027\n\023COMPLETE_COM" +
       "MON_JOB\020!\022\025\n\021COMPLETE_RARE_JOB\020\"\022\026\n\022COMP" +
       "LETE_SUPER_JOB\020#\022\026\n\022COMPLETE_ULTRA_JOB\020$" +
-      "\022\025\n\021COMPLETE_EPIC_JOB\020%\022\025\n\021USE_HEALTH_PO" +
-      "TION\020\'\022\026\n\022USE_CHILL_ANTIDOTE\020(\022\027\n\023USE_PO" +
-      "ISON_ANTIDOTE\020)\022\022\n\016USE_ORB_HAMMER\020*\022\021\n\rU",
-      "SE_HAND_SWAP\020+\022\025\n\021USE_BOARD_SHUFFLE\020,\022\r\n" +
-      "\tUSE_PUTTY\020-\"\362\001\n\034MiniEventForPlayerLevel" +
-      "Proto\022\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniEventId\030\002 " +
-      "\001(\005\022\024\n\014playerLvlMin\030\003 \001(\005\022\024\n\014playerLvlMa" +
-      "x\030\004 \001(\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022\025\n\rtierTw" +
-      "oMinPts\030\006 \001(\005\022\027\n\017tierThreeMinPts\030\007 \001(\005\0229" +
-      "\n\007rewards\030\010 \003(\0132(.com.lvl6.proto.MiniEve" +
-      "ntTierRewardProto\"~\n\030MiniEventTierReward" +
-      "Proto\022\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplId\030\002 \001(\005\0220" +
-      "\n\013rewardProto\030\003 \001(\0132\033.com.lvl6.proto.Rew",
-      "ardProto\022\017\n\007tierLvl\030\004 \001(\005\"\223\001\n\037MiniEventL" +
-      "eaderboardRewardProto\022\016\n\006melrId\030\001 \001(\005\022\023\n" +
-      "\013miniEventId\030\002 \001(\005\0220\n\013rewardProto\030\003 \001(\0132" +
-      "\033.com.lvl6.proto.RewardProto\022\031\n\021leaderbo" +
-      "ardMinPos\030\004 \001(\005\"\203\002\n\022UserMiniEventProto\022\023" +
-      "\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\017\n" +
-      "\007userLvl\030\003 \001(\005\022\027\n\017tierOneRedeemed\030\004 \001(\010\022" +
-      "\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021tierThreeRed" +
-      "eemed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\0132\036.com.lvl" +
-      "6.proto.MiniEventProto\0225\n\005goals\030\010 \003(\0132&.",
-      "com.lvl6.proto.UserMiniEventGoalProto\"U\n" +
-      "\026UserMiniEventGoalProto\022\020\n\010userUuid\030\001 \001(" +
-      "\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022\020\n\010progress\030\003" +
-      " \001(\005B\021B\017MiniEventProtos"
+      "\022\025\n\021COMPLETE_EPIC_JOB\020%\022\034\n\030USE_HEALTH_PO" +
+      "TION_IN_PVP\020\'\022\035\n\031USE_CHILL_ANTIDOTE_IN_P" +
+      "VP\020(\022\036\n\032USE_POISON_ANTIDOTE_IN_PVP\020)\022\031\n\025",
+      "USE_ORB_HAMMER_IN_PVP\020*\022\030\n\024USE_HAND_SWAP" +
+      "_IN_PVP\020+\022\034\n\030USE_BOARD_SHUFFLE_IN_PVP\020,\022" +
+      "\024\n\020USE_PUTTY_IN_PVP\020-\"\362\001\n\034MiniEventForPl" +
+      "ayerLevelProto\022\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniE" +
+      "ventId\030\002 \001(\005\022\024\n\014playerLvlMin\030\003 \001(\005\022\024\n\014pl" +
+      "ayerLvlMax\030\004 \001(\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022" +
+      "\025\n\rtierTwoMinPts\030\006 \001(\005\022\027\n\017tierThreeMinPt" +
+      "s\030\007 \001(\005\0229\n\007rewards\030\010 \003(\0132(.com.lvl6.prot" +
+      "o.MiniEventTierRewardProto\"~\n\030MiniEventT" +
+      "ierRewardProto\022\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplI",
+      "d\030\002 \001(\005\0220\n\013rewardProto\030\003 \001(\0132\033.com.lvl6." +
+      "proto.RewardProto\022\017\n\007tierLvl\030\004 \001(\005\"\223\001\n\037M" +
+      "iniEventLeaderboardRewardProto\022\016\n\006melrId" +
+      "\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\0220\n\013rewardPro" +
+      "to\030\003 \001(\0132\033.com.lvl6.proto.RewardProto\022\031\n" +
+      "\021leaderboardMinPos\030\004 \001(\005\"\203\002\n\022UserMiniEve" +
+      "ntProto\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid" +
+      "\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRedeem" +
+      "ed\030\004 \001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021tie" +
+      "rThreeRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\0132",
+      "\036.com.lvl6.proto.MiniEventProto\0225\n\005goals" +
+      "\030\010 \003(\0132&.com.lvl6.proto.UserMiniEventGoa" +
+      "lProto\"U\n\026UserMiniEventGoalProto\022\020\n\010user" +
+      "Uuid\030\001 \001(\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022\020\n\010p" +
+      "rogress\030\003 \001(\005B\021B\017MiniEventProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
