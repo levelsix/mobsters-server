@@ -1975,6 +1975,15 @@ public final class EventResearchProto {
      * <code>optional int32 gemsCost = 3;</code>
      */
     int getGemsCost();
+
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.FinishPerformingResearchRequestProto}
@@ -2050,6 +2059,11 @@ public final class EventResearchProto {
             case 24: {
               bitField0_ |= 0x00000004;
               gemsCost_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -2170,10 +2184,26 @@ public final class EventResearchProto {
       return gemsCost_;
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 4;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userResearchUuid_ = "";
       gemsCost_ = 0;
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2197,6 +2227,9 @@ public final class EventResearchProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, gemsCost_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, clientTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -2217,6 +2250,10 @@ public final class EventResearchProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, gemsCost_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2346,6 +2383,8 @@ public final class EventResearchProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         gemsCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -2390,6 +2429,10 @@ public final class EventResearchProto {
           to_bitField0_ |= 0x00000004;
         }
         result.gemsCost_ = gemsCost_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2416,6 +2459,9 @@ public final class EventResearchProto {
         }
         if (other.hasGemsCost()) {
           setGemsCost(other.getGemsCost());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2664,6 +2710,38 @@ public final class EventResearchProto {
       public Builder clearGemsCost() {
         bitField0_ = (bitField0_ & ~0x00000004);
         gemsCost_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000008;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        clientTime_ = 0L;
         onChanged();
         return this;
       }
@@ -3322,15 +3400,15 @@ public final class EventResearchProto {
       "\232\001\n\034PerformResearchResponseProto\0220\n\006send" +
       "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro",
       "to\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Resp" +
-      "onseStatus\022\030\n\020userResearchUuid\030\003 \001(\t\"\204\001\n" +
+      "onseStatus\022\030\n\020userResearchUuid\030\003 \001(\t\"\230\001\n" +
       "$FinishPerformingResearchRequestProto\0220\n" +
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
       "erProto\022\030\n\020userResearchUuid\030\002 \001(\t\022\020\n\010gem" +
-      "sCost\030\003 \001(\005\"\211\001\n%FinishPerformingResearch" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022.\n\006status\030\002 \001(\0162" +
-      "\036.com.lvl6.proto.ResponseStatusB\024B\022Event" +
-      "ResearchProto"
+      "sCost\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003\"\211\001\n%Fini" +
+      "shPerformingResearchResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Res" +
+      "ponseStatusB\024B\022EventResearchProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3363,7 +3441,7 @@ public final class EventResearchProto {
     internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FinishPerformingResearchRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserResearchUuid", "GemsCost", });
+        new java.lang.String[] { "Sender", "UserResearchUuid", "GemsCost", "ClientTime", });
     internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_fieldAccessorTable = new

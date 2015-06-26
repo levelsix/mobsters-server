@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SubmitMonsterEnhancementRequestEvent;
+import com.lvl6.events.response.EvolutionFinishedResponseEvent;
 import com.lvl6.events.response.SubmitMonsterEnhancementResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
@@ -30,9 +31,9 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProto;
 import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto;
 import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
@@ -43,6 +44,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -69,6 +71,9 @@ public class SubmitMonsterEnhancementController extends EventController {
 	
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
@@ -108,7 +113,8 @@ public class SubmitMonsterEnhancementController extends EventController {
 		int oilChange = reqProto.getOilChange();
 		Timestamp clientTime = new Timestamp((new Date()).getTime());
 		int maxOil = senderResourcesProto.getMaxOil();
-
+		Date clientTimeDate = new Date(reqProto.getClientTime());
+		
 		Map<String, UserEnhancementItemProto> newMap = monsterStuffUtils
 				.convertIntoUserMonsterIdToUeipProtoMap(ueipNew);
 
@@ -117,6 +123,16 @@ public class SubmitMonsterEnhancementController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(clientTimeDate, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

@@ -39,6 +39,9 @@ message FinishPerformingResearchRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional string userResearchUuid = 2;
 	optional int32 gemsCost = 3;
+	
+	optional int64 clientTime = 4;
+	
 }
 																						//DONE
 message FinishPerformingResearchResponseProto {

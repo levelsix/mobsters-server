@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,20 +14,23 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.DiscardBattleItemRequestEvent;
+import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
 import com.lvl6.events.response.DiscardBattleItemResponseEvent;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.DiscardBattleItemAction;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
@@ -46,6 +50,9 @@ public class DiscardBattleItemController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public DiscardBattleItemController() {
 		
@@ -69,6 +76,8 @@ public class DiscardBattleItemController extends EventController {
 		//get stuff client sent
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
+		Date clientTime = new Date(reqProto.getClientTime());
+		
 		//the new items added to queue, updated refers to those finished as well as 
 		//priorities changing, deleted refers to those removed from queue and completed
 		List<Integer> discardedBattleItemIdsList = reqProto
@@ -79,6 +88,16 @@ public class DiscardBattleItemController extends EventController {
 				.newBuilder();
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
+		
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

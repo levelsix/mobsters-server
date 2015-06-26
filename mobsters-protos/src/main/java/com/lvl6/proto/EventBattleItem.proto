@@ -33,6 +33,8 @@ message CreateBattleItemRequestProto {
 	//positive amount if charging user, negative if refunding user
 	optional int32 gemCostForCreating = 7; 
 	
+	optional int64 clientTime = 8;
+	
 }
 
 message CreateBattleItemResponseProto {
@@ -52,6 +54,9 @@ message CompleteBattleItemRequestProto {
 	
 	//the battle items that are completed
 	repeated BattleItemQueueForUserProto biqfuCompleted = 4;
+	
+	optional int64 clientTime = 5;
+	
 }
 
 message CompleteBattleItemResponseProto {
@@ -71,6 +76,9 @@ message DiscardBattleItemRequestProto {
 	//user can choose to throw away existing battle items so he has the 
 	//"power" to create different ones
 	repeated int32 discardedBattleItemIds = 2;
+	
+	optional int64 clientTime = 3;
+	
 
 }
 

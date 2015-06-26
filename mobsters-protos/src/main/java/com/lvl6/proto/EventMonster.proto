@@ -27,6 +27,9 @@ message EvolveMonsterRequestProto {
 	//positive means refund, negative means charge user
 	optional sint32 oilChange = 4;
 	
+	optional int64 clientTime = 5;
+	
+	
 }
 
 message EvolveMonsterResponseProto {
@@ -44,6 +47,9 @@ message EvolutionFinishedRequestProto {
 	//if the user is going to speed up the evolution process
 	//(positive number, server will convert it to negative)
 	optional int32 gemsSpent = 2; 
+	
+	optional int64 clientTime = 3;
+	
 }
 
 message EvolutionFinishedResponseProto {
@@ -73,6 +79,9 @@ message SubmitMonsterEnhancementRequestProto {
 	//for the feeder that was dequeued 
 	optional sint32 oilChange = 6; 
 	
+	optional int64 clientTime = 7;
+	
+	
 }
 
 message SubmitMonsterEnhancementResponseProto {
@@ -100,6 +109,9 @@ message EnhancementWaitTimeCompleteRequestProto {
 	
 	//monster that finishes being enhanced, so server doesn't have to figure it out
 	optional string userMonsterUuid = 6;
+	
+	optional int64 clientTime = 7;
+	
 }
 
 message EnhancementWaitTimeCompleteResponseProto {
@@ -118,6 +130,9 @@ message CollectMonsterEnhancementRequestProto {
 	
 	//ids of monster_enhancing_for_user to delete, does not include main monster
 	repeated string userMonsterUuids = 3;
+	
+	optional int64 clientTime = 4;
+	
 	
 }
 
@@ -218,6 +233,9 @@ message HealMonsterRequestProto {
 	optional bool isSpeedup = 7;
 	optional int32 gemsForSpeedup = 8; //pos amount if charging user 
 	repeated UserMonsterCurrentHealthProto umchp = 9;
+	
+	optional int64 clientTime = 10;
+	
 	
 }
 
@@ -354,6 +372,9 @@ message CombineUserMonsterPiecesRequestProto {
 	//(positive amount) if user wants to speed up the process
 	//if this is set, there should only be one userMonsterId
 	optional int32 gemCost = 3;
+	
+	optional int64 clientTime = 4;
+	
 }
 
 message CombineUserMonsterPiecesResponseProto {

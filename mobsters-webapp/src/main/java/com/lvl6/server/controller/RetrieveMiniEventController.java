@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveMiniEventRequestEvent;
+import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
 import com.lvl6.events.response.RetrieveMiniEventResponseEvent;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventRequestProto;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
@@ -114,11 +116,22 @@ public class RetrieveMiniEventController extends EventController {
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		Date now = new Date();
-
+		Date clientTime = new Date(reqProto.getClientTime());
+		
 		RetrieveMiniEventResponseProto.Builder resBuilder = RetrieveMiniEventResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtil.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		boolean invalidUuids = true;
 		try {

@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,16 +14,18 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateMiniEventRequestEvent;
 import com.lvl6.events.response.UpdateMiniEventResponseEvent;
 import com.lvl6.info.MiniEventGoalForUser;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventRequestProto;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.UpdateMiniEventAction;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
@@ -44,6 +47,9 @@ public class UpdateMiniEventController extends EventController {
 	@Autowired
 	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
 	
+	@Autowired
+	protected TimeUtils timeUtils;
+	
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new UpdateMiniEventRequestEvent();
@@ -64,11 +70,23 @@ public class UpdateMiniEventController extends EventController {
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		List<UserMiniEventGoalProto> umegpList = reqProto.getUpdatedGoalsList();
+		
+		Date clientTime = new Date(reqProto.getClientTime());
 
 		UpdateMiniEventResponseProto.Builder resBuilder = UpdateMiniEventResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			UpdateMiniEventResponseEvent resEvent = new UpdateMiniEventResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		boolean invalidUuids = true;
 		try {

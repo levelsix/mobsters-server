@@ -25,6 +25,9 @@ message RetrieveMiniEventRequestProto {
 	//b) user's MiniEvent doesn't equal currently active MiniEvent,
 	//	i) there is no active MiniEvent, then no MiniEvent info is returned
 	//	ii) there is an active MiniEvent, then a new one will be created	 
+	
+	optional int64 clientTime = 2;
+	
 }
 
 message RetrieveMiniEventResponseProto {
@@ -39,6 +42,8 @@ message RetrieveMiniEventResponseProto {
 message UpdateMiniEventRequestProto {
 	optional MinimumUserProto sender = 1;
 	repeated UserMiniEventGoalProto updatedGoals = 2;
+	optional int64 clientTime = 3;
+	
 }
 
 message UpdateMiniEventResponseProto {

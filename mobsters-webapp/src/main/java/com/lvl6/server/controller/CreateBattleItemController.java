@@ -18,11 +18,12 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
@@ -30,6 +31,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CreateBattleItemAction;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -60,6 +62,9 @@ public class CreateBattleItemController extends EventController {
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public CreateBattleItemController() {
 		
@@ -86,6 +91,7 @@ public class CreateBattleItemController extends EventController {
 		MinimumUserProto senderProto = senderMaxResourcesProto
 				.getMinUserProto();
 		String userId = senderProto.getUserUuid();
+		Date clientTime = new Date(reqProto.getClientTime());
 
 		int maxCash = senderMaxResourcesProto.getMaxCash();
 		int maxOil = senderMaxResourcesProto.getMaxOil();
@@ -115,6 +121,16 @@ public class CreateBattleItemController extends EventController {
 				.newBuilder();
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
+		
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

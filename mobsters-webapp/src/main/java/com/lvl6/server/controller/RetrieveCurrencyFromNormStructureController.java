@@ -15,16 +15,18 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveCurrencyFromNormStructureRequestEvent;
+import com.lvl6.events.response.HealMonsterResponseEvent;
 import com.lvl6.events.response.RetrieveCurrencyFromNormStructureResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.StructureRetrieval;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
@@ -34,6 +36,7 @@ import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RetrieveCurrencyFromNormStructureAction;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component
@@ -64,6 +67,9 @@ public class RetrieveCurrencyFromNormStructureController extends
 	@Autowired
 	protected UpdateUtil updateUtil;
 
+	@Autowired
+	protected TimeUtils timeUtils;
+	
 	public RetrieveCurrencyFromNormStructureController() {
 		
 	}
@@ -111,6 +117,22 @@ public class RetrieveCurrencyFromNormStructureController extends
 		resBuilder
 				.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderResourcesProto);
+	
+		Date clientTime = null;
+		for(StructRetrieval sr : structRetrievals) {
+			clientTime = new Date(sr.getTimeOfRetrieval());
+		}
+		
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new 
+					RetrieveCurrencyFromNormStructureResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EvolveMonsterRequestEvent;
+import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
 import com.lvl6.events.response.EvolveMonsterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
@@ -30,9 +31,9 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils2;
@@ -41,6 +42,7 @@ import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -74,6 +76,9 @@ public class EvolveMonsterController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public EvolveMonsterController() {
 		
@@ -104,7 +109,7 @@ public class EvolveMonsterController extends EventController {
 		int gemsSpent = reqProto.getGemsSpent();
 		//positive means refund, negative means charge user
 		int oilChange = reqProto.getOilChange();
-
+		
 		String catalystUserMonsterId = "";
 		List<String> evolvingUserMonsterIds = new ArrayList<String>();
 		Timestamp clientTime = null;
@@ -122,6 +127,16 @@ public class EvolveMonsterController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(new Date(clientTime.getTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

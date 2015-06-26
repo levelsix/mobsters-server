@@ -24,6 +24,15 @@ public final class EventMiniEventProto {
      * <code>optional .com.lvl6.proto.MinimumUserProto sender = 1;</code>
      */
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+
+    /**
+     * <code>optional int64 clientTime = 2;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 2;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RetrieveMiniEventRequestProto}
@@ -95,6 +104,11 @@ public final class EventMiniEventProto {
               bitField0_ |= 0x00000001;
               break;
             }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              clientTime_ = input.readInt64();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -156,8 +170,24 @@ public final class EventMiniEventProto {
       return sender_;
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 2;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 2;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 clientTime = 2;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -175,6 +205,9 @@ public final class EventMiniEventProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, clientTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -187,6 +220,10 @@ public final class EventMiniEventProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -317,6 +354,8 @@ public final class EventMiniEventProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -353,6 +392,10 @@ public final class EventMiniEventProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -371,6 +414,9 @@ public final class EventMiniEventProto {
         if (other == com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -513,6 +559,38 @@ public final class EventMiniEventProto {
           sender_ = null;
         }
         return senderBuilder_;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 2;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int64 clientTime = 2;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 2;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000002;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 2;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RetrieveMiniEventRequestProto)
@@ -1350,6 +1428,15 @@ public final class EventMiniEventProto {
      */
     com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder getUpdatedGoalsOrBuilder(
         int index);
+
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpdateMiniEventRequestProto}
@@ -1426,6 +1513,11 @@ public final class EventMiniEventProto {
                 mutable_bitField0_ |= 0x00000002;
               }
               updatedGoals_.add(input.readMessage(com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -1527,9 +1619,25 @@ public final class EventMiniEventProto {
       return updatedGoals_.get(index);
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 3;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       updatedGoals_ = java.util.Collections.emptyList();
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1550,6 +1658,9 @@ public final class EventMiniEventProto {
       for (int i = 0; i < updatedGoals_.size(); i++) {
         output.writeMessage(2, updatedGoals_.get(i));
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(3, clientTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1566,6 +1677,10 @@ public final class EventMiniEventProto {
       for (int i = 0; i < updatedGoals_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, updatedGoals_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1702,6 +1817,8 @@ public final class EventMiniEventProto {
         } else {
           updatedGoalsBuilder_.clear();
         }
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -1747,6 +1864,10 @@ public final class EventMiniEventProto {
         } else {
           result.updatedGoals_ = updatedGoalsBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1791,6 +1912,9 @@ public final class EventMiniEventProto {
               updatedGoalsBuilder_.addAllMessages(other.updatedGoals_);
             }
           }
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2173,6 +2297,38 @@ public final class EventMiniEventProto {
           updatedGoals_ = null;
         }
         return updatedGoalsBuilder_;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000004;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UpdateMiniEventRequestProto)
@@ -4520,24 +4676,25 @@ public final class EventMiniEventProto {
     java.lang.String[] descriptorData = {
       "\n\024EventMiniEvent.proto\022\016com.lvl6.proto\032\017" +
       "MiniEvent.proto\032\014Reward.proto\032\026SharedEnu" +
-      "mConfig.proto\032\nUser.proto\"Q\n\035RetrieveMin" +
+      "mConfig.proto\032\nUser.proto\"e\n\035RetrieveMin" +
       "iEventRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\"\275\001\n\036Retriev" +
-      "eMiniEventResponseProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\0229\n\ruse" +
-      "rMiniEvent\030\002 \001(\0132\".com.lvl6.proto.UserMi" +
-      "niEventProto\022.\n\006status\030\003 \001(\0162\036.com.lvl6." +
-      "proto.ResponseStatus\"\215\001\n\033UpdateMiniEvent",
-      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022<\n\014updatedGoals\030\002" +
-      " \003(\0132&.com.lvl6.proto.UserMiniEventGoalP" +
-      "roto\"\200\001\n\034UpdateMiniEventResponseProto\0220\n" +
+      ".lvl6.proto.MinimumUserProto\022\022\n\nclientTi" +
+      "me\030\002 \001(\003\"\275\001\n\036RetrieveMiniEventResponsePr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\0229\n\ruserMiniEvent\030\002 \001(\0132\".c" +
+      "om.lvl6.proto.UserMiniEventProto\022.\n\006stat" +
+      "us\030\003 \001(\0162\036.com.lvl6.proto.ResponseStatus",
+      "\"\241\001\n\033UpdateMiniEventRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022<\n\014updatedGoals\030\002 \003(\0132&.com.lvl6.prot" +
+      "o.UserMiniEventGoalProto\022\022\n\nclientTime\030\003" +
+      " \001(\003\"\200\001\n\034UpdateMiniEventResponseProto\0220\n" +
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
       "erProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto" +
       ".ResponseStatus\"\230\002\n!RedeemMiniEventRewar" +
       "dRequestProto\022@\n\006sender\030\001 \001(\01320.com.lvl6" +
-      ".proto.MinimumUserProtoWithMaxResources\022" +
-      "R\n\014tierRedeemed\030\002 \001(\0162<.com.lvl6.proto.R",
+      ".proto.MinimumUserProtoWithMaxResources\022",
+      "R\n\014tierRedeemed\030\002 \001(\0162<.com.lvl6.proto.R" +
       "edeemMiniEventRewardRequestProto.RewardT" +
       "ier\022\017\n\007mefplId\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003" +
       "\"8\n\nRewardTier\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_TWO" +
@@ -4569,7 +4726,7 @@ public final class EventMiniEventProto {
     internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_descriptor,
-        new java.lang.String[] { "Sender", });
+        new java.lang.String[] { "Sender", "ClientTime", });
     internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_RetrieveMiniEventResponseProto_fieldAccessorTable = new
@@ -4581,7 +4738,7 @@ public final class EventMiniEventProto {
     internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UpdateMiniEventRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UpdatedGoals", });
+        new java.lang.String[] { "Sender", "UpdatedGoals", "ClientTime", });
     internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_UpdateMiniEventResponseProto_fieldAccessorTable = new
