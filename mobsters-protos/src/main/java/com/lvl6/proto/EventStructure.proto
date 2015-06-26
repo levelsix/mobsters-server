@@ -118,6 +118,7 @@ message NormStructWaitCompleteRequestProto {
 	//newer comment: this curTime now represents the time client has calculated for when
 	//a resource generator completed it's upgrade 
 	optional int64 curTime = 3;
+	optional int64 currentClientTime = 4;
 	
 }
 
