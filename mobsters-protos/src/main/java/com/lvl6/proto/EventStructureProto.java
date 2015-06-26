@@ -6842,7 +6842,7 @@ public final class EventStructureProto {
         getUserStructUuidBytes(int index);
 
     /**
-     * <code>optional int64 curTime = 3;</code>
+     * <code>optional int64 timeOfCompletion = 3;</code>
      *
      * <pre>
      *if the structure is a generator, the uncollected resources will be lost when upgraded
@@ -6852,9 +6852,9 @@ public final class EventStructureProto {
      *a resource generator completed it's upgrade 
      * </pre>
      */
-    boolean hasCurTime();
+    boolean hasTimeOfCompletion();
     /**
-     * <code>optional int64 curTime = 3;</code>
+     * <code>optional int64 timeOfCompletion = 3;</code>
      *
      * <pre>
      *if the structure is a generator, the uncollected resources will be lost when upgraded
@@ -6864,7 +6864,7 @@ public final class EventStructureProto {
      *a resource generator completed it's upgrade 
      * </pre>
      */
-    long getCurTime();
+    long getTimeOfCompletion();
 
     /**
      * <code>optional int64 currentClientTime = 4;</code>
@@ -6956,7 +6956,7 @@ public final class EventStructureProto {
             }
             case 24: {
               bitField0_ |= 0x00000002;
-              curTime_ = input.readInt64();
+              timeOfCompletion_ = input.readInt64();
               break;
             }
             case 32: {
@@ -7057,10 +7057,10 @@ public final class EventStructureProto {
       return userStructUuid_.getByteString(index);
     }
 
-    public static final int CURTIME_FIELD_NUMBER = 3;
-    private long curTime_;
+    public static final int TIMEOFCOMPLETION_FIELD_NUMBER = 3;
+    private long timeOfCompletion_;
     /**
-     * <code>optional int64 curTime = 3;</code>
+     * <code>optional int64 timeOfCompletion = 3;</code>
      *
      * <pre>
      *if the structure is a generator, the uncollected resources will be lost when upgraded
@@ -7070,11 +7070,11 @@ public final class EventStructureProto {
      *a resource generator completed it's upgrade 
      * </pre>
      */
-    public boolean hasCurTime() {
+    public boolean hasTimeOfCompletion() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int64 curTime = 3;</code>
+     * <code>optional int64 timeOfCompletion = 3;</code>
      *
      * <pre>
      *if the structure is a generator, the uncollected resources will be lost when upgraded
@@ -7084,8 +7084,8 @@ public final class EventStructureProto {
      *a resource generator completed it's upgrade 
      * </pre>
      */
-    public long getCurTime() {
-      return curTime_;
+    public long getTimeOfCompletion() {
+      return timeOfCompletion_;
     }
 
     public static final int CURRENTCLIENTTIME_FIELD_NUMBER = 4;
@@ -7106,7 +7106,7 @@ public final class EventStructureProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userStructUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      curTime_ = 0L;
+      timeOfCompletion_ = 0L;
       currentClientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -7129,7 +7129,7 @@ public final class EventStructureProto {
         output.writeBytes(2, userStructUuid_.getByteString(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(3, curTime_);
+        output.writeInt64(3, timeOfCompletion_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(4, currentClientTime_);
@@ -7158,7 +7158,7 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, curTime_);
+          .computeInt64Size(3, timeOfCompletion_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -7295,7 +7295,7 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         userStructUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
-        curTime_ = 0L;
+        timeOfCompletion_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
         currentClientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -7343,7 +7343,7 @@ public final class EventStructureProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.curTime_ = curTime_;
+        result.timeOfCompletion_ = timeOfCompletion_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -7377,8 +7377,8 @@ public final class EventStructureProto {
           }
           onChanged();
         }
-        if (other.hasCurTime()) {
-          setCurTime(other.getCurTime());
+        if (other.hasTimeOfCompletion()) {
+          setTimeOfCompletion(other.getTimeOfCompletion());
         }
         if (other.hasCurrentClientTime()) {
           setCurrentClientTime(other.getCurrentClientTime());
@@ -7619,9 +7619,9 @@ public final class EventStructureProto {
         return this;
       }
 
-      private long curTime_ ;
+      private long timeOfCompletion_ ;
       /**
-       * <code>optional int64 curTime = 3;</code>
+       * <code>optional int64 timeOfCompletion = 3;</code>
        *
        * <pre>
        *if the structure is a generator, the uncollected resources will be lost when upgraded
@@ -7631,11 +7631,11 @@ public final class EventStructureProto {
        *a resource generator completed it's upgrade 
        * </pre>
        */
-      public boolean hasCurTime() {
+      public boolean hasTimeOfCompletion() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int64 curTime = 3;</code>
+       * <code>optional int64 timeOfCompletion = 3;</code>
        *
        * <pre>
        *if the structure is a generator, the uncollected resources will be lost when upgraded
@@ -7645,11 +7645,11 @@ public final class EventStructureProto {
        *a resource generator completed it's upgrade 
        * </pre>
        */
-      public long getCurTime() {
-        return curTime_;
+      public long getTimeOfCompletion() {
+        return timeOfCompletion_;
       }
       /**
-       * <code>optional int64 curTime = 3;</code>
+       * <code>optional int64 timeOfCompletion = 3;</code>
        *
        * <pre>
        *if the structure is a generator, the uncollected resources will be lost when upgraded
@@ -7659,14 +7659,14 @@ public final class EventStructureProto {
        *a resource generator completed it's upgrade 
        * </pre>
        */
-      public Builder setCurTime(long value) {
+      public Builder setTimeOfCompletion(long value) {
         bitField0_ |= 0x00000004;
-        curTime_ = value;
+        timeOfCompletion_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 curTime = 3;</code>
+       * <code>optional int64 timeOfCompletion = 3;</code>
        *
        * <pre>
        *if the structure is a generator, the uncollected resources will be lost when upgraded
@@ -7676,9 +7676,9 @@ public final class EventStructureProto {
        *a resource generator completed it's upgrade 
        * </pre>
        */
-      public Builder clearCurTime() {
+      public Builder clearTimeOfCompletion() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        curTime_ = 0L;
+        timeOfCompletion_ = 0L;
         onChanged();
         return this;
       }
@@ -19349,75 +19349,76 @@ public final class EventStructureProto {
       "NormStructWaittimeWithDiamondsResponsePr" +
       "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
       "imumUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6" +
-      ".proto.ResponseStatus\"\232\001\n\"NormStructWait" +
+      ".proto.ResponseStatus\"\243\001\n\"NormStructWait" +
       "CompleteRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\022\026\n\016userSt" +
-      "ructUuid\030\002 \003(\t\022\017\n\007curTime\030\003 \001(\003\022\031\n\021curre" +
-      "ntClientTime\030\004 \001(\003\"\303\001\n#NormStructWaitCom" +
-      "pleteResponseProto\0220\n\006sender\030\001 \001(\0132 .com",
-      ".lvl6.proto.MinimumUserProto\022.\n\006status\030\002" +
-      " \001(\0162\036.com.lvl6.proto.ResponseStatus\022:\n\n" +
-      "userStruct\030\003 \003(\0132&.com.lvl6.proto.FullUs" +
-      "erStructureProto\"\267\002\n-RetrieveCurrencyFro" +
-      "mNormStructureRequestProto\022@\n\006sender\030\001 \001" +
-      "(\01320.com.lvl6.proto.MinimumUserProtoWith" +
-      "MaxResources\022g\n\020structRetrievals\030\002 \003(\0132M" +
-      ".com.lvl6.proto.RetrieveCurrencyFromNorm" +
-      "StructureRequestProto.StructRetrieval\032[\n" +
-      "\017StructRetrieval\022\026\n\016userStructUuid\030\001 \001(\t",
-      "\022\027\n\017timeOfRetrieval\030\002 \001(\003\022\027\n\017amountColle" +
-      "cted\030\003 \001(\005\"\242\001\n.RetrieveCurrencyFromNormS" +
-      "tructureResponseProto\022@\n\006sender\030\001 \001(\01320." +
-      "com.lvl6.proto.MinimumUserProtoWithMaxRe" +
-      "sources\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto" +
-      ".ResponseStatus\"q\n%DestroyMoneyTreeStruc" +
-      "tureRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022\026\n\016userStruct" +
-      "Uuid\030\002 \003(\t\"\212\001\n&DestroyMoneyTreeStructure" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6",
-      ".proto.MinimumUserProto\022.\n\006status\030\002 \001(\0162" +
-      "\036.com.lvl6.proto.ResponseStatus\"\267\001\n!Expa" +
-      "nsionWaitCompleteRequestProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\017\n\007curTime\030\002 \001(\003\022\021\n\txPosition\030\003 \001(\021\022\021\n\ty" +
-      "Position\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(\010\022\030\n\020gemCo" +
-      "stToSpeedup\030\006 \001(\005\"\375\002\n\"ExpansionWaitCompl" +
-      "eteResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022^\n\006status\030\002 \001" +
-      "(\0162N.com.lvl6.proto.ExpansionWaitComplet",
-      "eResponseProto.ExpansionWaitCompleteStat" +
-      "us\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.proto.UserC" +
-      "ityExpansionDataProto\"\211\001\n\033ExpansionWaitC" +
-      "ompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_WAS_N" +
-      "OT_EXPANDING\020\002\022\025\n\021FAIL_NOT_DONE_YET\020\003\022\032\n" +
-      "\026FAIL_INSUFFICIENT_GEMS\020\004\022\016\n\nFAIL_OTHER\020" +
-      "\005\"\242\001\n\031SpawnObstacleRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022B\n\024prospectiveObstacles\030\002 \003(\0132$.com.lv" +
-      "l6.proto.MinimumObstacleProto\022\017\n\007curTime",
-      "\030\003 \001(\003\"\273\001\n\032SpawnObstacleResponseProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022;\n\020spawnedObstacles\030\002 \003(\0132!.com." +
-      "lvl6.proto.UserObstacleProto\022.\n\006status\030\003" +
-      " \001(\0162\036.com.lvl6.proto.ResponseStatus\"\344\001\n" +
-      " BeginObstacleRemovalRequestProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\017\n\007curTime\030\002 \001(\003\022\021\n\tgemsSpent\030\003 \001(\005\022" +
-      "\026\n\016resourceChange\030\004 \001(\021\0228\n\014resourceType\030" +
-      "\005 \001(\0162\034.com.lvl6.proto.ResourceType:\004CAS",
-      "H\022\030\n\020userObstacleUuid\030\006 \001(\t\"\205\001\n!BeginObs" +
-      "tacleRemovalResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022.\n\006s" +
-      "tatus\030\002 \001(\0162\036.com.lvl6.proto.ResponseSta" +
-      "tus\"\276\001\n#ObstacleRemovalCompleteRequestPr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\017\n\007curTime\030\002 \001(\003\022\017\n\007speedU" +
-      "p\030\003 \001(\010\022\021\n\tgemsSpent\030\004 \001(\005\022\030\n\020userObstac" +
-      "leUuid\030\005 \001(\t\022\026\n\016atMaxObstacles\030\006 \001(\010\"\210\001\n" +
-      "$ObstacleRemovalCompleteResponseProto\0220\n",
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto" +
-      ".ResponseStatusB\025B\023EventStructureProto"
+      "ructUuid\030\002 \003(\t\022\030\n\020timeOfCompletion\030\003 \001(\003" +
+      "\022\031\n\021currentClientTime\030\004 \001(\003\"\303\001\n#NormStru" +
+      "ctWaitCompleteResponseProto\0220\n\006sender\030\001 ",
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022.\n" +
+      "\006status\030\002 \001(\0162\036.com.lvl6.proto.ResponseS" +
+      "tatus\022:\n\nuserStruct\030\003 \003(\0132&.com.lvl6.pro" +
+      "to.FullUserStructureProto\"\267\002\n-RetrieveCu" +
+      "rrencyFromNormStructureRequestProto\022@\n\006s" +
+      "ender\030\001 \001(\01320.com.lvl6.proto.MinimumUser" +
+      "ProtoWithMaxResources\022g\n\020structRetrieval" +
+      "s\030\002 \003(\0132M.com.lvl6.proto.RetrieveCurrenc" +
+      "yFromNormStructureRequestProto.StructRet" +
+      "rieval\032[\n\017StructRetrieval\022\026\n\016userStructU",
+      "uid\030\001 \001(\t\022\027\n\017timeOfRetrieval\030\002 \001(\003\022\027\n\017am" +
+      "ountCollected\030\003 \001(\005\"\242\001\n.RetrieveCurrency" +
+      "FromNormStructureResponseProto\022@\n\006sender" +
+      "\030\001 \001(\01320.com.lvl6.proto.MinimumUserProto" +
+      "WithMaxResources\022.\n\006status\030\002 \001(\0162\036.com.l" +
+      "vl6.proto.ResponseStatus\"q\n%DestroyMoney" +
+      "TreeStructureRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\026\n\016u" +
+      "serStructUuid\030\002 \003(\t\"\212\001\n&DestroyMoneyTree" +
+      "StructureResponseProto\0220\n\006sender\030\001 \001(\0132 ",
+      ".com.lvl6.proto.MinimumUserProto\022.\n\006stat" +
+      "us\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatus" +
+      "\"\267\001\n!ExpansionWaitCompleteRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\txPosition\030\003" +
+      " \001(\021\022\021\n\tyPosition\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(\010" +
+      "\022\030\n\020gemCostToSpeedup\030\006 \001(\005\"\375\002\n\"Expansion" +
+      "WaitCompleteResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022^\n\006s" +
+      "tatus\030\002 \001(\0162N.com.lvl6.proto.ExpansionWa",
+      "itCompleteResponseProto.ExpansionWaitCom" +
+      "pleteStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.pr" +
+      "oto.UserCityExpansionDataProto\"\211\001\n\033Expan" +
+      "sionWaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026F" +
+      "AIL_WAS_NOT_EXPANDING\020\002\022\025\n\021FAIL_NOT_DONE" +
+      "_YET\020\003\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\004\022\016\n\nFA" +
+      "IL_OTHER\020\005\"\242\001\n\031SpawnObstacleRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022B\n\024prospectiveObstacles\030\002 \003(\013" +
+      "2$.com.lvl6.proto.MinimumObstacleProto\022\017",
+      "\n\007curTime\030\003 \001(\003\"\273\001\n\032SpawnObstacleRespons" +
+      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022;\n\020spawnedObstacles\030\002 \003" +
+      "(\0132!.com.lvl6.proto.UserObstacleProto\022.\n" +
+      "\006status\030\003 \001(\0162\036.com.lvl6.proto.ResponseS" +
+      "tatus\"\344\001\n BeginObstacleRemovalRequestPro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\tgemsSpe" +
+      "nt\030\003 \001(\005\022\026\n\016resourceChange\030\004 \001(\021\0228\n\014reso" +
+      "urceType\030\005 \001(\0162\034.com.lvl6.proto.Resource",
+      "Type:\004CASH\022\030\n\020userObstacleUuid\030\006 \001(\t\"\205\001\n" +
+      "!BeginObstacleRemovalResponseProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Re" +
+      "sponseStatus\"\276\001\n#ObstacleRemovalComplete" +
+      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022\017\n\007curTime\030\002 \001(\003\022" +
+      "\017\n\007speedUp\030\003 \001(\010\022\021\n\tgemsSpent\030\004 \001(\005\022\030\n\020u" +
+      "serObstacleUuid\030\005 \001(\t\022\026\n\016atMaxObstacles\030" +
+      "\006 \001(\010\"\210\001\n$ObstacleRemovalCompleteRespons",
+      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022.\n\006status\030\002 \001(\0162\036.com.l" +
+      "vl6.proto.ResponseStatusB\025B\023EventStructu" +
+      "reProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -19488,7 +19489,7 @@ public final class EventStructureProto {
     internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserStructUuid", "CurTime", "CurrentClientTime", });
+        new java.lang.String[] { "Sender", "UserStructUuid", "TimeOfCompletion", "CurrentClientTime", });
     internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_fieldAccessorTable = new
