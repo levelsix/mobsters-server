@@ -83,13 +83,13 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureForUserDao2 structureForUserDao;
 
 
 	public RetrieveUserMonsterTeamController() {
-		
+
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 		RetrieveUserMonsterTeamRequestProto reqProto = ((RetrieveUserMonsterTeamRequestEvent) event)
 				.getRetrieveUserMonsterTeamRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -173,7 +173,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 				List<String> userIds = new ArrayList<String>();
 				userIds.addAll(rumta.getAllUsers().keySet());
 				Map<String, List<StructureForUserPojo>> userIdsToSfuList = structureForUserDao.fetchByUserIds(userIds);
-				
+
 				List<PvpProto> ppList = createInfoProtoUtils
 						.createPvpProtos(
 								rumta.getAllUsersExceptRetriever(),
@@ -191,7 +191,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 								rumta.getAllButRetrieverUserIdToUserResearch(),
 								userIdsToSfuList,
 								rumta.getPercentageStolenFromGenerators());
-				
+
 				log.info("ppList={}", ppList);
 				resBuilder.addAllUserMonsterTeam(ppList);
 			}
