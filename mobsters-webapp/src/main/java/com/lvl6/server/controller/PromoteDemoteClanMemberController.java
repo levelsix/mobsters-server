@@ -17,7 +17,7 @@ import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberRequestProto;
 import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto;
-import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -92,7 +92,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 
 		PromoteDemoteClanMemberResponseProto.Builder resBuilder = PromoteDemoteClanMemberResponseProto
 				.newBuilder();
-		resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 		resBuilder.setUserClanStatus(newUserClanStatus);
 
@@ -120,7 +120,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			PromoteDemoteClanMemberResponseEvent resEvent = new PromoteDemoteClanMemberResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -143,7 +143,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
-			if (!PromoteDemoteClanMemberStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (!ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
@@ -165,7 +165,7 @@ public class PromoteDemoteClanMemberController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in PromoteDemoteClanMember processEvent", e);
 			try {
-				resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				PromoteDemoteClanMemberResponseEvent resEvent = new PromoteDemoteClanMemberResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

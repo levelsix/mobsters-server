@@ -25,7 +25,7 @@ import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsRequestProto;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto;
-import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -120,7 +120,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RetrievePrivateChatPostsStatus.FAIL);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -131,7 +131,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 		}
 
 		try {
-			resBuilder.setStatus(RetrievePrivateChatPostsStatus.SUCCESS);
+			resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 			List<PrivateChatPost> recentPrivateChatPosts = getPrivateChatPostRetrieveUtils()
 					.getPrivateChatPostsBetweenUsersBeforePostId(
@@ -338,7 +338,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(RetrievePrivateChatPostsStatus.FAIL);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

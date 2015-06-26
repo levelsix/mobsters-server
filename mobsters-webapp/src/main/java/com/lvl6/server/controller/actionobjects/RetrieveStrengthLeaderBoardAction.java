@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.StrengthLeaderBoard;
 import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.Builder;
-import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -56,7 +56,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	//derived state
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RetrieveStrengthLeaderBoardStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -72,18 +72,18 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		}
 
 		retrieveInfo(resBuilder);
-		resBuilder.setStatus(RetrieveStrengthLeaderBoardStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {		
 		if (leaderBoard.getSize() == 0) {
-			resBuilder.setStatus(RetrieveStrengthLeaderBoardStatus.FAIL_NO_RESULTS);
+			resBuilder.setStatus(ResponseStatus.FAIL_NO_RESULTS);
 			log.info("!!!!!!!!!!!!!!!!LEADERBOARD IS EMPTY!!!!!!!!!!!!!!!!!!!!");
 			return false;
 		}
 		
 		if(leaderBoard.getSize() < minRank) {
-			resBuilder.setStatus(RetrieveStrengthLeaderBoardStatus.FAIL_NO_RESULTS);
+			resBuilder.setStatus(ResponseStatus.FAIL_NO_RESULTS);
 			log.info("the leaderboard ranks request fall outside the possible range");
 			return false;
 		}

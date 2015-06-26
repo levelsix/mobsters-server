@@ -12,7 +12,7 @@ import com.lvl6.events.request.RetractRequestJoinClanRequestEvent;
 import com.lvl6.events.response.RetractRequestJoinClanResponseEvent;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto;
-import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -73,7 +73,7 @@ public class RetractRequestJoinClanController extends EventController {
 
 		RetractRequestJoinClanResponseProto.Builder resBuilder = RetractRequestJoinClanResponseProto
 				.newBuilder();
-		resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 		resBuilder.setClanUuid(clanId);
 
@@ -94,7 +94,7 @@ public class RetractRequestJoinClanController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RetractRequestJoinClanResponseEvent resEvent = new RetractRequestJoinClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -120,14 +120,14 @@ public class RetractRequestJoinClanController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 
 
-			if (RetractRequestJoinClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			}
 
 		} catch (Exception e) {
 			log.error("exception in RetractRequestJoinClan processEvent", e);
 			try {
-				resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RetractRequestJoinClanResponseEvent resEvent = new RetractRequestJoinClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

@@ -13,7 +13,7 @@ import com.lvl6.events.response.SetDefendingMsgResponseEvent;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgRequestProto;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto;
-import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto.SetDefendingMsgStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -65,7 +65,7 @@ public class SetDefendingMsgController extends EventController {
 		SetDefendingMsgResponseProto.Builder resBuilder = SetDefendingMsgResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(SetDefendingMsgStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -80,7 +80,7 @@ public class SetDefendingMsgController extends EventController {
 		//UUID checks
 		if (invalidUuids) {
 			log.info("invalid UUIDS.");
-			resBuilder.setStatus(SetDefendingMsgStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -108,7 +108,7 @@ public class SetDefendingMsgController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in SetDefendingMsgController processEvent", e);
 			try {
-				resBuilder.setStatus(SetDefendingMsgStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SetDefendingMsgResponseEvent resEvent = new SetDefendingMsgResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

@@ -38,7 +38,7 @@ import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.Builder;
-import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -140,7 +140,7 @@ public class SendGroupChatController extends EventController {
 		SendGroupChatResponseProto.Builder resBuilder = SendGroupChatResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		SendGroupChatResponseEvent resEvent = new SendGroupChatResponseEvent(
 				senderProto.getUserUuid());
 		resEvent.setTag(event.getTag());
@@ -159,7 +159,7 @@ public class SendGroupChatController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -269,7 +269,7 @@ public class SendGroupChatController extends EventController {
 			log.error("exception in SendGroupChat processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 			} catch (Exception e2) {
@@ -384,14 +384,14 @@ public class SendGroupChatController extends EventController {
 			ChatScope scope, String chatMessage) {
 		if (user == null || scope == null || chatMessage == null
 				|| chatMessage.length() == 0) {
-			resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("user is " + user + ", scope is " + scope
 					+ ", chatMessage=" + chatMessage);
 			return false;
 		}
 
 		if (chatMessage.length() > ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING) {
-			resBuilder.setStatus(SendGroupChatStatus.TOO_LONG);
+			resBuilder.setStatus(ResponseStatus.FAIL_TOO_LONG);
 			log.error("chat message is too long. allowed is "
 					+ ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING
 					+ ", length is " + chatMessage.length()
@@ -401,12 +401,12 @@ public class SendGroupChatController extends EventController {
 
 		Set<Integer> banned = bannedUserRetrieveUtils.getAllBannedUsers();
 		if (banned.contains(user.getId())) {
-			resBuilder.setStatus(SendGroupChatStatus.BANNED);
+			resBuilder.setStatus(ResponseStatus.FAIL_BANNED);
 			log.warn("banned user tried to send a post. user=" + user);
 			return false;
 		}
 
-		resBuilder.setStatus(SendGroupChatStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

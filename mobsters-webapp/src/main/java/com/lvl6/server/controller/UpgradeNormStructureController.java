@@ -22,9 +22,9 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.Builder;
-import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -85,7 +85,7 @@ public class UpgradeNormStructureController extends EventController {
 		UpgradeNormStructureResponseProto.Builder resBuilder = UpgradeNormStructureResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -102,7 +102,7 @@ public class UpgradeNormStructureController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -160,7 +160,7 @@ public class UpgradeNormStructureController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in UpgradeNormStructure processEvent", e);
 			try {
-				resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -188,19 +188,19 @@ public class UpgradeNormStructureController extends EventController {
 			return false;
 		}
 		if (!userStruct.isComplete()) {
-			resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_BUILT_YET);
 			log.error("user struct is not complete yet");
 			return false;
 		}
 		if (null == nextLevelStruct) {
 			resBuilder
-					.setStatus(UpgradeNormStructureStatus.FAIL_AT_MAX_LEVEL_ALREADY);
+					.setStatus(ResponseStatus.FAIL_AT_MAX_LEVEL_ALREADY);
 			log.error("user struct at max level already. struct is {}",
 					currentStruct);
 			return false;
 		}
 		if (timeOfUpgrade.getTime() < userStruct.getLastRetrieved().getTime()) {
-			resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_BUILT_YET);
 			log.error(
 					"the upgrade time {} is before the last time the building was retrieved:{}",
 					timeOfUpgrade, userStruct.getLastRetrieved());
@@ -209,7 +209,7 @@ public class UpgradeNormStructureController extends EventController {
 		//see if the user can upgrade it
 		if (!user.getId().equals(userStruct.getUserId())) {
 			resBuilder
-					.setStatus(UpgradeNormStructureStatus.FAIL_NOT_USERS_STRUCT);
+					.setStatus(ResponseStatus.FAIL_NOT_USERS_STRUCT);
 			log.error("user struct belongs to someone else with id={}",
 					userStruct.getUserId());
 			return false;
@@ -226,7 +226,7 @@ public class UpgradeNormStructureController extends EventController {
 					new Object[] { userGems, gemsSpent, resourceChange, rt,
 							nextLevelStruct });
 			resBuilder
-					.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 
@@ -237,7 +237,7 @@ public class UpgradeNormStructureController extends EventController {
 		if (ResourceType.CASH.equals(rt)) {
 			if (user.getCash() < resourceRequired) {
 				resBuilder
-						.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_CASH);
 				log.error("user doesn't have enough cash, has {}, needs {}",
 						user.getCash(), resourceChange);
 				return false;
@@ -245,7 +245,7 @@ public class UpgradeNormStructureController extends EventController {
 		} else if (ResourceType.OIL.equals(rt)) {
 			if (user.getOil() < resourceRequired) {
 				resBuilder
-						.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_OIL);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_OIL);
 				log.error("user doesn't have enough gems, has , needs ",
 						user.getGems(), resourceChange);
 				return false;
@@ -264,7 +264,7 @@ public class UpgradeNormStructureController extends EventController {
 		  }
 		}*/
 
-		resBuilder.setStatus(UpgradeNormStructureStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

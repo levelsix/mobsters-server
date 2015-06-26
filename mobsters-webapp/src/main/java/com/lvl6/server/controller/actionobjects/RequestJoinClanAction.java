@@ -16,7 +16,7 @@ import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -61,7 +61,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -81,10 +81,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 
 		if (requestToJoinRequired) {
-			resBuilder.setStatus(RequestJoinClanStatus.SUCCESS_REQUEST);
+			resBuilder.setStatus(ResponseStatus.SUCCESS_REQUEST);
 		}
 		else {
-			resBuilder.setStatus(RequestJoinClanStatus.SUCCESS_JOIN);
+			resBuilder.setStatus(ResponseStatus.SUCCESS_JOIN);
 		}
 	}
 
@@ -96,13 +96,13 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return false;
 		}
 		if (user == null || clan == null) {
-			resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("user is {}, clan is {}", user, clan);
 			return false;
 		}
 		String userClanId = user.getClanId();
 		if (userClanId != null) {
-			resBuilder.setStatus(RequestJoinClanStatus.FAIL_ALREADY_IN_CLAN);
+			resBuilder.setStatus(ResponseStatus.FAIL_ALREADY_IN_CLAN);
 			log.error("user is already in clan with id {}",
 					userClanId);
 			return false;
@@ -122,7 +122,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 		if (null != userIdsToStatuses && userIdsToStatuses.containsKey(userId)) {
 			resBuilder
-			.setStatus(RequestJoinClanStatus.FAIL_REQUEST_ALREADY_FILED);
+			.setStatus(ResponseStatus.FAIL_REQUEST_ALREADY_FILED);
 			log.error("user clan already exists for this: {}",
 					userIdsToStatuses.get(userId));
 			return false;
@@ -142,7 +142,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		int size = calculateClanSize(userIdsToStatuses);
 		int maxSize = ControllerConstants.CLAN__MAX_NUM_MEMBERS;
 		if (size >= maxSize) {
-			resBuilder.setStatus(RequestJoinClanStatus.FAIL_CLAN_IS_FULL);
+			resBuilder.setStatus(ResponseStatus.FAIL_CLAN_IS_FULL);
 			log.warn("trying to join full clan with id {}, cur size={}", clanId,
 					maxSize);
 			return false;
@@ -184,7 +184,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 				clientTime)) {
 			log.error("problem inserting user clan data for user={}, and clan id {}",
 							user, clanId);
-			resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			return false;
 		}
 
@@ -213,7 +213,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			if (!deleteUtil.deleteUserClan(userId, clanId)) {
 				log.error("unexpected error: could not delete user clan inserted.");
 			}
-			resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			successful = false;
 		}
 		return successful;

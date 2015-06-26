@@ -16,7 +16,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.Builder;
-import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -82,7 +82,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -101,7 +101,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(CreateBattleItemStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -123,7 +123,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		user = userRetrieveUtil.getUserById(userId);
 
 		if (null == user) {
-			resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("no user with id={}", userId);
 			return false;
 		}
@@ -157,7 +157,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			//check if user can afford to buy however many more user wants to buy
 			if (userGems < gemCostForCreating) {
 				resBuilder
-						.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
 		}
@@ -174,7 +174,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			int userCash = user.getCash();
 			if (userCash < cashCost) {
 				resBuilder
-						.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
 		}
@@ -191,7 +191,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			int userOil = user.getOil();
 			if (userOil < oilCost) {
 				resBuilder
-						.setStatus(CreateBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
 		}

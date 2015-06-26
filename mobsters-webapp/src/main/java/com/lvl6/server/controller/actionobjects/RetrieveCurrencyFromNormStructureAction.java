@@ -20,8 +20,8 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.Builder;
-import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
@@ -96,7 +96,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	public void execute(Builder resBuilder) {
 		resBuilder
-				.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+				.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -116,7 +116,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 
@@ -171,7 +171,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 			if (!userStruct.isComplete()) {
 				resBuilder
-						.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				log.error("(will continue processing) struct not complete {}",
 						userStruct);
 				//remove invalid user structure

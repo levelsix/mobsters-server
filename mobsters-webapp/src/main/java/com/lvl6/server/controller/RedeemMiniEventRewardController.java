@@ -20,7 +20,7 @@ import com.lvl6.info.User;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto;
-import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -133,7 +133,7 @@ public class RedeemMiniEventRewardController extends EventController {
 		RedeemMiniEventRewardResponseProto.Builder resBuilder = RedeemMiniEventRewardResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(RedeemMiniEventRewardStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -149,7 +149,7 @@ public class RedeemMiniEventRewardController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RedeemMiniEventRewardStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RedeemMiniEventRewardResponseEvent resEvent = new RedeemMiniEventRewardResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -175,7 +175,7 @@ public class RedeemMiniEventRewardController extends EventController {
 
 			rmera.execute(resBuilder);
 
-			boolean success = resBuilder.getStatus().equals(RedeemMiniEventRewardStatus.SUCCESS);
+			boolean success = resBuilder.getStatus().equals(ResponseStatus.SUCCESS);
 			if (success) {
 				Collection<ItemForUser> nuOrUpdatedItems = rmera.getNuOrUpdatedItems();
 				Collection<FullUserMonsterProto> fumpList = rmera.getNuOrUpdatedMonsters();
@@ -219,7 +219,7 @@ public class RedeemMiniEventRewardController extends EventController {
 			log.error("exception in RedeemMiniEventRewardController processEvent",
 					e);
 			try {
-				resBuilder.setStatus(RedeemMiniEventRewardStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RedeemMiniEventRewardResponseEvent resEvent = new RedeemMiniEventRewardResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

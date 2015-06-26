@@ -33,7 +33,7 @@ import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.Builder;
-import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -152,7 +152,7 @@ public class TradeItemForBoosterController extends EventController {
 		TradeItemForBoosterResponseProto.Builder resBuilder = TradeItemForBoosterResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(TradeItemForBoosterStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -167,7 +167,7 @@ public class TradeItemForBoosterController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(TradeItemForBoosterStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -239,7 +239,7 @@ public class TradeItemForBoosterController extends EventController {
 							.createBoosterItemProto(bi, rewardRetrieveUtil);
 					resBuilder.setPrize(bip);
 				}
-				resBuilder.setStatus(TradeItemForBoosterStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			TradeItemForBoosterResponseProto resProto = resBuilder.build();
@@ -275,7 +275,7 @@ public class TradeItemForBoosterController extends EventController {
 					"exception in TradeItemForBoosterController processEvent",
 					e);
 			try {
-				resBuilder.setStatus(TradeItemForBoosterStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -355,7 +355,7 @@ public class TradeItemForBoosterController extends EventController {
 		if (ifu.getQuantity() <= 0) {
 			log.error(String.format("not enough item quantity. item=%s", ifu));
 			resBuilder
-					.setStatus(TradeItemForBoosterStatus.FAIL_INSUFFICIENT_ITEM);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_ITEM);
 			return false;
 		}
 

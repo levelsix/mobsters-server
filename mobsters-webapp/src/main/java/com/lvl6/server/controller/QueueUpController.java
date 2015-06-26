@@ -25,11 +25,10 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
-import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventPvpProto.QueueUpRequestProto;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.Builder;
-import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.QueueUpStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
@@ -158,7 +157,7 @@ public class QueueUpController extends EventController {
 		QueueUpResponseProto.Builder resBuilder = QueueUpResponseProto
 				.newBuilder();
 		resBuilder.setAttacker(attackerProto);
-		resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -179,7 +178,7 @@ public class QueueUpController extends EventController {
 		}
 
 		if (invalidUuids) {
-			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
@@ -206,7 +205,7 @@ public class QueueUpController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
-			if (QueueUpStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//no need to update client since no currency or elo update
 				//UPDATE CLIENT
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -219,7 +218,7 @@ public class QueueUpController extends EventController {
 
 		} catch (Exception e) {
 			log.error("exception in QueueUp processEvent", e);
-			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
@@ -303,7 +302,7 @@ public class QueueUpController extends EventController {
 					.newBuilder();
 			rumta.execute(tempResBuilder);
 
-			if (RetrieveUserMonsterTeamStatus.SUCCESS.equals(tempResBuilder
+			if (ResponseStatus.SUCCESS.equals(tempResBuilder
 					.getStatus())) {
 				List<User> usersExceptRetriever = rumta.getAllUsersExceptRetriever();	
 				Map<String, User> allUsersMap = rumta.getAllUsers();
@@ -361,7 +360,7 @@ public class QueueUpController extends EventController {
 		}
 
 		if (pvpProtoList.isEmpty()) {
-			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("no real nor fake players to fight");
 			return;
 		}

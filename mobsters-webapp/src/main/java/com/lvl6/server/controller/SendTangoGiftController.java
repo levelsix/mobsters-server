@@ -30,7 +30,7 @@ import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftRequestProto;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto;
-import com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -102,7 +102,7 @@ public class SendTangoGiftController extends EventController {
 		SendTangoGiftResponseProto.Builder resBuilder = SendTangoGiftResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(SendTangoGiftStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -117,7 +117,7 @@ public class SendTangoGiftController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SendTangoGiftStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -136,7 +136,7 @@ public class SendTangoGiftController extends EventController {
 					giftRewardRetrieveUtil, insertUtil);
 			stga.execute(resBuilder);
 
-			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
+			if ( ResponseStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
 				Collection<String> tangoIdsNotInToonSquad = stga
 						.getNonToonSquadTangoUserIds();
 				resBuilder.addAllTangoUserIdsNotInToonSquad(tangoIdsNotInToonSquad);
@@ -153,7 +153,7 @@ public class SendTangoGiftController extends EventController {
 			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 
-			if ( SendTangoGiftStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
+			if ( ResponseStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
 
 				List<GiftForUserPojo> receiverGifts = stga.getReceiverGifts();
 				if (null != receiverGifts && !receiverGifts.isEmpty()) {
@@ -191,7 +191,7 @@ public class SendTangoGiftController extends EventController {
 			log.error("exception in SendTangoGiftController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(SendTangoGiftStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

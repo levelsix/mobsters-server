@@ -775,13 +775,13 @@ public final class EventLeaderBoardProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
-    com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto}
@@ -871,7 +871,7 @@ public final class EventLeaderBoardProto {
             }
             case 32: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus value = com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
@@ -920,97 +920,6 @@ public final class EventLeaderBoardProto {
     @java.lang.Override
     public com.google.protobuf.Parser<RetrieveStrengthLeaderBoardResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus}
-     */
-    public enum RetrieveStrengthLeaderBoardStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NO_RESULTS = 3;</code>
-       */
-      FAIL_NO_RESULTS(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NO_RESULTS = 3;</code>
-       */
-      public static final int FAIL_NO_RESULTS_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static RetrieveStrengthLeaderBoardStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NO_RESULTS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RetrieveStrengthLeaderBoardStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RetrieveStrengthLeaderBoardStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RetrieveStrengthLeaderBoardStatus>() {
-              public RetrieveStrengthLeaderBoardStatus findValueByNumber(int number) {
-                return RetrieveStrengthLeaderBoardStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RetrieveStrengthLeaderBoardStatus[] VALUES = values();
-
-      public static RetrieveStrengthLeaderBoardStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RetrieveStrengthLeaderBoardStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus)
     }
 
     private int bitField0_;
@@ -1092,17 +1001,17 @@ public final class EventLeaderBoardProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 4;
-    private com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
-    public com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -1110,7 +1019,7 @@ public final class EventLeaderBoardProto {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       senderLeaderBoardInfo_ = com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto.getDefaultInstance();
       leaderBoardInfo_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1300,7 +1209,7 @@ public final class EventLeaderBoardProto {
         } else {
           leaderBoardInfoBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
@@ -1909,23 +1818,23 @@ public final class EventLeaderBoardProto {
         return leaderBoardInfoBuilder_;
       }
 
-      private com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status_ = com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
-      public com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1935,11 +1844,11 @@ public final class EventLeaderBoardProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        status_ = com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -1975,22 +1884,19 @@ public final class EventLeaderBoardProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026EventLeaderBoard.proto\022\016com.lvl6.proto" +
-      "\032\021LeaderBoard.proto\032\nUser.proto\"}\n\'Retri" +
-      "eveStrengthLeaderBoardRequestProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\017\n\007minRank\030\002 \001(\005\022\017\n\007maxRank\030\003 \001(\005\"\253" +
-      "\003\n(RetrieveStrengthLeaderBoardResponsePr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022G\n\025senderLeaderBoardInfo\030\002" +
-      " \001(\0132(.com.lvl6.proto.StrengthLeaderBoar" +
-      "dProto\022A\n\017leaderBoardInfo\030\003 \003(\0132(.com.lv",
-      "l6.proto.StrengthLeaderBoardProto\022j\n\006sta" +
-      "tus\030\004 \001(\0162Z.com.lvl6.proto.RetrieveStren" +
-      "gthLeaderBoardResponseProto.RetrieveStre" +
-      "ngthLeaderBoardStatus\"U\n!RetrieveStrengt" +
-      "hLeaderBoardStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\022\023\n\017FAIL_NO_RESULTS\020\003B\027B\025EventLea" +
-      "derBoardProto"
+      "\032\021LeaderBoard.proto\032\026SharedEnumConfig.pr" +
+      "oto\032\nUser.proto\"}\n\'RetrieveStrengthLeade" +
+      "rBoardRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\017\n\007minRank\030" +
+      "\002 \001(\005\022\017\n\007maxRank\030\003 \001(\005\"\230\002\n(RetrieveStren" +
+      "gthLeaderBoardResponseProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022G\n" +
+      "\025senderLeaderBoardInfo\030\002 \001(\0132(.com.lvl6." +
+      "proto.StrengthLeaderBoardProto\022A\n\017leader",
+      "BoardInfo\030\003 \003(\0132(.com.lvl6.proto.Strengt" +
+      "hLeaderBoardProto\022.\n\006status\030\004 \001(\0162\036.com." +
+      "lvl6.proto.ResponseStatusB\027B\025EventLeader" +
+      "BoardProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2004,6 +1910,7 @@ public final class EventLeaderBoardProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.LeaderBoardProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_RetrieveStrengthLeaderBoardRequestProto_descriptor =
@@ -2019,6 +1926,7 @@ public final class EventLeaderBoardProto {
         internal_static_com_lvl6_proto_RetrieveStrengthLeaderBoardResponseProto_descriptor,
         new java.lang.String[] { "Sender", "SenderLeaderBoardInfo", "LeaderBoardInfo", "Status", });
     com.lvl6.proto.LeaderBoardProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

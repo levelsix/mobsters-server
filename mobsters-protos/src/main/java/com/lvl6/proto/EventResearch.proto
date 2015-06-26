@@ -2,7 +2,6 @@
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "SharedEnumConfig.proto";
-import "Structure.proto";
 import "User.proto";
 
 package com.lvl6.proto;

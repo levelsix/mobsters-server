@@ -3,7 +3,6 @@
 
 //import "MonsterStuff.proto";
 import "SharedEnumConfig.proto";
-import "Structure.proto";
 
 package com.lvl6.proto;
 

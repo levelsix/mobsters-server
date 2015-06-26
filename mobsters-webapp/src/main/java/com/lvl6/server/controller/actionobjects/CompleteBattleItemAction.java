@@ -18,7 +18,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.Builder;
-import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -64,7 +64,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -83,14 +83,14 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-		resBuilder.setStatus(CompleteBattleItemStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
 
 		if (null == completedList || completedList.isEmpty()) {
 			resBuilder
-					.setStatus(CompleteBattleItemStatus.FAIL_INVALID_BATTLE_ITEMS);
+					.setStatus(ResponseStatus.FAIL_INVALID_BATTLE_ITEMS);
 			log.error("no BattleItems sent as completed");
 			return false;
 		}
@@ -102,7 +102,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		user = userRetrieveUtil.getUserById(userId);
 
 		if (null == user) {
-			resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("no user with id={}", userId);
 			return false;
 		}
@@ -121,7 +121,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			//check if user can afford to buy however many more user wants to buy
 			if (userGems < gemsForSpeedUp) {
 				resBuilder
-						.setStatus(CompleteBattleItemStatus.FAIL_INSUFFICIENT_FUNDS);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
 		}

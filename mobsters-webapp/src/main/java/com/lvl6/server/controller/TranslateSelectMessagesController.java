@@ -23,7 +23,7 @@ import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.ChatProto.TranslatedTextProto;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesRequestProto;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto;
-import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
@@ -124,7 +124,7 @@ public class TranslateSelectMessagesController extends EventController {
 		TranslateSelectMessagesResponseProto.Builder resBuilder = TranslateSelectMessagesResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID recipientUserUuid = null;
 		UUID senderUserUuid = null;
@@ -146,7 +146,7 @@ public class TranslateSelectMessagesController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			TranslateSelectMessagesResponseEvent resEvent = new TranslateSelectMessagesResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
@@ -166,7 +166,7 @@ public class TranslateSelectMessagesController extends EventController {
 			tsma.execute(resBuilder);
 
 			Map<String, PrivateChatPost> privateChatPostMap;
-			if (TranslateSelectMessagesStatus.SUCCESS.equals(resBuilder.getStatus()) && ct.equals(ChatScope.PRIVATE)) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus()) && ct.equals(ChatScope.PRIVATE)) {
 				privateChatPostMap = tsma.getPrivateChatPostMap();
 				log.info("PRIVATE CHAT POST MAP: " + privateChatPostMap);
 
@@ -188,7 +188,7 @@ public class TranslateSelectMessagesController extends EventController {
 			log.error("exception in TranslateSelectMessagesController processEvent", e);
 			// don't let the client hang
 			try {
-				resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				TranslateSelectMessagesResponseEvent resEvent = new TranslateSelectMessagesResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());

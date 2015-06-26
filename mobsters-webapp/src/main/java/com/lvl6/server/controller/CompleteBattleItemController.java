@@ -23,7 +23,7 @@ import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto;
-import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
@@ -103,7 +103,7 @@ public class CompleteBattleItemController extends EventController {
 
 		CompleteBattleItemResponseProto.Builder resBuilder = CompleteBattleItemResponseProto
 				.newBuilder();
-		resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		UUID userUuid = null;
@@ -120,7 +120,7 @@ public class CompleteBattleItemController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -144,7 +144,7 @@ public class CompleteBattleItemController extends EventController {
 
 			User user2 = cbia.getUser();
 
-			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				List<BattleItemForUser> bifuCompletedList = cbia
 						.getBifuCompletedList();
 				List<UserBattleItemProto> ubipCompletedList = createInfoProtoUtils
@@ -156,7 +156,7 @@ public class CompleteBattleItemController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
-			if (CompleteBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
@@ -173,7 +173,7 @@ public class CompleteBattleItemController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(CompleteBattleItemStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

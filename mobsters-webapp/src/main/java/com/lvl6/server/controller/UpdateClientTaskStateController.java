@@ -16,7 +16,7 @@ import com.lvl6.events.response.UpdateClientTaskStateResponseEvent;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.proto.EventUserProto.UpdateClientTaskStateRequestProto;
 import com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto;
-import com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
@@ -64,7 +64,7 @@ public class UpdateClientTaskStateController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setTaskState(bs);
-		resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UpdateClientTaskStateResponseEvent resEvent = new UpdateClientTaskStateResponseEvent(
 				userId);
@@ -83,7 +83,7 @@ public class UpdateClientTaskStateController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			resEvent = new UpdateClientTaskStateResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
@@ -103,7 +103,7 @@ public class UpdateClientTaskStateController extends EventController {
 					.insertIntoUpdateClientTaskState(tfucsList);
 			log.info("numInserted TaskForUserClientState: {}", numUpdated);
 
-			resBuilder.setStatus(UpdateClientTaskStateStatus.SUCCESS);
+			resBuilder.setStatus(ResponseStatus.SUCCESS);
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
@@ -113,7 +113,7 @@ public class UpdateClientTaskStateController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(UpdateClientTaskStateStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				resEvent = new UpdateClientTaskStateResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setResponseProto(resBuilder

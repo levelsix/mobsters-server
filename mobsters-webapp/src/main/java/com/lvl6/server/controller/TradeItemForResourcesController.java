@@ -18,7 +18,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto;
-import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -92,7 +92,7 @@ public class TradeItemForResourcesController extends EventController {
 		TradeItemForResourcesResponseProto.Builder resBuilder = TradeItemForResourcesResponseProto
 				.newBuilder();
 		resBuilder.setSender(mupMaxResources);
-		resBuilder.setStatus(TradeItemForResourcesStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -108,7 +108,7 @@ public class TradeItemForResourcesController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(TradeItemForResourcesStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -139,7 +139,7 @@ public class TradeItemForResourcesController extends EventController {
 			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
-			if (TradeItemForResourcesStatus.SUCCESS.equals(resBuilder
+			if (ResponseStatus.SUCCESS.equals(resBuilder
 					.getStatus())) {
 				User user = tifsua.getUser();
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
@@ -156,7 +156,7 @@ public class TradeItemForResourcesController extends EventController {
 					"exception in TradeItemForResourcesController processEvent",
 					e);
 			try {
-				resBuilder.setStatus(TradeItemForResourcesStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

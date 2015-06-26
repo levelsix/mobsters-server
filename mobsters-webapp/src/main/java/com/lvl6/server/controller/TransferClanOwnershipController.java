@@ -20,7 +20,7 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -91,7 +91,7 @@ public class TransferClanOwnershipController extends EventController {
 
 		TransferClanOwnershipResponseProto.Builder resBuilder = TransferClanOwnershipResponseProto
 				.newBuilder();
-		resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		String clanId = null;
@@ -119,7 +119,7 @@ public class TransferClanOwnershipController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -139,7 +139,7 @@ public class TransferClanOwnershipController extends EventController {
 			tcoa.execute(resBuilder);
 			setResponseBuilderStuff(resBuilder, clanId, tcoa.getNewClanOwner());
 
-			if (!TransferClanOwnershipStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (!ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//if not successful write to guy
 				TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(
 						userId);
@@ -149,7 +149,7 @@ public class TransferClanOwnershipController extends EventController {
 				responses.normalResponseEvents().add(resEvent);
 			}
 
-			if (TransferClanOwnershipStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
@@ -162,7 +162,7 @@ public class TransferClanOwnershipController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in TransferClanOwnership processEvent", e);
 			try {
-				resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

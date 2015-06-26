@@ -14,7 +14,7 @@ import com.lvl6.events.request.DestroyMoneyTreeStructureRequestEvent;
 import com.lvl6.events.response.DestroyMoneyTreeStructureResponseEvent;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto;
-import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
@@ -91,7 +91,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(DestroyMoneyTreeStructureStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			DestroyMoneyTreeStructureResponseEvent resEvent = new DestroyMoneyTreeStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -109,7 +109,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 
 			if (!resBuilder.hasStatus()) {
 				resBuilder
-						.setStatus(DestroyMoneyTreeStructureStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 			}
 
 			DestroyMoneyTreeStructureResponseProto resProto = resBuilder
@@ -145,7 +145,7 @@ public class DestroyMoneyTreeStructureController extends EventController {
 			dmtsa.execute(resBuilder);
 
 			if (resBuilder.getStatus().equals(
-					DestroyMoneyTreeStructureStatus.SUCCESS)) {
+					ResponseStatus.SUCCESS)) {
 				log.info("successful money tree destroy from user {}", userId);
 			}
 		} catch (Exception e) {

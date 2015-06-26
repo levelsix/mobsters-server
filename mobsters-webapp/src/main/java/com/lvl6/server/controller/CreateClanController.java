@@ -21,7 +21,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpLeagueForUserDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventClanProto.CreateClanRequestProto;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto;
-import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -114,7 +114,7 @@ public class CreateClanController extends EventController {
 		int cashChange = reqProto.getCashChange();
 
 		CreateClanResponseProto.Builder resBuilder = CreateClanResponseProto.newBuilder();
-		resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		UUID userUuid = null;
@@ -131,7 +131,7 @@ public class CreateClanController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
@@ -148,7 +148,7 @@ public class CreateClanController extends EventController {
 			
 			cca.execute(resBuilder);
 
-			if (CreateClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				resBuilder.setClanInfo(createInfoProtoUtils.createMinimumClanProtoFromClan(cca.getCreatedClan()));
 				updateClanCache(cca.getCreatedClan());
 			}
@@ -162,7 +162,7 @@ public class CreateClanController extends EventController {
 			responses.setNewClanId(cca.getClanId());
 			resEvent.setResponseProto(resBuilder.build());
 
-			if (CreateClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(cca.getUser(), null, cca.getCreatedClan());
@@ -177,7 +177,7 @@ public class CreateClanController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in CreateClan processEvent", e);
 			try {
-				resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				CreateClanResponseEvent resEvent = new CreateClanResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setResponseProto(resBuilder.build());

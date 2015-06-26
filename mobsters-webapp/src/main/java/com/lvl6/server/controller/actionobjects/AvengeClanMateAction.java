@@ -16,7 +16,7 @@ import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
-import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.Builder;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
@@ -85,7 +85,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	protected int expectedOilVictimLost;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(AvengeClanMateStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -105,7 +105,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-		resBuilder.setStatus(AvengeClanMateStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {

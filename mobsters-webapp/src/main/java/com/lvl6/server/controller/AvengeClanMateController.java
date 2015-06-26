@@ -15,7 +15,7 @@ import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.proto.BattleProto.PvpClanAvengeProto;
 import com.lvl6.proto.EventClanProto.AvengeClanMateRequestProto;
 import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto;
-import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -81,7 +81,7 @@ public class AvengeClanMateController extends EventController {
 
 		AvengeClanMateResponseProto.Builder resBuilder = AvengeClanMateResponseProto
 				.newBuilder();
-		resBuilder.setStatus(AvengeClanMateStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		String clanId = "";
@@ -116,7 +116,7 @@ public class AvengeClanMateController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(AvengeClanMateStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			AvengeClanMateResponseEvent resEvent = new AvengeClanMateResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -156,7 +156,7 @@ public class AvengeClanMateController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
 
-			if (resBuilder.getStatus().equals(AvengeClanMateStatus.SUCCESS)) {
+			if (resBuilder.getStatus().equals(ResponseStatus.SUCCESS)) {
 				//				User defender = acma.getVictim();
 				//				PvpLeagueForUser plfu = acma.getVictimPvpLeagueInfo();
 				//				PvpUser defenderPu = acma.getCachedVictimPvpLeaguenfo();
@@ -187,7 +187,7 @@ public class AvengeClanMateController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in AvengeClanMate processEvent", e);
 			try {
-				resBuilder.setStatus(AvengeClanMateStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				AvengeClanMateResponseEvent resEvent = new AvengeClanMateResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

@@ -1081,7 +1081,7 @@ public final class BattleItemsProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
      */
-    com.lvl6.proto.StructureProto.ResourceType getCreateResourceType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getCreateResourceType();
 
     /**
      * <code>optional int32 createCost = 7;</code>
@@ -1244,7 +1244,7 @@ public final class BattleItemsProto {
             }
             case 48: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(6, rawValue);
               } else {
@@ -1459,7 +1459,7 @@ public final class BattleItemsProto {
     }
 
     public static final int CREATERESOURCETYPE_FIELD_NUMBER = 6;
-    private com.lvl6.proto.StructureProto.ResourceType createResourceType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType createResourceType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
      */
@@ -1469,7 +1469,7 @@ public final class BattleItemsProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getCreateResourceType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getCreateResourceType() {
       return createResourceType_;
     }
 
@@ -1611,7 +1611,7 @@ public final class BattleItemsProto {
       imgName_ = "";
       battleItemType_ = com.lvl6.proto.BattleItemsProto.BattleItemType.HEALING_POTION;
       battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
-      createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      createResourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       createCost_ = 0;
       description_ = "";
       powerAmount_ = 0;
@@ -1860,7 +1860,7 @@ public final class BattleItemsProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         battleItemCategory_ = com.lvl6.proto.BattleItemsProto.BattleItemCategory.POTION;
         bitField0_ = (bitField0_ & ~0x00000010);
-        createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        createResourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000020);
         createCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -2298,7 +2298,7 @@ public final class BattleItemsProto {
         return this;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType createResourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
        */
@@ -2308,13 +2308,13 @@ public final class BattleItemsProto {
       /**
        * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getCreateResourceType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getCreateResourceType() {
         return createResourceType_;
       }
       /**
        * <code>optional .com.lvl6.proto.ResourceType createResourceType = 6;</code>
        */
-      public Builder setCreateResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setCreateResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2328,7 +2328,7 @@ public final class BattleItemsProto {
        */
       public Builder clearCreateResourceType() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        createResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        createResourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -3424,29 +3424,29 @@ public final class BattleItemsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020BattleItem.proto\022\016com.lvl6.proto\032\017Stru" +
-      "cture.proto\"i\n\023UserBattleItemProto\022\030\n\020us" +
-      "erBattleItemId\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\024" +
-      "\n\014battleItemId\030\003 \001(\005\022\020\n\010quantity\030\004 \001(\005\"\212" +
-      "\003\n\017BattleItemProto\022\024\n\014battleItemId\030\001 \001(\005" +
-      "\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\0226\n\016battl" +
-      "eItemType\030\004 \001(\0162\036.com.lvl6.proto.BattleI" +
-      "temType\022>\n\022battleItemCategory\030\005 \001(\0162\".co" +
-      "m.lvl6.proto.BattleItemCategory\0228\n\022creat" +
-      "eResourceType\030\006 \001(\0162\034.com.lvl6.proto.Res",
-      "ourceType\022\022\n\ncreateCost\030\007 \001(\005\022\023\n\013descrip" +
-      "tion\030\010 \001(\t\022\023\n\013powerAmount\030\t \001(\005\022\020\n\010prior" +
-      "ity\030\013 \001(\005\022\027\n\017minutesToCreate\030\014 \001(\005\022\027\n\017in" +
-      "BattleGemCost\030\r \001(\005\022\016\n\006amount\030\016 \001(\005\"\207\001\n\033" +
-      "BattleItemQueueForUserProto\022\020\n\010priority\030" +
-      "\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battleItemId\030" +
-      "\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003\022\023\n\013elap" +
-      "sedTime\030\005 \001(\002*\224\001\n\016BattleItemType\022\022\n\016HEAL" +
-      "ING_POTION\020\001\022\022\n\016CHILL_ANTIDOTE\020\002\022\023\n\017POIS" +
-      "ON_ANTIDOTE\020\003\022\016\n\nORB_HAMMER\020\004\022\r\n\tHAND_SW",
-      "AP\020\005\022\021\n\rBOARD_SHUFFLE\020\006\022\t\n\005PUTTY\020\007\022\010\n\004NO" +
-      "NE\020\010*,\n\022BattleItemCategory\022\n\n\006POTION\020\001\022\n" +
-      "\n\006PUZZLE\020\002B\022B\020BattleItemsProto"
+      "\n\020BattleItem.proto\022\016com.lvl6.proto\032\026Shar" +
+      "edEnumConfig.proto\"i\n\023UserBattleItemProt" +
+      "o\022\030\n\020userBattleItemId\030\001 \001(\t\022\020\n\010userUuid\030" +
+      "\002 \001(\t\022\024\n\014battleItemId\030\003 \001(\005\022\020\n\010quantity\030" +
+      "\004 \001(\005\"\212\003\n\017BattleItemProto\022\024\n\014battleItemI" +
+      "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007imgName\030\003 \001(\t\0226" +
+      "\n\016battleItemType\030\004 \001(\0162\036.com.lvl6.proto." +
+      "BattleItemType\022>\n\022battleItemCategory\030\005 \001" +
+      "(\0162\".com.lvl6.proto.BattleItemCategory\0228" +
+      "\n\022createResourceType\030\006 \001(\0162\034.com.lvl6.pr",
+      "oto.ResourceType\022\022\n\ncreateCost\030\007 \001(\005\022\023\n\013" +
+      "description\030\010 \001(\t\022\023\n\013powerAmount\030\t \001(\005\022\020" +
+      "\n\010priority\030\013 \001(\005\022\027\n\017minutesToCreate\030\014 \001(" +
+      "\005\022\027\n\017inBattleGemCost\030\r \001(\005\022\016\n\006amount\030\016 \001" +
+      "(\005\"\207\001\n\033BattleItemQueueForUserProto\022\020\n\010pr" +
+      "iority\030\001 \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\024\n\014battle" +
+      "ItemId\030\003 \001(\005\022\031\n\021expectedStartTime\030\004 \001(\003\022" +
+      "\023\n\013elapsedTime\030\005 \001(\002*\224\001\n\016BattleItemType\022" +
+      "\022\n\016HEALING_POTION\020\001\022\022\n\016CHILL_ANTIDOTE\020\002\022" +
+      "\023\n\017POISON_ANTIDOTE\020\003\022\016\n\nORB_HAMMER\020\004\022\r\n\t",
+      "HAND_SWAP\020\005\022\021\n\rBOARD_SHUFFLE\020\006\022\t\n\005PUTTY\020" +
+      "\007\022\010\n\004NONE\020\010*,\n\022BattleItemCategory\022\n\n\006POT" +
+      "ION\020\001\022\n\n\006PUZZLE\020\002B\022B\020BattleItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3459,7 +3459,7 @@ public final class BattleItemsProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.StructureProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_UserBattleItemProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -3479,7 +3479,7 @@ public final class BattleItemsProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_BattleItemQueueForUserProto_descriptor,
         new java.lang.String[] { "Priority", "UserUuid", "BattleItemId", "ExpectedStartTime", "ElapsedTime", });
-    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

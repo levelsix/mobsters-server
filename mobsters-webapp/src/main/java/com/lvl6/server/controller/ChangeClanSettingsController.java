@@ -23,7 +23,7 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.ChangeClanSettingsRequestProto;
 import com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto;
 import com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
@@ -113,7 +113,7 @@ public class ChangeClanSettingsController extends EventController {
 
 		ChangeClanSettingsResponseProto.Builder resBuilder = ChangeClanSettingsResponseProto
 				.newBuilder();
-		resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		String clanId = "";
@@ -138,7 +138,7 @@ public class ChangeClanSettingsController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -158,7 +158,7 @@ public class ChangeClanSettingsController extends EventController {
 			
 			List<Integer> clanSizeContainer = new ArrayList<Integer>();
 
-			if(ChangeClanSettingsStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if(ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				setResponseBuilderStuff(resBuilder, clanId, ccsa.getClan(),
 						clanSizeContainer);
 			}
@@ -169,7 +169,7 @@ public class ChangeClanSettingsController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 
 			//if not successful only write to user
-			if (!ChangeClanSettingsStatus.SUCCESS
+			if (!ResponseStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
 				responses.normalResponseEvents().add(resEvent);
 
@@ -184,7 +184,7 @@ public class ChangeClanSettingsController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in ChangeClanSettings processEvent", e);
 			try {
-				resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				ChangeClanSettingsResponseEvent resEvent = new ChangeClanSettingsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

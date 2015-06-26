@@ -19,7 +19,7 @@ import com.lvl6.events.response.VoidTeamDonationSolicitationResponseEvent;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationRequestProto;
 import com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto;
-import com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -71,7 +71,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 
 		VoidTeamDonationSolicitationResponseProto.Builder resBuilder = VoidTeamDonationSolicitationResponseProto
 				.newBuilder();
-		resBuilder.setStatus(VoidTeamDonationSolicitationStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		//		String clanId = null;
@@ -123,7 +123,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(VoidTeamDonationSolicitationStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			VoidTeamDonationSolicitationResponseEvent resEvent = new VoidTeamDonationSolicitationResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -160,7 +160,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 
 			//only write to user if failed
 			if (!resBuilder.getStatus().equals(
-					VoidTeamDonationSolicitationStatus.SUCCESS)) {
+					ResponseStatus.SUCCESS)) {
 				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
@@ -186,7 +186,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 					e);
 			try {
 				resBuilder
-						.setStatus(VoidTeamDonationSolicitationStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				VoidTeamDonationSolicitationResponseEvent resEvent = new VoidTeamDonationSolicitationResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

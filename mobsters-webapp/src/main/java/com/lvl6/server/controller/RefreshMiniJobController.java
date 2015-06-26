@@ -20,7 +20,7 @@ import com.lvl6.info.MiniJobForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto;
-import com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.SharedEnumConfigProto.Quality;
@@ -114,7 +114,7 @@ public class RefreshMiniJobController extends EventController {
 		RefreshMiniJobResponseProto.Builder resBuilder = RefreshMiniJobResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(RefreshMiniJobStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -135,7 +135,7 @@ public class RefreshMiniJobController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RefreshMiniJobStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RefreshMiniJobResponseEvent resEvent = new RefreshMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -161,7 +161,7 @@ public class RefreshMiniJobController extends EventController {
 
 			rmja.execute(resBuilder);
 
-			if (RefreshMiniJobStatus.SUCCESS.equals(resBuilder.getStatus()))
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus()))
 			{
 				List<MiniJobForUser> userMiniJobs = rmja.getUserMiniJobs();
 				Map<Integer, MiniJob> mjIdToMj = rmja.getMiniJobIdToMj();
@@ -177,7 +177,7 @@ public class RefreshMiniJobController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
-			if (RefreshMiniJobStatus.SUCCESS.equals(resBuilder.getStatus()) &&
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus()) &&
 					rmja.isUsedGems())
 			{
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -194,7 +194,7 @@ public class RefreshMiniJobController extends EventController {
 			log.error("exception in RefreshMiniJobController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(RefreshMiniJobStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RefreshMiniJobResponseEvent resEvent = new RefreshMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

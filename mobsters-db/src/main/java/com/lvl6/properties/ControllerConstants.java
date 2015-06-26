@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 
 public class ControllerConstants {
 

@@ -21,7 +21,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto;
-import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -142,7 +142,7 @@ public class RedeemMiniJobController extends EventController {
 		RedeemMiniJobResponseProto.Builder resBuilder = RedeemMiniJobResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
-		resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -160,7 +160,7 @@ public class RedeemMiniJobController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -181,7 +181,7 @@ public class RedeemMiniJobController extends EventController {
 
 			rmja.execute(resBuilder);
 
-			if (RedeemMiniJobStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				UserRewardProto urp = createInfoProtoUtils.createUserRewardProto(rmja.getAra().getNuOrUpdatedItems(),
 						rmja.getAra().getNuOrUpdatedMonsters(), rmja.getAra().getGemsGained(),
 						rmja.getAra().getCashGained(), rmja.getAra().getOilGained(), rmja.getAra().getGachaCreditsGained(), null);
@@ -195,7 +195,7 @@ public class RedeemMiniJobController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
-			if (resBuilder.getStatus().equals(RedeemMiniJobStatus.SUCCESS)) {
+			if (resBuilder.getStatus().equals(ResponseStatus.SUCCESS)) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
@@ -213,7 +213,7 @@ public class RedeemMiniJobController extends EventController {
 			log.error("exception in RedeemMiniJobController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

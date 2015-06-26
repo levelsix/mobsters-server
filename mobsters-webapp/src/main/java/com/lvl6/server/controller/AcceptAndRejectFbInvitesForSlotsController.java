@@ -24,7 +24,7 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsRequestProto;
 import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto;
-import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -103,7 +103,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 		AcceptAndRejectFbInviteForSlotsResponseProto.Builder resBuilder = AcceptAndRejectFbInviteForSlotsResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(AcceptAndRejectFbInviteForSlotsStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = false;
@@ -118,7 +118,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder
-					.setStatus(AcceptAndRejectFbInviteForSlotsStatus.FAIL_OTHER);
+					.setStatus(ResponseStatus.FAIL_OTHER);
 			AcceptAndRejectFbInviteForSlotsResponseEvent resEvent = new AcceptAndRejectFbInviteForSlotsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -174,7 +174,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 					resBuilder.addAcceptedInvites(inviteProto);
 				}
 				resBuilder
-						.setStatus(AcceptAndRejectFbInviteForSlotsStatus.SUCCESS);
+						.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			AcceptAndRejectFbInviteForSlotsResponseEvent resEvent = new AcceptAndRejectFbInviteForSlotsResponseEvent(
@@ -210,7 +210,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 			//don't let the client hang
 			try {
 				resBuilder
-						.setStatus(AcceptAndRejectFbInviteForSlotsStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				AcceptAndRejectFbInviteForSlotsResponseEvent resEvent = new AcceptAndRejectFbInviteForSlotsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

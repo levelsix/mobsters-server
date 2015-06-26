@@ -19,7 +19,7 @@ import com.lvl6.info.AchievementForUser;
 import com.lvl6.proto.AchievementStuffProto.UserAchievementProto;
 import com.lvl6.proto.EventAchievementProto.AchievementProgressRequestProto;
 import com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto;
-import com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -85,7 +85,7 @@ public class AchievementProgressController extends EventController {
 		AchievementProgressResponseProto.Builder resBuilder = AchievementProgressResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(AchievementProgressStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -100,7 +100,7 @@ public class AchievementProgressController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(AchievementProgressStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -124,7 +124,7 @@ public class AchievementProgressController extends EventController {
 			}
 
 			if (success) {
-				resBuilder.setStatus(AchievementProgressStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
@@ -135,7 +135,7 @@ public class AchievementProgressController extends EventController {
 
 		} catch (Exception e) {
 			log.error("exception in AchievementProgress processEvent", e);
-			resBuilder.setStatus(AchievementProgressStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());

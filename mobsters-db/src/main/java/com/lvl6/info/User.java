@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {

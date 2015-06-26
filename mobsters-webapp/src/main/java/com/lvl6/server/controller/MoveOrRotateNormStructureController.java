@@ -15,7 +15,7 @@ import com.lvl6.info.StructureForUser;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto;
-import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -89,7 +89,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -103,19 +103,19 @@ public class MoveOrRotateNormStructureController extends EventController {
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			boolean legit = true;
-			resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
+			resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 			StructureForUser userStruct = getStructureForUserRetrieveUtils()
 					.getSpecificUserStruct(userStructId);
 			if (userStruct == null) {
 				legit = false;
-				resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			if (type == MoveOrRotateNormStructType.MOVE && newCoords == null) {
 				legit = false;
 				resBuilder
-						.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				log.error("asked to move, but the coordinates supplied in are null. reqProto's newStructCoordinates="
 						+ reqProto.getCurStructCoordinates());
 			}
@@ -125,25 +125,25 @@ public class MoveOrRotateNormStructureController extends EventController {
 					if (!UpdateUtils.get().updateUserStructCoord(userStructId,
 							newCoords)) {
 						resBuilder
-								.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
+								.setStatus(ResponseStatus.FAIL_OTHER);
 						log.error("problem with updating coordinates to "
 								+ newCoords + " for user struct "
 								+ userStructId);
 					} else {
 						resBuilder
-								.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
+								.setStatus(ResponseStatus.SUCCESS);
 					}
 				} else {
 					if (!UpdateUtils.get().updateUserStructOrientation(
 							userStructId, orientation)) {
 						resBuilder
-								.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
+								.setStatus(ResponseStatus.FAIL_OTHER);
 						log.error("problem with updating orientation to "
 								+ orientation + " for user struct "
 								+ userStructId);
 					} else {
 						resBuilder
-								.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
+								.setStatus(ResponseStatus.SUCCESS);
 					}
 				}
 			}
@@ -159,7 +159,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 			//don't let the client hang
 			try {
 				resBuilder
-						.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				MoveOrRotateNormStructureResponseEvent resEvent = new MoveOrRotateNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

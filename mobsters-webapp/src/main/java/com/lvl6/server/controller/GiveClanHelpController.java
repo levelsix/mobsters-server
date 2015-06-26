@@ -20,7 +20,7 @@ import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpRequestProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto;
 import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanHelpRetrieveUtil;
@@ -91,7 +91,7 @@ public class GiveClanHelpController extends EventController {
 
 		GiveClanHelpResponseProto.Builder resBuilder = GiveClanHelpResponseProto
 				.newBuilder();
-		resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		boolean invalidUuids = true;
@@ -114,7 +114,7 @@ public class GiveClanHelpController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -159,7 +159,7 @@ public class GiveClanHelpController extends EventController {
 				//NOTE: Sending most up to date ClanHelps incurs a db read
 				hzClanSearch.updateRankForClanSearch(clanId, new Date(), clanHelpIds.size(), 0, 0, 0, 0);
 				setClanHelpings(resBuilder, null, senderProto, clanHelpIds);
-				resBuilder.setStatus(GiveClanHelpStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 			}
@@ -167,7 +167,7 @@ public class GiveClanHelpController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in GiveClanHelp processEvent", e);
 			try {
-				resBuilder.setStatus(GiveClanHelpStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				GiveClanHelpResponseEvent resEvent = new GiveClanHelpResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

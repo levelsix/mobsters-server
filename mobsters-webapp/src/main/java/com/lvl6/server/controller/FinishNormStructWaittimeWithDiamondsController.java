@@ -22,7 +22,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRequestProto;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.Builder;
-import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
@@ -85,7 +85,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 		FinishNormStructWaittimeWithDiamondsResponseProto.Builder resBuilder = FinishNormStructWaittimeWithDiamondsResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		UUID userStructUuid = null;
@@ -103,7 +103,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -142,7 +142,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 						struct, gemCostToSpeedup, money);
 			}
 			if (success) {
-				resBuilder.setStatus(FinishNormStructWaittimeStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(
@@ -168,7 +168,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -191,7 +191,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 		if (user == null || userStruct == null || struct == null
 				|| !userStruct.getUserId().equals(user.getId())
 				|| userStruct.isComplete()) {
-			resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("something passed in is null. user=" + user + ", struct="
 					+ struct + ", struct owner's id=" + userStruct.getUserId()
 					+ "\t or user struct is complete. userStruct=" + userStruct);
@@ -200,7 +200,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 
 		if (user.getGems() < gemCostToSpeedup) {
 			resBuilder
-					.setStatus(FinishNormStructWaittimeStatus.FAIL_NOT_ENOUGH_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			log.error("user doesn't have enough diamonds. has "
 					+ user.getGems() + ", needs " + gemCostToSpeedup);
 			return false;

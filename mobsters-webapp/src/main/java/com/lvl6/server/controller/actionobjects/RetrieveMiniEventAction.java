@@ -24,7 +24,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfigPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.Builder;
-import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.AchievementForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil;
@@ -122,7 +122,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private Collection<MiniEventLeaderboardReward> leaderboardRewards;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RetrieveMiniEventStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -142,7 +142,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-		resBuilder.setStatus(RetrieveMiniEventStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

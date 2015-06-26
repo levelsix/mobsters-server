@@ -21,7 +21,7 @@ import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMiniJobProto.BeginMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto;
-import com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -85,7 +85,7 @@ public class BeginMiniJobController extends EventController {
 		BeginMiniJobResponseProto.Builder resBuilder = BeginMiniJobResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(BeginMiniJobStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -99,7 +99,7 @@ public class BeginMiniJobController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(BeginMiniJobStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			BeginMiniJobResponseEvent resEvent = new BeginMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -123,7 +123,7 @@ public class BeginMiniJobController extends EventController {
 			}
 
 			if (success) {
-				resBuilder.setStatus(BeginMiniJobStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			BeginMiniJobResponseEvent resEvent = new BeginMiniJobResponseEvent(
@@ -136,7 +136,7 @@ public class BeginMiniJobController extends EventController {
 			log.error("exception in BeginMiniJobController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(BeginMiniJobStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				BeginMiniJobResponseEvent resEvent = new BeginMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -188,7 +188,7 @@ public class BeginMiniJobController extends EventController {
 
 		if (idToUserMiniJob.isEmpty()) {
 			log.error("no UserMiniJob exists with id=" + userMiniJobId);
-			resBuilder.setStatus(BeginMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
+			resBuilder.setStatus(ResponseStatus.FAIL_DOESNT_EXIST);
 			return false;
 		}
 

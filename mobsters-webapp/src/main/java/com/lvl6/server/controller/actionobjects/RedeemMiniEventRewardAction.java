@@ -21,7 +21,7 @@ import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.Builder;
-import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
@@ -130,7 +130,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private AwardRewardAction ara;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RedeemMiniEventRewardStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 //		boolean valid = verifySyntax(resBuilder);
@@ -150,7 +150,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(RedeemMiniEventRewardStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

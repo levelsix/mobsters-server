@@ -15,7 +15,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.SetTangoIdRequestProto;
 import com.lvl6.proto.EventUserProto.SetTangoIdResponseProto;
-import com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -63,7 +63,7 @@ public class SetTangoIdController extends EventController {
 		SetTangoIdResponseProto.Builder resBuilder = SetTangoIdResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(SetTangoIdStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		if (null != tangoId) {
 			resBuilder.setTangoId(tangoId);
 		}
@@ -81,7 +81,7 @@ public class SetTangoIdController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SetTangoIdStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SetTangoIdResponseEvent resEvent = new SetTangoIdResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -101,7 +101,7 @@ public class SetTangoIdController extends EventController {
 			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
-			if ( SetTangoIdStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
+			if ( ResponseStatus.SUCCESS.equals(resBuilder.getStatus()) ) {
 				//game center id might have changed
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
@@ -115,7 +115,7 @@ public class SetTangoIdController extends EventController {
 			log.error("exception in SetTangoIdController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(SetTangoIdStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SetTangoIdResponseEvent resEvent = new SetTangoIdResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

@@ -27,7 +27,7 @@ import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto;
-import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -169,7 +169,7 @@ public class PurchaseBoosterPackController extends EventController {
 		PurchaseBoosterPackResponseProto.Builder resBuilder = PurchaseBoosterPackResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -185,7 +185,7 @@ public class PurchaseBoosterPackController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
@@ -211,7 +211,7 @@ public class PurchaseBoosterPackController extends EventController {
 
 			List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
 
-			if (PurchaseBoosterPackStatus.SUCCESS
+			if (ResponseStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
 				//assume user only purchases 1 item. NEED TO LET CLIENT KNOW THE PRIZE
 				itemsUserReceives = pbpa
@@ -235,7 +235,7 @@ public class PurchaseBoosterPackController extends EventController {
 			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
-			if (PurchaseBoosterPackStatus.SUCCESS
+			if (ResponseStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
@@ -260,7 +260,7 @@ public class PurchaseBoosterPackController extends EventController {
 					e);
 			// don't let the client hang
 			try {
-				resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());

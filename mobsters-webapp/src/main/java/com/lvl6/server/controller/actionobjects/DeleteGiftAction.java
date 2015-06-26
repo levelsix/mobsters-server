@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.Builder;
-import com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
 @Component@Scope("prototype")public class DeleteGiftAction {
@@ -48,7 +48,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 		if (!success) {
 			return;
 		}
-		resBuilder.setStatus(DeleteGiftStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 		return;
 	}

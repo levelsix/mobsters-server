@@ -1784,13 +1784,13 @@ public final class EventDungeonProto {
     int getTaskId();
 
     /**
-     * <code>optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 5;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 5;</code>
      */
-    com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BeginDungeonResponseProto}
@@ -1878,7 +1878,7 @@ public final class EventDungeonProto {
             }
             case 40: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus value = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(5, rawValue);
               } else {
@@ -1927,88 +1927,6 @@ public final class EventDungeonProto {
     @java.lang.Override
     public com.google.protobuf.Parser<BeginDungeonResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus}
-     */
-    public enum BeginDungeonStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static BeginDungeonStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<BeginDungeonStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<BeginDungeonStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<BeginDungeonStatus>() {
-              public BeginDungeonStatus findValueByNumber(int number) {
-                return BeginDungeonStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final BeginDungeonStatus[] VALUES = values();
-
-      public static BeginDungeonStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private BeginDungeonStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus)
     }
 
     private int bitField0_;
@@ -2126,17 +2044,17 @@ public final class EventDungeonProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 5;
-    private com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 5;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 5;</code>
      */
-    public com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -2145,7 +2063,7 @@ public final class EventDungeonProto {
       tsp_ = java.util.Collections.emptyList();
       userTaskUuid_ = "";
       taskId_ = 0;
-      status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2339,7 +2257,7 @@ public final class EventDungeonProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         taskId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
@@ -2945,23 +2863,23 @@ public final class EventDungeonProto {
         return this;
       }
 
-      private com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 5;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 5;</code>
        */
-      public com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 5;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2971,11 +2889,11 @@ public final class EventDungeonProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 5;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -4317,13 +4235,13 @@ public final class EventDungeonProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;</code>
@@ -4526,7 +4444,7 @@ public final class EventDungeonProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus value = com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -4627,88 +4545,6 @@ public final class EventDungeonProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus}
-     */
-    public enum EndDungeonStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static EndDungeonStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<EndDungeonStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<EndDungeonStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EndDungeonStatus>() {
-              public EndDungeonStatus findValueByNumber(int number) {
-                return EndDungeonStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final EndDungeonStatus[] VALUES = values();
-
-      public static EndDungeonStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private EndDungeonStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
@@ -4732,17 +4568,17 @@ public final class EventDungeonProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -4949,7 +4785,7 @@ public final class EventDungeonProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      status_ = com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       updatedOrNew_ = java.util.Collections.emptyList();
       taskId_ = 0;
       userWon_ = false;
@@ -5162,7 +4998,7 @@ public final class EventDungeonProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (updatedOrNewBuilder_ == null) {
           updatedOrNew_ = java.util.Collections.emptyList();
@@ -5473,23 +5309,23 @@ public final class EventDungeonProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus status_ = com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -5499,11 +5335,11 @@ public final class EventDungeonProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -7550,13 +7386,13 @@ public final class EventDungeonProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ReviveInDungeonResponseProto}
@@ -7625,7 +7461,7 @@ public final class EventDungeonProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus value = com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -7673,97 +7509,6 @@ public final class EventDungeonProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus}
-     */
-    public enum ReviveInDungeonStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_FUNDS(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static ReviveInDungeonStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_FUNDS;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<ReviveInDungeonStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<ReviveInDungeonStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<ReviveInDungeonStatus>() {
-              public ReviveInDungeonStatus findValueByNumber(int number) {
-                return ReviveInDungeonStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final ReviveInDungeonStatus[] VALUES = values();
-
-      public static ReviveInDungeonStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private ReviveInDungeonStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -7787,23 +7532,23 @@ public final class EventDungeonProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7965,7 +7710,7 @@ public final class EventDungeonProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -8172,23 +7917,23 @@ public final class EventDungeonProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status_ = com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -8198,11 +7943,11 @@ public final class EventDungeonProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ReviveInDungeonResponseProto.ReviveInDungeonStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -8268,43 +8013,36 @@ public final class EventDungeonProto {
       " \001(\005\022\020\n\010questIds\030\010 \003(\005\0221\n\004elem\030\t \001(\0162\027.c" +
       "om.lvl6.proto.Element:\nNO_ELEMENT\022\026\n\016for",
       "ceEnemyElem\030\n \001(\010\022(\n alreadyCompletedMin" +
-      "iTutorialTask\030\013 \001(\010\"\241\002\n\031BeginDungeonResp" +
+      "iTutorialTask\030\013 \001(\010\"\320\001\n\031BeginDungeonResp" +
       "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
       "to.MinimumUserProto\022+\n\003tsp\030\002 \003(\0132\036.com.l" +
       "vl6.proto.TaskStageProto\022\024\n\014userTaskUuid" +
-      "\030\003 \001(\t\022\016\n\006taskId\030\004 \001(\005\022L\n\006status\030\005 \001(\0162<" +
-      ".com.lvl6.proto.BeginDungeonResponseProt" +
-      "o.BeginDungeonStatus\"1\n\022BeginDungeonStat" +
-      "us\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\354\001\n\026EndD" +
-      "ungeonRequestProto\022@\n\006sender\030\001 \001(\01320.com",
-      ".lvl6.proto.MinimumUserProtoWithMaxResou" +
-      "rces\022\024\n\014userTaskUuid\030\002 \001(\t\022\017\n\007userWon\030\003 " +
-      "\001(\010\022\022\n\nclientTime\030\004 \001(\003\022\034\n\024firstTimeUser" +
-      "WonTask\030\005 \001(\010\022\034\n\024userBeatAllCityTasks\030\006 " +
-      "\001(\010\022\031\n\021droplessTsfuUuids\030\007 \003(\t\"\266\003\n\027EndDu" +
-      "ngeonResponseProto\022@\n\006sender\030\001 \001(\01320.com" +
-      ".lvl6.proto.MinimumUserProtoWithMaxResou" +
-      "rces\022H\n\006status\030\002 \001(\01628.com.lvl6.proto.En" +
-      "dDungeonResponseProto.EndDungeonStatus\022:" +
-      "\n\014updatedOrNew\030\003 \003(\0132$.com.lvl6.proto.Fu",
-      "llUserMonsterProto\022\016\n\006taskId\030\004 \001(\005\022\017\n\007us" +
-      "erWon\030\005 \001(\010\022/\n\010userItem\030\006 \001(\0132\035.com.lvl6" +
-      ".proto.UserItemProto\022\032\n\022taskMapSectionNa" +
-      "me\030\007 \001(\t\0224\n\004utcp\030\010 \001(\0132&.com.lvl6.proto." +
-      "UserTaskCompletedProto\"/\n\020EndDungeonStat" +
-      "us\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\315\001\n\033Revi" +
-      "veInDungeonRequestProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022\024\n\014use" +
-      "rTaskUuid\030\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\022?\n\010r" +
-      "eviveMe\030\004 \003(\0132-.com.lvl6.proto.UserMonst",
-      "erCurrentHealthProto\022\021\n\tgemsSpent\030\005 \001(\005\"" +
-      "\367\001\n\034ReviveInDungeonResponseProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Revi" +
-      "veInDungeonResponseProto.ReviveInDungeon" +
-      "Status\"Q\n\025ReviveInDungeonStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAI" +
-      "L_OTHER\020\003B\023B\021EventDungeonProto"
+      "\030\003 \001(\t\022\016\n\006taskId\030\004 \001(\005\022.\n\006status\030\005 \001(\0162\036" +
+      ".com.lvl6.proto.ResponseStatus\"\354\001\n\026EndDu" +
+      "ngeonRequestProto\022@\n\006sender\030\001 \001(\01320.com." +
+      "lvl6.proto.MinimumUserProtoWithMaxResour" +
+      "ces\022\024\n\014userTaskUuid\030\002 \001(\t\022\017\n\007userWon\030\003 \001",
+      "(\010\022\022\n\nclientTime\030\004 \001(\003\022\034\n\024firstTimeUserW" +
+      "onTask\030\005 \001(\010\022\034\n\024userBeatAllCityTasks\030\006 \001" +
+      "(\010\022\031\n\021droplessTsfuUuids\030\007 \003(\t\"\353\002\n\027EndDun" +
+      "geonResponseProto\022@\n\006sender\030\001 \001(\01320.com." +
+      "lvl6.proto.MinimumUserProtoWithMaxResour" +
+      "ces\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Res" +
+      "ponseStatus\022:\n\014updatedOrNew\030\003 \003(\0132$.com." +
+      "lvl6.proto.FullUserMonsterProto\022\016\n\006taskI" +
+      "d\030\004 \001(\005\022\017\n\007userWon\030\005 \001(\010\022/\n\010userItem\030\006 \001" +
+      "(\0132\035.com.lvl6.proto.UserItemProto\022\032\n\022tas",
+      "kMapSectionName\030\007 \001(\t\0224\n\004utcp\030\010 \001(\0132&.co" +
+      "m.lvl6.proto.UserTaskCompletedProto\"\315\001\n\033" +
+      "ReviveInDungeonRequestProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\024\n" +
+      "\014userTaskUuid\030\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\022" +
+      "?\n\010reviveMe\030\004 \003(\0132-.com.lvl6.proto.UserM" +
+      "onsterCurrentHealthProto\022\021\n\tgemsSpent\030\005 " +
+      "\001(\005\"\200\001\n\034ReviveInDungeonResponseProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.",
+      "ResponseStatusB\023B\021EventDungeonProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

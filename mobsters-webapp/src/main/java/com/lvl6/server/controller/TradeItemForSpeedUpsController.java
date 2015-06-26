@@ -17,7 +17,7 @@ import com.lvl6.info.ItemForUserUsage;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto;
-import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.ItemsProto.UserItemUsageProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -82,7 +82,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 		TradeItemForSpeedUpsResponseProto.Builder resBuilder = TradeItemForSpeedUpsResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(TradeItemForSpeedUpsStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -98,7 +98,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(TradeItemForSpeedUpsStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -129,7 +129,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 			tifsua.execute(resBuilder);
 
 			if (resBuilder.getStatus().equals(
-					TradeItemForSpeedUpsStatus.SUCCESS)) {
+					ResponseStatus.SUCCESS)) {
 				List<ItemForUserUsage> itemsUsedWithIds = tifsua
 						.getItemForUserUsages();
 				if(!itemsUsedWithIds.isEmpty()) {
@@ -140,7 +140,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 			}
 			
 			if (resBuilder.getStatus().equals(
-					TradeItemForSpeedUpsStatus.SUCCESS)) {
+					ResponseStatus.SUCCESS)) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
@@ -161,7 +161,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 					"exception in TradeItemForSpeedUpsController processEvent",
 					e);
 			try {
-				resBuilder.setStatus(TradeItemForSpeedUpsStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				TradeItemForSpeedUpsResponseEvent resEvent = new TradeItemForSpeedUpsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

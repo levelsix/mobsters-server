@@ -32,7 +32,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto;
-import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -196,7 +196,7 @@ public class EndPvpBattleController extends EventController {
 		EndPvpBattleResponseProto.Builder resBuilder = EndPvpBattleResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProtoMaxResources);
-		resBuilder.setStatus(EndPvpBattleStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 		resBuilder.setAttackerAttacked(attackerAttacked);
 		resBuilder.setAttackerWon(attackerWon);
 		EndPvpBattleResponseEvent resEvent = new EndPvpBattleResponseEvent(
@@ -222,7 +222,7 @@ public class EndPvpBattleController extends EventController {
 		}
 
 		if (invalidUuids) {
-			resBuilder.setStatus(EndPvpBattleStatus.FAIL_OTHER); //default
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			return;
@@ -263,7 +263,7 @@ public class EndPvpBattleController extends EventController {
 
 			PvpBattleHistoryPojo battleJustEnded = epba.getPbh();
 
-			if (EndPvpBattleStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				List<PvpHistoryProto> historyProtoList = null;
 				if (null != battleJustEnded) {
 					//Note: no protos for fake defenders are created
@@ -290,7 +290,7 @@ public class EndPvpBattleController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 
 			//TODO: NEED TO REFACTOR CONSTRUCTING THE PvpBattleHistoryProto
-			if (EndPvpBattleStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				User attacker = epba.getAttacker();
 				User defender = epba.getDefender();
 				//respond to the defender

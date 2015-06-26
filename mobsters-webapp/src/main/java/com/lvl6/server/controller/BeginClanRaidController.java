@@ -28,7 +28,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.BeginClanRaidRequestProto;
 import com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto;
-import com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.Builder;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -129,7 +129,7 @@ public class BeginClanRaidController extends EventController {
 
 		BeginClanRaidResponseProto.Builder resBuilder = BeginClanRaidResponseProto
 				.newBuilder();
-		resBuilder.setStatus(BeginClanRaidStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		//OUTLINE: 
@@ -157,7 +157,7 @@ public class BeginClanRaidController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(BeginClanRaidStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -203,7 +203,7 @@ public class BeginClanRaidController extends EventController {
 					setClanAndUserDetails(resBuilder, userId, clanId,
 							clanRaidId, userMonsterIds, userMonsters);
 				}
-				resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 				log.info("BEGIN CLAN RAID EVENT SUCCESS!!!!!!!");
 			}
 
@@ -222,7 +222,7 @@ public class BeginClanRaidController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in BeginClanRaid processEvent", e);
 			try {
-				resBuilder.setStatus(BeginClanRaidStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -267,7 +267,7 @@ public class BeginClanRaidController extends EventController {
 		Map<Integer, ClanEventPersistent> clanEventIdToEvent = clanEventPersistentRetrieveUtils
 				.getActiveClanEventIdsToEvents(curDate, timeUtils);
 		if (!clanEventIdToEvent.containsKey(clanEventId)) {
-			resBuilder.setStatus(BeginClanRaidStatus.FAIL_NO_ACTIVE_CLAN_RAID);
+			resBuilder.setStatus(ResponseStatus.FAIL_NO_ACTIVE_CLAN_RAID);
 			log.error(String.format("no active clan event with id=%s, user=%s",
 					clanEventId, mupfc));
 			return false;
@@ -277,7 +277,7 @@ public class BeginClanRaidController extends EventController {
 		ClanEventPersistent cep = clanEventIdToEvent.get(clanEventId);
 		int eventRaidId = cep.getClanRaidId();
 		if (clanRaidId != eventRaidId) {
-			resBuilder.setStatus(BeginClanRaidStatus.FAIL_NO_ACTIVE_CLAN_RAID);
+			resBuilder.setStatus(ResponseStatus.FAIL_NO_ACTIVE_CLAN_RAID);
 			log.error(String.format(
 					"no active clan event with raidId=%s, event=%s, user=%s",
 					clanRaidId, cep, mupfc));
@@ -289,7 +289,7 @@ public class BeginClanRaidController extends EventController {
 		if (!setMonsterTeamForRaid) {
 			Set<String> authorizedUsers = getAuthorizedUsers(clanId);
 			if (!authorizedUsers.contains(userId)) {
-				resBuilder.setStatus(BeginClanRaidStatus.FAIL_NOT_AUTHORIZED);
+				resBuilder.setStatus(ResponseStatus.FAIL_NOT_AUTHORIZED);
 				log.error(String.format("user can't start raid. user=%s"
 						+ mupfc));
 				return false;
@@ -306,7 +306,7 @@ public class BeginClanRaidController extends EventController {
 		//(user needs to equip user monsters before beginning raid; checks are done there) 
 		if (setMonsterTeamForRaid
 				&& (null == userMonsterIds || userMonsterIds.isEmpty())) {
-			resBuilder.setStatus(BeginClanRaidStatus.FAIL_NO_MONSTERS_SENT);
+			resBuilder.setStatus(ResponseStatus.FAIL_NO_MONSTERS_SENT);
 			log.error("client did not send any monster ids to set for clan raid.");
 			return false;
 		}

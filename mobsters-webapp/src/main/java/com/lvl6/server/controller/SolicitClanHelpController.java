@@ -22,7 +22,7 @@ import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.EventClanProto.SolicitClanHelpRequestProto;
 import com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto;
 import com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -84,7 +84,7 @@ public class SolicitClanHelpController extends EventController {
 
 		SolicitClanHelpResponseProto.Builder resBuilder = SolicitClanHelpResponseProto
 				.newBuilder();
-		resBuilder.setStatus(SolicitClanHelpStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		String clanId = null;
@@ -108,7 +108,7 @@ public class SolicitClanHelpController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SolicitClanHelpStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -159,7 +159,7 @@ public class SolicitClanHelpController extends EventController {
 					resBuilder.addHelpProto(chp);
 				}
 
-				resBuilder.setStatus(SolicitClanHelpStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
@@ -169,7 +169,7 @@ public class SolicitClanHelpController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in SolicitClanHelp processEvent", e);
 			try {
-				resBuilder.setStatus(SolicitClanHelpStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -195,20 +195,20 @@ public class SolicitClanHelpController extends EventController {
 
 		String clanIdUser = user.getClanId();
 		if (null == clanIdUser || clanIdUser.isEmpty()) {
-			resBuilder.setStatus(SolicitClanHelpStatus.FAIL_NOT_IN_CLAN);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_IN_CLAN);
 			log.error("user's clanId={}", clanId);
 			return false;
 		}
 
 		Clan clan = getClanRetrieveUtil().getClanWithId(clanIdUser);
 		if (null == clan) {
-			resBuilder.setStatus(SolicitClanHelpStatus.FAIL_NOT_IN_CLAN);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_IN_CLAN);
 			log.error("no clan with clanId={}", clanIdUser);
 			return false;
 		}
 
 		if (!clanIdUser.equals(clanId)) {
-			resBuilder.setStatus(SolicitClanHelpStatus.FAIL_NOT_IN_CLAN);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_IN_CLAN);
 			log.error("inconsistent clanIds. proto clanId={}, clanIdUser={}",
 					clanId, clanIdUser);
 			return false;

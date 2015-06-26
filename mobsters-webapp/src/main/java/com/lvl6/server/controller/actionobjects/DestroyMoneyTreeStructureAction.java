@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureMoneyTree;
 import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.Builder;
-import com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureMoneyTreeRetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -60,7 +60,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(DestroyMoneyTreeStructureStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = false;
@@ -69,7 +69,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 
 		if (!valid) {
 			resBuilder
-					.setStatus(DestroyMoneyTreeStructureStatus.FAIL_NOT_EXPIRED_YET);
+					.setStatus(ResponseStatus.FAIL_NOT_EXPIRED_YET);
 			return;
 		}
 
@@ -78,7 +78,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 			return;
 		}
 
-		resBuilder.setStatus(DestroyMoneyTreeStructureStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

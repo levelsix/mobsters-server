@@ -27,7 +27,7 @@ import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.SnapshotType;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
@@ -130,7 +130,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 	private Map<String, Float> percentageStolenFromGenerators;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RetrieveUserMonsterTeamStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -147,7 +147,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 
 		gatherDbInfo();
 
-		resBuilder.setStatus(RetrieveUserMonsterTeamStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

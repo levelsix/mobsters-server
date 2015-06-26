@@ -1389,13 +1389,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.MinimumClanProto clanInfo = 3;</code>
@@ -1477,7 +1477,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus value = com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1538,142 +1538,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.CreateClanResponseProto.CreateClanStatus}
-     */
-    public enum CreateClanStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NOT_ENOUGH_CASH = 3;</code>
-       */
-      FAIL_NOT_ENOUGH_CASH(2, 3),
-      /**
-       * <code>FAIL_NAME_TAKEN = 4;</code>
-       */
-      FAIL_NAME_TAKEN(3, 4),
-      /**
-       * <code>FAIL_ALREADY_IN_CLAN = 5;</code>
-       */
-      FAIL_ALREADY_IN_CLAN(4, 5),
-      /**
-       * <code>FAIL_INVALID_TAG_LENGTH = 6;</code>
-       */
-      FAIL_INVALID_TAG_LENGTH(5, 6),
-      /**
-       * <code>FAIL_TAG_TAKEN = 7;</code>
-       */
-      FAIL_TAG_TAKEN(6, 7),
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 8;</code>
-       */
-      FAIL_INSUFFICIENT_FUNDS(7, 8),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_ENOUGH_CASH = 3;</code>
-       */
-      public static final int FAIL_NOT_ENOUGH_CASH_VALUE = 3;
-      /**
-       * <code>FAIL_NAME_TAKEN = 4;</code>
-       */
-      public static final int FAIL_NAME_TAKEN_VALUE = 4;
-      /**
-       * <code>FAIL_ALREADY_IN_CLAN = 5;</code>
-       */
-      public static final int FAIL_ALREADY_IN_CLAN_VALUE = 5;
-      /**
-       * <code>FAIL_INVALID_TAG_LENGTH = 6;</code>
-       */
-      public static final int FAIL_INVALID_TAG_LENGTH_VALUE = 6;
-      /**
-       * <code>FAIL_TAG_TAKEN = 7;</code>
-       */
-      public static final int FAIL_TAG_TAKEN_VALUE = 7;
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 8;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 8;
-
-
-      public final int getNumber() { return value; }
-
-      public static CreateClanStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NOT_ENOUGH_CASH;
-          case 4: return FAIL_NAME_TAKEN;
-          case 5: return FAIL_ALREADY_IN_CLAN;
-          case 6: return FAIL_INVALID_TAG_LENGTH;
-          case 7: return FAIL_TAG_TAKEN;
-          case 8: return FAIL_INSUFFICIENT_FUNDS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<CreateClanStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<CreateClanStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<CreateClanStatus>() {
-              public CreateClanStatus findValueByNumber(int number) {
-                return CreateClanStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.CreateClanResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final CreateClanStatus[] VALUES = values();
-
-      public static CreateClanStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private CreateClanStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CreateClanResponseProto.CreateClanStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -1697,17 +1561,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -1734,7 +1598,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       clanInfo_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -1905,7 +1769,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (clanInfoBuilder_ == null) {
           clanInfo_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
@@ -2129,23 +1993,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus status_ = com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2155,11 +2019,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CreateClanResponseProto.CreateClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -2825,13 +2689,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.LeaveClanResponseProto}
@@ -2900,7 +2764,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus value = com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -2948,106 +2812,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus}
-     */
-    public enum LeaveClanStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NOT_IN_CLAN = 3;</code>
-       */
-      FAIL_NOT_IN_CLAN(2, 3),
-      /**
-       * <code>FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 4;</code>
-       */
-      FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_IN_CLAN = 3;</code>
-       */
-      public static final int FAIL_NOT_IN_CLAN_VALUE = 3;
-      /**
-       * <code>FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 4;</code>
-       */
-      public static final int FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static LeaveClanStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NOT_IN_CLAN;
-          case 4: return FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<LeaveClanStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<LeaveClanStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<LeaveClanStatus>() {
-              public LeaveClanStatus findValueByNumber(int number) {
-                return LeaveClanStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.LeaveClanResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final LeaveClanStatus[] VALUES = values();
-
-      public static LeaveClanStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private LeaveClanStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -3071,23 +2835,23 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3249,7 +3013,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -3456,23 +3220,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus status_ = com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3482,11 +3246,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.LeaveClanResponseProto.LeaveClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -4263,13 +4027,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional string clanUuid = 3;</code>
@@ -4467,7 +4231,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus value = com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -4602,124 +4366,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus}
-     */
-    public enum RequestJoinClanStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS_REQUEST = 1;</code>
-       */
-      SUCCESS_REQUEST(0, 1),
-      /**
-       * <code>SUCCESS_JOIN = 2;</code>
-       */
-      SUCCESS_JOIN(1, 2),
-      /**
-       * <code>FAIL_ALREADY_IN_CLAN = 3;</code>
-       */
-      FAIL_ALREADY_IN_CLAN(2, 3),
-      /**
-       * <code>FAIL_REQUEST_ALREADY_FILED = 4;</code>
-       */
-      FAIL_REQUEST_ALREADY_FILED(3, 4),
-      /**
-       * <code>FAIL_CLAN_IS_FULL = 5;</code>
-       */
-      FAIL_CLAN_IS_FULL(4, 5),
-      /**
-       * <code>FAIL_OTHER = 6;</code>
-       */
-      FAIL_OTHER(5, 6),
-      ;
-
-      /**
-       * <code>SUCCESS_REQUEST = 1;</code>
-       */
-      public static final int SUCCESS_REQUEST_VALUE = 1;
-      /**
-       * <code>SUCCESS_JOIN = 2;</code>
-       */
-      public static final int SUCCESS_JOIN_VALUE = 2;
-      /**
-       * <code>FAIL_ALREADY_IN_CLAN = 3;</code>
-       */
-      public static final int FAIL_ALREADY_IN_CLAN_VALUE = 3;
-      /**
-       * <code>FAIL_REQUEST_ALREADY_FILED = 4;</code>
-       */
-      public static final int FAIL_REQUEST_ALREADY_FILED_VALUE = 4;
-      /**
-       * <code>FAIL_CLAN_IS_FULL = 5;</code>
-       */
-      public static final int FAIL_CLAN_IS_FULL_VALUE = 5;
-      /**
-       * <code>FAIL_OTHER = 6;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 6;
-
-
-      public final int getNumber() { return value; }
-
-      public static RequestJoinClanStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS_REQUEST;
-          case 2: return SUCCESS_JOIN;
-          case 3: return FAIL_ALREADY_IN_CLAN;
-          case 4: return FAIL_REQUEST_ALREADY_FILED;
-          case 5: return FAIL_CLAN_IS_FULL;
-          case 6: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RequestJoinClanStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RequestJoinClanStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RequestJoinClanStatus>() {
-              public RequestJoinClanStatus findValueByNumber(int number) {
-                return RequestJoinClanStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RequestJoinClanStatus[] VALUES = values();
-
-      public static RequestJoinClanStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RequestJoinClanStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -4743,17 +4389,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -4968,7 +4614,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus.SUCCESS_REQUEST;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       clanUuid_ = "";
       requester_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
       minClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
@@ -5205,7 +4851,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus.SUCCESS_REQUEST;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         clanUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -5558,23 +5204,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus status_ = com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus.SUCCESS_REQUEST;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -5584,11 +5230,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RequestJoinClanResponseProto.RequestJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus.SUCCESS_REQUEST;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -7251,13 +6897,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional string clanUuid = 3;</code>
@@ -7340,7 +6986,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus value = com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -7394,106 +7040,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus}
-     */
-    public enum RetractRequestJoinClanStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_ALREADY_IN_CLAN = 3;</code>
-       */
-      FAIL_ALREADY_IN_CLAN(2, 3),
-      /**
-       * <code>FAIL_DID_NOT_REQUEST = 4;</code>
-       */
-      FAIL_DID_NOT_REQUEST(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_ALREADY_IN_CLAN = 3;</code>
-       */
-      public static final int FAIL_ALREADY_IN_CLAN_VALUE = 3;
-      /**
-       * <code>FAIL_DID_NOT_REQUEST = 4;</code>
-       */
-      public static final int FAIL_DID_NOT_REQUEST_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static RetractRequestJoinClanStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_ALREADY_IN_CLAN;
-          case 4: return FAIL_DID_NOT_REQUEST;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RetractRequestJoinClanStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RetractRequestJoinClanStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RetractRequestJoinClanStatus>() {
-              public RetractRequestJoinClanStatus findValueByNumber(int number) {
-                return RetractRequestJoinClanStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RetractRequestJoinClanStatus[] VALUES = values();
-
-      public static RetractRequestJoinClanStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RetractRequestJoinClanStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -7517,17 +7063,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -7575,7 +7121,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       clanUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -7745,7 +7291,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         clanUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -7963,23 +7509,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status_ = com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -7989,11 +7535,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -8854,13 +8400,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto requester = 3;</code>
@@ -8977,7 +8523,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus value = com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -9069,124 +8615,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus}
-     */
-    public enum ApproveOrRejectRequestToJoinClanStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       */
-      FAIL_NOT_AUTHORIZED(2, 3),
-      /**
-       * <code>FAIL_NOT_A_REQUESTER = 4;</code>
-       */
-      FAIL_NOT_A_REQUESTER(3, 4),
-      /**
-       * <code>FAIL_ALREADY_IN_A_CLAN = 5;</code>
-       */
-      FAIL_ALREADY_IN_A_CLAN(4, 5),
-      /**
-       * <code>FAIL_CLAN_IS_FULL = 6;</code>
-       */
-      FAIL_CLAN_IS_FULL(5, 6),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       */
-      public static final int FAIL_NOT_AUTHORIZED_VALUE = 3;
-      /**
-       * <code>FAIL_NOT_A_REQUESTER = 4;</code>
-       */
-      public static final int FAIL_NOT_A_REQUESTER_VALUE = 4;
-      /**
-       * <code>FAIL_ALREADY_IN_A_CLAN = 5;</code>
-       */
-      public static final int FAIL_ALREADY_IN_A_CLAN_VALUE = 5;
-      /**
-       * <code>FAIL_CLAN_IS_FULL = 6;</code>
-       */
-      public static final int FAIL_CLAN_IS_FULL_VALUE = 6;
-
-
-      public final int getNumber() { return value; }
-
-      public static ApproveOrRejectRequestToJoinClanStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NOT_AUTHORIZED;
-          case 4: return FAIL_NOT_A_REQUESTER;
-          case 5: return FAIL_ALREADY_IN_A_CLAN;
-          case 6: return FAIL_CLAN_IS_FULL;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<ApproveOrRejectRequestToJoinClanStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<ApproveOrRejectRequestToJoinClanStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<ApproveOrRejectRequestToJoinClanStatus>() {
-              public ApproveOrRejectRequestToJoinClanStatus findValueByNumber(int number) {
-                return ApproveOrRejectRequestToJoinClanStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final ApproveOrRejectRequestToJoinClanStatus[] VALUES = values();
-
-      public static ApproveOrRejectRequestToJoinClanStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private ApproveOrRejectRequestToJoinClanStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -9210,17 +8638,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -9304,7 +8732,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       requester_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       accept_ = false;
       minClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
@@ -9501,7 +8929,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (requesterBuilder_ == null) {
           requester_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -9768,23 +9196,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status_ = com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -9794,11 +9222,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -11448,13 +10876,13 @@ public final class EventClanProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
-    com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional bool isForSearch = 5;</code>
@@ -11618,7 +11046,7 @@ public final class EventClanProto {
             }
             case 32: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus value = com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
@@ -11708,88 +11136,6 @@ public final class EventClanProto {
     @java.lang.Override
     public com.google.protobuf.Parser<RetrieveClanInfoResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus}
-     */
-    public enum RetrieveClanInfoStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>OTHER_FAIL = 2;</code>
-       */
-      OTHER_FAIL(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>OTHER_FAIL = 2;</code>
-       */
-      public static final int OTHER_FAIL_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static RetrieveClanInfoStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return OTHER_FAIL;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RetrieveClanInfoStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RetrieveClanInfoStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RetrieveClanInfoStatus>() {
-              public RetrieveClanInfoStatus findValueByNumber(int number) {
-                return RetrieveClanInfoStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RetrieveClanInfoStatus[] VALUES = values();
-
-      public static RetrieveClanInfoStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RetrieveClanInfoStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus)
     }
 
     private int bitField0_;
@@ -11885,17 +11231,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 4;
-    private com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
-    public com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -12067,7 +11413,7 @@ public final class EventClanProto {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       members_ = java.util.Collections.emptyList();
       clanInfo_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       isForSearch_ = false;
       isForBrowsingList_ = false;
       clanUuid_ = "";
@@ -12306,7 +11652,7 @@ public final class EventClanProto {
         } else {
           clanInfoBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000008);
         isForSearch_ = false;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -13153,23 +12499,23 @@ public final class EventClanProto {
         return clanInfoBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status_ = com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
-      public com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -13179,11 +12525,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        status_ = com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -14370,13 +13716,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.MinimumClanProto minClan = 3;</code>
@@ -14484,7 +13830,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus value = com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -14571,106 +13917,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus}
-     */
-    public enum TransferClanOwnershipStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       */
-      FAIL_NOT_AUTHORIZED(2, 3),
-      /**
-       * <code>FAIL_NEW_OWNER_NOT_IN_CLAN = 4;</code>
-       */
-      FAIL_NEW_OWNER_NOT_IN_CLAN(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       */
-      public static final int FAIL_NOT_AUTHORIZED_VALUE = 3;
-      /**
-       * <code>FAIL_NEW_OWNER_NOT_IN_CLAN = 4;</code>
-       */
-      public static final int FAIL_NEW_OWNER_NOT_IN_CLAN_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static TransferClanOwnershipStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NOT_AUTHORIZED;
-          case 4: return FAIL_NEW_OWNER_NOT_IN_CLAN;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<TransferClanOwnershipStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<TransferClanOwnershipStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<TransferClanOwnershipStatus>() {
-              public TransferClanOwnershipStatus findValueByNumber(int number) {
-                return TransferClanOwnershipStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final TransferClanOwnershipStatus[] VALUES = values();
-
-      public static TransferClanOwnershipStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private TransferClanOwnershipStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -14694,17 +13940,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -14773,7 +14019,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       minClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       fullClan_ = com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.getDefaultInstance();
       clanOwnerNew_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -14962,7 +14208,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (minClanBuilder_ == null) {
           minClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
@@ -15220,23 +14466,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status_ = com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -15246,11 +14492,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -16310,13 +15556,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getPlayerToBootOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BootPlayerFromClanResponseProto}
@@ -16398,7 +15644,7 @@ public final class EventClanProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus value = com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -16446,106 +15692,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus}
-     */
-    public enum BootPlayerFromClanStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       */
-      FAIL_NOT_AUTHORIZED(2, 3),
-      /**
-       * <code>FAIL_BOOTED_NOT_IN_CLAN = 4;</code>
-       */
-      FAIL_BOOTED_NOT_IN_CLAN(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       */
-      public static final int FAIL_NOT_AUTHORIZED_VALUE = 3;
-      /**
-       * <code>FAIL_BOOTED_NOT_IN_CLAN = 4;</code>
-       */
-      public static final int FAIL_BOOTED_NOT_IN_CLAN_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static BootPlayerFromClanStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NOT_AUTHORIZED;
-          case 4: return FAIL_BOOTED_NOT_IN_CLAN;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<BootPlayerFromClanStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<BootPlayerFromClanStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<BootPlayerFromClanStatus>() {
-              public BootPlayerFromClanStatus findValueByNumber(int number) {
-                return BootPlayerFromClanStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final BootPlayerFromClanStatus[] VALUES = values();
-
-      public static BootPlayerFromClanStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private BootPlayerFromClanStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -16590,24 +15736,24 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       playerToBoot_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16783,7 +15929,7 @@ public final class EventClanProto {
           playerToBootBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -17117,23 +16263,23 @@ public final class EventClanProto {
         return playerToBootBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status_ = com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -17143,11 +16289,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -18278,13 +17424,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.MinimumClanProto minClan = 3;</code>
@@ -18379,7 +17525,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus value = com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -18453,122 +17599,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus}
-     */
-    public enum ChangeClanSettingsStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       *
-       * <pre>
-       *if all requested changes succeed 
-       * </pre>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 2;</code>
-       */
-      FAIL_NOT_AUTHORIZED(1, 2),
-      /**
-       * <code>FAIL_NOT_IN_CLAN = 3;</code>
-       */
-      FAIL_NOT_IN_CLAN(2, 3),
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       *
-       * <pre>
-       *if one requested change fails, but server still process all of them
-       * </pre>
-       */
-      FAIL_OTHER(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       *
-       * <pre>
-       *if all requested changes succeed 
-       * </pre>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 2;</code>
-       */
-      public static final int FAIL_NOT_AUTHORIZED_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_IN_CLAN = 3;</code>
-       */
-      public static final int FAIL_NOT_IN_CLAN_VALUE = 3;
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       *
-       * <pre>
-       *if one requested change fails, but server still process all of them
-       * </pre>
-       */
-      public static final int FAIL_OTHER_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static ChangeClanSettingsStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_NOT_AUTHORIZED;
-          case 3: return FAIL_NOT_IN_CLAN;
-          case 4: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<ChangeClanSettingsStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<ChangeClanSettingsStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<ChangeClanSettingsStatus>() {
-              public ChangeClanSettingsStatus findValueByNumber(int number) {
-                return ChangeClanSettingsStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final ChangeClanSettingsStatus[] VALUES = values();
-
-      public static ChangeClanSettingsStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private ChangeClanSettingsStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -18592,17 +17622,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -18650,7 +17680,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       minClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       fullClan_ = com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.getDefaultInstance();
     }
@@ -18830,7 +17860,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (minClanBuilder_ == null) {
           minClan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
@@ -19071,23 +18101,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status_ = com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -19097,11 +18127,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -20729,13 +19759,13 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.PersistentClanEventUserInfoProto userDetails = 4;</code>
@@ -20834,7 +19864,7 @@ public final class EventClanProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus value = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -20893,140 +19923,6 @@ public final class EventClanProto {
     @java.lang.Override
     public com.google.protobuf.Parser<BeginClanRaidResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus}
-     */
-    public enum BeginClanRaidStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_ALREADY_STARTED = 2;</code>
-       */
-      FAIL_ALREADY_STARTED(1, 2),
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       *
-       * <pre>
-       *regular members can't start it
-       * </pre>
-       */
-      FAIL_NOT_AUTHORIZED(2, 3),
-      /**
-       * <code>FAIL_NO_ACTIVE_CLAN_RAID = 4;</code>
-       *
-       * <pre>
-       *should be EVENT, NOT RAID. Oh well
-       * </pre>
-       */
-      FAIL_NO_ACTIVE_CLAN_RAID(3, 4),
-      /**
-       * <code>FAIL_NO_MONSTERS_SENT = 5;</code>
-       */
-      FAIL_NO_MONSTERS_SENT(4, 5),
-      /**
-       * <code>FAIL_OTHER = 6;</code>
-       */
-      FAIL_OTHER(5, 6),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_ALREADY_STARTED = 2;</code>
-       */
-      public static final int FAIL_ALREADY_STARTED_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       *
-       * <pre>
-       *regular members can't start it
-       * </pre>
-       */
-      public static final int FAIL_NOT_AUTHORIZED_VALUE = 3;
-      /**
-       * <code>FAIL_NO_ACTIVE_CLAN_RAID = 4;</code>
-       *
-       * <pre>
-       *should be EVENT, NOT RAID. Oh well
-       * </pre>
-       */
-      public static final int FAIL_NO_ACTIVE_CLAN_RAID_VALUE = 4;
-      /**
-       * <code>FAIL_NO_MONSTERS_SENT = 5;</code>
-       */
-      public static final int FAIL_NO_MONSTERS_SENT_VALUE = 5;
-      /**
-       * <code>FAIL_OTHER = 6;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 6;
-
-
-      public final int getNumber() { return value; }
-
-      public static BeginClanRaidStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_ALREADY_STARTED;
-          case 3: return FAIL_NOT_AUTHORIZED;
-          case 4: return FAIL_NO_ACTIVE_CLAN_RAID;
-          case 5: return FAIL_NO_MONSTERS_SENT;
-          case 6: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<BeginClanRaidStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<BeginClanRaidStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<BeginClanRaidStatus>() {
-              public BeginClanRaidStatus findValueByNumber(int number) {
-                return BeginClanRaidStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final BeginClanRaidStatus[] VALUES = values();
-
-      public static BeginClanRaidStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private BeginClanRaidStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus)
     }
 
     private int bitField0_;
@@ -21088,17 +19984,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -21126,7 +20022,7 @@ public final class EventClanProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       userDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -21315,7 +20211,7 @@ public final class EventClanProto {
           eventDetailsBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         if (userDetailsBuilder_ == null) {
           userDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.getDefaultInstance();
@@ -21711,23 +20607,23 @@ public final class EventClanProto {
         return eventDetailsBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -21737,11 +20633,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -23889,13 +22785,13 @@ public final class EventClanProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUserMonsterThatAttackedOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 6;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 6;</code>
      */
-    com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.AttackClanRaidMonsterResponseProto}
@@ -24007,7 +22903,7 @@ public final class EventClanProto {
             }
             case 48: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus value = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(6, rawValue);
               } else {
@@ -24056,124 +22952,6 @@ public final class EventClanProto {
     @java.lang.Override
     public com.google.protobuf.Parser<AttackClanRaidMonsterResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus}
-     */
-    public enum AttackClanRaidMonsterStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>SUCCESS_MONSTER_JUST_DIED = 2;</code>
-       */
-      SUCCESS_MONSTER_JUST_DIED(1, 2),
-      /**
-       * <code>FAIL_USER_NOT_IN_CLAN = 3;</code>
-       */
-      FAIL_USER_NOT_IN_CLAN(2, 3),
-      /**
-       * <code>FAIL_NO_STAGE_RAID_IN_PROGRESS = 4;</code>
-       */
-      FAIL_NO_STAGE_RAID_IN_PROGRESS(3, 4),
-      /**
-       * <code>FAIL_MONSTER_ALREADY_DEAD = 5;</code>
-       */
-      FAIL_MONSTER_ALREADY_DEAD(4, 5),
-      /**
-       * <code>FAIL_OTHER = 6;</code>
-       */
-      FAIL_OTHER(5, 6),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>SUCCESS_MONSTER_JUST_DIED = 2;</code>
-       */
-      public static final int SUCCESS_MONSTER_JUST_DIED_VALUE = 2;
-      /**
-       * <code>FAIL_USER_NOT_IN_CLAN = 3;</code>
-       */
-      public static final int FAIL_USER_NOT_IN_CLAN_VALUE = 3;
-      /**
-       * <code>FAIL_NO_STAGE_RAID_IN_PROGRESS = 4;</code>
-       */
-      public static final int FAIL_NO_STAGE_RAID_IN_PROGRESS_VALUE = 4;
-      /**
-       * <code>FAIL_MONSTER_ALREADY_DEAD = 5;</code>
-       */
-      public static final int FAIL_MONSTER_ALREADY_DEAD_VALUE = 5;
-      /**
-       * <code>FAIL_OTHER = 6;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 6;
-
-
-      public final int getNumber() { return value; }
-
-      public static AttackClanRaidMonsterStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return SUCCESS_MONSTER_JUST_DIED;
-          case 3: return FAIL_USER_NOT_IN_CLAN;
-          case 4: return FAIL_NO_STAGE_RAID_IN_PROGRESS;
-          case 5: return FAIL_MONSTER_ALREADY_DEAD;
-          case 6: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<AttackClanRaidMonsterStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<AttackClanRaidMonsterStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<AttackClanRaidMonsterStatus>() {
-              public AttackClanRaidMonsterStatus findValueByNumber(int number) {
-                return AttackClanRaidMonsterStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final AttackClanRaidMonsterStatus[] VALUES = values();
-
-      public static AttackClanRaidMonsterStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private AttackClanRaidMonsterStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus)
     }
 
     private int bitField0_;
@@ -24331,17 +23109,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 6;
-    private com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 6;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 6;</code>
      */
-    public com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -24351,7 +23129,7 @@ public final class EventClanProto {
       eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
       clanUsersDetails_ = java.util.Collections.emptyList();
       userMonsterThatAttacked_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -24568,7 +23346,7 @@ public final class EventClanProto {
           userMonsterThatAttackedBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000010);
-        status_ = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
@@ -25478,23 +24256,23 @@ public final class EventClanProto {
         return userMonsterThatAttackedBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status_ = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 6;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 6;</code>
        */
-      public com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 6;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -25504,11 +24282,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 6;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 6;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        status_ = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -27088,13 +25866,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RecordClanRaidStatsResponseProto}
@@ -27163,7 +25941,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus value = com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -27211,105 +25989,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus}
-     */
-    public enum RecordClanRaidStatsStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_MONSTER_ALREADY_DEAD = 2;</code>
-       *
-       * <pre>
-       *even though time ended, clan still progresses to next stage
-       * </pre>
-       */
-      FAIL_MONSTER_ALREADY_DEAD(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_MONSTER_ALREADY_DEAD = 2;</code>
-       *
-       * <pre>
-       *even though time ended, clan still progresses to next stage
-       * </pre>
-       */
-      public static final int FAIL_MONSTER_ALREADY_DEAD_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static RecordClanRaidStatsStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_MONSTER_ALREADY_DEAD;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RecordClanRaidStatsStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RecordClanRaidStatsStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RecordClanRaidStatsStatus>() {
-              public RecordClanRaidStatsStatus findValueByNumber(int number) {
-                return RecordClanRaidStatsStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RecordClanRaidStatsStatus[] VALUES = values();
-
-      public static RecordClanRaidStatsStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RecordClanRaidStatsStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -27333,23 +26012,23 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -27511,7 +26190,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -27718,23 +26397,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status_ = com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -27744,11 +26423,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.RecordClanRaidStatsResponseProto.RecordClanRaidStatsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -28565,13 +27244,13 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.UserClanStatus getPrevUserClanStatus();
 
     /**
-     * <code>optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
-    com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PromoteDemoteClanMemberResponseProto}
@@ -28664,7 +27343,7 @@ public final class EventClanProto {
             }
             case 32: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus value = com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
@@ -28721,106 +27400,6 @@ public final class EventClanProto {
     @java.lang.Override
     public com.google.protobuf.Parser<PromoteDemoteClanMemberResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus}
-     */
-    public enum PromoteDemoteClanMemberStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_NOT_IN_CLAN = 2;</code>
-       */
-      FAIL_NOT_IN_CLAN(1, 2),
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       */
-      FAIL_NOT_AUTHORIZED(2, 3),
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      FAIL_OTHER(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_NOT_IN_CLAN = 2;</code>
-       */
-      public static final int FAIL_NOT_IN_CLAN_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       */
-      public static final int FAIL_NOT_AUTHORIZED_VALUE = 3;
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static PromoteDemoteClanMemberStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_NOT_IN_CLAN;
-          case 3: return FAIL_NOT_AUTHORIZED;
-          case 4: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<PromoteDemoteClanMemberStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<PromoteDemoteClanMemberStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<PromoteDemoteClanMemberStatus>() {
-              public PromoteDemoteClanMemberStatus findValueByNumber(int number) {
-                return PromoteDemoteClanMemberStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final PromoteDemoteClanMemberStatus[] VALUES = values();
-
-      public static PromoteDemoteClanMemberStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private PromoteDemoteClanMemberStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus)
     }
 
     private int bitField0_;
@@ -28897,17 +27476,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 4;
-    private com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
-    public com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -28916,7 +27495,7 @@ public final class EventClanProto {
       victim_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userClanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.MEMBER;
       prevUserClanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.MEMBER;
-      status_ = com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -29110,7 +27689,7 @@ public final class EventClanProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         prevUserClanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.MEMBER;
         bitField0_ = (bitField0_ & ~0x00000008);
-        status_ = com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
@@ -29528,23 +28107,23 @@ public final class EventClanProto {
         return this;
       }
 
-      private com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status_ = com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
-      public com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -29554,11 +28133,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        status_ = com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -30640,13 +29219,13 @@ public final class EventClanProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SolicitClanHelpResponseProto}
@@ -30723,7 +29302,7 @@ public final class EventClanProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus value = com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -30772,97 +29351,6 @@ public final class EventClanProto {
     @java.lang.Override
     public com.google.protobuf.Parser<SolicitClanHelpResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus}
-     */
-    public enum SolicitClanHelpStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NOT_IN_CLAN = 3;</code>
-       */
-      FAIL_NOT_IN_CLAN(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_IN_CLAN = 3;</code>
-       */
-      public static final int FAIL_NOT_IN_CLAN_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static SolicitClanHelpStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NOT_IN_CLAN;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SolicitClanHelpStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SolicitClanHelpStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SolicitClanHelpStatus>() {
-              public SolicitClanHelpStatus findValueByNumber(int number) {
-                return SolicitClanHelpStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SolicitClanHelpStatus[] VALUES = values();
-
-      public static SolicitClanHelpStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SolicitClanHelpStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus)
     }
 
     private int bitField0_;
@@ -30923,24 +29411,24 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       helpProto_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -31116,7 +29604,7 @@ public final class EventClanProto {
         } else {
           helpProtoBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -31598,23 +30086,23 @@ public final class EventClanProto {
         return helpProtoBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status_ = com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -31624,11 +30112,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SolicitClanHelpResponseProto.SolicitClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventClanProto.SolicitClanHelpResponseProto.SolicitClanHelpStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -32377,13 +30865,13 @@ public final class EventClanProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.GiveClanHelpResponseProto}
@@ -32460,7 +30948,7 @@ public final class EventClanProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus value = com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -32509,88 +30997,6 @@ public final class EventClanProto {
     @java.lang.Override
     public com.google.protobuf.Parser<GiveClanHelpResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus}
-     */
-    public enum GiveClanHelpStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static GiveClanHelpStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<GiveClanHelpStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<GiveClanHelpStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<GiveClanHelpStatus>() {
-              public GiveClanHelpStatus findValueByNumber(int number) {
-                return GiveClanHelpStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final GiveClanHelpStatus[] VALUES = values();
-
-      public static GiveClanHelpStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private GiveClanHelpStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus)
     }
 
     private int bitField0_;
@@ -32651,24 +31057,24 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clanHelps_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -32844,7 +31250,7 @@ public final class EventClanProto {
         } else {
           clanHelpsBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -33326,23 +31732,23 @@ public final class EventClanProto {
         return clanHelpsBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus status_ = com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -33352,11 +31758,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.GiveClanHelpResponseProto.GiveClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventClanProto.GiveClanHelpResponseProto.GiveClanHelpStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -34100,7 +32506,7 @@ public final class EventClanProto {
         getClanHelpUuidsBytes(int index);
 
     /**
-     * <code>optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      *
      * <pre>
      *SEND TO ALL CLAN MEMBERS ON SUCCESS
@@ -34108,13 +32514,13 @@ public final class EventClanProto {
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      *
      * <pre>
      *SEND TO ALL CLAN MEMBERS ON SUCCESS
      * </pre>
      */
-    com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndClanHelpResponseProto}
@@ -34192,7 +32598,7 @@ public final class EventClanProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus value = com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -34241,88 +32647,6 @@ public final class EventClanProto {
     @java.lang.Override
     public com.google.protobuf.Parser<EndClanHelpResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus}
-     */
-    public enum EndClanHelpStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static EndClanHelpStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<EndClanHelpStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<EndClanHelpStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EndClanHelpStatus>() {
-              public EndClanHelpStatus findValueByNumber(int number) {
-                return EndClanHelpStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final EndClanHelpStatus[] VALUES = values();
-
-      public static EndClanHelpStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private EndClanHelpStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus)
     }
 
     private int bitField0_;
@@ -34377,9 +32701,9 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      *
      * <pre>
      *SEND TO ALL CLAN MEMBERS ON SUCCESS
@@ -34389,20 +32713,20 @@ public final class EventClanProto {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      *
      * <pre>
      *SEND TO ALL CLAN MEMBERS ON SUCCESS
      * </pre>
      */
-    public com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clanHelpUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      status_ = com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -34578,7 +32902,7 @@ public final class EventClanProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         clanHelpUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -34893,9 +33217,9 @@ public final class EventClanProto {
         return this;
       }
 
-      private com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus status_ = com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        *
        * <pre>
        *SEND TO ALL CLAN MEMBERS ON SUCCESS
@@ -34905,23 +33229,23 @@ public final class EventClanProto {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        *
        * <pre>
        *SEND TO ALL CLAN MEMBERS ON SUCCESS
        * </pre>
        */
-      public com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        *
        * <pre>
        *SEND TO ALL CLAN MEMBERS ON SUCCESS
        * </pre>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -34931,7 +33255,7 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.EndClanHelpResponseProto.EndClanHelpStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        *
        * <pre>
        *SEND TO ALL CLAN MEMBERS ON SUCCESS
@@ -34939,7 +33263,7 @@ public final class EventClanProto {
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -35724,13 +34048,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.ClanInviteProto invite = 3;</code>
@@ -35812,7 +34136,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus value = com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -35873,97 +34197,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus}
-     */
-    public enum InviteToClanStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       */
-      FAIL_NOT_AUTHORIZED(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_AUTHORIZED = 3;</code>
-       */
-      public static final int FAIL_NOT_AUTHORIZED_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static InviteToClanStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NOT_AUTHORIZED;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<InviteToClanStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<InviteToClanStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<InviteToClanStatus>() {
-              public InviteToClanStatus findValueByNumber(int number) {
-                return InviteToClanStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.InviteToClanResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final InviteToClanStatus[] VALUES = values();
-
-      public static InviteToClanStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private InviteToClanStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -35987,17 +34220,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -36024,7 +34257,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       invite_ = com.lvl6.proto.ClanProto.ClanInviteProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -36195,7 +34428,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (inviteBuilder_ == null) {
           invite_ = com.lvl6.proto.ClanProto.ClanInviteProto.getDefaultInstance();
@@ -36419,23 +34652,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus status_ = com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -36445,11 +34678,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.InviteToClanResponseProto.InviteToClanStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -37794,13 +36027,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.FullClanProtoWithClanSize fullClan = 3;</code>
@@ -37882,7 +36115,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus value = com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -37943,97 +36176,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus}
-     */
-    public enum AcceptOrRejectClanInviteStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_CLAN_IS_FULL = 3;</code>
-       */
-      FAIL_CLAN_IS_FULL(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_CLAN_IS_FULL = 3;</code>
-       */
-      public static final int FAIL_CLAN_IS_FULL_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static AcceptOrRejectClanInviteStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_CLAN_IS_FULL;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<AcceptOrRejectClanInviteStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<AcceptOrRejectClanInviteStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<AcceptOrRejectClanInviteStatus>() {
-              public AcceptOrRejectClanInviteStatus findValueByNumber(int number) {
-                return AcceptOrRejectClanInviteStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final AcceptOrRejectClanInviteStatus[] VALUES = values();
-
-      public static AcceptOrRejectClanInviteStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private AcceptOrRejectClanInviteStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -38057,17 +36199,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -38094,7 +36236,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       fullClan_ = com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -38265,7 +36407,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (fullClanBuilder_ == null) {
           fullClan_ = com.lvl6.proto.ClanProto.FullClanProtoWithClanSize.getDefaultInstance();
@@ -38489,23 +36631,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status_ = com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -38515,11 +36657,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -40404,13 +38546,13 @@ public final class EventClanProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BeginClanAvengingResponseProto}
@@ -40487,7 +38629,7 @@ public final class EventClanProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus value = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -40536,88 +38678,6 @@ public final class EventClanProto {
     @java.lang.Override
     public com.google.protobuf.Parser<BeginClanAvengingResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus}
-     */
-    public enum BeginClanAvengingStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static BeginClanAvengingStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<BeginClanAvengingStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<BeginClanAvengingStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<BeginClanAvengingStatus>() {
-              public BeginClanAvengingStatus findValueByNumber(int number) {
-                return BeginClanAvengingStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final BeginClanAvengingStatus[] VALUES = values();
-
-      public static BeginClanAvengingStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private BeginClanAvengingStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus)
     }
 
     private int bitField0_;
@@ -40678,24 +38738,24 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clanAvengings_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -40871,7 +38931,7 @@ public final class EventClanProto {
         } else {
           clanAvengingsBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -41353,23 +39413,23 @@ public final class EventClanProto {
         return clanAvengingsBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status_ = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -41379,11 +39439,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginClanAvengingResponseProto.BeginClanAvengingStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -42195,13 +40255,13 @@ public final class EventClanProto {
         getClanAvengeUuidsBytes(int index);
 
     /**
-     * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EndClanAvengingResponseProto}
@@ -42279,7 +40339,7 @@ public final class EventClanProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus value = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -42328,88 +40388,6 @@ public final class EventClanProto {
     @java.lang.Override
     public com.google.protobuf.Parser<EndClanAvengingResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus}
-     */
-    public enum EndClanAvengingStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static EndClanAvengingStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<EndClanAvengingStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<EndClanAvengingStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EndClanAvengingStatus>() {
-              public EndClanAvengingStatus findValueByNumber(int number) {
-                return EndClanAvengingStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final EndClanAvengingStatus[] VALUES = values();
-
-      public static EndClanAvengingStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private EndClanAvengingStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus)
     }
 
     private int bitField0_;
@@ -42464,24 +40442,24 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      status_ = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -42657,7 +40635,7 @@ public final class EventClanProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         clanAvengeUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -42972,23 +40950,23 @@ public final class EventClanProto {
         return this;
       }
 
-      private com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus status_ = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -42998,11 +40976,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.EndClanAvengingResponseProto.EndClanAvengingStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -43896,13 +41874,13 @@ public final class EventClanProto {
     @java.lang.Deprecated com.lvl6.proto.BattleProto.PvpProtoOrBuilder getVictimOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.AvengeClanMateResponseProto}
@@ -43984,7 +41962,7 @@ public final class EventClanProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus value = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -44030,88 +42008,6 @@ public final class EventClanProto {
     @java.lang.Override
     public com.google.protobuf.Parser<AvengeClanMateResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus}
-     */
-    public enum AvengeClanMateStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static AvengeClanMateStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<AvengeClanMateStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<AvengeClanMateStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<AvengeClanMateStatus>() {
-              public AvengeClanMateStatus findValueByNumber(int number) {
-                return AvengeClanMateStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final AvengeClanMateStatus[] VALUES = values();
-
-      public static AvengeClanMateStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private AvengeClanMateStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus)
     }
 
     private int bitField0_;
@@ -44170,24 +42066,24 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       victim_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -44363,7 +42259,7 @@ public final class EventClanProto {
           victimBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -44733,23 +42629,23 @@ public final class EventClanProto {
         return victimBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus status_ = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -44759,11 +42655,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.AvengeClanMateResponseProto.AvengeClanMateStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -45736,13 +43632,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
@@ -45824,7 +43720,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus value = com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -45885,106 +43781,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus}
-     */
-    public enum SolicitTeamDonationStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 3;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(2, 3),
-      /**
-       * <code>FAIL_FULFILLED_REQUEST_EXISTS = 4;</code>
-       */
-      FAIL_FULFILLED_REQUEST_EXISTS(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 3;
-      /**
-       * <code>FAIL_FULFILLED_REQUEST_EXISTS = 4;</code>
-       */
-      public static final int FAIL_FULFILLED_REQUEST_EXISTS_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static SolicitTeamDonationStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_INSUFFICIENT_GEMS;
-          case 4: return FAIL_FULFILLED_REQUEST_EXISTS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SolicitTeamDonationStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SolicitTeamDonationStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SolicitTeamDonationStatus>() {
-              public SolicitTeamDonationStatus findValueByNumber(int number) {
-                return SolicitTeamDonationStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SolicitTeamDonationStatus[] VALUES = values();
-
-      public static SolicitTeamDonationStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SolicitTeamDonationStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -46008,17 +43804,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -46045,7 +43841,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -46216,7 +44012,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (solicitationBuilder_ == null) {
           solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
@@ -46440,23 +44236,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status_ = com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -46466,11 +44262,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -47644,13 +45440,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.ClanMemberTeamDonationProto solicitation = 3;</code>
@@ -47732,7 +45528,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus value = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -47793,106 +45589,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus}
-     */
-    public enum FulfillTeamDonationSolicitationStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NONEXISTENT_SOLICITATION = 3;</code>
-       */
-      FAIL_NONEXISTENT_SOLICITATION(2, 3),
-      /**
-       * <code>FAIL_ALREADY_FULFILLED = 4;</code>
-       */
-      FAIL_ALREADY_FULFILLED(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NONEXISTENT_SOLICITATION = 3;</code>
-       */
-      public static final int FAIL_NONEXISTENT_SOLICITATION_VALUE = 3;
-      /**
-       * <code>FAIL_ALREADY_FULFILLED = 4;</code>
-       */
-      public static final int FAIL_ALREADY_FULFILLED_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static FulfillTeamDonationSolicitationStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NONEXISTENT_SOLICITATION;
-          case 4: return FAIL_ALREADY_FULFILLED;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<FulfillTeamDonationSolicitationStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<FulfillTeamDonationSolicitationStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<FulfillTeamDonationSolicitationStatus>() {
-              public FulfillTeamDonationSolicitationStatus findValueByNumber(int number) {
-                return FulfillTeamDonationSolicitationStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final FulfillTeamDonationSolicitationStatus[] VALUES = values();
-
-      public static FulfillTeamDonationSolicitationStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private FulfillTeamDonationSolicitationStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -47916,17 +45612,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -47953,7 +45649,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -48124,7 +45820,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (solicitationBuilder_ == null) {
           solicitation_ = com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto.getDefaultInstance();
@@ -48348,23 +46044,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -48374,11 +46070,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -49396,13 +47092,13 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated string clanTeamDonateUuid = 3;</code>
@@ -49490,7 +47186,7 @@ public final class EventClanProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus value = com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -49550,88 +47246,6 @@ public final class EventClanProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus}
-     */
-    public enum VoidTeamDonationSolicitationStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static VoidTeamDonationSolicitationStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<VoidTeamDonationSolicitationStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<VoidTeamDonationSolicitationStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<VoidTeamDonationSolicitationStatus>() {
-              public VoidTeamDonationSolicitationStatus findValueByNumber(int number) {
-                return VoidTeamDonationSolicitationStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final VoidTeamDonationSolicitationStatus[] VALUES = values();
-
-      public static VoidTeamDonationSolicitationStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private VoidTeamDonationSolicitationStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -49655,17 +47269,17 @@ public final class EventClanProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -49700,7 +47314,7 @@ public final class EventClanProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       clanTeamDonateUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
@@ -49875,7 +47489,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         clanTeamDonateUuid_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -50099,23 +47713,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status_ = com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -50125,11 +47739,11 @@ public final class EventClanProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventClanProto.VoidTeamDonationSolicitationResponseProto.VoidTeamDonationSolicitationStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -50499,345 +48113,257 @@ public final class EventClanProto {
     java.lang.String[] descriptorData = {
       "\n\017EventClan.proto\022\016com.lvl6.proto\032\014Battl" +
       "e.proto\032\nClan.proto\032\022MonsterStuff.proto\032" +
-      "\nUser.proto\"\330\001\n\026CreateClanRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\014\n\004name\030\002 \001(\t\022\013\n\003tag\030\003 \001(\t\022!\n\031r" +
-      "equestToJoinClanRequired\030\004 \001(\010\022\023\n\013descri" +
-      "ption\030\005 \001(\t\022\022\n\nclanIconId\030\006 \001(\005\022\021\n\tgemsS" +
-      "pent\030\007 \001(\005\022\022\n\ncashChange\030\010 \001(\021\"\222\003\n\027Creat" +
-      "eClanResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022H\n\006status\030\002",
-      " \001(\01628.com.lvl6.proto.CreateClanResponse" +
-      "Proto.CreateClanStatus\0222\n\010clanInfo\030\003 \001(\013" +
-      "2 .com.lvl6.proto.MinimumClanProto\"\306\001\n\020C" +
-      "reateClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
-      "ER\020\002\022\030\n\024FAIL_NOT_ENOUGH_CASH\020\003\022\023\n\017FAIL_N" +
-      "AME_TAKEN\020\004\022\030\n\024FAIL_ALREADY_IN_CLAN\020\005\022\033\n" +
-      "\027FAIL_INVALID_TAG_LENGTH\020\006\022\022\n\016FAIL_TAG_T" +
-      "AKEN\020\007\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\010\"I\n\025L" +
-      "eaveClanRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\"\205\002\n\026Leave",
-      "ClanResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022F\n\006status\030\002 " +
-      "\001(\01626.com.lvl6.proto.LeaveClanResponsePr" +
-      "oto.LeaveClanStatus\"q\n\017LeaveClanStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\024\n\020FAIL_NOT_" +
-      "IN_CLAN\020\003\022+\n\'FAIL_OWNER_OF_CLAN_WITH_OTH" +
-      "ERS_STILL_IN\020\004\"u\n\033RequestJoinClanRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\020\n\010clanUuid\030\002 \001(\t\022\022\n\ncli" +
-      "entTime\030\003 \001(\003\"\365\005\n\034RequestJoinClanRespons",
-      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022R\n\006status\030\002 \001(\0162B.com.l" +
-      "vl6.proto.RequestJoinClanResponseProto.R" +
-      "equestJoinClanStatus\022\020\n\010clanUuid\030\003 \001(\t\022;" +
-      "\n\trequester\030\004 \001(\0132(.com.lvl6.proto.Minim" +
-      "umUserProtoForClans\0221\n\007minClan\030\005 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumClanProto\022;\n\010fullCl" +
-      "an\030\006 \001(\0132).com.lvl6.proto.FullClanProtoW" +
-      "ithClanSize\022F\n\014eventDetails\030\007 \001(\01320.com." +
-      "lvl6.proto.PersistentClanEventClanInfoPr",
-      "oto\022J\n\020clanUsersDetails\030\010 \003(\01320.com.lvl6" +
-      ".proto.PersistentClanEventUserInfoProto\022" +
-      "F\n\021requesterMonsters\030\t \001(\0132+.com.lvl6.pr" +
-      "oto.UserCurrentMonsterTeamProto\022\022\n\nclien" +
-      "tTime\030\n \001(\003\"\237\001\n\025RequestJoinClanStatus\022\023\n" +
-      "\017SUCCESS_REQUEST\020\001\022\020\n\014SUCCESS_JOIN\020\002\022\030\n\024" +
-      "FAIL_ALREADY_IN_CLAN\020\003\022\036\n\032FAIL_REQUEST_A" +
-      "LREADY_FILED\020\004\022\025\n\021FAIL_CLAN_IS_FULL\020\005\022\016\n" +
-      "\nFAIL_OTHER\020\006\"h\n\"RetractRequestJoinClanR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p",
-      "roto.MinimumUserProto\022\020\n\010clanUuid\030\002 \001(\t\"" +
-      "\274\002\n#RetractRequestJoinClanResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022`\n\006status\030\002 \001(\0162P.com.lvl6.pro" +
-      "to.RetractRequestJoinClanResponseProto.R" +
-      "etractRequestJoinClanStatus\022\020\n\010clanUuid\030" +
-      "\003 \001(\t\"o\n\034RetractRequestJoinClanStatus\022\013\n" +
-      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\030\n\024FAIL_ALREA" +
-      "DY_IN_CLAN\020\003\022\030\n\024FAIL_DID_NOT_REQUEST\020\004\"\207" +
-      "\001\n,ApproveOrRejectRequestToJoinClanReque",
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\025\n\rrequesterUuid\030\002 \001(\t" +
-      "\022\016\n\006accept\030\003 \001(\010\"\272\004\n-ApproveOrRejectRequ" +
-      "estToJoinClanResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022t\n\006" +
-      "status\030\002 \001(\0162d.com.lvl6.proto.ApproveOrR" +
-      "ejectRequestToJoinClanResponseProto.Appr" +
-      "oveOrRejectRequestToJoinClanStatus\0223\n\tre" +
-      "quester\030\003 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\016\n\006accept\030\004 \001(\010\0221\n\007minClan\030\005 \001(\013",
-      "2 .com.lvl6.proto.MinimumClanProto\022;\n\010fu" +
-      "llClan\030\006 \001(\0132).com.lvl6.proto.FullClanPr" +
-      "otoWithClanSize\"\253\001\n&ApproveOrRejectReque" +
-      "stToJoinClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\030\n\024FAIL" +
-      "_NOT_A_REQUESTER\020\004\022\032\n\026FAIL_ALREADY_IN_A_" +
-      "CLAN\020\005\022\025\n\021FAIL_CLAN_IS_FULL\020\006\"\267\002\n\034Retrie" +
-      "veClanInfoRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\020\n\010clan" +
-      "Uuid\030\002 \001(\t\022\020\n\010clanName\030\003 \001(\t\022O\n\010grabType",
-      "\030\004 \001(\0162=.com.lvl6.proto.RetrieveClanInfo" +
-      "RequestProto.ClanInfoGrabType\022\034\n\020beforeT" +
-      "hisClanId\030\005 \001(\005B\002\030\001\022\031\n\021isForBrowsingList" +
-      "\030\006 \001(\010\"7\n\020ClanInfoGrabType\022\007\n\003ALL\020\001\022\r\n\tC" +
-      "LAN_INFO\020\002\022\013\n\007MEMBERS\020\003\"\213\004\n\035RetrieveClan" +
-      "InfoResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\0229\n\007members\030\002" +
-      " \003(\0132(.com.lvl6.proto.MinimumUserProtoFo" +
-      "rClans\022;\n\010clanInfo\030\003 \003(\0132).com.lvl6.prot" +
-      "o.FullClanProtoWithClanSize\022T\n\006status\030\004 ",
-      "\001(\0162D.com.lvl6.proto.RetrieveClanInfoRes" +
-      "ponseProto.RetrieveClanInfoStatus\022\023\n\013isF" +
-      "orSearch\030\005 \001(\010\022\031\n\021isForBrowsingList\030\006 \001(" +
-      "\010\022\020\n\010clanUuid\030\007 \001(\t\022\020\n\010clanName\030\010 \001(\t\022\034\n" +
-      "\020beforeThisClanId\030\t \001(\005B\002\030\001\022A\n\014monsterTe" +
-      "ams\030\n \003(\0132+.com.lvl6.proto.UserCurrentMo" +
-      "nsterTeamProto\"5\n\026RetrieveClanInfoStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAIL\020\002\"o\n!Transfe" +
-      "rClanOwnershipRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\030\n\020",
-      "clanOwnerUuidNew\030\002 \001(\t\"\323\003\n\"TransferClanO" +
-      "wnershipResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022^\n\006statu" +
-      "s\030\002 \001(\0162N.com.lvl6.proto.TransferClanOwn" +
-      "ershipResponseProto.TransferClanOwnershi" +
-      "pStatus\0221\n\007minClan\030\003 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumClanProto\022;\n\010fullClan\030\004 \001(\0132).c" +
-      "om.lvl6.proto.FullClanProtoWithClanSize\022" +
-      "6\n\014clanOwnerNew\030\005 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\"s\n\033TransferClanOwnership",
-      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\027\n\023F" +
-      "AIL_NOT_AUTHORIZED\020\003\022\036\n\032FAIL_NEW_OWNER_N" +
-      "OT_IN_CLAN\020\004\"l\n\036BootPlayerFromClanReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\030\n\020playerToBootUuid\030\002 \001" +
-      "(\t\"\324\002\n\037BootPlayerFromClanResponseProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\0226\n\014playerToBoot\030\002 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022X\n\006status\030\003 \001(\016" +
-      "2H.com.lvl6.proto.BootPlayerFromClanResp",
-      "onseProto.BootPlayerFromClanStatus\"m\n\030Bo" +
-      "otPlayerFromClanStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
-      "AIL_OTHER\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\033\n\027" +
-      "FAIL_BOOTED_NOT_IN_CLAN\020\004\"\346\001\n\036ChangeClan" +
-      "SettingsRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\033\n\023isChan" +
-      "geDescription\030\002 \001(\010\022\026\n\016descriptionNow\030\003 " +
-      "\001(\t\022\030\n\020isChangeJoinType\030\004 \001(\010\022\035\n\025request" +
-      "ToJoinRequired\030\005 \001(\010\022\024\n\014isChangeIcon\030\006 \001" +
-      "(\010\022\016\n\006iconId\030\007 \001(\005\"\205\003\n\037ChangeClanSetting",
-      "sResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022X\n\006status\030\002 \001(\016" +
-      "2H.com.lvl6.proto.ChangeClanSettingsResp" +
-      "onseProto.ChangeClanSettingsStatus\0221\n\007mi" +
-      "nClan\030\003 \001(\0132 .com.lvl6.proto.MinimumClan" +
-      "Proto\022;\n\010fullClan\030\004 \001(\0132).com.lvl6.proto" +
-      ".FullClanProtoWithClanSize\"f\n\030ChangeClan" +
-      "SettingsStatus\022\013\n\007SUCCESS\020\001\022\027\n\023FAIL_NOT_" +
-      "AUTHORIZED\020\002\022\024\n\020FAIL_NOT_IN_CLAN\020\003\022\016\n\nFA" +
-      "IL_OTHER\020\004\"\364\001\n\031BeginClanRaidRequestProto",
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\017\n\007curTime\030\002 \001(\003\022\016\n\006raidId\030\003 " +
-      "\001(\005\022\023\n\013clanEventId\030\007 \001(\005\022\035\n\025setMonsterTe" +
-      "amForRaid\030\004 \001(\010\022:\n\014userMonsters\030\005 \003(\0132$." +
-      "com.lvl6.proto.FullUserMonsterProto\022\024\n\014i" +
-      "sFirstStage\030\006 \001(\010\"\316\003\n\032BeginClanRaidRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022F\n\014eventDetails\030\002 \001(\013" +
-      "20.com.lvl6.proto.PersistentClanEventCla" +
-      "nInfoProto\022N\n\006status\030\003 \001(\0162>.com.lvl6.pr",
-      "oto.BeginClanRaidResponseProto.BeginClan" +
-      "RaidStatus\022E\n\013userDetails\030\004 \001(\01320.com.lv" +
-      "l6.proto.PersistentClanEventUserInfoProt" +
-      "o\"\236\001\n\023BeginClanRaidStatus\022\013\n\007SUCCESS\020\001\022\030" +
-      "\n\024FAIL_ALREADY_STARTED\020\002\022\027\n\023FAIL_NOT_AUT" +
-      "HORIZED\020\003\022\034\n\030FAIL_NO_ACTIVE_CLAN_RAID\020\004\022" +
-      "\031\n\025FAIL_NO_MONSTERS_SENT\020\005\022\016\n\nFAIL_OTHER" +
-      "\020\006\"\232\003\n!AttackClanRaidMonsterRequestProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022F\n\014eventDetails\030\002 \001(\01320.com.l",
-      "vl6.proto.PersistentClanEventClanInfoPro" +
-      "to\022\022\n\nclientTime\030\003 \001(\003\022\023\n\013damageDealt\030\004 " +
-      "\001(\005\022E\n\016monsterHealths\030\005 \003(\0132-.com.lvl6.p" +
-      "roto.UserMonsterCurrentHealthProto\022E\n\027us" +
-      "erMonsterThatAttacked\030\t \001(\0132$.com.lvl6.p" +
-      "roto.FullUserMonsterProto\022D\n\017userMonster" +
-      "Team\030\n \001(\0132+.com.lvl6.proto.UserCurrentM" +
-      "onsterTeamProto\"\335\004\n\"AttackClanRaidMonste" +
-      "rResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022\020\n\010dmgDealt\030\002 \001",
-      "(\005\022F\n\014eventDetails\030\003 \001(\01320.com.lvl6.prot" +
-      "o.PersistentClanEventClanInfoProto\022J\n\020cl" +
-      "anUsersDetails\030\004 \003(\01320.com.lvl6.proto.Pe" +
-      "rsistentClanEventUserInfoProto\022E\n\027userMo" +
-      "nsterThatAttacked\030\005 \001(\0132$.com.lvl6.proto" +
-      ".FullUserMonsterProto\022^\n\006status\030\006 \001(\0162N." +
-      "com.lvl6.proto.AttackClanRaidMonsterResp" +
-      "onseProto.AttackClanRaidMonsterStatus\"\267\001" +
-      "\n\033AttackClanRaidMonsterStatus\022\013\n\007SUCCESS" +
-      "\020\001\022\035\n\031SUCCESS_MONSTER_JUST_DIED\020\002\022\031\n\025FAI",
-      "L_USER_NOT_IN_CLAN\020\003\022\"\n\036FAIL_NO_STAGE_RA" +
-      "ID_IN_PROGRESS\020\004\022\035\n\031FAIL_MONSTER_ALREADY" +
-      "_DEAD\020\005\022\016\n\nFAIL_OTHER\020\006\"~\n%AwardClanRaid" +
-      "StageRewardResponseProto\022\r\n\005crsId\030\001 \001(\005\022" +
-      "F\n\nallRewards\030\002 \003(\01322.com.lvl6.proto.Per" +
-      "sistentClanEventUserRewardProto\"y\n\037Recor" +
-      "dClanRaidStatsRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\020\n\010" +
-      "clanUuid\030\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\"\211\002\n R" +
-      "ecordClanRaidStatsResponseProto\0220\n\006sende",
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Recor" +
-      "dClanRaidStatsResponseProto.RecordClanRa" +
-      "idStatsStatus\"W\n\031RecordClanRaidStatsStat" +
-      "us\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_MONSTER_ALREADY_" +
-      "DEAD\020\002\022\016\n\nFAIL_OTHER\020\003\"\253\001\n#PromoteDemote" +
-      "ClanMemberRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\022\n\nvict" +
-      "imUuid\030\002 \001(\t\022>\n\016userClanStatus\030\003 \001(\0162\036.c" +
-      "om.lvl6.proto.UserClanStatus:\006MEMBER\"\337\003\n",
-      "$PromoteDemoteClanMemberResponseProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\0220\n\006victim\030\002 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022>\n\016userClanStatus\030\003 \001(" +
-      "\0162\036.com.lvl6.proto.UserClanStatus:\006MEMBE" +
-      "R\022B\n\022prevUserClanStatus\030\005 \001(\0162\036.com.lvl6" +
-      ".proto.UserClanStatus:\006MEMBER\022b\n\006status\030" +
-      "\004 \001(\0162R.com.lvl6.proto.PromoteDemoteClan" +
-      "MemberResponseProto.PromoteDemoteClanMem" +
-      "berStatus\"k\n\035PromoteDemoteClanMemberStat",
-      "us\022\013\n\007SUCCESS\020\001\022\024\n\020FAIL_NOT_IN_CLAN\020\002\022\027\n" +
-      "\023FAIL_NOT_AUTHORIZED\020\003\022\016\n\nFAIL_OTHER\020\004\"\254" +
-      "\001\n\033SolicitClanHelpRequestProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\0223\n\006notice\030\002 \003(\0132#.com.lvl6.proto.ClanHe" +
-      "lpNoticeProto\022\022\n\nclientTime\030\004 \001(\003\022\022\n\nmax" +
-      "Helpers\030\005 \001(\005\"\242\002\n\034SolicitClanHelpRespons" +
-      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\0220\n\thelpProto\030\002 \003(\0132\035.co" +
-      "m.lvl6.proto.ClanHelpProto\022R\n\006status\030\003 \001",
-      "(\0162B.com.lvl6.proto.SolicitClanHelpRespo" +
-      "nseProto.SolicitClanHelpStatus\"J\n\025Solici" +
-      "tClanHelpStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
-      "ER\020\002\022\024\n\020FAIL_NOT_IN_CLAN\020\003\"c\n\030GiveClanHe" +
-      "lpRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022\025\n\rclanHelpUuid" +
-      "s\030\002 \003(\t\"\200\002\n\031GiveClanHelpResponseProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\0220\n\tclanHelps\030\002 \003(\0132\035.com.lvl6.pr" +
-      "oto.ClanHelpProto\022L\n\006status\030\003 \001(\0162<.com.",
-      "lvl6.proto.GiveClanHelpResponseProto.Giv" +
-      "eClanHelpStatus\"1\n\022GiveClanHelpStatus\022\013\n" +
-      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"b\n\027EndClanHel" +
-      "pRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\025\n\rclanHelpUuids" +
-      "\030\002 \003(\t\"\341\001\n\030EndClanHelpResponseProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022\025\n\rclanHelpUuids\030\002 \003(\t\022J\n\006status\030\003" +
-      " \001(\0162:.com.lvl6.proto.EndClanHelpRespons" +
-      "eProto.EndClanHelpStatus\"0\n\021EndClanHelpS",
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"{\n\030In" +
-      "viteToClanRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\031\n\021pros" +
-      "pectiveMember\030\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\"" +
-      "\230\002\n\031InviteToClanResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "L\n\006status\030\002 \001(\0162<.com.lvl6.proto.InviteT" +
-      "oClanResponseProto.InviteToClanStatus\022/\n" +
-      "\006invite\030\003 \001(\0132\037.com.lvl6.proto.ClanInvit" +
-      "eProto\"J\n\022InviteToClanStatus\022\013\n\007SUCCESS\020",
-      "\001\022\016\n\nFAIL_OTHER\020\002\022\027\n\023FAIL_NOT_AUTHORIZED" +
-      "\020\003\"\322\001\n$AcceptOrRejectClanInviteRequestPr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\0221\n\010accepted\030\002 \001(\0132\037.com.lv" +
-      "l6.proto.ClanInviteProto\0221\n\010rejected\030\003 \003" +
-      "(\0132\037.com.lvl6.proto.ClanInviteProto\022\022\n\nc" +
-      "lientTime\030\004 \001(\003\"\322\002\n%AcceptOrRejectClanIn" +
-      "viteResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022d\n\006status\030\002 " +
-      "\001(\0162T.com.lvl6.proto.AcceptOrRejectClanI",
-      "nviteResponseProto.AcceptOrRejectClanInv" +
-      "iteStatus\022;\n\010fullClan\030\003 \001(\0132).com.lvl6.p" +
-      "roto.FullClanProtoWithClanSize\"T\n\036Accept" +
-      "OrRejectClanInviteStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
-      "\nFAIL_OTHER\020\002\022\025\n\021FAIL_CLAN_IS_FULL\020\003\"\177\n\035" +
-      "RetrieveClanDataResponseProto\022-\n\003mup\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022/\n\010" +
-      "clanData\030\002 \001(\0132\035.com.lvl6.proto.ClanData" +
-      "Proto\"\236\001\n\035BeginClanAvengingRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum",
-      "UserProto\0227\n\016recentNBattles\030\002 \003(\0132\037.com." +
-      "lvl6.proto.PvpHistoryProto\022\022\n\nclientTime" +
-      "\030\003 \001(\003\"\235\002\n\036BeginClanAvengingResponseProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\0229\n\rclanAvengings\030\002 \003(\0132\".com" +
-      ".lvl6.proto.PvpClanAvengeProto\022V\n\006status" +
-      "\030\003 \001(\0162F.com.lvl6.proto.BeginClanAvengin" +
-      "gResponseProto.BeginClanAvengingStatus\"6" +
-      "\n\027BeginClanAvengingStatus\022\013\n\007SUCCESS\020\001\022\016" +
-      "\n\nFAIL_OTHER\020\002\"h\n\033EndClanAvengingRequest",
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\027\n\017clanAvengeUuids\030\002 \003(\t" +
-      "\"\363\001\n\034EndClanAvengingResponseProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\027\n\017clanAvengeUuids\030\002 \003(\t\022R\n\006status\030\003" +
-      " \001(\0162B.com.lvl6.proto.EndClanAvengingRes" +
-      "ponseProto.EndClanAvengingStatus\"4\n\025EndC" +
-      "lanAvengingStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002\"\232\001\n\032AvengeClanMateRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs",
-      "erProto\0226\n\nclanAvenge\030\002 \001(\0132\".com.lvl6.p" +
-      "roto.PvpClanAvengeProto\022\022\n\nclientTime\030\003 " +
-      "\001(\003\"\204\002\n\033AvengeClanMateResponseProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022,\n\006victim\030\002 \001(\0132\030.com.lvl6.proto.P" +
-      "vpProtoB\002\030\001\022P\n\006status\030\003 \001(\0162@.com.lvl6.p" +
-      "roto.AvengeClanMateResponseProto.AvengeC" +
-      "lanMateStatus\"3\n\024AvengeClanMateStatus\022\013\n" +
-      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\233\001\n\037SolicitTe" +
-      "amDonationRequestProto\0220\n\006sender\030\001 \001(\0132 ",
-      ".com.lvl6.proto.MinimumUserProto\022\013\n\003msg\030" +
-      "\002 \001(\t\022\022\n\npowerLimit\030\003 \001(\005\022\022\n\nclientTime\030" +
-      "\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(\005\"\354\002\n SolicitTeam" +
-      "DonationResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022Z\n\006statu" +
-      "s\030\002 \001(\0162J.com.lvl6.proto.SolicitTeamDona" +
-      "tionResponseProto.SolicitTeamDonationSta" +
-      "tus\022A\n\014solicitation\030\003 \001(\0132+.com.lvl6.pro" +
-      "to.ClanMemberTeamDonationProto\"w\n\031Solici" +
-      "tTeamDonationStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL",
-      "_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003\022!\n\035" +
-      "FAIL_FULFILLED_REQUEST_EXISTS\020\004\"\352\001\n+Fulf" +
-      "illTeamDonationSolicitationRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\0222\n\004fump\030\002 \001(\0132$.com.lvl6.proto" +
-      ".FullUserMonsterProto\022\022\n\nclientTime\030\003 \001(" +
-      "\003\022A\n\014solicitation\030\004 \001(\0132+.com.lvl6.proto" +
-      ".ClanMemberTeamDonationProto\"\235\003\n,Fulfill" +
-      "TeamDonationSolicitationResponseProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs",
-      "erProto\022r\n\006status\030\002 \001(\0162b.com.lvl6.proto" +
-      ".FulfillTeamDonationSolicitationResponse" +
-      "Proto.FulfillTeamDonationSolicitationSta" +
-      "tus\022A\n\014solicitation\030\003 \001(\0132+.com.lvl6.pro" +
-      "to.ClanMemberTeamDonationProto\"\203\001\n%Fulfi" +
-      "llTeamDonationSolicitationStatus\022\013\n\007SUCC" +
-      "ESS\020\001\022\016\n\nFAIL_OTHER\020\002\022!\n\035FAIL_NONEXISTEN" +
-      "T_SOLICITATION\020\003\022\032\n\026FAIL_ALREADY_FULFILL" +
-      "ED\020\004\"\240\001\n(VoidTeamDonationSolicitationReq" +
-      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro",
-      "to.MinimumUserProto\022B\n\rsolicitations\030\002 \003" +
-      "(\0132+.com.lvl6.proto.ClanMemberTeamDonati" +
-      "onProto\"\252\002\n)VoidTeamDonationSolicitation" +
+      "\026SharedEnumConfig.proto\032\nUser.proto\"\330\001\n\026" +
+      "CreateClanRequestProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\014\n\004name" +
+      "\030\002 \001(\t\022\013\n\003tag\030\003 \001(\t\022!\n\031requestToJoinClan" +
+      "Required\030\004 \001(\010\022\023\n\013description\030\005 \001(\t\022\022\n\nc" +
+      "lanIconId\030\006 \001(\005\022\021\n\tgemsSpent\030\007 \001(\005\022\022\n\nca" +
+      "shChange\030\010 \001(\021\"\257\001\n\027CreateClanResponsePro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini",
+      "mumUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6." +
+      "proto.ResponseStatus\0222\n\010clanInfo\030\003 \001(\0132 " +
+      ".com.lvl6.proto.MinimumClanProto\"I\n\025Leav" +
+      "eClanRequestProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\"z\n\026LeaveClan" +
       "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022l\n\006status\030\002 \001(\0162" +
-      "\\.com.lvl6.proto.VoidTeamDonationSolicit" +
-      "ationResponseProto.VoidTeamDonationSolic" +
-      "itationStatus\022\032\n\022clanTeamDonateUuid\030\003 \003(" +
-      "\t\"A\n\"VoidTeamDonationSolicitationStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventCla",
-      "nProto"
+      ".proto.MinimumUserProto\022.\n\006status\030\002 \001(\0162" +
+      "\036.com.lvl6.proto.ResponseStatus\"u\n\033Reque" +
+      "stJoinClanRequestProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\020\n\010clan",
+      "Uuid\030\002 \001(\t\022\022\n\nclientTime\030\003 \001(\003\"\257\004\n\034Reque" +
+      "stJoinClanResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022.\n\006sta" +
+      "tus\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatu" +
+      "s\022\020\n\010clanUuid\030\003 \001(\t\022;\n\trequester\030\004 \001(\0132(" +
+      ".com.lvl6.proto.MinimumUserProtoForClans" +
+      "\0221\n\007minClan\030\005 \001(\0132 .com.lvl6.proto.Minim" +
+      "umClanProto\022;\n\010fullClan\030\006 \001(\0132).com.lvl6" +
+      ".proto.FullClanProtoWithClanSize\022F\n\014even" +
+      "tDetails\030\007 \001(\01320.com.lvl6.proto.Persiste",
+      "ntClanEventClanInfoProto\022J\n\020clanUsersDet" +
+      "ails\030\010 \003(\01320.com.lvl6.proto.PersistentCl" +
+      "anEventUserInfoProto\022F\n\021requesterMonster" +
+      "s\030\t \001(\0132+.com.lvl6.proto.UserCurrentMons" +
+      "terTeamProto\022\022\n\nclientTime\030\n \001(\003\"h\n\"Retr" +
+      "actRequestJoinClanRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022\020\n\010clanUuid\030\002 \001(\t\"\231\001\n#RetractRequestJoi" +
+      "nClanResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022.\n\006status\030\002",
+      " \001(\0162\036.com.lvl6.proto.ResponseStatus\022\020\n\010" +
+      "clanUuid\030\003 \001(\t\"\207\001\n,ApproveOrRejectReques" +
+      "tToJoinClanRequestProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022\025\n\rreq" +
+      "uesterUuid\030\002 \001(\t\022\016\n\006accept\030\003 \001(\010\"\306\002\n-App" +
+      "roveOrRejectRequestToJoinClanResponsePro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6." +
+      "proto.ResponseStatus\0223\n\trequester\030\003 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022\016\n\006acc",
+      "ept\030\004 \001(\010\0221\n\007minClan\030\005 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumClanProto\022;\n\010fullClan\030\006 \001(\0132)" +
+      ".com.lvl6.proto.FullClanProtoWithClanSiz" +
+      "e\"\267\002\n\034RetrieveClanInfoRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\020\n\010clanUuid\030\002 \001(\t\022\020\n\010clanName\030\003 \001(\t" +
+      "\022O\n\010grabType\030\004 \001(\0162=.com.lvl6.proto.Retr" +
+      "ieveClanInfoRequestProto.ClanInfoGrabTyp" +
+      "e\022\034\n\020beforeThisClanId\030\005 \001(\005B\002\030\001\022\031\n\021isFor" +
+      "BrowsingList\030\006 \001(\010\"7\n\020ClanInfoGrabType\022\007",
+      "\n\003ALL\020\001\022\r\n\tCLAN_INFO\020\002\022\013\n\007MEMBERS\020\003\"\256\003\n\035" +
+      "RetrieveClanInfoResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "9\n\007members\030\002 \003(\0132(.com.lvl6.proto.Minimu" +
+      "mUserProtoForClans\022;\n\010clanInfo\030\003 \003(\0132).c" +
+      "om.lvl6.proto.FullClanProtoWithClanSize\022" +
+      ".\n\006status\030\004 \001(\0162\036.com.lvl6.proto.Respons" +
+      "eStatus\022\023\n\013isForSearch\030\005 \001(\010\022\031\n\021isForBro" +
+      "wsingList\030\006 \001(\010\022\020\n\010clanUuid\030\007 \001(\t\022\020\n\010cla" +
+      "nName\030\010 \001(\t\022\034\n\020beforeThisClanId\030\t \001(\005B\002\030",
+      "\001\022A\n\014monsterTeams\030\n \003(\0132+.com.lvl6.proto" +
+      ".UserCurrentMonsterTeamProto\"o\n!Transfer" +
+      "ClanOwnershipRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\030\n\020c" +
+      "lanOwnerUuidNew\030\002 \001(\t\"\256\002\n\"TransferClanOw" +
+      "nershipResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022.\n\006status" +
+      "\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatus\0221" +
+      "\n\007minClan\030\003 \001(\0132 .com.lvl6.proto.Minimum" +
+      "ClanProto\022;\n\010fullClan\030\004 \001(\0132).com.lvl6.p",
+      "roto.FullClanProtoWithClanSize\0226\n\014clanOw" +
+      "nerNew\030\005 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\"l\n\036BootPlayerFromClanRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\030\n\020playerToBootUuid\030\002 \001(\t\"\273\001\n" +
+      "\037BootPlayerFromClanResponseProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\0226\n\014playerToBoot\030\002 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022.\n\006status\030\003 \001(\0162\036.com" +
+      ".lvl6.proto.ResponseStatus\"\346\001\n\036ChangeCla",
+      "nSettingsRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\033\n\023isCha" +
+      "ngeDescription\030\002 \001(\010\022\026\n\016descriptionNow\030\003" +
+      " \001(\t\022\030\n\020isChangeJoinType\030\004 \001(\010\022\035\n\025reques" +
+      "tToJoinRequired\030\005 \001(\010\022\024\n\014isChangeIcon\030\006 " +
+      "\001(\010\022\016\n\006iconId\030\007 \001(\005\"\363\001\n\037ChangeClanSettin" +
+      "gsResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022.\n\006status\030\002 \001(" +
+      "\0162\036.com.lvl6.proto.ResponseStatus\0221\n\007min" +
+      "Clan\030\003 \001(\0132 .com.lvl6.proto.MinimumClanP",
+      "roto\022;\n\010fullClan\030\004 \001(\0132).com.lvl6.proto." +
+      "FullClanProtoWithClanSize\"\364\001\n\031BeginClanR" +
+      "aidRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022\017\n\007curTime\030\002 \001" +
+      "(\003\022\016\n\006raidId\030\003 \001(\005\022\023\n\013clanEventId\030\007 \001(\005\022" +
+      "\035\n\025setMonsterTeamForRaid\030\004 \001(\010\022:\n\014userMo" +
+      "nsters\030\005 \003(\0132$.com.lvl6.proto.FullUserMo" +
+      "nsterProto\022\024\n\014isFirstStage\030\006 \001(\010\"\215\002\n\032Beg" +
+      "inClanRaidResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022F\n\014eve",
+      "ntDetails\030\002 \001(\01320.com.lvl6.proto.Persist" +
+      "entClanEventClanInfoProto\022.\n\006status\030\003 \001(" +
+      "\0162\036.com.lvl6.proto.ResponseStatus\022E\n\013use" +
+      "rDetails\030\004 \001(\01320.com.lvl6.proto.Persiste" +
+      "ntClanEventUserInfoProto\"\232\003\n!AttackClanR" +
+      "aidMonsterRequestProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022F\n\014even" +
+      "tDetails\030\002 \001(\01320.com.lvl6.proto.Persiste" +
+      "ntClanEventClanInfoProto\022\022\n\nclientTime\030\003" +
+      " \001(\003\022\023\n\013damageDealt\030\004 \001(\005\022E\n\016monsterHeal",
+      "ths\030\005 \003(\0132-.com.lvl6.proto.UserMonsterCu" +
+      "rrentHealthProto\022E\n\027userMonsterThatAttac" +
+      "ked\030\t \001(\0132$.com.lvl6.proto.FullUserMonst" +
+      "erProto\022D\n\017userMonsterTeam\030\n \001(\0132+.com.l" +
+      "vl6.proto.UserCurrentMonsterTeamProto\"\363\002" +
+      "\n\"AttackClanRaidMonsterResponseProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\020\n\010dmgDealt\030\002 \001(\005\022F\n\014eventDetails" +
+      "\030\003 \001(\01320.com.lvl6.proto.PersistentClanEv" +
+      "entClanInfoProto\022J\n\020clanUsersDetails\030\004 \003",
+      "(\01320.com.lvl6.proto.PersistentClanEventU" +
+      "serInfoProto\022E\n\027userMonsterThatAttacked\030" +
+      "\005 \001(\0132$.com.lvl6.proto.FullUserMonsterPr" +
+      "oto\022.\n\006status\030\006 \001(\0162\036.com.lvl6.proto.Res" +
+      "ponseStatus\"~\n%AwardClanRaidStageRewardR" +
+      "esponseProto\022\r\n\005crsId\030\001 \001(\005\022F\n\nallReward" +
+      "s\030\002 \003(\01322.com.lvl6.proto.PersistentClanE" +
+      "ventUserRewardProto\"y\n\037RecordClanRaidSta" +
+      "tsRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\020\n\010clanUuid\030\002 \001",
+      "(\t\022\022\n\nclientTime\030\003 \001(\003\"\204\001\n RecordClanRai" +
+      "dStatsResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022.\n\006status\030" +
+      "\002 \001(\0162\036.com.lvl6.proto.ResponseStatus\"\253\001" +
+      "\n#PromoteDemoteClanMemberRequestProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\022\n\nvictimUuid\030\002 \001(\t\022>\n\016userClanS" +
+      "tatus\030\003 \001(\0162\036.com.lvl6.proto.UserClanSta" +
+      "tus:\006MEMBER\"\276\002\n$PromoteDemoteClanMemberR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.",
+      "proto.MinimumUserProto\0220\n\006victim\030\002 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022>\n\016user" +
+      "ClanStatus\030\003 \001(\0162\036.com.lvl6.proto.UserCl" +
+      "anStatus:\006MEMBER\022B\n\022prevUserClanStatus\030\005" +
+      " \001(\0162\036.com.lvl6.proto.UserClanStatus:\006ME" +
+      "MBER\022.\n\006status\030\004 \001(\0162\036.com.lvl6.proto.Re" +
+      "sponseStatus\"\254\001\n\033SolicitClanHelpRequestP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\0223\n\006notice\030\002 \003(\0132#.com.lvl" +
+      "6.proto.ClanHelpNoticeProto\022\022\n\nclientTim",
+      "e\030\004 \001(\003\022\022\n\nmaxHelpers\030\005 \001(\005\"\262\001\n\034SolicitC" +
+      "lanHelpResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\0220\n\thelpPr" +
+      "oto\030\002 \003(\0132\035.com.lvl6.proto.ClanHelpProto" +
+      "\022.\n\006status\030\003 \001(\0162\036.com.lvl6.proto.Respon" +
+      "seStatus\"c\n\030GiveClanHelpRequestProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\025\n\rclanHelpUuids\030\002 \003(\t\"\257\001\n\031GiveCl" +
+      "anHelpResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\0220\n\tclanHel",
+      "ps\030\002 \003(\0132\035.com.lvl6.proto.ClanHelpProto\022" +
+      ".\n\006status\030\003 \001(\0162\036.com.lvl6.proto.Respons" +
+      "eStatus\"b\n\027EndClanHelpRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\025\n\rclanHelpUuids\030\002 \003(\t\"\223\001\n\030EndClanH" +
+      "elpResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\025\n\rclanHelpUu" +
+      "ids\030\002 \003(\t\022.\n\006status\030\003 \001(\0162\036.com.lvl6.pro" +
+      "to.ResponseStatus\"{\n\030InviteToClanRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M",
+      "inimumUserProto\022\031\n\021prospectiveMember\030\002 \001" +
+      "(\t\022\022\n\nclientTime\030\003 \001(\003\"\256\001\n\031InviteToClanR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022.\n\006status\030\002 \001(\0162\036" +
+      ".com.lvl6.proto.ResponseStatus\022/\n\006invite" +
+      "\030\003 \001(\0132\037.com.lvl6.proto.ClanInviteProto\"" +
+      "\322\001\n$AcceptOrRejectClanInviteRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\0221\n\010accepted\030\002 \001(\0132\037.com.lvl6." +
+      "proto.ClanInviteProto\0221\n\010rejected\030\003 \003(\0132",
+      "\037.com.lvl6.proto.ClanInviteProto\022\022\n\nclie" +
+      "ntTime\030\004 \001(\003\"\306\001\n%AcceptOrRejectClanInvit" +
+      "eResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022.\n\006status\030\002 \001(\016" +
+      "2\036.com.lvl6.proto.ResponseStatus\022;\n\010full" +
+      "Clan\030\003 \001(\0132).com.lvl6.proto.FullClanProt" +
+      "oWithClanSize\"\177\n\035RetrieveClanDataRespons" +
+      "eProto\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022/\n\010clanData\030\002 \001(\0132\035.com.lv" +
+      "l6.proto.ClanDataProto\"\236\001\n\035BeginClanAven",
+      "gingRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\0227\n\016recentNBat" +
+      "tles\030\002 \003(\0132\037.com.lvl6.proto.PvpHistoryPr" +
+      "oto\022\022\n\nclientTime\030\003 \001(\003\"\275\001\n\036BeginClanAve" +
+      "ngingResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\0229\n\rclanAven" +
+      "gings\030\002 \003(\0132\".com.lvl6.proto.PvpClanAven" +
+      "geProto\022.\n\006status\030\003 \001(\0162\036.com.lvl6.proto" +
+      ".ResponseStatus\"h\n\033EndClanAvengingReques" +
+      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.",
+      "MinimumUserProto\022\027\n\017clanAvengeUuids\030\002 \003(" +
+      "\t\"\231\001\n\034EndClanAvengingResponseProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\027\n\017clanAvengeUuids\030\002 \003(\t\022.\n\006status\030" +
+      "\003 \001(\0162\036.com.lvl6.proto.ResponseStatus\"\232\001" +
+      "\n\032AvengeClanMateRequestProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\0226" +
+      "\n\nclanAvenge\030\002 \001(\0132\".com.lvl6.proto.PvpC" +
+      "lanAvengeProto\022\022\n\nclientTime\030\003 \001(\003\"\255\001\n\033A" +
+      "vengeClanMateResponseProto\0220\n\006sender\030\001 \001",
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022,\n\006" +
+      "victim\030\002 \001(\0132\030.com.lvl6.proto.PvpProtoB\002" +
+      "\030\001\022.\n\006status\030\003 \001(\0162\036.com.lvl6.proto.Resp" +
+      "onseStatus\"\233\001\n\037SolicitTeamDonationReques" +
+      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\013\n\003msg\030\002 \001(\t\022\022\n\npowerLi" +
+      "mit\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003\022\021\n\tgemsSpe" +
+      "nt\030\005 \001(\005\"\307\001\n SolicitTeamDonationResponse" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022.\n\006status\030\002 \001(\0162\036.com.lv",
+      "l6.proto.ResponseStatus\022A\n\014solicitation\030" +
+      "\003 \001(\0132+.com.lvl6.proto.ClanMemberTeamDon" +
+      "ationProto\"\352\001\n+FulfillTeamDonationSolici" +
+      "tationRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\0222\n\004fump\030\002 \001" +
+      "(\0132$.com.lvl6.proto.FullUserMonsterProto" +
+      "\022\022\n\nclientTime\030\003 \001(\003\022A\n\014solicitation\030\004 \001" +
+      "(\0132+.com.lvl6.proto.ClanMemberTeamDonati" +
+      "onProto\"\323\001\n,FulfillTeamDonationSolicitat" +
+      "ionResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l",
+      "vl6.proto.MinimumUserProto\022.\n\006status\030\002 \001" +
+      "(\0162\036.com.lvl6.proto.ResponseStatus\022A\n\014so" +
+      "licitation\030\003 \001(\0132+.com.lvl6.proto.ClanMe" +
+      "mberTeamDonationProto\"\240\001\n(VoidTeamDonati" +
+      "onSolicitationRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022B\n\r" +
+      "solicitations\030\002 \003(\0132+.com.lvl6.proto.Cla" +
+      "nMemberTeamDonationProto\"\251\001\n)VoidTeamDon" +
+      "ationSolicitationResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto",
+      "\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Respon" +
+      "seStatus\022\032\n\022clanTeamDonateUuid\030\003 \003(\tB\020B\016" +
+      "EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -50853,6 +48379,7 @@ public final class EventClanProto {
           com.lvl6.proto.BattleProto.getDescriptor(),
           com.lvl6.proto.ClanProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_CreateClanRequestProto_descriptor =
@@ -51158,6 +48685,7 @@ public final class EventClanProto {
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.ClanProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

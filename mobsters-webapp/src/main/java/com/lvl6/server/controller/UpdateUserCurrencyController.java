@@ -19,7 +19,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyRequestProto;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.Builder;
-import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -77,7 +77,7 @@ public class UpdateUserCurrencyController extends EventController {
 		UpdateUserCurrencyResponseProto.Builder resBuilder = UpdateUserCurrencyResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -92,7 +92,7 @@ public class UpdateUserCurrencyController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -122,7 +122,7 @@ public class UpdateUserCurrencyController extends EventController {
 						oilSpent, gemsSpent, clientTime, currencyChange);
 			}
 			if (successful) {
-				resBuilder.setStatus(UpdateUserCurrencyStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(
@@ -158,7 +158,7 @@ public class UpdateUserCurrencyController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -218,7 +218,7 @@ public class UpdateUserCurrencyController extends EventController {
 					"not enough cash. userCash=%s, cashSpent=%s", userCash,
 					cashSpent));
 			resBuilder
-					.setStatus(UpdateUserCurrencyStatus.FAIL_INSUFFICIENT_CASH);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_CASH);
 			return false;
 		}
 
@@ -232,7 +232,7 @@ public class UpdateUserCurrencyController extends EventController {
 			log.error(String.format("not enough oil. userOil=%s, oilSpent=%s",
 					userOil, oilSpent));
 			resBuilder
-					.setStatus(UpdateUserCurrencyStatus.FAIL_INSUFFICIENT_OIL);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_OIL);
 			return false;
 		}
 
@@ -247,7 +247,7 @@ public class UpdateUserCurrencyController extends EventController {
 					"not enough gems. userGems=%s, gemsSpent=%s", userGems,
 					gemsSpent));
 			resBuilder
-					.setStatus(UpdateUserCurrencyStatus.FAIL_INSUFFICIENT_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 

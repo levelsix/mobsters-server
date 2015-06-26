@@ -22,7 +22,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto;
-import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -140,7 +140,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 
 		ApproveOrRejectRequestToJoinClanResponseProto.Builder resBuilder = ApproveOrRejectRequestToJoinClanResponseProto
 				.newBuilder();
-		resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 		resBuilder.setAccept(accept);
 
@@ -171,7 +171,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder
-					.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
+					.setStatus(ResponseStatus.FAIL_OTHER);
 			ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -191,7 +191,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			// Only need to set clan data if user accepted.
 			ClanDataProto cdp = null;
 			MinimumUserProto requestMup = null;
-			if (ApproveOrRejectRequestToJoinClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				Clan clan = null;
 
 				if (accept) {
@@ -226,7 +226,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 					.build());
 
 			//if fail only to sender
-			if (!ApproveOrRejectRequestToJoinClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (!ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				responses.normalResponseEvents().add(resEvent);
 			} else {
 				//if success to clan and the requester
@@ -254,7 +254,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 					e);
 			try {
 				resBuilder
-						.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

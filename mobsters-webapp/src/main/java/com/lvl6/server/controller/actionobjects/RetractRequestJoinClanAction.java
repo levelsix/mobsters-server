@@ -11,7 +11,7 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -52,7 +52,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -71,7 +71,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-		resBuilder.setStatus(RetractRequestJoinClanStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -82,13 +82,13 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return false;
 		}
 		if (user == null || clan == null) {
-			resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("user is {}, clan is {}", user, clan);
 			return false;
 		}
 		if (user.getClanId() != null) {
 			resBuilder
-			.setStatus(RetractRequestJoinClanStatus.FAIL_ALREADY_IN_CLAN);
+			.setStatus(ResponseStatus.FAIL_ALREADY_IN_CLAN);
 			log.error("user is already in clan with id {} ", user.getClanId());
 			return false;
 		}
@@ -101,7 +101,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		if (uc == null
 				|| !UserClanStatus.REQUESTING.name().equals(uc.getStatus())) {
 			resBuilder
-			.setStatus(RetractRequestJoinClanStatus.FAIL_DID_NOT_REQUEST);
+			.setStatus(ResponseStatus.FAIL_DID_NOT_REQUEST);
 			log.error("user clan request has not been filed");
 			return false;
 		}

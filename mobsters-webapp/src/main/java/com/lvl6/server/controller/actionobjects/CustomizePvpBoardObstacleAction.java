@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.Builder;
-import com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -63,7 +63,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	//	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(CustomizePvpBoardObstacleStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -83,7 +83,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-		resBuilder.setStatus(CustomizePvpBoardObstacleStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

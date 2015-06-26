@@ -24,7 +24,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto;
 import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.Builder;
-import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -93,7 +93,7 @@ public class SpawnMiniJobController extends EventController {
 		SpawnMiniJobResponseProto.Builder resBuilder = SpawnMiniJobResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(SpawnMiniJobStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -109,7 +109,7 @@ public class SpawnMiniJobController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SpawnMiniJobStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -142,7 +142,7 @@ public class SpawnMiniJobController extends EventController {
 			}
 
 			if (success) {
-				resBuilder.setStatus(SpawnMiniJobStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 				List<UserMiniJobProto> userMiniJobProtos = createInfoProtoUtils
 						.createUserMiniJobProtos(spawnedUserMiniJobs,
 								miniJobIdToMiniJob, rewardRetrieveUtil);
@@ -170,7 +170,7 @@ public class SpawnMiniJobController extends EventController {
 			log.error("exception in SpawnMiniJobController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(SpawnMiniJobStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SpawnMiniJobResponseEvent resEvent = new SpawnMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

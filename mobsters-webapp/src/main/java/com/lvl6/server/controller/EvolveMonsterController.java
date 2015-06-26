@@ -30,7 +30,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -121,7 +121,7 @@ public class EvolveMonsterController extends EventController {
 		EvolveMonsterResponseProto.Builder resBuilder = EvolveMonsterResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(EvolveMonsterStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -140,7 +140,7 @@ public class EvolveMonsterController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(EvolveMonsterStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -196,7 +196,7 @@ public class EvolveMonsterController extends EventController {
 			}
 
 			if (successful) {
-				resBuilder.setStatus(EvolveMonsterStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(
@@ -229,7 +229,7 @@ public class EvolveMonsterController extends EventController {
 
 		} catch (Exception e) {
 			log.error("exception in EvolveMonster processEvent", e);
-			resBuilder.setStatus(EvolveMonsterStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -261,7 +261,7 @@ public class EvolveMonsterController extends EventController {
 					.format("using nonexistent monster in evolution. existing=%s, catalyst=%s, others=%s",
 							existingUserMonsters, catalystUserMonsterId,
 							userMonsterIds));
-			resBuilder.setStatus(EvolveMonsterStatus.FAIL_NONEXISTENT_MONSTERS);
+			resBuilder.setStatus(ResponseStatus.FAIL_DOESNT_EXIST);
 			return false;
 		}
 
@@ -271,7 +271,7 @@ public class EvolveMonsterController extends EventController {
 					"user already evolving monsters. monsters=%s",
 					alreadyEvolving));
 			resBuilder
-					.setStatus(EvolveMonsterStatus.FAIL_MAX_NUM_EVOLUTIONS_REACHED);
+					.setStatus(ResponseStatus.FAIL_MAX_NUM_EVOLUTIONS_REACHED);
 			return false;
 		}
 
@@ -326,7 +326,7 @@ public class EvolveMonsterController extends EventController {
 					.format("not enough gems. userGems=%s, gemsSpent=%s, oilChange=%s, catalyst=%s, userMonsterIds=%s",
 							userGems, gemsSpent, oilChange, catalyst,
 							userMonsterIds));
-			resBuilder.setStatus(EvolveMonsterStatus.FAIL_INSUFFICIENT_GEMS);
+			resBuilder.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 		return true;
@@ -344,7 +344,7 @@ public class EvolveMonsterController extends EventController {
 					.format("not enough oil. cost=%s, oilChange=%s, catalyst=%s, userMonsterIds=%s",
 							cost, oilChange, catalyst, userMonsterIds));
 			resBuilder
-					.setStatus(EvolveMonsterStatus.FAIL_INSUFFICIENT_RESOURCES);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 			return false;
 		}
 		return true;

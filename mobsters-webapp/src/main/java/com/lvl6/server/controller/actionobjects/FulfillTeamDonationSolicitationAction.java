@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.SnapshotType;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -77,7 +77,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	//	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -97,7 +97,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			return;
 		}
 
-		resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 
@@ -117,14 +117,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			log.error("nonexistent solicitation. origClientSolicitation={}",
 					cmtd);
 			resBuilder
-					.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_NONEXISTENT_SOLICITATION);
+					.setStatus(ResponseStatus.FAIL_DOESNT_EXIST);
 			return false;
 		}
 
 		if (solicitation.isFulfilled()) {
 			log.error("already fulfilled solicitation. {}", solicitation);
 			resBuilder
-					.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_ALREADY_FULFILLED);
+					.setStatus(ResponseStatus.FAIL_ALREADY_FULFILLED);
 			return false;
 		}
 

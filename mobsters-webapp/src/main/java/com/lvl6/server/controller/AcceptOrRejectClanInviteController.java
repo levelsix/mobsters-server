@@ -21,8 +21,7 @@ import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
 import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteRequestProto;
 import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto;
-import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus;
-import com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -117,7 +116,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 
 		AcceptOrRejectClanInviteResponseProto.Builder resBuilder = AcceptOrRejectClanInviteResponseProto
 				.newBuilder();
-		resBuilder.setStatus(AcceptOrRejectClanInviteStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		String clanId = "";
@@ -143,7 +142,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(AcceptOrRejectClanInviteStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -185,7 +184,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			resEvent.setResponseProto(resBuilder
 					.build());
 
-			if (resBuilder.getStatus().equals(InviteToClanStatus.SUCCESS)
+			if (resBuilder.getStatus().equals(ResponseStatus.SUCCESS)
 					&& null != accepted) {
 				//only write to clan if user accepted and success
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
@@ -215,7 +214,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in AcceptOrRejectClanInvite processEvent", e);
 			try {
-				resBuilder.setStatus(AcceptOrRejectClanInviteStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

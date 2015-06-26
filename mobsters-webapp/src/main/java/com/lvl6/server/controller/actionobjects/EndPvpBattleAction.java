@@ -26,7 +26,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.Builder;
-import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.EndPvpBattleStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
@@ -220,7 +220,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private Map<String, Map<String, String>> detailsMap;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(EndPvpBattleStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 //		boolean valid = verifySyntax(resBuilder);
@@ -245,7 +245,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(EndPvpBattleStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 //	private boolean verifySyntax(Builder resBuilder) {
@@ -267,7 +267,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		long battleEndTime = pvpBattleInfo.getBattleStartTime().getTime()
 				+ ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS;
 		if (clientTime > battleEndTime) {
-			resBuilder.setStatus(EndPvpBattleStatus.FAIL_BATTLE_TOOK_TOO_LONG);
+			resBuilder.setStatus(ResponseStatus.FAIL_BATTLE_TOOK_TOO_LONG);
 			log.error("client took too long to finish a battle. pvpInfo={},\t now={}",
 					pvpBattleInfo, clientDateTime);
 			return false;

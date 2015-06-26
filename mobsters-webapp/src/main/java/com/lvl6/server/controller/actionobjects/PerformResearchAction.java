@@ -16,8 +16,8 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.Builder;
-import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
@@ -74,7 +74,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = false;
 		valid = verifySemantics(resBuilder);
@@ -88,13 +88,13 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(PerformResearchStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySemantics(Builder resBuilder) {
 		user = userRetrieveUtils.getUserById(userId);
 		if (null == user) {
-			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("no user with id={}", userId);
 			return false;
 		}
@@ -131,7 +131,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private boolean verifyResearch(Builder resBuilder) {
 		research = researchRetrieveUtils.getResearchForId(researchId);
 		if (null == research) {
-			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("no research for id: " + researchId);
 			return false;
 		}
@@ -152,7 +152,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		//check if user can afford to buy however many more user wants to buy
 		if (userGems < gemsCost) {
-			resBuilder.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_GEMS);
+			resBuilder.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			log.error("user has less gems then amount spent in request, user gems= "
 					+ userGems);
 			return false;
@@ -165,7 +165,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			int userCash = user.getCash();
 			if (userCash < resourceCost) {
 				resBuilder
-						.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_CASH);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_CASH);
 				log.error("user has less cash then amount spent in request, user gems= "
 						+ userCash);
 
@@ -175,7 +175,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			int userOil = user.getOil();
 			if (userOil < resourceCost) {
 				resBuilder
-						.setStatus(PerformResearchStatus.FAIL_INSUFFICIENT_OIL);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_OIL);
 				log.error("user has less oil then amount spent in request, user oil= "
 						+ userOil);
 
@@ -209,7 +209,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		if (!(gemsCost > 0) && (resourceType != ResourceType.CASH)
 				&& (resourceType != ResourceType.OIL)) {
-			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("not being purchased with gems, cash, or oil, what is this voodoo shit");
 			return false;
 		}

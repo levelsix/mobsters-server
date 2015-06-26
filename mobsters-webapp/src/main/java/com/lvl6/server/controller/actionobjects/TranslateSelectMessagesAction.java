@@ -21,7 +21,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.Builder;
-import com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.TranslationSettingsForUserRetrieveUtil;
 import com.lvl6.retrieveutils.rarechange.ChatTranslationsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
@@ -80,7 +80,7 @@ import com.memetix.mst.language.Language;
 
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = false;
 		valid = verifySemantics(resBuilder);
@@ -94,7 +94,7 @@ import com.memetix.mst.language.Language;
 			return;
 		}
 
-		resBuilder.setStatus(TranslateSelectMessagesStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 
@@ -107,7 +107,7 @@ import com.memetix.mst.language.Language;
 
 		language = translationUtils.convertFromEnumToLanguage(languageEnum);
 		if (null == language) {
-			resBuilder.setStatus(TranslateSelectMessagesStatus.FAIL_NOT_VALID_LANGUAGE);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_VALID_LANGUAGE);
 			log.error("not valid language for TranslationLanguage: " + languageEnum);
 			return false;
 		}

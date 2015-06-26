@@ -16,7 +16,7 @@ import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationRequestProto;
 import com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto;
-import com.lvl6.proto.EventClanProto.FulfillTeamDonationSolicitationResponseProto.FulfillTeamDonationSolicitationStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -97,7 +97,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 
 		FulfillTeamDonationSolicitationResponseProto.Builder resBuilder = FulfillTeamDonationSolicitationResponseProto
 				.newBuilder();
-		resBuilder.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		String clanId = null;
@@ -130,7 +130,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder
-					.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_OTHER);
+					.setStatus(ResponseStatus.FAIL_OTHER);
 			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(
 					donatorId);
 			resEvent.setTag(event.getTag());
@@ -169,7 +169,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 
 			//only write to user if failed
 			if (!resBuilder.getStatus().equals(
-					FulfillTeamDonationSolicitationStatus.SUCCESS)) {
+					ResponseStatus.SUCCESS)) {
 				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.normalResponseEvents().add(resEvent);
@@ -210,7 +210,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 					e);
 			try {
 				resBuilder
-						.setStatus(FulfillTeamDonationSolicitationStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(
 						donatorId);
 				resEvent.setTag(event.getTag());

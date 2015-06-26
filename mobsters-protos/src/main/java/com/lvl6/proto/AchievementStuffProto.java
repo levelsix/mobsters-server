@@ -99,7 +99,7 @@ public final class AchievementStuffProto {
      *could be null
      * </pre>
      */
-    com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType();
 
     /**
      * <code>optional .com.lvl6.proto.Element element = 8 [default = NO_ELEMENT];</code>
@@ -280,7 +280,7 @@ public final class AchievementStuffProto {
             }
             case 56: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(7, rawValue);
               } else {
@@ -810,7 +810,7 @@ public final class AchievementStuffProto {
     }
 
     public static final int RESOURCETYPE_FIELD_NUMBER = 7;
-    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
      *
@@ -828,7 +828,7 @@ public final class AchievementStuffProto {
      *could be null
      * </pre>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
       return resourceType_;
     }
 
@@ -968,7 +968,7 @@ public final class AchievementStuffProto {
       gemReward_ = 0;
       lvl_ = 0;
       achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
       quality_ = com.lvl6.proto.SharedEnumConfigProto.Quality.NO_QUALITY;
       staticDataId_ = 0;
@@ -1226,7 +1226,7 @@ public final class AchievementStuffProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         achievementType_ = com.lvl6.proto.AchievementStuffProto.AchievementProto.AchievementType.NO_ACHIEVEMENT;
         bitField0_ = (bitField0_ & ~0x00000020);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000040);
         element_ = com.lvl6.proto.SharedEnumConfigProto.Element.NO_ELEMENT;
         bitField0_ = (bitField0_ & ~0x00000080);
@@ -1714,7 +1714,7 @@ public final class AchievementStuffProto {
         return this;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = NO_RESOURCE];</code>
        *
@@ -1732,7 +1732,7 @@ public final class AchievementStuffProto {
        *could be null
        * </pre>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
         return resourceType_;
       }
       /**
@@ -1742,7 +1742,7 @@ public final class AchievementStuffProto {
        *could be null
        * </pre>
        */
-      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1760,7 +1760,7 @@ public final class AchievementStuffProto {
        */
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -2705,33 +2705,32 @@ public final class AchievementStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026AchievementStuff.proto\022\016com.lvl6.proto" +
-      "\032\026SharedEnumConfig.proto\032\017Structure.prot" +
-      "o\"\353\006\n\020AchievementProto\022\025\n\rachievementId\030" +
-      "\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013description\030\003 \001(\t" +
-      "\022\021\n\tgemReward\030\004 \001(\005\022\013\n\003lvl\030\005 \001(\005\022I\n\017achi" +
-      "evementType\030\006 \001(\01620.com.lvl6.proto.Achie" +
-      "vementProto.AchievementType\022?\n\014resourceT" +
-      "ype\030\007 \001(\0162\034.com.lvl6.proto.ResourceType:" +
-      "\013NO_RESOURCE\0224\n\007element\030\010 \001(\0162\027.com.lvl6" +
-      ".proto.Element:\nNO_ELEMENT\0224\n\007quality\030\t ",
-      "\001(\0162\027.com.lvl6.proto.Quality:\nNO_QUALITY" +
-      "\022\024\n\014staticDataId\030\n \001(\005\022\020\n\010quantity\030\013 \001(\005" +
-      "\022\020\n\010priority\030\014 \001(\005\022\026\n\016prerequisiteId\030\r \001" +
-      "(\005\022\023\n\013successorId\030\016 \001(\005\"\235\003\n\017AchievementT" +
-      "ype\022\022\n\016NO_ACHIEVEMENT\020\021\022\024\n\020COLLECT_RESOU" +
-      "RCE\020\001\022\022\n\016CREATE_GRENADE\020\002\022\022\n\016CREATE_RAIN" +
-      "BOW\020\003\022\021\n\rCREATE_ROCKET\020\004\022\023\n\017DEFEAT_MONST" +
-      "ERS\020\005\022\020\n\014DESTROY_ORBS\020\006\022\022\n\016ENHANCE_POINT" +
-      "S\020\007\022\021\n\rHEAL_MONSTERS\020\010\022\017\n\013JOIN_LEAGUE\020\t\022" +
-      "\016\n\nMAKE_COMBO\020\n\022\023\n\017REMOVE_OBSTACLE\020\013\022\020\n\014",
-      "SELL_MONSTER\020\014\022\022\n\016STEAL_RESOURCE\020\r\022\017\n\013TA" +
-      "KE_DAMAGE\020\016\022\024\n\020UPGRADE_BUILDING\020\017\022\022\n\016WIN" +
-      "_PVP_BATTLE\020\020\022\r\n\tJOIN_CLAN\020\022\022\020\n\014SOLICIT_" +
-      "HELP\020\023\022\r\n\tGIVE_HELP\020\024\022\020\n\014REQUEST_TOON\020\025\"" +
-      "g\n\024UserAchievementProto\022\025\n\rachievementId" +
-      "\030\001 \001(\005\022\020\n\010progress\030\002 \001(\005\022\022\n\nisComplete\030\003" +
-      " \001(\010\022\022\n\nisRedeemed\030\004 \001(\010B\027B\025AchievementS" +
-      "tuffProto"
+      "\032\026SharedEnumConfig.proto\"\353\006\n\020Achievement" +
+      "Proto\022\025\n\rachievementId\030\001 \001(\005\022\014\n\004name\030\002 \001" +
+      "(\t\022\023\n\013description\030\003 \001(\t\022\021\n\tgemReward\030\004 \001" +
+      "(\005\022\013\n\003lvl\030\005 \001(\005\022I\n\017achievementType\030\006 \001(\016" +
+      "20.com.lvl6.proto.AchievementProto.Achie" +
+      "vementType\022?\n\014resourceType\030\007 \001(\0162\034.com.l" +
+      "vl6.proto.ResourceType:\013NO_RESOURCE\0224\n\007e" +
+      "lement\030\010 \001(\0162\027.com.lvl6.proto.Element:\nN" +
+      "O_ELEMENT\0224\n\007quality\030\t \001(\0162\027.com.lvl6.pr",
+      "oto.Quality:\nNO_QUALITY\022\024\n\014staticDataId\030" +
+      "\n \001(\005\022\020\n\010quantity\030\013 \001(\005\022\020\n\010priority\030\014 \001(" +
+      "\005\022\026\n\016prerequisiteId\030\r \001(\005\022\023\n\013successorId" +
+      "\030\016 \001(\005\"\235\003\n\017AchievementType\022\022\n\016NO_ACHIEVE" +
+      "MENT\020\021\022\024\n\020COLLECT_RESOURCE\020\001\022\022\n\016CREATE_G" +
+      "RENADE\020\002\022\022\n\016CREATE_RAINBOW\020\003\022\021\n\rCREATE_R" +
+      "OCKET\020\004\022\023\n\017DEFEAT_MONSTERS\020\005\022\020\n\014DESTROY_" +
+      "ORBS\020\006\022\022\n\016ENHANCE_POINTS\020\007\022\021\n\rHEAL_MONST" +
+      "ERS\020\010\022\017\n\013JOIN_LEAGUE\020\t\022\016\n\nMAKE_COMBO\020\n\022\023" +
+      "\n\017REMOVE_OBSTACLE\020\013\022\020\n\014SELL_MONSTER\020\014\022\022\n",
+      "\016STEAL_RESOURCE\020\r\022\017\n\013TAKE_DAMAGE\020\016\022\024\n\020UP" +
+      "GRADE_BUILDING\020\017\022\022\n\016WIN_PVP_BATTLE\020\020\022\r\n\t" +
+      "JOIN_CLAN\020\022\022\020\n\014SOLICIT_HELP\020\023\022\r\n\tGIVE_HE" +
+      "LP\020\024\022\020\n\014REQUEST_TOON\020\025\"g\n\024UserAchievemen" +
+      "tProto\022\025\n\rachievementId\030\001 \001(\005\022\020\n\010progres" +
+      "s\030\002 \001(\005\022\022\n\nisComplete\030\003 \001(\010\022\022\n\nisRedeeme" +
+      "d\030\004 \001(\010B\027B\025AchievementStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2745,7 +2744,6 @@ public final class AchievementStuffProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
-          com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_AchievementProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -2760,7 +2758,6 @@ public final class AchievementStuffProto {
         internal_static_com_lvl6_proto_UserAchievementProto_descriptor,
         new java.lang.String[] { "AchievementId", "Progress", "IsComplete", "IsRedeemed", });
     com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
-    com.lvl6.proto.StructureProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -14,7 +14,7 @@ import com.lvl6.events.response.RetrieveBattleReplayResponseEvent;
 import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.proto.EventPvpProto.RetrieveBattleReplayRequestProto;
 import com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto;
-import com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
@@ -65,7 +65,7 @@ public class RetrieveBattleReplayController extends EventController {
 		RetrieveBattleReplayResponseProto.Builder resBuilder = RetrieveBattleReplayResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(RetrieveBattleReplayStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -80,7 +80,7 @@ public class RetrieveBattleReplayController extends EventController {
 		//UUID checks
 		if (invalidUuids) {
 			log.info("invalid UUIDS.");
-			resBuilder.setStatus(RetrieveBattleReplayStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RetrieveBattleReplayResponseEvent resEvent = new RetrieveBattleReplayResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -98,7 +98,7 @@ public class RetrieveBattleReplayController extends EventController {
 
 			rsga.execute(resBuilder);
 
-			if (RetrieveBattleReplayStatus.SUCCESS.equals(resBuilder.getStatus()))
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus()))
 			{
 				BattleReplayForUser brfu = rsga.getBrfu();
 
@@ -115,7 +115,7 @@ public class RetrieveBattleReplayController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in RetrieveBattleReplayController processEvent", e);
 			try {
-				resBuilder.setStatus(RetrieveBattleReplayStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RetrieveBattleReplayResponseEvent resEvent = new RetrieveBattleReplayResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

@@ -17,7 +17,7 @@ import com.lvl6.events.request.DeleteGiftRequestEvent;
 import com.lvl6.events.response.DeleteGiftResponseEvent;
 import com.lvl6.proto.EventRewardProto.DeleteGiftRequestProto;
 import com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto;
-import com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.GiftProto;
 import com.lvl6.proto.RewardsProto.UserGiftProto;
@@ -94,7 +94,7 @@ public class DeleteGiftController extends EventController {
 		DeleteGiftResponseProto.Builder resBuilder = DeleteGiftResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(DeleteGiftStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		Set<String> giftForUserIds = new HashSet<String>();
 		Set<String> giftForTangoUserGfuIds = new HashSet<String>();
@@ -130,7 +130,7 @@ public class DeleteGiftController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(DeleteGiftStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			DeleteGiftResponseEvent resEvent = new DeleteGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -157,7 +157,7 @@ public class DeleteGiftController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(DeleteGiftStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				DeleteGiftResponseEvent resEvent = new DeleteGiftResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

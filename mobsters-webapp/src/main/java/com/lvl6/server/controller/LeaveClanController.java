@@ -15,7 +15,7 @@ import com.lvl6.events.request.LeaveClanRequestEvent;
 import com.lvl6.events.response.LeaveClanResponseEvent;
 import com.lvl6.proto.EventClanProto.LeaveClanRequestProto;
 import com.lvl6.proto.EventClanProto.LeaveClanResponseProto;
-import com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
@@ -95,7 +95,7 @@ public class LeaveClanController extends EventController {
 
 		LeaveClanResponseProto.Builder resBuilder = LeaveClanResponseProto
 				.newBuilder();
-		resBuilder.setStatus(LeaveClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		String clanId = null;
@@ -120,7 +120,7 @@ public class LeaveClanController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(LeaveClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
@@ -146,7 +146,7 @@ public class LeaveClanController extends EventController {
 			LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			//only write to user if failed
-			if (!LeaveClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (!ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 
@@ -164,7 +164,7 @@ public class LeaveClanController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in LeaveClan processEvent", e);
 			try {
-				resBuilder.setStatus(LeaveClanStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

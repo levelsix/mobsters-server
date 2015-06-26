@@ -55,7 +55,7 @@ import com.lvl6.proto.ChatProto.DefaultLanguagesProto
 import com.lvl6.proto.ChatProto.GroupChatMessageProto
 import com.lvl6.proto.ClanProto.ClanDataProto
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto
-import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus
 import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto
 import com.lvl6.proto.EventStartupProto.StartupRequestProto
 import com.lvl6.proto.EventStartupProto.StartupRequestProto.VersionNumberProto
@@ -1065,7 +1065,7 @@ class StartupService extends LazyLogging {
           miniEventTimetableRetrieveUtil,
           timeUtils);
         rmea.execute(rmeaResBuilder);
-        if (rmeaResBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) && null != rmea.getCurActiveMiniEvent()) {
+        if (rmeaResBuilder.getStatus().equals(ResponseStatus.SUCCESS) && null != rmea.getCurActiveMiniEvent()) {
           //get UserMiniEvent info and create the proto to set into resBuilder
           val umep = createInfoProtoUtils.createUserMiniEventProto(
             rmea.getMefu(),

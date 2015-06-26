@@ -14,7 +14,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamRequestProto;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto;
 import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
@@ -62,7 +62,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 		RemoveMonsterFromBattleTeamResponseProto.Builder resBuilder = RemoveMonsterFromBattleTeamResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(RemoveMonsterFromBattleTeamStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		UUID userMonsterUuid = null;
@@ -81,7 +81,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RemoveMonsterFromBattleTeamStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RemoveMonsterFromBattleTeamResponseEvent resEvent = new RemoveMonsterFromBattleTeamResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -107,7 +107,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 			}
 
 			if (successful) {
-				resBuilder.setStatus(RemoveMonsterFromBattleTeamStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			RemoveMonsterFromBattleTeamResponseEvent resEvent = new RemoveMonsterFromBattleTeamResponseEvent(
@@ -128,7 +128,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 			//don't let the client hang
 			try {
 				resBuilder
-						.setStatus(RemoveMonsterFromBattleTeamStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				RemoveMonsterFromBattleTeamResponseEvent resEvent = new RemoveMonsterFromBattleTeamResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -167,7 +167,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 			return false;
 		}
 
-		resBuilder.setStatus(RemoveMonsterFromBattleTeamStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

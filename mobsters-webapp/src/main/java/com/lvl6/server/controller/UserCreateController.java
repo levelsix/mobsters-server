@@ -28,7 +28,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto.Builder;
-import com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
@@ -124,7 +124,7 @@ public class UserCreateController extends EventController {
 
 		UserCreateResponseProto.Builder resBuilder = UserCreateResponseProto
 				.newBuilder();
-		resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean gotLock = true;
 		if (null != fbId && !fbId.isEmpty()) {
@@ -190,7 +190,7 @@ public class UserCreateController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in UserCreateController processEvent", e);
 			try {
-				resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				UserCreateResponseEvent resEvent = new UserCreateResponseEvent(
 						udid);
 				resEvent.setTag(event.getTag());
@@ -225,7 +225,7 @@ public class UserCreateController extends EventController {
 				&& facebookIdExists(facebookId, users)) {
 			//check if facebookId is tied to an account
 			resBuilder
-					.setStatus(UserCreateStatus.FAIL_USER_WITH_FACEBOOK_ID_EXISTS);
+					.setStatus(ResponseStatus.FAIL_USER_WITH_FACEBOOK_ID_EXISTS);
 			log.error("user with facebookId " + facebookId
 					+ " already exists. users=" + users);
 			return false;
@@ -234,7 +234,7 @@ public class UserCreateController extends EventController {
 			//udid shouldn't be empty
 			//check if udid is tied to an account
 			resBuilder
-					.setStatus(UserCreateStatus.FAIL_USER_WITH_UDID_ALREADY_EXISTS);
+					.setStatus(ResponseStatus.FAIL_USER_WITH_UDID_ALREADY_EXISTS);
 			log.error("user with udid " + udid + " already exists");
 			return false;
 		}
@@ -289,7 +289,7 @@ public class UserCreateController extends EventController {
 																				locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 																				}*/
 		} else {
-			resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("problem with trying to create user. udid=" + udid
 					+ ", name=" + name + ", deviceToken=" + deviceToken
 					+ ", playerExp=" + playerExp + ", cash=" + cash + ", oil="
@@ -297,7 +297,7 @@ public class UserCreateController extends EventController {
 		}
 
 		log.info(String.format("created new userId=%s", userId));
-		resBuilder.setStatus(UserCreateStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return userId;
 	}
 

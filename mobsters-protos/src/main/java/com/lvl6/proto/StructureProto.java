@@ -9,124 +9,6 @@ public final class StructureProto {
       com.google.protobuf.ExtensionRegistry registry) {
   }
   /**
-   * Protobuf enum {@code com.lvl6.proto.ResourceType}
-   */
-  public enum ResourceType
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>NO_RESOURCE = 4;</code>
-     */
-    NO_RESOURCE(0, 4),
-    /**
-     * <code>CASH = 1;</code>
-     */
-    CASH(1, 1),
-    /**
-     * <code>OIL = 2;</code>
-     */
-    OIL(2, 2),
-    /**
-     * <code>GEMS = 3;</code>
-     */
-    GEMS(3, 3),
-    /**
-     * <code>GACHA_CREDITS = 5;</code>
-     */
-    GACHA_CREDITS(4, 5),
-    /**
-     * <code>MONSTER = 20;</code>
-     */
-    MONSTER(5, 20),
-    ;
-
-    /**
-     * <code>NO_RESOURCE = 4;</code>
-     */
-    public static final int NO_RESOURCE_VALUE = 4;
-    /**
-     * <code>CASH = 1;</code>
-     */
-    public static final int CASH_VALUE = 1;
-    /**
-     * <code>OIL = 2;</code>
-     */
-    public static final int OIL_VALUE = 2;
-    /**
-     * <code>GEMS = 3;</code>
-     */
-    public static final int GEMS_VALUE = 3;
-    /**
-     * <code>GACHA_CREDITS = 5;</code>
-     */
-    public static final int GACHA_CREDITS_VALUE = 5;
-    /**
-     * <code>MONSTER = 20;</code>
-     */
-    public static final int MONSTER_VALUE = 20;
-
-
-    public final int getNumber() { return value; }
-
-    public static ResourceType valueOf(int value) {
-      switch (value) {
-        case 4: return NO_RESOURCE;
-        case 1: return CASH;
-        case 2: return OIL;
-        case 3: return GEMS;
-        case 5: return GACHA_CREDITS;
-        case 20: return MONSTER;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<ResourceType>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<ResourceType>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<ResourceType>() {
-            public ResourceType findValueByNumber(int number) {
-              return ResourceType.valueOf(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.lvl6.proto.StructureProto.getDescriptor().getEnumTypes().get(0);
-    }
-
-    private static final ResourceType[] VALUES = values();
-
-    public static ResourceType valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int index;
-    private final int value;
-
-    private ResourceType(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ResourceType)
-  }
-
-  /**
    * Protobuf enum {@code com.lvl6.proto.StructOrientation}
    */
   public enum StructOrientation
@@ -192,7 +74,7 @@ public final class StructureProto {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.lvl6.proto.StructureProto.getDescriptor().getEnumTypes().get(1);
+      return com.lvl6.proto.StructureProto.getDescriptor().getEnumTypes().get(0);
     }
 
     private static final StructOrientation[] VALUES = values();
@@ -292,7 +174,7 @@ public final class StructureProto {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.lvl6.proto.StructureProto.getDescriptor().getEnumTypes().get(2);
+      return com.lvl6.proto.StructureProto.getDescriptor().getEnumTypes().get(1);
     }
 
     private static final BoardObstacleType[] VALUES = values();
@@ -377,7 +259,7 @@ public final class StructureProto {
      *cash, other soft currency (like CoC's gold, elixir, dark elixir)
      * </pre>
      */
-    com.lvl6.proto.StructureProto.ResourceType getBuildResourceType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getBuildResourceType();
 
     /**
      * <code>optional int32 buildCost = 6;</code>
@@ -653,7 +535,7 @@ public final class StructureProto {
             }
             case 40: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(5, rawValue);
               } else {
@@ -1089,7 +971,7 @@ public final class StructureProto {
     }
 
     public static final int BUILDRESOURCETYPE_FIELD_NUMBER = 5;
-    private com.lvl6.proto.StructureProto.ResourceType buildResourceType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType buildResourceType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType buildResourceType = 5;</code>
      *
@@ -1107,7 +989,7 @@ public final class StructureProto {
      *cash, other soft currency (like CoC's gold, elixir, dark elixir)
      * </pre>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getBuildResourceType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getBuildResourceType() {
       return buildResourceType_;
     }
 
@@ -1488,7 +1370,7 @@ public final class StructureProto {
       name_ = "";
       level_ = 0;
       structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.NO_STRUCT;
-      buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      buildResourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       buildCost_ = 0;
       minutesToBuild_ = 0;
       width_ = 0;
@@ -1805,7 +1687,7 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.NO_STRUCT;
         bitField0_ = (bitField0_ & ~0x00000008);
-        buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        buildResourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000010);
         buildCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -2242,7 +2124,7 @@ public final class StructureProto {
         return this;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType buildResourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType buildResourceType = 5;</code>
        *
@@ -2260,7 +2142,7 @@ public final class StructureProto {
        *cash, other soft currency (like CoC's gold, elixir, dark elixir)
        * </pre>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getBuildResourceType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getBuildResourceType() {
         return buildResourceType_;
       }
       /**
@@ -2270,7 +2152,7 @@ public final class StructureProto {
        *cash, other soft currency (like CoC's gold, elixir, dark elixir)
        * </pre>
        */
-      public Builder setBuildResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setBuildResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2288,7 +2170,7 @@ public final class StructureProto {
        */
       public Builder clearBuildResourceType() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        buildResourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -3072,7 +2954,7 @@ public final class StructureProto {
      *the type of resource that is generated
      * </pre>
      */
-    com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType();
 
     /**
      * <code>optional float productionRate = 3;</code>
@@ -3167,7 +3049,7 @@ public final class StructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -3248,7 +3130,7 @@ public final class StructureProto {
     }
 
     public static final int RESOURCETYPE_FIELD_NUMBER = 2;
-    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 2;</code>
      *
@@ -3266,7 +3148,7 @@ public final class StructureProto {
      *the type of resource that is generated
      * </pre>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
       return resourceType_;
     }
 
@@ -3310,7 +3192,7 @@ public final class StructureProto {
 
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       productionRate_ = 0F;
       capacity_ = 0;
     }
@@ -3488,7 +3370,7 @@ public final class StructureProto {
           structInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000002);
         productionRate_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -3713,7 +3595,7 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 2;</code>
        *
@@ -3731,7 +3613,7 @@ public final class StructureProto {
        *the type of resource that is generated
        * </pre>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
         return resourceType_;
       }
       /**
@@ -3741,7 +3623,7 @@ public final class StructureProto {
        *the type of resource that is generated
        * </pre>
        */
-      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3759,7 +3641,7 @@ public final class StructureProto {
        */
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -3887,7 +3769,7 @@ public final class StructureProto {
      *the type of resource that is stored
      * </pre>
      */
-    com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType();
 
     /**
      * <code>optional int32 capacity = 3;</code>
@@ -3965,7 +3847,7 @@ public final class StructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -4041,7 +3923,7 @@ public final class StructureProto {
     }
 
     public static final int RESOURCETYPE_FIELD_NUMBER = 2;
-    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 2;</code>
      *
@@ -4059,7 +3941,7 @@ public final class StructureProto {
      *the type of resource that is stored
      * </pre>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
       return resourceType_;
     }
 
@@ -4080,7 +3962,7 @@ public final class StructureProto {
 
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       capacity_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -4250,7 +4132,7 @@ public final class StructureProto {
           structInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000002);
         capacity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -4466,7 +4348,7 @@ public final class StructureProto {
         return structInfoBuilder_;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 2;</code>
        *
@@ -4484,7 +4366,7 @@ public final class StructureProto {
        *the type of resource that is stored
        * </pre>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
         return resourceType_;
       }
       /**
@@ -4494,7 +4376,7 @@ public final class StructureProto {
        *the type of resource that is stored
        * </pre>
        */
-      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -4512,7 +4394,7 @@ public final class StructureProto {
        */
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -13580,7 +13462,7 @@ public final class StructureProto {
      *costs cash, oil, or other to remove
      * </pre>
      */
-    com.lvl6.proto.StructureProto.ResourceType getRemovalCostType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getRemovalCostType();
 
     /**
      * <code>optional int32 cost = 4;</code>
@@ -13766,7 +13648,7 @@ public final class StructureProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -13931,7 +13813,7 @@ public final class StructureProto {
     }
 
     public static final int REMOVALCOSTTYPE_FIELD_NUMBER = 3;
-    private com.lvl6.proto.StructureProto.ResourceType removalCostType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType removalCostType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType removalCostType = 3;</code>
      *
@@ -13949,7 +13831,7 @@ public final class StructureProto {
      *costs cash, oil, or other to remove
      * </pre>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getRemovalCostType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getRemovalCostType() {
       return removalCostType_;
     }
 
@@ -14202,7 +14084,7 @@ public final class StructureProto {
     private void initFields() {
       obstacleId_ = 0;
       name_ = "";
-      removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      removalCostType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       cost_ = 0;
       secondsToRemove_ = 0;
       width_ = 0;
@@ -14461,7 +14343,7 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        removalCostType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000004);
         cost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -14770,7 +14652,7 @@ public final class StructureProto {
         return this;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType removalCostType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType removalCostType = 3;</code>
        *
@@ -14788,7 +14670,7 @@ public final class StructureProto {
        *costs cash, oil, or other to remove
        * </pre>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getRemovalCostType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getRemovalCostType() {
         return removalCostType_;
       }
       /**
@@ -14798,7 +14680,7 @@ public final class StructureProto {
        *costs cash, oil, or other to remove
        * </pre>
        */
-      public Builder setRemovalCostType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setRemovalCostType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -14816,7 +14698,7 @@ public final class StructureProto {
        */
       public Builder clearRemovalCostType() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        removalCostType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -21973,13 +21855,11 @@ public final class StructureProto {
       "d\030\003 \001(\005\022\014\n\004posX\030\004 \001(\005\022\014\n\004posY\030\005 \001(\005\"d\n\026B" +
       "attleItemFactoryProto\0226\n\nstructInfo\030\001 \001(" +
       "\0132\".com.lvl6.proto.StructureInfoProto\022\022\n" +
-      "\npowerLimit\030\002 \001(\005*\\\n\014ResourceType\022\017\n\013NO_" +
-      "RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022" +
-      "\021\n\rGACHA_CREDITS\020\005\022\013\n\007MONSTER\020\024*G\n\021Struc" +
-      "tOrientation\022\022\n\016NO_ORIENTATION\020\003\022\016\n\nPOSI" +
-      "TION_1\020\001\022\016\n\nPOSITION_2\020\002*<\n\021BoardObstacl",
-      "eType\022\t\n\005CLOUD\020\001\022\010\n\004LOCK\020\002\022\010\n\004HOLE\020\003\022\010\n\004" +
-      "VINE\020\004B\020B\016StructureProto"
+      "\npowerLimit\030\002 \001(\005*G\n\021StructOrientation\022\022" +
+      "\n\016NO_ORIENTATION\020\003\022\016\n\nPOSITION_1\020\001\022\016\n\nPO" +
+      "SITION_2\020\002*<\n\021BoardObstacleType\022\t\n\005CLOUD" +
+      "\020\001\022\010\n\004LOCK\020\002\022\010\n\004HOLE\020\003\022\010\n\004VINE\020\004B\020B\016Stru" +
+      "ctureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

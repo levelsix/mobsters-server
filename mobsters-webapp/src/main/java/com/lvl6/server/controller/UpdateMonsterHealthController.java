@@ -18,7 +18,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthRequestProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -93,7 +93,7 @@ public class UpdateMonsterHealthController extends EventController {
 		UpdateMonsterHealthResponseProto.Builder resBuilder = UpdateMonsterHealthResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -119,7 +119,7 @@ public class UpdateMonsterHealthController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -144,7 +144,7 @@ public class UpdateMonsterHealthController extends EventController {
 			}
 
 			if (successful) {
-				resBuilder.setStatus(UpdateMonsterHealthStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
@@ -159,7 +159,7 @@ public class UpdateMonsterHealthController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

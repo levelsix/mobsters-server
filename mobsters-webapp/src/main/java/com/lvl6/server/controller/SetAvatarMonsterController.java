@@ -15,7 +15,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterRequestProto;
 import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto;
-import com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -74,7 +74,7 @@ public class SetAvatarMonsterController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SetAvatarMonsterStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -100,9 +100,9 @@ public class SetAvatarMonsterController extends EventController {
 			}
 
 			if (successful) {
-				resBuilder.setStatus(SetAvatarMonsterStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			} else {
-				resBuilder.setStatus(SetAvatarMonsterStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			}
 
 			SetAvatarMonsterResponseProto resProto = resBuilder.build();
@@ -125,7 +125,7 @@ public class SetAvatarMonsterController extends EventController {
 			log.error("exception in SetAvatarMonsterController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(SetAvatarMonsterStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SetAvatarMonsterResponseEvent resEvent = new SetAvatarMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

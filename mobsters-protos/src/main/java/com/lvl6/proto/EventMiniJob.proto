@@ -43,7 +43,7 @@ message BeginMiniJobRequestProto {
 																						//DONE
 message BeginMiniJobResponseProto {
      optional MinimumUserProto sender = 1;
-     optional BeginMiniJobStatus status = 2;    
+     optional ResponseStatus status = 2;    
      
 }
 

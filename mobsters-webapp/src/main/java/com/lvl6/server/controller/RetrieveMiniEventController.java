@@ -13,7 +13,7 @@ import com.lvl6.events.request.RetrieveMiniEventRequestEvent;
 import com.lvl6.events.response.RetrieveMiniEventResponseEvent;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventRequestProto;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto;
-import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MiniEventProtos.UserMiniEventProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -118,7 +118,7 @@ public class RetrieveMiniEventController extends EventController {
 		RetrieveMiniEventResponseProto.Builder resBuilder = RetrieveMiniEventResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(RetrieveMiniEventStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -134,7 +134,7 @@ public class RetrieveMiniEventController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RetrieveMiniEventStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -158,7 +158,7 @@ public class RetrieveMiniEventController extends EventController {
 
 			rmea.execute(resBuilder);
 
-			if (resBuilder.getStatus().equals(RetrieveMiniEventStatus.SUCCESS) &&
+			if (resBuilder.getStatus().equals(ResponseStatus.SUCCESS) &&
 					null != rmea.getCurActiveMiniEvent())
 			{
 				//get UserMiniEvent info and create the proto to set into resBuilder
@@ -186,7 +186,7 @@ public class RetrieveMiniEventController extends EventController {
 			log.error("exception in RetrieveMiniEventController processEvent",
 					e);
 			try {
-				resBuilder.setStatus(RetrieveMiniEventStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

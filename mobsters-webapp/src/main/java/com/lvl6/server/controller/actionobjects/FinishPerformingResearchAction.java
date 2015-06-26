@@ -16,8 +16,8 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.Builder;
-import com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -56,7 +56,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = false;
 		valid = verifySemantics(resBuilder);
@@ -70,12 +70,12 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(FinishPerformingResearchStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySemantics(Builder resBuilder) {
 		if (null == user) {
-			resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("no user with id={}", userId);
 			return false;
 		}
@@ -122,7 +122,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		//check if user can afford to buy however many more user wants to buy
 		if (userGems < gemsCost) {
 			resBuilder
-					.setStatus(FinishPerformingResearchStatus.FAIL_NOT_ENOUGH_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		} else
 			return true;

@@ -817,13 +817,13 @@ public final class EventDevProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto fump = 3;</code>
@@ -933,7 +933,7 @@ public final class EventDevProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus value = com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1005,88 +1005,6 @@ public final class EventDevProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.DevResponseProto.DevStatus}
-     */
-    public enum DevStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static DevStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<DevStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<DevStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<DevStatus>() {
-              public DevStatus findValueByNumber(int number) {
-                return DevStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventDevProto.DevResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final DevStatus[] VALUES = values();
-
-      public static DevStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private DevStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DevResponseProto.DevStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -1110,17 +1028,17 @@ public final class EventDevProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -1182,7 +1100,7 @@ public final class EventDevProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       fump_ = java.util.Collections.emptyList();
       uip_ = com.lvl6.proto.ItemsProto.UserItemProto.getDefaultInstance();
     }
@@ -1366,7 +1284,7 @@ public final class EventDevProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (fumpBuilder_ == null) {
           fump_ = java.util.Collections.emptyList();
@@ -1631,23 +1549,23 @@ public final class EventDevProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus status_ = com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1657,11 +1575,11 @@ public final class EventDevProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.DevResponseProto.DevStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -2053,19 +1971,18 @@ public final class EventDevProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\016EventDev.proto\022\016com.lvl6.proto\032\tDev.pr" +
-      "oto\032\nItem.proto\032\022MonsterStuff.proto\032\nUse" +
-      "r.proto\"\252\001\n\017DevRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022=\n" +
-      "\ndevRequest\030\002 \001(\0162\032.com.lvl6.proto.DevRe" +
-      "quest:\rRESET_ACCOUNT\022\024\n\014staticDataId\030\003 \001" +
-      "(\005\022\020\n\010quantity\030\004 \001(\005\"\212\002\n\020DevResponseProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022:\n\006status\030\002 \001(\0162*.com.lvl6.p" +
-      "roto.DevResponseProto.DevStatus\0222\n\004fump\030",
-      "\003 \003(\0132$.com.lvl6.proto.FullUserMonsterPr" +
-      "oto\022*\n\003uip\030\004 \001(\0132\035.com.lvl6.proto.UserIt" +
-      "emProto\"(\n\tDevStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
-      "L_OTHER\020\002B\017B\rEventDevProto"
+      "oto\032\nItem.proto\032\022MonsterStuff.proto\032\026Sha" +
+      "redEnumConfig.proto\032\nUser.proto\"\252\001\n\017DevR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022=\n\ndevRequest\030\002 \001(" +
+      "\0162\032.com.lvl6.proto.DevRequest:\rRESET_ACC" +
+      "OUNT\022\024\n\014staticDataId\030\003 \001(\005\022\020\n\010quantity\030\004" +
+      " \001(\005\"\324\001\n\020DevResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022.\n\006s" +
+      "tatus\030\002 \001(\0162\036.com.lvl6.proto.ResponseSta",
+      "tus\0222\n\004fump\030\003 \003(\0132$.com.lvl6.proto.FullU" +
+      "serMonsterProto\022*\n\003uip\030\004 \001(\0132\035.com.lvl6." +
+      "proto.UserItemProtoB\017B\rEventDevProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2081,6 +1998,7 @@ public final class EventDevProto {
           com.lvl6.proto.DevProto.getDescriptor(),
           com.lvl6.proto.ItemsProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_DevRequestProto_descriptor =
@@ -2098,6 +2016,7 @@ public final class EventDevProto {
     com.lvl6.proto.DevProto.getDescriptor();
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

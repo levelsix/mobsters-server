@@ -32,7 +32,7 @@ import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -150,7 +150,7 @@ public class RetrieveClanInfoController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RetrieveClanInfoStatus.OTHER_FAIL);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
@@ -176,7 +176,7 @@ public class RetrieveClanInfoController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in RetrieveClanInfo processEvent", e);
 			try {
-				resBuilder.setStatus(RetrieveClanInfoStatus.OTHER_FAIL);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RetrieveClanInfoResponseEvent resEvent = new RetrieveClanInfoResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());
@@ -191,11 +191,11 @@ public class RetrieveClanInfoController extends EventController {
 	private boolean checkLegitCreate(Builder resBuilder, String clanName,
 			String clanId) {
 		if ((clanName == null || clanName.length() != 0) && clanId != null) {
-			resBuilder.setStatus(RetrieveClanInfoStatus.OTHER_FAIL);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("clan name and clan id set");
 			return false;
 		}
-		resBuilder.setStatus(RetrieveClanInfoStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

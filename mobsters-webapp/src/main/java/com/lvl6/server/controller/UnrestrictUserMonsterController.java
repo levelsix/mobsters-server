@@ -16,7 +16,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
@@ -64,7 +64,7 @@ public class UnrestrictUserMonsterController extends EventController {
 		UnrestrictUserMonsterResponseProto.Builder resBuilder = UnrestrictUserMonsterResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(UnrestrictUserMonsterStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		UUID userMonsterUuid = null;
@@ -88,7 +88,7 @@ public class UnrestrictUserMonsterController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(UnrestrictUserMonsterStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -115,7 +115,7 @@ public class UnrestrictUserMonsterController extends EventController {
 			}
 
 			if (successful) {
-				resBuilder.setStatus(UnrestrictUserMonsterStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(
@@ -134,7 +134,7 @@ public class UnrestrictUserMonsterController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(UnrestrictUserMonsterStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				UnrestrictUserMonsterResponseEvent resEvent = new UnrestrictUserMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -165,7 +165,7 @@ public class UnrestrictUserMonsterController extends EventController {
 			return false;
 		}
 
-		resBuilder.setStatus(UnrestrictUserMonsterStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

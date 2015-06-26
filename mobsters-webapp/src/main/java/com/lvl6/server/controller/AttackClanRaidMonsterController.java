@@ -32,7 +32,7 @@ import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto;
 import com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto;
 import com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto;
-import com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
@@ -154,7 +154,7 @@ public class AttackClanRaidMonsterController extends EventController {
 
 		AttackClanRaidMonsterResponseProto.Builder resBuilder = AttackClanRaidMonsterResponseProto
 				.newBuilder();
-		resBuilder.setStatus(AttackClanRaidMonsterStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(sender);
 		resBuilder.setUserMonsterThatAttacked(userMonsterThatAttacked);
 		resBuilder.setDmgDealt(damageDealt);
@@ -195,7 +195,7 @@ public class AttackClanRaidMonsterController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(AttackClanRaidMonsterStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			AttackClanRaidMonsterResponseEvent resEvent = new AttackClanRaidMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -241,9 +241,9 @@ public class AttackClanRaidMonsterController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 
 			//tell whole clan on a successful attack
-			if (AttackClanRaidMonsterStatus.SUCCESS.equals(resBuilder
+			if (ResponseStatus.SUCCESS.equals(resBuilder
 					.getStatus())
-					|| AttackClanRaidMonsterStatus.SUCCESS_MONSTER_JUST_DIED
+					|| ResponseStatus.SUCCESS_MONSTER_JUST_DIED
 							.equals(resBuilder.getStatus())) {
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
@@ -256,7 +256,7 @@ public class AttackClanRaidMonsterController extends EventController {
 			log.error("exception in AttackClanRaidMonster processEvent", e);
 			//errorless = false;
 			try {
-				resBuilder.setStatus(AttackClanRaidMonsterStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				AttackClanRaidMonsterResponseEvent resEvent = new AttackClanRaidMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -307,7 +307,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		UserClan uc = userClanRetrieveUtil.getSpecificUserClan(userId, clanId);
 		if (null == uc) {
 			resBuilder
-					.setStatus(AttackClanRaidMonsterStatus.FAIL_USER_NOT_IN_CLAN);
+					.setStatus(ResponseStatus.FAIL_NOT_IN_CLAN);
 			log.error(String.format("not in clan. user=%s", mup));
 			return false;
 		}
@@ -337,7 +337,7 @@ public class AttackClanRaidMonsterController extends EventController {
 
 			clanEventList.add(raidStartedByClan);
 
-			resBuilder.setStatus(AttackClanRaidMonsterStatus.SUCCESS);
+			resBuilder.setStatus(ResponseStatus.SUCCESS);
 			log.info(String
 					.format("since data client sent matches up with db info, allowing attack, clanEvent=%s",
 							raidStartedByClan));
@@ -386,7 +386,7 @@ public class AttackClanRaidMonsterController extends EventController {
 					+ "\t clanEventClientSent="
 					+ clanEventClientSent);
 			resBuilder
-					.setStatus(AttackClanRaidMonsterStatus.FAIL_MONSTER_ALREADY_DEAD);
+					.setStatus(ResponseStatus.FAIL_MONSTER_ALREADY_DEAD);
 
 		} else if (null == clanEvent) {
 			log.warn("possibly remnants of old requests to attack last clan raid stage monster."
@@ -395,7 +395,7 @@ public class AttackClanRaidMonsterController extends EventController {
 					+ "\t clanEventClientSent="
 					+ clanEventClientSent);
 			resBuilder
-					.setStatus(AttackClanRaidMonsterStatus.FAIL_NO_STAGE_RAID_IN_PROGRESS);
+					.setStatus(ResponseStatus.FAIL_NO_ACTIVE_CLAN_RAID);
 		}
 
 		//update user's monsters' healths, don't know if it should be blindly done though...
@@ -513,14 +513,14 @@ public class AttackClanRaidMonsterController extends EventController {
 
 		if (monsterDied && 0 != newDmg) {
 			resBuilder
-					.setStatus(AttackClanRaidMonsterStatus.SUCCESS_MONSTER_JUST_DIED);
+					.setStatus(ResponseStatus.SUCCESS_MONSTER_JUST_DIED);
 		} else if (monsterDied && 0 == newDmg) {
 			log.error("not really error since will continue processing. should not be here. "
 					+ "what has been processed same as this user killing last monster in the raid");
 			resBuilder
-					.setStatus(AttackClanRaidMonsterStatus.FAIL_MONSTER_ALREADY_DEAD);
+					.setStatus(ResponseStatus.FAIL_MONSTER_ALREADY_DEAD);
 		} else if (!monsterDied) {
-			resBuilder.setStatus(AttackClanRaidMonsterStatus.SUCCESS);
+			resBuilder.setStatus(ResponseStatus.SUCCESS);
 		}
 		resBuilder.setDmgDealt(newDmg);
 	}

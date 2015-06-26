@@ -25,7 +25,7 @@ import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
@@ -92,7 +92,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 		InviteFbFriendsForSlotsResponseProto.Builder resBuilder = InviteFbFriendsForSlotsResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -108,7 +108,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -168,7 +168,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 						resBuilder.addInvitesNew(inviteProto);
 					}
 				}
-				resBuilder.setStatus(InviteFbFriendsForSlotsStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
@@ -202,7 +202,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				InviteFbFriendsForSlotsResponseEvent resEvent = new InviteFbFriendsForSlotsResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

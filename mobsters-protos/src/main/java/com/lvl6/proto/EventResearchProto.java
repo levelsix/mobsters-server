@@ -110,7 +110,7 @@ public final class EventResearchProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
      */
-    com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PerformResearchRequestProto}
@@ -205,7 +205,7 @@ public final class EventResearchProto {
             }
             case 56: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(7, rawValue);
               } else {
@@ -406,7 +406,7 @@ public final class EventResearchProto {
     }
 
     public static final int RESOURCETYPE_FIELD_NUMBER = 7;
-    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
      */
@@ -416,7 +416,7 @@ public final class EventResearchProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
       return resourceType_;
     }
 
@@ -427,7 +427,7 @@ public final class EventResearchProto {
       clientTime_ = 0L;
       gemsCost_ = 0;
       resourceCost_ = 0;
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -634,7 +634,7 @@ public final class EventResearchProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         resourceCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
@@ -1138,7 +1138,7 @@ public final class EventResearchProto {
         return this;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
        */
@@ -1148,13 +1148,13 @@ public final class EventResearchProto {
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
         return resourceType_;
       }
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
        */
-      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1168,7 +1168,7 @@ public final class EventResearchProto {
        */
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
         onChanged();
         return this;
       }
@@ -1202,13 +1202,13 @@ public final class EventResearchProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional string userResearchUuid = 3;</code>
@@ -1291,7 +1291,7 @@ public final class EventResearchProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus value = com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1345,115 +1345,6 @@ public final class EventResearchProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus}
-     */
-    public enum PerformResearchStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_CASH = 3;</code>
-       */
-      FAIL_INSUFFICIENT_CASH(2, 3),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 4;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(3, 4),
-      /**
-       * <code>FAIL_INSUFFICIENT_OIL = 5;</code>
-       */
-      FAIL_INSUFFICIENT_OIL(4, 5),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_CASH = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_CASH_VALUE = 3;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 4;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 4;
-      /**
-       * <code>FAIL_INSUFFICIENT_OIL = 5;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_OIL_VALUE = 5;
-
-
-      public final int getNumber() { return value; }
-
-      public static PerformResearchStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_INSUFFICIENT_CASH;
-          case 4: return FAIL_INSUFFICIENT_GEMS;
-          case 5: return FAIL_INSUFFICIENT_OIL;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<PerformResearchStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<PerformResearchStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<PerformResearchStatus>() {
-              public PerformResearchStatus findValueByNumber(int number) {
-                return PerformResearchStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final PerformResearchStatus[] VALUES = values();
-
-      public static PerformResearchStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private PerformResearchStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -1477,17 +1368,17 @@ public final class EventResearchProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -1535,7 +1426,7 @@ public final class EventResearchProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       userResearchUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -1705,7 +1596,7 @@ public final class EventResearchProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         userResearchUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -1923,23 +1814,23 @@ public final class EventResearchProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus status_ = com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1949,11 +1840,11 @@ public final class EventResearchProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.PerformResearchResponseProto.PerformResearchStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -2806,13 +2697,13 @@ public final class EventResearchProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.FinishPerformingResearchResponseProto}
@@ -2885,7 +2776,7 @@ public final class EventResearchProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus value = com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -2933,97 +2824,6 @@ public final class EventResearchProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus}
-     */
-    public enum FinishPerformingResearchStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NOT_ENOUGH_GEMS = 3;</code>
-       */
-      FAIL_NOT_ENOUGH_GEMS(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_ENOUGH_GEMS = 3;</code>
-       */
-      public static final int FAIL_NOT_ENOUGH_GEMS_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static FinishPerformingResearchStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NOT_ENOUGH_GEMS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<FinishPerformingResearchStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<FinishPerformingResearchStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<FinishPerformingResearchStatus>() {
-              public FinishPerformingResearchStatus findValueByNumber(int number) {
-                return FinishPerformingResearchStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final FinishPerformingResearchStatus[] VALUES = values();
-
-      public static FinishPerformingResearchStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private FinishPerformingResearchStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -3047,23 +2847,23 @@ public final class EventResearchProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3229,7 +3029,7 @@ public final class EventResearchProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -3436,23 +3236,23 @@ public final class EventResearchProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status_ = com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3462,11 +3262,11 @@ public final class EventResearchProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -3511,34 +3311,26 @@ public final class EventResearchProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023EventResearch.proto\022\016com.lvl6.proto\032\017S" +
-      "tructure.proto\032\nUser.proto\"\363\001\n\033PerformRe" +
-      "searchRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022\022\n\nresearch" +
-      "Id\030\002 \001(\005\022\030\n\020userResearchUuid\030\003 \001(\t\022\022\n\ncl" +
-      "ientTime\030\004 \001(\003\022\020\n\010gemsCost\030\005 \001(\005\022\024\n\014reso" +
-      "urceCost\030\006 \001(\021\0228\n\014resourceType\030\007 \001(\0162\034.c" +
-      "om.lvl6.proto.ResourceType:\004CASH\"\310\002\n\034Per" +
-      "formResearchResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022R\n\006s",
-      "tatus\030\002 \001(\0162B.com.lvl6.proto.PerformRese" +
-      "archResponseProto.PerformResearchStatus\022" +
-      "\030\n\020userResearchUuid\030\003 \001(\t\"\207\001\n\025PerformRes" +
-      "earchStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002" +
-      "\022\032\n\026FAIL_INSUFFICIENT_CASH\020\003\022\032\n\026FAIL_INS" +
-      "UFFICIENT_GEMS\020\004\022\031\n\025FAIL_INSUFFICIENT_OI" +
-      "L\020\005\"\204\001\n$FinishPerformingResearchRequestP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022\030\n\020userResearchUuid\030\002 \001(\t" +
-      "\022\020\n\010gemsCost\030\003 \001(\005\"\230\002\n%FinishPerformingR",
-      "esearchResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022d\n\006status" +
-      "\030\002 \001(\0162T.com.lvl6.proto.FinishPerforming" +
-      "ResearchResponseProto.FinishPerformingRe" +
-      "searchStatus\"W\n\036FinishPerformingResearch" +
-      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\030\n\024F" +
-      "AIL_NOT_ENOUGH_GEMS\020\003B\024B\022EventResearchPr" +
-      "oto"
+      "\n\023EventResearch.proto\022\016com.lvl6.proto\032\026S" +
+      "haredEnumConfig.proto\032\nUser.proto\"\363\001\n\033Pe" +
+      "rformResearchRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\022\n\nr" +
+      "esearchId\030\002 \001(\005\022\030\n\020userResearchUuid\030\003 \001(" +
+      "\t\022\022\n\nclientTime\030\004 \001(\003\022\020\n\010gemsCost\030\005 \001(\005\022" +
+      "\024\n\014resourceCost\030\006 \001(\021\0228\n\014resourceType\030\007 " +
+      "\001(\0162\034.com.lvl6.proto.ResourceType:\004CASH\"" +
+      "\232\001\n\034PerformResearchResponseProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro",
+      "to\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Resp" +
+      "onseStatus\022\030\n\020userResearchUuid\030\003 \001(\t\"\204\001\n" +
+      "$FinishPerformingResearchRequestProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\030\n\020userResearchUuid\030\002 \001(\t\022\020\n\010gem" +
+      "sCost\030\003 \001(\005\"\211\001\n%FinishPerformingResearch" +
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022.\n\006status\030\002 \001(\0162" +
+      "\036.com.lvl6.proto.ResponseStatusB\024B\022Event" +
+      "ResearchProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3551,7 +3343,7 @@ public final class EventResearchProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.StructureProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_PerformResearchRequestProto_descriptor =
@@ -3578,7 +3370,7 @@ public final class EventResearchProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_FinishPerformingResearchResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
-    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

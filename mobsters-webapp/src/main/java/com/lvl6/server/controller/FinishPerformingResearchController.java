@@ -17,7 +17,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto;
-import com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto.FinishPerformingResearchStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
@@ -89,7 +89,7 @@ public class FinishPerformingResearchController extends EventController {
 		FinishPerformingResearchResponseProto.Builder resBuilder = FinishPerformingResearchResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -105,7 +105,7 @@ public class FinishPerformingResearchController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
@@ -133,7 +133,7 @@ public class FinishPerformingResearchController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 
 			Timestamp nowTimestamp = new Timestamp(now.getTime());
-			if(gemsCost > 0 && resBuilder.getStatus().equals(FinishPerformingResearchStatus.SUCCESS)) {
+			if(gemsCost > 0 && resBuilder.getStatus().equals(ResponseStatus.SUCCESS)) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
@@ -150,7 +150,7 @@ public class FinishPerformingResearchController extends EventController {
 					e);
 			// don't let the client hang
 			try {
-				resBuilder.setStatus(FinishPerformingResearchStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());

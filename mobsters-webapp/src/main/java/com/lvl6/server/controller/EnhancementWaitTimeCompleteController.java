@@ -23,7 +23,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteRequestProto;
 import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto;
 import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -84,7 +84,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 		EnhancementWaitTimeCompleteResponseProto.Builder resBuilder = EnhancementWaitTimeCompleteResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -101,7 +101,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -171,7 +171,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 			//don't let the client hang
 			try {
 				resBuilder
-						.setStatus(EnhancementWaitTimeCompleteStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -265,12 +265,12 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 						"insufficient gems to speed up enhancing. userGems=%s, cost=%s",
 								userGems, gemsForSpeedUp));
 				resBuilder
-						.setStatus(EnhancementWaitTimeCompleteStatus.FAIL_INSUFFICIENT_FUNDS);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
 		}
 
-		resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

@@ -30,7 +30,7 @@ import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType;
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto;
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -111,7 +111,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 		IncreaseMonsterInventorySlotResponseProto.Builder resBuilder = IncreaseMonsterInventorySlotResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		UUID inviteUuid = null;
@@ -135,7 +135,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			IncreaseMonsterInventorySlotResponseEvent resEvent = new IncreaseMonsterInventorySlotResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -172,7 +172,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 
 			if (successful) {
 				resBuilder
-						.setStatus(IncreaseMonsterInventorySlotStatus.SUCCESS);
+						.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			IncreaseMonsterInventorySlotResponseEvent resEvent = new IncreaseMonsterInventorySlotResponseEvent(
@@ -204,7 +204,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 			//don't let the client hang
 			try {
 				resBuilder
-						.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				IncreaseMonsterInventorySlotResponseEvent resEvent = new IncreaseMonsterInventorySlotResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -270,7 +270,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 					idsToInvitesForUserStructTemp);
 			if (!userStructId.equals(userStructIdFromInvites)) {
 				resBuilder
-						.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_INCONSISTENT_INVITE_DATA);
+						.setStatus(ResponseStatus.FAIL_INCONSISTENT_INVITE_DATA);
 				String preface = "data across invites inconsistent:";
 				log.error(
 						"{} user struct id/fb lvl. invites={}, \t expectedUserStructId={}",
@@ -288,7 +288,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 
 			if (nextUserStructFbInviteLvl > structLvl) {
 				resBuilder
-						.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL);
+						.setStatus(ResponseStatus.FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL);
 				log.error(
 						"user struct maxed fb invite lvl. userStruct={} \t struct={}",
 						sfu, struct);
@@ -304,7 +304,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 
 			if (acceptedAmount < minNumInvites) {
 				resBuilder
-						.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_INSUFFICIENT_FACEBOOK_INVITES);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FACEBOOK_INVITES);
 				String preface = "insufficient accepted fb invites to increase slots.";
 				log.error("{} \t minRequired={} \t has={}", new Object[] {
 						preface, minNumInvites, acceptedAmount });
@@ -324,7 +324,7 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 			int userGems = u.getGems();
 			if (userGems < gemPrice) {
 				resBuilder
-						.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_INSUFFICIENT_FUNDS);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 				log.error("user does not have enough gems to buy more monster inventory slots. userGems="
 						+ userGems + "\t gemPrice=" + gemPrice);
 				return false;

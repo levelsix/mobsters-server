@@ -23,7 +23,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventAchievementProto.AchievementRedeemRequestProto;
 import com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto;
-import com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -82,7 +82,7 @@ public class AchievementRedeemController extends EventController {
 
 		AchievementRedeemResponseProto.Builder resBuilder = AchievementRedeemResponseProto
 				.newBuilder();
-		resBuilder.setStatus(AchievementRedeemStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = false;
@@ -96,7 +96,7 @@ public class AchievementRedeemController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(AchievementRedeemStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -129,7 +129,7 @@ public class AchievementRedeemController extends EventController {
 			}
 
 			if (success) {
-				resBuilder.setStatus(AchievementRedeemStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(
@@ -156,7 +156,7 @@ public class AchievementRedeemController extends EventController {
 			log.error("exception in AchievementRedeem processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(AchievementRedeemStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -176,7 +176,7 @@ public class AchievementRedeemController extends EventController {
 		if (null == achievementIdToUserAchievement
 				|| achievementIdToUserAchievement.isEmpty()
 				|| !achievementIdToUserAchievement.containsKey(achievementId)) {
-			resBuilder.setStatus(AchievementRedeemStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error(String
 					.format("userAchievement does not exist. id=%s, userAchievement=%s",
 							achievementId, achievementIdToUserAchievement));
@@ -186,13 +186,13 @@ public class AchievementRedeemController extends EventController {
 		AchievementForUser userAchievement = achievementIdToUserAchievement
 				.get(achievementId);
 		if (!userAchievement.isComplete()) {
-			resBuilder.setStatus(AchievementRedeemStatus.FAIL_NOT_COMPLETE);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_COMPLETE);
 			log.error("userAchievement is not complete");
 			return false;
 		}
 
 		if (userAchievement.isRedeemed()) {
-			resBuilder.setStatus(AchievementRedeemStatus.FAIL_ALREADY_REDEEMED);
+			resBuilder.setStatus(ResponseStatus.FAIL_ALREADY_REDEEMED);
 			log.error(String.format("userAchievement is already redeemed: %s",
 					userAchievement));
 			return false;
