@@ -29,7 +29,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -133,7 +133,7 @@ public class HealMonsterController extends EventController {
 		HealMonsterResponseProto.Builder resBuilder = HealMonsterResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
-		resBuilder.setStatus(HealMonsterStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -156,7 +156,7 @@ public class HealMonsterController extends EventController {
 
 		if (invalidUuids) {
 			log.info("invalid UUIDS.");
-			resBuilder.setStatus(HealMonsterStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -213,7 +213,7 @@ public class HealMonsterController extends EventController {
 			}
 
 			if (successful) {
-				resBuilder.setStatus(HealMonsterStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(
@@ -238,7 +238,7 @@ public class HealMonsterController extends EventController {
 			log.error("exception in HealMonsterController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(HealMonsterStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -295,7 +295,7 @@ public class HealMonsterController extends EventController {
 		if (gemCost > userGems) {
 			log.error("user error: user does not have enough gems. userGems="
 					+ userGems + "\t gemCost=" + gemCost + "\t user=" + u);
-			resBuilder.setStatus(HealMonsterStatus.FAIL_INSUFFICIENT_FUNDS);
+			resBuilder.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 			return false;
 		}
 
@@ -311,7 +311,7 @@ public class HealMonsterController extends EventController {
 
 			log.error("user error: user has too little cash and not using gems. userCash="
 					+ userCash + "\t cashCost=" + cashCost + "\t user=" + u);
-			resBuilder.setStatus(HealMonsterStatus.FAIL_INSUFFICIENT_FUNDS);
+			resBuilder.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 			return false;
 		}
 		//if user has insufficient cash but gems is nonzero, take it on full faith

@@ -16,7 +16,7 @@ import com.lvl6.events.response.RetrieveStrengthLeaderBoardResponseEvent;
 import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardRequestProto;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto;
-import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.RetrieveStrengthLeaderBoardStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
@@ -72,7 +72,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 		RetrieveStrengthLeaderBoardResponseProto.Builder resBuilder = RetrieveStrengthLeaderBoardResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(RetrieveStrengthLeaderBoardStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		Set<String> userUuidsSet = new HashSet<String>();
 
@@ -88,7 +88,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RetrieveStrengthLeaderBoardStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RetrieveStrengthLeaderBoardResponseEvent resEvent = new RetrieveStrengthLeaderBoardResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -116,7 +116,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 					"exception in RetrieveStrengthLeaderBoardController processEvent",
 					e);
 			try {
-				resBuilder.setStatus(RetrieveStrengthLeaderBoardStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RetrieveStrengthLeaderBoardResponseEvent resEvent = new RetrieveStrengthLeaderBoardResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

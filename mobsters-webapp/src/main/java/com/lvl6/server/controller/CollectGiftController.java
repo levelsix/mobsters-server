@@ -19,7 +19,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventRewardProto.CollectGiftRequestProto;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto;
-import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -124,7 +124,7 @@ public class CollectGiftController extends EventController {
 		CollectGiftResponseProto.Builder resBuilder = CollectGiftResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProtoMaxResources);
-		resBuilder.setStatus(CollectGiftStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -142,7 +142,7 @@ public class CollectGiftController extends EventController {
 		//UUID checks
 		if (invalidUuids) {
 			log.info("invalid UUIDS.");
-			resBuilder.setStatus(CollectGiftStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			CollectGiftResponseEvent resEvent = new CollectGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -163,7 +163,7 @@ public class CollectGiftController extends EventController {
 					createInfoProtoUtils);
 			cga.execute(resBuilder);
 
-			if (CollectGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				resBuilder.setReward(cga.getUrp());
 			}
 
@@ -174,7 +174,7 @@ public class CollectGiftController extends EventController {
 			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
-			if (CollectGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//last_secret_gift time in user is modified, need to
 				//update client's user
 				User u = cga.getUser();
@@ -189,7 +189,7 @@ public class CollectGiftController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in CollectGiftController processEvent", e);
 			try {
-				resBuilder.setStatus(CollectGiftStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				CollectGiftResponseEvent resEvent = new CollectGiftResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

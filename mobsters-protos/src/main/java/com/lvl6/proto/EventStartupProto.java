@@ -14491,7 +14491,7 @@ public final class EventStartupProto {
         /**
          * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
          */
-        com.lvl6.proto.StructureProto.ResourceType getResourceType();
+        com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType();
 
         /**
          * <code>optional int32 resourceAmt = 2;</code>
@@ -14565,7 +14565,7 @@ public final class EventStartupProto {
                 }
                 case 8: {
                   int rawValue = input.readEnum();
-                  com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+                  com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
                   if (value == null) {
                     unknownFields.mergeVarintField(1, rawValue);
                   } else {
@@ -14625,7 +14625,7 @@ public final class EventStartupProto {
 
         private int bitField0_;
         public static final int RESOURCETYPE_FIELD_NUMBER = 1;
-        private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+        private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_;
         /**
          * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
          */
@@ -14635,7 +14635,7 @@ public final class EventStartupProto {
         /**
          * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
          */
-        public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+        public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
           return resourceType_;
         }
 
@@ -14670,7 +14670,7 @@ public final class EventStartupProto {
         }
 
         private void initFields() {
-          resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+          resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
           resourceAmt_ = 0;
           numGems_ = 0;
         }
@@ -14834,7 +14834,7 @@ public final class EventStartupProto {
 
           public Builder clear() {
             super.clear();
-            resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+            resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
             bitField0_ = (bitField0_ & ~0x00000001);
             resourceAmt_ = 0;
             bitField0_ = (bitField0_ & ~0x00000002);
@@ -14932,7 +14932,7 @@ public final class EventStartupProto {
           }
           private int bitField0_;
 
-          private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+          private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
           /**
            * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
            */
@@ -14942,13 +14942,13 @@ public final class EventStartupProto {
           /**
            * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
            */
-          public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+          public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
             return resourceType_;
           }
           /**
            * <code>optional .com.lvl6.proto.ResourceType resourceType = 1 [default = NO_RESOURCE];</code>
            */
-          public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+          public Builder setResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
             if (value == null) {
               throw new NullPointerException();
             }
@@ -14962,7 +14962,7 @@ public final class EventStartupProto {
            */
           public Builder clearResourceType() {
             bitField0_ = (bitField0_ & ~0x00000001);
-            resourceType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+            resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
             onChanged();
             return this;
           }

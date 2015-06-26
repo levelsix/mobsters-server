@@ -2324,13 +2324,13 @@ public final class EventBattleItemProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CreateBattleItemResponseProto}
@@ -2407,7 +2407,7 @@ public final class EventBattleItemProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus value = com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -2456,97 +2456,6 @@ public final class EventBattleItemProto {
     @java.lang.Override
     public com.google.protobuf.Parser<CreateBattleItemResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus}
-     */
-    public enum CreateBattleItemStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 3;</code>
-       */
-      FAIL_INSUFFICIENT_FUNDS(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static CreateBattleItemStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_INSUFFICIENT_FUNDS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<CreateBattleItemStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<CreateBattleItemStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<CreateBattleItemStatus>() {
-              public CreateBattleItemStatus findValueByNumber(int number) {
-                return CreateBattleItemStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final CreateBattleItemStatus[] VALUES = values();
-
-      public static CreateBattleItemStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private CreateBattleItemStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus)
     }
 
     private int bitField0_;
@@ -2607,24 +2516,24 @@ public final class EventBattleItemProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userBattleItems_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2800,7 +2709,7 @@ public final class EventBattleItemProto {
         } else {
           userBattleItemsBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -3282,23 +3191,23 @@ public final class EventBattleItemProto {
         return userBattleItemsBuilder_;
       }
 
-      private com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus status_ = com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3308,11 +3217,11 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CreateBattleItemResponseProto.CreateBattleItemStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -4514,13 +4423,13 @@ public final class EventBattleItemProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.UserBattleItemProto ubiUpdated = 3;</code>
@@ -4633,7 +4542,7 @@ public final class EventBattleItemProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus value = com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -4692,106 +4601,6 @@ public final class EventBattleItemProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus}
-     */
-    public enum CompleteBattleItemStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_INVALID_BATTLE_ITEMS = 3;</code>
-       */
-      FAIL_INVALID_BATTLE_ITEMS(2, 3),
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 4;</code>
-       */
-      FAIL_INSUFFICIENT_FUNDS(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_INVALID_BATTLE_ITEMS = 3;</code>
-       */
-      public static final int FAIL_INVALID_BATTLE_ITEMS_VALUE = 3;
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 4;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static CompleteBattleItemStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_INVALID_BATTLE_ITEMS;
-          case 4: return FAIL_INSUFFICIENT_FUNDS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<CompleteBattleItemStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<CompleteBattleItemStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<CompleteBattleItemStatus>() {
-              public CompleteBattleItemStatus findValueByNumber(int number) {
-                return CompleteBattleItemStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final CompleteBattleItemStatus[] VALUES = values();
-
-      public static CompleteBattleItemStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private CompleteBattleItemStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -4815,17 +4624,17 @@ public final class EventBattleItemProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -4886,7 +4695,7 @@ public final class EventBattleItemProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       ubiUpdated_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -5057,7 +4866,7 @@ public final class EventBattleItemProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (ubiUpdatedBuilder_ == null) {
           ubiUpdated_ = java.util.Collections.emptyList();
@@ -5305,23 +5114,23 @@ public final class EventBattleItemProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status_ = com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -5331,11 +5140,11 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CompleteBattleItemResponseProto.CompleteBattleItemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.CompleteBattleItemStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -6409,13 +6218,13 @@ public final class EventBattleItemProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.DiscardBattleItemResponseProto}
@@ -6484,7 +6293,7 @@ public final class EventBattleItemProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus value = com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -6532,97 +6341,6 @@ public final class EventBattleItemProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus}
-     */
-    public enum DiscardBattleItemStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_BATTLE_ITEMS_DONT_EXIST = 3;</code>
-       */
-      FAIL_BATTLE_ITEMS_DONT_EXIST(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_BATTLE_ITEMS_DONT_EXIST = 3;</code>
-       */
-      public static final int FAIL_BATTLE_ITEMS_DONT_EXIST_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static DiscardBattleItemStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_BATTLE_ITEMS_DONT_EXIST;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<DiscardBattleItemStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<DiscardBattleItemStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<DiscardBattleItemStatus>() {
-              public DiscardBattleItemStatus findValueByNumber(int number) {
-                return DiscardBattleItemStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final DiscardBattleItemStatus[] VALUES = values();
-
-      public static DiscardBattleItemStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private DiscardBattleItemStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -6646,23 +6364,23 @@ public final class EventBattleItemProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6824,7 +6542,7 @@ public final class EventBattleItemProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -7031,23 +6749,23 @@ public final class EventBattleItemProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status_ = com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -7057,11 +6775,11 @@ public final class EventBattleItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.DiscardBattleItemResponseProto.DiscardBattleItemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -7117,48 +6835,38 @@ public final class EventBattleItemProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\025EventBattleItem.proto\022\016com.lvl6.proto\032" +
-      "\020BattleItem.proto\032\nUser.proto\"\346\002\n\034Create" +
-      "BattleItemRequestProto\022@\n\006sender\030\001 \001(\01320" +
-      ".com.lvl6.proto.MinimumUserProtoWithMaxR" +
-      "esources\022@\n\013biqfuDelete\030\002 \003(\0132+.com.lvl6" +
-      ".proto.BattleItemQueueForUserProto\022@\n\013bi" +
-      "qfuUpdate\030\003 \003(\0132+.com.lvl6.proto.BattleI" +
-      "temQueueForUserProto\022=\n\010biqfuNew\030\004 \003(\0132+" +
-      ".com.lvl6.proto.BattleItemQueueForUserPr" +
-      "oto\022\022\n\ncashChange\030\005 \001(\021\022\021\n\toilChange\030\006 \001",
-      "(\021\022\032\n\022gemCostForCreating\030\007 \001(\005\"\271\002\n\035Creat" +
-      "eBattleItemResponseProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\022<\n\017us" +
-      "erBattleItems\030\002 \003(\0132#.com.lvl6.proto.Use" +
-      "rBattleItemProto\022T\n\006status\030\003 \001(\0162D.com.l" +
-      "vl6.proto.CreateBattleItemResponseProto." +
-      "CreateBattleItemStatus\"R\n\026CreateBattleIt" +
-      "emStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n" +
-      "\027FAIL_INSUFFICIENT_FUNDS\020\003\"\302\001\n\036CompleteB" +
-      "attleItemRequestProto\0220\n\006sender\030\001 \001(\0132 .",
-      "com.lvl6.proto.MinimumUserProto\022\021\n\tisSpe" +
-      "edup\030\002 \001(\010\022\026\n\016gemsForSpeedup\030\003 \001(\005\022C\n\016bi" +
-      "qfuCompleted\030\004 \003(\0132+.com.lvl6.proto.Batt" +
-      "leItemQueueForUserProto\"\333\002\n\037CompleteBatt" +
-      "leItemResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022X\n\006status\030" +
-      "\002 \001(\0162H.com.lvl6.proto.CompleteBattleIte" +
-      "mResponseProto.CompleteBattleItemStatus\022" +
-      "7\n\nubiUpdated\030\003 \003(\0132#.com.lvl6.proto.Use" +
-      "rBattleItemProto\"s\n\030CompleteBattleItemSt",
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\035\n\031FAI" +
-      "L_INVALID_BATTLE_ITEMS\020\003\022\033\n\027FAIL_INSUFFI" +
-      "CIENT_FUNDS\020\004\"q\n\035DiscardBattleItemReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\036\n\026discardedBattleItemI" +
-      "ds\030\002 \003(\005\"\204\002\n\036DiscardBattleItemResponsePr" +
+      "\020BattleItem.proto\032\026SharedEnumConfig.prot" +
+      "o\032\nUser.proto\"\346\002\n\034CreateBattleItemReques" +
+      "tProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto." +
+      "MinimumUserProtoWithMaxResources\022@\n\013biqf" +
+      "uDelete\030\002 \003(\0132+.com.lvl6.proto.BattleIte" +
+      "mQueueForUserProto\022@\n\013biqfuUpdate\030\003 \003(\0132" +
+      "+.com.lvl6.proto.BattleItemQueueForUserP" +
+      "roto\022=\n\010biqfuNew\030\004 \003(\0132+.com.lvl6.proto." +
+      "BattleItemQueueForUserProto\022\022\n\ncashChang",
+      "e\030\005 \001(\021\022\021\n\toilChange\030\006 \001(\021\022\032\n\022gemCostFor" +
+      "Creating\030\007 \001(\005\"\277\001\n\035CreateBattleItemRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022<\n\017userBattleItems\030\002 " +
+      "\003(\0132#.com.lvl6.proto.UserBattleItemProto" +
+      "\022.\n\006status\030\003 \001(\0162\036.com.lvl6.proto.Respon" +
+      "seStatus\"\302\001\n\036CompleteBattleItemRequestPr" +
       "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022V\n\006status\030\002 \001(\0162F.com.lvl6" +
-      ".proto.DiscardBattleItemResponseProto.Di" +
-      "scardBattleItemStatus\"X\n\027DiscardBattleIt",
-      "emStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022 \n" +
-      "\034FAIL_BATTLE_ITEMS_DONT_EXIST\020\003B\026B\024Event" +
-      "BattleItemProto"
+      "imumUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gems" +
+      "ForSpeedup\030\003 \001(\005\022C\n\016biqfuCompleted\030\004 \003(\013",
+      "2+.com.lvl6.proto.BattleItemQueueForUser" +
+      "Proto\"\274\001\n\037CompleteBattleItemResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.p" +
+      "roto.ResponseStatus\0227\n\nubiUpdated\030\003 \003(\0132" +
+      "#.com.lvl6.proto.UserBattleItemProto\"q\n\035" +
+      "DiscardBattleItemRequestProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\036\n\026discardedBattleItemIds\030\002 \003(\005\"\202\001\n\036Disc" +
+      "ardBattleItemResponseProto\0220\n\006sender\030\001 \001",
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022.\n\006" +
+      "status\030\002 \001(\0162\036.com.lvl6.proto.ResponseSt" +
+      "atusB\026B\024EventBattleItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7172,6 +6880,7 @@ public final class EventBattleItemProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.BattleItemsProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_CreateBattleItemRequestProto_descriptor =
@@ -7211,6 +6920,7 @@ public final class EventBattleItemProto {
         internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     com.lvl6.proto.BattleItemsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

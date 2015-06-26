@@ -21,7 +21,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto;
-import com.lvl6.proto.EventBattleItemProto.CreateBattleItemResponseProto.CreateBattleItemStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
@@ -113,7 +113,7 @@ public class CreateBattleItemController extends EventController {
 
 		CreateBattleItemResponseProto.Builder resBuilder = CreateBattleItemResponseProto
 				.newBuilder();
-		resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		UUID userUuid = null;
@@ -130,7 +130,7 @@ public class CreateBattleItemController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -156,7 +156,7 @@ public class CreateBattleItemController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
-			if (CreateBattleItemStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				User user2 = cbia.getUser();
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
@@ -173,7 +173,7 @@ public class CreateBattleItemController extends EventController {
 			log.error("exception in CreateBattleItemController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(CreateBattleItemStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				CreateBattleItemResponseEvent resEvent = new CreateBattleItemResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

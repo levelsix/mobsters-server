@@ -1092,13 +1092,13 @@ public final class EventAchievementProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.AchievementProgressResponseProto}
@@ -1171,7 +1171,7 @@ public final class EventAchievementProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus value = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1219,88 +1219,6 @@ public final class EventAchievementProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus}
-     */
-    public enum AchievementProgressStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static AchievementProgressStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<AchievementProgressStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<AchievementProgressStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<AchievementProgressStatus>() {
-              public AchievementProgressStatus findValueByNumber(int number) {
-                return AchievementProgressStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final AchievementProgressStatus[] VALUES = values();
-
-      public static AchievementProgressStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private AchievementProgressStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -1324,23 +1242,23 @@ public final class EventAchievementProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1506,7 +1424,7 @@ public final class EventAchievementProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -1713,23 +1631,23 @@ public final class EventAchievementProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1739,11 +1657,11 @@ public final class EventAchievementProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.AchievementProgressResponseProto.AchievementProgressStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventAchievementProto.AchievementProgressResponseProto.AchievementProgressStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -2451,13 +2369,13 @@ public final class EventAchievementProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.AchievementRedeemResponseProto}
@@ -2530,7 +2448,7 @@ public final class EventAchievementProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus value = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -2578,106 +2496,6 @@ public final class EventAchievementProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus}
-     */
-    public enum AchievementRedeemStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_NOT_COMPLETE = 2;</code>
-       */
-      FAIL_NOT_COMPLETE(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      /**
-       * <code>FAIL_ALREADY_REDEEMED = 4;</code>
-       */
-      FAIL_ALREADY_REDEEMED(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_NOT_COMPLETE = 2;</code>
-       */
-      public static final int FAIL_NOT_COMPLETE_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-      /**
-       * <code>FAIL_ALREADY_REDEEMED = 4;</code>
-       */
-      public static final int FAIL_ALREADY_REDEEMED_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static AchievementRedeemStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_NOT_COMPLETE;
-          case 3: return FAIL_OTHER;
-          case 4: return FAIL_ALREADY_REDEEMED;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<AchievementRedeemStatus>() {
-              public AchievementRedeemStatus findValueByNumber(int number) {
-                return AchievementRedeemStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final AchievementRedeemStatus[] VALUES = values();
-
-      public static AchievementRedeemStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private AchievementRedeemStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -2701,23 +2519,23 @@ public final class EventAchievementProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2883,7 +2701,7 @@ public final class EventAchievementProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -3090,23 +2908,23 @@ public final class EventAchievementProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3116,11 +2934,11 @@ public final class EventAchievementProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.AchievementRedeemResponseProto.AchievementRedeemStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventAchievementProto.AchievementRedeemResponseProto.AchievementRedeemStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -3166,28 +2984,22 @@ public final class EventAchievementProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026EventAchievement.proto\022\016com.lvl6.proto" +
-      "\032\026AchievementStuff.proto\032\nUser.proto\"\236\001\n" +
-      "\037AchievementProgressRequestProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\0225\n\007uapList\030\002 \003(\0132$.com.lvl6.proto.Use" +
-      "rAchievementProto\022\022\n\nclientTime\030\003 \001(\003\"\352\001" +
-      "\n AchievementProgressResponseProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Ac" +
-      "hievementProgressResponseProto.Achieveme",
-      "ntProgressStatus\"8\n\031AchievementProgressS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"|\n\035Ac" +
-      "hievementRedeemRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\025\n" +
-      "\rachievementId\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003" +
-      "\"\224\002\n\036AchievementRedeemResponseProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022V\n\006status\030\002 \001(\0162F.com.lvl6.proto.A" +
-      "chievementRedeemResponseProto.Achievemen" +
-      "tRedeemStatus\"h\n\027AchievementRedeemStatus",
-      "\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_COMPLETE\020\002\022\016\n\n" +
-      "FAIL_OTHER\020\003\022\031\n\025FAIL_ALREADY_REDEEMED\020\004B" +
-      "\027B\025EventAchievementProto"
+      "\032\026AchievementStuff.proto\032\026SharedEnumConf" +
+      "ig.proto\032\nUser.proto\"\236\001\n\037AchievementProg" +
+      "ressRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\0225\n\007uapList\030\002 " +
+      "\003(\0132$.com.lvl6.proto.UserAchievementProt" +
+      "o\022\022\n\nclientTime\030\003 \001(\003\"\204\001\n AchievementPro" +
+      "gressResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022.\n\006status\030\002" +
+      " \001(\0162\036.com.lvl6.proto.ResponseStatus\"|\n\035",
+      "AchievementRedeemRequestProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\025\n\rachievementId\030\002 \001(\005\022\022\n\nclientTime\030\003 \001" +
+      "(\003\"\202\001\n\036AchievementRedeemResponseProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto" +
+      ".ResponseStatusB\027B\025EventAchievementProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3201,6 +3013,7 @@ public final class EventAchievementProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.AchievementStuffProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_AchievementProgressRequestProto_descriptor =
@@ -3228,6 +3041,7 @@ public final class EventAchievementProto {
         internal_static_com_lvl6_proto_AchievementRedeemResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     com.lvl6.proto.AchievementStuffProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

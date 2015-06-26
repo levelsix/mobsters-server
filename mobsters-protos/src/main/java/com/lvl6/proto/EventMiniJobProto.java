@@ -856,13 +856,13 @@ public final class EventMiniJobProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SpawnMiniJobResponseProto}
@@ -943,7 +943,7 @@ public final class EventMiniJobProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus value = com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -992,88 +992,6 @@ public final class EventMiniJobProto {
     @java.lang.Override
     public com.google.protobuf.Parser<SpawnMiniJobResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus}
-     */
-    public enum SpawnMiniJobStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static SpawnMiniJobStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SpawnMiniJobStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SpawnMiniJobStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SpawnMiniJobStatus>() {
-              public SpawnMiniJobStatus findValueByNumber(int number) {
-                return SpawnMiniJobStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SpawnMiniJobStatus[] VALUES = values();
-
-      public static SpawnMiniJobStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SpawnMiniJobStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus)
     }
 
     private int bitField0_;
@@ -1134,24 +1052,24 @@ public final class EventMiniJobProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       miniJobs_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1331,7 +1249,7 @@ public final class EventMiniJobProto {
         } else {
           miniJobsBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -1813,23 +1731,23 @@ public final class EventMiniJobProto {
         return miniJobsBuilder_;
       }
 
-      private com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status_ = com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1839,11 +1757,11 @@ public final class EventMiniJobProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SpawnMiniJobResponseProto.SpawnMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -2813,13 +2731,13 @@ public final class EventMiniJobProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BeginMiniJobResponseProto}
@@ -2892,7 +2810,7 @@ public final class EventMiniJobProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus value = com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -2940,97 +2858,6 @@ public final class EventMiniJobProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus}
-     */
-    public enum BeginMiniJobStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NO_MINI_JOB_EXISTS = 3;</code>
-       */
-      FAIL_NO_MINI_JOB_EXISTS(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NO_MINI_JOB_EXISTS = 3;</code>
-       */
-      public static final int FAIL_NO_MINI_JOB_EXISTS_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static BeginMiniJobStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NO_MINI_JOB_EXISTS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<BeginMiniJobStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<BeginMiniJobStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<BeginMiniJobStatus>() {
-              public BeginMiniJobStatus findValueByNumber(int number) {
-                return BeginMiniJobStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final BeginMiniJobStatus[] VALUES = values();
-
-      public static BeginMiniJobStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private BeginMiniJobStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -3054,23 +2881,23 @@ public final class EventMiniJobProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3236,7 +3063,7 @@ public final class EventMiniJobProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -3443,23 +3270,23 @@ public final class EventMiniJobProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus status_ = com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3469,11 +3296,11 @@ public final class EventMiniJobProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginMiniJobResponseProto.BeginMiniJobStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMiniJobProto.BeginMiniJobResponseProto.BeginMiniJobStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -4448,13 +4275,13 @@ public final class EventMiniJobProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CompleteMiniJobResponseProto}
@@ -4527,7 +4354,7 @@ public final class EventMiniJobProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus value = com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -4575,106 +4402,6 @@ public final class EventMiniJobProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus}
-     */
-    public enum CompleteMiniJobStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 3;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(2, 3),
-      /**
-       * <code>FAIL_NO_MINI_JOB_EXISTS = 4;</code>
-       */
-      FAIL_NO_MINI_JOB_EXISTS(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 3;
-      /**
-       * <code>FAIL_NO_MINI_JOB_EXISTS = 4;</code>
-       */
-      public static final int FAIL_NO_MINI_JOB_EXISTS_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static CompleteMiniJobStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_INSUFFICIENT_GEMS;
-          case 4: return FAIL_NO_MINI_JOB_EXISTS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<CompleteMiniJobStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<CompleteMiniJobStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<CompleteMiniJobStatus>() {
-              public CompleteMiniJobStatus findValueByNumber(int number) {
-                return CompleteMiniJobStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final CompleteMiniJobStatus[] VALUES = values();
-
-      public static CompleteMiniJobStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private CompleteMiniJobStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -4698,23 +4425,23 @@ public final class EventMiniJobProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4880,7 +4607,7 @@ public final class EventMiniJobProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -5087,23 +4814,23 @@ public final class EventMiniJobProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status_ = com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -5113,11 +4840,11 @@ public final class EventMiniJobProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CompleteMiniJobResponseProto.CompleteMiniJobStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -6289,13 +6016,13 @@ public final class EventMiniJobProto {
     @java.lang.Deprecated com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.UserRewardProto rewards = 4;</code>
@@ -6394,7 +6121,7 @@ public final class EventMiniJobProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus value = com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -6455,106 +6182,6 @@ public final class EventMiniJobProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus}
-     */
-    public enum RedeemMiniJobStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NO_MINI_JOB_EXISTS = 3;</code>
-       */
-      FAIL_NO_MINI_JOB_EXISTS(2, 3),
-      /**
-       * <code>FAIL_MINI_JOB_INCOMPLETE = 4;</code>
-       */
-      FAIL_MINI_JOB_INCOMPLETE(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NO_MINI_JOB_EXISTS = 3;</code>
-       */
-      public static final int FAIL_NO_MINI_JOB_EXISTS_VALUE = 3;
-      /**
-       * <code>FAIL_MINI_JOB_INCOMPLETE = 4;</code>
-       */
-      public static final int FAIL_MINI_JOB_INCOMPLETE_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static RedeemMiniJobStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NO_MINI_JOB_EXISTS;
-          case 4: return FAIL_MINI_JOB_INCOMPLETE;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RedeemMiniJobStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RedeemMiniJobStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RedeemMiniJobStatus>() {
-              public RedeemMiniJobStatus findValueByNumber(int number) {
-                return RedeemMiniJobStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RedeemMiniJobStatus[] VALUES = values();
-
-      public static RedeemMiniJobStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RedeemMiniJobStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
@@ -6611,17 +6238,17 @@ public final class EventMiniJobProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -6649,7 +6276,7 @@ public final class EventMiniJobProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -6838,7 +6465,7 @@ public final class EventMiniJobProto {
           fumpBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         if (rewardsBuilder_ == null) {
           rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
@@ -7225,23 +6852,23 @@ public final class EventMiniJobProto {
         return fumpBuilder_;
       }
 
-      private com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status_ = com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -7251,11 +6878,11 @@ public final class EventMiniJobProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniJobResponseProto.RedeemMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -8661,13 +8288,13 @@ public final class EventMiniJobProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RefreshMiniJobResponseProto}
@@ -8744,7 +8371,7 @@ public final class EventMiniJobProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus value = com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -8793,106 +8420,6 @@ public final class EventMiniJobProto {
     @java.lang.Override
     public com.google.protobuf.Parser<RefreshMiniJobResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus}
-     */
-    public enum RefreshMiniJobStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_ITEMS = 3;</code>
-       */
-      FAIL_INSUFFICIENT_ITEMS(2, 3),
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      FAIL_OTHER(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_ITEMS = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_ITEMS_VALUE = 3;
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static RefreshMiniJobStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_GEMS;
-          case 3: return FAIL_INSUFFICIENT_ITEMS;
-          case 4: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RefreshMiniJobStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RefreshMiniJobStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RefreshMiniJobStatus>() {
-              public RefreshMiniJobStatus findValueByNumber(int number) {
-                return RefreshMiniJobStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RefreshMiniJobStatus[] VALUES = values();
-
-      public static RefreshMiniJobStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RefreshMiniJobStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus)
     }
 
     private int bitField0_;
@@ -8953,24 +8480,24 @@ public final class EventMiniJobProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       miniJobs_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -9146,7 +8673,7 @@ public final class EventMiniJobProto {
         } else {
           miniJobsBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -9628,23 +9155,23 @@ public final class EventMiniJobProto {
         return miniJobsBuilder_;
       }
 
-      private com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status_ = com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -9654,11 +9181,11 @@ public final class EventMiniJobProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RefreshMiniJobResponseProto.RefreshMiniJobStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -9739,64 +9266,49 @@ public final class EventMiniJobProto {
       "r.proto\"\206\001\n\030SpawnMiniJobRequestProto\0220\n\006" +
       "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
       "rProto\022\022\n\nclientTime\030\002 \001(\003\022\022\n\nnumToSpawn" +
-      "\030\003 \001(\005\022\020\n\010structId\030\004 \001(\005\"\202\002\n\031SpawnMiniJo" +
+      "\030\003 \001(\005\022\020\n\010structId\030\004 \001(\005\"\261\001\n\031SpawnMiniJo" +
       "bResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
       "6.proto.MinimumUserProto\0222\n\010miniJobs\030\002 \003" +
-      "(\0132 .com.lvl6.proto.UserMiniJobProto\022L\n\006",
-      "status\030\003 \001(\0162<.com.lvl6.proto.SpawnMiniJ" +
-      "obResponseProto.SpawnMiniJobStatus\"1\n\022Sp" +
-      "awnMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT" +
-      "HER\020\002\"\223\001\n\030BeginMiniJobRequestProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\022\n\nclientTime\030\002 \001(\003\022\030\n\020userMonsterU" +
-      "uids\030\003 \003(\t\022\027\n\017userMiniJobUuid\030\004 \001(\t\"\353\001\n\031" +
-      "BeginMiniJobResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022L\n\006s" +
-      "tatus\030\002 \001(\0162<.com.lvl6.proto.BeginMiniJo",
-      "bResponseProto.BeginMiniJobStatus\"N\n\022Beg" +
-      "inMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
-      "ER\020\002\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020\003\"\240\001\n\033Co" +
-      "mpleteMiniJobRequestProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022\022\n\nc" +
-      "lientTime\030\002 \001(\003\022\027\n\017userMiniJobUuid\030\003 \001(\t" +
-      "\022\021\n\tisSpeedUp\030\004 \001(\010\022\017\n\007gemCost\030\005 \001(\005\"\223\002\n" +
-      "\034CompleteMiniJobResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Complet",
-      "eMiniJobResponseProto.CompleteMiniJobSta" +
-      "tus\"m\n\025CompleteMiniJobStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_G" +
-      "EMS\020\003\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020\004\"\310\001\n\031R" +
-      "edeemMiniJobRequestProto\022@\n\006sender\030\001 \001(\013" +
-      "20.com.lvl6.proto.MinimumUserProtoWithMa" +
-      "xResources\022\022\n\nclientTime\030\002 \001(\003\022\027\n\017userMi" +
-      "niJobUuid\030\003 \001(\t\022<\n\005umchp\030\006 \003(\0132-.com.lvl" +
-      "6.proto.UserMonsterCurrentHealthProto\"\207\003" +
-      "\n\032RedeemMiniJobResponseProto\022@\n\006sender\030\001",
-      " \001(\01320.com.lvl6.proto.MinimumUserProtoWi" +
-      "thMaxResources\0226\n\004fump\030\002 \001(\0132$.com.lvl6." +
-      "proto.FullUserMonsterProtoB\002\030\001\022N\n\006status" +
-      "\030\003 \001(\0162>.com.lvl6.proto.RedeemMiniJobRes" +
-      "ponseProto.RedeemMiniJobStatus\0220\n\007reward" +
-      "s\030\004 \001(\0132\037.com.lvl6.proto.UserRewardProto" +
-      "\"m\n\023RedeemMiniJobStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
-      "FAIL_OTHER\020\002\022\033\n\027FAIL_NO_MINI_JOB_EXISTS\020" +
-      "\003\022\034\n\030FAIL_MINI_JOB_INCOMPLETE\020\004\"\375\001\n\032Refr" +
-      "eshMiniJobRequestProto\0220\n\006sender\030\001 \001(\0132 ",
-      ".com.lvl6.proto.MinimumUserProto\022\034\n\024dele" +
-      "teUserMiniJobIds\030\002 \003(\t\022\016\n\006itemId\030\003 \001(\005\022\022" +
-      "\n\nnumToSpawn\030\004 \001(\005\022\021\n\tgemsSpent\030\005 \001(\005\0222\n" +
-      "\021minQualitySpawned\030\006 \001(\0162\027.com.lvl6.prot" +
-      "o.Quality\022\022\n\nclientTime\030\007 \001(\003\022\020\n\010structI" +
-      "d\030\010 \001(\005\"\303\002\n\033RefreshMiniJobResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\0222\n\010miniJobs\030\002 \003(\0132 .com.lvl6.p" +
-      "roto.UserMiniJobProto\022P\n\006status\030\003 \001(\0162@." +
-      "com.lvl6.proto.RefreshMiniJobResponsePro",
-      "to.RefreshMiniJobStatus\"l\n\024RefreshMiniJo" +
-      "bStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICIEN" +
-      "T_GEMS\020\002\022\033\n\027FAIL_INSUFFICIENT_ITEMS\020\003\022\016\n" +
-      "\nFAIL_OTHER\020\004B\023B\021EventMiniJobProto"
+      "(\0132 .com.lvl6.proto.UserMiniJobProto\022.\n\006",
+      "status\030\003 \001(\0162\036.com.lvl6.proto.ResponseSt" +
+      "atus\"\223\001\n\030BeginMiniJobRequestProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022\022\n\nclientTime\030\002 \001(\003\022\030\n\020userMonsterUu" +
+      "ids\030\003 \003(\t\022\027\n\017userMiniJobUuid\030\004 \001(\t\"}\n\031Be" +
+      "ginMiniJobResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022.\n\006sta" +
+      "tus\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatu" +
+      "s\"\240\001\n\033CompleteMiniJobRequestProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr",
+      "oto\022\022\n\nclientTime\030\002 \001(\003\022\027\n\017userMiniJobUu" +
+      "id\030\003 \001(\t\022\021\n\tisSpeedUp\030\004 \001(\010\022\017\n\007gemCost\030\005" +
+      " \001(\005\"\200\001\n\034CompleteMiniJobResponseProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto" +
+      ".ResponseStatus\"\310\001\n\031RedeemMiniJobRequest" +
+      "Proto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.M" +
+      "inimumUserProtoWithMaxResources\022\022\n\nclien" +
+      "tTime\030\002 \001(\003\022\027\n\017userMiniJobUuid\030\003 \001(\t\022<\n\005" +
+      "umchp\030\006 \003(\0132-.com.lvl6.proto.UserMonster",
+      "CurrentHealthProto\"\370\001\n\032RedeemMiniJobResp" +
+      "onseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pro" +
+      "to.MinimumUserProtoWithMaxResources\0226\n\004f" +
+      "ump\030\002 \001(\0132$.com.lvl6.proto.FullUserMonst" +
+      "erProtoB\002\030\001\022.\n\006status\030\003 \001(\0162\036.com.lvl6.p" +
+      "roto.ResponseStatus\0220\n\007rewards\030\004 \001(\0132\037.c" +
+      "om.lvl6.proto.UserRewardProto\"\375\001\n\032Refres" +
+      "hMiniJobRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022\034\n\024delete" +
+      "UserMiniJobIds\030\002 \003(\t\022\016\n\006itemId\030\003 \001(\005\022\022\n\n",
+      "numToSpawn\030\004 \001(\005\022\021\n\tgemsSpent\030\005 \001(\005\0222\n\021m" +
+      "inQualitySpawned\030\006 \001(\0162\027.com.lvl6.proto." +
+      "Quality\022\022\n\nclientTime\030\007 \001(\003\022\020\n\010structId\030" +
+      "\010 \001(\005\"\263\001\n\033RefreshMiniJobResponseProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\0222\n\010miniJobs\030\002 \003(\0132 .com.lvl6.pro" +
+      "to.UserMiniJobProto\022.\n\006status\030\003 \001(\0162\036.co" +
+      "m.lvl6.proto.ResponseStatusB\023B\021EventMini" +
+      "JobProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

@@ -66,7 +66,7 @@ import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;

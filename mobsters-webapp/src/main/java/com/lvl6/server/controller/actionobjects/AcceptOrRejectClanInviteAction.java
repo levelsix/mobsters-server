@@ -18,7 +18,7 @@ import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.FullClanProtoWithClanSize;
 import com.lvl6.proto.ClanProto.UserClanStatus;
-import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.AcceptOrRejectClanInviteStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto.Builder;
 import com.lvl6.retrieveutils.ClanInviteRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -88,7 +88,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private int clanSize;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(AcceptOrRejectClanInviteStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -108,7 +108,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-		resBuilder.setStatus(AcceptOrRejectClanInviteStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		if (!rejectOnly) {
 			//meaning user accepted an invite
 			FullClanProtoWithClanSize fcpwcs = createInfoProtoUtils
@@ -186,7 +186,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			log.error(String.format("clan is full. %s, size=%s",
 					prospectiveClan, clanSize));
 			resBuilder
-					.setStatus(AcceptOrRejectClanInviteStatus.FAIL_CLAN_IS_FULL);
+					.setStatus(ResponseStatus.FAIL_CLAN_IS_FULL);
 			return false;
 		}
 

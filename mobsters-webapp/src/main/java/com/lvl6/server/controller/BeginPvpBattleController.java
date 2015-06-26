@@ -15,7 +15,7 @@ import com.lvl6.events.response.BeginPvpBattleResponseEvent;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventPvpProto.BeginPvpBattleRequestProto;
 import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto;
-import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto.BeginPvpBattleStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
@@ -97,7 +97,7 @@ public class BeginPvpBattleController extends EventController {
 		BeginPvpBattleResponseProto.Builder resBuilder = BeginPvpBattleResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(BeginPvpBattleStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 		BeginPvpBattleResponseEvent resEvent = new BeginPvpBattleResponseEvent(
 				attackerId);
 		resEvent.setTag(event.getTag());
@@ -121,7 +121,7 @@ public class BeginPvpBattleController extends EventController {
 		}
 
 		if (invalidUuids) {
-			resBuilder.setStatus(BeginPvpBattleStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);

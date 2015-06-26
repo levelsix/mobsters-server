@@ -15,7 +15,7 @@ import com.lvl6.events.response.UpdateUserStrengthResponseEvent;
 import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthRequestProto;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto;
-import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -75,7 +75,7 @@ public class UpdateUserStrengthController extends EventController {
 		UpdateUserStrengthResponseProto.Builder resBuilder = UpdateUserStrengthResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(UpdateUserStrengthStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -90,7 +90,7 @@ public class UpdateUserStrengthController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(UpdateUserStrengthStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			UpdateUserStrengthResponseEvent resEvent = new UpdateUserStrengthResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -112,7 +112,7 @@ public class UpdateUserStrengthController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
-			if (UpdateUserStrengthStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods()
@@ -128,7 +128,7 @@ public class UpdateUserStrengthController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(UpdateUserStrengthStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				UpdateUserStrengthResponseEvent resEvent = new UpdateUserStrengthResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

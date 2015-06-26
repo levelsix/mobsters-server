@@ -19,7 +19,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.Builder;
-import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -86,7 +86,7 @@ public class SetFacebookIdController extends EventController {
 		userIds.add(userId);
 
 		Builder resBuilder = SetFacebookIdResponseProto.newBuilder();
-		resBuilder.setStatus(SetFacebookIdStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		UUID userUuid = null;
@@ -103,7 +103,7 @@ public class SetFacebookIdController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SetFacebookIdStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -127,7 +127,7 @@ public class SetFacebookIdController extends EventController {
 			}
 
 			if (legit) {
-				resBuilder.setStatus(SetFacebookIdStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			SetFacebookIdResponseProto resProto = resBuilder.build();
@@ -137,7 +137,7 @@ public class SetFacebookIdController extends EventController {
 			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
-			if (SetFacebookIdStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
@@ -149,7 +149,7 @@ public class SetFacebookIdController extends EventController {
 			log.error("exception in SetFacebookIdController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(SetFacebookIdStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -182,7 +182,7 @@ public class SetFacebookIdController extends EventController {
 					.format("fbId already set for user. existingFbId='%s', user=%s, newFbId=%s",
 							existingFbId, user, newFbId));
 			resBuilder
-					.setStatus(SetFacebookIdStatus.FAIL_USER_FB_ID_ALREADY_SET);
+					.setStatus(ResponseStatus.FAIL_USER_FB_ID_ALREADY_SET);
 			return false;
 		}
 
@@ -194,7 +194,7 @@ public class SetFacebookIdController extends EventController {
 			log.error(String.format(
 					"fbId already taken. fbId='%s', usersInDb=%s", newFbId,
 					userMap));
-			resBuilder.setStatus(SetFacebookIdStatus.FAIL_FB_ID_EXISTS);
+			resBuilder.setStatus(ResponseStatus.FAIL_FB_ID_EXISTS);
 
 			//client wants the user who has the facebook id
 			for (User u : userMap.values()) {

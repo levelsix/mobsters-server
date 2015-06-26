@@ -17,7 +17,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.ResourceUtil;
@@ -81,7 +81,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -100,20 +100,20 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-		resBuilder.setStatus(CreateClanStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
 		user = userRetrieveUtils.getUserById(userId);
 		if (user == null || clanName == null || clanName.isEmpty() ||
 				tag == null || tag.isEmpty()) {
-			resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("user is null");
 			return false;
 		}
 
 		if (clanName.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME) {
-			resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error(String.format(
 					"clan name %s is more than %s characters",
 					clanName, ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME));
@@ -121,7 +121,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 
 		if (tag.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG) {
-			resBuilder.setStatus(CreateClanStatus.FAIL_INVALID_TAG_LENGTH);
+			resBuilder.setStatus(ResponseStatus.FAIL_INVALID_TAG_LENGTH);
 			log.error(String.format(
 					"clan tag %s is more than %s characters.",
 					tag, ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG));
@@ -132,7 +132,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 	private boolean verifySemantics(Builder resBuilder) {
 		if (null != user.getClanId() && !user.getClanId().isEmpty()) {
-			resBuilder.setStatus(CreateClanStatus.FAIL_ALREADY_IN_CLAN);
+			resBuilder.setStatus(ResponseStatus.FAIL_ALREADY_IN_CLAN);
 			log.error(String.format(
 					"user already in clan with id %s", user.getClanId()));
 			return false;
@@ -140,12 +140,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		Clan clan = clanRetrieveUtils.getClanWithNameOrTag(clanName, tag);
 		if (clan != null) {
 			if (clan.getName().equalsIgnoreCase(clanName)) {
-				resBuilder.setStatus(CreateClanStatus.FAIL_NAME_TAKEN);
+				resBuilder.setStatus(ResponseStatus.FAIL_NAME_TAKEN);
 				log.error("clan name already taken with name " + clanName);
 				return false;
 			}
 			if (clan.getTag().equalsIgnoreCase(tag)) {
-				resBuilder.setStatus(CreateClanStatus.FAIL_TAG_TAKEN);
+				resBuilder.setStatus(ResponseStatus.FAIL_TAG_TAKEN);
 				log.error("clan tag already taken with tag " + tag);
 				return false;
 			}
@@ -154,17 +154,17 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		//CHECK MONEY
 		if (0 == gemsSpent) {
 			if (!resourceUtil.hasEnoughCash(user, cashChange)) {
-				resBuilder.setStatus(CreateClanStatus.FAIL_INSUFFICIENT_FUNDS);
+				resBuilder.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 				return false;
 			}
 		}
 
 		if (!resourceUtil.hasEnoughGems(user, gemsSpent)) {
-			resBuilder.setStatus(CreateClanStatus.FAIL_INSUFFICIENT_FUNDS);
+			resBuilder.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 			return false;
 		}
 
-		resBuilder.setStatus(CreateClanStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

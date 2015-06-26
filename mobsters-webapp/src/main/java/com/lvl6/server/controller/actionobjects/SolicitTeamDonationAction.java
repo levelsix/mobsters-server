@@ -16,7 +16,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -86,7 +86,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(SolicitTeamDonationStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -106,7 +106,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(SolicitTeamDonationStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		//TODO: consider moving this out to controller
 		//ClanMemberTeamDonationProto cmtdp = CreateInfoProtoUtils
 		//	.createClanMemberTeamDonationProto(donation, null);
@@ -157,7 +157,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			log.error("not enough gems. userGems={}, gemsSpent={}", userGems,
 					gemsSpent);
 			resBuilder
-					.setStatus(SolicitTeamDonationStatus.FAIL_INSUFFICIENT_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 

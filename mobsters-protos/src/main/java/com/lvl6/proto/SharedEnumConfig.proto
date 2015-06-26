@@ -179,7 +179,8 @@ enum ResponseStatus {
 	//used by BeginClanRaid,
 	FAIL_ALREADY_STARTED = 708;
 	
-	//used by LeaveCLan, SolicitClanHelp
+	//used by LeaveCLan, SolicitClanHelp, TransferClanOwnership, BootPlayerFromClan, ChangeClanSettings, 
+	//AttackClanRaidMonster, PromoteDemoteClanMember
 	FAIL_NOT_IN_CLAN = 709;
 	
 	//used by LeaveClan
@@ -201,20 +202,17 @@ enum ResponseStatus {
 	//PromoteDemoteClanMember, InviteToClan, 
 	FAIL_NOT_AUTHORIZED = 715;
 	
-	//used by TransferClanOwnership, BootPlayerFromClan, ChangeClanSettings, AttackClanRaidMonster, PromoteDemoteClanMember
-	FAIL_NOT_IN_CLAN = 716;
-	
 	//used by BeginClanRaid, AttackClanRaidMonster
-	FAIL_NO_ACTIVE_CLAN_RAID = 717;
+	FAIL_NO_ACTIVE_CLAN_RAID = 716;
 	
 	//used by BeginClanRaid,
-	FAIL_NO_MONSTERS_SENT = 718;
+	FAIL_NO_MONSTERS_SENT = 717;
 	
 	//used by AttackClanRaidMonster, RecordClanRaidStats
-	FAIL_MONSTER_ALREADY_DEAD = 719;
+	FAIL_MONSTER_ALREADY_DEAD = 718;
 	
 	//used by SolicitTeamDonation,
-	FAIL_FULFILLED_REQUEST_EXISTS = 720;
+	FAIL_FULFILLED_REQUEST_EXISTS = 719;
 	
 	//--------------------------EventInAppPurchase-------------------
 		

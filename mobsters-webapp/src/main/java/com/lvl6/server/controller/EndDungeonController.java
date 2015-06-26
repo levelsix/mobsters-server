@@ -33,7 +33,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.EndDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.Builder;
-import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -145,7 +145,7 @@ public class EndDungeonController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setUserWon(userWon);
-		resBuilder.setStatus(EndDungeonStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -161,7 +161,7 @@ public class EndDungeonController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(EndDungeonStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -271,7 +271,7 @@ public class EndDungeonController extends EventController {
 			log.error("exception in EndDungeonController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(EndDungeonStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -304,7 +304,7 @@ public class EndDungeonController extends EventController {
 			return false;
 		}
 
-		resBuilder.setStatus(EndDungeonStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 
@@ -662,7 +662,7 @@ public class EndDungeonController extends EventController {
 
 	private void setResponseBuilder(Builder resBuilder,
 			List<FullUserMonsterProto> protos, UserTaskCompleted utc) {
-		resBuilder.setStatus(EndDungeonStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 		if (!protos.isEmpty()) {
 			resBuilder.addAllUpdatedOrNew(protos);

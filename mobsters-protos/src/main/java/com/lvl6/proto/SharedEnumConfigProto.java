@@ -767,6 +767,1224 @@ public final class SharedEnumConfigProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.GameType)
   }
 
+  /**
+   * Protobuf enum {@code com.lvl6.proto.ResourceType}
+   *
+   * <pre>
+   *If I don't make it...tell my parents I love them
+   * </pre>
+   */
+  public enum ResourceType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>NO_RESOURCE = 4;</code>
+     */
+    NO_RESOURCE(0, 4),
+    /**
+     * <code>CASH = 1;</code>
+     */
+    CASH(1, 1),
+    /**
+     * <code>OIL = 2;</code>
+     */
+    OIL(2, 2),
+    /**
+     * <code>GEMS = 3;</code>
+     */
+    GEMS(3, 3),
+    /**
+     * <code>GACHA_CREDITS = 5;</code>
+     */
+    GACHA_CREDITS(4, 5),
+    /**
+     * <code>MONSTER = 20;</code>
+     */
+    MONSTER(5, 20),
+    ;
+
+    /**
+     * <code>NO_RESOURCE = 4;</code>
+     */
+    public static final int NO_RESOURCE_VALUE = 4;
+    /**
+     * <code>CASH = 1;</code>
+     */
+    public static final int CASH_VALUE = 1;
+    /**
+     * <code>OIL = 2;</code>
+     */
+    public static final int OIL_VALUE = 2;
+    /**
+     * <code>GEMS = 3;</code>
+     */
+    public static final int GEMS_VALUE = 3;
+    /**
+     * <code>GACHA_CREDITS = 5;</code>
+     */
+    public static final int GACHA_CREDITS_VALUE = 5;
+    /**
+     * <code>MONSTER = 20;</code>
+     */
+    public static final int MONSTER_VALUE = 20;
+
+
+    public final int getNumber() { return value; }
+
+    public static ResourceType valueOf(int value) {
+      switch (value) {
+        case 4: return NO_RESOURCE;
+        case 1: return CASH;
+        case 2: return OIL;
+        case 3: return GEMS;
+        case 5: return GACHA_CREDITS;
+        case 20: return MONSTER;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ResourceType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<ResourceType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ResourceType>() {
+            public ResourceType findValueByNumber(int number) {
+              return ResourceType.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.lvl6.proto.SharedEnumConfigProto.getDescriptor().getEnumTypes().get(5);
+    }
+
+    private static final ResourceType[] VALUES = values();
+
+    public static ResourceType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private ResourceType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ResourceType)
+  }
+
+  /**
+   * Protobuf enum {@code com.lvl6.proto.ResponseStatus}
+   */
+  public enum ResponseStatus
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>SUCCESS = 1;</code>
+     */
+    SUCCESS(0, 1),
+    /**
+     * <code>FAIL_OTHER = 2;</code>
+     */
+    FAIL_OTHER(1, 2),
+    /**
+     * <code>FAIL_TIME_OUT_OF_SYNC = 3;</code>
+     */
+    FAIL_TIME_OUT_OF_SYNC(2, 3),
+    /**
+     * <code>FAIL_INSUFFICIENT_FUNDS = 4;</code>
+     *
+     * <pre>
+     *used by CreateBattleItem, CompleteBattleItem, CreateClan, ReviveInDungeon, EndPersistentEventCoolDownTimer, EvolveMonster,
+     *EnhancementWaitTimeComplete, UpdateMonsterHealth, HealMonster, HealMonsterWaitTimeComplete, IncreaseMonsterInventorySlot,
+     *BeginObstacleRemoval
+     * </pre>
+     */
+    FAIL_INSUFFICIENT_FUNDS(3, 4),
+    /**
+     * <code>FAIL_INSUFFICIENT_CASH = 5;</code>
+     *
+     * <pre>
+     *used by CreateClan, QueueUp, PerformResearch, PurchaseNormStructure, UpgradeNormStructure, UpdateUserCurrency
+     * </pre>
+     */
+    FAIL_INSUFFICIENT_CASH(4, 5),
+    /**
+     * <code>FAIL_INSUFFICIENT_OIL = 6;</code>
+     *
+     * <pre>
+     *used by SubmitMonsterEnhancement, PerformResearch, PurchaseNormStructure, UpgradeNormStructure, UpdateUserCurrency
+     * </pre>
+     */
+    FAIL_INSUFFICIENT_OIL(5, 6),
+    /**
+     * <code>FAIL_INSUFFICIENT_GEMS = 7;</code>
+     *
+     * <pre>
+     *used by PurchaseBoosterPack, SolicitTeamDonation, ExchangeGemsForResources, CompleteMiniJob, RefreshMiniJob, EvolveMonster,
+     *EvolutionFinished, SubmitMonsterEnhancement, CombineUserMonsterPieces, QueueUp, PerformResearch, FinishPerformingResearch,
+     *PurchaseNormStructure, UpgradeNormStructure, FinishNormStructWaittime, BeginObstacleRemoval, ObstacleRemovalComplete,
+     *UpdateUserCurrency
+     * </pre>
+     */
+    FAIL_INSUFFICIENT_GEMS(6, 7),
+    /**
+     * <code>FAIL_NOT_COMPLETE = 8;</code>
+     *
+     * <pre>
+     *used by AchievementRedeem, RedeemMiniJob, CollectMonsterEnhancement
+     * </pre>
+     */
+    FAIL_NOT_COMPLETE(7, 8),
+    /**
+     * <code>FAIL_INSUFFICIENT_ITEM = 9;</code>
+     *
+     * <pre>
+     *used by TradeItemForBooster, RefreshMiniJob, RedeemSecretGift
+     * </pre>
+     */
+    FAIL_INSUFFICIENT_ITEM(8, 9),
+    /**
+     * <code>FAIL_DOESNT_EXIST = 10;</code>
+     *
+     * <pre>
+     *used by BeginMiniJob, CompleteMiniJob, RedeemMiniJob, FulfillTeamDonationSolicitation, EvolveMonster, HealMonster
+     * </pre>
+     */
+    FAIL_DOESNT_EXIST(9, 10),
+    /**
+     * <code>FAIL_ALREADY_REDEEMED = 100;</code>
+     *
+     * <pre>
+     *used by AchievementRedeem, 
+     * </pre>
+     */
+    FAIL_ALREADY_REDEEMED(10, 100),
+    /**
+     * <code>FAIL_NOT_ENABLED = 200;</code>
+     *
+     * <pre>
+     *used by EnableAPNS
+     * </pre>
+     */
+    FAIL_NOT_ENABLED(11, 200),
+    /**
+     * <code>FAIL_INVALID_BATTLE_ITEMS = 300;</code>
+     *
+     * <pre>
+     *used by CompleteBattleItem, DiscardBattleItem
+     * </pre>
+     */
+    FAIL_INVALID_BATTLE_ITEMS(12, 300),
+    /**
+     * <code>FAIL_INSUFFICIENT_GACHA_CREDITS = 400;</code>
+     *
+     * <pre>
+     *used by PurchaseBoosterPack
+     * </pre>
+     */
+    FAIL_INSUFFICIENT_GACHA_CREDITS(13, 400),
+    /**
+     * <code>FAIL_TOO_LONG = 500;</code>
+     *
+     * <pre>
+     *used by SendGroupChat, PrivateChatPost
+     * </pre>
+     */
+    FAIL_TOO_LONG(14, 500),
+    /**
+     * <code>FAIL_BANNED = 501;</code>
+     *
+     * <pre>
+     *used by SendGroupChat, PrivateChatPost
+     * </pre>
+     */
+    FAIL_BANNED(15, 501),
+    /**
+     * <code>FAIL_NO_CONTENT_SENT = 502;</code>
+     *
+     * <pre>
+     *used by PrivateChatPost,
+     * </pre>
+     */
+    FAIL_NO_CONTENT_SENT(16, 502),
+    /**
+     * <code>FAIL_NOT_VALID_LANGUAGE = 503;</code>
+     *
+     * <pre>
+     *used by TranslateSelectMessages
+     * </pre>
+     */
+    FAIL_NOT_VALID_LANGUAGE(17, 503),
+    /**
+     * <code>FAIL_NO_SUCH_PLAYER = 600;</code>
+     *
+     * <pre>
+     *used by LoadPlayerCity,
+     * </pre>
+     */
+    FAIL_NO_SUCH_PLAYER(18, 600),
+    /**
+     * <code>SUCCESS_REQUEST = 701;</code>
+     *
+     * <pre>
+     *used by RequestJoinClan
+     * </pre>
+     */
+    SUCCESS_REQUEST(19, 701),
+    /**
+     * <code>SUCCESS_JOIN = 702;</code>
+     *
+     * <pre>
+     *used by RequestJoinClan
+     * </pre>
+     */
+    SUCCESS_JOIN(20, 702),
+    /**
+     * <code>SUCCESS_MONSTER_JUST_DIED = 703;</code>
+     *
+     * <pre>
+     *used by AttackClanRaidMonster
+     * </pre>
+     */
+    SUCCESS_MONSTER_JUST_DIED(21, 703),
+    /**
+     * <code>FAIL_NAME_TAKEN = 704;</code>
+     *
+     * <pre>
+     *used by CreateClan, UserCreate
+     * </pre>
+     */
+    FAIL_NAME_TAKEN(22, 704),
+    /**
+     * <code>FAIL_ALREADY_IN_CLAN = 705;</code>
+     *
+     * <pre>
+     *used by CreateClan, RequestJoinClan, RetractRequestJoinClan, ApproveOrRejectRequestToJoinClan
+     * </pre>
+     */
+    FAIL_ALREADY_IN_CLAN(23, 705),
+    /**
+     * <code>FAIL_INVALID_TAG_LENGTH = 706;</code>
+     *
+     * <pre>
+     *used by CreateClan,
+     * </pre>
+     */
+    FAIL_INVALID_TAG_LENGTH(24, 706),
+    /**
+     * <code>FAIL_TAG_TAKEN = 707;</code>
+     *
+     * <pre>
+     *used by CreateClan,
+     * </pre>
+     */
+    FAIL_TAG_TAKEN(25, 707),
+    /**
+     * <code>FAIL_ALREADY_STARTED = 708;</code>
+     *
+     * <pre>
+     *used by BeginClanRaid,
+     * </pre>
+     */
+    FAIL_ALREADY_STARTED(26, 708),
+    /**
+     * <code>FAIL_NOT_IN_CLAN = 709;</code>
+     *
+     * <pre>
+     *used by LeaveCLan, SolicitClanHelp, TransferClanOwnership, BootPlayerFromClan, ChangeClanSettings, 
+     *AttackClanRaidMonster, PromoteDemoteClanMember
+     * </pre>
+     */
+    FAIL_NOT_IN_CLAN(27, 709),
+    /**
+     * <code>FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 710;</code>
+     *
+     * <pre>
+     *used by LeaveClan
+     * </pre>
+     */
+    FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN(28, 710),
+    /**
+     * <code>FAIL_ALREADY_FULFILLED = 711;</code>
+     *
+     * <pre>
+     *used by FulFIllTeamDonationSolicitation
+     * </pre>
+     */
+    FAIL_ALREADY_FULFILLED(29, 711),
+    /**
+     * <code>FAIL_REQUEST_ALREADY_FILED = 712;</code>
+     *
+     * <pre>
+     *used by RequestJoinClan 
+     * </pre>
+     */
+    FAIL_REQUEST_ALREADY_FILED(30, 712),
+    /**
+     * <code>FAIL_CLAN_IS_FULL = 713;</code>
+     *
+     * <pre>
+     *used by RequestJoinClan, ApproveOrRejectRequestToJoinClan, AcceptOrRejectClanInvite
+     * </pre>
+     */
+    FAIL_CLAN_IS_FULL(31, 713),
+    /**
+     * <code>FAIL_DID_NOT_REQUEST = 714;</code>
+     *
+     * <pre>
+     *used by RetractRequestJoinClan, ApproveOrRejectRequestToJoinClan, 
+     * </pre>
+     */
+    FAIL_DID_NOT_REQUEST(32, 714),
+    /**
+     * <code>FAIL_NOT_AUTHORIZED = 715;</code>
+     *
+     * <pre>
+     *used by ApproveOrRejectRequestToJoinClan, TransferClanOwnership, BootPlayerFromClan, ChangeClanSettings, BeginClanRaid,
+     *PromoteDemoteClanMember, InviteToClan, 
+     * </pre>
+     */
+    FAIL_NOT_AUTHORIZED(33, 715),
+    /**
+     * <code>FAIL_NO_ACTIVE_CLAN_RAID = 716;</code>
+     *
+     * <pre>
+     *used by BeginClanRaid, AttackClanRaidMonster
+     * </pre>
+     */
+    FAIL_NO_ACTIVE_CLAN_RAID(34, 716),
+    /**
+     * <code>FAIL_NO_MONSTERS_SENT = 717;</code>
+     *
+     * <pre>
+     *used by BeginClanRaid,
+     * </pre>
+     */
+    FAIL_NO_MONSTERS_SENT(35, 717),
+    /**
+     * <code>FAIL_MONSTER_ALREADY_DEAD = 718;</code>
+     *
+     * <pre>
+     *used by AttackClanRaidMonster, RecordClanRaidStats
+     * </pre>
+     */
+    FAIL_MONSTER_ALREADY_DEAD(36, 718),
+    /**
+     * <code>FAIL_FULFILLED_REQUEST_EXISTS = 719;</code>
+     *
+     * <pre>
+     *used by SolicitTeamDonation,
+     * </pre>
+     */
+    FAIL_FULFILLED_REQUEST_EXISTS(37, 719),
+    /**
+     * <code>FAIL_DUPLICATE_RECEIPT = 800;</code>
+     *
+     * <pre>
+     *used by InAppPurchase
+     * </pre>
+     */
+    FAIL_DUPLICATE_RECEIPT(38, 800),
+    /**
+     * <code>FAIL_METHOD_NOT_SUPPORTED = 801;</code>
+     *
+     * <pre>
+     *used by EarnFreeDiamonds
+     * </pre>
+     */
+    FAIL_METHOD_NOT_SUPPORTED(39, 801),
+    /**
+     * <code>FAIL_NO_RESULTS = 900;</code>
+     *
+     * <pre>
+     *used by RetrieveStrengthLeaderBoard
+     * </pre>
+     */
+    FAIL_NO_RESULTS(40, 900),
+    /**
+     * <code>FAIL_MONSTER_REACHED_EVOLVING_LIMIT = 1000;</code>
+     *
+     * <pre>
+     *used by EvolveMonster
+     * </pre>
+     */
+    FAIL_MONSTER_REACHED_EVOLVING_LIMIT(41, 1000),
+    /**
+     * <code>FAIL_MAX_NUM_EVOLUTIONS_REACHED = 1001;</code>
+     */
+    FAIL_MAX_NUM_EVOLUTIONS_REACHED(42, 1001),
+    /**
+     * <code>FAIL_MONSTER_IN_ENHANCING = 1002;</code>
+     *
+     * <pre>
+     *used by SubmitMonsterEnhancement
+     * </pre>
+     */
+    FAIL_MONSTER_IN_ENHANCING(43, 1002),
+    /**
+     * <code>FAIL_MONSTER_IN_EVOLUTION = 1003;</code>
+     */
+    FAIL_MONSTER_IN_EVOLUTION(44, 1003),
+    /**
+     * <code>FAIL_MONSTER_NONEXISTENT = 1004;</code>
+     */
+    FAIL_MONSTER_NONEXISTENT(45, 1004),
+    /**
+     * <code>FAIL_MONSTER_RESTRICTED = 1005;</code>
+     */
+    FAIL_MONSTER_RESTRICTED(46, 1005),
+    /**
+     * <code>FAIL_MONSTER_ALREADY_IN_HEALING = 1006;</code>
+     *
+     * <pre>
+     *used by SubmitMonsterEnhancement, HealMonster
+     * </pre>
+     */
+    FAIL_MONSTER_ALREADY_IN_HEALING(47, 1006),
+    /**
+     * <code>FAIL_HEALING_NOT_COMPLETE = 1007;</code>
+     *
+     * <pre>
+     *used by HealMonster, HealMonsterWaitTimeComplete
+     * </pre>
+     */
+    FAIL_HEALING_NOT_COMPLETE(48, 1007),
+    /**
+     * <code>FAIL_INSUFFICIENT_FACEBOOK_INVITES = 1008;</code>
+     *
+     * <pre>
+     *used by IncreaseMonsterInventorySlot
+     * </pre>
+     */
+    FAIL_INSUFFICIENT_FACEBOOK_INVITES(49, 1008),
+    /**
+     * <code>FAIL_INCONSISTENT_INVITE_DATA = 1009;</code>
+     */
+    FAIL_INCONSISTENT_INVITE_DATA(50, 1009),
+    /**
+     * <code>FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL = 1010;</code>
+     */
+    FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL(51, 1010),
+    /**
+     * <code>FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP = 1011;</code>
+     *
+     * <pre>
+     *used by CombineUserMonsterPieces
+     * </pre>
+     */
+    FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP(52, 1011),
+    /**
+     * <code>FAIL_EXPIRED = 1012;</code>
+     *
+     * <pre>
+     *used by AcceptAndRejectFbInviteForSlots
+     * </pre>
+     */
+    FAIL_EXPIRED(53, 1012),
+    /**
+     * <code>FAIL_ALREADY_BEEN_USED = 1013;</code>
+     *
+     * <pre>
+     *used by AcceptAndRejectFbInviteForSlots
+     * </pre>
+     */
+    FAIL_ALREADY_BEEN_USED(54, 1013),
+    /**
+     * <code>FAIL_ENEMY_UNAVAILABLE = 1100;</code>
+     *
+     * <pre>
+     *used by BeginPvpBattle
+     * </pre>
+     */
+    FAIL_ENEMY_UNAVAILABLE(55, 1100),
+    /**
+     * <code>FAIL_BATTLE_TOOK_TOO_LONG = 1101;</code>
+     *
+     * <pre>
+     *used by EndPvpBattle
+     * </pre>
+     */
+    FAIL_BATTLE_TOOK_TOO_LONG(56, 1101),
+    /**
+     * <code>FAIL_NOT_BUILT_YET = 1200;</code>
+     *
+     * <pre>
+     *used by UpgradeNormStructure, NormStructWaitComplete
+     * </pre>
+     */
+    FAIL_NOT_BUILT_YET(57, 1200),
+    /**
+     * <code>FAIL_NOT_USERS_STRUCT = 1201;</code>
+     *
+     * <pre>
+     *used by UpgradeNormStructure
+     * </pre>
+     */
+    FAIL_NOT_USERS_STRUCT(58, 1201),
+    /**
+     * <code>FAIL_AT_MAX_LEVEL_ALREADY = 1202;</code>
+     */
+    FAIL_AT_MAX_LEVEL_ALREADY(59, 1202),
+    /**
+     * <code>FAIL_NOT_EXPIRED_YET = 1203;</code>
+     *
+     * <pre>
+     *used by DestroyMoneyTreeStructure
+     * </pre>
+     */
+    FAIL_NOT_EXPIRED_YET(60, 1203),
+    /**
+     * <code>FAIL_USER_WITH_UDID_ALREADY_EXISTS = 1300;</code>
+     *
+     * <pre>
+     *used by UserCreate
+     * </pre>
+     */
+    FAIL_USER_WITH_UDID_ALREADY_EXISTS(61, 1300),
+    /**
+     * <code>FAIL_INVALID_REFER_CODE = 1301;</code>
+     */
+    FAIL_INVALID_REFER_CODE(62, 1301),
+    /**
+     * <code>FAIL_USER_WITH_FACEBOOK_ID_EXISTS = 1302;</code>
+     */
+    FAIL_USER_WITH_FACEBOOK_ID_EXISTS(63, 1302),
+    /**
+     * <code>FAIL_FB_ID_EXISTS = 1303;</code>
+     *
+     * <pre>
+     *used by SetFacebookId
+     * </pre>
+     */
+    FAIL_FB_ID_EXISTS(64, 1303),
+    /**
+     * <code>FAIL_USER_FB_ID_ALREADY_SET = 1304;</code>
+     */
+    FAIL_USER_FB_ID_ALREADY_SET(65, 1304),
+    ;
+
+    /**
+     * <code>SUCCESS = 1;</code>
+     */
+    public static final int SUCCESS_VALUE = 1;
+    /**
+     * <code>FAIL_OTHER = 2;</code>
+     */
+    public static final int FAIL_OTHER_VALUE = 2;
+    /**
+     * <code>FAIL_TIME_OUT_OF_SYNC = 3;</code>
+     */
+    public static final int FAIL_TIME_OUT_OF_SYNC_VALUE = 3;
+    /**
+     * <code>FAIL_INSUFFICIENT_FUNDS = 4;</code>
+     *
+     * <pre>
+     *used by CreateBattleItem, CompleteBattleItem, CreateClan, ReviveInDungeon, EndPersistentEventCoolDownTimer, EvolveMonster,
+     *EnhancementWaitTimeComplete, UpdateMonsterHealth, HealMonster, HealMonsterWaitTimeComplete, IncreaseMonsterInventorySlot,
+     *BeginObstacleRemoval
+     * </pre>
+     */
+    public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 4;
+    /**
+     * <code>FAIL_INSUFFICIENT_CASH = 5;</code>
+     *
+     * <pre>
+     *used by CreateClan, QueueUp, PerformResearch, PurchaseNormStructure, UpgradeNormStructure, UpdateUserCurrency
+     * </pre>
+     */
+    public static final int FAIL_INSUFFICIENT_CASH_VALUE = 5;
+    /**
+     * <code>FAIL_INSUFFICIENT_OIL = 6;</code>
+     *
+     * <pre>
+     *used by SubmitMonsterEnhancement, PerformResearch, PurchaseNormStructure, UpgradeNormStructure, UpdateUserCurrency
+     * </pre>
+     */
+    public static final int FAIL_INSUFFICIENT_OIL_VALUE = 6;
+    /**
+     * <code>FAIL_INSUFFICIENT_GEMS = 7;</code>
+     *
+     * <pre>
+     *used by PurchaseBoosterPack, SolicitTeamDonation, ExchangeGemsForResources, CompleteMiniJob, RefreshMiniJob, EvolveMonster,
+     *EvolutionFinished, SubmitMonsterEnhancement, CombineUserMonsterPieces, QueueUp, PerformResearch, FinishPerformingResearch,
+     *PurchaseNormStructure, UpgradeNormStructure, FinishNormStructWaittime, BeginObstacleRemoval, ObstacleRemovalComplete,
+     *UpdateUserCurrency
+     * </pre>
+     */
+    public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 7;
+    /**
+     * <code>FAIL_NOT_COMPLETE = 8;</code>
+     *
+     * <pre>
+     *used by AchievementRedeem, RedeemMiniJob, CollectMonsterEnhancement
+     * </pre>
+     */
+    public static final int FAIL_NOT_COMPLETE_VALUE = 8;
+    /**
+     * <code>FAIL_INSUFFICIENT_ITEM = 9;</code>
+     *
+     * <pre>
+     *used by TradeItemForBooster, RefreshMiniJob, RedeemSecretGift
+     * </pre>
+     */
+    public static final int FAIL_INSUFFICIENT_ITEM_VALUE = 9;
+    /**
+     * <code>FAIL_DOESNT_EXIST = 10;</code>
+     *
+     * <pre>
+     *used by BeginMiniJob, CompleteMiniJob, RedeemMiniJob, FulfillTeamDonationSolicitation, EvolveMonster, HealMonster
+     * </pre>
+     */
+    public static final int FAIL_DOESNT_EXIST_VALUE = 10;
+    /**
+     * <code>FAIL_ALREADY_REDEEMED = 100;</code>
+     *
+     * <pre>
+     *used by AchievementRedeem, 
+     * </pre>
+     */
+    public static final int FAIL_ALREADY_REDEEMED_VALUE = 100;
+    /**
+     * <code>FAIL_NOT_ENABLED = 200;</code>
+     *
+     * <pre>
+     *used by EnableAPNS
+     * </pre>
+     */
+    public static final int FAIL_NOT_ENABLED_VALUE = 200;
+    /**
+     * <code>FAIL_INVALID_BATTLE_ITEMS = 300;</code>
+     *
+     * <pre>
+     *used by CompleteBattleItem, DiscardBattleItem
+     * </pre>
+     */
+    public static final int FAIL_INVALID_BATTLE_ITEMS_VALUE = 300;
+    /**
+     * <code>FAIL_INSUFFICIENT_GACHA_CREDITS = 400;</code>
+     *
+     * <pre>
+     *used by PurchaseBoosterPack
+     * </pre>
+     */
+    public static final int FAIL_INSUFFICIENT_GACHA_CREDITS_VALUE = 400;
+    /**
+     * <code>FAIL_TOO_LONG = 500;</code>
+     *
+     * <pre>
+     *used by SendGroupChat, PrivateChatPost
+     * </pre>
+     */
+    public static final int FAIL_TOO_LONG_VALUE = 500;
+    /**
+     * <code>FAIL_BANNED = 501;</code>
+     *
+     * <pre>
+     *used by SendGroupChat, PrivateChatPost
+     * </pre>
+     */
+    public static final int FAIL_BANNED_VALUE = 501;
+    /**
+     * <code>FAIL_NO_CONTENT_SENT = 502;</code>
+     *
+     * <pre>
+     *used by PrivateChatPost,
+     * </pre>
+     */
+    public static final int FAIL_NO_CONTENT_SENT_VALUE = 502;
+    /**
+     * <code>FAIL_NOT_VALID_LANGUAGE = 503;</code>
+     *
+     * <pre>
+     *used by TranslateSelectMessages
+     * </pre>
+     */
+    public static final int FAIL_NOT_VALID_LANGUAGE_VALUE = 503;
+    /**
+     * <code>FAIL_NO_SUCH_PLAYER = 600;</code>
+     *
+     * <pre>
+     *used by LoadPlayerCity,
+     * </pre>
+     */
+    public static final int FAIL_NO_SUCH_PLAYER_VALUE = 600;
+    /**
+     * <code>SUCCESS_REQUEST = 701;</code>
+     *
+     * <pre>
+     *used by RequestJoinClan
+     * </pre>
+     */
+    public static final int SUCCESS_REQUEST_VALUE = 701;
+    /**
+     * <code>SUCCESS_JOIN = 702;</code>
+     *
+     * <pre>
+     *used by RequestJoinClan
+     * </pre>
+     */
+    public static final int SUCCESS_JOIN_VALUE = 702;
+    /**
+     * <code>SUCCESS_MONSTER_JUST_DIED = 703;</code>
+     *
+     * <pre>
+     *used by AttackClanRaidMonster
+     * </pre>
+     */
+    public static final int SUCCESS_MONSTER_JUST_DIED_VALUE = 703;
+    /**
+     * <code>FAIL_NAME_TAKEN = 704;</code>
+     *
+     * <pre>
+     *used by CreateClan, UserCreate
+     * </pre>
+     */
+    public static final int FAIL_NAME_TAKEN_VALUE = 704;
+    /**
+     * <code>FAIL_ALREADY_IN_CLAN = 705;</code>
+     *
+     * <pre>
+     *used by CreateClan, RequestJoinClan, RetractRequestJoinClan, ApproveOrRejectRequestToJoinClan
+     * </pre>
+     */
+    public static final int FAIL_ALREADY_IN_CLAN_VALUE = 705;
+    /**
+     * <code>FAIL_INVALID_TAG_LENGTH = 706;</code>
+     *
+     * <pre>
+     *used by CreateClan,
+     * </pre>
+     */
+    public static final int FAIL_INVALID_TAG_LENGTH_VALUE = 706;
+    /**
+     * <code>FAIL_TAG_TAKEN = 707;</code>
+     *
+     * <pre>
+     *used by CreateClan,
+     * </pre>
+     */
+    public static final int FAIL_TAG_TAKEN_VALUE = 707;
+    /**
+     * <code>FAIL_ALREADY_STARTED = 708;</code>
+     *
+     * <pre>
+     *used by BeginClanRaid,
+     * </pre>
+     */
+    public static final int FAIL_ALREADY_STARTED_VALUE = 708;
+    /**
+     * <code>FAIL_NOT_IN_CLAN = 709;</code>
+     *
+     * <pre>
+     *used by LeaveCLan, SolicitClanHelp, TransferClanOwnership, BootPlayerFromClan, ChangeClanSettings, 
+     *AttackClanRaidMonster, PromoteDemoteClanMember
+     * </pre>
+     */
+    public static final int FAIL_NOT_IN_CLAN_VALUE = 709;
+    /**
+     * <code>FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 710;</code>
+     *
+     * <pre>
+     *used by LeaveClan
+     * </pre>
+     */
+    public static final int FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN_VALUE = 710;
+    /**
+     * <code>FAIL_ALREADY_FULFILLED = 711;</code>
+     *
+     * <pre>
+     *used by FulFIllTeamDonationSolicitation
+     * </pre>
+     */
+    public static final int FAIL_ALREADY_FULFILLED_VALUE = 711;
+    /**
+     * <code>FAIL_REQUEST_ALREADY_FILED = 712;</code>
+     *
+     * <pre>
+     *used by RequestJoinClan 
+     * </pre>
+     */
+    public static final int FAIL_REQUEST_ALREADY_FILED_VALUE = 712;
+    /**
+     * <code>FAIL_CLAN_IS_FULL = 713;</code>
+     *
+     * <pre>
+     *used by RequestJoinClan, ApproveOrRejectRequestToJoinClan, AcceptOrRejectClanInvite
+     * </pre>
+     */
+    public static final int FAIL_CLAN_IS_FULL_VALUE = 713;
+    /**
+     * <code>FAIL_DID_NOT_REQUEST = 714;</code>
+     *
+     * <pre>
+     *used by RetractRequestJoinClan, ApproveOrRejectRequestToJoinClan, 
+     * </pre>
+     */
+    public static final int FAIL_DID_NOT_REQUEST_VALUE = 714;
+    /**
+     * <code>FAIL_NOT_AUTHORIZED = 715;</code>
+     *
+     * <pre>
+     *used by ApproveOrRejectRequestToJoinClan, TransferClanOwnership, BootPlayerFromClan, ChangeClanSettings, BeginClanRaid,
+     *PromoteDemoteClanMember, InviteToClan, 
+     * </pre>
+     */
+    public static final int FAIL_NOT_AUTHORIZED_VALUE = 715;
+    /**
+     * <code>FAIL_NO_ACTIVE_CLAN_RAID = 716;</code>
+     *
+     * <pre>
+     *used by BeginClanRaid, AttackClanRaidMonster
+     * </pre>
+     */
+    public static final int FAIL_NO_ACTIVE_CLAN_RAID_VALUE = 716;
+    /**
+     * <code>FAIL_NO_MONSTERS_SENT = 717;</code>
+     *
+     * <pre>
+     *used by BeginClanRaid,
+     * </pre>
+     */
+    public static final int FAIL_NO_MONSTERS_SENT_VALUE = 717;
+    /**
+     * <code>FAIL_MONSTER_ALREADY_DEAD = 718;</code>
+     *
+     * <pre>
+     *used by AttackClanRaidMonster, RecordClanRaidStats
+     * </pre>
+     */
+    public static final int FAIL_MONSTER_ALREADY_DEAD_VALUE = 718;
+    /**
+     * <code>FAIL_FULFILLED_REQUEST_EXISTS = 719;</code>
+     *
+     * <pre>
+     *used by SolicitTeamDonation,
+     * </pre>
+     */
+    public static final int FAIL_FULFILLED_REQUEST_EXISTS_VALUE = 719;
+    /**
+     * <code>FAIL_DUPLICATE_RECEIPT = 800;</code>
+     *
+     * <pre>
+     *used by InAppPurchase
+     * </pre>
+     */
+    public static final int FAIL_DUPLICATE_RECEIPT_VALUE = 800;
+    /**
+     * <code>FAIL_METHOD_NOT_SUPPORTED = 801;</code>
+     *
+     * <pre>
+     *used by EarnFreeDiamonds
+     * </pre>
+     */
+    public static final int FAIL_METHOD_NOT_SUPPORTED_VALUE = 801;
+    /**
+     * <code>FAIL_NO_RESULTS = 900;</code>
+     *
+     * <pre>
+     *used by RetrieveStrengthLeaderBoard
+     * </pre>
+     */
+    public static final int FAIL_NO_RESULTS_VALUE = 900;
+    /**
+     * <code>FAIL_MONSTER_REACHED_EVOLVING_LIMIT = 1000;</code>
+     *
+     * <pre>
+     *used by EvolveMonster
+     * </pre>
+     */
+    public static final int FAIL_MONSTER_REACHED_EVOLVING_LIMIT_VALUE = 1000;
+    /**
+     * <code>FAIL_MAX_NUM_EVOLUTIONS_REACHED = 1001;</code>
+     */
+    public static final int FAIL_MAX_NUM_EVOLUTIONS_REACHED_VALUE = 1001;
+    /**
+     * <code>FAIL_MONSTER_IN_ENHANCING = 1002;</code>
+     *
+     * <pre>
+     *used by SubmitMonsterEnhancement
+     * </pre>
+     */
+    public static final int FAIL_MONSTER_IN_ENHANCING_VALUE = 1002;
+    /**
+     * <code>FAIL_MONSTER_IN_EVOLUTION = 1003;</code>
+     */
+    public static final int FAIL_MONSTER_IN_EVOLUTION_VALUE = 1003;
+    /**
+     * <code>FAIL_MONSTER_NONEXISTENT = 1004;</code>
+     */
+    public static final int FAIL_MONSTER_NONEXISTENT_VALUE = 1004;
+    /**
+     * <code>FAIL_MONSTER_RESTRICTED = 1005;</code>
+     */
+    public static final int FAIL_MONSTER_RESTRICTED_VALUE = 1005;
+    /**
+     * <code>FAIL_MONSTER_ALREADY_IN_HEALING = 1006;</code>
+     *
+     * <pre>
+     *used by SubmitMonsterEnhancement, HealMonster
+     * </pre>
+     */
+    public static final int FAIL_MONSTER_ALREADY_IN_HEALING_VALUE = 1006;
+    /**
+     * <code>FAIL_HEALING_NOT_COMPLETE = 1007;</code>
+     *
+     * <pre>
+     *used by HealMonster, HealMonsterWaitTimeComplete
+     * </pre>
+     */
+    public static final int FAIL_HEALING_NOT_COMPLETE_VALUE = 1007;
+    /**
+     * <code>FAIL_INSUFFICIENT_FACEBOOK_INVITES = 1008;</code>
+     *
+     * <pre>
+     *used by IncreaseMonsterInventorySlot
+     * </pre>
+     */
+    public static final int FAIL_INSUFFICIENT_FACEBOOK_INVITES_VALUE = 1008;
+    /**
+     * <code>FAIL_INCONSISTENT_INVITE_DATA = 1009;</code>
+     */
+    public static final int FAIL_INCONSISTENT_INVITE_DATA_VALUE = 1009;
+    /**
+     * <code>FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL = 1010;</code>
+     */
+    public static final int FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL_VALUE = 1010;
+    /**
+     * <code>FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP = 1011;</code>
+     *
+     * <pre>
+     *used by CombineUserMonsterPieces
+     * </pre>
+     */
+    public static final int FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP_VALUE = 1011;
+    /**
+     * <code>FAIL_EXPIRED = 1012;</code>
+     *
+     * <pre>
+     *used by AcceptAndRejectFbInviteForSlots
+     * </pre>
+     */
+    public static final int FAIL_EXPIRED_VALUE = 1012;
+    /**
+     * <code>FAIL_ALREADY_BEEN_USED = 1013;</code>
+     *
+     * <pre>
+     *used by AcceptAndRejectFbInviteForSlots
+     * </pre>
+     */
+    public static final int FAIL_ALREADY_BEEN_USED_VALUE = 1013;
+    /**
+     * <code>FAIL_ENEMY_UNAVAILABLE = 1100;</code>
+     *
+     * <pre>
+     *used by BeginPvpBattle
+     * </pre>
+     */
+    public static final int FAIL_ENEMY_UNAVAILABLE_VALUE = 1100;
+    /**
+     * <code>FAIL_BATTLE_TOOK_TOO_LONG = 1101;</code>
+     *
+     * <pre>
+     *used by EndPvpBattle
+     * </pre>
+     */
+    public static final int FAIL_BATTLE_TOOK_TOO_LONG_VALUE = 1101;
+    /**
+     * <code>FAIL_NOT_BUILT_YET = 1200;</code>
+     *
+     * <pre>
+     *used by UpgradeNormStructure, NormStructWaitComplete
+     * </pre>
+     */
+    public static final int FAIL_NOT_BUILT_YET_VALUE = 1200;
+    /**
+     * <code>FAIL_NOT_USERS_STRUCT = 1201;</code>
+     *
+     * <pre>
+     *used by UpgradeNormStructure
+     * </pre>
+     */
+    public static final int FAIL_NOT_USERS_STRUCT_VALUE = 1201;
+    /**
+     * <code>FAIL_AT_MAX_LEVEL_ALREADY = 1202;</code>
+     */
+    public static final int FAIL_AT_MAX_LEVEL_ALREADY_VALUE = 1202;
+    /**
+     * <code>FAIL_NOT_EXPIRED_YET = 1203;</code>
+     *
+     * <pre>
+     *used by DestroyMoneyTreeStructure
+     * </pre>
+     */
+    public static final int FAIL_NOT_EXPIRED_YET_VALUE = 1203;
+    /**
+     * <code>FAIL_USER_WITH_UDID_ALREADY_EXISTS = 1300;</code>
+     *
+     * <pre>
+     *used by UserCreate
+     * </pre>
+     */
+    public static final int FAIL_USER_WITH_UDID_ALREADY_EXISTS_VALUE = 1300;
+    /**
+     * <code>FAIL_INVALID_REFER_CODE = 1301;</code>
+     */
+    public static final int FAIL_INVALID_REFER_CODE_VALUE = 1301;
+    /**
+     * <code>FAIL_USER_WITH_FACEBOOK_ID_EXISTS = 1302;</code>
+     */
+    public static final int FAIL_USER_WITH_FACEBOOK_ID_EXISTS_VALUE = 1302;
+    /**
+     * <code>FAIL_FB_ID_EXISTS = 1303;</code>
+     *
+     * <pre>
+     *used by SetFacebookId
+     * </pre>
+     */
+    public static final int FAIL_FB_ID_EXISTS_VALUE = 1303;
+    /**
+     * <code>FAIL_USER_FB_ID_ALREADY_SET = 1304;</code>
+     */
+    public static final int FAIL_USER_FB_ID_ALREADY_SET_VALUE = 1304;
+
+
+    public final int getNumber() { return value; }
+
+    public static ResponseStatus valueOf(int value) {
+      switch (value) {
+        case 1: return SUCCESS;
+        case 2: return FAIL_OTHER;
+        case 3: return FAIL_TIME_OUT_OF_SYNC;
+        case 4: return FAIL_INSUFFICIENT_FUNDS;
+        case 5: return FAIL_INSUFFICIENT_CASH;
+        case 6: return FAIL_INSUFFICIENT_OIL;
+        case 7: return FAIL_INSUFFICIENT_GEMS;
+        case 8: return FAIL_NOT_COMPLETE;
+        case 9: return FAIL_INSUFFICIENT_ITEM;
+        case 10: return FAIL_DOESNT_EXIST;
+        case 100: return FAIL_ALREADY_REDEEMED;
+        case 200: return FAIL_NOT_ENABLED;
+        case 300: return FAIL_INVALID_BATTLE_ITEMS;
+        case 400: return FAIL_INSUFFICIENT_GACHA_CREDITS;
+        case 500: return FAIL_TOO_LONG;
+        case 501: return FAIL_BANNED;
+        case 502: return FAIL_NO_CONTENT_SENT;
+        case 503: return FAIL_NOT_VALID_LANGUAGE;
+        case 600: return FAIL_NO_SUCH_PLAYER;
+        case 701: return SUCCESS_REQUEST;
+        case 702: return SUCCESS_JOIN;
+        case 703: return SUCCESS_MONSTER_JUST_DIED;
+        case 704: return FAIL_NAME_TAKEN;
+        case 705: return FAIL_ALREADY_IN_CLAN;
+        case 706: return FAIL_INVALID_TAG_LENGTH;
+        case 707: return FAIL_TAG_TAKEN;
+        case 708: return FAIL_ALREADY_STARTED;
+        case 709: return FAIL_NOT_IN_CLAN;
+        case 710: return FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN;
+        case 711: return FAIL_ALREADY_FULFILLED;
+        case 712: return FAIL_REQUEST_ALREADY_FILED;
+        case 713: return FAIL_CLAN_IS_FULL;
+        case 714: return FAIL_DID_NOT_REQUEST;
+        case 715: return FAIL_NOT_AUTHORIZED;
+        case 716: return FAIL_NO_ACTIVE_CLAN_RAID;
+        case 717: return FAIL_NO_MONSTERS_SENT;
+        case 718: return FAIL_MONSTER_ALREADY_DEAD;
+        case 719: return FAIL_FULFILLED_REQUEST_EXISTS;
+        case 800: return FAIL_DUPLICATE_RECEIPT;
+        case 801: return FAIL_METHOD_NOT_SUPPORTED;
+        case 900: return FAIL_NO_RESULTS;
+        case 1000: return FAIL_MONSTER_REACHED_EVOLVING_LIMIT;
+        case 1001: return FAIL_MAX_NUM_EVOLUTIONS_REACHED;
+        case 1002: return FAIL_MONSTER_IN_ENHANCING;
+        case 1003: return FAIL_MONSTER_IN_EVOLUTION;
+        case 1004: return FAIL_MONSTER_NONEXISTENT;
+        case 1005: return FAIL_MONSTER_RESTRICTED;
+        case 1006: return FAIL_MONSTER_ALREADY_IN_HEALING;
+        case 1007: return FAIL_HEALING_NOT_COMPLETE;
+        case 1008: return FAIL_INSUFFICIENT_FACEBOOK_INVITES;
+        case 1009: return FAIL_INCONSISTENT_INVITE_DATA;
+        case 1010: return FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL;
+        case 1011: return FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP;
+        case 1012: return FAIL_EXPIRED;
+        case 1013: return FAIL_ALREADY_BEEN_USED;
+        case 1100: return FAIL_ENEMY_UNAVAILABLE;
+        case 1101: return FAIL_BATTLE_TOOK_TOO_LONG;
+        case 1200: return FAIL_NOT_BUILT_YET;
+        case 1201: return FAIL_NOT_USERS_STRUCT;
+        case 1202: return FAIL_AT_MAX_LEVEL_ALREADY;
+        case 1203: return FAIL_NOT_EXPIRED_YET;
+        case 1300: return FAIL_USER_WITH_UDID_ALREADY_EXISTS;
+        case 1301: return FAIL_INVALID_REFER_CODE;
+        case 1302: return FAIL_USER_WITH_FACEBOOK_ID_EXISTS;
+        case 1303: return FAIL_FB_ID_EXISTS;
+        case 1304: return FAIL_USER_FB_ID_ALREADY_SET;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ResponseStatus>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<ResponseStatus>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ResponseStatus>() {
+            public ResponseStatus findValueByNumber(int number) {
+              return ResponseStatus.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.lvl6.proto.SharedEnumConfigProto.getDescriptor().getEnumTypes().get(6);
+    }
+
+    private static final ResponseStatus[] VALUES = values();
+
+    public static ResponseStatus valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private ResponseStatus(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ResponseStatus)
+  }
+
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -793,8 +2011,59 @@ public final class SharedEnumConfigProto {
       "\n\022\026\n\022CREATE_BATTLE_ITEM\020\013*n\n\010GameType\022\013\n" +
       "\007NO_TYPE\020\001\022\r\n\tSTRUCTURE\020\002\022\014\n\010RESEARCH\020\003\022" +
       "\t\n\005SKILL\020\004\022\010\n\004TASK\020\005\022\017\n\013BATTLE_ITEM\020\006\022\022\n" +
-      "\016BOARD_OBSTACLE\020\007B\027B\025SharedEnumConfigPro" +
-      "to"
+      "\016BOARD_OBSTACLE\020\007*\\\n\014ResourceType\022\017\n\013NO_" +
+      "RESOURCE\020\004\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022" +
+      "\021\n\rGACHA_CREDITS\020\005\022\013\n\007MONSTER\020\024*\232\017\n\016Resp",
+      "onseStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022" +
+      "\031\n\025FAIL_TIME_OUT_OF_SYNC\020\003\022\033\n\027FAIL_INSUF" +
+      "FICIENT_FUNDS\020\004\022\032\n\026FAIL_INSUFFICIENT_CAS" +
+      "H\020\005\022\031\n\025FAIL_INSUFFICIENT_OIL\020\006\022\032\n\026FAIL_I" +
+      "NSUFFICIENT_GEMS\020\007\022\025\n\021FAIL_NOT_COMPLETE\020" +
+      "\010\022\032\n\026FAIL_INSUFFICIENT_ITEM\020\t\022\025\n\021FAIL_DO" +
+      "ESNT_EXIST\020\n\022\031\n\025FAIL_ALREADY_REDEEMED\020d\022" +
+      "\025\n\020FAIL_NOT_ENABLED\020\310\001\022\036\n\031FAIL_INVALID_B" +
+      "ATTLE_ITEMS\020\254\002\022$\n\037FAIL_INSUFFICIENT_GACH" +
+      "A_CREDITS\020\220\003\022\022\n\rFAIL_TOO_LONG\020\364\003\022\020\n\013FAIL",
+      "_BANNED\020\365\003\022\031\n\024FAIL_NO_CONTENT_SENT\020\366\003\022\034\n" +
+      "\027FAIL_NOT_VALID_LANGUAGE\020\367\003\022\030\n\023FAIL_NO_S" +
+      "UCH_PLAYER\020\330\004\022\024\n\017SUCCESS_REQUEST\020\275\005\022\021\n\014S" +
+      "UCCESS_JOIN\020\276\005\022\036\n\031SUCCESS_MONSTER_JUST_D" +
+      "IED\020\277\005\022\024\n\017FAIL_NAME_TAKEN\020\300\005\022\031\n\024FAIL_ALR" +
+      "EADY_IN_CLAN\020\301\005\022\034\n\027FAIL_INVALID_TAG_LENG" +
+      "TH\020\302\005\022\023\n\016FAIL_TAG_TAKEN\020\303\005\022\031\n\024FAIL_ALREA" +
+      "DY_STARTED\020\304\005\022\025\n\020FAIL_NOT_IN_CLAN\020\305\005\022,\n\'" +
+      "FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN\020" +
+      "\306\005\022\033\n\026FAIL_ALREADY_FULFILLED\020\307\005\022\037\n\032FAIL_",
+      "REQUEST_ALREADY_FILED\020\310\005\022\026\n\021FAIL_CLAN_IS" +
+      "_FULL\020\311\005\022\031\n\024FAIL_DID_NOT_REQUEST\020\312\005\022\030\n\023F" +
+      "AIL_NOT_AUTHORIZED\020\313\005\022\035\n\030FAIL_NO_ACTIVE_" +
+      "CLAN_RAID\020\314\005\022\032\n\025FAIL_NO_MONSTERS_SENT\020\315\005" +
+      "\022\036\n\031FAIL_MONSTER_ALREADY_DEAD\020\316\005\022\"\n\035FAIL" +
+      "_FULFILLED_REQUEST_EXISTS\020\317\005\022\033\n\026FAIL_DUP" +
+      "LICATE_RECEIPT\020\240\006\022\036\n\031FAIL_METHOD_NOT_SUP" +
+      "PORTED\020\241\006\022\024\n\017FAIL_NO_RESULTS\020\204\007\022(\n#FAIL_" +
+      "MONSTER_REACHED_EVOLVING_LIMIT\020\350\007\022$\n\037FAI" +
+      "L_MAX_NUM_EVOLUTIONS_REACHED\020\351\007\022\036\n\031FAIL_",
+      "MONSTER_IN_ENHANCING\020\352\007\022\036\n\031FAIL_MONSTER_" +
+      "IN_EVOLUTION\020\353\007\022\035\n\030FAIL_MONSTER_NONEXIST" +
+      "ENT\020\354\007\022\034\n\027FAIL_MONSTER_RESTRICTED\020\355\007\022$\n\037" +
+      "FAIL_MONSTER_ALREADY_IN_HEALING\020\356\007\022\036\n\031FA" +
+      "IL_HEALING_NOT_COMPLETE\020\357\007\022\'\n\"FAIL_INSUF" +
+      "FICIENT_FACEBOOK_INVITES\020\360\007\022\"\n\035FAIL_INCO" +
+      "NSISTENT_INVITE_DATA\020\361\007\022(\n#FAIL_STRUCTUR" +
+      "E_AT_MAX_FB_INVITE_LVL\020\362\007\022+\n&FAIL_MORE_T" +
+      "HAN_ONE_MONSTER_FOR_SPEEDUP\020\363\007\022\021\n\014FAIL_E" +
+      "XPIRED\020\364\007\022\033\n\026FAIL_ALREADY_BEEN_USED\020\365\007\022\033",
+      "\n\026FAIL_ENEMY_UNAVAILABLE\020\314\010\022\036\n\031FAIL_BATT" +
+      "LE_TOOK_TOO_LONG\020\315\010\022\027\n\022FAIL_NOT_BUILT_YE" +
+      "T\020\260\t\022\032\n\025FAIL_NOT_USERS_STRUCT\020\261\t\022\036\n\031FAIL" +
+      "_AT_MAX_LEVEL_ALREADY\020\262\t\022\031\n\024FAIL_NOT_EXP" +
+      "IRED_YET\020\263\t\022\'\n\"FAIL_USER_WITH_UDID_ALREA" +
+      "DY_EXISTS\020\224\n\022\034\n\027FAIL_INVALID_REFER_CODE\020" +
+      "\225\n\022&\n!FAIL_USER_WITH_FACEBOOK_ID_EXISTS\020" +
+      "\226\n\022\026\n\021FAIL_FB_ID_EXISTS\020\227\n\022 \n\033FAIL_USER_" +
+      "FB_ID_ALREADY_SET\020\230\nB\027B\025SharedEnumConfig" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

@@ -21,7 +21,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
 import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.Builder;
-import com.lvl6.proto.EventMiniJobProto.RedeemMiniJobResponseProto.RedeemMiniJobStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
@@ -118,7 +118,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -138,7 +138,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(RedeemMiniJobStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 
@@ -147,7 +147,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		user = userRetrieveUtil.getUserById(userId);
 
 		if(user == null) {
-			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("user is null, userId = {}", userId);
 			return false;
 		}
@@ -163,7 +163,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 					+ userMiniJobId
 					+ "or invalid userMonsterIds (monsters need to be damaged). "
 					+ " userMonsters=" + umchpList);
-			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
+			resBuilder.setStatus(ResponseStatus.FAIL_DOESNT_EXIST);
 			return false;
 		}
 
@@ -185,12 +185,12 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		if (null == mj) {
 			log.error("no MiniJob exists with id=" + miniJobId
 					+ "\t invalid MiniJobForUser=" + mjfu);
-			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
+			resBuilder.setStatus(ResponseStatus.FAIL_DOESNT_EXIST);
 			return false;
 		}
 
 		if(!verifyListOfRewards()) {
-			resBuilder.setStatus(RedeemMiniJobStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			return false;
 		}
 

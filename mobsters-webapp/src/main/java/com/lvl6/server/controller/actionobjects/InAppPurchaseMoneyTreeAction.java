@@ -23,7 +23,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
-import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -118,7 +118,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -138,7 +138,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(InAppPurchaseStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 
@@ -163,7 +163,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		duplicateReceipt = inAppPurchaseUtils.checkIfDuplicateReceipt(receiptFromApple, iapHistoryRetrieveUtil);
 
 		if(duplicateReceipt) {
-			resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
+			resBuilder.setStatus(ResponseStatus.FAIL_DUPLICATE_RECEIPT);
 		}
 
 		if (duplicateReceipt || !userOwnsOneMoneyTreeMax()) {

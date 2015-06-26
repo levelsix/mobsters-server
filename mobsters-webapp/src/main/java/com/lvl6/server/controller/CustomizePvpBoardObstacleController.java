@@ -16,7 +16,7 @@ import com.lvl6.events.response.CustomizePvpBoardObstacleResponseEvent;
 import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleRequestProto;
 import com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto;
-import com.lvl6.proto.EventPvpProto.CustomizePvpBoardObstacleResponseProto.CustomizePvpBoardObstacleStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.UserPvpBoardObstacleProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -71,7 +71,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 		CustomizePvpBoardObstacleResponseProto.Builder resBuilder = CustomizePvpBoardObstacleResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(CustomizePvpBoardObstacleStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -86,7 +86,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 		//UUID checks
 		if (invalidUuids) {
 			log.info("invalid UUIDS.");
-			resBuilder.setStatus(CustomizePvpBoardObstacleStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -118,7 +118,7 @@ public class CustomizePvpBoardObstacleController extends EventController {
 					e);
 			try {
 				resBuilder
-						.setStatus(CustomizePvpBoardObstacleStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				CustomizePvpBoardObstacleResponseEvent resEvent = new CustomizePvpBoardObstacleResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

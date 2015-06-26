@@ -15,7 +15,7 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -62,7 +62,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -81,7 +81,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(TransferClanOwnershipStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -103,13 +103,13 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return false;
 		}
 		if (user == null || newClanOwner == null) {
-			resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("user is " + user + ", new clan owner is " + newClanOwner);
 			return false;
 		}
 		if (user.getClanId() == null) {
 			resBuilder
-					.setStatus(TransferClanOwnershipStatus.FAIL_NOT_AUTHORIZED);
+					.setStatus(ResponseStatus.FAIL_NOT_AUTHORIZED);
 			log.error("user not in clan. user=" + user);
 			return false;
 		}
@@ -119,7 +119,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private boolean verifySemantics(Builder resBuilder) {
 		if (!newClanOwner.getClanId().equals(user.getClanId())) {
 			resBuilder
-					.setStatus(TransferClanOwnershipStatus.FAIL_NEW_OWNER_NOT_IN_CLAN);
+					.setStatus(ResponseStatus.FAIL_NOT_IN_CLAN);
 			log.error("new owner not in same clan as user. new owner= "
 					+ newClanOwner + ", user is " + user);
 			return false;
@@ -138,12 +138,12 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		if (!leaderStatusName.equals(userClan.getStatus())) {
 			resBuilder
-					.setStatus(TransferClanOwnershipStatus.FAIL_NOT_AUTHORIZED);
+					.setStatus(ResponseStatus.FAIL_NOT_AUTHORIZED);
 			log.error("user is " + user + ", and user isn't owner. user is:"
 					+ userClan);
 			return false;
 		}
-		resBuilder.setStatus(TransferClanOwnershipStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

@@ -17,7 +17,7 @@ import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
-import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.Builder;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -86,7 +86,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -105,7 +105,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(BootPlayerFromClanStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -123,7 +123,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 
 		if (user == null || playerToBoot == null) {
-			resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("user is {}, playerToBoot is {}", user,
 					playerToBoot);
 			return false;
@@ -150,7 +150,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				userClanRetrieveUtils, userIdsToStatuses, leaderStatus, jrLeaderStatus);
 		String userId = user.getId();
 		if (!uniqUserIds.contains(userId)) {
-			resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_NOT_AUTHORIZED);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_AUTHORIZED);
 			log.error("user can't boot player. user= {}, playerToBoot = {}", user, playerToBoot);
 			return false;
 		}
@@ -160,14 +160,14 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		String playerToBootClanId = playerToBoot.getClanId();
 		if (!playerToBootClanId.equals(user.getClanId())) {
 			resBuilder
-					.setStatus(BootPlayerFromClanStatus.FAIL_BOOTED_NOT_IN_CLAN);
+					.setStatus(ResponseStatus.FAIL_NOT_IN_CLAN);
 			log.error("playerToBoot not in user's clan. playerToBoot is in {}, user's clan ={}",
 							playerToBootClanId, user.getClanId());
 			return false;
 		}
 		clanSizeContainer = new ArrayList<Integer>();
 		clanSizeContainer.add(uniqUserIds.size());
-		resBuilder.setStatus(BootPlayerFromClanStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

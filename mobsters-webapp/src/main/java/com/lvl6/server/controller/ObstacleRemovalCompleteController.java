@@ -21,7 +21,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto;
 import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.Builder;
-import com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2;
@@ -80,7 +80,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 		ObstacleRemovalCompleteResponseProto.Builder resBuilder = ObstacleRemovalCompleteResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		UUID userObstacleUuid = null;
@@ -99,7 +99,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -151,7 +151,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -173,7 +173,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 			int gemCostToSpeedup) {
 
 		if (null == user || null == ofu) {
-			resBuilder.setStatus(ObstacleRemovalCompleteStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("unexpected error: user or obstacle for user is null. user="
 					+ user
 					+ "\t userId="
@@ -185,7 +185,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 
 		if (speedUp && user.getGems() < gemCostToSpeedup) {
 			resBuilder
-					.setStatus(ObstacleRemovalCompleteStatus.FAIL_INSUFFICIENT_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			log.error("user error: user does not have enough gems to speed up removal."
 					+ "\t obstacleForUser="
 					+ ofu
@@ -194,7 +194,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 			return false;
 		}
 
-		resBuilder.setStatus(ObstacleRemovalCompleteStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

@@ -23,7 +23,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniJobProto.CompleteMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto;
 import com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.Builder;
-import com.lvl6.proto.EventMiniJobProto.CompleteMiniJobResponseProto.CompleteMiniJobStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
@@ -86,7 +86,7 @@ public class CompleteMiniJobController extends EventController {
 		CompleteMiniJobResponseProto.Builder resBuilder = CompleteMiniJobResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		UUID userMiniJobUuid = null;
@@ -104,7 +104,7 @@ public class CompleteMiniJobController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -134,7 +134,7 @@ public class CompleteMiniJobController extends EventController {
 			}
 
 			if (success) {
-				resBuilder.setStatus(CompleteMiniJobStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
@@ -159,7 +159,7 @@ public class CompleteMiniJobController extends EventController {
 			log.error("exception in CompleteMiniJobController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(CompleteMiniJobStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				CompleteMiniJobResponseEvent resEvent = new CompleteMiniJobResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -193,7 +193,7 @@ public class CompleteMiniJobController extends EventController {
 		if (idToUserMiniJob.isEmpty()) {
 			log.error(String.format("no UserMiniJob exists with id=%s",
 					userMiniJobId));
-			resBuilder.setStatus(CompleteMiniJobStatus.FAIL_NO_MINI_JOB_EXISTS);
+			resBuilder.setStatus(ResponseStatus.FAIL_DOESNT_EXIST);
 			return false;
 		}
 
@@ -211,7 +211,7 @@ public class CompleteMiniJobController extends EventController {
 			log.error(String
 					.format("user does not have enough gems. userGems=%s, gemsSpent=%s",
 							userGems, gemsSpent));
-			resBuilder.setStatus(CompleteMiniJobStatus.FAIL_INSUFFICIENT_GEMS);
+			resBuilder.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 

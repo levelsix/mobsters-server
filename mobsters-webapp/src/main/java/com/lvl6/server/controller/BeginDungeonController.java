@@ -31,7 +31,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto;
-import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.SharedEnumConfigProto.Element;
@@ -140,7 +140,7 @@ public class BeginDungeonController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setTaskId(taskId);
-		resBuilder.setStatus(BeginDungeonStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -154,7 +154,7 @@ public class BeginDungeonController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(BeginDungeonStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			BeginDungeonResponseEvent resEvent = new BeginDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -216,7 +216,7 @@ public class BeginDungeonController extends EventController {
 			log.error("exception in BeginDungeonController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(BeginDungeonStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				BeginDungeonResponseEvent resEvent = new BeginDungeonResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -278,7 +278,7 @@ public class BeginDungeonController extends EventController {
 		//    }
 
 		tsMap.putAll(ts);
-		resBuilder.setStatus(BeginDungeonStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

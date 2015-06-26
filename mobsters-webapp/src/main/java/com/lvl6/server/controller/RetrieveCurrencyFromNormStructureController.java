@@ -23,7 +23,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto;
-import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
@@ -109,7 +109,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 		RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder = RetrieveCurrencyFromNormStructureResponseProto
 				.newBuilder();
 		resBuilder
-				.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+				.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderResourcesProto);
 
 		UUID userUuid = null;
@@ -132,7 +132,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 		//UUID checks
 		if (invalidUuids) {
 			resBuilder
-					.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+					.setStatus(ResponseStatus.FAIL_OTHER);
 			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -161,7 +161,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 
-			if (RetrieveCurrencyFromNormStructureStatus.SUCCESS
+			if (ResponseStatus.SUCCESS
 					.equals(resBuilder.getStatus())) {
 				User user = rcfnsa.getUser();
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -180,7 +180,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 			//don't let the client hang
 			try {
 				resBuilder
-						.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

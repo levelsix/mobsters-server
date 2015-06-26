@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.Builder;
-import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
@@ -39,7 +39,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	}
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = false;
 		valid = verifySemantics(resBuilder);
@@ -53,12 +53,12 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(DiscardBattleItemStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySemantics(Builder resBuilder) {
 		if (null == user) {
-			resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("no user with id={}", userId);
 			return false;
 		}
@@ -66,7 +66,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		if (deletedBattleItemIdsToQuantity == null
 				|| deletedBattleItemIdsToQuantity.isEmpty()) {
 			resBuilder
-					.setStatus(DiscardBattleItemStatus.FAIL_BATTLE_ITEMS_DONT_EXIST);
+					.setStatus(ResponseStatus.FAIL_INVALID_BATTLE_ITEMS);
 			log.error("no battle item list");
 			return false;
 		}

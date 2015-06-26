@@ -19,7 +19,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationRequestProto;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto;
-import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto.SolicitTeamDonationStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -84,7 +84,7 @@ public class SolicitTeamDonationController extends EventController {
 
 		SolicitTeamDonationResponseProto.Builder resBuilder = SolicitTeamDonationResponseProto
 				.newBuilder();
-		resBuilder.setStatus(SolicitTeamDonationStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		String clanId = null;
@@ -108,7 +108,7 @@ public class SolicitTeamDonationController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SolicitTeamDonationStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -145,7 +145,7 @@ public class SolicitTeamDonationController extends EventController {
 
 			//only write to user if failed
 			if (!resBuilder.getStatus().equals(
-					SolicitTeamDonationStatus.SUCCESS)) {
+					ResponseStatus.SUCCESS)) {
 				resEvent.setResponseProto(resBuilder.build());
 				responses.normalResponseEvents().add(resEvent);
 
@@ -179,7 +179,7 @@ public class SolicitTeamDonationController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in SolicitTeamDonation processEvent", e);
 			try {
-				resBuilder.setStatus(SolicitTeamDonationStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

@@ -23,7 +23,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder;
-import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -164,7 +164,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	public void execute(Builder resBuilder) {
 		setUpDaos();
-		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -182,7 +182,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(PurchaseBoosterPackStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 	
@@ -210,7 +210,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private boolean verifySemantics(Builder resBuilder) {
 		user = userRetrieveUtil.getUserById(userId);
 		if (null == user) {
-			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("no user with id={}", userId);
 			return false;
 		}
@@ -231,11 +231,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		} else {
 			if ( !resourceUtil.hasEnoughGems(user, gemsSpent) ) {
-				resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				return false;
 			} else if ( !resourceUtil.hasEnoughGachaCredits(user, gachaCreditsChange) ) {
 				resBuilder.setStatus(
-						PurchaseBoosterPackStatus.FAIL_INSUFFICIENT_GACHA_CREDITS);
+						ResponseStatus.FAIL_INSUFFICIENT_GACHA_CREDITS);
 			return false;
 		}
 		}
@@ -280,7 +280,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		aPack = boosterPackRetrieveUtils.getBoosterPackForBoosterPackId(bpId);
 
 		if (null == aPack) {
-			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("no BoosterPack for id={}", bpId);
 			return false;
 		}
@@ -294,7 +294,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		if (null == boosterItemIdsToBoosterItems
 				|| boosterItemIdsToBoosterItems.isEmpty()) {
-			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("no booster items={}", boosterItemIdsToBoosterItems);
 			return false;
 		}
@@ -308,7 +308,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 		if (!timeUtil.isFirstEarlierThanSecond(lastFreeDate, now)) {
 			// lastFreeDate is not earlier than now
-			resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error(
 					"client incorrectly says time now={} is before lastFreeBoosterPackDate={}",
 					now, lastFreeDate);

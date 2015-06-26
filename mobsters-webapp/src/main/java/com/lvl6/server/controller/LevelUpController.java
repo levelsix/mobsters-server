@@ -16,7 +16,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.LevelUpRequestProto;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto.Builder;
-import com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -63,7 +63,7 @@ public class LevelUpController extends EventController {
 		LevelUpResponseProto.Builder resBuilder = LevelUpResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -79,7 +79,7 @@ public class LevelUpController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			LevelUpResponseEvent resEvent = new LevelUpResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
@@ -98,7 +98,7 @@ public class LevelUpController extends EventController {
 			}
 
 			if (success) {
-				resBuilder.setStatus(LevelUpStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			LevelUpResponseEvent resEvent = new LevelUpResponseEvent(
@@ -121,7 +121,7 @@ public class LevelUpController extends EventController {
 			log.error("exception in LevelUpController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(LevelUpStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				LevelUpResponseEvent resEvent = new LevelUpResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setResponseProto(resBuilder.build());

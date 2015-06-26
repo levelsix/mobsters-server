@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.MiniEventGoal;
 import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.Builder;
-import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -51,7 +51,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	//derived state
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(UpdateMiniEventStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -71,7 +71,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-		resBuilder.setStatus(UpdateMiniEventStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

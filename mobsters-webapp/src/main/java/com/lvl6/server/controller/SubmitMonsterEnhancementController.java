@@ -30,7 +30,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProto;
 import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto;
 import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -116,7 +116,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		SubmitMonsterEnhancementResponseProto.Builder resBuilder = SubmitMonsterEnhancementResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
-		resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -139,7 +139,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -188,7 +188,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 			}
 
 			if (successful) {
-				resBuilder.setStatus(SubmitMonsterEnhancementStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(
@@ -215,7 +215,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in EnhanceMonster processEvent", e);
 			try {
-				resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -263,7 +263,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 			log.error("user already has monsters enhancing={}, user={}",
 					alreadyEnhancing, u);
 			resBuilder
-					.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_ENHANCING);
+					.setStatus(ResponseStatus.FAIL_MONSTER_IN_ENHANCING);
 			return false;
 		}
 
@@ -275,7 +275,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 				log.error("some monsters not in the db. inDb={}, newMap={}",
 						existingUserMonsters, newMap);
 				resBuilder
-						.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_NONEXISTENT);
+						.setStatus(ResponseStatus.FAIL_MONSTER_NONEXISTENT);
 				return false;
 			}
 
@@ -284,7 +284,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 				log.error("some monsters are healing. healing={}, newMap={}",
 						alreadyHealing, newMap);
 				resBuilder
-						.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_HEALING);
+						.setStatus(ResponseStatus.FAIL_MONSTER_ALREADY_IN_HEALING);
 				return false;
 			}
 
@@ -295,7 +295,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 				log.error("some monsters are evolving. evolving={}, newMap={}",
 						evolution, newMap);
 				resBuilder
-						.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_IN_EVOLUTION);
+						.setStatus(ResponseStatus.FAIL_MONSTER_IN_EVOLUTION);
 				return false;
 			}
 
@@ -323,7 +323,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 						new Object[] { preface, ueip, existingUserMonsters,
 								newMap });
 				resBuilder
-						.setStatus(SubmitMonsterEnhancementStatus.FAIL_MONSTER_RESTRICTED);
+						.setStatus(ResponseStatus.FAIL_MONSTER_RESTRICTED);
 				return false;
 			}
 		}
@@ -367,7 +367,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 					.format("insufficient gems. userGems=%s, gemsSpent=%s, newMap=%s, oilChange=%s, user=%s",
 							userGems, gemsSpent, newMap, oilChange, u));
 			resBuilder
-					.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 		return true;
@@ -388,7 +388,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 					.format("insufficient oil. userOil=%s, cost=%s, newMap=%s, user=%s",
 							userOil, cost, newMap, u));
 			resBuilder
-					.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_OIL);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_OIL);
 			return false;
 		}
 		return true;

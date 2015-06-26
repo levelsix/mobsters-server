@@ -15,7 +15,7 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
@@ -70,7 +70,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -89,7 +89,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -124,7 +124,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 					+ "userIdsToUserClans = {}, userIdsToUsers = {}", 
 					new Object[] {userId, userClans, users});
 			resBuilder
-			.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_IN_CLAN);
+			.setStatus(ResponseStatus.FAIL_NOT_IN_CLAN);
 			return false;
 		}
 		if (!userClans.containsKey(victimId)
@@ -133,7 +133,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 					+ "userIdsToUserClans = {}, userIdsToUsers = {}", 
 					new Object[] {userId, userClans, users});
 			resBuilder
-			.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_IN_CLAN);
+			.setStatus(ResponseStatus.FAIL_NOT_IN_CLAN);
 			return false;
 		}
 		return true;
@@ -153,7 +153,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			log.error("user not authorized to promote or demote otherUser. clanStatus of user = {},"
 					+ " clanStatus of other user = {}", first, second);
 			resBuilder
-			.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_AUTHORIZED);
+			.setStatus(ResponseStatus.FAIL_NOT_AUTHORIZED);
 			return false;
 		}
 		if (!clanStuffUtils.firstUserClanStatusAboveSecond(first,
@@ -162,7 +162,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 					+ "clanStatus of other user = {}, newClanStatus of other user = {}", 
 					new Object[] {first, second, newUserClanStatus});
 			resBuilder
-			.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_AUTHORIZED);
+			.setStatus(ResponseStatus.FAIL_NOT_AUTHORIZED);
 			return false;
 		}
 		if (UserClanStatus.REQUESTING.equals(second)) {
@@ -170,10 +170,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 					+ "UserClan for victim = {}, users = {}", new Object[] 
 							{promoterDemoter, victim, users});
 			resBuilder
-			.setStatus(PromoteDemoteClanMemberStatus.FAIL_NOT_AUTHORIZED);
+			.setStatus(ResponseStatus.FAIL_NOT_AUTHORIZED);
 			return false;
 		}
-		resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

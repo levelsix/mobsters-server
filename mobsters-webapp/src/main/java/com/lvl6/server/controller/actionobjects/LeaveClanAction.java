@@ -18,7 +18,7 @@ import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.LeaveClanResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.LeaveClanResponseProto.LeaveClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
@@ -80,7 +80,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(LeaveClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -99,7 +99,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			return;
 		}
 
-		resBuilder.setStatus(LeaveClanStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -115,7 +115,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			return false;
 		}
 		if (user.getClanId() == null || !user.getClanId().equals(clan.getId())) {
-			resBuilder.setStatus(LeaveClanStatus.FAIL_NOT_IN_CLAN);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_IN_CLAN);
 			log.error(String.format("user's clan id={}, clan id={}",
 					user.getClanId(), clan.getId()));
 			return false;
@@ -141,7 +141,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		if (clanOwnerId.equals(user.getId())) {
 			if (userClanMembersInClan > 1) {
 				resBuilder
-				.setStatus(LeaveClanStatus.FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN);
+				.setStatus(ResponseStatus.FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN);
 				String preface = "user is owner and he's not alone in clan,";
 				String preface2 = "can't leave without switching ownership.";
 				log.error("{} {} user clan members are {}",

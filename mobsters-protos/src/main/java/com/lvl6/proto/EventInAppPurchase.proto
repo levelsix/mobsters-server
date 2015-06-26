@@ -6,6 +6,7 @@ import "Item.proto";
 import "MonsterStuff.proto";
 import "Reward.proto";
 import "Sales.proto";
+import "SharedEnumConfig.proto";
 import "Structure.proto";
 import "User.proto";
 

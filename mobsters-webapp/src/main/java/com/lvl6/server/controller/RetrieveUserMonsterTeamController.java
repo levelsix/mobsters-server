@@ -19,7 +19,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamRequestProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
-import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
@@ -116,7 +116,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 		RetrieveUserMonsterTeamResponseProto.Builder resBuilder = RetrieveUserMonsterTeamResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(RetrieveUserMonsterTeamStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		Set<String> userUuidsSet = new HashSet<String>();
 
@@ -144,7 +144,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RetrieveUserMonsterTeamStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -168,7 +168,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 			rumta.execute(resBuilder);
 			if (resBuilder.getStatus().equals(
-					RetrieveUserMonsterTeamStatus.SUCCESS)) {
+					ResponseStatus.SUCCESS)) {
 				//TODO: replace QueueUp and Avenge controller logic with this
 				List<String> userIds = new ArrayList<String>();
 				userIds.addAll(rumta.getAllUsers().keySet());
@@ -208,7 +208,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					"exception in RetrieveUserMonsterTeamController processEvent",
 					e);
 			try {
-				resBuilder.setStatus(RetrieveUserMonsterTeamStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RetrieveUserMonsterTeamResponseEvent resEvent = new RetrieveUserMonsterTeamResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

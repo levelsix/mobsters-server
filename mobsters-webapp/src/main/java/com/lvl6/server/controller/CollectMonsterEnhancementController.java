@@ -27,7 +27,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -97,7 +97,7 @@ public class CollectMonsterEnhancementController extends EventController {
 		CollectMonsterEnhancementResponseProto.Builder resBuilder = CollectMonsterEnhancementResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(CollectMonsterEnhancementStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -117,7 +117,7 @@ public class CollectMonsterEnhancementController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(CollectMonsterEnhancementStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -160,7 +160,7 @@ public class CollectMonsterEnhancementController extends EventController {
 				successful = writeChangesToDb(aUser, umcep, mfu);
 			}
 			if (successful) {
-				resBuilder.setStatus(CollectMonsterEnhancementStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(
@@ -189,7 +189,7 @@ public class CollectMonsterEnhancementController extends EventController {
 			//don't let the client hang
 			try {
 				resBuilder
-						.setStatus(CollectMonsterEnhancementStatus.FAIL_OTHER);
+						.setStatus(ResponseStatus.FAIL_OTHER);
 				CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

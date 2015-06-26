@@ -99,7 +99,7 @@ public final class EventStructureProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
      */
-    com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.PurchaseNormStructureRequestProto}
@@ -207,7 +207,7 @@ public final class EventStructureProto {
             }
             case 56: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(7, rawValue);
               } else {
@@ -377,7 +377,7 @@ public final class EventStructureProto {
     }
 
     public static final int RESOURCETYPE_FIELD_NUMBER = 7;
-    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
      */
@@ -387,7 +387,7 @@ public final class EventStructureProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
       return resourceType_;
     }
 
@@ -398,7 +398,7 @@ public final class EventStructureProto {
       timeOfPurchase_ = 0L;
       gemsSpent_ = 0;
       resourceChange_ = 0;
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -616,7 +616,7 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         resourceChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
@@ -1142,7 +1142,7 @@ public final class EventStructureProto {
         return this;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
        */
@@ -1152,13 +1152,13 @@ public final class EventStructureProto {
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
         return resourceType_;
       }
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];</code>
        */
-      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1172,7 +1172,7 @@ public final class EventStructureProto {
        */
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
         onChanged();
         return this;
       }
@@ -1206,13 +1206,13 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional string userStructUuid = 3;</code>
@@ -1295,7 +1295,7 @@ public final class EventStructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus value = com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1349,115 +1349,6 @@ public final class EventStructureProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus}
-     */
-    public enum PurchaseNormStructureStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_CASH = 2;</code>
-       */
-      FAIL_INSUFFICIENT_CASH(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 3;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(2, 3),
-      /**
-       * <code>FAIL_INSUFFICIENT_OIL = 4;</code>
-       */
-      FAIL_INSUFFICIENT_OIL(3, 4),
-      /**
-       * <code>FAIL_OTHER = 5;</code>
-       */
-      FAIL_OTHER(4, 5),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_CASH = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_CASH_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 3;
-      /**
-       * <code>FAIL_INSUFFICIENT_OIL = 4;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_OIL_VALUE = 4;
-      /**
-       * <code>FAIL_OTHER = 5;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 5;
-
-
-      public final int getNumber() { return value; }
-
-      public static PurchaseNormStructureStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_CASH;
-          case 3: return FAIL_INSUFFICIENT_GEMS;
-          case 4: return FAIL_INSUFFICIENT_OIL;
-          case 5: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<PurchaseNormStructureStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<PurchaseNormStructureStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<PurchaseNormStructureStatus>() {
-              public PurchaseNormStructureStatus findValueByNumber(int number) {
-                return PurchaseNormStructureStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final PurchaseNormStructureStatus[] VALUES = values();
-
-      public static PurchaseNormStructureStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private PurchaseNormStructureStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -1481,17 +1372,17 @@ public final class EventStructureProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -1539,7 +1430,7 @@ public final class EventStructureProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       userStructUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -1709,7 +1600,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         userStructUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -1927,23 +1818,23 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1953,11 +1844,11 @@ public final class EventStructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -3184,13 +3075,13 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.MoveOrRotateNormStructureResponseProto}
@@ -3263,7 +3154,7 @@ public final class EventStructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus value = com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -3311,88 +3202,6 @@ public final class EventStructureProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus}
-     */
-    public enum MoveOrRotateNormStructureStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>OTHER_FAIL = 2;</code>
-       */
-      OTHER_FAIL(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>OTHER_FAIL = 2;</code>
-       */
-      public static final int OTHER_FAIL_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static MoveOrRotateNormStructureStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return OTHER_FAIL;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<MoveOrRotateNormStructureStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<MoveOrRotateNormStructureStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<MoveOrRotateNormStructureStatus>() {
-              public MoveOrRotateNormStructureStatus findValueByNumber(int number) {
-                return MoveOrRotateNormStructureStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final MoveOrRotateNormStructureStatus[] VALUES = values();
-
-      public static MoveOrRotateNormStructureStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private MoveOrRotateNormStructureStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -3416,23 +3225,23 @@ public final class EventStructureProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3598,7 +3407,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -3805,23 +3614,23 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3831,11 +3640,11 @@ public final class EventStructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.MoveOrRotateNormStructureStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -3934,7 +3743,7 @@ public final class EventStructureProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];</code>
      */
-    com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpgradeNormStructureRequestProto}
@@ -4029,7 +3838,7 @@ public final class EventStructureProto {
             }
             case 48: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(6, rawValue);
               } else {
@@ -4205,7 +4014,7 @@ public final class EventStructureProto {
     }
 
     public static final int RESOURCETYPE_FIELD_NUMBER = 6;
-    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];</code>
      */
@@ -4215,7 +4024,7 @@ public final class EventStructureProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];</code>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
       return resourceType_;
     }
 
@@ -4225,7 +4034,7 @@ public final class EventStructureProto {
       timeOfUpgrade_ = 0L;
       gemsSpent_ = 0;
       resourceChange_ = 0;
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4428,7 +4237,7 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         resourceChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
@@ -4873,7 +4682,7 @@ public final class EventStructureProto {
         return this;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];</code>
        */
@@ -4883,13 +4692,13 @@ public final class EventStructureProto {
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];</code>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
         return resourceType_;
       }
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 6 [default = CASH];</code>
        */
-      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -4903,7 +4712,7 @@ public final class EventStructureProto {
        */
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
         onChanged();
         return this;
       }
@@ -4937,13 +4746,13 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpgradeNormStructureResponseProto}
@@ -5016,7 +4825,7 @@ public final class EventStructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus value = com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -5064,142 +4873,6 @@ public final class EventStructureProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus}
-     */
-    public enum UpgradeNormStructureStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_NOT_ENOUGH_CASH = 2;</code>
-       */
-      FAIL_NOT_ENOUGH_CASH(1, 2),
-      /**
-       * <code>FAIL_NOT_ENOUGH_GEMS = 3;</code>
-       */
-      FAIL_NOT_ENOUGH_GEMS(2, 3),
-      /**
-       * <code>FAIL_NOT_ENOUGH_OIL = 4;</code>
-       */
-      FAIL_NOT_ENOUGH_OIL(3, 4),
-      /**
-       * <code>FAIL_NOT_BUILT_YET = 5;</code>
-       */
-      FAIL_NOT_BUILT_YET(4, 5),
-      /**
-       * <code>FAIL_NOT_USERS_STRUCT = 6;</code>
-       */
-      FAIL_NOT_USERS_STRUCT(5, 6),
-      /**
-       * <code>FAIL_AT_MAX_LEVEL_ALREADY = 8;</code>
-       */
-      FAIL_AT_MAX_LEVEL_ALREADY(6, 8),
-      /**
-       * <code>FAIL_OTHER = 9;</code>
-       */
-      FAIL_OTHER(7, 9),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_NOT_ENOUGH_CASH = 2;</code>
-       */
-      public static final int FAIL_NOT_ENOUGH_CASH_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_ENOUGH_GEMS = 3;</code>
-       */
-      public static final int FAIL_NOT_ENOUGH_GEMS_VALUE = 3;
-      /**
-       * <code>FAIL_NOT_ENOUGH_OIL = 4;</code>
-       */
-      public static final int FAIL_NOT_ENOUGH_OIL_VALUE = 4;
-      /**
-       * <code>FAIL_NOT_BUILT_YET = 5;</code>
-       */
-      public static final int FAIL_NOT_BUILT_YET_VALUE = 5;
-      /**
-       * <code>FAIL_NOT_USERS_STRUCT = 6;</code>
-       */
-      public static final int FAIL_NOT_USERS_STRUCT_VALUE = 6;
-      /**
-       * <code>FAIL_AT_MAX_LEVEL_ALREADY = 8;</code>
-       */
-      public static final int FAIL_AT_MAX_LEVEL_ALREADY_VALUE = 8;
-      /**
-       * <code>FAIL_OTHER = 9;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 9;
-
-
-      public final int getNumber() { return value; }
-
-      public static UpgradeNormStructureStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_NOT_ENOUGH_CASH;
-          case 3: return FAIL_NOT_ENOUGH_GEMS;
-          case 4: return FAIL_NOT_ENOUGH_OIL;
-          case 5: return FAIL_NOT_BUILT_YET;
-          case 6: return FAIL_NOT_USERS_STRUCT;
-          case 8: return FAIL_AT_MAX_LEVEL_ALREADY;
-          case 9: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<UpgradeNormStructureStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<UpgradeNormStructureStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<UpgradeNormStructureStatus>() {
-              public UpgradeNormStructureStatus findValueByNumber(int number) {
-                return UpgradeNormStructureStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final UpgradeNormStructureStatus[] VALUES = values();
-
-      public static UpgradeNormStructureStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private UpgradeNormStructureStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -5223,23 +4896,23 @@ public final class EventStructureProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5405,7 +5078,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -5612,23 +5285,23 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -5638,11 +5311,11 @@ public final class EventStructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -6547,13 +6220,13 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto}
@@ -6626,7 +6299,7 @@ public final class EventStructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus value = com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -6674,97 +6347,6 @@ public final class EventStructureProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus}
-     */
-    public enum FinishNormStructWaittimeStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_NOT_ENOUGH_GEMS = 2;</code>
-       */
-      FAIL_NOT_ENOUGH_GEMS(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_NOT_ENOUGH_GEMS = 2;</code>
-       */
-      public static final int FAIL_NOT_ENOUGH_GEMS_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static FinishNormStructWaittimeStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_NOT_ENOUGH_GEMS;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<FinishNormStructWaittimeStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<FinishNormStructWaittimeStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<FinishNormStructWaittimeStatus>() {
-              public FinishNormStructWaittimeStatus findValueByNumber(int number) {
-                return FinishNormStructWaittimeStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final FinishNormStructWaittimeStatus[] VALUES = values();
-
-      public static FinishNormStructWaittimeStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private FinishNormStructWaittimeStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -6788,23 +6370,23 @@ public final class EventStructureProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6970,7 +6552,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -7177,23 +6759,23 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status_ = com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -7203,11 +6785,11 @@ public final class EventStructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -8084,13 +7666,13 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.FullUserStructureProto userStruct = 3;</code>
@@ -8187,7 +7769,7 @@ public final class EventStructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus value = com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -8246,97 +7828,6 @@ public final class EventStructureProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus}
-     */
-    public enum NormStructWaitCompleteStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_NOT_DONE_YET = 2;</code>
-       */
-      FAIL_NOT_DONE_YET(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_NOT_DONE_YET = 2;</code>
-       */
-      public static final int FAIL_NOT_DONE_YET_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static NormStructWaitCompleteStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_NOT_DONE_YET;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<NormStructWaitCompleteStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<NormStructWaitCompleteStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<NormStructWaitCompleteStatus>() {
-              public NormStructWaitCompleteStatus findValueByNumber(int number) {
-                return NormStructWaitCompleteStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final NormStructWaitCompleteStatus[] VALUES = values();
-
-      public static NormStructWaitCompleteStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private NormStructWaitCompleteStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -8360,17 +7851,17 @@ public final class EventStructureProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -8411,7 +7902,7 @@ public final class EventStructureProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       userStruct_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -8586,7 +8077,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (userStructBuilder_ == null) {
           userStruct_ = java.util.Collections.emptyList();
@@ -8834,23 +8325,23 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status_ = com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -8860,11 +8351,11 @@ public final class EventStructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -10648,13 +10139,13 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto}
@@ -10727,7 +10218,7 @@ public final class EventStructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus value = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -10775,88 +10266,6 @@ public final class EventStructureProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus}
-     */
-    public enum RetrieveCurrencyFromNormStructureStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static RetrieveCurrencyFromNormStructureStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RetrieveCurrencyFromNormStructureStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RetrieveCurrencyFromNormStructureStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RetrieveCurrencyFromNormStructureStatus>() {
-              public RetrieveCurrencyFromNormStructureStatus findValueByNumber(int number) {
-                return RetrieveCurrencyFromNormStructureStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RetrieveCurrencyFromNormStructureStatus[] VALUES = values();
-
-      public static RetrieveCurrencyFromNormStructureStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RetrieveCurrencyFromNormStructureStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
@@ -10880,23 +10289,23 @@ public final class EventStructureProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -11062,7 +10471,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -11269,23 +10678,23 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -11295,11 +10704,11 @@ public final class EventStructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -12024,13 +11433,13 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.DestroyMoneyTreeStructureResponseProto}
@@ -12099,7 +11508,7 @@ public final class EventStructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus value = com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -12147,97 +11556,6 @@ public final class EventStructureProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus}
-     */
-    public enum DestroyMoneyTreeStructureStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_NOT_EXPIRED_YET = 2;</code>
-       */
-      FAIL_NOT_EXPIRED_YET(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_NOT_EXPIRED_YET = 2;</code>
-       */
-      public static final int FAIL_NOT_EXPIRED_YET_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static DestroyMoneyTreeStructureStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_NOT_EXPIRED_YET;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<DestroyMoneyTreeStructureStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<DestroyMoneyTreeStructureStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<DestroyMoneyTreeStructureStatus>() {
-              public DestroyMoneyTreeStructureStatus findValueByNumber(int number) {
-                return DestroyMoneyTreeStructureStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final DestroyMoneyTreeStructureStatus[] VALUES = values();
-
-      public static DestroyMoneyTreeStructureStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private DestroyMoneyTreeStructureStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -12261,23 +11579,23 @@ public final class EventStructureProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -12439,7 +11757,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -12646,23 +11964,23 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus status_ = com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -12672,11 +11990,11 @@ public final class EventStructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.DestroyMoneyTreeStructureResponseProto.DestroyMoneyTreeStructureStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -15567,13 +14885,13 @@ public final class EventStructureProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SpawnObstacleResponseProto}
@@ -15650,7 +14968,7 @@ public final class EventStructureProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus value = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -15699,88 +15017,6 @@ public final class EventStructureProto {
     @java.lang.Override
     public com.google.protobuf.Parser<SpawnObstacleResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus}
-     */
-    public enum SpawnObstacleStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static SpawnObstacleStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SpawnObstacleStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SpawnObstacleStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SpawnObstacleStatus>() {
-              public SpawnObstacleStatus findValueByNumber(int number) {
-                return SpawnObstacleStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SpawnObstacleStatus[] VALUES = values();
-
-      public static SpawnObstacleStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SpawnObstacleStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus)
     }
 
     private int bitField0_;
@@ -15841,24 +15077,24 @@ public final class EventStructureProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       spawnedObstacles_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16034,7 +15270,7 @@ public final class EventStructureProto {
         } else {
           spawnedObstaclesBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -16516,23 +15752,23 @@ public final class EventStructureProto {
         return spawnedObstaclesBuilder_;
       }
 
-      private com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus status_ = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -16542,11 +15778,11 @@ public final class EventStructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SpawnObstacleResponseProto.SpawnObstacleStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -16631,7 +15867,7 @@ public final class EventStructureProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];</code>
      */
-    com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType();
 
     /**
      * <code>optional string userObstacleUuid = 6;</code>
@@ -16729,7 +15965,7 @@ public final class EventStructureProto {
             }
             case 40: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(5, rawValue);
               } else {
@@ -16869,7 +16105,7 @@ public final class EventStructureProto {
     }
 
     public static final int RESOURCETYPE_FIELD_NUMBER = 5;
-    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];</code>
      */
@@ -16879,7 +16115,7 @@ public final class EventStructureProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];</code>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
       return resourceType_;
     }
 
@@ -16930,7 +16166,7 @@ public final class EventStructureProto {
       curTime_ = 0L;
       gemsSpent_ = 0;
       resourceChange_ = 0;
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
       userObstacleUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -17127,7 +16363,7 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         resourceChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000010);
         userObstacleUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -17498,7 +16734,7 @@ public final class EventStructureProto {
         return this;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];</code>
        */
@@ -17508,13 +16744,13 @@ public final class EventStructureProto {
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];</code>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
         return resourceType_;
       }
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];</code>
        */
-      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -17528,7 +16764,7 @@ public final class EventStructureProto {
        */
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
         onChanged();
         return this;
       }
@@ -17638,13 +16874,13 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.BeginObstacleRemovalResponseProto}
@@ -17713,7 +16949,7 @@ public final class EventStructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus value = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -17761,106 +16997,6 @@ public final class EventStructureProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus}
-     */
-    public enum BeginObstacleRemovalStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_RESOURCE = 3;</code>
-       */
-      FAIL_INSUFFICIENT_RESOURCE(2, 3),
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      FAIL_OTHER(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_RESOURCE = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_RESOURCE_VALUE = 3;
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static BeginObstacleRemovalStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_GEMS;
-          case 3: return FAIL_INSUFFICIENT_RESOURCE;
-          case 4: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<BeginObstacleRemovalStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<BeginObstacleRemovalStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<BeginObstacleRemovalStatus>() {
-              public BeginObstacleRemovalStatus findValueByNumber(int number) {
-                return BeginObstacleRemovalStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final BeginObstacleRemovalStatus[] VALUES = values();
-
-      public static BeginObstacleRemovalStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private BeginObstacleRemovalStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -17884,23 +17020,23 @@ public final class EventStructureProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -18062,7 +17198,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -18269,23 +17405,23 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status_ = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -18295,11 +17431,11 @@ public final class EventStructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -19390,13 +18526,13 @@ public final class EventStructureProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ObstacleRemovalCompleteResponseProto}
@@ -19465,7 +18601,7 @@ public final class EventStructureProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus value = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -19513,97 +18649,6 @@ public final class EventStructureProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus}
-     */
-    public enum ObstacleRemovalCompleteStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static ObstacleRemovalCompleteStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_GEMS;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<ObstacleRemovalCompleteStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<ObstacleRemovalCompleteStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<ObstacleRemovalCompleteStatus>() {
-              public ObstacleRemovalCompleteStatus findValueByNumber(int number) {
-                return ObstacleRemovalCompleteStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final ObstacleRemovalCompleteStatus[] VALUES = values();
-
-      public static ObstacleRemovalCompleteStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private ObstacleRemovalCompleteStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -19627,23 +18672,23 @@ public final class EventStructureProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -19805,7 +18850,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -20012,23 +19057,23 @@ public final class EventStructureProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status_ = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -20038,11 +19083,11 @@ public final class EventStructureProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteResponseProto.ObstacleRemovalCompleteStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -20183,156 +19228,118 @@ public final class EventStructureProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\024EventStructure.proto\022\016com.lvl6.proto\032\n" +
-      "City.proto\032\017Structure.proto\032\nUser.proto\"" +
-      "\240\002\n!PurchaseNormStructureRequestProto\0220\n" +
+      "City.proto\032\026SharedEnumConfig.proto\032\017Stru" +
+      "cture.proto\032\nUser.proto\"\240\002\n!PurchaseNorm" +
+      "StructureRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022:\n\021struc" +
+      "tCoordinates\030\002 \001(\0132\037.com.lvl6.proto.Coor" +
+      "dinateProto\022\020\n\010structId\030\003 \001(\005\022\026\n\016timeOfP" +
+      "urchase\030\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(\005\022\026\n\016reso" +
+      "urceChange\030\006 \001(\021\0228\n\014resourceType\030\007 \001(\0162\034" +
+      ".com.lvl6.proto.ResourceType:\004CASH\"\236\001\n\"P",
+      "urchaseNormStructureResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Res" +
+      "ponseStatus\022\026\n\016userStructUuid\030\003 \001(\t\"\377\002\n%" +
+      "MoveOrRotateNormStructureRequestProto\0220\n" +
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022:\n\021structCoordinates\030\002 \001(\0132\037.com" +
-      ".lvl6.proto.CoordinateProto\022\020\n\010structId\030" +
-      "\003 \001(\005\022\026\n\016timeOfPurchase\030\004 \001(\003\022\021\n\tgemsSpe" +
-      "nt\030\005 \001(\005\022\026\n\016resourceChange\030\006 \001(\021\0228\n\014reso" +
-      "urceType\030\007 \001(\0162\034.com.lvl6.proto.Resource" +
-      "Type:\004CASH\"\336\002\n\"PurchaseNormStructureResp",
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022^\n\006status\030\002 \001(\0162N.co" +
-      "m.lvl6.proto.PurchaseNormStructureRespon" +
-      "seProto.PurchaseNormStructureStatus\022\026\n\016u" +
-      "serStructUuid\030\003 \001(\t\"\215\001\n\033PurchaseNormStru" +
-      "ctureStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFI" +
-      "CIENT_CASH\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003" +
-      "\022\031\n\025FAIL_INSUFFICIENT_OIL\020\004\022\016\n\nFAIL_OTHE" +
-      "R\020\005\"\377\002\n%MoveOrRotateNormStructureRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M",
-      "inimumUserProto\022\026\n\016userStructUuid\030\002 \001(\t\022" +
-      "^\n\004type\030\003 \001(\0162P.com.lvl6.proto.MoveOrRot" +
-      "ateNormStructureRequestProto.MoveOrRotat" +
-      "eNormStructType\022=\n\024curStructCoordinates\030" +
-      "\004 \001(\0132\037.com.lvl6.proto.CoordinateProto\022E" +
-      "\n\016orientationNew\030\005 \001(\0162!.com.lvl6.proto." +
-      "StructOrientation:\nPOSITION_1\"&\n\032MoveOrR" +
-      "otateNormStructType\022\010\n\004MOVE\020\001\"\202\002\n&MoveOr" +
-      "RotateNormStructureResponseProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro",
-      "to\022f\n\006status\030\002 \001(\0162V.com.lvl6.proto.Move" +
-      "OrRotateNormStructureResponseProto.MoveO" +
-      "rRotateNormStructureStatus\">\n\037MoveOrRota" +
-      "teNormStructureStatus\022\013\n\007SUCCESS\020\001\022\016\n\nOT" +
-      "HER_FAIL\020\002\"\350\001\n UpgradeNormStructureReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\026\n\016userStructUuid\030\002 \001(" +
-      "\t\022\025\n\rtimeOfUpgrade\030\003 \001(\003\022\021\n\tgemsSpent\030\004 " +
-      "\001(\005\022\026\n\016resourceChange\030\005 \001(\021\0228\n\014resourceT" +
-      "ype\030\006 \001(\0162\034.com.lvl6.proto.ResourceType:",
-      "\004CASH\"\216\003\n!UpgradeNormStructureResponsePr" +
+      "erProto\022\026\n\016userStructUuid\030\002 \001(\t\022^\n\004type\030" +
+      "\003 \001(\0162P.com.lvl6.proto.MoveOrRotateNormS" +
+      "tructureRequestProto.MoveOrRotateNormStr" +
+      "uctType\022=\n\024curStructCoordinates\030\004 \001(\0132\037.",
+      "com.lvl6.proto.CoordinateProto\022E\n\016orient" +
+      "ationNew\030\005 \001(\0162!.com.lvl6.proto.StructOr" +
+      "ientation:\nPOSITION_1\"&\n\032MoveOrRotateNor" +
+      "mStructType\022\010\n\004MOVE\020\001\"\212\001\n&MoveOrRotateNo" +
+      "rmStructureResponseProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022.\n\006st" +
+      "atus\030\002 \001(\0162\036.com.lvl6.proto.ResponseStat" +
+      "us\"\350\001\n UpgradeNormStructureRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022\026\n\016userStructUuid\030\002 \001(\t\022\025\n\rtim",
+      "eOfUpgrade\030\003 \001(\003\022\021\n\tgemsSpent\030\004 \001(\005\022\026\n\016r" +
+      "esourceChange\030\005 \001(\021\0228\n\014resourceType\030\006 \001(" +
+      "\0162\034.com.lvl6.proto.ResourceType:\004CASH\"\205\001" +
+      "\n!UpgradeNormStructureResponseProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.R" +
+      "esponseStatus\"\255\001\n0FinishNormStructWaitti" +
+      "meWithDiamondsRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\026\n\016" +
+      "userStructUuid\030\002 \001(\t\022\025\n\rtimeOfSpeedup\030\003 ",
+      "\001(\003\022\030\n\020gemCostToSpeedup\030\004 \001(\005\"\225\001\n1Finish" +
+      "NormStructWaittimeWithDiamondsResponsePr" +
       "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\\\n\006status\030\002 \001(\0162L.com.lvl6" +
-      ".proto.UpgradeNormStructureResponseProto" +
-      ".UpgradeNormStructureStatus\"\330\001\n\032UpgradeN" +
-      "ormStructureStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_" +
-      "NOT_ENOUGH_CASH\020\002\022\030\n\024FAIL_NOT_ENOUGH_GEM" +
-      "S\020\003\022\027\n\023FAIL_NOT_ENOUGH_OIL\020\004\022\026\n\022FAIL_NOT" +
-      "_BUILT_YET\020\005\022\031\n\025FAIL_NOT_USERS_STRUCT\020\006\022" +
-      "\035\n\031FAIL_AT_MAX_LEVEL_ALREADY\020\010\022\016\n\nFAIL_O",
-      "THER\020\t\"\255\001\n0FinishNormStructWaittimeWithD" +
-      "iamondsRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "imumUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6" +
+      ".proto.ResponseStatus\"\177\n\"NormStructWaitC" +
+      "ompleteRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
       "m.lvl6.proto.MinimumUserProto\022\026\n\016userStr" +
-      "uctUuid\030\002 \001(\t\022\025\n\rtimeOfSpeedup\030\003 \001(\003\022\030\n\020" +
-      "gemCostToSpeedup\030\004 \001(\005\"\260\002\n1FinishNormStr" +
-      "uctWaittimeWithDiamondsResponseProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022p\n\006status\030\002 \001(\0162`.com.lvl6.proto." +
-      "FinishNormStructWaittimeWithDiamondsResp" +
-      "onseProto.FinishNormStructWaittimeStatus",
-      "\"W\n\036FinishNormStructWaittimeStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\030\n\024FAIL_NOT_ENOUGH_GEMS\020\002\022\016\n\nFAI" +
-      "L_OTHER\020\003\"\177\n\"NormStructWaitCompleteReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\026\n\016userStructUuid\030\002 \003(" +
-      "\t\022\017\n\007curTime\030\003 \001(\003\"\311\002\n#NormStructWaitCom" +
-      "pleteResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022`\n\006status\030\002" +
-      " \001(\0162P.com.lvl6.proto.NormStructWaitComp" +
-      "leteResponseProto.NormStructWaitComplete",
-      "Status\022:\n\nuserStruct\030\003 \003(\0132&.com.lvl6.pr" +
-      "oto.FullUserStructureProto\"R\n\034NormStruct" +
-      "WaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_" +
-      "NOT_DONE_YET\020\002\022\016\n\nFAIL_OTHER\020\003\"\267\002\n-Retri" +
-      "eveCurrencyFromNormStructureRequestProto" +
-      "\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimu" +
-      "mUserProtoWithMaxResources\022g\n\020structRetr" +
-      "ievals\030\002 \003(\0132M.com.lvl6.proto.RetrieveCu" +
-      "rrencyFromNormStructureRequestProto.Stru" +
-      "ctRetrieval\032[\n\017StructRetrieval\022\026\n\016userSt",
-      "ructUuid\030\001 \001(\t\022\027\n\017timeOfRetrieval\030\002 \001(\003\022" +
-      "\027\n\017amountCollected\030\003 \001(\005\"\262\002\n.RetrieveCur" +
-      "rencyFromNormStructureResponseProto\022@\n\006s" +
-      "ender\030\001 \001(\01320.com.lvl6.proto.MinimumUser" +
-      "ProtoWithMaxResources\022v\n\006status\030\002 \001(\0162f." +
-      "com.lvl6.proto.RetrieveCurrencyFromNormS" +
-      "tructureResponseProto.RetrieveCurrencyFr" +
-      "omNormStructureStatus\"F\n\'RetrieveCurrenc" +
-      "yFromNormStructureStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
-      "\nFAIL_OTHER\020\002\"q\n%DestroyMoneyTreeStructu",
-      "reRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022\026\n\016userStructUu" +
-      "id\030\002 \003(\t\"\234\002\n&DestroyMoneyTreeStructureRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022f\n\006status\030\002 \001(\0162V." +
-      "com.lvl6.proto.DestroyMoneyTreeStructure" +
-      "ResponseProto.DestroyMoneyTreeStructureS" +
-      "tatus\"X\n\037DestroyMoneyTreeStructureStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_EXPIRED_YET\020\002\022" +
-      "\016\n\nFAIL_OTHER\020\003\"\267\001\n!ExpansionWaitComplet",
-      "eRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\017\n\007curTime\030\002 \001(\003" +
-      "\022\021\n\txPosition\030\003 \001(\021\022\021\n\tyPosition\030\004 \001(\021\022\017" +
-      "\n\007speedUp\030\005 \001(\010\022\030\n\020gemCostToSpeedup\030\006 \001(" +
-      "\005\"\375\002\n\"ExpansionWaitCompleteResponseProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022^\n\006status\030\002 \001(\0162N.com.lvl6.pr" +
-      "oto.ExpansionWaitCompleteResponseProto.E" +
-      "xpansionWaitCompleteStatus\0229\n\005ucedp\030\003 \001(" +
-      "\0132*.com.lvl6.proto.UserCityExpansionData",
-      "Proto\"\211\001\n\033ExpansionWaitCompleteStatus\022\013\n" +
-      "\007SUCCESS\020\001\022\032\n\026FAIL_WAS_NOT_EXPANDING\020\002\022\025" +
-      "\n\021FAIL_NOT_DONE_YET\020\003\022\032\n\026FAIL_INSUFFICIE" +
-      "NT_GEMS\020\004\022\016\n\nFAIL_OTHER\020\005\"\242\001\n\031SpawnObsta" +
-      "cleRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022B\n\024prospective" +
-      "Obstacles\030\002 \003(\0132$.com.lvl6.proto.Minimum" +
-      "ObstacleProto\022\017\n\007curTime\030\003 \001(\003\"\217\002\n\032Spawn" +
-      "ObstacleResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022;\n\020spawn",
-      "edObstacles\030\002 \003(\0132!.com.lvl6.proto.UserO" +
-      "bstacleProto\022N\n\006status\030\003 \001(\0162>.com.lvl6." +
-      "proto.SpawnObstacleResponseProto.SpawnOb" +
-      "stacleStatus\"2\n\023SpawnObstacleStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\344\001\n BeginObstac" +
-      "leRemovalRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022\017\n\007curTi" +
-      "me\030\002 \001(\003\022\021\n\tgemsSpent\030\003 \001(\005\022\026\n\016resourceC" +
-      "hange\030\004 \001(\021\0228\n\014resourceType\030\005 \001(\0162\034.com." +
-      "lvl6.proto.ResourceType:\004CASH\022\030\n\020userObs",
-      "tacleUuid\030\006 \001(\t\"\252\002\n!BeginObstacleRemoval" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\\\n\006status\030\002 \001(\0162" +
-      "L.com.lvl6.proto.BeginObstacleRemovalRes" +
-      "ponseProto.BeginObstacleRemovalStatus\"u\n" +
-      "\032BeginObstacleRemovalStatus\022\013\n\007SUCCESS\020\001" +
-      "\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\036\n\032FAIL_INS" +
-      "UFFICIENT_RESOURCE\020\003\022\016\n\nFAIL_OTHER\020\004\"\276\001\n" +
-      "#ObstacleRemovalCompleteRequestProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse",
-      "rProto\022\017\n\007curTime\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010" +
-      "\022\021\n\tgemsSpent\030\004 \001(\005\022\030\n\020userObstacleUuid\030" +
-      "\005 \001(\t\022\026\n\016atMaxObstacles\030\006 \001(\010\"\226\002\n$Obstac" +
-      "leRemovalCompleteResponseProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022b\n\006status\030\002 \001(\0162R.com.lvl6.proto.Obstac" +
-      "leRemovalCompleteResponseProto.ObstacleR" +
-      "emovalCompleteStatus\"X\n\035ObstacleRemovalC" +
-      "ompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUF" +
-      "FICIENT_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003B\025B\023EventS",
-      "tructureProto"
+      "uctUuid\030\002 \003(\t\022\017\n\007curTime\030\003 \001(\003\"\303\001\n#NormS" +
+      "tructWaitCompleteResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto",
+      "\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Respon" +
+      "seStatus\022:\n\nuserStruct\030\003 \003(\0132&.com.lvl6." +
+      "proto.FullUserStructureProto\"\267\002\n-Retriev" +
+      "eCurrencyFromNormStructureRequestProto\022@" +
+      "\n\006sender\030\001 \001(\01320.com.lvl6.proto.MinimumU" +
+      "serProtoWithMaxResources\022g\n\020structRetrie" +
+      "vals\030\002 \003(\0132M.com.lvl6.proto.RetrieveCurr" +
+      "encyFromNormStructureRequestProto.Struct" +
+      "Retrieval\032[\n\017StructRetrieval\022\026\n\016userStru" +
+      "ctUuid\030\001 \001(\t\022\027\n\017timeOfRetrieval\030\002 \001(\003\022\027\n",
+      "\017amountCollected\030\003 \001(\005\"\242\001\n.RetrieveCurre" +
+      "ncyFromNormStructureResponseProto\022@\n\006sen" +
+      "der\030\001 \001(\01320.com.lvl6.proto.MinimumUserPr" +
+      "otoWithMaxResources\022.\n\006status\030\002 \001(\0162\036.co" +
+      "m.lvl6.proto.ResponseStatus\"q\n%DestroyMo" +
+      "neyTreeStructureRequestProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\026" +
+      "\n\016userStructUuid\030\002 \003(\t\"\212\001\n&DestroyMoneyT" +
+      "reeStructureResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022.\n\006s",
+      "tatus\030\002 \001(\0162\036.com.lvl6.proto.ResponseSta" +
+      "tus\"\267\001\n!ExpansionWaitCompleteRequestProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\txPositio" +
+      "n\030\003 \001(\021\022\021\n\tyPosition\030\004 \001(\021\022\017\n\007speedUp\030\005 " +
+      "\001(\010\022\030\n\020gemCostToSpeedup\030\006 \001(\005\"\375\002\n\"Expans" +
+      "ionWaitCompleteResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022^" +
+      "\n\006status\030\002 \001(\0162N.com.lvl6.proto.Expansio" +
+      "nWaitCompleteResponseProto.ExpansionWait",
+      "CompleteStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6" +
+      ".proto.UserCityExpansionDataProto\"\211\001\n\033Ex" +
+      "pansionWaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\032" +
+      "\n\026FAIL_WAS_NOT_EXPANDING\020\002\022\025\n\021FAIL_NOT_D" +
+      "ONE_YET\020\003\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\004\022\016\n" +
+      "\nFAIL_OTHER\020\005\"\242\001\n\031SpawnObstacleRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022B\n\024prospectiveObstacles\030\002 " +
+      "\003(\0132$.com.lvl6.proto.MinimumObstacleProt" +
+      "o\022\017\n\007curTime\030\003 \001(\003\"\273\001\n\032SpawnObstacleResp",
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022;\n\020spawnedObstacles\030" +
+      "\002 \003(\0132!.com.lvl6.proto.UserObstacleProto" +
+      "\022.\n\006status\030\003 \001(\0162\036.com.lvl6.proto.Respon" +
+      "seStatus\"\344\001\n BeginObstacleRemovalRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\tgems" +
+      "Spent\030\003 \001(\005\022\026\n\016resourceChange\030\004 \001(\021\0228\n\014r" +
+      "esourceType\030\005 \001(\0162\034.com.lvl6.proto.Resou" +
+      "rceType:\004CASH\022\030\n\020userObstacleUuid\030\006 \001(\t\"",
+      "\205\001\n!BeginObstacleRemovalResponseProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto" +
+      ".ResponseStatus\"\276\001\n#ObstacleRemovalCompl" +
+      "eteRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022\017\n\007curTime\030\002 \001" +
+      "(\003\022\017\n\007speedUp\030\003 \001(\010\022\021\n\tgemsSpent\030\004 \001(\005\022\030" +
+      "\n\020userObstacleUuid\030\005 \001(\t\022\026\n\016atMaxObstacl" +
+      "es\030\006 \001(\010\"\210\001\n$ObstacleRemovalCompleteResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro",
+      "to.MinimumUserProto\022.\n\006status\030\002 \001(\0162\036.co" +
+      "m.lvl6.proto.ResponseStatusB\025B\023EventStru" +
+      "ctureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -20346,6 +19353,7 @@ public final class EventStructureProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.CityProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -20488,6 +19496,7 @@ public final class EventStructureProto {
         internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
     com.lvl6.proto.CityProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

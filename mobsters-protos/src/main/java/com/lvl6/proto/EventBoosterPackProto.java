@@ -1206,13 +1206,13 @@ public final class EventBoosterPackProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.BoosterItemProto prize = 4;</code>
@@ -1318,7 +1318,7 @@ public final class EventBoosterPackProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus value = com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1390,106 +1390,6 @@ public final class EventBoosterPackProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus}
-     */
-    public enum PurchaseBoosterPackStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_GACHA_CREDITS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_GACHA_CREDITS(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 4;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_GACHA_CREDITS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GACHA_CREDITS_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 4;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static PurchaseBoosterPackStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_GACHA_CREDITS;
-          case 3: return FAIL_OTHER;
-          case 4: return FAIL_INSUFFICIENT_GEMS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<PurchaseBoosterPackStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<PurchaseBoosterPackStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<PurchaseBoosterPackStatus>() {
-              public PurchaseBoosterPackStatus findValueByNumber(int number) {
-                return PurchaseBoosterPackStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final PurchaseBoosterPackStatus[] VALUES = values();
-
-      public static PurchaseBoosterPackStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private PurchaseBoosterPackStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -1513,17 +1413,17 @@ public final class EventBoosterPackProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -1585,7 +1485,7 @@ public final class EventBoosterPackProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       prize_ = java.util.Collections.emptyList();
       reward_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
     }
@@ -1765,7 +1665,7 @@ public final class EventBoosterPackProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (prizeBuilder_ == null) {
           prize_ = java.util.Collections.emptyList();
@@ -2030,23 +1930,23 @@ public final class EventBoosterPackProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status_ = com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2056,11 +1956,11 @@ public final class EventBoosterPackProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -2965,27 +2865,23 @@ public final class EventBoosterPackProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026EventBoosterPack.proto\022\016com.lvl6.proto" +
-      "\032\026BoosterPackStuff.proto\032\014Reward.proto\032\n" +
-      "User.proto\"\341\001\n\037PurchaseBoosterPackReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\025\n\rboosterPackId\030\002 \001(\005\022" +
-      "\022\n\nclientTime\030\003 \001(\003\022\034\n\024dailyFreeBoosterP" +
-      "ack\030\004 \001(\010\022\024\n\014buyingInBulk\030\005 \001(\010\022\021\n\tgemsS" +
-      "pent\030\006 \001(\005\022\032\n\022gachaCreditsChange\030\007 \001(\005\"\215" +
-      "\003\n PurchaseBoosterPackResponseProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser",
-      "Proto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.P" +
-      "urchaseBoosterPackResponseProto.Purchase" +
-      "BoosterPackStatus\022/\n\005prize\030\004 \003(\0132 .com.l" +
-      "vl6.proto.BoosterItemProto\022/\n\006reward\030\006 \001" +
-      "(\0132\037.com.lvl6.proto.UserRewardProto\"y\n\031P" +
-      "urchaseBoosterPackStatus\022\013\n\007SUCCESS\020\001\022#\n" +
-      "\037FAIL_INSUFFICIENT_GACHA_CREDITS\020\002\022\016\n\nFA" +
-      "IL_OTHER\020\003\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\004\"q" +
-      "\n(ReceivedRareBoosterPurchaseResponsePro" +
-      "to\022E\n\023rareBoosterPurchase\030\001 \001(\0132(.com.lv",
-      "l6.proto.RareBoosterPurchaseProtoB\027B\025Eve" +
-      "ntBoosterPackProto"
+      "\032\026BoosterPackStuff.proto\032\014Reward.proto\032\026" +
+      "SharedEnumConfig.proto\032\nUser.proto\"\341\001\n\037P" +
+      "urchaseBoosterPackRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022\025\n\rboosterPackId\030\002 \001(\005\022\022\n\nclientTime\030\003 " +
+      "\001(\003\022\034\n\024dailyFreeBoosterPack\030\004 \001(\010\022\024\n\014buy" +
+      "ingInBulk\030\005 \001(\010\022\021\n\tgemsSpent\030\006 \001(\005\022\032\n\022ga" +
+      "chaCreditsChange\030\007 \001(\005\"\346\001\n PurchaseBoost" +
+      "erPackResponseProto\0220\n\006sender\030\001 \001(\0132 .co",
+      "m.lvl6.proto.MinimumUserProto\022.\n\006status\030" +
+      "\002 \001(\0162\036.com.lvl6.proto.ResponseStatus\022/\n" +
+      "\005prize\030\004 \003(\0132 .com.lvl6.proto.BoosterIte" +
+      "mProto\022/\n\006reward\030\006 \001(\0132\037.com.lvl6.proto." +
+      "UserRewardProto\"q\n(ReceivedRareBoosterPu" +
+      "rchaseResponseProto\022E\n\023rareBoosterPurcha" +
+      "se\030\001 \001(\0132(.com.lvl6.proto.RareBoosterPur" +
+      "chaseProtoB\027B\025EventBoosterPackProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3000,6 +2896,7 @@ public final class EventBoosterPackProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.BoosterPackStuffProto.getDescriptor(),
           com.lvl6.proto.RewardsProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_PurchaseBoosterPackRequestProto_descriptor =
@@ -3022,6 +2919,7 @@ public final class EventBoosterPackProto {
         new java.lang.String[] { "RareBoosterPurchase", });
     com.lvl6.proto.BoosterPackStuffProto.getDescriptor();
     com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

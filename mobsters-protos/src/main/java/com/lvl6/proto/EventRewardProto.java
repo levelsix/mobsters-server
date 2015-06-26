@@ -1187,13 +1187,13 @@ public final class EventRewardProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.SendTangoGiftResponseProto.SendTangoGiftStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SendTangoGiftResponseProto.SendTangoGiftStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated string tangoUserIdsNotInToonSquad = 3;</code>
@@ -1304,7 +1304,7 @@ public final class EventRewardProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus value = com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1376,88 +1376,6 @@ public final class EventRewardProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SendTangoGiftResponseProto.SendTangoGiftStatus}
-     */
-    public enum SendTangoGiftStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static SendTangoGiftStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SendTangoGiftStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SendTangoGiftStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SendTangoGiftStatus>() {
-              public SendTangoGiftStatus findValueByNumber(int number) {
-                return SendTangoGiftStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SendTangoGiftStatus[] VALUES = values();
-
-      public static SendTangoGiftStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SendTangoGiftStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SendTangoGiftResponseProto.SendTangoGiftStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -1481,17 +1399,17 @@ public final class EventRewardProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SendTangoGiftResponseProto.SendTangoGiftStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.SendTangoGiftResponseProto.SendTangoGiftStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -1555,7 +1473,7 @@ public final class EventRewardProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       tangoUserIdsNotInToonSquad_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       tangoUserIdsInToonSquad_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
@@ -1747,7 +1665,7 @@ public final class EventRewardProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         tangoUserIdsNotInToonSquad_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -1988,23 +1906,23 @@ public final class EventRewardProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus status_ = com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SendTangoGiftResponseProto.SendTangoGiftStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.SendTangoGiftResponseProto.SendTangoGiftStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SendTangoGiftResponseProto.SendTangoGiftStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2014,11 +1932,11 @@ public final class EventRewardProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SendTangoGiftResponseProto.SendTangoGiftStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -4121,13 +4039,13 @@ public final class EventRewardProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.DeleteGiftResponseProto.DeleteGiftStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.DeleteGiftResponseProto.DeleteGiftStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.DeleteGiftResponseProto}
@@ -4196,7 +4114,7 @@ public final class EventRewardProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus value = com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -4244,88 +4162,6 @@ public final class EventRewardProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.DeleteGiftResponseProto.DeleteGiftStatus}
-     */
-    public enum DeleteGiftStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static DeleteGiftStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<DeleteGiftStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<DeleteGiftStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<DeleteGiftStatus>() {
-              public DeleteGiftStatus findValueByNumber(int number) {
-                return DeleteGiftStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final DeleteGiftStatus[] VALUES = values();
-
-      public static DeleteGiftStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private DeleteGiftStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DeleteGiftResponseProto.DeleteGiftStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -4349,23 +4185,23 @@ public final class EventRewardProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.DeleteGiftResponseProto.DeleteGiftStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.DeleteGiftResponseProto.DeleteGiftStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4527,7 +4363,7 @@ public final class EventRewardProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -4734,23 +4570,23 @@ public final class EventRewardProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus status_ = com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.DeleteGiftResponseProto.DeleteGiftStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.DeleteGiftResponseProto.DeleteGiftStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.DeleteGiftResponseProto.DeleteGiftStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -4760,11 +4596,11 @@ public final class EventRewardProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.DeleteGiftResponseProto.DeleteGiftStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventRewardProto.DeleteGiftResponseProto.DeleteGiftStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -5648,13 +5484,13 @@ public final class EventRewardProto {
     com.lvl6.proto.RewardsProto.UserRewardProtoOrBuilder getRewardOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.CollectGiftResponseProto.CollectGiftStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.CollectGiftResponseProto.CollectGiftStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CollectGiftResponseProto}
@@ -5740,7 +5576,7 @@ public final class EventRewardProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus value = com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -5788,88 +5624,6 @@ public final class EventRewardProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.CollectGiftResponseProto.CollectGiftStatus}
-     */
-    public enum CollectGiftStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static CollectGiftStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<CollectGiftStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<CollectGiftStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<CollectGiftStatus>() {
-              public CollectGiftStatus findValueByNumber(int number) {
-                return CollectGiftStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final CollectGiftStatus[] VALUES = values();
-
-      public static CollectGiftStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private CollectGiftStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CollectGiftResponseProto.CollectGiftStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
@@ -5914,24 +5668,24 @@ public final class EventRewardProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.CollectGiftResponseProto.CollectGiftStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.CollectGiftResponseProto.CollectGiftStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       reward_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6111,7 +5865,7 @@ public final class EventRewardProto {
           rewardBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -6445,23 +6199,23 @@ public final class EventRewardProto {
         return rewardBuilder_;
       }
 
-      private com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus status_ = com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.CollectGiftResponseProto.CollectGiftStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.CollectGiftResponseProto.CollectGiftStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.CollectGiftResponseProto.CollectGiftStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -6471,11 +6225,11 @@ public final class EventRewardProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CollectGiftResponseProto.CollectGiftStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -7390,13 +7144,13 @@ public final class EventRewardProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.UserRewardProto reward = 4;</code>
@@ -7486,7 +7240,7 @@ public final class EventRewardProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus value = com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -7548,97 +7302,6 @@ public final class EventRewardProto {
     @java.lang.Override
     public com.google.protobuf.Parser<RedeemSecretGiftResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus}
-     */
-    public enum RedeemSecretGiftStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_ITEMS_NONEXISTENT = 2;</code>
-       */
-      FAIL_ITEMS_NONEXISTENT(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_ITEMS_NONEXISTENT = 2;</code>
-       */
-      public static final int FAIL_ITEMS_NONEXISTENT_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static RedeemSecretGiftStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_ITEMS_NONEXISTENT;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RedeemSecretGiftStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RedeemSecretGiftStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RedeemSecretGiftStatus>() {
-              public RedeemSecretGiftStatus findValueByNumber(int number) {
-                return RedeemSecretGiftStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RedeemSecretGiftStatus[] VALUES = values();
-
-      public static RedeemSecretGiftStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RedeemSecretGiftStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus)
     }
 
     private int bitField0_;
@@ -7719,17 +7382,17 @@ public final class EventRewardProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -7757,7 +7420,7 @@ public final class EventRewardProto {
     private void initFields() {
       mup_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       nuGifts_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       reward_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -7942,7 +7605,7 @@ public final class EventRewardProto {
         } else {
           nuGiftsBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         if (rewardBuilder_ == null) {
           reward_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
@@ -8513,23 +8176,23 @@ public final class EventRewardProto {
         return nuGiftsBuilder_;
       }
 
-      private com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status_ = com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -8539,11 +8202,11 @@ public final class EventRewardProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -8730,54 +8393,46 @@ public final class EventRewardProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\021EventReward.proto\022\016com.lvl6.proto\032\nCha" +
-      "t.proto\032\014Reward.proto\032\nUser.proto\"\276\001\n\031Se" +
-      "ndTangoGiftRequestProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022\022\n\ncli" +
-      "entTime\030\002 \001(\003\022\024\n\014tangoUserIds\030\003 \003(\t\022\031\n\021s" +
-      "enderTangoUserId\030\004 \001(\t\022\021\n\tgemReward\030\005 \001(" +
-      "\005\022\027\n\017senderTangoName\030\006 \001(\t\"\227\002\n\032SendTango" +
-      "GiftResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022N\n\006status\030\002 " +
-      "\001(\0162>.com.lvl6.proto.SendTangoGiftRespon",
-      "seProto.SendTangoGiftStatus\022\"\n\032tangoUser" +
-      "IdsNotInToonSquad\030\003 \003(\t\022\037\n\027tangoUserIdsI" +
-      "nToonSquad\030\004 \003(\t\"2\n\023SendTangoGiftStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\262\001\n\031Receive" +
-      "dGiftResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\0221\n\005scope\030\002 " +
-      "\001(\0162\031.com.lvl6.proto.ChatScope:\007PRIVATE\022" +
-      "0\n\tuserGifts\030\003 \003(\0132\035.com.lvl6.proto.User" +
-      "GiftProto\"\177\n\026DeleteGiftRequestProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser",
-      "Proto\0223\n\014expiredGifts\030\002 \003(\0132\035.com.lvl6.p" +
-      "roto.UserGiftProto\"\306\001\n\027DeleteGiftRespons" +
-      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022H\n\006status\030\002 \001(\01628.com.l" +
-      "vl6.proto.DeleteGiftResponseProto.Delete" +
-      "GiftStatus\"/\n\020DeleteGiftStatus\022\013\n\007SUCCES" +
-      "S\020\001\022\016\n\nFAIL_OTHER\020\002\"\200\001\n\027CollectGiftReque" +
-      "stProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto" +
-      ".MinimumUserProtoWithMaxResources\022\022\n\ncli" +
-      "entTime\030\002 \001(\003\022\017\n\007ugUuids\030\003 \003(\t\"\213\002\n\030Colle",
-      "ctGiftResponseProto\022@\n\006sender\030\001 \001(\01320.co" +
-      "m.lvl6.proto.MinimumUserProtoWithMaxReso" +
-      "urces\022/\n\006reward\030\002 \001(\0132\037.com.lvl6.proto.U" +
-      "serRewardProto\022J\n\006status\030\003 \001(\0162:.com.lvl" +
-      "6.proto.CollectGiftResponseProto.Collect" +
-      "GiftStatus\"0\n\021CollectGiftStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\"v\n\034RedeemSecretGift" +
-      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022\022\n\nclientTime\030\002 \001" +
-      "(\003\022\020\n\010uisgUuid\030\003 \003(\t\"\336\002\n\035RedeemSecretGif",
-      "tResponseProto\022-\n\003mup\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\0224\n\007nuGifts\030\002 \003(\0132#" +
-      ".com.lvl6.proto.UserSecretGiftProto\022T\n\006s" +
-      "tatus\030\003 \001(\0162D.com.lvl6.proto.RedeemSecre" +
-      "tGiftResponseProto.RedeemSecretGiftStatu" +
-      "s\022/\n\006reward\030\004 \001(\0132\037.com.lvl6.proto.UserR" +
-      "ewardProto\"Q\n\026RedeemSecretGiftStatus\022\013\n\007" +
-      "SUCCESS\020\001\022\032\n\026FAIL_ITEMS_NONEXISTENT\020\002\022\016\n" +
-      "\nFAIL_OTHER\020\003B\022B\020EventRewardProto"
+      "t.proto\032\014Reward.proto\032\026SharedEnumConfig." +
+      "proto\032\nUser.proto\"\276\001\n\031SendTangoGiftReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\022\n\nclientTime\030\002 \001(\003\022\024\n" +
+      "\014tangoUserIds\030\003 \003(\t\022\031\n\021senderTangoUserId" +
+      "\030\004 \001(\t\022\021\n\tgemReward\030\005 \001(\005\022\027\n\017senderTango" +
+      "Name\030\006 \001(\t\"\303\001\n\032SendTangoGiftResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.p",
+      "roto.ResponseStatus\022\"\n\032tangoUserIdsNotIn" +
+      "ToonSquad\030\003 \003(\t\022\037\n\027tangoUserIdsInToonSqu" +
+      "ad\030\004 \003(\t\"\262\001\n\031ReceivedGiftResponseProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\0221\n\005scope\030\002 \001(\0162\031.com.lvl6.proto" +
+      ".ChatScope:\007PRIVATE\0220\n\tuserGifts\030\003 \003(\0132\035" +
+      ".com.lvl6.proto.UserGiftProto\"\177\n\026DeleteG" +
+      "iftRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\0223\n\014expiredGift" +
+      "s\030\002 \003(\0132\035.com.lvl6.proto.UserGiftProto\"{",
+      "\n\027DeleteGiftResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022.\n\006s" +
+      "tatus\030\002 \001(\0162\036.com.lvl6.proto.ResponseSta" +
+      "tus\"\200\001\n\027CollectGiftRequestProto\022@\n\006sende" +
+      "r\030\001 \001(\01320.com.lvl6.proto.MinimumUserProt" +
+      "oWithMaxResources\022\022\n\nclientTime\030\002 \001(\003\022\017\n" +
+      "\007ugUuids\030\003 \003(\t\"\275\001\n\030CollectGiftResponsePr" +
+      "oto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Min" +
+      "imumUserProtoWithMaxResources\022/\n\006reward\030" +
+      "\002 \001(\0132\037.com.lvl6.proto.UserRewardProto\022.",
+      "\n\006status\030\003 \001(\0162\036.com.lvl6.proto.Response" +
+      "Status\"v\n\034RedeemSecretGiftRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\022\n\nclientTime\030\002 \001(\003\022\020\n\010uisgUuid" +
+      "\030\003 \003(\t\"\345\001\n\035RedeemSecretGiftResponseProto" +
+      "\022-\n\003mup\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\0224\n\007nuGifts\030\002 \003(\0132#.com.lvl6.prot" +
+      "o.UserSecretGiftProto\022.\n\006status\030\003 \001(\0162\036." +
+      "com.lvl6.proto.ResponseStatus\022/\n\006reward\030" +
+      "\004 \001(\0132\037.com.lvl6.proto.UserRewardProtoB\022",
+      "B\020EventRewardProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8792,6 +8447,7 @@ public final class EventRewardProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.ChatProto.getDescriptor(),
           com.lvl6.proto.RewardsProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_SendTangoGiftRequestProto_descriptor =
@@ -8850,6 +8506,7 @@ public final class EventRewardProto {
         new java.lang.String[] { "Mup", "NuGifts", "Status", "Reward", });
     com.lvl6.proto.ChatProto.getDescriptor();
     com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

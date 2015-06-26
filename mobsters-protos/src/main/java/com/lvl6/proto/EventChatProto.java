@@ -2406,13 +2406,13 @@ public final class EventChatProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SendGroupChatResponseProto}
@@ -2481,7 +2481,7 @@ public final class EventChatProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus value = com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -2529,106 +2529,6 @@ public final class EventChatProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus}
-     */
-    public enum SendGroupChatStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>TOO_LONG = 2;</code>
-       */
-      TOO_LONG(1, 2),
-      /**
-       * <code>OTHER_FAIL = 3;</code>
-       */
-      OTHER_FAIL(2, 3),
-      /**
-       * <code>BANNED = 4;</code>
-       */
-      BANNED(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>TOO_LONG = 2;</code>
-       */
-      public static final int TOO_LONG_VALUE = 2;
-      /**
-       * <code>OTHER_FAIL = 3;</code>
-       */
-      public static final int OTHER_FAIL_VALUE = 3;
-      /**
-       * <code>BANNED = 4;</code>
-       */
-      public static final int BANNED_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static SendGroupChatStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return TOO_LONG;
-          case 3: return OTHER_FAIL;
-          case 4: return BANNED;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SendGroupChatStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SendGroupChatStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SendGroupChatStatus>() {
-              public SendGroupChatStatus findValueByNumber(int number) {
-                return SendGroupChatStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SendGroupChatStatus[] VALUES = values();
-
-      public static SendGroupChatStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SendGroupChatStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -2652,23 +2552,23 @@ public final class EventChatProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2830,7 +2730,7 @@ public final class EventChatProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -3037,23 +2937,23 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus status_ = com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3063,11 +2963,11 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SendGroupChatResponseProto.SendGroupChatStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -5029,13 +4929,13 @@ public final class EventChatProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.PrivateChatPostProto post = 3;</code>
@@ -5147,7 +5047,7 @@ public final class EventChatProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus value = com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -5234,115 +5134,6 @@ public final class EventChatProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus}
-     */
-    public enum PrivateChatPostStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>NO_CONTENT_SENT = 2;</code>
-       */
-      NO_CONTENT_SENT(1, 2),
-      /**
-       * <code>POST_TOO_LARGE = 3;</code>
-       */
-      POST_TOO_LARGE(2, 3),
-      /**
-       * <code>OTHER_FAIL = 4;</code>
-       */
-      OTHER_FAIL(3, 4),
-      /**
-       * <code>BANNED = 5;</code>
-       */
-      BANNED(4, 5),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>NO_CONTENT_SENT = 2;</code>
-       */
-      public static final int NO_CONTENT_SENT_VALUE = 2;
-      /**
-       * <code>POST_TOO_LARGE = 3;</code>
-       */
-      public static final int POST_TOO_LARGE_VALUE = 3;
-      /**
-       * <code>OTHER_FAIL = 4;</code>
-       */
-      public static final int OTHER_FAIL_VALUE = 4;
-      /**
-       * <code>BANNED = 5;</code>
-       */
-      public static final int BANNED_VALUE = 5;
-
-
-      public final int getNumber() { return value; }
-
-      public static PrivateChatPostStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return NO_CONTENT_SENT;
-          case 3: return POST_TOO_LARGE;
-          case 4: return OTHER_FAIL;
-          case 5: return BANNED;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<PrivateChatPostStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<PrivateChatPostStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<PrivateChatPostStatus>() {
-              public PrivateChatPostStatus findValueByNumber(int number) {
-                return PrivateChatPostStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final PrivateChatPostStatus[] VALUES = values();
-
-      public static PrivateChatPostStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private PrivateChatPostStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -5366,17 +5157,17 @@ public final class EventChatProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -5445,7 +5236,7 @@ public final class EventChatProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       post_ = com.lvl6.proto.ChatProto.PrivateChatPostProto.getDefaultInstance();
       translationSetting_ = com.lvl6.proto.ChatProto.PrivateChatDefaultLanguageProto.getDefaultInstance();
       adminMessage_ = com.lvl6.proto.ChatProto.GroupChatMessageProto.getDefaultInstance();
@@ -5638,7 +5429,7 @@ public final class EventChatProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (postBuilder_ == null) {
           post_ = com.lvl6.proto.ChatProto.PrivateChatPostProto.getDefaultInstance();
@@ -5896,23 +5687,23 @@ public final class EventChatProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus status_ = com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -5922,11 +5713,11 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.PrivateChatPostResponseProto.PrivateChatPostStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -7227,13 +7018,13 @@ public final class EventChatProto {
     @java.lang.Deprecated int getBeforePrivateChatId();
 
     /**
-     * <code>optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
-    com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional string otherUserUuid = 5;</code>
@@ -7329,7 +7120,7 @@ public final class EventChatProto {
             }
             case 32: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus value = com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
@@ -7384,88 +7175,6 @@ public final class EventChatProto {
     @java.lang.Override
     public com.google.protobuf.Parser<RetrievePrivateChatPostsResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus}
-     */
-    public enum RetrievePrivateChatPostsStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL = 2;</code>
-       */
-      FAIL(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL = 2;</code>
-       */
-      public static final int FAIL_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static RetrievePrivateChatPostsStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RetrievePrivateChatPostsStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RetrievePrivateChatPostsStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RetrievePrivateChatPostsStatus>() {
-              public RetrievePrivateChatPostsStatus findValueByNumber(int number) {
-                return RetrievePrivateChatPostsStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RetrievePrivateChatPostsStatus[] VALUES = values();
-
-      public static RetrievePrivateChatPostsStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RetrievePrivateChatPostsStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus)
     }
 
     private int bitField0_;
@@ -7549,17 +7258,17 @@ public final class EventChatProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 4;
-    private com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
      */
-    public com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -7609,7 +7318,7 @@ public final class EventChatProto {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       posts_ = java.util.Collections.emptyList();
       beforePrivateChatId_ = 0;
-      status_ = com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       otherUserUuid_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -7802,7 +7511,7 @@ public final class EventChatProto {
         }
         beforePrivateChatId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000008);
         otherUserUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -8350,23 +8059,23 @@ public final class EventChatProto {
         return this;
       }
 
-      private com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status_ = com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
-      public com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -8376,11 +8085,11 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus status = 4;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 4;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        status_ = com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -9851,13 +9560,13 @@ public final class EventChatProto {
         int index);
 
     /**
-     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TranslateSelectMessagesResponseProto}
@@ -9934,7 +9643,7 @@ public final class EventChatProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus value = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -9983,97 +9692,6 @@ public final class EventChatProto {
     @java.lang.Override
     public com.google.protobuf.Parser<TranslateSelectMessagesResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus}
-     */
-    public enum TranslateSelectMessagesStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_NOT_VALID_LANGUAGE = 3;</code>
-       */
-      FAIL_NOT_VALID_LANGUAGE(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_NOT_VALID_LANGUAGE = 3;</code>
-       */
-      public static final int FAIL_NOT_VALID_LANGUAGE_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static TranslateSelectMessagesStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_NOT_VALID_LANGUAGE;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<TranslateSelectMessagesStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<TranslateSelectMessagesStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<TranslateSelectMessagesStatus>() {
-              public TranslateSelectMessagesStatus findValueByNumber(int number) {
-                return TranslateSelectMessagesStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final TranslateSelectMessagesStatus[] VALUES = values();
-
-      public static TranslateSelectMessagesStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private TranslateSelectMessagesStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus)
     }
 
     private int bitField0_;
@@ -10134,24 +9752,24 @@ public final class EventChatProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       messagesTranslated_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10327,7 +9945,7 @@ public final class EventChatProto {
         } else {
           messagesTranslatedBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -10809,23 +10427,23 @@ public final class EventChatProto {
         return messagesTranslatedBuilder_;
       }
 
-      private com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -10835,11 +10453,11 @@ public final class EventChatProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventChatProto.TranslateSelectMessagesResponseProto.TranslateSelectMessagesStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -10920,76 +10538,64 @@ public final class EventChatProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017EventChat.proto\022\016com.lvl6.proto\032\nChat." +
-      "proto\032\nUser.proto\"D\n\035SendAdminMessageRes" +
-      "ponseProto\022\022\n\nsenderUuid\030\001 \001(\t\022\017\n\007messag" +
-      "e\030\002 \001(\t\"l\n GeneralNotificationResponsePr" +
-      "oto\022\r\n\005title\030\001 \001(\t\022\020\n\010subtitle\030\002 \001(\t\022\'\n\003" +
-      "rgb\030\003 \001(\0132\032.com.lvl6.proto.ColorProto\"\342\001" +
-      "\n\031SendGroupChatRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022.\n" +
-      "\005scope\030\002 \001(\0162\031.com.lvl6.proto.ChatScope:" +
-      "\004CLAN\022\023\n\013chatMessage\030\003 \001(\t\022\022\n\nclientTime",
-      "\030\004 \001(\003\022:\n\016globalLanguage\030\005 \001(\0162\".com.lvl" +
-      "6.proto.TranslateLanguages\"\354\001\n\032SendGroup" +
-      "ChatResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022N\n\006status\030\002 " +
-      "\001(\0162>.com.lvl6.proto.SendGroupChatRespon" +
-      "seProto.SendGroupChatStatus\"L\n\023SendGroup" +
-      "ChatStatus\022\013\n\007SUCCESS\020\001\022\014\n\010TOO_LONG\020\002\022\016\n" +
-      "\nOTHER_FAIL\020\003\022\n\n\006BANNED\020\004\"\350\001\n\036ReceivedGr" +
-      "oupChatResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022.\n\005scope\030",
-      "\002 \001(\0162\031.com.lvl6.proto.ChatScope:\004CLAN\0226" +
-      "\n\007message\030\003 \001(\0132%.com.lvl6.proto.GroupCh" +
-      "atMessageProto\022\027\n\013chatMessage\030\004 \001(\tB\002\030\001\022" +
-      "\023\n\007isAdmin\030\005 \001(\010B\002\030\001\"\275\001\n\033PrivateChatPost" +
-      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022\025\n\rrecipientUuid\030" +
-      "\002 \001(\t\022\017\n\007content\030\003 \001(\t\022D\n\017contentLanguag" +
-      "e\030\004 \001(\0162\".com.lvl6.proto.TranslateLangua" +
-      "ges:\007ENGLISH\"\315\003\n\034PrivateChatPostResponse" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M",
-      "inimumUserProto\022R\n\006status\030\002 \001(\0162B.com.lv" +
-      "l6.proto.PrivateChatPostResponseProto.Pr" +
-      "ivateChatPostStatus\0222\n\004post\030\003 \001(\0132$.com." +
-      "lvl6.proto.PrivateChatPostProto\022K\n\022trans" +
-      "lationSetting\030\004 \001(\0132/.com.lvl6.proto.Pri" +
-      "vateChatDefaultLanguageProto\022;\n\014adminMes" +
-      "sage\030\005 \001(\0132%.com.lvl6.proto.GroupChatMes" +
-      "sageProto\"i\n\025PrivateChatPostStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\023\n\017NO_CONTENT_SENT\020\002\022\022\n\016POST_TOO" +
-      "_LARGE\020\003\022\016\n\nOTHER_FAIL\020\004\022\n\n\006BANNED\020\005\"\306\001\n",
-      "$RetrievePrivateChatPostsRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\025\n\rotherUserUuid\030\002 \001(\t\022\037\n\023before" +
-      "PrivateChatId\030\003 \001(\005B\002\030\001\0224\n\010language\030\004 \001(" +
-      "\0162\".com.lvl6.proto.TranslateLanguages\"\346\002" +
-      "\n%RetrievePrivateChatPostsResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\0224\n\005posts\030\002 \003(\0132%.com.lvl6.prot" +
-      "o.GroupChatMessageProto\022\037\n\023beforePrivate" +
-      "ChatId\030\003 \001(\005B\002\030\001\022d\n\006status\030\004 \001(\0162T.com.l",
-      "vl6.proto.RetrievePrivateChatPostsRespon" +
-      "seProto.RetrievePrivateChatPostsStatus\022\025" +
-      "\n\rotherUserUuid\030\005 \001(\t\"7\n\036RetrievePrivate" +
-      "ChatPostsStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"\254" +
-      "\002\n#TranslateSelectMessagesRequestProto\0220" +
+      "proto\032\026SharedEnumConfig.proto\032\nUser.prot" +
+      "o\"D\n\035SendAdminMessageResponseProto\022\022\n\nse" +
+      "nderUuid\030\001 \001(\t\022\017\n\007message\030\002 \001(\t\"l\n Gener" +
+      "alNotificationResponseProto\022\r\n\005title\030\001 \001" +
+      "(\t\022\020\n\010subtitle\030\002 \001(\t\022\'\n\003rgb\030\003 \001(\0132\032.com." +
+      "lvl6.proto.ColorProto\"\342\001\n\031SendGroupChatR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022.\n\005scope\030\002 \001(\0162\031.c" +
+      "om.lvl6.proto.ChatScope:\004CLAN\022\023\n\013chatMes",
+      "sage\030\003 \001(\t\022\022\n\nclientTime\030\004 \001(\003\022:\n\016global" +
+      "Language\030\005 \001(\0162\".com.lvl6.proto.Translat" +
+      "eLanguages\"~\n\032SendGroupChatResponseProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.pr" +
+      "oto.ResponseStatus\"\350\001\n\036ReceivedGroupChat" +
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022.\n\005scope\030\002 \001(\0162\031" +
+      ".com.lvl6.proto.ChatScope:\004CLAN\0226\n\007messa" +
+      "ge\030\003 \001(\0132%.com.lvl6.proto.GroupChatMessa",
+      "geProto\022\027\n\013chatMessage\030\004 \001(\tB\002\030\001\022\023\n\007isAd" +
+      "min\030\005 \001(\010B\002\030\001\"\275\001\n\033PrivateChatPostRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\025\n\rrecipientUuid\030\002 \001(\t\022\017" +
+      "\n\007content\030\003 \001(\t\022D\n\017contentLanguage\030\004 \001(\016" +
+      "2\".com.lvl6.proto.TranslateLanguages:\007EN" +
+      "GLISH\"\276\002\n\034PrivateChatPostResponseProto\0220" +
       "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022+\n\010chatType\030\002 \001(\0162\031.com.lvl6.pr" +
-      "oto.ChatScope\022\025\n\rotherUserUuid\030\003 \001(\t\0224\n\010" +
-      "language\030\004 \001(\0162\".com.lvl6.proto.Translat" +
-      "eLanguages\022D\n\026messagesToBeTranslated\030\005 \003",
-      "(\0132$.com.lvl6.proto.PrivateChatPostProto" +
-      "\022\023\n\013translateOn\030\006 \001(\010\"\331\002\n$TranslateSelec" +
-      "tMessagesResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022@\n\022mess" +
-      "agesTranslated\030\002 \003(\0132$.com.lvl6.proto.Pr" +
-      "ivateChatPostProto\022b\n\006status\030\003 \001(\0162R.com" +
-      ".lvl6.proto.TranslateSelectMessagesRespo" +
-      "nseProto.TranslateSelectMessagesStatus\"Y" +
-      "\n\035TranslateSelectMessagesStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\033\n\027FAIL_NOT_VALID_L",
-      "ANGUAGE\020\003B\020B\016EventChatProto"
+      "serProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.prot" +
+      "o.ResponseStatus\0222\n\004post\030\003 \001(\0132$.com.lvl",
+      "6.proto.PrivateChatPostProto\022K\n\022translat" +
+      "ionSetting\030\004 \001(\0132/.com.lvl6.proto.Privat" +
+      "eChatDefaultLanguageProto\022;\n\014adminMessag" +
+      "e\030\005 \001(\0132%.com.lvl6.proto.GroupChatMessag" +
+      "eProto\"\306\001\n$RetrievePrivateChatPostsReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\025\n\rotherUserUuid\030\002 \001(\t" +
+      "\022\037\n\023beforePrivateChatId\030\003 \001(\005B\002\030\001\0224\n\010lan" +
+      "guage\030\004 \001(\0162\".com.lvl6.proto.TranslateLa" +
+      "nguages\"\367\001\n%RetrievePrivateChatPostsResp",
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\0224\n\005posts\030\002 \003(\0132%.com" +
+      ".lvl6.proto.GroupChatMessageProto\022\037\n\023bef" +
+      "orePrivateChatId\030\003 \001(\005B\002\030\001\022.\n\006status\030\004 \001" +
+      "(\0162\036.com.lvl6.proto.ResponseStatus\022\025\n\rot" +
+      "herUserUuid\030\005 \001(\t\"\254\002\n#TranslateSelectMes" +
+      "sagesRequestProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022+\n\010chatType\030" +
+      "\002 \001(\0162\031.com.lvl6.proto.ChatScope\022\025\n\rothe" +
+      "rUserUuid\030\003 \001(\t\0224\n\010language\030\004 \001(\0162\".com.",
+      "lvl6.proto.TranslateLanguages\022D\n\026message" +
+      "sToBeTranslated\030\005 \003(\0132$.com.lvl6.proto.P" +
+      "rivateChatPostProto\022\023\n\013translateOn\030\006 \001(\010" +
+      "\"\312\001\n$TranslateSelectMessagesResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022@\n\022messagesTranslated\030\002 \003(\0132" +
+      "$.com.lvl6.proto.PrivateChatPostProto\022.\n" +
+      "\006status\030\003 \001(\0162\036.com.lvl6.proto.ResponseS" +
+      "tatusB\020B\016EventChatProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -11003,6 +10609,7 @@ public final class EventChatProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.ChatProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_SendAdminMessageResponseProto_descriptor =
@@ -11072,6 +10679,7 @@ public final class EventChatProto {
         internal_static_com_lvl6_proto_TranslateSelectMessagesResponseProto_descriptor,
         new java.lang.String[] { "Sender", "MessagesTranslated", "Status", });
     com.lvl6.proto.ChatProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

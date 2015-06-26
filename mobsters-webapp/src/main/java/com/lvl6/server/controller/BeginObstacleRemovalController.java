@@ -20,10 +20,10 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto;
 import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto;
-import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.BeginObstacleRemovalStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2;
 import com.lvl6.server.Locker;
@@ -77,7 +77,7 @@ public class BeginObstacleRemovalController extends EventController {
 		BeginObstacleRemovalResponseProto.Builder resBuilder = BeginObstacleRemovalResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -92,7 +92,7 @@ public class BeginObstacleRemovalController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -146,7 +146,7 @@ public class BeginObstacleRemovalController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				BeginObstacleRemovalResponseEvent resEvent = new BeginObstacleRemovalResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -168,7 +168,7 @@ public class BeginObstacleRemovalController extends EventController {
 			int resourceChange, ResourceType rt) {
 
 		if (null == user || null == ofu) {
-			resBuilder.setStatus(BeginObstacleRemovalStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error(String
 					.format("user or ofu is null. user=%s, userId=%s, ofu=%s, ofuId=%s",
 							user, userId, ofu, ofuId));
@@ -195,7 +195,7 @@ public class BeginObstacleRemovalController extends EventController {
 			}
 		}
 
-		resBuilder.setStatus(BeginObstacleRemovalStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 
@@ -207,7 +207,7 @@ public class BeginObstacleRemovalController extends EventController {
 					"not enough gems. userGems=%s, gemsSpent=%s", userGems,
 					gemsSpent));
 			resBuilder
-					.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 
@@ -222,7 +222,7 @@ public class BeginObstacleRemovalController extends EventController {
 					"not enough cash. userCash=%s, cashSpent=%s", userCash,
 					cashSpent));
 			resBuilder
-					.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 			return false;
 		}
 
@@ -236,7 +236,7 @@ public class BeginObstacleRemovalController extends EventController {
 			log.error(String.format("not enough oil. userOil=%s, oilSpent=%s",
 					userOil, oilSpent));
 			resBuilder
-					.setStatus(BeginObstacleRemovalStatus.FAIL_INSUFFICIENT_RESOURCE);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 			return false;
 		}
 

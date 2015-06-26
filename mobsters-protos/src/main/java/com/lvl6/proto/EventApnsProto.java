@@ -691,13 +691,13 @@ public final class EventApnsProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EnableAPNSResponseProto}
@@ -770,7 +770,7 @@ public final class EventApnsProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus value = com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -818,88 +818,6 @@ public final class EventApnsProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus}
-     */
-    public enum EnableAPNSStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>NOT_ENABLED = 2;</code>
-       */
-      NOT_ENABLED(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>NOT_ENABLED = 2;</code>
-       */
-      public static final int NOT_ENABLED_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static EnableAPNSStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return NOT_ENABLED;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<EnableAPNSStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<EnableAPNSStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EnableAPNSStatus>() {
-              public EnableAPNSStatus findValueByNumber(int number) {
-                return EnableAPNSStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final EnableAPNSStatus[] VALUES = values();
-
-      public static EnableAPNSStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private EnableAPNSStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -923,23 +841,23 @@ public final class EventApnsProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1105,7 +1023,7 @@ public final class EventApnsProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -1312,23 +1230,23 @@ public final class EventApnsProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus status_ = com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1338,11 +1256,11 @@ public final class EventApnsProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.EnableAPNSResponseProto.EnableAPNSStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -1377,16 +1295,14 @@ public final class EventApnsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017EventApns.proto\022\016com.lvl6.proto\032\nUser." +
-      "proto\"_\n\026EnableAPNSRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\023\n\013deviceToken\030\002 \001(\t\"\307\001\n\027EnableAPNSRes" +
-      "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022H\n\006status\030\002 \001(\01628.c" +
-      "om.lvl6.proto.EnableAPNSResponseProto.En" +
-      "ableAPNSStatus\"0\n\020EnableAPNSStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\017\n\013NOT_ENABLED\020\002B\020B\016EventApnsPro" +
-      "to"
+      "\n\017EventApns.proto\022\016com.lvl6.proto\032\026Share" +
+      "dEnumConfig.proto\032\nUser.proto\"_\n\026EnableA" +
+      "PNSRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022\023\n\013deviceToken" +
+      "\030\002 \001(\t\"{\n\027EnableAPNSResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Res" +
+      "ponseStatusB\020B\016EventApnsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1399,6 +1315,7 @@ public final class EventApnsProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_EnableAPNSRequestProto_descriptor =
@@ -1413,6 +1330,7 @@ public final class EventApnsProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EnableAPNSResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", });
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

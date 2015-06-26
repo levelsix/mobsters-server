@@ -704,13 +704,13 @@ public final class EventCityProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getCityOwnerOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.FullUserStructureProto ownerNormStructs = 4;</code>
@@ -868,7 +868,7 @@ public final class EventCityProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus value = com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -949,97 +949,6 @@ public final class EventCityProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus}
-     */
-    public enum LoadPlayerCityStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_NO_SUCH_PLAYER = 2;</code>
-       */
-      FAIL_NO_SUCH_PLAYER(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_NO_SUCH_PLAYER = 2;</code>
-       */
-      public static final int FAIL_NO_SUCH_PLAYER_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static LoadPlayerCityStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_NO_SUCH_PLAYER;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<LoadPlayerCityStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<LoadPlayerCityStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<LoadPlayerCityStatus>() {
-              public LoadPlayerCityStatus findValueByNumber(int number) {
-                return LoadPlayerCityStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final LoadPlayerCityStatus[] VALUES = values();
-
-      public static LoadPlayerCityStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private LoadPlayerCityStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -1084,17 +993,17 @@ public final class EventCityProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -1206,7 +1115,7 @@ public final class EventCityProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       cityOwner_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       ownerNormStructs_ = java.util.Collections.emptyList();
       userCityExpansionDataProtoList_ = java.util.Collections.emptyList();
       obstacles_ = java.util.Collections.emptyList();
@@ -1413,7 +1322,7 @@ public final class EventCityProto {
           cityOwnerBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         if (ownerNormStructsBuilder_ == null) {
           ownerNormStructs_ = java.util.Collections.emptyList();
@@ -1870,23 +1779,23 @@ public final class EventCityProto {
         return cityOwnerBuilder_;
       }
 
-      private com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status_ = com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1896,11 +1805,11 @@ public final class EventCityProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.LoadPlayerCityResponseProto.LoadPlayerCityStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -6085,46 +5994,44 @@ public final class EventCityProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017EventCity.proto\022\016com.lvl6.proto\032\nCity." +
-      "proto\032\017Structure.proto\032\nUser.proto\"e\n\032Lo" +
-      "adPlayerCityRequestProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\022\025\n\rci" +
-      "tyOwnerUuid\030\002 \001(\t\"\360\003\n\033LoadPlayerCityResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\0223\n\tcityOwner\030\002 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022P\n\006stat" +
-      "us\030\003 \001(\0162@.com.lvl6.proto.LoadPlayerCity" +
-      "ResponseProto.LoadPlayerCityStatus\022@\n\020ow",
-      "nerNormStructs\030\004 \003(\0132&.com.lvl6.proto.Fu" +
-      "llUserStructureProto\022R\n\036userCityExpansio" +
-      "nDataProtoList\030\005 \003(\0132*.com.lvl6.proto.Us" +
-      "erCityExpansionDataProto\0224\n\tobstacles\030\006 " +
-      "\003(\0132!.com.lvl6.proto.UserObstacleProto\"L" +
-      "\n\024LoadPlayerCityStatus\022\013\n\007SUCCESS\020\001\022\027\n\023F" +
-      "AIL_NO_SUCH_PLAYER\020\002\022\016\n\nFAIL_OTHER\020\003\"\223\001\n" +
-      "!PurchaseCityExpansionRequestProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\021\n\txPosition\030\002 \001(\021\022\021\n\tyPosition\030\003 \001",
-      "(\021\022\026\n\016timeOfPurchase\030\004 \001(\003\"\202\003\n\"PurchaseC" +
-      "ityExpansionResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022^\n\006s" +
-      "tatus\030\002 \001(\0162N.com.lvl6.proto.PurchaseCit" +
-      "yExpansionResponseProto.PurchaseCityExpa" +
-      "nsionStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.pr" +
-      "oto.UserCityExpansionDataProto\"\216\001\n\033Purch" +
-      "aseCityExpansionStatus\022\013\n\007SUCCESS\020\001\022\024\n\020N" +
-      "OT_ENOUGH_COINS\020\002\022\025\n\021ALREADY_EXPANDING\020\003" +
-      "\022\016\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_APART_FRO",
-      "M_SERVER_TIME\020\005\"X\n\024LoadCityRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\016\n\006cityId\030\002 \001(\005\"\242\002\n\025LoadCityRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022D\n\006status\030\002 \001(\01624." +
-      "com.lvl6.proto.LoadCityResponseProto.Loa" +
-      "dCityStatus\0226\n\014cityElements\030\003 \003(\0132 .com." +
-      "lvl6.proto.CityElementProto\022\016\n\006cityId\030\004 " +
-      "\001(\005\"I\n\016LoadCityStatus\022\013\n\007SUCCESS\020\001\022\032\n\026NO" +
-      "T_ACCESSIBLE_TO_USER\020\002\022\016\n\nOTHER_FAIL\020\003B\020",
-      "B\016EventCityProto"
+      "proto\032\026SharedEnumConfig.proto\032\017Structure" +
+      ".proto\032\nUser.proto\"e\n\032LoadPlayerCityRequ" +
+      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022\025\n\rcityOwnerUuid\030\002 \001(" +
+      "\t\"\200\003\n\033LoadPlayerCityResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\0223\n\tcityOwner\030\002 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022.\n\006status\030\003 \001(\0162\036.com.l" +
+      "vl6.proto.ResponseStatus\022@\n\020ownerNormStr",
+      "ucts\030\004 \003(\0132&.com.lvl6.proto.FullUserStru" +
+      "ctureProto\022R\n\036userCityExpansionDataProto" +
+      "List\030\005 \003(\0132*.com.lvl6.proto.UserCityExpa" +
+      "nsionDataProto\0224\n\tobstacles\030\006 \003(\0132!.com." +
+      "lvl6.proto.UserObstacleProto\"\223\001\n!Purchas" +
+      "eCityExpansionRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\021\n\t" +
+      "xPosition\030\002 \001(\021\022\021\n\tyPosition\030\003 \001(\021\022\026\n\016ti" +
+      "meOfPurchase\030\004 \001(\003\"\202\003\n\"PurchaseCityExpan" +
+      "sionResponseProto\0220\n\006sender\030\001 \001(\0132 .com.",
+      "lvl6.proto.MinimumUserProto\022^\n\006status\030\002 " +
+      "\001(\0162N.com.lvl6.proto.PurchaseCityExpansi" +
+      "onResponseProto.PurchaseCityExpansionSta" +
+      "tus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.proto.User" +
+      "CityExpansionDataProto\"\216\001\n\033PurchaseCityE" +
+      "xpansionStatus\022\013\n\007SUCCESS\020\001\022\024\n\020NOT_ENOUG" +
+      "H_COINS\020\002\022\025\n\021ALREADY_EXPANDING\020\003\022\016\n\nOTHE" +
+      "R_FAIL\020\004\022%\n!CLIENT_TOO_APART_FROM_SERVER" +
+      "_TIME\020\005\"X\n\024LoadCityRequestProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt",
+      "o\022\016\n\006cityId\030\002 \001(\005\"\242\002\n\025LoadCityResponsePr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022D\n\006status\030\002 \001(\01624.com.lvl6" +
+      ".proto.LoadCityResponseProto.LoadCitySta" +
+      "tus\0226\n\014cityElements\030\003 \003(\0132 .com.lvl6.pro" +
+      "to.CityElementProto\022\016\n\006cityId\030\004 \001(\005\"I\n\016L" +
+      "oadCityStatus\022\013\n\007SUCCESS\020\001\022\032\n\026NOT_ACCESS" +
+      "IBLE_TO_USER\020\002\022\016\n\nOTHER_FAIL\020\003B\020B\016EventC" +
+      "ityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6138,6 +6045,7 @@ public final class EventCityProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.CityProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -6178,6 +6086,7 @@ public final class EventCityProto {
         internal_static_com_lvl6_proto_LoadCityResponseProto_descriptor,
         new java.lang.String[] { "Sender", "Status", "CityElements", "CityId", });
     com.lvl6.proto.CityProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

@@ -18,7 +18,7 @@ import com.lvl6.info.User;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityRequestProto;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.Builder;
-import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -80,7 +80,7 @@ public class LoadPlayerCityController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 
-		resBuilder.setStatus(LoadPlayerCityStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 		UUID userUuid = null;
 		UUID cityOwnerUuid = null;
@@ -99,7 +99,7 @@ public class LoadPlayerCityController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(LoadPlayerCityStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -152,7 +152,7 @@ public class LoadPlayerCityController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in LoadPlayerCity processEvent", e);
 			try {
-				resBuilder.setStatus(LoadPlayerCityStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -177,7 +177,7 @@ public class LoadPlayerCityController extends EventController {
 								.createFullUserStructureProtoFromUserstruct(userStruct));
 			}
 		} else {
-			resBuilder.setStatus(LoadPlayerCityStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("user structs found for user is null");
 		}
 	}

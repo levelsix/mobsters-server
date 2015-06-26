@@ -22,7 +22,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.Builder;
-import com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto.RefreshMiniJobStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
@@ -110,7 +110,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RefreshMiniJobStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -130,7 +130,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(RefreshMiniJobStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 
@@ -176,7 +176,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			if (!hasEnoughGems(resBuilder, gemsSpent))
 			{
 				resBuilder
-				.setStatus(RefreshMiniJobStatus.FAIL_INSUFFICIENT_GEMS);
+				.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 				return false;
 			}
 
@@ -193,7 +193,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			//verify user has sufficient items
 			if (!hasEnoughItems(resBuilder))
 			{
-				resBuilder.setStatus(RefreshMiniJobStatus.FAIL_INSUFFICIENT_ITEMS);
+				resBuilder.setStatus(ResponseStatus.FAIL_INSUFFICIENT_ITEM);
 				return false;
 			}
 		}

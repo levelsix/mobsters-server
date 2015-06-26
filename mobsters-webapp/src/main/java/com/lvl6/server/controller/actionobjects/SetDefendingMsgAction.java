@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto.Builder;
-import com.lvl6.proto.EventPvpProto.SetDefendingMsgResponseProto.SetDefendingMsgStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 
 @Component@Scope("prototype")public class SetDefendingMsgAction {
@@ -53,7 +53,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 	//	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(SetDefendingMsgStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -73,7 +73,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 			return;
 		}
 
-		resBuilder.setStatus(SetDefendingMsgStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

@@ -24,7 +24,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProto;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
@@ -85,7 +85,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 		CombineUserMonsterPiecesResponseProto.Builder resBuilder = CombineUserMonsterPiecesResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(CombineUserMonsterPiecesStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		boolean invalidUuids = false;
@@ -99,7 +99,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(CombineUserMonsterPiecesStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -130,7 +130,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 			}
 
 			if (successful) {
-				resBuilder.setStatus(CombineUserMonsterPiecesStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(
@@ -157,7 +157,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(CombineUserMonsterPiecesStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -232,7 +232,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 		}
 
 		if (userMonsterIds.isEmpty()) {
-			resBuilder.setStatus(CombineUserMonsterPiecesStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("the user didn't send any userMonsters to complete!.");
 			return false;
 		}
@@ -244,7 +244,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 					+ gemCost
 					+ "\t userMonsterIds=" + userMonsterIds);
 			resBuilder
-					.setStatus(CombineUserMonsterPiecesStatus.FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP);
+					.setStatus(ResponseStatus.FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP);
 			return false;
 		}
 
@@ -258,7 +258,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 					+ "\t userMonsterIds="
 					+ userMonsterIds);
 			resBuilder
-					.setStatus(CombineUserMonsterPiecesStatus.FAIL_INSUFFUCIENT_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 

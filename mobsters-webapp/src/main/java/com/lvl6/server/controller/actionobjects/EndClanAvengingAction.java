@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
 @Component@Scope("prototype")public class EndClanAvengingAction {
@@ -45,7 +45,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 	//derived state
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(EndClanAvengingStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -65,7 +65,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 			return;
 		}
 
-		resBuilder.setStatus(EndClanAvengingStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanAvenge;
-import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.Builder;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -59,7 +59,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	List<Timestamp> battleEndTime;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(BeginClanAvengingStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -79,7 +79,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(BeginClanAvengingStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {

@@ -20,7 +20,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.ItemForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
-import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -61,7 +61,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 	public void execute(Builder resBuilder) {
 		setUpDaos();
-		resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -81,7 +81,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-		resBuilder.setStatus(InAppPurchaseStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 	

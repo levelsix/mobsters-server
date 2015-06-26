@@ -535,7 +535,7 @@ public final class ResearchsProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType costType = 11;</code>
      */
-    com.lvl6.proto.StructureProto.ResourceType getCostType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getCostType();
 
     /**
      * <code>repeated .com.lvl6.proto.ResearchPropertyProto properties = 12;</code>
@@ -716,7 +716,7 @@ public final class ResearchsProto {
             }
             case 88: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(11, rawValue);
               } else {
@@ -1068,7 +1068,7 @@ public final class ResearchsProto {
     }
 
     public static final int COSTTYPE_FIELD_NUMBER = 11;
-    private com.lvl6.proto.StructureProto.ResourceType costType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType costType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType costType = 11;</code>
      */
@@ -1078,7 +1078,7 @@ public final class ResearchsProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType costType = 11;</code>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getCostType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getCostType() {
       return costType_;
     }
 
@@ -1188,7 +1188,7 @@ public final class ResearchsProto {
       desc_ = "";
       durationMin_ = 0;
       costAmt_ = 0;
-      costType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      costType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       properties_ = java.util.Collections.emptyList();
       level_ = 0;
       priority_ = 0F;
@@ -1467,7 +1467,7 @@ public final class ResearchsProto {
         bitField0_ = (bitField0_ & ~0x00000100);
         costAmt_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        costType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        costType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         bitField0_ = (bitField0_ & ~0x00000400);
         if (propertiesBuilder_ == null) {
           properties_ = java.util.Collections.emptyList();
@@ -2238,7 +2238,7 @@ public final class ResearchsProto {
         return this;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType costType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType costType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
       /**
        * <code>optional .com.lvl6.proto.ResourceType costType = 11;</code>
        */
@@ -2248,13 +2248,13 @@ public final class ResearchsProto {
       /**
        * <code>optional .com.lvl6.proto.ResourceType costType = 11;</code>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getCostType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getCostType() {
         return costType_;
       }
       /**
        * <code>optional .com.lvl6.proto.ResourceType costType = 11;</code>
        */
-      public Builder setCostType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setCostType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2268,7 +2268,7 @@ public final class ResearchsProto {
        */
       public Builder clearCostType() {
         bitField0_ = (bitField0_ & ~0x00000400);
-        costType_ = com.lvl6.proto.StructureProto.ResourceType.NO_RESOURCE;
+        costType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.NO_RESOURCE;
         onChanged();
         return this;
       }
@@ -5182,42 +5182,43 @@ public final class ResearchsProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016Research.proto\022\016com.lvl6.proto\032\017Struct" +
-      "ure.proto\"\262\003\n\rResearchProto\022\022\n\nresearchI" +
-      "d\030\001 \001(\005\0222\n\014researchType\030\002 \001(\0162\034.com.lvl6" +
-      ".proto.ResearchType\0226\n\016researchDomain\030\003 " +
-      "\001(\0162\036.com.lvl6.proto.ResearchDomain\022\023\n\013i" +
-      "conImgName\030\004 \001(\t\022\014\n\004name\030\005 \001(\t\022\016\n\006predId" +
-      "\030\006 \001(\005\022\016\n\006succId\030\007 \001(\005\022\014\n\004desc\030\010 \001(\t\022\023\n\013" +
-      "durationMin\030\t \001(\005\022\017\n\007costAmt\030\n \001(\005\022.\n\010co" +
-      "stType\030\013 \001(\0162\034.com.lvl6.proto.ResourceTy" +
-      "pe\0229\n\nproperties\030\014 \003(\0132%.com.lvl6.proto.",
-      "ResearchPropertyProto\022\r\n\005level\030\r \001(\005\022\020\n\010" +
-      "priority\030\016 \001(\002\022\014\n\004tier\030\017 \001(\005\022\020\n\010strength" +
-      "\030\020 \001(\005\"l\n\025ResearchPropertyProto\022\032\n\022resea" +
-      "rchPropertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\025\n\rres" +
-      "earchValue\030\003 \001(\002\022\022\n\nresearchId\030\004 \001(\005\"|\n\021" +
-      "UserResearchProto\022\030\n\020userResearchUuid\030\001 " +
-      "\001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nresearchId\030\003 \001(" +
-      "\005\022\025\n\rtimePurchased\030\004 \001(\003\022\020\n\010complete\030\005 \001" +
-      "(\010\"a\n\024AllUserResearchProto\022\020\n\010userUuid\030\001" +
-      " \001(\t\0227\n\014userResearch\030\002 \003(\0132!.com.lvl6.pr",
-      "oto.UserResearchProto*\326\003\n\014ResearchType\022\017" +
-      "\n\013NO_RESEARCH\020\001\022\017\n\013HP_INCREASE\020\002\022\023\n\017ATTA" +
-      "CK_INCREASE\020\003\022\022\n\016SPEED_INCREASE\020\004\022\020\n\014HEA" +
-      "LING_COST\020\005\022\021\n\rHEALING_SPEED\020\006\022\020\n\014ENHANC" +
-      "E_COST\020\007\022\031\n\025DECREASE_ENHANCE_TIME\020\010\022\014\n\010X" +
-      "P_BONUS\020\t\022\033\n\027INCREASE_HOSPITAL_QUEUE\020\n\022\032" +
-      "\n\026INCREASE_ENHANCE_QUEUE\020\013\022\027\n\023NUMBER_OF_" +
-      "HOSPITALS\020\014\022\037\n\033INCREASE_CONSTRUCTION_SPE" +
-      "ED\020\r\022\031\n\025ITEM_PRODUCTION_SPEED\020\016\022\030\n\024ITEM_" +
-      "PRODUCTION_COST\020\017\022\027\n\023RESOURCE_PRODUCTION",
-      "\020\020\022\024\n\020RESOURCE_STORAGE\020\021\022\017\n\013UNLOCK_ITEM\020" +
-      "\022\022\023\n\017UNLOCK_OBSTACLE\020\023\022\036\n\032RESOURCE_GENER" +
-      "ATOR_STORAGE\020\024*z\n\016ResearchDomain\022\r\n\tNO_D" +
-      "OMAIN\020\001\022\013\n\007HEALING\020\002\022\r\n\tENHANCING\020\003\022\n\n\006B" +
-      "ATTLE\020\004\022\r\n\tRESOURCES\020\005\022\t\n\005ITEMS\020\006\022\027\n\023TRA" +
-      "PS_AND_OBSTACLES\020\007B\020B\016ResearchsProto"
+      "\n\016Research.proto\022\016com.lvl6.proto\032\026Shared" +
+      "EnumConfig.proto\"\262\003\n\rResearchProto\022\022\n\nre" +
+      "searchId\030\001 \001(\005\0222\n\014researchType\030\002 \001(\0162\034.c" +
+      "om.lvl6.proto.ResearchType\0226\n\016researchDo" +
+      "main\030\003 \001(\0162\036.com.lvl6.proto.ResearchDoma" +
+      "in\022\023\n\013iconImgName\030\004 \001(\t\022\014\n\004name\030\005 \001(\t\022\016\n" +
+      "\006predId\030\006 \001(\005\022\016\n\006succId\030\007 \001(\005\022\014\n\004desc\030\010 " +
+      "\001(\t\022\023\n\013durationMin\030\t \001(\005\022\017\n\007costAmt\030\n \001(" +
+      "\005\022.\n\010costType\030\013 \001(\0162\034.com.lvl6.proto.Res" +
+      "ourceType\0229\n\nproperties\030\014 \003(\0132%.com.lvl6",
+      ".proto.ResearchPropertyProto\022\r\n\005level\030\r " +
+      "\001(\005\022\020\n\010priority\030\016 \001(\002\022\014\n\004tier\030\017 \001(\005\022\020\n\010s" +
+      "trength\030\020 \001(\005\"l\n\025ResearchPropertyProto\022\032" +
+      "\n\022researchPropertyId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t" +
+      "\022\025\n\rresearchValue\030\003 \001(\002\022\022\n\nresearchId\030\004 " +
+      "\001(\005\"|\n\021UserResearchProto\022\030\n\020userResearch" +
+      "Uuid\030\001 \001(\t\022\020\n\010userUuid\030\002 \001(\t\022\022\n\nresearch" +
+      "Id\030\003 \001(\005\022\025\n\rtimePurchased\030\004 \001(\003\022\020\n\010compl" +
+      "ete\030\005 \001(\010\"a\n\024AllUserResearchProto\022\020\n\010use" +
+      "rUuid\030\001 \001(\t\0227\n\014userResearch\030\002 \003(\0132!.com.",
+      "lvl6.proto.UserResearchProto*\326\003\n\014Researc" +
+      "hType\022\017\n\013NO_RESEARCH\020\001\022\017\n\013HP_INCREASE\020\002\022" +
+      "\023\n\017ATTACK_INCREASE\020\003\022\022\n\016SPEED_INCREASE\020\004" +
+      "\022\020\n\014HEALING_COST\020\005\022\021\n\rHEALING_SPEED\020\006\022\020\n" +
+      "\014ENHANCE_COST\020\007\022\031\n\025DECREASE_ENHANCE_TIME" +
+      "\020\010\022\014\n\010XP_BONUS\020\t\022\033\n\027INCREASE_HOSPITAL_QU" +
+      "EUE\020\n\022\032\n\026INCREASE_ENHANCE_QUEUE\020\013\022\027\n\023NUM" +
+      "BER_OF_HOSPITALS\020\014\022\037\n\033INCREASE_CONSTRUCT" +
+      "ION_SPEED\020\r\022\031\n\025ITEM_PRODUCTION_SPEED\020\016\022\030" +
+      "\n\024ITEM_PRODUCTION_COST\020\017\022\027\n\023RESOURCE_PRO",
+      "DUCTION\020\020\022\024\n\020RESOURCE_STORAGE\020\021\022\017\n\013UNLOC" +
+      "K_ITEM\020\022\022\023\n\017UNLOCK_OBSTACLE\020\023\022\036\n\032RESOURC" +
+      "E_GENERATOR_STORAGE\020\024*z\n\016ResearchDomain\022" +
+      "\r\n\tNO_DOMAIN\020\001\022\013\n\007HEALING\020\002\022\r\n\tENHANCING" +
+      "\020\003\022\n\n\006BATTLE\020\004\022\r\n\tRESOURCES\020\005\022\t\n\005ITEMS\020\006" +
+      "\022\027\n\023TRAPS_AND_OBSTACLES\020\007B\020B\016ResearchsPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -5230,7 +5231,7 @@ public final class ResearchsProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.StructureProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_ResearchProto_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -5256,7 +5257,7 @@ public final class ResearchsProto {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_AllUserResearchProto_descriptor,
         new java.lang.String[] { "UserUuid", "UserResearch", });
-    com.lvl6.proto.StructureProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.Builder;
-import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 
 @Component@Scope("prototype")public class RemoveUserItemUsedAction {
@@ -43,7 +43,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 	//derived state
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RemoveUserItemUsedStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -63,7 +63,7 @@ import com.lvl6.utils.utilmethods.DeleteUtil;
 			return;
 		}
 
-		resBuilder.setStatus(RemoveUserItemUsedStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

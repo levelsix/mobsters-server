@@ -16,7 +16,7 @@ import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto.BeginPvpBattleStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventPvpProto.BeginPvpBattleResponseProto.Builder;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
@@ -91,7 +91,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	private int attackerLoseEloChange;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(BeginPvpBattleStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -111,7 +111,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			return;
 		}
 
-		resBuilder.setStatus(BeginPvpBattleStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

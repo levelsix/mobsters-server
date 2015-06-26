@@ -20,7 +20,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStructureProto.SpawnObstacleRequestProto;
 import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto;
 import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.Builder;
-import com.lvl6.proto.EventStructureProto.SpawnObstacleResponseProto.SpawnObstacleStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
@@ -81,7 +81,7 @@ public class SpawnObstacleController extends EventController {
 		SpawnObstacleResponseProto.Builder resBuilder = SpawnObstacleResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(SpawnObstacleStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -97,7 +97,7 @@ public class SpawnObstacleController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SpawnObstacleStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -151,7 +151,7 @@ public class SpawnObstacleController extends EventController {
 			log.error("exception in SpawnObstacleController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(SpawnObstacleStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -181,7 +181,7 @@ public class SpawnObstacleController extends EventController {
 			return false;
 		}
 
-		resBuilder.setStatus(SpawnObstacleStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

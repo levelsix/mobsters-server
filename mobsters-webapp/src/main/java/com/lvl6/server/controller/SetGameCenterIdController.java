@@ -15,7 +15,7 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.SetGameCenterIdRequestProto;
 import com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto;
-import com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -79,7 +79,7 @@ public class SetGameCenterIdController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SetGameCenterIdStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -97,9 +97,9 @@ public class SetGameCenterIdController extends EventController {
 			boolean legit = writeChangesToDb(user, gameCenterId);
 
 			if (legit) {
-				resBuilder.setStatus(SetGameCenterIdStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			} else {
-				resBuilder.setStatus(SetGameCenterIdStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			}
 
 			SetGameCenterIdResponseProto resProto = resBuilder.build();
@@ -122,7 +122,7 @@ public class SetGameCenterIdController extends EventController {
 			log.error("exception in SetGameCenterIdController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(SetGameCenterIdStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SetGameCenterIdResponseEvent resEvent = new SetGameCenterIdResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

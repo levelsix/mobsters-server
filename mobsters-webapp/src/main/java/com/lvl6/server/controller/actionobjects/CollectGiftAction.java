@@ -16,7 +16,7 @@ import com.lvl6.info.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.Builder;
-import com.lvl6.proto.EventRewardProto.CollectGiftResponseProto.CollectGiftStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
 import com.lvl6.retrieveutils.GiftForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -106,7 +106,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private UserRewardProto urp;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(CollectGiftStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -124,7 +124,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(CollectGiftStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

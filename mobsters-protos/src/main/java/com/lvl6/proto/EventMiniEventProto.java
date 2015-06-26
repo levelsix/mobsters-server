@@ -557,13 +557,13 @@ public final class EventMiniEventProto {
     com.lvl6.proto.MiniEventProtos.UserMiniEventProtoOrBuilder getUserMiniEventOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RetrieveMiniEventResponseProto}
@@ -645,7 +645,7 @@ public final class EventMiniEventProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus value = com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -693,88 +693,6 @@ public final class EventMiniEventProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus}
-     */
-    public enum RetrieveMiniEventStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static RetrieveMiniEventStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RetrieveMiniEventStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RetrieveMiniEventStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RetrieveMiniEventStatus>() {
-              public RetrieveMiniEventStatus findValueByNumber(int number) {
-                return RetrieveMiniEventStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RetrieveMiniEventStatus[] VALUES = values();
-
-      public static RetrieveMiniEventStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RetrieveMiniEventStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -819,24 +737,24 @@ public final class EventMiniEventProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userMiniEvent_ = com.lvl6.proto.MiniEventProtos.UserMiniEventProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1012,7 +930,7 @@ public final class EventMiniEventProto {
           userMiniEventBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -1346,23 +1264,23 @@ public final class EventMiniEventProto {
         return userMiniEventBuilder_;
       }
 
-      private com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status_ = com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1372,11 +1290,11 @@ public final class EventMiniEventProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.RetrieveMiniEventStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -2286,13 +2204,13 @@ public final class EventMiniEventProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpdateMiniEventResponseProto}
@@ -2361,7 +2279,7 @@ public final class EventMiniEventProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus value = com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -2409,88 +2327,6 @@ public final class EventMiniEventProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus}
-     */
-    public enum UpdateMiniEventStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static UpdateMiniEventStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<UpdateMiniEventStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<UpdateMiniEventStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<UpdateMiniEventStatus>() {
-              public UpdateMiniEventStatus findValueByNumber(int number) {
-                return UpdateMiniEventStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final UpdateMiniEventStatus[] VALUES = values();
-
-      public static UpdateMiniEventStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private UpdateMiniEventStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -2514,23 +2350,23 @@ public final class EventMiniEventProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2692,7 +2528,7 @@ public final class EventMiniEventProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -2899,23 +2735,23 @@ public final class EventMiniEventProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status_ = com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2925,11 +2761,11 @@ public final class EventMiniEventProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateMiniEventResponseProto.UpdateMiniEventStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -3869,13 +3705,13 @@ public final class EventMiniEventProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2 [default = FAIL_OTHER];</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2 [default = FAIL_OTHER];</code>
      */
-    com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.UserRewardProto rewards = 3;</code>
@@ -3961,7 +3797,7 @@ public final class EventMiniEventProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus value = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -4022,88 +3858,6 @@ public final class EventMiniEventProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus}
-     */
-    public enum RedeemMiniEventRewardStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static RedeemMiniEventRewardStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RedeemMiniEventRewardStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RedeemMiniEventRewardStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RedeemMiniEventRewardStatus>() {
-              public RedeemMiniEventRewardStatus findValueByNumber(int number) {
-                return RedeemMiniEventRewardStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RedeemMiniEventRewardStatus[] VALUES = values();
-
-      public static RedeemMiniEventRewardStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RedeemMiniEventRewardStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -4127,17 +3881,17 @@ public final class EventMiniEventProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2 [default = FAIL_OTHER];</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2 [default = FAIL_OTHER];</code>
      */
-    public com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -4164,7 +3918,7 @@ public final class EventMiniEventProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus.FAIL_OTHER;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.FAIL_OTHER;
       rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -4339,7 +4093,7 @@ public final class EventMiniEventProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus.FAIL_OTHER;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.FAIL_OTHER;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (rewardsBuilder_ == null) {
           rewards_ = com.lvl6.proto.RewardsProto.UserRewardProto.getDefaultInstance();
@@ -4563,23 +4317,23 @@ public final class EventMiniEventProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus.FAIL_OTHER;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.FAIL_OTHER;
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2 [default = FAIL_OTHER];</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2 [default = FAIL_OTHER];</code>
        */
-      public com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2 [default = FAIL_OTHER];</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -4589,11 +4343,11 @@ public final class EventMiniEventProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus status = 2 [default = FAIL_OTHER];</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2 [default = FAIL_OTHER];</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.RedeemMiniEventRewardStatus.FAIL_OTHER;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.FAIL_OTHER;
         onChanged();
         return this;
       }
@@ -4765,41 +4519,34 @@ public final class EventMiniEventProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\024EventMiniEvent.proto\022\016com.lvl6.proto\032\017" +
-      "MiniEvent.proto\032\014Reward.proto\032\nUser.prot" +
-      "o\"Q\n\035RetrieveMiniEventRequestProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\"\235\002\n\036RetrieveMiniEventResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\0229\n\ruserMiniEvent\030\002 \001(\0132\".com.l" +
-      "vl6.proto.UserMiniEventProto\022V\n\006status\030\003" +
-      " \001(\0162F.com.lvl6.proto.RetrieveMiniEventR" +
-      "esponseProto.RetrieveMiniEventStatus\"6\n\027",
-      "RetrieveMiniEventStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
-      "FAIL_OTHER\020\002\"\215\001\n\033UpdateMiniEventRequestP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022<\n\014updatedGoals\030\002 \003(\0132&.c" +
-      "om.lvl6.proto.UserMiniEventGoalProto\"\332\001\n" +
-      "\034UpdateMiniEventResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "R\n\006status\030\002 \001(\0162B.com.lvl6.proto.UpdateM" +
-      "iniEventResponseProto.UpdateMiniEventSta" +
-      "tus\"4\n\025UpdateMiniEventStatus\022\013\n\007SUCCESS\020",
-      "\001\022\016\n\nFAIL_OTHER\020\002\"\230\002\n!RedeemMiniEventRew" +
-      "ardRequestProto\022@\n\006sender\030\001 \001(\01320.com.lv" +
-      "l6.proto.MinimumUserProtoWithMaxResource" +
-      "s\022R\n\014tierRedeemed\030\002 \001(\0162<.com.lvl6.proto" +
-      ".RedeemMiniEventRewardRequestProto.Rewar" +
-      "dTier\022\017\n\007mefplId\030\003 \001(\005\022\022\n\nclientTime\030\004 \001" +
-      "(\003\"8\n\nRewardTier\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_T" +
-      "WO\020\002\022\016\n\nTIER_THREE\020\003\"\260\002\n\"RedeemMiniEvent" +
-      "RewardResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022j\n\006status\030",
-      "\002 \001(\0162N.com.lvl6.proto.RedeemMiniEventRe" +
-      "wardResponseProto.RedeemMiniEventRewardS" +
-      "tatus:\nFAIL_OTHER\0220\n\007rewards\030\003 \001(\0132\037.com" +
-      ".lvl6.proto.UserRewardProto\":\n\033RedeemMin" +
-      "iEventRewardStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002B\025B\023EventMiniEventProto"
+      "MiniEvent.proto\032\014Reward.proto\032\026SharedEnu" +
+      "mConfig.proto\032\nUser.proto\"Q\n\035RetrieveMin" +
+      "iEventRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\"\275\001\n\036Retriev" +
+      "eMiniEventResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\0229\n\ruse" +
+      "rMiniEvent\030\002 \001(\0132\".com.lvl6.proto.UserMi" +
+      "niEventProto\022.\n\006status\030\003 \001(\0162\036.com.lvl6." +
+      "proto.ResponseStatus\"\215\001\n\033UpdateMiniEvent",
+      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022<\n\014updatedGoals\030\002" +
+      " \003(\0132&.com.lvl6.proto.UserMiniEventGoalP" +
+      "roto\"\200\001\n\034UpdateMiniEventResponseProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto" +
+      ".ResponseStatus\"\230\002\n!RedeemMiniEventRewar" +
+      "dRequestProto\022@\n\006sender\030\001 \001(\01320.com.lvl6" +
+      ".proto.MinimumUserProtoWithMaxResources\022" +
+      "R\n\014tierRedeemed\030\002 \001(\0162<.com.lvl6.proto.R",
+      "edeemMiniEventRewardRequestProto.RewardT" +
+      "ier\022\017\n\007mefplId\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003" +
+      "\"8\n\nRewardTier\022\014\n\010TIER_ONE\020\001\022\014\n\010TIER_TWO" +
+      "\020\002\022\016\n\nTIER_THREE\020\003\"\304\001\n\"RedeemMiniEventRe" +
+      "wardResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022:\n\006status\030\002 " +
+      "\001(\0162\036.com.lvl6.proto.ResponseStatus:\nFAI" +
+      "L_OTHER\0220\n\007rewards\030\003 \001(\0132\037.com.lvl6.prot" +
+      "o.UserRewardProtoB\025B\023EventMiniEventProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4814,6 +4561,7 @@ public final class EventMiniEventProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MiniEventProtos.getDescriptor(),
           com.lvl6.proto.RewardsProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_RetrieveMiniEventRequestProto_descriptor =
@@ -4854,6 +4602,7 @@ public final class EventMiniEventProto {
         new java.lang.String[] { "Sender", "Status", "Rewards", });
     com.lvl6.proto.MiniEventProtos.getDescriptor();
     com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

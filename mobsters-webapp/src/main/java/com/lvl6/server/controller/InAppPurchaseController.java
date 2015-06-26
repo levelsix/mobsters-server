@@ -35,7 +35,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
-import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -222,7 +222,7 @@ public class InAppPurchaseController extends EventController {
 
         //UUID checks
         if (invalidUuids) {
-            resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+            resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
             InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                     userId);
             resEvent.setTag(event.getTag());
@@ -325,7 +325,7 @@ public class InAppPurchaseController extends EventController {
             rd.close();
 
             if (!resBuilder.hasStatus()) {
-                resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+                resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
             }
 
             InAppPurchaseResponseProto resProto = resBuilder.build();
@@ -365,7 +365,7 @@ public class InAppPurchaseController extends EventController {
             log.error("exception in InAppPurchaseController processEvent", e);
             //don't let the client hang
             try {
-                resBuilder.setStatus(InAppPurchaseStatus.FAIL);
+                resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
                 InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(
                         userId);
                 resEvent.setTag(event.getTag());
@@ -441,7 +441,7 @@ public class InAppPurchaseController extends EventController {
                 iapa.execute(resBuilder);
             }
 
-            if (resBuilder.getStatus().equals(InAppPurchaseStatus.SUCCESS)) {
+            if (resBuilder.getStatus().equals(ResponseStatus.SUCCESS)) {
                 resBuilder.setPackageName(packageName);
                 resBuilder.setPackagePrice(realLifeCashCost);
 

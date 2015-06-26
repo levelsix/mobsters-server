@@ -16,7 +16,7 @@ import com.lvl6.events.response.AddMonsterToBattleTeamResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamRequestProto;
 import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto;
-import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -66,7 +66,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 		AddMonsterToBattleTeamResponseProto.Builder resBuilder = AddMonsterToBattleTeamResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(AddMonsterToBattleTeamStatus.FAIL_OTHER); // default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); // default
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -81,7 +81,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(AddMonsterToBattleTeamStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			AddMonsterToBattleTeamResponseEvent resEvent = new AddMonsterToBattleTeamResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -113,7 +113,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 			}
 
 			if (successful) {
-				resBuilder.setStatus(AddMonsterToBattleTeamStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			AddMonsterToBattleTeamResponseEvent resEvent = new AddMonsterToBattleTeamResponseEvent(
@@ -132,7 +132,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 					e);
 			// don't let the client hang
 			try {
-				resBuilder.setStatus(AddMonsterToBattleTeamStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				AddMonsterToBattleTeamResponseEvent resEvent = new AddMonsterToBattleTeamResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -191,7 +191,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 		 * " inHealing=" + inHealing); return false; }
 		 */
 
-		resBuilder.setStatus(AddMonsterToBattleTeamStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

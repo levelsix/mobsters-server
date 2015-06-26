@@ -20,9 +20,9 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto;
 import com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.Builder;
-import com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -78,7 +78,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 
 		Builder resBuilder = ExchangeGemsForResourcesResponseProto.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
-		resBuilder.setStatus(ExchangeGemsForResourcesStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -93,7 +93,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(ExchangeGemsForResourcesStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			ExchangeGemsForResourcesResponseEvent resEvent = new ExchangeGemsForResourcesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -122,7 +122,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 						numResources, maxCash, maxOil, currencyChange);
 			}
 			if (successful) {
-				resBuilder.setStatus(ExchangeGemsForResourcesStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			ExchangeGemsForResourcesResponseProto resProto = resBuilder.build();
@@ -148,7 +148,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 			log.error(
 					"exception in ExchangeGemsForResourcesController processEvent",
 					e);
-			resBuilder.setStatus(ExchangeGemsForResourcesStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			ExchangeGemsForResourcesResponseEvent resEvent = new ExchangeGemsForResourcesResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -178,7 +178,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 					+ "\t resourceType="
 					+ resourceType + "\t numResources=" + numResources);
 			resBuilder
-					.setStatus(ExchangeGemsForResourcesStatus.FAIL_INSUFFICIENT_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 

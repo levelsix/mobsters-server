@@ -15,7 +15,7 @@ import com.lvl6.events.response.UpdateMiniEventResponseEvent;
 import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventRequestProto;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto;
-import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.UpdateMiniEventStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -68,7 +68,7 @@ public class UpdateMiniEventController extends EventController {
 		UpdateMiniEventResponseProto.Builder resBuilder = UpdateMiniEventResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(UpdateMiniEventStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -88,7 +88,7 @@ public class UpdateMiniEventController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(UpdateMiniEventStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			UpdateMiniEventResponseEvent resEvent = new UpdateMiniEventResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -117,7 +117,7 @@ public class UpdateMiniEventController extends EventController {
 			log.error("exception in UpdateMiniEventController processEvent",
 					e);
 			try {
-				resBuilder.setStatus(UpdateMiniEventStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				UpdateMiniEventResponseEvent resEvent = new UpdateMiniEventResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

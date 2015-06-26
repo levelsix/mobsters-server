@@ -23,7 +23,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.Builder;
-import com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ItemsProto.ItemType;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -107,7 +107,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	public void execute(Builder resBuilder) {
 		setUpDaos();
-		resBuilder.setStatus(TradeItemForResourcesStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -126,7 +126,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		if (!success) {
 			return;
 		}
-		resBuilder.setStatus(TradeItemForResourcesStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 	
 	public void setUpDaos() {

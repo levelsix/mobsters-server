@@ -10,7 +10,7 @@ import com.lvl6.events.response.EnableAPNSResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.proto.EventApnsProto.EnableAPNSRequestProto;
 import com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto;
-import com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.eventsender.ToClientEvents;
@@ -55,9 +55,9 @@ public class EnableAPNSController extends EventController {
 					senderProto.getUserUuid());
 
 			if (deviceToken != null && user != null) {
-				resBuilder.setStatus(EnableAPNSStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			} else {
-				resBuilder.setStatus(EnableAPNSStatus.NOT_ENABLED);
+				resBuilder.setStatus(ResponseStatus.FAIL_NOT_ENABLED);
 			}
 
 			EnableAPNSResponseProto resProto = resBuilder.build();

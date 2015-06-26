@@ -13,7 +13,7 @@ import com.lvl6.events.request.RemoveUserItemUsedRequestEvent;
 import com.lvl6.events.response.RemoveUserItemUsedResponseEvent;
 import com.lvl6.proto.EventItemProto.RemoveUserItemUsedRequestProto;
 import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto;
-import com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -64,7 +64,7 @@ public class RemoveUserItemUsedController extends EventController {
 		RemoveUserItemUsedResponseProto.Builder resBuilder = RemoveUserItemUsedResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(RemoveUserItemUsedStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -82,7 +82,7 @@ public class RemoveUserItemUsedController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RemoveUserItemUsedStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -113,7 +113,7 @@ public class RemoveUserItemUsedController extends EventController {
 			log.error("exception in RemoveUserItemUsedController processEvent",
 					e);
 			try {
-				resBuilder.setStatus(RemoveUserItemUsedStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RemoveUserItemUsedResponseEvent resEvent = new RemoveUserItemUsedResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

@@ -16,7 +16,7 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
-import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.ApproveOrRejectRequestToJoinClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponseProto.Builder;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -69,7 +69,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -88,7 +88,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -110,7 +110,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 		if (user == null || requester == null) {
 			resBuilder
-			.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
+			.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error(String.format("user is %s, requester is %s", user,
 					requester));
 			return false;
@@ -140,7 +140,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		String userId = user.getId();
 		if (!uniqUserIds.contains(userId)) {
 			resBuilder
-			.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_NOT_AUTHORIZED);
+			.setStatus(ResponseStatus.FAIL_NOT_AUTHORIZED);
 			log.error(
 					"clan member can't approve clan join request. member={}, requester={}",
 					user, requester);
@@ -149,7 +149,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		//check if requester is already in a clan
 		if (requester.getClanId() != null && !requester.getClanId().isEmpty()) {
 			resBuilder
-			.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_ALREADY_IN_A_CLAN);
+			.setStatus(ResponseStatus.FAIL_ALREADY_IN_CLAN);
 			log.error("trying to accept a user that is already in a clan");
 			//the other requests in user_clans table that have a status of 2 (requesting to join clan)
 			//are deleted later on in writeChangesToDB
@@ -161,7 +161,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				userIdsToStatuses);
 		if (!requestingStatus.equals(requesterStatus)) {
 			resBuilder
-			.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_NOT_A_REQUESTER);
+			.setStatus(ResponseStatus.FAIL_DID_NOT_REQUEST);
 			log.error("requester has not requested for clan with id {}", clanId);
 			return false;
 		}
@@ -170,7 +170,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		int maxSize = ControllerConstants.CLAN__MAX_NUM_MEMBERS;
 		if (size >= maxSize && accept) {
 			resBuilder
-			.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_CLAN_IS_FULL);
+			.setStatus(ResponseStatus.FAIL_CLAN_IS_FULL);
 			log.warn(String.format(
 					"trying to add user into already full clan with id %s",
 					user.getClanId()));

@@ -15,7 +15,7 @@ import com.lvl6.events.request.BootPlayerFromClanRequestEvent;
 import com.lvl6.events.response.BootPlayerFromClanResponseEvent;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanRequestProto;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto;
-import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
@@ -111,7 +111,7 @@ public class BootPlayerFromClanController extends EventController {
 
 		BootPlayerFromClanResponseProto.Builder resBuilder = BootPlayerFromClanResponseProto
 				.newBuilder();
-		resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		String clanId = "";
@@ -139,7 +139,7 @@ public class BootPlayerFromClanController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -157,7 +157,7 @@ public class BootPlayerFromClanController extends EventController {
 					clanChatPostRetrieveUtil, hzClanSearch, clanSearch, toggle);
 			bpfca.execute(resBuilder);
 			
-			if (BootPlayerFromClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				MinimumUserProto mup = createInfoProtoUtils
 						.createMinimumUserProtoFromUserAndClan(bpfca.getPlayerToBoot(),
 								null);
@@ -169,7 +169,7 @@ public class BootPlayerFromClanController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
 
-			if (BootPlayerFromClanStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//if successful write to clan
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				responses.setUserId(userId);
@@ -182,7 +182,7 @@ public class BootPlayerFromClanController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in BootPlayerFromClan processEvent", e);
 			try {
-				resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

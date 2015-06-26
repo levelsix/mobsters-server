@@ -1878,7 +1878,7 @@ public final class EventUserProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.lvl6.proto.UserCreateResponseProto.UserCreateStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      *
      * <pre>
      *optional FullUserProto sender = 1;
@@ -1887,14 +1887,14 @@ public final class EventUserProto {
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.UserCreateResponseProto.UserCreateStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      *
      * <pre>
      *optional FullUserProto sender = 1;
      *just need success, since client calls startup after this anyway
      * </pre>
      */
-    com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserCreateResponseProto}
@@ -1950,7 +1950,7 @@ public final class EventUserProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus value = com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1998,145 +1998,11 @@ public final class EventUserProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.UserCreateResponseProto.UserCreateStatus}
-     */
-    public enum UserCreateStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INVALID_NAME = 2;</code>
-       *
-       * <pre>
-       *not checking
-       * </pre>
-       */
-      FAIL_INVALID_NAME(1, 2),
-      /**
-       * <code>FAIL_USER_WITH_UDID_ALREADY_EXISTS = 3;</code>
-       */
-      FAIL_USER_WITH_UDID_ALREADY_EXISTS(2, 3),
-      /**
-       * <code>FAIL_INVALID_REFER_CODE = 4;</code>
-       *
-       * <pre>
-       *not checking
-       * </pre>
-       */
-      FAIL_INVALID_REFER_CODE(3, 4),
-      /**
-       * <code>FAIL_USER_WITH_FACEBOOK_ID_EXISTS = 5;</code>
-       */
-      FAIL_USER_WITH_FACEBOOK_ID_EXISTS(4, 5),
-      /**
-       * <code>FAIL_OTHER = 6;</code>
-       */
-      FAIL_OTHER(5, 6),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INVALID_NAME = 2;</code>
-       *
-       * <pre>
-       *not checking
-       * </pre>
-       */
-      public static final int FAIL_INVALID_NAME_VALUE = 2;
-      /**
-       * <code>FAIL_USER_WITH_UDID_ALREADY_EXISTS = 3;</code>
-       */
-      public static final int FAIL_USER_WITH_UDID_ALREADY_EXISTS_VALUE = 3;
-      /**
-       * <code>FAIL_INVALID_REFER_CODE = 4;</code>
-       *
-       * <pre>
-       *not checking
-       * </pre>
-       */
-      public static final int FAIL_INVALID_REFER_CODE_VALUE = 4;
-      /**
-       * <code>FAIL_USER_WITH_FACEBOOK_ID_EXISTS = 5;</code>
-       */
-      public static final int FAIL_USER_WITH_FACEBOOK_ID_EXISTS_VALUE = 5;
-      /**
-       * <code>FAIL_OTHER = 6;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 6;
-
-
-      public final int getNumber() { return value; }
-
-      public static UserCreateStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INVALID_NAME;
-          case 3: return FAIL_USER_WITH_UDID_ALREADY_EXISTS;
-          case 4: return FAIL_INVALID_REFER_CODE;
-          case 5: return FAIL_USER_WITH_FACEBOOK_ID_EXISTS;
-          case 6: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<UserCreateStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<UserCreateStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<UserCreateStatus>() {
-              public UserCreateStatus findValueByNumber(int number) {
-                return UserCreateStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventUserProto.UserCreateResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final UserCreateStatus[] VALUES = values();
-
-      public static UserCreateStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private UserCreateStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UserCreateResponseProto.UserCreateStatus)
-    }
-
     private int bitField0_;
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.UserCreateResponseProto.UserCreateStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      *
      * <pre>
      *optional FullUserProto sender = 1;
@@ -2147,19 +2013,19 @@ public final class EventUserProto {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.lvl6.proto.UserCreateResponseProto.UserCreateStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      *
      * <pre>
      *optional FullUserProto sender = 1;
      *just need success, since client calls startup after this anyway
      * </pre>
      */
-    public com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
-      status_ = com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2307,7 +2173,7 @@ public final class EventUserProto {
 
       public Builder clear() {
         super.clear();
-        status_ = com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -2387,9 +2253,9 @@ public final class EventUserProto {
       }
       private int bitField0_;
 
-      private com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus status_ = com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.UserCreateResponseProto.UserCreateStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        *
        * <pre>
        *optional FullUserProto sender = 1;
@@ -2400,25 +2266,25 @@ public final class EventUserProto {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.lvl6.proto.UserCreateResponseProto.UserCreateStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        *
        * <pre>
        *optional FullUserProto sender = 1;
        *just need success, since client calls startup after this anyway
        * </pre>
        */
-      public com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserCreateResponseProto.UserCreateStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        *
        * <pre>
        *optional FullUserProto sender = 1;
        *just need success, since client calls startup after this anyway
        * </pre>
        */
-      public Builder setStatus(com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2428,7 +2294,7 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UserCreateResponseProto.UserCreateStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        *
        * <pre>
        *optional FullUserProto sender = 1;
@@ -2437,7 +2303,7 @@ public final class EventUserProto {
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -3067,7 +2933,7 @@ public final class EventUserProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.LevelUpResponseProto.LevelUpStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      *
      * <pre>
      *repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
@@ -3075,13 +2941,13 @@ public final class EventUserProto {
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.LevelUpResponseProto.LevelUpStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      *
      * <pre>
      *repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
      * </pre>
      */
-    com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.LevelUpResponseProto}
@@ -3150,7 +3016,7 @@ public final class EventUserProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus value = com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -3198,88 +3064,6 @@ public final class EventUserProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.LevelUpResponseProto.LevelUpStatus}
-     */
-    public enum LevelUpStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static LevelUpStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<LevelUpStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<LevelUpStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<LevelUpStatus>() {
-              public LevelUpStatus findValueByNumber(int number) {
-                return LevelUpStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventUserProto.LevelUpResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final LevelUpStatus[] VALUES = values();
-
-      public static LevelUpStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private LevelUpStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.LevelUpResponseProto.LevelUpStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -3303,9 +3087,9 @@ public final class EventUserProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.LevelUpResponseProto.LevelUpStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      *
      * <pre>
      *repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
@@ -3315,19 +3099,19 @@ public final class EventUserProto {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.LevelUpResponseProto.LevelUpStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      *
      * <pre>
      *repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
      * </pre>
      */
-    public com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3489,7 +3273,7 @@ public final class EventUserProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -3696,9 +3480,9 @@ public final class EventUserProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus status_ = com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.LevelUpResponseProto.LevelUpStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        *
        * <pre>
        *repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
@@ -3708,23 +3492,23 @@ public final class EventUserProto {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.LevelUpResponseProto.LevelUpStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        *
        * <pre>
        *repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
        * </pre>
        */
-      public com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.LevelUpResponseProto.LevelUpStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        *
        * <pre>
        *repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
        * </pre>
        */
-      public Builder setStatus(com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3734,7 +3518,7 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.LevelUpResponseProto.LevelUpStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        *
        * <pre>
        *repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
@@ -3742,7 +3526,7 @@ public final class EventUserProto {
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -8334,13 +8118,13 @@ public final class EventUserProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.MinimumUserProto existing = 3;</code>
@@ -8422,7 +8206,7 @@ public final class EventUserProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus value = com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -8483,106 +8267,6 @@ public final class EventUserProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus}
-     */
-    public enum SetFacebookIdStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_FB_ID_EXISTS = 3;</code>
-       */
-      FAIL_FB_ID_EXISTS(2, 3),
-      /**
-       * <code>FAIL_USER_FB_ID_ALREADY_SET = 4;</code>
-       */
-      FAIL_USER_FB_ID_ALREADY_SET(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_FB_ID_EXISTS = 3;</code>
-       */
-      public static final int FAIL_FB_ID_EXISTS_VALUE = 3;
-      /**
-       * <code>FAIL_USER_FB_ID_ALREADY_SET = 4;</code>
-       */
-      public static final int FAIL_USER_FB_ID_ALREADY_SET_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static SetFacebookIdStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_FB_ID_EXISTS;
-          case 4: return FAIL_USER_FB_ID_ALREADY_SET;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SetFacebookIdStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SetFacebookIdStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SetFacebookIdStatus>() {
-              public SetFacebookIdStatus findValueByNumber(int number) {
-                return SetFacebookIdStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SetFacebookIdStatus[] VALUES = values();
-
-      public static SetFacebookIdStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SetFacebookIdStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -8606,17 +8290,17 @@ public final class EventUserProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -8643,7 +8327,7 @@ public final class EventUserProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       existing_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -8814,7 +8498,7 @@ public final class EventUserProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (existingBuilder_ == null) {
           existing_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -9038,23 +8722,23 @@ public final class EventUserProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus status_ = com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -9064,11 +8748,11 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -10478,13 +10162,13 @@ public final class EventUserProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpdateUserCurrencyResponseProto}
@@ -10553,7 +10237,7 @@ public final class EventUserProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus value = com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -10601,115 +10285,6 @@ public final class EventUserProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus}
-     */
-    public enum UpdateUserCurrencyStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_CASH = 3;</code>
-       */
-      FAIL_INSUFFICIENT_CASH(2, 3),
-      /**
-       * <code>FAIL_INSUFFICIENT_OIL = 4;</code>
-       */
-      FAIL_INSUFFICIENT_OIL(3, 4),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 5;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(4, 5),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_CASH = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_CASH_VALUE = 3;
-      /**
-       * <code>FAIL_INSUFFICIENT_OIL = 4;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_OIL_VALUE = 4;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 5;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 5;
-
-
-      public final int getNumber() { return value; }
-
-      public static UpdateUserCurrencyStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_INSUFFICIENT_CASH;
-          case 4: return FAIL_INSUFFICIENT_OIL;
-          case 5: return FAIL_INSUFFICIENT_GEMS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<UpdateUserCurrencyStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<UpdateUserCurrencyStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<UpdateUserCurrencyStatus>() {
-              public UpdateUserCurrencyStatus findValueByNumber(int number) {
-                return UpdateUserCurrencyStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final UpdateUserCurrencyStatus[] VALUES = values();
-
-      public static UpdateUserCurrencyStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private UpdateUserCurrencyStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -10733,23 +10308,23 @@ public final class EventUserProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10911,7 +10486,7 @@ public final class EventUserProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -11118,23 +10693,23 @@ public final class EventUserProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus status_ = com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -11144,11 +10719,11 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -11861,13 +11436,13 @@ public final class EventUserProto {
         getGameCenterIdBytes();
 
     /**
-     * <code>optional .com.lvl6.proto.SetGameCenterIdResponseProto.SetGameCenterIdStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SetGameCenterIdResponseProto.SetGameCenterIdStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SetGameCenterIdResponseProto}
@@ -11942,7 +11517,7 @@ public final class EventUserProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus value = com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -11988,88 +11563,6 @@ public final class EventUserProto {
     @java.lang.Override
     public com.google.protobuf.Parser<SetGameCenterIdResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SetGameCenterIdResponseProto.SetGameCenterIdStatus}
-     */
-    public enum SetGameCenterIdStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static SetGameCenterIdStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SetGameCenterIdStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SetGameCenterIdStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SetGameCenterIdStatus>() {
-              public SetGameCenterIdStatus findValueByNumber(int number) {
-                return SetGameCenterIdStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SetGameCenterIdStatus[] VALUES = values();
-
-      public static SetGameCenterIdStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SetGameCenterIdStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SetGameCenterIdResponseProto.SetGameCenterIdStatus)
     }
 
     private int bitField0_;
@@ -12137,24 +11630,24 @@ public final class EventUserProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SetGameCenterIdResponseProto.SetGameCenterIdStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.SetGameCenterIdResponseProto.SetGameCenterIdStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       gameCenterId_ = "";
-      status_ = com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -12325,7 +11818,7 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         gameCenterId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -12617,23 +12110,23 @@ public final class EventUserProto {
         return this;
       }
 
-      private com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus status_ = com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SetGameCenterIdResponseProto.SetGameCenterIdStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.SetGameCenterIdResponseProto.SetGameCenterIdStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SetGameCenterIdResponseProto.SetGameCenterIdStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -12643,11 +12136,11 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SetGameCenterIdResponseProto.SetGameCenterIdStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventUserProto.SetGameCenterIdResponseProto.SetGameCenterIdStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -13267,13 +12760,13 @@ public final class EventUserProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SetAvatarMonsterResponseProto}
@@ -13342,7 +12835,7 @@ public final class EventUserProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus value = com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -13390,88 +12883,6 @@ public final class EventUserProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus}
-     */
-    public enum SetAvatarMonsterStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static SetAvatarMonsterStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SetAvatarMonsterStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SetAvatarMonsterStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SetAvatarMonsterStatus>() {
-              public SetAvatarMonsterStatus findValueByNumber(int number) {
-                return SetAvatarMonsterStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SetAvatarMonsterStatus[] VALUES = values();
-
-      public static SetAvatarMonsterStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SetAvatarMonsterStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -13495,23 +12906,23 @@ public final class EventUserProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -13673,7 +13084,7 @@ public final class EventUserProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -13880,23 +13291,23 @@ public final class EventUserProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus status_ = com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -13906,11 +13317,11 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventUserProto.SetAvatarMonsterResponseProto.SetAvatarMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -14542,13 +13953,13 @@ public final class EventUserProto {
     com.google.protobuf.ByteString getTaskState();
 
     /**
-     * <code>optional .com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpdateClientTaskStateResponseProto}
@@ -14622,7 +14033,7 @@ public final class EventUserProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus value = com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -14670,88 +14081,6 @@ public final class EventUserProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus}
-     */
-    public enum UpdateClientTaskStateStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static UpdateClientTaskStateStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<UpdateClientTaskStateStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<UpdateClientTaskStateStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<UpdateClientTaskStateStatus>() {
-              public UpdateClientTaskStateStatus findValueByNumber(int number) {
-                return UpdateClientTaskStateStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final UpdateClientTaskStateStatus[] VALUES = values();
-
-      public static UpdateClientTaskStateStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private UpdateClientTaskStateStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -14790,24 +14119,24 @@ public final class EventUserProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       taskState_ = com.google.protobuf.ByteString.EMPTY;
-      status_ = com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -14978,7 +14307,7 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         taskState_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -15227,23 +14556,23 @@ public final class EventUserProto {
         return this;
       }
 
-      private com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status_ = com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -15253,11 +14582,11 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventUserProto.UpdateClientTaskStateResponseProto.UpdateClientTaskStateStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -15877,13 +15206,13 @@ public final class EventUserProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpdateUserStrengthResponseProto}
@@ -15952,7 +15281,7 @@ public final class EventUserProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus value = com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -16000,88 +15329,6 @@ public final class EventUserProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus}
-     */
-    public enum UpdateUserStrengthStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static UpdateUserStrengthStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<UpdateUserStrengthStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<UpdateUserStrengthStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<UpdateUserStrengthStatus>() {
-              public UpdateUserStrengthStatus findValueByNumber(int number) {
-                return UpdateUserStrengthStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final UpdateUserStrengthStatus[] VALUES = values();
-
-      public static UpdateUserStrengthStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private UpdateUserStrengthStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -16105,23 +15352,23 @@ public final class EventUserProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16283,7 +15530,7 @@ public final class EventUserProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -16490,23 +15737,23 @@ public final class EventUserProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus status_ = com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -16516,11 +15763,11 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.UpdateUserStrengthStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -17233,13 +16480,13 @@ public final class EventUserProto {
         getTangoIdBytes();
 
     /**
-     * <code>optional .com.lvl6.proto.SetTangoIdResponseProto.SetTangoIdStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SetTangoIdResponseProto.SetTangoIdStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SetTangoIdResponseProto}
@@ -17314,7 +16561,7 @@ public final class EventUserProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus value = com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -17360,88 +16607,6 @@ public final class EventUserProto {
     @java.lang.Override
     public com.google.protobuf.Parser<SetTangoIdResponseProto> getParserForType() {
       return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SetTangoIdResponseProto.SetTangoIdStatus}
-     */
-    public enum SetTangoIdStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static SetTangoIdStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SetTangoIdStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SetTangoIdStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SetTangoIdStatus>() {
-              public SetTangoIdStatus findValueByNumber(int number) {
-                return SetTangoIdStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SetTangoIdStatus[] VALUES = values();
-
-      public static SetTangoIdStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SetTangoIdStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SetTangoIdResponseProto.SetTangoIdStatus)
     }
 
     private int bitField0_;
@@ -17509,24 +16674,24 @@ public final class EventUserProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SetTangoIdResponseProto.SetTangoIdStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.SetTangoIdResponseProto.SetTangoIdStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       tangoId_ = "";
-      status_ = com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -17697,7 +16862,7 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         tangoId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -17989,23 +17154,23 @@ public final class EventUserProto {
         return this;
       }
 
-      private com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus status_ = com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SetTangoIdResponseProto.SetTangoIdStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.SetTangoIdResponseProto.SetTangoIdStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SetTangoIdResponseProto.SetTangoIdStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -18015,11 +17180,11 @@ public final class EventUserProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SetTangoIdResponseProto.SetTangoIdStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -18155,110 +17320,84 @@ public final class EventUserProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\017EventUser.proto\022\016com.lvl6.proto\032\022Monst" +
-      "erStuff.proto\032\016Research.proto\032\017Structure" +
-      ".proto\032\nUser.proto\"\344\001\n\026UserCreateRequest" +
-      "Proto\022\014\n\004udid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\023\n\013dev" +
-      "iceToken\030\003 \001(\t\022\022\n\nfacebookId\030\004 \001(\t\022=\n\020st" +
-      "ructsJustBuilt\030\005 \003(\0132#.com.lvl6.proto.Tu" +
-      "torialStructProto\022\014\n\004cash\030\n \001(\005\022\013\n\003oil\030\013" +
-      " \001(\005\022\014\n\004gems\030\014 \001(\005\022\r\n\005email\030\r \001(\t\022\016\n\006fbD" +
-      "ata\030\016 \001(\t\"\230\002\n\027UserCreateResponseProto\022H\n" +
-      "\006status\030\002 \001(\01628.com.lvl6.proto.UserCreat",
-      "eResponseProto.UserCreateStatus\"\262\001\n\020User" +
-      "CreateStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_INVALI" +
-      "D_NAME\020\002\022&\n\"FAIL_USER_WITH_UDID_ALREADY_" +
-      "EXISTS\020\003\022\033\n\027FAIL_INVALID_REFER_CODE\020\004\022%\n" +
-      "!FAIL_USER_WITH_FACEBOOK_ID_EXISTS\020\005\022\016\n\n" +
-      "FAIL_OTHER\020\006\"Z\n\023LevelUpRequestProto\0220\n\006s" +
+      "erStuff.proto\032\016Research.proto\032\026SharedEnu" +
+      "mConfig.proto\032\017Structure.proto\032\nUser.pro" +
+      "to\"\344\001\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
+      "\001(\t\022\014\n\004name\030\002 \001(\t\022\023\n\013deviceToken\030\003 \001(\t\022\022" +
+      "\n\nfacebookId\030\004 \001(\t\022=\n\020structsJustBuilt\030\005" +
+      " \003(\0132#.com.lvl6.proto.TutorialStructProt" +
+      "o\022\014\n\004cash\030\n \001(\005\022\013\n\003oil\030\013 \001(\005\022\014\n\004gems\030\014 \001" +
+      "(\005\022\r\n\005email\030\r \001(\t\022\016\n\006fbData\030\016 \001(\t\"I\n\027Use" +
+      "rCreateResponseProto\022.\n\006status\030\002 \001(\0162\036.c",
+      "om.lvl6.proto.ResponseStatus\"Z\n\023LevelUpR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022\021\n\tnextLevel\030\002 \001(\005" +
+      "\"x\n\024LevelUpResponseProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022.\n\006st" +
+      "atus\030\002 \001(\0162\036.com.lvl6.proto.ResponseStat" +
+      "us\"\222\001\n#RetrieveUsersForUserIdsRequestPro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022\032\n\022requestedUserUuids\030\002 \003(\t" +
+      "\022\035\n\025includeCurMonsterTeam\030\003 \001(\010\"\211\002\n$Retr",
+      "ieveUsersForUserIdsResponseProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\0225\n\016requestedUsers\030\002 \003(\0132\035.com.lvl6.pr" +
+      "oto.FullUserProto\022<\n\007curTeam\030\003 \003(\0132+.com" +
+      ".lvl6.proto.UserCurrentMonsterTeamProto\022" +
+      ":\n\014userResearch\030\004 \003(\0132$.com.lvl6.proto.A" +
+      "llUserResearchProto\"F\n\022LogoutRequestProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\"h\n\035UpdateClientUserResponseP" +
+      "roto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.proto.Fu",
+      "llUserProto\022\030\n\020timeOfUserUpdate\030\002 \001(\003\"\220\001" +
+      "\n\031SetFacebookIdRequestProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\014\n" +
+      "\004fbId\030\002 \001(\t\022\024\n\014isUserCreate\030\003 \001(\010\022\r\n\005ema" +
+      "il\030\004 \001(\t\022\016\n\006fbData\030\005 \001(\t\"\262\001\n\032SetFacebook" +
+      "IdResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022.\n\006status\030\002 \001(" +
+      "\0162\036.com.lvl6.proto.ResponseStatus\0222\n\010exi" +
+      "sting\030\003 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\"\277\001\n\036UpdateUserCurrencyRequestProto",
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\021\n\tcashSpent\030\002 \001(\021\022\020\n\010oilSpen" +
+      "t\030\003 \001(\021\022\021\n\tgemsSpent\030\004 \001(\021\022\022\n\nclientTime" +
+      "\030\005 \001(\003\022\016\n\006reason\030\006 \001(\t\022\017\n\007details\030\007 \001(\t\"" +
+      "\203\001\n\037UpdateUserCurrencyResponseProto\0220\n\006s" +
       "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022\021\n\tnextLevel\030\002 \001(\005\"\272\001\n\024LevelUpResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022B\n\006status\030\002 \001(\01622.co",
-      "m.lvl6.proto.LevelUpResponseProto.LevelU" +
-      "pStatus\",\n\rLevelUpStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
-      "\nFAIL_OTHER\020\002\"\222\001\n#RetrieveUsersForUserId" +
-      "sRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\032\n\022requestedUser" +
-      "Uuids\030\002 \003(\t\022\035\n\025includeCurMonsterTeam\030\003 \001" +
-      "(\010\"\211\002\n$RetrieveUsersForUserIdsResponsePr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\0225\n\016requestedUsers\030\002 \003(\0132\035." +
-      "com.lvl6.proto.FullUserProto\022<\n\007curTeam\030",
-      "\003 \003(\0132+.com.lvl6.proto.UserCurrentMonste" +
-      "rTeamProto\022:\n\014userResearch\030\004 \003(\0132$.com.l" +
-      "vl6.proto.AllUserResearchProto\"F\n\022Logout" +
-      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\"h\n\035UpdateClientUs" +
-      "erResponseProto\022-\n\006sender\030\001 \001(\0132\035.com.lv" +
-      "l6.proto.FullUserProto\022\030\n\020timeOfUserUpda" +
-      "te\030\002 \001(\003\"\220\001\n\031SetFacebookIdRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\014\n\004fbId\030\002 \001(\t\022\024\n\014isUserCreate\030\003",
-      " \001(\010\022\r\n\005email\030\004 \001(\t\022\016\n\006fbData\030\005 \001(\t\"\276\002\n\032" +
-      "SetFacebookIdResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022N\n\006" +
-      "status\030\002 \001(\0162>.com.lvl6.proto.SetFaceboo" +
-      "kIdResponseProto.SetFacebookIdStatus\0222\n\010" +
-      "existing\030\003 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\"j\n\023SetFacebookIdStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\025\n\021FAIL_FB_ID_EXIST" +
-      "S\020\003\022\037\n\033FAIL_USER_FB_ID_ALREADY_SET\020\004\"\277\001\n" +
-      "\036UpdateUserCurrencyRequestProto\0220\n\006sende",
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\021\n\tcashSpent\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001(\021\022\021" +
-      "\n\tgemsSpent\030\004 \001(\021\022\022\n\nclientTime\030\005 \001(\003\022\016\n" +
-      "\006reason\030\006 \001(\t\022\017\n\007details\030\007 \001(\t\"\272\002\n\037Updat" +
-      "eUserCurrencyResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022X\n\006" +
-      "status\030\002 \001(\0162H.com.lvl6.proto.UpdateUser" +
-      "CurrencyResponseProto.UpdateUserCurrency" +
-      "Status\"\212\001\n\030UpdateUserCurrencyStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFI",
-      "CIENT_CASH\020\003\022\031\n\025FAIL_INSUFFICIENT_OIL\020\004\022" +
-      "\032\n\026FAIL_INSUFFICIENT_GEMS\020\005\"e\n\033SetGameCe" +
-      "nterIdRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022\024\n\014gameCent" +
-      "erId\030\002 \001(\t\"\360\001\n\034SetGameCenterIdResponsePr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\024\n\014gameCenterId\030\002 \001(\t\022R\n\006s" +
-      "tatus\030\003 \001(\0162B.com.lvl6.proto.SetGameCent" +
-      "erIdResponseProto.SetGameCenterIdStatus\"" +
-      "4\n\025SetGameCenterIdStatus\022\013\n\007SUCCESS\020\001\022\016\n",
-      "\nFAIL_OTHER\020\002\"c\n\034SetAvatarMonsterRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\021\n\tmonsterId\030\002 \001(\005\"\336\001\n\035S" +
-      "etAvatarMonsterResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022T" +
-      "\n\006status\030\002 \001(\0162D.com.lvl6.proto.SetAvata" +
-      "rMonsterResponseProto.SetAvatarMonsterSt" +
-      "atus\"5\n\026SetAvatarMonsterStatus\022\013\n\007SUCCES" +
-      "S\020\001\022\016\n\nFAIL_OTHER\020\002\"h\n!UpdateClientTaskS" +
-      "tateRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l",
-      "vl6.proto.MinimumUserProto\022\021\n\ttaskState\030" +
-      "\002 \001(\014\"\205\002\n\"UpdateClientTaskStateResponseP" +
+      "Proto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.R" +
+      "esponseStatus\"e\n\033SetGameCenterIdRequestP" +
       "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022\021\n\ttaskState\030\002 \001(\014\022^\n\006sta" +
-      "tus\030\003 \001(\0162N.com.lvl6.proto.UpdateClientT" +
-      "askStateResponseProto.UpdateClientTaskSt" +
-      "ateStatus\":\n\033UpdateClientTaskStateStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"k\n\036UpdateU" +
-      "serStrengthRequestProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022\027\n\017upd",
-      "atedStrength\030\002 \001(\003\"\346\001\n\037UpdateUserStrengt" +
-      "hResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022X\n\006status\030\002 \001(\016" +
-      "2H.com.lvl6.proto.UpdateUserStrengthResp" +
-      "onseProto.UpdateUserStrengthStatus\"7\n\030Up" +
-      "dateUserStrengthStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
-      "AIL_OTHER\020\002\"[\n\026SetTangoIdRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\017\n\007tangoId\030\002 \001(\t\"\327\001\n\027SetTangoIdR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.",
-      "proto.MinimumUserProto\022\017\n\007tangoId\030\002 \001(\t\022" +
-      "H\n\006status\030\003 \001(\01628.com.lvl6.proto.SetTang" +
-      "oIdResponseProto.SetTangoIdStatus\"/\n\020Set" +
-      "TangoIdStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
-      "\020\002B\020B\016EventUserProto"
+      "nimumUserProto\022\024\n\014gameCenterId\030\002 \001(\t\"\226\001\n",
+      "\034SetGameCenterIdResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\024\n\014gameCenterId\030\002 \001(\t\022.\n\006status\030\003 \001(\0162\036." +
+      "com.lvl6.proto.ResponseStatus\"c\n\034SetAvat" +
+      "arMonsterRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\021\n\tmonst" +
+      "erId\030\002 \001(\005\"\201\001\n\035SetAvatarMonsterResponseP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl" +
+      "6.proto.ResponseStatus\"h\n!UpdateClientTa",
+      "skStateRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\021\n\ttaskSta" +
+      "te\030\002 \001(\014\"\231\001\n\"UpdateClientTaskStateRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\021\n\ttaskState\030\002 \001(\014\022.\n\006" +
+      "status\030\003 \001(\0162\036.com.lvl6.proto.ResponseSt" +
+      "atus\"k\n\036UpdateUserStrengthRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\027\n\017updatedStrength\030\002 \001(\003\"\203\001\n\037Up" +
+      "dateUserStrengthResponseProto\0220\n\006sender\030",
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      ".\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Respons" +
+      "eStatus\"[\n\026SetTangoIdRequestProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022\017\n\007tangoId\030\002 \001(\t\"\214\001\n\027SetTangoIdRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022\017\n\007tangoId\030\002 \001(\t\022.\n\006s" +
+      "tatus\030\003 \001(\0162\036.com.lvl6.proto.ResponseSta" +
+      "tusB\020B\016EventUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -18273,6 +17412,7 @@ public final class EventUserProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.ResearchsProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -18410,6 +17550,7 @@ public final class EventUserProto {
         new java.lang.String[] { "Sender", "TangoId", "Status", });
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.ResearchsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

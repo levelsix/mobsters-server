@@ -24,9 +24,9 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.Builder;
-import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
@@ -92,7 +92,7 @@ public class PurchaseNormStructureController extends EventController {
 		PurchaseNormStructureResponseProto.Builder resBuilder = PurchaseNormStructureResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -108,7 +108,7 @@ public class PurchaseNormStructureController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -149,7 +149,7 @@ public class PurchaseNormStructureController extends EventController {
 			}
 
 			if (success) {
-				resBuilder.setStatus(PurchaseNormStructureStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 				uStructId = uStructIdList.get(0);
 				resBuilder.setUserStructUuid(uStructId);
 			}
@@ -176,7 +176,7 @@ public class PurchaseNormStructureController extends EventController {
 			log.error("exception in PurchaseNormStructure processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -221,7 +221,7 @@ public class PurchaseNormStructureController extends EventController {
 						new Object[] { userGems, gemsSpent, resourceChange,
 								resourceType, prospective });
 				resBuilder
-						.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 				return false;
 			} else {
 				//has enough gems
@@ -241,7 +241,7 @@ public class PurchaseNormStructureController extends EventController {
 						new Object[] { userResource, requiredResourceAmount,
 								prospective });
 				resBuilder
-						.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_CASH);
 				return false;
 			}
 		} else if (resourceType == ResourceType.OIL) {
@@ -251,7 +251,7 @@ public class PurchaseNormStructureController extends EventController {
 						new Object[] { userResource, requiredResourceAmount,
 								prospective });
 				resBuilder
-						.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_OIL);
+						.setStatus(ResponseStatus.FAIL_INSUFFICIENT_OIL);
 				return false;
 			}
 		} else {

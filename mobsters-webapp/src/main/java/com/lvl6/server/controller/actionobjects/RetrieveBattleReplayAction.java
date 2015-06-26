@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BattleReplayForUser;
 import com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.Builder;
-import com.lvl6.proto.EventPvpProto.RetrieveBattleReplayResponseProto.RetrieveBattleReplayStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
 
 @Component@Scope("prototype")public class RetrieveBattleReplayAction {
@@ -50,7 +50,7 @@ import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
 	//	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(RetrieveBattleReplayStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 //		boolean valid = verifySyntax(resBuilder);
@@ -70,7 +70,7 @@ import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
 //			return;
 //		}
 
-		resBuilder.setStatus(RetrieveBattleReplayStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

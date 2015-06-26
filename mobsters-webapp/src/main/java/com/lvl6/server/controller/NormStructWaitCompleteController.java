@@ -21,7 +21,7 @@ import com.lvl6.info.User;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.Builder;
-import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.NormStructWaitCompleteStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
@@ -83,7 +83,7 @@ public class NormStructWaitCompleteController extends EventController {
 		NormStructWaitCompleteResponseProto.Builder resBuilder = NormStructWaitCompleteResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		UUID userStructUuid = null;
@@ -107,7 +107,7 @@ public class NormStructWaitCompleteController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -134,7 +134,7 @@ public class NormStructWaitCompleteController extends EventController {
 			}
 
 			if (success) {
-				resBuilder.setStatus(NormStructWaitCompleteStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 				List<StructureForUser> newUserStructs = getStructureForUserRetrieveUtils()
 						.getSpecificOrAllUserStructsForUser(userId,
 								userStructIds);
@@ -157,7 +157,7 @@ public class NormStructWaitCompleteController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -181,7 +181,7 @@ public class NormStructWaitCompleteController extends EventController {
 
 		if (userStructs == null || userStructIds == null || clientTime == null
 				|| userStructIds.size() != userStructs.size()) {
-			resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			String preface = "userStructs, userStructIds, or clientTime is null,";
 			String preface2 = " or array lengths different.";
 			log.error(String.format(

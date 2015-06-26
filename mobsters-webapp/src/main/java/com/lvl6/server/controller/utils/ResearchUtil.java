@@ -18,7 +18,7 @@ import com.lvl6.proto.ResearchsProto.ResearchPropertyProto;
 import com.lvl6.proto.ResearchsProto.ResearchProto;
 import com.lvl6.proto.ResearchsProto.ResearchType;
 import com.lvl6.proto.ResearchsProto.UserResearchProto;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.retrieveutils.rarechange.ResearchPropertyRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
 

@@ -4,7 +4,6 @@ import "Battle.proto";
 import "Chat.proto";
 import "MonsterStuff.proto";
 import "SharedEnumConfig.proto";
-import "Structure.proto";
 //import "Task.proto";
 import "User.proto";
 

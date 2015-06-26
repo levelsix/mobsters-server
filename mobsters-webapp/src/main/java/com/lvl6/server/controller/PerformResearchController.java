@@ -16,9 +16,9 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventResearchProto.PerformResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto;
-import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.PerformResearchStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -110,7 +110,7 @@ public class PerformResearchController extends EventController {
 		PerformResearchResponseProto.Builder resBuilder = PerformResearchResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -130,7 +130,7 @@ public class PerformResearchController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
@@ -150,7 +150,7 @@ public class PerformResearchController extends EventController {
 
 			pra.execute(resBuilder);
 
-			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				userResearchUuid = pra.getUserResearchUuid();
 				if (null != userResearchUuid) {
 					resBuilder.setUserResearchUuid(userResearchUuid);
@@ -163,7 +163,7 @@ public class PerformResearchController extends EventController {
 			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
-			if (PerformResearchStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
@@ -178,7 +178,7 @@ public class PerformResearchController extends EventController {
 			log.error("exception in PerformResearchController processEvent", e);
 			// don't let the client hang
 			try {
-				resBuilder.setStatus(PerformResearchStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(
 						senderProto.getUserUuid());
 				resEvent.setTag(event.getTag());

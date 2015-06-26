@@ -29,7 +29,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProto;
 import com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto;
 import com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -111,7 +111,7 @@ public class EvolutionFinishedController extends EventController {
 		EvolutionFinishedResponseProto.Builder resBuilder = EvolutionFinishedResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(EvolutionFinishedStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
@@ -126,7 +126,7 @@ public class EvolutionFinishedController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(EvolutionFinishedStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
@@ -181,7 +181,7 @@ public class EvolutionFinishedController extends EventController {
 				FullUserMonsterProto fump = createInfoProtoUtils
 						.createFullUserMonsterProtoFromUserMonster(evolvedMfu);
 				resBuilder.setEvolvedMonster(fump);
-				resBuilder.setStatus(EvolutionFinishedStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(
@@ -204,7 +204,7 @@ public class EvolutionFinishedController extends EventController {
 
 		} catch (Exception e) {
 			log.error("exception in EnhanceMonster processEvent", e);
-			resBuilder.setStatus(EvolutionFinishedStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(
 					senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
@@ -257,7 +257,7 @@ public class EvolutionFinishedController extends EventController {
 			log.error(String
 					.format("one of the monsters in an evolution is missing. evolution=%s, existingUserMonsters=%s",
 							evolution, existingUserMonsters));
-			resBuilder.setStatus(EvolutionFinishedStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			return false;
 		}
 
@@ -279,7 +279,7 @@ public class EvolutionFinishedController extends EventController {
 					"not enough gems. userGems=%s, gemsSpent=%s, evolution=%s",
 					userGems, gemsSpent, evolution));
 			resBuilder
-					.setStatus(EvolutionFinishedStatus.FAIL_INSUFFICIENT_GEMS);
+					.setStatus(ResponseStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
 		}
 		return true;

@@ -36,7 +36,7 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.RequestJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -175,7 +175,7 @@ public class RequestJoinClanController extends EventController {
 
 		RequestJoinClanResponseProto.Builder resBuilder = RequestJoinClanResponseProto
 				.newBuilder();
-		resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 		resBuilder.setClanUuid(clanId);
 		resBuilder.setClientTime(clientTime.getTime());
@@ -195,7 +195,7 @@ public class RequestJoinClanController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
@@ -232,7 +232,7 @@ public class RequestJoinClanController extends EventController {
 
 			// Only need to set clan data if it's a successful join.
 			ClanDataProto cdp = null;
-			if (RequestJoinClanStatus.SUCCESS_JOIN.equals(resBuilder.getStatus()) && !rjca.isRequestToJoinRequired()) {
+			if (ResponseStatus.SUCCESS_JOIN.equals(resBuilder.getStatus()) && !rjca.isRequestToJoinRequired()) {
 				setResponseBuilderStuff(resBuilder, rjca.getClan(), rjca.getClanSizeList());
 				sendClanRaidStuff(resBuilder, rjca.getClan(), rjca.getUser());
 
@@ -261,8 +261,8 @@ public class RequestJoinClanController extends EventController {
 			 */
 			responses.normalResponseEvents().add(resEvent);
 
-			if (RequestJoinClanStatus.SUCCESS_JOIN.equals(resBuilder.getStatus()) ||
-					RequestJoinClanStatus.SUCCESS_REQUEST.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS_JOIN.equals(resBuilder.getStatus()) ||
+					ResponseStatus.SUCCESS_REQUEST.equals(resBuilder.getStatus())) {
 				List<String> userIds = new ArrayList<String>();
 				userIds.add(userId);
 				//get user's current monster team
@@ -300,7 +300,7 @@ public class RequestJoinClanController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in RequestJoinClan processEvent", e);
 			try {
-				resBuilder.setStatus(RequestJoinClanStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -366,7 +366,7 @@ public class RequestJoinClanController extends EventController {
 	}
 
 	private void sendClanRaidStuff(Builder resBuilder, Clan clan, User user) {
-		if (!RequestJoinClanStatus.SUCCESS_JOIN.equals(resBuilder.getStatus())) {
+		if (!ResponseStatus.SUCCESS_JOIN.equals(resBuilder.getStatus())) {
 			return;
 		}
 

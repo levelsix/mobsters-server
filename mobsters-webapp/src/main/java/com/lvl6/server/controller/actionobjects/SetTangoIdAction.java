@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.User;
 import com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.Builder;
-import com.lvl6.proto.EventUserProto.SetTangoIdResponseProto.SetTangoIdStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 
 @Component@Scope("prototype")public class SetTangoIdAction {
@@ -43,7 +43,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 	protected User user;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(SetTangoIdStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 //		boolean valid = verifySyntax(resBuilder);
@@ -63,7 +63,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 			return;
 		}
 
-		resBuilder.setStatus(SetTangoIdStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

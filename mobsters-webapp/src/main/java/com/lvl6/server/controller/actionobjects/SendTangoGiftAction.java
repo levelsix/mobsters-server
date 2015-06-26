@@ -25,7 +25,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftRewardConfigPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.Builder;
-import com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto.SendTangoGiftStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.RewardsProto.GiftProto.GiftType;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
@@ -102,7 +102,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(SendTangoGiftStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 //		boolean valid = verifySyntax(resBuilder);
@@ -122,7 +122,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return;
 		}
 
-		resBuilder.setStatus(SendTangoGiftStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

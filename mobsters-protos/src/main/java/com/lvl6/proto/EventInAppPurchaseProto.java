@@ -1524,13 +1524,13 @@ public final class EventInAppPurchaseProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional int32 diamondsGained = 3;</code>
@@ -1812,7 +1812,7 @@ public final class EventInAppPurchaseProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus value = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1959,97 +1959,6 @@ public final class EventInAppPurchaseProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus}
-     */
-    public enum InAppPurchaseStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL = 2;</code>
-       */
-      FAIL(1, 2),
-      /**
-       * <code>DUPLICATE_RECEIPT = 3;</code>
-       */
-      DUPLICATE_RECEIPT(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL = 2;</code>
-       */
-      public static final int FAIL_VALUE = 2;
-      /**
-       * <code>DUPLICATE_RECEIPT = 3;</code>
-       */
-      public static final int DUPLICATE_RECEIPT_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static InAppPurchaseStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL;
-          case 3: return DUPLICATE_RECEIPT;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<InAppPurchaseStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<InAppPurchaseStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<InAppPurchaseStatus>() {
-              public InAppPurchaseStatus findValueByNumber(int number) {
-                return InAppPurchaseStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final InAppPurchaseStatus[] VALUES = values();
-
-      public static InAppPurchaseStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private InAppPurchaseStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -2073,17 +1982,17 @@ public final class EventInAppPurchaseProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -2429,7 +2338,7 @@ public final class EventInAppPurchaseProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       diamondsGained_ = 0;
       coinsGained_ = 0;
       packageName_ = "";
@@ -2689,7 +2598,7 @@ public final class EventInAppPurchaseProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         diamondsGained_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -3119,23 +3028,23 @@ public final class EventInAppPurchaseProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus status_ = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3145,11 +3054,11 @@ public final class EventInAppPurchaseProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.InAppPurchaseResponseProto.InAppPurchaseStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -5314,13 +5223,13 @@ public final class EventInAppPurchaseProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];</code>
@@ -5398,7 +5307,7 @@ public final class EventInAppPurchaseProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus value = com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -5457,106 +5366,6 @@ public final class EventInAppPurchaseProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus}
-     */
-    public enum EarnFreeDiamondsStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>CLIENT_TOO_APART_FROM_SERVER_TIME = 2;</code>
-       */
-      CLIENT_TOO_APART_FROM_SERVER_TIME(1, 2),
-      /**
-       * <code>METHOD_NOT_SUPPORTED = 3;</code>
-       */
-      METHOD_NOT_SUPPORTED(2, 3),
-      /**
-       * <code>OTHER_FAIL = 4;</code>
-       */
-      OTHER_FAIL(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>CLIENT_TOO_APART_FROM_SERVER_TIME = 2;</code>
-       */
-      public static final int CLIENT_TOO_APART_FROM_SERVER_TIME_VALUE = 2;
-      /**
-       * <code>METHOD_NOT_SUPPORTED = 3;</code>
-       */
-      public static final int METHOD_NOT_SUPPORTED_VALUE = 3;
-      /**
-       * <code>OTHER_FAIL = 4;</code>
-       */
-      public static final int OTHER_FAIL_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static EarnFreeDiamondsStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return CLIENT_TOO_APART_FROM_SERVER_TIME;
-          case 3: return METHOD_NOT_SUPPORTED;
-          case 4: return OTHER_FAIL;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<EarnFreeDiamondsStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<EarnFreeDiamondsStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EarnFreeDiamondsStatus>() {
-              public EarnFreeDiamondsStatus findValueByNumber(int number) {
-                return EarnFreeDiamondsStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final EarnFreeDiamondsStatus[] VALUES = values();
-
-      public static EarnFreeDiamondsStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private EarnFreeDiamondsStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -5580,17 +5389,17 @@ public final class EventInAppPurchaseProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -5611,7 +5420,7 @@ public final class EventInAppPurchaseProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       freeDiamondsType_ = com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType.FB_CONNECT;
     }
     private byte memoizedIsInitialized = -1;
@@ -5781,7 +5590,7 @@ public final class EventInAppPurchaseProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         freeDiamondsType_ = com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType.FB_CONNECT;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -5997,23 +5806,23 @@ public final class EventInAppPurchaseProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status_ = com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -6023,11 +5832,11 @@ public final class EventInAppPurchaseProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -6128,7 +5937,7 @@ public final class EventInAppPurchaseProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];</code>
      */
-    com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType();
 
     /**
      * <code>optional int64 clientTime = 5;</code>
@@ -6224,7 +6033,7 @@ public final class EventInAppPurchaseProto {
             }
             case 32: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResourceType value = com.lvl6.proto.SharedEnumConfigProto.ResourceType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
@@ -6338,7 +6147,7 @@ public final class EventInAppPurchaseProto {
     }
 
     public static final int RESOURCETYPE_FIELD_NUMBER = 4;
-    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_;
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];</code>
      */
@@ -6348,7 +6157,7 @@ public final class EventInAppPurchaseProto {
     /**
      * <code>optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];</code>
      */
-    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
       return resourceType_;
     }
 
@@ -6379,7 +6188,7 @@ public final class EventInAppPurchaseProto {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       numGems_ = 0;
       numResources_ = 0;
-      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
       clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
@@ -6567,7 +6376,7 @@ public final class EventInAppPurchaseProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         numResources_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000008);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -6877,7 +6686,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
 
-      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      private com.lvl6.proto.SharedEnumConfigProto.ResourceType resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];</code>
        */
@@ -6887,13 +6696,13 @@ public final class EventInAppPurchaseProto {
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];</code>
        */
-      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResourceType getResourceType() {
         return resourceType_;
       }
       /**
        * <code>optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];</code>
        */
-      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+      public Builder setResourceType(com.lvl6.proto.SharedEnumConfigProto.ResourceType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -6907,7 +6716,7 @@ public final class EventInAppPurchaseProto {
        */
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        resourceType_ = com.lvl6.proto.SharedEnumConfigProto.ResourceType.CASH;
         onChanged();
         return this;
       }
@@ -6989,13 +6798,13 @@ public final class EventInAppPurchaseProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.ExchangeGemsForResourcesResponseProto}
@@ -7064,7 +6873,7 @@ public final class EventInAppPurchaseProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus value = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -7112,97 +6921,6 @@ public final class EventInAppPurchaseProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus}
-     */
-    public enum ExchangeGemsForResourcesStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 3;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static ExchangeGemsForResourcesStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_INSUFFICIENT_GEMS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<ExchangeGemsForResourcesStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<ExchangeGemsForResourcesStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<ExchangeGemsForResourcesStatus>() {
-              public ExchangeGemsForResourcesStatus findValueByNumber(int number) {
-                return ExchangeGemsForResourcesStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final ExchangeGemsForResourcesStatus[] VALUES = values();
-
-      public static ExchangeGemsForResourcesStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private ExchangeGemsForResourcesStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
@@ -7226,23 +6944,23 @@ public final class EventInAppPurchaseProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      status_ = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7404,7 +7122,7 @@ public final class EventInAppPurchaseProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -7611,23 +7329,23 @@ public final class EventInAppPurchaseProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status_ = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -7637,11 +7355,11 @@ public final class EventInAppPurchaseProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -7699,57 +7417,47 @@ public final class EventInAppPurchaseProto {
       "\n\030EventInAppPurchase.proto\022\016com.lvl6.pro" +
       "to\032\023InAppPurchase.proto\032\nItem.proto\032\022Mon" +
       "sterStuff.proto\032\014Reward.proto\032\013Sales.pro" +
-      "to\032\017Structure.proto\032\nUser.proto\"\267\001\n\031InAp" +
-      "pPurchaseRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022\017\n\007recei" +
-      "pt\030\002 \001(\t\022\022\n\nlocalcents\030\003 \001(\t\022\025\n\rlocalcur" +
-      "rency\030\004 \001(\t\022\016\n\006locale\030\005 \001(\t\022\016\n\006ipaddr\030\006 " +
-      "\001(\t\022\014\n\004uuid\030\007 \001(\t\"\275\005\n\032InAppPurchaseRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot",
-      "o.MinimumUserProto\022N\n\006status\030\002 \001(\0162>.com" +
-      ".lvl6.proto.InAppPurchaseResponseProto.I" +
-      "nAppPurchaseStatus\022\026\n\016diamondsGained\030\003 \001" +
-      "(\005\022\027\n\013coinsGained\030\004 \001(\005B\002\030\001\022\023\n\013packageNa" +
-      "me\030\005 \001(\t\022\024\n\014packagePrice\030\006 \001(\001\022\017\n\007receip" +
-      "t\030\007 \001(\t\022:\n\014updatedOrNew\030\010 \003(\0132$.com.lvl6" +
-      ".proto.FullUserMonsterProto\0227\n\020updatedUs" +
-      "erItems\030\t \003(\0132\035.com.lvl6.proto.UserItemP" +
-      "roto\022@\n\020updatedMoneyTree\030\n \003(\0132&.com.lvl" +
-      "6.proto.FullUserStructureProto\022@\n\025succes",
-      "sorSalesPackage\030\013 \001(\0132!.com.lvl6.proto.S" +
-      "alesPackageProto\022@\n\025purchasedSalesPackag" +
-      "e\030\014 \001(\0132!.com.lvl6.proto.SalesPackagePro" +
-      "to\0220\n\007rewards\030\r \001(\0132\037.com.lvl6.proto.Use" +
-      "rRewardProto\"C\n\023InAppPurchaseStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEIPT\020" +
-      "\003\"\260\001\n\034EarnFreeDiamondsRequestProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022J\n\020freeDiamondsType\030\002 \001(\0162$.com.lvl" +
-      "6.proto.EarnFreeDiamondsType:\nFB_CONNECT",
-      "\022\022\n\nclientTime\030\003 \001(\003\"\353\002\n\035EarnFreeDiamond" +
-      "sResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022T\n\006status\030\002 \001(\016" +
-      "2D.com.lvl6.proto.EarnFreeDiamondsRespon" +
-      "seProto.EarnFreeDiamondsStatus\022J\n\020freeDi" +
-      "amondsType\030\003 \001(\0162$.com.lvl6.proto.EarnFr" +
-      "eeDiamondsType:\nFB_CONNECT\"v\n\026EarnFreeDi" +
-      "amondsStatus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_" +
-      "APART_FROM_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_S" +
-      "UPPORTED\020\003\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$ExchangeG",
-      "emsForResourcesRequestProto\022@\n\006sender\030\001 " +
-      "\001(\01320.com.lvl6.proto.MinimumUserProtoWit" +
-      "hMaxResources\022\017\n\007numGems\030\002 \001(\005\022\024\n\014numRes" +
-      "ources\030\003 \001(\005\0228\n\014resourceType\030\004 \001(\0162\034.com" +
-      ".lvl6.proto.ResourceType:\004CASH\022\022\n\nclient" +
-      "Time\030\005 \001(\003\"\252\002\n%ExchangeGemsForResourcesR" +
-      "esponseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6." +
-      "proto.MinimumUserProtoWithMaxResources\022d" +
-      "\n\006status\030\002 \001(\0162T.com.lvl6.proto.Exchange" +
-      "GemsForResourcesResponseProto.ExchangeGe",
-      "msForResourcesStatus\"Y\n\036ExchangeGemsForR" +
-      "esourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
-      "R\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003B\031B\027Event" +
-      "InAppPurchaseProto"
+      "to\032\026SharedEnumConfig.proto\032\017Structure.pr" +
+      "oto\032\nUser.proto\"\267\001\n\031InAppPurchaseRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nloca" +
+      "lcents\030\003 \001(\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n\006l" +
+      "ocale\030\005 \001(\t\022\016\n\006ipaddr\030\006 \001(\t\022\014\n\004uuid\030\007 \001(" +
+      "\t\"\330\004\n\032InAppPurchaseResponseProto\0220\n\006send",
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Resp" +
+      "onseStatus\022\026\n\016diamondsGained\030\003 \001(\005\022\027\n\013co" +
+      "insGained\030\004 \001(\005B\002\030\001\022\023\n\013packageName\030\005 \001(\t" +
+      "\022\024\n\014packagePrice\030\006 \001(\001\022\017\n\007receipt\030\007 \001(\t\022" +
+      ":\n\014updatedOrNew\030\010 \003(\0132$.com.lvl6.proto.F" +
+      "ullUserMonsterProto\0227\n\020updatedUserItems\030" +
+      "\t \003(\0132\035.com.lvl6.proto.UserItemProto\022@\n\020" +
+      "updatedMoneyTree\030\n \003(\0132&.com.lvl6.proto." +
+      "FullUserStructureProto\022@\n\025successorSales",
+      "Package\030\013 \001(\0132!.com.lvl6.proto.SalesPack" +
+      "ageProto\022@\n\025purchasedSalesPackage\030\014 \001(\0132" +
+      "!.com.lvl6.proto.SalesPackageProto\0220\n\007re" +
+      "wards\030\r \001(\0132\037.com.lvl6.proto.UserRewardP" +
+      "roto\"\260\001\n\034EarnFreeDiamondsRequestProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022J\n\020freeDiamondsType\030\002 \001(\0162$.com." +
+      "lvl6.proto.EarnFreeDiamondsType:\nFB_CONN" +
+      "ECT\022\022\n\nclientTime\030\003 \001(\003\"\315\001\n\035EarnFreeDiam" +
+      "ondsResponseProto\0220\n\006sender\030\001 \001(\0132 .com.",
+      "lvl6.proto.MinimumUserProto\022.\n\006status\030\002 " +
+      "\001(\0162\036.com.lvl6.proto.ResponseStatus\022J\n\020f" +
+      "reeDiamondsType\030\003 \001(\0162$.com.lvl6.proto.E" +
+      "arnFreeDiamondsType:\nFB_CONNECT\"\335\001\n$Exch" +
+      "angeGemsForResourcesRequestProto\022@\n\006send" +
+      "er\030\001 \001(\01320.com.lvl6.proto.MinimumUserPro" +
+      "toWithMaxResources\022\017\n\007numGems\030\002 \001(\005\022\024\n\014n" +
+      "umResources\030\003 \001(\005\0228\n\014resourceType\030\004 \001(\0162" +
+      "\034.com.lvl6.proto.ResourceType:\004CASH\022\022\n\nc" +
+      "lientTime\030\005 \001(\003\"\231\001\n%ExchangeGemsForResou",
+      "rcesResponseProto\022@\n\006sender\030\001 \001(\01320.com." +
+      "lvl6.proto.MinimumUserProtoWithMaxResour" +
+      "ces\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Res" +
+      "ponseStatusB\031B\027EventInAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7767,6 +7475,7 @@ public final class EventInAppPurchaseProto {
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.RewardsProto.getDescriptor(),
           com.lvl6.proto.SalesProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
@@ -7811,6 +7520,7 @@ public final class EventInAppPurchaseProto {
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.RewardsProto.getDescriptor();
     com.lvl6.proto.SalesProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.StructureProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }

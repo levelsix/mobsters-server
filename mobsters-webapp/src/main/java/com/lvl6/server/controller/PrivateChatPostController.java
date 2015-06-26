@@ -34,7 +34,7 @@ import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.proto.EventChatProto.PrivateChatPostRequestProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.Builder;
-import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -149,7 +149,7 @@ public class PrivateChatPostController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			PrivateChatPostResponseEvent resEvent = new PrivateChatPostResponseEvent(
 					posterId);
 			resEvent.setTag(event.getTag());
@@ -177,7 +177,7 @@ public class PrivateChatPostController extends EventController {
 								censoredContent, timeOfPost, contentLanguage.toString());
 				if (privateChatPostId == null) {
 					legitPost = false;
-					resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
+					resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 					log.error("problem with inserting private chat post into db. posterId="
 							+ posterId
 							+ ", recipientId="
@@ -343,7 +343,7 @@ public class PrivateChatPostController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in PrivateChatPostController processEvent", e);
 			try {
-				resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				PrivateChatPostResponseEvent resEvent = new PrivateChatPostResponseEvent(
 						posterId);
 				resEvent.setTag(event.getTag());
@@ -361,32 +361,32 @@ public class PrivateChatPostController extends EventController {
 	private boolean checkLegitPost(Builder resBuilder, String posterId,
 			String recipientId, String content, Map<String, User> users) {
 		if (users == null) {
-			resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("users are null- posterId=" + posterId + ", recipientId="
 					+ recipientId);
 			return false;
 		}
 		if (users.size() != 2 && !posterId.equals(recipientId)) {
-			resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("error retrieving one of the users. posterId=" + posterId
 					+ ", recipientId=" + recipientId);
 			return false;
 		}
 		if (users.size() != 1 && posterId.equals(recipientId)) {
-			resBuilder.setStatus(PrivateChatPostStatus.OTHER_FAIL);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("error retrieving one of the users. posterId=" + posterId
 					+ ", recipientId=" + recipientId);
 			return false;
 		}
 		if (content == null || content.length() == 0) {
-			resBuilder.setStatus(PrivateChatPostStatus.NO_CONTENT_SENT);
+			resBuilder.setStatus(ResponseStatus.FAIL_NO_CONTENT_SENT);
 			log.error("no content when posterId " + posterId
 					+ " tries to post on wall with owner " + recipientId);
 			return false;
 		}
 		// maybe use different controller constants...
 		if (content.length() > ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING) {
-			resBuilder.setStatus(PrivateChatPostStatus.POST_TOO_LARGE);
+			resBuilder.setStatus(ResponseStatus.FAIL_TOO_LONG);
 			log.error("wall post is too long. content length is "
 					+ content.length()
 					+ ", max post length="
@@ -397,11 +397,11 @@ public class PrivateChatPostController extends EventController {
 		}
 		Set<Integer> banned = bannedUserRetrieveUtils.getAllBannedUsers();
 		if (null != banned && banned.contains(posterId)) {
-			resBuilder.setStatus(PrivateChatPostStatus.BANNED);
+			resBuilder.setStatus(ResponseStatus.FAIL_BANNED);
 			log.warn("banned user tried to send a post. posterId=" + posterId);
 			return false;
 		}
-		resBuilder.setStatus(PrivateChatPostStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

@@ -14,8 +14,7 @@ import com.lvl6.events.request.EndClanAvengingRequestEvent;
 import com.lvl6.events.response.EndClanAvengingResponseEvent;
 import com.lvl6.proto.EventClanProto.EndClanAvengingRequestProto;
 import com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto;
-import com.lvl6.proto.EventClanProto.EndClanAvengingResponseProto.EndClanAvengingStatus;
-import com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -61,7 +60,7 @@ public class EndClanAvengingController extends EventController {
 
 		EndClanAvengingResponseProto.Builder resBuilder = EndClanAvengingResponseProto
 				.newBuilder();
-		resBuilder.setStatus(EndClanAvengingStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		String clanId = "";
@@ -101,7 +100,7 @@ public class EndClanAvengingController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(EndClanAvengingStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			EndClanAvengingResponseEvent resEvent = new EndClanAvengingResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -122,7 +121,7 @@ public class EndClanAvengingController extends EventController {
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
 
-			if (resBuilder.getStatus().equals(InviteToClanStatus.SUCCESS)) {
+			if (resBuilder.getStatus().equals(ResponseStatus.SUCCESS)) {
 				resBuilder.addAllClanAvengeUuids(clanAvengeUuids);
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
@@ -139,7 +138,7 @@ public class EndClanAvengingController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in EndClanAvenging processEvent", e);
 			try {
-				resBuilder.setStatus(EndClanAvengingStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				EndClanAvengingResponseEvent resEvent = new EndClanAvengingResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

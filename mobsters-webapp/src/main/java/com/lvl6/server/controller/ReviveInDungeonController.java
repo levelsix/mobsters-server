@@ -22,7 +22,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.Builder;
-import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -87,7 +87,7 @@ public class ReviveInDungeonController extends EventController {
 		ReviveInDungeonResponseProto.Builder resBuilder = ReviveInDungeonResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(ReviveInDungeonStatus.FAIL_OTHER); //default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
 		UUID userUuid = null;
 		UUID userTaskUuid = null;
@@ -106,7 +106,7 @@ public class ReviveInDungeonController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(ReviveInDungeonStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -138,7 +138,7 @@ public class ReviveInDungeonController extends EventController {
 						currencyChange);
 			}
 			if (successful) {
-				resBuilder.setStatus(ReviveInDungeonStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(
@@ -161,7 +161,7 @@ public class ReviveInDungeonController extends EventController {
 			log.error("exception in ReviveInDungeonController processEvent", e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(ReviveInDungeonStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -225,12 +225,12 @@ public class ReviveInDungeonController extends EventController {
 		if (cost > userDiamonds) {
 			log.error("user error: user does not have enough diamonds to revive. "
 					+ "cost=" + cost + "\t userDiamonds=" + userDiamonds);
-			resBuilder.setStatus(ReviveInDungeonStatus.FAIL_INSUFFICIENT_FUNDS);
+			resBuilder.setStatus(ResponseStatus.FAIL_INSUFFICIENT_FUNDS);
 			return false;
 		}
 
 		//    userTaskList.add(ut);
-		resBuilder.setStatus(ReviveInDungeonStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 

@@ -14,7 +14,7 @@ import com.lvl6.events.response.EndClanHelpResponseEvent;
 import com.lvl6.proto.EventClanProto.EndClanHelpRequestProto;
 import com.lvl6.proto.EventClanProto.EndClanHelpResponseProto;
 import com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.EndClanHelpResponseProto.EndClanHelpStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.Locker;
@@ -59,7 +59,7 @@ public class EndClanHelpController extends EventController {
 
 		EndClanHelpResponseProto.Builder resBuilder = EndClanHelpResponseProto
 				.newBuilder();
-		resBuilder.setStatus(EndClanHelpStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 		resBuilder.addAllClanHelpUuids(clanHelpIdList);
 
@@ -87,7 +87,7 @@ public class EndClanHelpController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(EndClanHelpStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -116,7 +116,7 @@ public class EndClanHelpController extends EventController {
 			} else {
 				//only write to clan if success
 
-				resBuilder.setStatus(EndClanHelpStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				//this works for other clan members, but not for the person 
@@ -126,7 +126,7 @@ public class EndClanHelpController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in EndClanHelp processEvent", e);
 			try {
-				resBuilder.setStatus(EndClanHelpStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				EndClanHelpResponseEvent resEvent = new EndClanHelpResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

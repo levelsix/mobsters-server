@@ -23,7 +23,7 @@ import com.lvl6.properties.Globals;
 import com.lvl6.proto.DevProto.DevRequest;
 import com.lvl6.proto.EventDevProto.DevRequestProto;
 import com.lvl6.proto.EventDevProto.DevResponseProto;
-import com.lvl6.proto.EventDevProto.DevResponseProto.DevStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -87,7 +87,7 @@ public class DevController extends EventController {
 
 		DevResponseProto.Builder resBuilder = DevResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
-		resBuilder.setStatus(DevStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 		boolean invalidUuids = true;
 
@@ -101,7 +101,7 @@ public class DevController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(DevStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			DevResponseEvent resEvent = new DevResponseEvent(userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
@@ -126,7 +126,7 @@ public class DevController extends EventController {
 			} else {
 				log.error("azzhole tried cheating: user={}",
 						aUser);
-				resBuilder.setStatus(DevStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			}
 
 			DevResponseProto resProto = resBuilder.build();
@@ -145,7 +145,7 @@ public class DevController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in DevController processEvent", e);
 			try {
-				resBuilder.setStatus(DevStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				DevResponseEvent resEvent = new DevResponseEvent(userId);
 				resEvent.setTag(event.getTag());
 				resEvent.setResponseProto(resBuilder.build());

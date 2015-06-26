@@ -18,7 +18,7 @@ import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.Builder;
-import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.QueueUpStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.pvp.PvpUtil2;
@@ -81,7 +81,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	private List<List<MonsterForPvp>> fakeUserMonsters;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		//check out inputs before db interaction
 		boolean valid = verifySyntax(resBuilder);
@@ -101,7 +101,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			return;
 		}
 
-		resBuilder.setStatus(QueueUpStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
 

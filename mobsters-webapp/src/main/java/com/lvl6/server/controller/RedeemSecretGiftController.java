@@ -21,7 +21,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.RedeemSecretGiftRequestProto;
 import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto;
-import com.lvl6.proto.EventRewardProto.RedeemSecretGiftResponseProto.RedeemSecretGiftStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserSecretGiftProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -133,7 +133,7 @@ public class RedeemSecretGiftController extends EventController {
 		RedeemSecretGiftResponseProto.Builder resBuilder = RedeemSecretGiftResponseProto
 				.newBuilder();
 		resBuilder.setMup(senderProto);
-		resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean invalidUuids = true;
 		try {
@@ -150,7 +150,7 @@ public class RedeemSecretGiftController extends EventController {
 		//UUID checks
 		if (invalidUuids) {
 			log.info("invalid UUIDS.");
-			resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -173,7 +173,7 @@ public class RedeemSecretGiftController extends EventController {
 					deleteUtil, updateUtil,insertUtil);
 			rsga.execute(resBuilder);
 
-			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				Collection<SecretGiftForUserPojo> nuGifts = rsga.getGifts();
 				Collection<UserSecretGiftProto> nuGiftsProtos = createInfoProtoUtils
 						.createUserSecretGiftProto(nuGifts);
@@ -191,7 +191,7 @@ public class RedeemSecretGiftController extends EventController {
 			resEvent.setResponseProto(resProto);
 			responses.normalResponseEvents().add(resEvent);
 
-			if (RedeemSecretGiftStatus.SUCCESS.equals(resBuilder.getStatus())) {
+			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				//last_secret_gift time in user is modified, need to
 				//update client's user
 				User u = rsga.getUser();
@@ -207,7 +207,7 @@ public class RedeemSecretGiftController extends EventController {
 		} catch (Exception e) {
 			log.error("exception in RedeemSecretGiftController processEvent", e);
 			try {
-				resBuilder.setStatus(RedeemSecretGiftStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

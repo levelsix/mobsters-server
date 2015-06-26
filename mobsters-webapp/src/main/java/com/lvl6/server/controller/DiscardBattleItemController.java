@@ -19,7 +19,7 @@ import com.lvl6.info.User;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto;
-import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.DiscardBattleItemStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
@@ -77,7 +77,7 @@ public class DiscardBattleItemController extends EventController {
 		
 		DiscardBattleItemResponseProto.Builder resBuilder = DiscardBattleItemResponseProto
 				.newBuilder();
-		resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
 		UUID userUuid = null;
@@ -94,7 +94,7 @@ public class DiscardBattleItemController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -123,7 +123,7 @@ public class DiscardBattleItemController extends EventController {
 					e);
 			//don't let the client hang
 			try {
-				resBuilder.setStatus(DiscardBattleItemStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());

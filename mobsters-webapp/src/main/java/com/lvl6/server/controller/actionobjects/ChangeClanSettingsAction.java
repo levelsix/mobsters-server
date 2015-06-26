@@ -20,7 +20,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.Builder;
-import com.lvl6.proto.EventClanProto.ChangeClanSettingsResponseProto.ChangeClanSettingsStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -81,7 +81,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private Map<String, String> details;
 
 	public void execute(Builder resBuilder) {
-		resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean valid = verifySyntax(resBuilder);
 
@@ -100,7 +100,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			return;
 		}
 
-		resBuilder.setStatus(ChangeClanSettingsStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
@@ -113,7 +113,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		String clanIdUser = user.getClanId();
 		if (null == clanIdUser || clanIdUser.isEmpty()) {
-			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_NOT_IN_CLAN);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_IN_CLAN);
 			log.error("user not in clan");
 			return false;
 		}
@@ -121,7 +121,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		clan = clanRetrieveUtils.getClanWithId(clanIdUser);
 
 		if (user == null || clan == null) {
-			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			log.error("userId is {}, user is {}, clanId is {}, clan is {}",
 					new Object[] {userId, user, clan.getId(), clan});
 			return false;
@@ -142,18 +142,18 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 
 		if (!uniqUserIds.contains(userId)) {
-			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_NOT_AUTHORIZED);
+			resBuilder.setStatus(ResponseStatus.FAIL_NOT_AUTHORIZED);
 			log.error("clan member can't change clan description member= {}", user);
 			return false;
 		}
-		resBuilder.setStatus(ChangeClanSettingsStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 		if (isChangeDescription) {
 			if (description.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION) {
-				resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				log.warn("description is {}, and length of that is {}, max size is {}", 
 						new Object[] {description, description.length(), ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION});
 			}
@@ -168,7 +168,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		if (isChangeIcon) {
 			ClanIcon ci = clanIconRetrieveUtils.getClanIconForId(iconId);
 			if (null == ci) {
-				resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				log.warn("no clan icon with id={}", iconId);
 			} else {
 				clan.setClanIconId(iconId);

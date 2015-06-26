@@ -1056,13 +1056,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EvolveMonsterResponseProto}
@@ -1131,7 +1131,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus value = com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1179,141 +1179,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus}
-     */
-    public enum EvolveMonsterStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_RESOURCES = 3;</code>
-       */
-      FAIL_INSUFFICIENT_RESOURCES(2, 3),
-      /**
-       * <code>FAIL_MONSTER_REACHED_EVOLVING_LIMIT = 4;</code>
-       */
-      FAIL_MONSTER_REACHED_EVOLVING_LIMIT(3, 4),
-      /**
-       * <code>FAIL_MAX_NUM_EVOLUTIONS_REACHED = 5;</code>
-       *
-       * <pre>
-       *user is already evolving some number of monsters and reached the limit.
-       * </pre>
-       */
-      FAIL_MAX_NUM_EVOLUTIONS_REACHED(4, 5),
-      /**
-       * <code>FAIL_NONEXISTENT_MONSTERS = 6;</code>
-       */
-      FAIL_NONEXISTENT_MONSTERS(5, 6),
-      /**
-       * <code>FAIL_OTHER = 7;</code>
-       */
-      FAIL_OTHER(6, 7),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_RESOURCES = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_RESOURCES_VALUE = 3;
-      /**
-       * <code>FAIL_MONSTER_REACHED_EVOLVING_LIMIT = 4;</code>
-       */
-      public static final int FAIL_MONSTER_REACHED_EVOLVING_LIMIT_VALUE = 4;
-      /**
-       * <code>FAIL_MAX_NUM_EVOLUTIONS_REACHED = 5;</code>
-       *
-       * <pre>
-       *user is already evolving some number of monsters and reached the limit.
-       * </pre>
-       */
-      public static final int FAIL_MAX_NUM_EVOLUTIONS_REACHED_VALUE = 5;
-      /**
-       * <code>FAIL_NONEXISTENT_MONSTERS = 6;</code>
-       */
-      public static final int FAIL_NONEXISTENT_MONSTERS_VALUE = 6;
-      /**
-       * <code>FAIL_OTHER = 7;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 7;
-
-
-      public final int getNumber() { return value; }
-
-      public static EvolveMonsterStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_GEMS;
-          case 3: return FAIL_INSUFFICIENT_RESOURCES;
-          case 4: return FAIL_MONSTER_REACHED_EVOLVING_LIMIT;
-          case 5: return FAIL_MAX_NUM_EVOLUTIONS_REACHED;
-          case 6: return FAIL_NONEXISTENT_MONSTERS;
-          case 7: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<EvolveMonsterStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<EvolveMonsterStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EvolveMonsterStatus>() {
-              public EvolveMonsterStatus findValueByNumber(int number) {
-                return EvolveMonsterStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final EvolveMonsterStatus[] VALUES = values();
-
-      public static EvolveMonsterStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private EvolveMonsterStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -1337,23 +1202,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1515,7 +1380,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -1722,23 +1587,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1748,11 +1613,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.EvolveMonsterResponseProto.EvolveMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -2425,13 +2290,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getEvolvedMonsterOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EvolutionFinishedResponseProto}
@@ -2513,7 +2378,7 @@ public final class EventMonsterProto {
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus value = com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -2561,97 +2426,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus}
-     */
-    public enum EvolutionFinishedStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static EvolutionFinishedStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_GEMS;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<EvolutionFinishedStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<EvolutionFinishedStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EvolutionFinishedStatus>() {
-              public EvolutionFinishedStatus findValueByNumber(int number) {
-                return EvolutionFinishedStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final EvolutionFinishedStatus[] VALUES = values();
-
-      public static EvolutionFinishedStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private EvolutionFinishedStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -2696,24 +2470,24 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       evolvedMonster_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2889,7 +2663,7 @@ public final class EventMonsterProto {
           evolvedMonsterBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -3223,23 +2997,23 @@ public final class EventMonsterProto {
         return evolvedMonsterBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status_ = com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3249,11 +3023,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.EvolutionFinishedResponseProto.EvolutionFinishedStatus status = 3;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 3;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -5239,13 +5013,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SubmitMonsterEnhancementResponseProto}
@@ -5314,7 +5088,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus value = com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -5362,159 +5136,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus}
-     */
-    public enum SubmitMonsterEnhancementStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_GEMS(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_OIL = 3;</code>
-       */
-      FAIL_INSUFFICIENT_OIL(2, 3),
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      FAIL_OTHER(3, 4),
-      /**
-       * <code>FAIL_MONSTER_IN_ENHANCING = 6;</code>
-       *
-       * <pre>
-       *TRYING_TO_SURPASS_MAX_LEVEL = 5;
-       * </pre>
-       */
-      FAIL_MONSTER_IN_ENHANCING(4, 6),
-      /**
-       * <code>FAIL_MONSTER_IN_HEALING = 7;</code>
-       */
-      FAIL_MONSTER_IN_HEALING(5, 7),
-      /**
-       * <code>FAIL_MONSTER_IN_EVOLUTION = 8;</code>
-       */
-      FAIL_MONSTER_IN_EVOLUTION(6, 8),
-      /**
-       * <code>FAIL_MONSTER_NONEXISTENT = 9;</code>
-       */
-      FAIL_MONSTER_NONEXISTENT(7, 9),
-      /**
-       * <code>FAIL_MONSTER_RESTRICTED = 10;</code>
-       */
-      FAIL_MONSTER_RESTRICTED(8, 10),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_GEMS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_OIL = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_OIL_VALUE = 3;
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 4;
-      /**
-       * <code>FAIL_MONSTER_IN_ENHANCING = 6;</code>
-       *
-       * <pre>
-       *TRYING_TO_SURPASS_MAX_LEVEL = 5;
-       * </pre>
-       */
-      public static final int FAIL_MONSTER_IN_ENHANCING_VALUE = 6;
-      /**
-       * <code>FAIL_MONSTER_IN_HEALING = 7;</code>
-       */
-      public static final int FAIL_MONSTER_IN_HEALING_VALUE = 7;
-      /**
-       * <code>FAIL_MONSTER_IN_EVOLUTION = 8;</code>
-       */
-      public static final int FAIL_MONSTER_IN_EVOLUTION_VALUE = 8;
-      /**
-       * <code>FAIL_MONSTER_NONEXISTENT = 9;</code>
-       */
-      public static final int FAIL_MONSTER_NONEXISTENT_VALUE = 9;
-      /**
-       * <code>FAIL_MONSTER_RESTRICTED = 10;</code>
-       */
-      public static final int FAIL_MONSTER_RESTRICTED_VALUE = 10;
-
-
-      public final int getNumber() { return value; }
-
-      public static SubmitMonsterEnhancementStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_GEMS;
-          case 3: return FAIL_INSUFFICIENT_OIL;
-          case 4: return FAIL_OTHER;
-          case 6: return FAIL_MONSTER_IN_ENHANCING;
-          case 7: return FAIL_MONSTER_IN_HEALING;
-          case 8: return FAIL_MONSTER_IN_EVOLUTION;
-          case 9: return FAIL_MONSTER_NONEXISTENT;
-          case 10: return FAIL_MONSTER_RESTRICTED;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SubmitMonsterEnhancementStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SubmitMonsterEnhancementStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SubmitMonsterEnhancementStatus>() {
-              public SubmitMonsterEnhancementStatus findValueByNumber(int number) {
-                return SubmitMonsterEnhancementStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SubmitMonsterEnhancementStatus[] VALUES = values();
-
-      public static SubmitMonsterEnhancementStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SubmitMonsterEnhancementStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
@@ -5538,23 +5159,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5716,7 +5337,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -5923,23 +5544,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status_ = com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -5949,11 +5570,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -7420,13 +7041,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto}
@@ -7495,7 +7116,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus value = com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -7543,97 +7164,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus}
-     */
-    public enum EnhancementWaitTimeCompleteStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 3;</code>
-       */
-      FAIL_INSUFFICIENT_FUNDS(1, 3),
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      FAIL_OTHER(2, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 3;
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static EnhancementWaitTimeCompleteStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 3: return FAIL_INSUFFICIENT_FUNDS;
-          case 4: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<EnhancementWaitTimeCompleteStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<EnhancementWaitTimeCompleteStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EnhancementWaitTimeCompleteStatus>() {
-              public EnhancementWaitTimeCompleteStatus findValueByNumber(int number) {
-                return EnhancementWaitTimeCompleteStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final EnhancementWaitTimeCompleteStatus[] VALUES = values();
-
-      public static EnhancementWaitTimeCompleteStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private EnhancementWaitTimeCompleteStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -7657,23 +7187,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7835,7 +7365,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -8042,23 +7572,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status_ = com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -8068,11 +7598,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -9114,13 +8644,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementResponseProto}
@@ -9189,7 +8719,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus value = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -9237,97 +8767,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus}
-     */
-    public enum CollectMonsterEnhancementStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_ENHANCEMENT_INCOMPLETE = 3;</code>
-       */
-      FAIL_ENHANCEMENT_INCOMPLETE(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_ENHANCEMENT_INCOMPLETE = 3;</code>
-       */
-      public static final int FAIL_ENHANCEMENT_INCOMPLETE_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static CollectMonsterEnhancementStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_ENHANCEMENT_INCOMPLETE;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<CollectMonsterEnhancementStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<CollectMonsterEnhancementStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<CollectMonsterEnhancementStatus>() {
-              public CollectMonsterEnhancementStatus findValueByNumber(int number) {
-                return CollectMonsterEnhancementStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final CollectMonsterEnhancementStatus[] VALUES = values();
-
-      public static CollectMonsterEnhancementStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private CollectMonsterEnhancementStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -9351,23 +8790,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -9529,7 +8968,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -9736,23 +9175,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status_ = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -9762,11 +9201,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.CollectMonsterEnhancementStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -13621,13 +13060,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpdateMonsterHealthResponseProto}
@@ -13696,7 +13135,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus value = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -13744,97 +13183,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus}
-     */
-    public enum UpdateMonsterHealthStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_FUNDS(1, 2),
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      FAIL_OTHER(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 2;
-      /**
-       * <code>FAIL_OTHER = 3;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static UpdateMonsterHealthStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_FUNDS;
-          case 3: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<UpdateMonsterHealthStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<UpdateMonsterHealthStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<UpdateMonsterHealthStatus>() {
-              public UpdateMonsterHealthStatus findValueByNumber(int number) {
-                return UpdateMonsterHealthStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final UpdateMonsterHealthStatus[] VALUES = values();
-
-      public static UpdateMonsterHealthStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private UpdateMonsterHealthStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -13858,23 +13206,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -14036,7 +13384,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -14243,23 +13591,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -14269,11 +13617,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -17083,13 +16431,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.HealMonsterResponseProto}
@@ -17158,7 +16506,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus value = com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -17206,124 +16554,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus}
-     */
-    public enum HealMonsterStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_FUNDS(1, 2),
-      /**
-       * <code>FAIL_ALL_MONSTERS_ALREADY_HEALING = 3;</code>
-       */
-      FAIL_ALL_MONSTERS_ALREADY_HEALING(2, 3),
-      /**
-       * <code>FAIL_ALL_MONSTERS_NONEXISTENT = 4;</code>
-       */
-      FAIL_ALL_MONSTERS_NONEXISTENT(3, 4),
-      /**
-       * <code>FAIL_OTHER = 5;</code>
-       */
-      FAIL_OTHER(4, 5),
-      /**
-       * <code>FAIL_HEALING_NOT_COMPLETE = 6;</code>
-       */
-      FAIL_HEALING_NOT_COMPLETE(5, 6),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 2;
-      /**
-       * <code>FAIL_ALL_MONSTERS_ALREADY_HEALING = 3;</code>
-       */
-      public static final int FAIL_ALL_MONSTERS_ALREADY_HEALING_VALUE = 3;
-      /**
-       * <code>FAIL_ALL_MONSTERS_NONEXISTENT = 4;</code>
-       */
-      public static final int FAIL_ALL_MONSTERS_NONEXISTENT_VALUE = 4;
-      /**
-       * <code>FAIL_OTHER = 5;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 5;
-      /**
-       * <code>FAIL_HEALING_NOT_COMPLETE = 6;</code>
-       */
-      public static final int FAIL_HEALING_NOT_COMPLETE_VALUE = 6;
-
-
-      public final int getNumber() { return value; }
-
-      public static HealMonsterStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_FUNDS;
-          case 3: return FAIL_ALL_MONSTERS_ALREADY_HEALING;
-          case 4: return FAIL_ALL_MONSTERS_NONEXISTENT;
-          case 5: return FAIL_OTHER;
-          case 6: return FAIL_HEALING_NOT_COMPLETE;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<HealMonsterStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<HealMonsterStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<HealMonsterStatus>() {
-              public HealMonsterStatus findValueByNumber(int number) {
-                return HealMonsterStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final HealMonsterStatus[] VALUES = values();
-
-      public static HealMonsterStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private HealMonsterStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
@@ -17347,23 +16577,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -17525,7 +16755,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -17732,23 +16962,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -17758,11 +16988,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -18539,13 +17769,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.AddMonsterToBattleTeamResponseProto}
@@ -18614,7 +17844,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus value = com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -18662,88 +17892,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus}
-     */
-    public enum AddMonsterToBattleTeamStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static AddMonsterToBattleTeamStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<AddMonsterToBattleTeamStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<AddMonsterToBattleTeamStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<AddMonsterToBattleTeamStatus>() {
-              public AddMonsterToBattleTeamStatus findValueByNumber(int number) {
-                return AddMonsterToBattleTeamStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final AddMonsterToBattleTeamStatus[] VALUES = values();
-
-      public static AddMonsterToBattleTeamStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private AddMonsterToBattleTeamStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -18767,23 +17915,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -18945,7 +18093,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -19152,23 +18300,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status_ = com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -19178,11 +18326,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddMonsterToBattleTeamStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -19881,13 +19029,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto}
@@ -19956,7 +19104,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus value = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -20004,88 +19152,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus}
-     */
-    public enum RemoveMonsterFromBattleTeamStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static RemoveMonsterFromBattleTeamStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RemoveMonsterFromBattleTeamStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RemoveMonsterFromBattleTeamStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RemoveMonsterFromBattleTeamStatus>() {
-              public RemoveMonsterFromBattleTeamStatus findValueByNumber(int number) {
-                return RemoveMonsterFromBattleTeamStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RemoveMonsterFromBattleTeamStatus[] VALUES = values();
-
-      public static RemoveMonsterFromBattleTeamStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RemoveMonsterFromBattleTeamStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -20109,23 +19175,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -20287,7 +19353,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -20494,23 +19560,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -20520,11 +19586,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -21653,13 +20719,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto}
@@ -21728,7 +20794,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus value = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -21776,132 +20842,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus}
-     */
-    public enum IncreaseMonsterInventorySlotStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 2;</code>
-       */
-      FAIL_INSUFFICIENT_FUNDS(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_FACEBOOK_INVITES = 3;</code>
-       */
-      FAIL_INSUFFICIENT_FACEBOOK_INVITES(2, 3),
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      FAIL_OTHER(3, 4),
-      /**
-       * <code>FAIL_INCONSISTENT_INVITE_DATA = 5;</code>
-       *
-       * <pre>
-       *user struct id/fb lvl not consistent across invites
-       * </pre>
-       */
-      FAIL_INCONSISTENT_INVITE_DATA(4, 5),
-      /**
-       * <code>FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL = 6;</code>
-       */
-      FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL(5, 6),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFICIENT_FUNDS = 2;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_FACEBOOK_INVITES = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_FACEBOOK_INVITES_VALUE = 3;
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 4;
-      /**
-       * <code>FAIL_INCONSISTENT_INVITE_DATA = 5;</code>
-       *
-       * <pre>
-       *user struct id/fb lvl not consistent across invites
-       * </pre>
-       */
-      public static final int FAIL_INCONSISTENT_INVITE_DATA_VALUE = 5;
-      /**
-       * <code>FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL = 6;</code>
-       */
-      public static final int FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL_VALUE = 6;
-
-
-      public final int getNumber() { return value; }
-
-      public static IncreaseMonsterInventorySlotStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFICIENT_FUNDS;
-          case 3: return FAIL_INSUFFICIENT_FACEBOOK_INVITES;
-          case 4: return FAIL_OTHER;
-          case 5: return FAIL_INCONSISTENT_INVITE_DATA;
-          case 6: return FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<IncreaseMonsterInventorySlotStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<IncreaseMonsterInventorySlotStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<IncreaseMonsterInventorySlotStatus>() {
-              public IncreaseMonsterInventorySlotStatus findValueByNumber(int number) {
-                return IncreaseMonsterInventorySlotStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final IncreaseMonsterInventorySlotStatus[] VALUES = values();
-
-      public static IncreaseMonsterInventorySlotStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private IncreaseMonsterInventorySlotStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -21925,23 +20865,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -22103,7 +21043,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -22310,23 +21250,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -22336,11 +21276,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -24013,13 +22953,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.UserFacebookInviteForSlotProto invitesNew = 3;</code>
@@ -24116,7 +23056,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus value = com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -24175,88 +23115,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus}
-     */
-    public enum InviteFbFriendsForSlotsStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static InviteFbFriendsForSlotsStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<InviteFbFriendsForSlotsStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<InviteFbFriendsForSlotsStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<InviteFbFriendsForSlotsStatus>() {
-              public InviteFbFriendsForSlotsStatus findValueByNumber(int number) {
-                return InviteFbFriendsForSlotsStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final InviteFbFriendsForSlotsStatus[] VALUES = values();
-
-      public static InviteFbFriendsForSlotsStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private InviteFbFriendsForSlotsStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_;
@@ -24280,17 +23138,17 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -24331,7 +23189,7 @@ public final class EventMonsterProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       invitesNew_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -24506,7 +23364,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (invitesNewBuilder_ == null) {
           invitesNew_ = java.util.Collections.emptyList();
@@ -24754,23 +23612,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status_ = com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -24780,11 +23638,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -26000,13 +24858,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.UserFacebookInviteForSlotProto acceptedInvites = 3;</code>
@@ -26103,7 +24961,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus value = com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -26162,114 +25020,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus}
-     */
-    public enum AcceptAndRejectFbInviteForSlotsStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_EXPIRED = 2;</code>
-       *
-       * <pre>
-       *3 PEOPLE ALREADY ACCEPTED INVITE
-       * </pre>
-       */
-      FAIL_EXPIRED(1, 2),
-      /**
-       * <code>FAIL_ALREADY_BEEN_USED = 3;</code>
-       */
-      FAIL_ALREADY_BEEN_USED(2, 3),
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      FAIL_OTHER(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_EXPIRED = 2;</code>
-       *
-       * <pre>
-       *3 PEOPLE ALREADY ACCEPTED INVITE
-       * </pre>
-       */
-      public static final int FAIL_EXPIRED_VALUE = 2;
-      /**
-       * <code>FAIL_ALREADY_BEEN_USED = 3;</code>
-       */
-      public static final int FAIL_ALREADY_BEEN_USED_VALUE = 3;
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static AcceptAndRejectFbInviteForSlotsStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_EXPIRED;
-          case 3: return FAIL_ALREADY_BEEN_USED;
-          case 4: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<AcceptAndRejectFbInviteForSlotsStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<AcceptAndRejectFbInviteForSlotsStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<AcceptAndRejectFbInviteForSlotsStatus>() {
-              public AcceptAndRejectFbInviteForSlotsStatus findValueByNumber(int number) {
-                return AcceptAndRejectFbInviteForSlotsStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final AcceptAndRejectFbInviteForSlotsStatus[] VALUES = values();
-
-      public static AcceptAndRejectFbInviteForSlotsStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private AcceptAndRejectFbInviteForSlotsStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_;
@@ -26293,17 +25043,17 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -26344,7 +25094,7 @@ public final class EventMonsterProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       acceptedInvites_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -26519,7 +25269,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (acceptedInvitesBuilder_ == null) {
           acceptedInvites_ = java.util.Collections.emptyList();
@@ -26767,23 +25517,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status_ = com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -26793,11 +25543,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto.AcceptAndRejectFbInviteForSlotsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -27880,13 +26630,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CombineUserMonsterPiecesResponseProto}
@@ -27955,7 +26705,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus value = com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -28003,114 +26753,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus}
-     */
-    public enum CombineUserMonsterPiecesStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_INSUFFUCIENT_GEMS = 2;</code>
-       */
-      FAIL_INSUFFUCIENT_GEMS(1, 2),
-      /**
-       * <code>FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP = 3;</code>
-       *
-       * <pre>
-       *user can only speed up combining the pieces of ONE monster
-       * </pre>
-       */
-      FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP(2, 3),
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      FAIL_OTHER(3, 4),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_INSUFFUCIENT_GEMS = 2;</code>
-       */
-      public static final int FAIL_INSUFFUCIENT_GEMS_VALUE = 2;
-      /**
-       * <code>FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP = 3;</code>
-       *
-       * <pre>
-       *user can only speed up combining the pieces of ONE monster
-       * </pre>
-       */
-      public static final int FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP_VALUE = 3;
-      /**
-       * <code>FAIL_OTHER = 4;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 4;
-
-
-      public final int getNumber() { return value; }
-
-      public static CombineUserMonsterPiecesStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_INSUFFUCIENT_GEMS;
-          case 3: return FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP;
-          case 4: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<CombineUserMonsterPiecesStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<CombineUserMonsterPiecesStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<CombineUserMonsterPiecesStatus>() {
-              public CombineUserMonsterPiecesStatus findValueByNumber(int number) {
-                return CombineUserMonsterPiecesStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final CombineUserMonsterPiecesStatus[] VALUES = values();
-
-      public static CombineUserMonsterPiecesStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private CombineUserMonsterPiecesStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -28134,23 +26776,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -28312,7 +26954,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -28519,23 +27161,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status_ = com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -28545,11 +27187,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.CombineUserMonsterPiecesStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -29451,13 +28093,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SellUserMonsterResponseProto}
@@ -29526,7 +28168,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus value = com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -29574,88 +28216,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus}
-     */
-    public enum SellUserMonsterStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static SellUserMonsterStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<SellUserMonsterStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SellUserMonsterStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SellUserMonsterStatus>() {
-              public SellUserMonsterStatus findValueByNumber(int number) {
-                return SellUserMonsterStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final SellUserMonsterStatus[] VALUES = values();
-
-      public static SellUserMonsterStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private SellUserMonsterStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
@@ -29679,23 +28239,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -29857,7 +28417,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -30064,23 +28624,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -30090,11 +28650,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -30819,13 +29379,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RestrictUserMonsterResponseProto}
@@ -30894,7 +29454,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus value = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -30942,88 +29502,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus}
-     */
-    public enum RestrictUserMonsterStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static RestrictUserMonsterStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RestrictUserMonsterStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RestrictUserMonsterStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RestrictUserMonsterStatus>() {
-              public RestrictUserMonsterStatus findValueByNumber(int number) {
-                return RestrictUserMonsterStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RestrictUserMonsterStatus[] VALUES = values();
-
-      public static RestrictUserMonsterStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RestrictUserMonsterStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -31047,23 +29525,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -31225,7 +29703,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -31432,23 +29910,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -31458,11 +29936,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.RestrictUserMonsterResponseProto.RestrictUserMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -32187,13 +30665,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UnrestrictUserMonsterResponseProto}
@@ -32262,7 +30740,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus value = com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -32310,88 +30788,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus}
-     */
-    public enum UnrestrictUserMonsterStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static UnrestrictUserMonsterStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<UnrestrictUserMonsterStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<UnrestrictUserMonsterStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<UnrestrictUserMonsterStatus>() {
-              public UnrestrictUserMonsterStatus findValueByNumber(int number) {
-                return UnrestrictUserMonsterStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final UnrestrictUserMonsterStatus[] VALUES = values();
-
-      public static UnrestrictUserMonsterStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private UnrestrictUserMonsterStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -32415,23 +30811,23 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -32593,7 +30989,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -32800,23 +31196,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status_ = com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -32826,11 +31222,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.UnrestrictUserMonsterResponseProto.UnrestrictUserMonsterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -33555,13 +31951,13 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.PvpProto userMonsterTeam = 3;</code>
@@ -33654,7 +32050,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus value = com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -33713,88 +32109,6 @@ public final class EventMonsterProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus}
-     */
-    public enum RetrieveUserMonsterTeamStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static RetrieveUserMonsterTeamStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RetrieveUserMonsterTeamStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RetrieveUserMonsterTeamStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RetrieveUserMonsterTeamStatus>() {
-              public RetrieveUserMonsterTeamStatus findValueByNumber(int number) {
-                return RetrieveUserMonsterTeamStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RetrieveUserMonsterTeamStatus[] VALUES = values();
-
-      public static RetrieveUserMonsterTeamStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RetrieveUserMonsterTeamStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -33818,17 +32132,17 @@ public final class EventMonsterProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -33869,7 +32183,7 @@ public final class EventMonsterProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       userMonsterTeam_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -34040,7 +32354,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (userMonsterTeamBuilder_ == null) {
           userMonsterTeam_ = java.util.Collections.emptyList();
@@ -34288,23 +32602,23 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus status_ = com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -34314,11 +32628,11 @@ public final class EventMonsterProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.RetrieveUserMonsterTeamStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -34769,244 +33083,175 @@ public final class EventMonsterProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\022EventMonster.proto\022\016com.lvl6.proto\032\014Ba" +
-      "ttle.proto\032\022MonsterStuff.proto\032\nUser.pro" +
-      "to\"\261\001\n\031EvolveMonsterRequestProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022<\n\tevolution\030\002 \001(\0132).com.lvl6.proto.U" +
-      "serMonsterEvolutionProto\022\021\n\tgemsSpent\030\003 " +
-      "\001(\005\022\021\n\toilChange\030\004 \001(\021\"\375\002\n\032EvolveMonster" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022N\n\006status\030\002 \001(\0162" +
-      ">.com.lvl6.proto.EvolveMonsterResponsePr",
-      "oto.EvolveMonsterStatus\"\334\001\n\023EvolveMonste" +
-      "rStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICIEN" +
-      "T_GEMS\020\002\022\037\n\033FAIL_INSUFFICIENT_RESOURCES\020" +
-      "\003\022\'\n#FAIL_MONSTER_REACHED_EVOLVING_LIMIT" +
-      "\020\004\022#\n\037FAIL_MAX_NUM_EVOLUTIONS_REACHED\020\005\022" +
-      "\035\n\031FAIL_NONEXISTENT_MONSTERS\020\006\022\016\n\nFAIL_O" +
-      "THER\020\007\"d\n\035EvolutionFinishedRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\021\n\tgemsSpent\030\002 \001(\005\"\274\002\n\036Evoluti" +
-      "onFinishedResponseProto\0220\n\006sender\030\001 \001(\0132",
-      " .com.lvl6.proto.MinimumUserProto\022<\n\016evo" +
-      "lvedMonster\030\002 \001(\0132$.com.lvl6.proto.FullU" +
-      "serMonsterProto\022V\n\006status\030\003 \001(\0162F.com.lv" +
-      "l6.proto.EvolutionFinishedResponseProto." +
-      "EvolutionFinishedStatus\"R\n\027EvolutionFini" +
-      "shedStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFIC" +
-      "IENT_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003\"\315\002\n$SubmitMo" +
-      "nsterEnhancementRequestProto\022@\n\006sender\030\001" +
-      " \001(\01320.com.lvl6.proto.MinimumUserProtoWi" +
-      "thMaxResources\022@\n\nueipDelete\030\002 \003(\0132(.com",
-      ".lvl6.proto.UserEnhancementItemProtoB\002\030\001" +
-      "\022@\n\nueipUpdate\030\003 \003(\0132(.com.lvl6.proto.Us" +
-      "erEnhancementItemProtoB\002\030\001\0229\n\007ueipNew\030\004 " +
-      "\003(\0132(.com.lvl6.proto.UserEnhancementItem" +
-      "Proto\022\021\n\tgemsSpent\030\005 \001(\005\022\021\n\toilChange\030\006 " +
-      "\001(\021\"\334\003\n%SubmitMonsterEnhancementResponse" +
-      "Proto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.M" +
-      "inimumUserProtoWithMaxResources\022d\n\006statu" +
-      "s\030\002 \001(\0162T.com.lvl6.proto.SubmitMonsterEn" +
-      "hancementResponseProto.SubmitMonsterEnha",
-      "ncementStatus\"\212\002\n\036SubmitMonsterEnhanceme" +
-      "ntStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICIE" +
-      "NT_GEMS\020\002\022\031\n\025FAIL_INSUFFICIENT_OIL\020\003\022\016\n\n" +
-      "FAIL_OTHER\020\004\022\035\n\031FAIL_MONSTER_IN_ENHANCIN" +
-      "G\020\006\022\033\n\027FAIL_MONSTER_IN_HEALING\020\007\022\035\n\031FAIL" +
-      "_MONSTER_IN_EVOLUTION\020\010\022\034\n\030FAIL_MONSTER_" +
-      "NONEXISTENT\020\t\022\033\n\027FAIL_MONSTER_RESTRICTED" +
-      "\020\n\"\374\001\n\'EnhancementWaitTimeCompleteReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016g",
-      "emsForSpeedup\030\003 \001(\005\022=\n\005umcep\030\004 \001(\0132*.com" +
-      ".lvl6.proto.UserMonsterCurrentExpProtoB\002" +
-      "\030\001\022\034\n\020userMonsterUuids\030\005 \003(\tB\002\030\001\022\027\n\017user" +
-      "MonsterUuid\030\006 \001(\t\"\247\002\n(EnhancementWaitTim" +
-      "eCompleteResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022j\n\006stat" +
-      "us\030\002 \001(\0162Z.com.lvl6.proto.EnhancementWai" +
-      "tTimeCompleteResponseProto.EnhancementWa" +
-      "itTimeCompleteStatus\"]\n!EnhancementWaitT" +
-      "imeCompleteStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_I",
-      "NSUFFICIENT_FUNDS\020\003\022\016\n\nFAIL_OTHER\020\004\"\256\001\n%" +
-      "CollectMonsterEnhancementRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\0229\n\005umcep\030\002 \001(\0132*.com.lvl6.proto." +
-      "UserMonsterCurrentExpProto\022\030\n\020userMonste" +
-      "rUuids\030\003 \003(\t\"\243\002\n&CollectMonsterEnhanceme" +
-      "ntResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022f\n\006status\030\002 \001(" +
-      "\0162V.com.lvl6.proto.CollectMonsterEnhance" +
-      "mentResponseProto.CollectMonsterEnhancem",
-      "entStatus\"_\n\037CollectMonsterEnhancementSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\037\n\033FAI" +
-      "L_ENHANCEMENT_INCOMPLETE\020\003\"\200\002\n\032EnhanceMo" +
-      "nsterRequestProto\0224\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProtoB\002\030\001\0225\n\003uep\030\002" +
-      " \001(\0132$.com.lvl6.proto.UserEnhancementPro" +
-      "toB\002\030\001\022G\n\017enhancingResult\030\003 \001(\0132*.com.lv" +
-      "l6.proto.UserMonsterCurrentExpProtoB\002\030\001\022" +
-      "\025\n\tgemsSpent\030\004 \001(\005B\002\030\001\022\025\n\toilChange\030\005 \001(" +
-      "\021B\002\030\001\"\221\002\n\033EnhanceMonsterResponseProto\0224\n",
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProtoB\002\030\001\022P\n\006status\030\002 \001(\0162@.com.lvl6.p" +
-      "roto.EnhanceMonsterResponseProto.Enhance" +
-      "MonsterStatus\"j\n\024EnhanceMonsterStatus\022\013\n" +
-      "\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031" +
-      "\n\025FAIL_INSUFFICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020" +
-      "\004\"\314\002\n\037UpdateMonsterHealthRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022<\n\005umchp\030\002 \003(\0132-.com.lvl6.proto." +
-      "UserMonsterCurrentHealthProto\022\022\n\nclientT",
-      "ime\030\003 \001(\003\022\024\n\014userTaskUuid\030\004 \001(\t\022 \n\030isUpd" +
-      "ateTaskStageForUser\030\005 \001(\010\022\025\n\rnuTaskStage" +
-      "Id\030\006 \001(\005\022\030\n\020droplessTsfuUuid\030\007 \001(\t\022 \n\030ch" +
-      "angeNuPvpDmgMultiplier\030\010 \001(\010\022\032\n\022nuPvpDmg" +
-      "Multiplier\030\t \001(\002\"\207\002\n UpdateMonsterHealth" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022Z\n\006status\030\002 \001(\0162" +
-      "J.com.lvl6.proto.UpdateMonsterHealthResp" +
-      "onseProto.UpdateMonsterHealthStatus\"U\n\031U" +
-      "pdateMonsterHealthStatus\022\013\n\007SUCCESS\020\001\022\033\n",
-      "\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER" +
-      "\020\003\"\244\003\n\027HealMonsterRequestProto\022@\n\006sender" +
-      "\030\001 \001(\01320.com.lvl6.proto.MinimumUserProto" +
-      "WithMaxResources\022:\n\tumhDelete\030\002 \003(\0132\'.co" +
-      "m.lvl6.proto.UserMonsterHealingProto\022:\n\t" +
-      "umhUpdate\030\003 \003(\0132\'.com.lvl6.proto.UserMon" +
-      "sterHealingProto\0227\n\006umhNew\030\004 \003(\0132\'.com.l" +
-      "vl6.proto.UserMonsterHealingProto\022\022\n\ncas" +
-      "hChange\030\005 \001(\021\022\031\n\021gemCostForHealing\030\006 \001(\005" +
-      "\022\021\n\tisSpeedup\030\007 \001(\010\022\026\n\016gemsForSpeedup\030\010 ",
-      "\001(\005\022<\n\005umchp\030\t \003(\0132-.com.lvl6.proto.User" +
-      "MonsterCurrentHealthProto\"\341\002\n\030HealMonste" +
-      "rResponseProto\022@\n\006sender\030\001 \001(\01320.com.lvl" +
-      "6.proto.MinimumUserProtoWithMaxResources" +
-      "\022J\n\006status\030\002 \001(\0162:.com.lvl6.proto.HealMo" +
-      "nsterResponseProto.HealMonsterStatus\"\266\001\n" +
-      "\021HealMonsterStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_" +
-      "INSUFFICIENT_FUNDS\020\002\022%\n!FAIL_ALL_MONSTER" +
-      "S_ALREADY_HEALING\020\003\022!\n\035FAIL_ALL_MONSTERS" +
-      "_NONEXISTENT\020\004\022\016\n\nFAIL_OTHER\020\005\022\035\n\031FAIL_H",
-      "EALING_NOT_COMPLETE\020\006\"\204\001\n\"AddMonsterToBa" +
-      "ttleTeamRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\023\n\013teamSl" +
-      "otNum\030\002 \001(\005\022\027\n\017userMonsterUuid\030\003 \001(\t\"\366\001\n" +
-      "#AddMonsterToBattleTeamResponseProto\0220\n\006" +
+      "ttle.proto\032\022MonsterStuff.proto\032\026SharedEn" +
+      "umConfig.proto\032\nUser.proto\"\261\001\n\031EvolveMon" +
+      "sterRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022<\n\tevolution\030" +
+      "\002 \001(\0132).com.lvl6.proto.UserMonsterEvolut" +
+      "ionProto\022\021\n\tgemsSpent\030\003 \001(\005\022\021\n\toilChange" +
+      "\030\004 \001(\021\"~\n\032EvolveMonsterResponseProto\0220\n\006" +
       "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022`\n\006status\030\002 \001(\0162P.com.lvl6.proto." +
-      "AddMonsterToBattleTeamResponseProto.AddM" +
-      "onsterToBattleTeamStatus\";\n\034AddMonsterTo" +
-      "BattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT",
-      "HER\020\002\"t\n\'RemoveMonsterFromBattleTeamRequ" +
-      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\027\n\017userMonsterUuid\030\003 " +
-      "\001(\t\"\212\002\n(RemoveMonsterFromBattleTeamRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022j\n\006status\030\002 \001(\0162Z.com" +
-      ".lvl6.proto.RemoveMonsterFromBattleTeamR" +
-      "esponseProto.RemoveMonsterFromBattleTeam" +
-      "Status\"@\n!RemoveMonsterFromBattleTeamSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\272\002\n(Inc",
-      "reaseMonsterInventorySlotRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022c\n\020increaseSlotType\030\002 \001(\0162I.com." +
-      "lvl6.proto.IncreaseMonsterInventorySlotR" +
-      "equestProto.IncreaseSlotType\022\026\n\016userStru" +
-      "ctUuid\030\003 \001(\t\022 \n\030userFbInviteForSlotUuids" +
-      "\030\004 \003(\t\"=\n\020IncreaseSlotType\022\014\n\010PURCHASE\020\001" +
-      "\022\033\n\027REDEEM_FACEBOOK_INVITES\020\002\"\240\003\n)Increa" +
-      "seMonsterInventorySlotResponseProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser",
-      "Proto\022l\n\006status\030\002 \001(\0162\\.com.lvl6.proto.I" +
-      "ncreaseMonsterInventorySlotResponseProto" +
-      ".IncreaseMonsterInventorySlotStatus\"\322\001\n\"" +
-      "IncreaseMonsterInventorySlotStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022&\n\"" +
-      "FAIL_INSUFFICIENT_FACEBOOK_INVITES\020\003\022\016\n\n" +
-      "FAIL_OTHER\020\004\022!\n\035FAIL_INCONSISTENT_INVITE" +
-      "_DATA\020\005\022\'\n#FAIL_STRUCTURE_AT_MAX_FB_INVI" +
-      "TE_LVL\020\006\"\243\002\n#InviteFbFriendsForSlotsRequ" +
-      "estProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.prot",
-      "o.MinimumUserProtoWithFacebookId\022\\\n\007invi" +
-      "tes\030\002 \003(\0132K.com.lvl6.proto.InviteFbFrien" +
-      "dsForSlotsRequestProto.FacebookInviteStr" +
-      "ucture\032^\n\027FacebookInviteStructure\022\022\n\nfbF" +
-      "riendId\030\001 \001(\t\022\026\n\016userStructUuid\030\002 \001(\t\022\027\n" +
-      "\017userStructFbLvl\030\003 \001(\005\"\314\002\n$InviteFbFrien" +
-      "dsForSlotsResponseProto\022>\n\006sender\030\001 \001(\0132" +
-      "..com.lvl6.proto.MinimumUserProtoWithFac" +
-      "ebookId\022b\n\006status\030\002 \001(\0162R.com.lvl6.proto" +
-      ".InviteFbFriendsForSlotsResponseProto.In",
-      "viteFbFriendsForSlotsStatus\022B\n\ninvitesNe" +
-      "w\030\003 \003(\0132..com.lvl6.proto.UserFacebookInv" +
-      "iteForSlotProto\"<\n\035InviteFbFriendsForSlo" +
-      "tsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\247\001" +
-      "\n+AcceptAndRejectFbInviteForSlotsRequest" +
-      "Proto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.M" +
-      "inimumUserProtoWithFacebookId\022\033\n\023accepte" +
-      "dInviteUuids\030\002 \003(\t\022\033\n\023rejectedInviteUuid" +
-      "s\030\003 \003(\t\"\237\003\n,AcceptAndRejectFbInviteForSl" +
-      "otsResponseProto\022>\n\006sender\030\001 \001(\0132..com.l",
-      "vl6.proto.MinimumUserProtoWithFacebookId" +
-      "\022r\n\006status\030\002 \001(\0162b.com.lvl6.proto.Accept" +
-      "AndRejectFbInviteForSlotsResponseProto.A" +
-      "cceptAndRejectFbInviteForSlotsStatus\022G\n\017" +
-      "acceptedInvites\030\003 \003(\0132..com.lvl6.proto.U" +
-      "serFacebookInviteForSlotProto\"r\n%AcceptA" +
-      "ndRejectFbInviteForSlotsStatus\022\013\n\007SUCCES" +
-      "S\020\001\022\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALREADY_BE" +
-      "EN_USED\020\003\022\016\n\nFAIL_OTHER\020\004\"\203\001\n$CombineUse" +
-      "rMonsterPiecesRequestProto\0220\n\006sender\030\001 \001",
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\030\n\020" +
-      "userMonsterUuids\030\002 \003(\t\022\017\n\007gemCost\030\003 \001(\005\"" +
-      "\307\002\n%CombineUserMonsterPiecesResponseProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022d\n\006status\030\002 \001(\0162T.com.lvl6.p" +
-      "roto.CombineUserMonsterPiecesResponsePro" +
-      "to.CombineUserMonsterPiecesStatus\"\205\001\n\036Co" +
-      "mbineUserMonsterPiecesStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_MO" +
-      "RE_THAN_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAI",
-      "L_OTHER\020\004\"\233\001\n\033SellUserMonsterRequestProt" +
-      "o\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minim" +
-      "umUserProtoWithMaxResources\022:\n\005sales\030\002 \003" +
-      "(\0132+.com.lvl6.proto.MinimumUserMonsterSe" +
-      "llProto\"\352\001\n\034SellUserMonsterResponseProto" +
-      "\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimu" +
-      "mUserProtoWithMaxResources\022R\n\006status\030\002 \001" +
-      "(\0162B.com.lvl6.proto.SellUserMonsterRespo" +
-      "nseProto.SellUserMonsterStatus\"4\n\025SellUs" +
-      "erMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH",
-      "ER\020\002\"m\n\037RestrictUserMonsterRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\030\n\020userMonsterUuids\030\003 \003(\t\"\352\001\n " +
-      "RestrictUserMonsterResponseProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Rest" +
-      "rictUserMonsterResponseProto.RestrictUse" +
-      "rMonsterStatus\"8\n\031RestrictUserMonsterSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"o\n!Unre" +
-      "strictUserMonsterRequestProto\0220\n\006sender\030",
+      "rProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.",
+      "ResponseStatus\"d\n\035EvolutionFinishedReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\021\n\tgemsSpent\030\002 \001(\005\"\300\001\n" +
+      "\036EvolutionFinishedResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022<\n\016evolvedMonster\030\002 \001(\0132$.com.lvl6.pro" +
+      "to.FullUserMonsterProto\022.\n\006status\030\003 \001(\0162" +
+      "\036.com.lvl6.proto.ResponseStatus\"\315\002\n$Subm" +
+      "itMonsterEnhancementRequestProto\022@\n\006send" +
+      "er\030\001 \001(\01320.com.lvl6.proto.MinimumUserPro",
+      "toWithMaxResources\022@\n\nueipDelete\030\002 \003(\0132(" +
+      ".com.lvl6.proto.UserEnhancementItemProto" +
+      "B\002\030\001\022@\n\nueipUpdate\030\003 \003(\0132(.com.lvl6.prot" +
+      "o.UserEnhancementItemProtoB\002\030\001\0229\n\007ueipNe" +
+      "w\030\004 \003(\0132(.com.lvl6.proto.UserEnhancement" +
+      "ItemProto\022\021\n\tgemsSpent\030\005 \001(\005\022\021\n\toilChang" +
+      "e\030\006 \001(\021\"\231\001\n%SubmitMonsterEnhancementResp" +
+      "onseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pro" +
+      "to.MinimumUserProtoWithMaxResources\022.\n\006s" +
+      "tatus\030\002 \001(\0162\036.com.lvl6.proto.ResponseSta",
+      "tus\"\374\001\n\'EnhancementWaitTimeCompleteReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016" +
+      "gemsForSpeedup\030\003 \001(\005\022=\n\005umcep\030\004 \001(\0132*.co" +
+      "m.lvl6.proto.UserMonsterCurrentExpProtoB" +
+      "\002\030\001\022\034\n\020userMonsterUuids\030\005 \003(\tB\002\030\001\022\027\n\017use" +
+      "rMonsterUuid\030\006 \001(\t\"\214\001\n(EnhancementWaitTi" +
+      "meCompleteResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022.\n\006sta" +
+      "tus\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatu",
+      "s\"\256\001\n%CollectMonsterEnhancementRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\0229\n\005umcep\030\002 \001(\0132*.com.lvl6." +
+      "proto.UserMonsterCurrentExpProto\022\030\n\020user" +
+      "MonsterUuids\030\003 \003(\t\"\212\001\n&CollectMonsterEnh" +
+      "ancementResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022.\n\006statu" +
+      "s\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatus\"" +
+      "\200\002\n\032EnhanceMonsterRequestProto\0224\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto",
+      "B\002\030\001\0225\n\003uep\030\002 \001(\0132$.com.lvl6.proto.UserE" +
+      "nhancementProtoB\002\030\001\022G\n\017enhancingResult\030\003" +
+      " \001(\0132*.com.lvl6.proto.UserMonsterCurrent" +
+      "ExpProtoB\002\030\001\022\025\n\tgemsSpent\030\004 \001(\005B\002\030\001\022\025\n\to" +
+      "ilChange\030\005 \001(\021B\002\030\001\"\221\002\n\033EnhanceMonsterRes" +
+      "ponseProto\0224\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProtoB\002\030\001\022P\n\006status\030\002 \001(\016" +
+      "2@.com.lvl6.proto.EnhanceMonsterResponse" +
+      "Proto.EnhanceMonsterStatus\"j\n\024EnhanceMon" +
+      "sterStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFIC",
+      "IENT_GEMS\020\002\022\031\n\025FAIL_INSUFFICIENT_OIL\020\003\022\016" +
+      "\n\nFAIL_OTHER\020\004\"\314\002\n\037UpdateMonsterHealthRe" +
+      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\022<\n\005umchp\030\002 \003(\0132-.co" +
+      "m.lvl6.proto.UserMonsterCurrentHealthPro" +
+      "to\022\022\n\nclientTime\030\003 \001(\003\022\024\n\014userTaskUuid\030\004" +
+      " \001(\t\022 \n\030isUpdateTaskStageForUser\030\005 \001(\010\022\025" +
+      "\n\rnuTaskStageId\030\006 \001(\005\022\030\n\020droplessTsfuUui" +
+      "d\030\007 \001(\t\022 \n\030changeNuPvpDmgMultiplier\030\010 \001(" +
+      "\010\022\032\n\022nuPvpDmgMultiplier\030\t \001(\002\"\204\001\n Update",
+      "MonsterHealthResponseProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022.\n\006" +
+      "status\030\002 \001(\0162\036.com.lvl6.proto.ResponseSt" +
+      "atus\"\244\003\n\027HealMonsterRequestProto\022@\n\006send" +
+      "er\030\001 \001(\01320.com.lvl6.proto.MinimumUserPro" +
+      "toWithMaxResources\022:\n\tumhDelete\030\002 \003(\0132\'." +
+      "com.lvl6.proto.UserMonsterHealingProto\022:" +
+      "\n\tumhUpdate\030\003 \003(\0132\'.com.lvl6.proto.UserM" +
+      "onsterHealingProto\0227\n\006umhNew\030\004 \003(\0132\'.com" +
+      ".lvl6.proto.UserMonsterHealingProto\022\022\n\nc",
+      "ashChange\030\005 \001(\021\022\031\n\021gemCostForHealing\030\006 \001" +
+      "(\005\022\021\n\tisSpeedup\030\007 \001(\010\022\026\n\016gemsForSpeedup\030" +
+      "\010 \001(\005\022<\n\005umchp\030\t \003(\0132-.com.lvl6.proto.Us" +
+      "erMonsterCurrentHealthProto\"\214\001\n\030HealMons" +
+      "terResponseProto\022@\n\006sender\030\001 \001(\01320.com.l" +
+      "vl6.proto.MinimumUserProtoWithMaxResourc" +
+      "es\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Resp" +
+      "onseStatus\"\204\001\n\"AddMonsterToBattleTeamReq" +
+      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022\023\n\013teamSlotNum\030\002 \001(\005",
+      "\022\027\n\017userMonsterUuid\030\003 \001(\t\"\207\001\n#AddMonster" +
+      "ToBattleTeamResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022.\n\006s" +
+      "tatus\030\002 \001(\0162\036.com.lvl6.proto.ResponseSta" +
+      "tus\"t\n\'RemoveMonsterFromBattleTeamReques" +
+      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\027\n\017userMonsterUuid\030\003 \001(" +
+      "\t\"\214\001\n(RemoveMonsterFromBattleTeamRespons" +
+      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022.\n\006status\030\002 \001(\0162\036.com.l",
+      "vl6.proto.ResponseStatus\"\272\002\n(IncreaseMon" +
+      "sterInventorySlotRequestProto\0220\n\006sender\030" +
       "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\030\n\020userMonsterUuids\030\003 \003(\t\"\362\001\n\"Unrestrict" +
-      "UserMonsterResponseProto\0220\n\006sender\030\001 \001(\013" +
-      "2 .com.lvl6.proto.MinimumUserProto\022^\n\006st" +
-      "atus\030\002 \001(\0162N.com.lvl6.proto.UnrestrictUs" +
-      "erMonsterResponseProto.UnrestrictUserMon" +
-      "sterStatus\":\n\033UnrestrictUserMonsterStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"j\n#Retrie" +
-      "veUserMonsterTeamRequestProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022",
-      "\021\n\tuserUuids\030\002 \003(\t\"\255\002\n$RetrieveUserMonst" +
-      "erTeamResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022b\n\006status\030" +
-      "\002 \001(\0162R.com.lvl6.proto.RetrieveUserMonst" +
-      "erTeamResponseProto.RetrieveUserMonsterT" +
-      "eamStatus\0221\n\017userMonsterTeam\030\003 \003(\0132\030.com" +
-      ".lvl6.proto.PvpProto\"<\n\035RetrieveUserMons" +
-      "terTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
-      "\020\002B\023B\021EventMonsterProto"
+      "c\n\020increaseSlotType\030\002 \001(\0162I.com.lvl6.pro" +
+      "to.IncreaseMonsterInventorySlotRequestPr" +
+      "oto.IncreaseSlotType\022\026\n\016userStructUuid\030\003" +
+      " \001(\t\022 \n\030userFbInviteForSlotUuids\030\004 \003(\t\"=" +
+      "\n\020IncreaseSlotType\022\014\n\010PURCHASE\020\001\022\033\n\027REDE" +
+      "EM_FACEBOOK_INVITES\020\002\"\215\001\n)IncreaseMonste" +
+      "rInventorySlotResponseProto\0220\n\006sender\030\001 ",
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022.\n" +
+      "\006status\030\002 \001(\0162\036.com.lvl6.proto.ResponseS" +
+      "tatus\"\243\002\n#InviteFbFriendsForSlotsRequest" +
+      "Proto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.M" +
+      "inimumUserProtoWithFacebookId\022\\\n\007invites" +
+      "\030\002 \003(\0132K.com.lvl6.proto.InviteFbFriendsF" +
+      "orSlotsRequestProto.FacebookInviteStruct" +
+      "ure\032^\n\027FacebookInviteStructure\022\022\n\nfbFrie" +
+      "ndId\030\001 \001(\t\022\026\n\016userStructUuid\030\002 \001(\t\022\027\n\017us" +
+      "erStructFbLvl\030\003 \001(\005\"\332\001\n$InviteFbFriendsF",
+      "orSlotsResponseProto\022>\n\006sender\030\001 \001(\0132..c" +
+      "om.lvl6.proto.MinimumUserProtoWithFacebo" +
+      "okId\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Re" +
+      "sponseStatus\022B\n\ninvitesNew\030\003 \003(\0132..com.l" +
+      "vl6.proto.UserFacebookInviteForSlotProto" +
+      "\"\247\001\n+AcceptAndRejectFbInviteForSlotsRequ" +
+      "estProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.prot" +
+      "o.MinimumUserProtoWithFacebookId\022\033\n\023acce" +
+      "ptedInviteUuids\030\002 \003(\t\022\033\n\023rejectedInviteU" +
+      "uids\030\003 \003(\t\"\347\001\n,AcceptAndRejectFbInviteFo",
+      "rSlotsResponseProto\022>\n\006sender\030\001 \001(\0132..co" +
+      "m.lvl6.proto.MinimumUserProtoWithFaceboo" +
+      "kId\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Res" +
+      "ponseStatus\022G\n\017acceptedInvites\030\003 \003(\0132..c" +
+      "om.lvl6.proto.UserFacebookInviteForSlotP" +
+      "roto\"\203\001\n$CombineUserMonsterPiecesRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\030\n\020userMonsterUuids\030\002 \003(" +
+      "\t\022\017\n\007gemCost\030\003 \001(\005\"\211\001\n%CombineUserMonste" +
+      "rPiecesResponseProto\0220\n\006sender\030\001 \001(\0132 .c",
+      "om.lvl6.proto.MinimumUserProto\022.\n\006status" +
+      "\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatus\"\233" +
+      "\001\n\033SellUserMonsterRequestProto\022@\n\006sender" +
+      "\030\001 \001(\01320.com.lvl6.proto.MinimumUserProto" +
+      "WithMaxResources\022:\n\005sales\030\002 \003(\0132+.com.lv" +
+      "l6.proto.MinimumUserMonsterSellProto\"\220\001\n" +
+      "\034SellUserMonsterResponseProto\022@\n\006sender\030" +
+      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
+      "ithMaxResources\022.\n\006status\030\002 \001(\0162\036.com.lv" +
+      "l6.proto.ResponseStatus\"m\n\037RestrictUserM",
+      "onsterRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\030\n\020userMons" +
+      "terUuids\030\003 \003(\t\"\204\001\n RestrictUserMonsterRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022.\n\006status\030\002 \001(\0162\036." +
+      "com.lvl6.proto.ResponseStatus\"o\n!Unrestr" +
+      "ictUserMonsterRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\030\n\020" +
+      "userMonsterUuids\030\003 \003(\t\"\206\001\n\"UnrestrictUse" +
+      "rMonsterResponseProto\0220\n\006sender\030\001 \001(\0132 .",
+      "com.lvl6.proto.MinimumUserProto\022.\n\006statu" +
+      "s\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatus\"" +
+      "j\n#RetrieveUserMonsterTeamRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\021\n\tuserUuids\030\002 \003(\t\"\273\001\n$Retrieve" +
+      "UserMonsterTeamResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022." +
+      "\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Response" +
+      "Status\0221\n\017userMonsterTeam\030\003 \003(\0132\030.com.lv" +
+      "l6.proto.PvpProtoB\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -35021,6 +33266,7 @@ public final class EventMonsterProto {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.BattleProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_EvolveMonsterRequestProto_descriptor =
@@ -35247,6 +33493,7 @@ public final class EventMonsterProto {
         new java.lang.String[] { "Sender", "Status", "UserMonsterTeam", });
     com.lvl6.proto.BattleProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

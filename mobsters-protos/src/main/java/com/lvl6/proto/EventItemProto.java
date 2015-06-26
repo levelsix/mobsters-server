@@ -722,13 +722,13 @@ public final class EventItemProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;</code>
@@ -910,7 +910,7 @@ public final class EventItemProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus value = com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -1006,97 +1006,6 @@ public final class EventItemProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus}
-     */
-    public enum TradeItemForBoosterStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      /**
-       * <code>FAIL_INSUFFICIENT_ITEM = 3;</code>
-       */
-      FAIL_INSUFFICIENT_ITEM(2, 3),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-      /**
-       * <code>FAIL_INSUFFICIENT_ITEM = 3;</code>
-       */
-      public static final int FAIL_INSUFFICIENT_ITEM_VALUE = 3;
-
-
-      public final int getNumber() { return value; }
-
-      public static TradeItemForBoosterStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          case 3: return FAIL_INSUFFICIENT_ITEM;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<TradeItemForBoosterStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<TradeItemForBoosterStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<TradeItemForBoosterStatus>() {
-              public TradeItemForBoosterStatus findValueByNumber(int number) {
-                return TradeItemForBoosterStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final TradeItemForBoosterStatus[] VALUES = values();
-
-      public static TradeItemForBoosterStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private TradeItemForBoosterStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -1120,17 +1029,17 @@ public final class EventItemProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -1283,7 +1192,7 @@ public final class EventItemProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       updatedOrNew_ = java.util.Collections.emptyList();
       prize_ = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance();
       updatedUserItems_ = java.util.Collections.emptyList();
@@ -1485,7 +1394,7 @@ public final class EventItemProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (updatedOrNewBuilder_ == null) {
           updatedOrNew_ = java.util.Collections.emptyList();
@@ -1808,23 +1717,23 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status_ = com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1834,11 +1743,11 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.TradeItemForBoosterStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -4250,13 +4159,13 @@ public final class EventItemProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
 
     /**
      * <code>repeated .com.lvl6.proto.UserItemUsageProto itemsUsed = 3;</code>
@@ -4369,7 +4278,7 @@ public final class EventItemProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus value = com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -4428,88 +4337,6 @@ public final class EventItemProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus}
-     */
-    public enum TradeItemForSpeedUpsStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static TradeItemForSpeedUpsStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<TradeItemForSpeedUpsStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<TradeItemForSpeedUpsStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<TradeItemForSpeedUpsStatus>() {
-              public TradeItemForSpeedUpsStatus findValueByNumber(int number) {
-                return TradeItemForSpeedUpsStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final TradeItemForSpeedUpsStatus[] VALUES = values();
-
-      public static TradeItemForSpeedUpsStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private TradeItemForSpeedUpsStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -4533,17 +4360,17 @@ public final class EventItemProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
@@ -4604,7 +4431,7 @@ public final class EventItemProto {
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       itemsUsed_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -4775,7 +4602,7 @@ public final class EventItemProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         if (itemsUsedBuilder_ == null) {
           itemsUsed_ = java.util.Collections.emptyList();
@@ -5023,23 +4850,23 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status_ = com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -5049,11 +4876,11 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.TradeItemForSpeedUpsStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -6166,13 +5993,13 @@ public final class EventItemProto {
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.RemoveUserItemUsedResponseProto}
@@ -6241,7 +6068,7 @@ public final class EventItemProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus value = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -6289,88 +6116,6 @@ public final class EventItemProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus}
-     */
-    public enum RemoveUserItemUsedStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static RemoveUserItemUsedStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<RemoveUserItemUsedStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<RemoveUserItemUsedStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<RemoveUserItemUsedStatus>() {
-              public RemoveUserItemUsedStatus findValueByNumber(int number) {
-                return RemoveUserItemUsedStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final RemoveUserItemUsedStatus[] VALUES = values();
-
-      public static RemoveUserItemUsedStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private RemoveUserItemUsedStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProto sender_;
@@ -6394,23 +6139,23 @@ public final class EventItemProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6572,7 +6317,7 @@ public final class EventItemProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -6779,23 +6524,23 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status_ = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -6805,11 +6550,11 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventItemProto.RemoveUserItemUsedResponseProto.RemoveUserItemUsedStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -8194,13 +7939,13 @@ public final class EventItemProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
 
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     boolean hasStatus();
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus getStatus();
+    com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.TradeItemForResourcesResponseProto}
@@ -8269,7 +8014,7 @@ public final class EventItemProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus value = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.valueOf(rawValue);
+              com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -8317,88 +8062,6 @@ public final class EventItemProto {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus}
-     */
-    public enum TradeItemForResourcesStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      SUCCESS(0, 1),
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      FAIL_OTHER(1, 2),
-      ;
-
-      /**
-       * <code>SUCCESS = 1;</code>
-       */
-      public static final int SUCCESS_VALUE = 1;
-      /**
-       * <code>FAIL_OTHER = 2;</code>
-       */
-      public static final int FAIL_OTHER_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static TradeItemForResourcesStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<TradeItemForResourcesStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<TradeItemForResourcesStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<TradeItemForResourcesStatus>() {
-              public TradeItemForResourcesStatus findValueByNumber(int number) {
-                return TradeItemForResourcesStatus.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final TradeItemForResourcesStatus[] VALUES = values();
-
-      public static TradeItemForResourcesStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private TradeItemForResourcesStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus)
-    }
-
     private int bitField0_;
     public static final int SENDER_FIELD_NUMBER = 1;
     private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
@@ -8422,23 +8085,23 @@ public final class EventItemProto {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status_;
+    private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_;
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+     * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
      */
-    public com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus getStatus() {
+    public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
       return status_;
     }
 
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
-      status_ = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.SUCCESS;
+      status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8600,7 +8263,7 @@ public final class EventItemProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -8807,23 +8470,23 @@ public final class EventItemProto {
         return senderBuilder_;
       }
 
-      private com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status_ = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.SUCCESS;
+      private com.lvl6.proto.SharedEnumConfigProto.ResponseStatus status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus getStatus() {
+      public com.lvl6.proto.SharedEnumConfigProto.ResponseStatus getStatus() {
         return status_;
       }
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
-      public Builder setStatus(com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus value) {
+      public Builder setStatus(com.lvl6.proto.SharedEnumConfigProto.ResponseStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -8833,11 +8496,11 @@ public final class EventItemProto {
         return this;
       }
       /**
-       * <code>optional .com.lvl6.proto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus status = 2;</code>
+       * <code>optional .com.lvl6.proto.ResponseStatus status = 2;</code>
        */
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventItemProto.TradeItemForResourcesResponseProto.TradeItemForResourcesStatus.SUCCESS;
+        status_ = com.lvl6.proto.SharedEnumConfigProto.ResponseStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -8904,56 +8567,46 @@ public final class EventItemProto {
     java.lang.String[] descriptorData = {
       "\n\017EventItem.proto\022\016com.lvl6.proto\032\026Boost" +
       "erPackStuff.proto\032\nItem.proto\032\022MonsterSt" +
-      "uff.proto\032\014Reward.proto\032\nUser.proto\"w\n\037T" +
-      "radeItemForBoosterRequestProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022\016\n\006itemId\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003\"\336\003\n" +
-      " TradeItemForBoosterResponseProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Tra" +
-      "deItemForBoosterResponseProto.TradeItemF",
-      "orBoosterStatus\022:\n\014updatedOrNew\030\003 \003(\0132$." +
-      "com.lvl6.proto.FullUserMonsterProto\022/\n\005p" +
-      "rize\030\004 \001(\0132 .com.lvl6.proto.BoosterItemP" +
-      "roto\0227\n\020updatedUserItems\030\005 \003(\0132\035.com.lvl" +
-      "6.proto.UserItemProto\0220\n\007rewards\030\006 \001(\0132\037" +
-      ".com.lvl6.proto.UserRewardProto\"T\n\031Trade" +
-      "ItemForBoosterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
-      "L_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_ITEM\020\003\"\322\001" +
-      "\n TradeItemForSpeedUpsRequestProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP",
-      "roto\0225\n\titemsUsed\030\002 \003(\0132\".com.lvl6.proto" +
-      ".UserItemUsageProto\0222\n\013nuUserItems\030\003 \003(\013" +
-      "2\035.com.lvl6.proto.UserItemProto\022\021\n\tgemsS" +
-      "pent\030\004 \001(\005\"\245\002\n!TradeItemForSpeedUpsRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\\\n\006status\030\002 \001(\0162L.com" +
-      ".lvl6.proto.TradeItemForSpeedUpsResponse" +
-      "Proto.TradeItemForSpeedUpsStatus\0225\n\titem" +
-      "sUsed\030\003 \003(\0132\".com.lvl6.proto.UserItemUsa" +
-      "geProto\"9\n\032TradeItemForSpeedUpsStatus\022\013\n",
-      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"l\n\036RemoveUser" +
-      "ItemUsedRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\030\n\020userIt" +
-      "emUsedUuid\030\002 \003(\t\"\346\001\n\037RemoveUserItemUsedR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022X\n\006status\030\002 \001(\0162H" +
-      ".com.lvl6.proto.RemoveUserItemUsedRespon" +
-      "seProto.RemoveUserItemUsedStatus\"7\n\030Remo" +
-      "veUserItemUsedStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
-      "L_OTHER\020\002\"\325\001\n!TradeItemForResourcesReque",
-      "stProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto" +
-      ".MinimumUserProtoWithMaxResources\022\023\n\013ite" +
-      "mIdsUsed\030\002 \003(\005\0222\n\013nuUserItems\030\003 \003(\0132\035.co" +
-      "m.lvl6.proto.UserItemProto\022\022\n\nclientTime" +
-      "\030\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(\005\"\202\002\n\"TradeItemF" +
-      "orResourcesResponseProto\022@\n\006sender\030\001 \001(\013" +
-      "20.com.lvl6.proto.MinimumUserProtoWithMa" +
-      "xResources\022^\n\006status\030\002 \001(\0162N.com.lvl6.pr" +
-      "oto.TradeItemForResourcesResponseProto.T" +
-      "radeItemForResourcesStatus\":\n\033TradeItemF",
-      "orResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002B\020B\016EventItemProto"
+      "uff.proto\032\014Reward.proto\032\026SharedEnumConfi" +
+      "g.proto\032\nUser.proto\"w\n\037TradeItemForBoost" +
+      "erRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\016\n\006itemId\030\002 \001(\005" +
+      "\022\022\n\nclientTime\030\003 \001(\003\"\334\002\n TradeItemForBoo" +
+      "sterResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022.\n\006status\030\002 " +
+      "\001(\0162\036.com.lvl6.proto.ResponseStatus\022:\n\014u",
+      "pdatedOrNew\030\003 \003(\0132$.com.lvl6.proto.FullU" +
+      "serMonsterProto\022/\n\005prize\030\004 \001(\0132 .com.lvl" +
+      "6.proto.BoosterItemProto\0227\n\020updatedUserI" +
+      "tems\030\005 \003(\0132\035.com.lvl6.proto.UserItemProt" +
+      "o\0220\n\007rewards\030\006 \001(\0132\037.com.lvl6.proto.User" +
+      "RewardProto\"\322\001\n TradeItemForSpeedUpsRequ" +
+      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\0225\n\titemsUsed\030\002 \003(\0132\"." +
+      "com.lvl6.proto.UserItemUsageProto\0222\n\013nuU" +
+      "serItems\030\003 \003(\0132\035.com.lvl6.proto.UserItem",
+      "Proto\022\021\n\tgemsSpent\030\004 \001(\005\"\274\001\n!TradeItemFo" +
+      "rSpeedUpsResponseProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022.\n\006stat" +
+      "us\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatus" +
+      "\0225\n\titemsUsed\030\003 \003(\0132\".com.lvl6.proto.Use" +
+      "rItemUsageProto\"l\n\036RemoveUserItemUsedReq" +
+      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022\030\n\020userItemUsedUuid\030" +
+      "\002 \003(\t\"\203\001\n\037RemoveUserItemUsedResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim",
+      "umUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.p" +
+      "roto.ResponseStatus\"\325\001\n!TradeItemForReso" +
+      "urcesRequestProto\022@\n\006sender\030\001 \001(\01320.com." +
+      "lvl6.proto.MinimumUserProtoWithMaxResour" +
+      "ces\022\023\n\013itemIdsUsed\030\002 \003(\005\0222\n\013nuUserItems\030" +
+      "\003 \003(\0132\035.com.lvl6.proto.UserItemProto\022\022\n\n" +
+      "clientTime\030\004 \001(\003\022\021\n\tgemsSpent\030\005 \001(\005\"\226\001\n\"" +
+      "TradeItemForResourcesResponseProto\022@\n\006se" +
+      "nder\030\001 \001(\01320.com.lvl6.proto.MinimumUserP" +
+      "rotoWithMaxResources\022.\n\006status\030\002 \001(\0162\036.c",
+      "om.lvl6.proto.ResponseStatusB\020B\016EventIte" +
+      "mProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8970,6 +8623,7 @@ public final class EventItemProto {
           com.lvl6.proto.ItemsProto.getDescriptor(),
           com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.RewardsProto.getDescriptor(),
+          com.lvl6.proto.SharedEnumConfigProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
     internal_static_com_lvl6_proto_TradeItemForBoosterRequestProto_descriptor =
@@ -9024,6 +8678,7 @@ public final class EventItemProto {
     com.lvl6.proto.ItemsProto.getDescriptor();
     com.lvl6.proto.MonsterStuffProto.getDescriptor();
     com.lvl6.proto.RewardsProto.getDescriptor();
+    com.lvl6.proto.SharedEnumConfigProto.getDescriptor();
     com.lvl6.proto.UserProto.getDescriptor();
   }
 

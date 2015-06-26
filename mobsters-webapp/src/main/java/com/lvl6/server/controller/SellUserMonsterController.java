@@ -26,7 +26,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -99,7 +99,7 @@ public class SellUserMonsterController extends EventController {
 		SellUserMonsterResponseProto.Builder resBuilder = SellUserMonsterResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
-		resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER); // default
+		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); // default
 
 		UUID userUuid = null;
 		UUID userMonsterUuid = null;
@@ -123,7 +123,7 @@ public class SellUserMonsterController extends EventController {
 
 		//UUID checks
 		if (invalidUuids) {
-			resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 			SellUserMonsterResponseEvent resEvent = new SellUserMonsterResponseEvent(
 					userId);
 			resEvent.setTag(event.getTag());
@@ -153,7 +153,7 @@ public class SellUserMonsterController extends EventController {
 			}
 
 			if (successful) {
-				resBuilder.setStatus(SellUserMonsterStatus.SUCCESS);
+				resBuilder.setStatus(ResponseStatus.SUCCESS);
 			}
 
 			SellUserMonsterResponseEvent resEvent = new SellUserMonsterResponseEvent(
@@ -182,7 +182,7 @@ public class SellUserMonsterController extends EventController {
 			log.error("exception in SellUserMonsterController processEvent", e);
 			// don't let the client hang
 			try {
-				resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER);
+				resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 				SellUserMonsterResponseEvent resEvent = new SellUserMonsterResponseEvent(
 						userId);
 				resEvent.setTag(event.getTag());
@@ -234,7 +234,7 @@ public class SellUserMonsterController extends EventController {
 			userMonsterIds.addAll(idsToUserMonsters.keySet());
 		}
 
-		resBuilder.setStatus(SellUserMonsterStatus.SUCCESS);
+		resBuilder.setStatus(ResponseStatus.SUCCESS);
 		return true;
 	}
 
