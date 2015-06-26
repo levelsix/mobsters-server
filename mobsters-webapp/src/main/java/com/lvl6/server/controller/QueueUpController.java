@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.QueueUpRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.QueueUpResponseEvent;
 import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.info.Monster;
@@ -162,6 +163,15 @@ public class QueueUpController extends EventController {
 				.newBuilder();
 		resBuilder.setAttacker(attackerProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 		
 		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

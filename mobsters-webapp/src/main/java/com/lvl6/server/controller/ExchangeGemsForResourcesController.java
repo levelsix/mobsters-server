@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ExchangeGemsForResourcesRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.ExchangeGemsForResourcesResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
@@ -87,6 +88,15 @@ public class ExchangeGemsForResourcesController extends EventController {
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			ExchangeGemsForResourcesResponseEvent resEvent = new ExchangeGemsForResourcesResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 		
 		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

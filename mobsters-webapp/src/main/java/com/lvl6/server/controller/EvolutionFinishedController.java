@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EvolutionFinishedRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.EvolutionFinishedResponseEvent;
 import com.lvl6.events.response.EvolveMonsterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -119,6 +120,15 @@ public class EvolutionFinishedController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			EvolutionFinishedResponseEvent resEvent = new EvolutionFinishedResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 		
 		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

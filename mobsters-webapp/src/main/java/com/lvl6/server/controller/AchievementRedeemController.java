@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AchievementRedeemRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.AchievementRedeemResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Achievement;
@@ -87,6 +88,15 @@ public class AchievementRedeemController extends EventController {
 		AchievementRedeemResponseProto.Builder resBuilder = AchievementRedeemResponseProto
 				.newBuilder();
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = false;

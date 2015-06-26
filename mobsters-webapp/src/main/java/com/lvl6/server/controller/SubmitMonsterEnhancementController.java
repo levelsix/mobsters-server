@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SubmitMonsterEnhancementRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.EvolutionFinishedResponseEvent;
 import com.lvl6.events.response.SubmitMonsterEnhancementResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -123,6 +124,15 @@ public class SubmitMonsterEnhancementController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			SubmitMonsterEnhancementResponseEvent resEvent = new SubmitMonsterEnhancementResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 		
 		if(timeUtils.numMinutesDifference(clientTimeDate, new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

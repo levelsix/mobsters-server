@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveMiniEventRequestEvent;
 import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.RetrieveMiniEventResponseEvent;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventRequestProto;
@@ -122,6 +123,15 @@ public class RetrieveMiniEventController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 		
 		if(timeUtil.numMinutesDifference(clientTime, new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

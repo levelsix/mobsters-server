@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateMonsterHealthRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.UpdateMonsterHealthResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.properties.ControllerConstants;
@@ -100,6 +101,15 @@ public class UpdateMonsterHealthController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 		
 		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

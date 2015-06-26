@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.hazelcast.core.IList;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseBoosterPackRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.AchievementRedeemResponseEvent;
 import com.lvl6.events.response.PurchaseBoosterPackResponseEvent;
 import com.lvl6.events.response.ReceivedGiftResponseEvent;
@@ -172,6 +173,15 @@ public class PurchaseBoosterPackController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		if(timeUtils.numMinutesDifference(now, new Date()) > 
 				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

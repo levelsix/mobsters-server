@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AvengeClanMateRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.AvengeClanMateResponseEvent;
 import com.lvl6.info.ClanAvengeUser;
 import com.lvl6.properties.ControllerConstants;
@@ -95,6 +96,15 @@ public class AvengeClanMateController extends EventController {
 			if (null != mcp && mcp.hasClanUuid()) {
 				clanId = mcp.getClanUuid();
 			}
+		}
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			AvengeClanMateResponseEvent resEvent = new AvengeClanMateResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		if(timeUtils.numMinutesDifference(new Date(clientTime), new Date()) > 

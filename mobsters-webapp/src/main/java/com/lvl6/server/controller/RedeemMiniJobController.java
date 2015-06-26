@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemMiniJobRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.RedeemMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -148,6 +149,15 @@ public class RedeemMiniJobController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 		
 		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

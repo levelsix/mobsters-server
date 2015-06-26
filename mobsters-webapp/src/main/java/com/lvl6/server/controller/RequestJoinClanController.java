@@ -17,6 +17,7 @@ import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RequestJoinClanRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.RequestJoinClanResponseEvent;
 import com.lvl6.events.response.RetrieveClanDataResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -183,6 +184,15 @@ public class RequestJoinClanController extends EventController {
 		resBuilder.setSender(senderProto);
 		resBuilder.setClanUuid(clanId);
 		resBuilder.setClientTime(clientTime.getTime());
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
 				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

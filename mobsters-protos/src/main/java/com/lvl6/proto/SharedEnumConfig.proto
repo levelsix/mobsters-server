@@ -87,6 +87,7 @@ enum ResponseStatus {
 	SUCCESS = 1;
 	FAIL_OTHER = 2;
 	FAIL_TIME_OUT_OF_SYNC = 3;
+	FAIL_CLIENT_TIME_NOT_SENT = 11;
 	
 	//used by CreateBattleItem, CompleteBattleItem, CreateClan, ReviveInDungeon, EndPersistentEventCoolDownTimer, EvolveMonster,
 	//EnhancementWaitTimeComplete, UpdateMonsterHealth, HealMonster, HealMonsterWaitTimeComplete, IncreaseMonsterInventorySlot,
@@ -113,6 +114,8 @@ enum ResponseStatus {
 	
 	//used by BeginMiniJob, CompleteMiniJob, RedeemMiniJob, FulfillTeamDonationSolicitation, EvolveMonster, HealMonster
 	FAIL_DOESNT_EXIST = 10;
+	
+	//FAIL_CLIENT_TIME_NOT_SENT = 11;
 	
 	//--------------------------EventAchievement--------------------
 	

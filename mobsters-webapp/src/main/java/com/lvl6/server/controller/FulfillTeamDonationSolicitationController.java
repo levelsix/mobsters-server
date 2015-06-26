@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.FulfillTeamDonationSolicitationRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.FulfillTeamDonationSolicitationResponseEvent;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.MonsterSnapshotForUser;
@@ -110,6 +111,15 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 
 		if (null != senderProto.getClan()) {
 			clanId = senderProto.getClan().getClanUuid();
+		}
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 

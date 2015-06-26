@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RedeemSecretGiftRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.RedeemSecretGiftResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -139,6 +140,15 @@ public class RedeemSecretGiftController extends EventController {
 				.newBuilder();
 		resBuilder.setMup(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 		
 		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

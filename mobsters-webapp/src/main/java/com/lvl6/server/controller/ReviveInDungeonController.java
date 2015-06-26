@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ReviveInDungeonRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterForUser;
@@ -107,6 +108,15 @@ public class ReviveInDungeonController extends EventController {
 					"UUID error. incorrect userId=%s, userTaskId=%s", userId,
 					userTaskId), e);
 			invalidUuids = true;
+		}
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 

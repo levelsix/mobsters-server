@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CollectGiftRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.CollectGiftResponseEvent;
 import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -142,6 +143,15 @@ public class CollectGiftController extends EventController {
 					"UUID error. incorrect userId=%s, ugIds=%s",
 					userId, ugIds), e);
 			invalidUuids = true;
+		}
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			CollectGiftResponseEvent resEvent = new CollectGiftResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 		
 		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
