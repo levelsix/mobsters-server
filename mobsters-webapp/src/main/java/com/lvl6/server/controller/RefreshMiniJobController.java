@@ -20,10 +20,10 @@ import com.lvl6.info.MiniJobForUser;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniJobProto.RefreshMiniJobRequestProto;
 import com.lvl6.proto.EventMiniJobProto.RefreshMiniJobResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MiniJobConfigProto.UserMiniJobProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.SharedEnumConfigProto.Quality;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
@@ -35,6 +35,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RefreshMiniJobAction;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -76,6 +77,9 @@ public class RefreshMiniJobController extends EventController {
 	protected DeleteUtil deleteUtil;
 	
 	@Autowired
+	protected TimeUtils timeUtils;
+	
+	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public RefreshMiniJobController() {
@@ -115,6 +119,17 @@ public class RefreshMiniJobController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			RefreshMiniJobResponseEvent resEvent = 
+					new RefreshMiniJobResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

@@ -18,11 +18,12 @@ import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -30,6 +31,7 @@ import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -52,6 +54,9 @@ public class NormStructWaitCompleteController extends EventController {
 	
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public NormStructWaitCompleteController() {
 		
@@ -84,6 +89,17 @@ public class NormStructWaitCompleteController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getCurTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			NormStructWaitCompleteResponseEvent resEvent = 
+					new NormStructWaitCompleteResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		UUID userStructUuid = null;

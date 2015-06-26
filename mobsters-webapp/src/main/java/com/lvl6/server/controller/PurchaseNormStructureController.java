@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,14 +25,15 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
@@ -54,6 +56,9 @@ public class PurchaseNormStructureController extends EventController {
 	
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public PurchaseNormStructureController() {
 		
@@ -93,6 +98,17 @@ public class PurchaseNormStructureController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getTimeOfPurchase()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			PurchaseNormStructureResponseEvent resEvent = 
+					new PurchaseNormStructureResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

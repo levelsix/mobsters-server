@@ -12,11 +12,13 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SolicitClanHelpRequestEvent;
+import com.lvl6.events.response.BeginClanRaidResponseEvent;
 import com.lvl6.events.response.SolicitClanHelpResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanHelp;
 import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.ClanHelpNoticeProto;
 import com.lvl6.proto.ClanProto.ClanHelpProto;
 import com.lvl6.proto.EventClanProto.SolicitClanHelpRequestProto;
@@ -93,6 +95,16 @@ public class SolicitClanHelpController extends EventController {
 			clanId = senderProto.getClan().getClanUuid();
 		}
 
+		if(timeUtil.numMinutesDifference(clientDate, new Date()) > 
+				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
+		
 		boolean invalidUuids = true;
 		try {
 			UUID.fromString(userId);

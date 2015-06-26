@@ -17,13 +17,14 @@ import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
 import com.lvl6.events.response.RetrieveClanDataResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.ClanDataProto;
 import com.lvl6.proto.ClanProto.ClanInviteProto;
 import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteRequestProto;
 import com.lvl6.proto.EventClanProto.AcceptOrRejectClanInviteResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.RetrieveClanDataResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanAvengeRetrieveUtil;
 import com.lvl6.retrieveutils.ClanAvengeUserRetrieveUtil;
@@ -43,6 +44,7 @@ import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -54,6 +56,9 @@ public class AcceptOrRejectClanInviteController extends EventController {
 
 	@Autowired
 	protected Locker locker;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
@@ -127,6 +132,16 @@ public class AcceptOrRejectClanInviteController extends EventController {
 		UUID userUuid = null;
 		UUID clanUuid = null;
 
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
+		
 		boolean invalidUuids = true;
 		if (!clanId.isEmpty()) {
 			try {

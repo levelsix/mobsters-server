@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -20,15 +21,16 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto;
 import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventStructureProto.BeginObstacleRemovalResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -44,6 +46,9 @@ public class BeginObstacleRemovalController extends EventController {
 
 	@Autowired
 	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public BeginObstacleRemovalController() {
 		
@@ -78,6 +83,17 @@ public class BeginObstacleRemovalController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getCurTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			BeginObstacleRemovalResponseEvent resEvent = 
+					new BeginObstacleRemovalResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

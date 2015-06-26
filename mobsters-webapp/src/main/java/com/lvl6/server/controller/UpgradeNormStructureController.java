@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -22,15 +23,16 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -53,6 +55,9 @@ public class UpgradeNormStructureController extends EventController {
 	
 	@Autowired
 	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public UpgradeNormStructureController() {
 		
@@ -86,6 +91,17 @@ public class UpgradeNormStructureController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getTimeOfUpgrade()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			UpgradeNormStructureResponseEvent resEvent = 
+					new UpgradeNormStructureResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

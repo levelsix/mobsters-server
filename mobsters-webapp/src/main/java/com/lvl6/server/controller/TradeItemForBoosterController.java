@@ -33,11 +33,11 @@ import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.BoosterPackType;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterRequestProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto;
 import com.lvl6.proto.EventItemProto.TradeItemForBoosterResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserRewardProto;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
@@ -57,6 +57,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.StringUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -126,6 +127,9 @@ public class TradeItemForBoosterController extends EventController {
 
 	@Autowired
 	protected BoosterItemUtils boosterItemUtils;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 
 	@Override
@@ -153,6 +157,17 @@ public class TradeItemForBoosterController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			TradeItemForBoosterResponseEvent resEvent = 
+					new TradeItemForBoosterResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		boolean invalidUuids = true;
 		try {

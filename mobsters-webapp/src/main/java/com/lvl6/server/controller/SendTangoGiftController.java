@@ -26,13 +26,14 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.EventRewardProto.ReceivedGiftResponseProto;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftRequestProto;
 import com.lvl6.proto.EventRewardProto.SendTangoGiftResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.RewardsProto.UserGiftProto;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.GiftRetrieveUtils;
@@ -41,6 +42,7 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.server.controller.actionobjects.SendTangoGiftAction;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
@@ -67,6 +69,9 @@ public class SendTangoGiftController extends EventController {
 
 	@Autowired
 	protected RewardRetrieveUtils rewardRetrieveUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 
 	@Autowired
@@ -113,6 +118,17 @@ public class SendTangoGiftController extends EventController {
 			log.error(String.format("UUID error. incorrect userId=%s", userId),
 					e);
 			invalidUuids = true;
+		}
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			SendTangoGiftResponseEvent resEvent = 
+					new SendTangoGiftResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		//UUID checks

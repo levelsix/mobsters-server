@@ -19,6 +19,7 @@ import com.google.protobuf.ByteString;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndPvpBattleRequestEvent;
 import com.lvl6.events.response.EndPvpBattleResponseEvent;
+import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
@@ -202,6 +203,15 @@ public class EndPvpBattleController extends EventController {
 		EndPvpBattleResponseEvent resEvent = new EndPvpBattleResponseEvent(
 				attackerId);
 		resEvent.setTag(event.getTag());
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		boolean invalidUuids = true;
 		UUID attackerUuid = null;

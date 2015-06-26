@@ -33,10 +33,10 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.EndDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ItemsProto.UserItemProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
@@ -53,6 +53,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -102,6 +103,9 @@ public class EndDungeonController extends EventController {
 	
 	@Autowired
 	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public EndDungeonController() {
 		
@@ -149,6 +153,17 @@ public class EndDungeonController extends EventController {
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
+		
+		if(timeUtils.numMinutesDifference(currentDate, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			EndDungeonResponseEvent resEvent = 
+					new EndDungeonResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		try {
 			userUuid = UUID.fromString(userId);

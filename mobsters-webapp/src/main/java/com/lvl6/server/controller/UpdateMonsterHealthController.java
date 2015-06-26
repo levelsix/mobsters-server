@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,17 +16,19 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateMonsterHealthRequestEvent;
 import com.lvl6.events.response.UpdateMonsterHealthResponseEvent;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthRequestProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -43,6 +46,9 @@ public class UpdateMonsterHealthController extends EventController {
 	
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public UpdateMonsterHealthController() {
 		
@@ -94,6 +100,17 @@ public class UpdateMonsterHealthController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			UpdateMonsterHealthResponseEvent resEvent = 
+					new UpdateMonsterHealthResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

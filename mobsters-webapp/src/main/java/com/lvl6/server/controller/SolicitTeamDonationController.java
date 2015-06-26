@@ -17,11 +17,12 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationRequestProto;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -29,6 +30,7 @@ import com.lvl6.server.controller.actionobjects.SolicitTeamDonationAction;
 import com.lvl6.server.eventsender.ClanResponseEvent;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -53,6 +55,9 @@ public class SolicitTeamDonationController extends EventController {
 	
 	@Autowired
 	protected HazelcastClanSearchImpl hzClanSearch;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public SolicitTeamDonationController() {
 		
@@ -91,6 +96,16 @@ public class SolicitTeamDonationController extends EventController {
 
 		if (null != senderProto.getClan()) {
 			clanId = senderProto.getClan().getClanUuid();
+		}
+		
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		boolean invalidUuids = true;

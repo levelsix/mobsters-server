@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -16,15 +17,17 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.events.response.UpdateUserCurrencyResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyRequestProto;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 
 @Component
 
@@ -40,6 +43,9 @@ public class UpdateUserCurrencyController extends EventController {
 	
 	@Autowired
 	protected MiscMethods miscMethods;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public UpdateUserCurrencyController() {
 		
@@ -78,6 +84,17 @@ public class UpdateUserCurrencyController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
+		
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			UpdateUserCurrencyResponseEvent resEvent = 
+					new UpdateUserCurrencyResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
