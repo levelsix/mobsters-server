@@ -15,10 +15,11 @@ import com.lvl6.events.response.FinishPerformingResearchResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchRequestProto;
 import com.lvl6.proto.EventResearchProto.FinishPerformingResearchResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -56,6 +57,7 @@ public class FinishPerformingResearchController extends EventController {
 	@Autowired
 	protected InsertUtil insertUtil;
 
+	
 	public FinishPerformingResearchController() {
 		
 	}
@@ -79,6 +81,7 @@ public class FinishPerformingResearchController extends EventController {
 		String userId = senderProto.getUserUuid();
 
 		String userResearchUuid = reqProto.getUserResearchUuid();
+		Date clientTime = new Date(reqProto.getClientTime());
 
 		int gemsCost = 0;
 		if (reqProto.hasGemsCost()) {
@@ -90,6 +93,16 @@ public class FinishPerformingResearchController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+		
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

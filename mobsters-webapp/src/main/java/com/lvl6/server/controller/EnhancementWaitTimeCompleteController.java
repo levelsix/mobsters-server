@@ -23,12 +23,13 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteRequestProto;
 import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto;
 import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -46,6 +47,9 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public EnhancementWaitTimeCompleteController() {
 		
@@ -78,6 +82,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 		//		List<Long> userMonsterIdsThatFinished = reqProto.getUserMonsterIdsList();
 		//		userMonsterIdsThatFinished = new ArrayList<Long>(userMonsterIdsThatFinished);
 		Timestamp curTime = new Timestamp((new Date()).getTime());
+		Date clientTime = new Date(reqProto.getClientTime());
 		String curEnhancingMfuId = reqProto.getUserMonsterUuid(); //monster being enhanced
 
 		//set some values to send to the client (the response proto)
@@ -85,6 +90,16 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
+		
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

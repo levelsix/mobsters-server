@@ -94,6 +94,15 @@ public final class EventMonsterProto {
      * </pre>
      */
     int getOilChange();
+
+    /**
+     * <code>optional int64 clientTime = 5;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 5;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EvolveMonsterRequestProto}
@@ -181,6 +190,11 @@ public final class EventMonsterProto {
             case 32: {
               bitField0_ |= 0x00000008;
               oilChange_ = input.readSInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -334,11 +348,27 @@ public final class EventMonsterProto {
       return oilChange_;
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 5;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 5;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 clientTime = 5;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       evolution_ = com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.getDefaultInstance();
       gemsSpent_ = 0;
       oilChange_ = 0;
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -365,6 +395,9 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeSInt32(4, oilChange_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, clientTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -389,6 +422,10 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeSInt32Size(4, oilChange_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -525,6 +562,8 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         oilChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -577,6 +616,10 @@ public final class EventMonsterProto {
           to_bitField0_ |= 0x00000008;
         }
         result.oilChange_ = oilChange_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -604,6 +647,9 @@ public final class EventMonsterProto {
         }
         if (other.hasOilChange()) {
           setOilChange(other.getOilChange());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1023,6 +1069,38 @@ public final class EventMonsterProto {
       public Builder clearOilChange() {
         bitField0_ = (bitField0_ & ~0x00000008);
         oilChange_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 5;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 clientTime = 5;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 5;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000010;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 5;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        clientTime_ = 0L;
         onChanged();
         return this;
       }
@@ -1668,6 +1746,15 @@ public final class EventMonsterProto {
      * </pre>
      */
     int getGemsSpent();
+
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EvolutionFinishedRequestProto}
@@ -1737,6 +1824,11 @@ public final class EventMonsterProto {
             case 16: {
               bitField0_ |= 0x00000002;
               gemsSpent_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -1825,9 +1917,25 @@ public final class EventMonsterProto {
       return gemsSpent_;
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 3;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       gemsSpent_ = 0;
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1848,6 +1956,9 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, gemsSpent_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, clientTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1864,6 +1975,10 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1991,6 +2106,8 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         gemsSpent_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -2031,6 +2148,10 @@ public final class EventMonsterProto {
           to_bitField0_ |= 0x00000002;
         }
         result.gemsSpent_ = gemsSpent_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2052,6 +2173,9 @@ public final class EventMonsterProto {
         }
         if (other.hasGemsSpent()) {
           setGemsSpent(other.getGemsSpent());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2244,6 +2368,38 @@ public final class EventMonsterProto {
       public Builder clearGemsSpent() {
         bitField0_ = (bitField0_ & ~0x00000002);
         gemsSpent_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000004;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clientTime_ = 0L;
         onChanged();
         return this;
       }
@@ -3193,6 +3349,15 @@ public final class EventMonsterProto {
      * </pre>
      */
     int getOilChange();
+
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.SubmitMonsterEnhancementRequestProto}
@@ -3291,6 +3456,11 @@ public final class EventMonsterProto {
             case 48: {
               bitField0_ |= 0x00000004;
               oilChange_ = input.readSInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000008;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -3542,6 +3712,21 @@ public final class EventMonsterProto {
       return oilChange_;
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 7;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       ueipDelete_ = java.util.Collections.emptyList();
@@ -3549,6 +3734,7 @@ public final class EventMonsterProto {
       ueipNew_ = java.util.Collections.emptyList();
       gemsSpent_ = 0;
       oilChange_ = 0;
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3580,6 +3766,9 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeSInt32(6, oilChange_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(7, clientTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3613,6 +3802,10 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeSInt32Size(6, oilChange_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3763,6 +3956,8 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         oilChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -3834,6 +4029,10 @@ public final class EventMonsterProto {
           to_bitField0_ |= 0x00000004;
         }
         result.oilChange_ = oilChange_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3936,6 +4135,9 @@ public final class EventMonsterProto {
         }
         if (other.hasOilChange()) {
           setOilChange(other.getOilChange());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4984,6 +5186,38 @@ public final class EventMonsterProto {
         return this;
       }
 
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000040;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SubmitMonsterEnhancementRequestProto)
     }
 
@@ -5726,6 +5960,15 @@ public final class EventMonsterProto {
      */
     com.google.protobuf.ByteString
         getUserMonsterUuidBytes();
+
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.EnhancementWaitTimeCompleteRequestProto}
@@ -5828,6 +6071,11 @@ public final class EventMonsterProto {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000010;
               userMonsterUuid_ = bs;
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000020;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -6072,6 +6320,21 @@ public final class EventMonsterProto {
       }
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 7;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int64 clientTime = 7;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       isSpeedup_ = false;
@@ -6079,6 +6342,7 @@ public final class EventMonsterProto {
       umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
       userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       userMonsterUuid_ = "";
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6110,6 +6374,9 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(6, getUserMonsterUuidBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(7, clientTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6148,6 +6415,10 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getUserMonsterUuidBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6288,6 +6559,8 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         userMonsterUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -6349,6 +6622,10 @@ public final class EventMonsterProto {
           to_bitField0_ |= 0x00000010;
         }
         result.userMonsterUuid_ = userMonsterUuid_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6391,6 +6668,9 @@ public final class EventMonsterProto {
           bitField0_ |= 0x00000020;
           userMonsterUuid_ = other.userMonsterUuid_;
           onChanged();
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7008,6 +7288,38 @@ public final class EventMonsterProto {
   }
   bitField0_ |= 0x00000020;
         userMonsterUuid_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000040;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 7;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        clientTime_ = 0L;
         onChanged();
         return this;
       }
@@ -7694,6 +8006,15 @@ public final class EventMonsterProto {
      */
     com.google.protobuf.ByteString
         getUserMonsterUuidsBytes(int index);
+
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CollectMonsterEnhancementRequestProto}
@@ -7780,6 +8101,11 @@ public final class EventMonsterProto {
                 mutable_bitField0_ |= 0x00000004;
               }
               userMonsterUuids_.add(bs);
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -7924,10 +8250,26 @@ public final class EventMonsterProto {
       return userMonsterUuids_.getByteString(index);
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 4;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       umcep_ = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.getDefaultInstance();
       userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7950,6 +8292,9 @@ public final class EventMonsterProto {
       }
       for (int i = 0; i < userMonsterUuids_.size(); i++) {
         output.writeBytes(3, userMonsterUuids_.getByteString(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(4, clientTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7976,6 +8321,10 @@ public final class EventMonsterProto {
         }
         size += dataSize;
         size += 1 * getUserMonsterUuidsList().size();
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8110,6 +8459,8 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -8159,6 +8510,10 @@ public final class EventMonsterProto {
           bitField0_ = (bitField0_ & ~0x00000004);
         }
         result.userMonsterUuids_ = userMonsterUuids_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8190,6 +8545,9 @@ public final class EventMonsterProto {
             userMonsterUuids_.addAll(other.userMonsterUuids_);
           }
           onChanged();
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8611,6 +8969,38 @@ public final class EventMonsterProto {
   }
   ensureUserMonsterUuidsIsMutable();
         userMonsterUuids_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000008;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        clientTime_ = 0L;
         onChanged();
         return this;
       }
@@ -13888,6 +14278,15 @@ public final class EventMonsterProto {
      */
     com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getUmchpOrBuilder(
         int index);
+
+    /**
+     * <code>optional int64 clientTime = 10;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 10;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.HealMonsterRequestProto}
@@ -14004,6 +14403,11 @@ public final class EventMonsterProto {
                 mutable_bitField0_ |= 0x00000100;
               }
               umchp_.add(input.readMessage(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000020;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -14382,6 +14786,21 @@ public final class EventMonsterProto {
       return umchp_.get(index);
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 10;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 10;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional int64 clientTime = 10;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       umhDelete_ = java.util.Collections.emptyList();
@@ -14392,6 +14811,7 @@ public final class EventMonsterProto {
       isSpeedup_ = false;
       gemsForSpeedup_ = 0;
       umchp_ = java.util.Collections.emptyList();
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -14432,6 +14852,9 @@ public final class EventMonsterProto {
       }
       for (int i = 0; i < umchp_.size(); i++) {
         output.writeMessage(9, umchp_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(10, clientTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -14477,6 +14900,10 @@ public final class EventMonsterProto {
       for (int i = 0; i < umchp_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, umchp_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(10, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -14638,6 +15065,8 @@ public final class EventMonsterProto {
         } else {
           umchpBuilder_.clear();
         }
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -14726,6 +15155,10 @@ public final class EventMonsterProto {
         } else {
           result.umchp_ = umchpBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -14860,6 +15293,9 @@ public final class EventMonsterProto {
               umchpBuilder_.addAllMessages(other.umchp_);
             }
           }
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -16400,6 +16836,38 @@ public final class EventMonsterProto {
           umchp_ = null;
         }
         return umchpBuilder_;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 10;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int64 clientTime = 10;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 10;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000200;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 10;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.HealMonsterRequestProto)
@@ -25857,6 +26325,15 @@ public final class EventMonsterProto {
      * </pre>
      */
     int getGemCost();
+
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CombineUserMonsterPiecesRequestProto}
@@ -25935,6 +26412,11 @@ public final class EventMonsterProto {
             case 24: {
               bitField0_ |= 0x00000002;
               gemCost_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -26055,10 +26537,26 @@ public final class EventMonsterProto {
       return gemCost_;
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 4;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 clientTime = 4;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userMonsterUuids_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       gemCost_ = 0;
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -26081,6 +26579,9 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(3, gemCost_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(4, clientTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -26107,6 +26608,10 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, gemCost_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -26236,6 +26741,8 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         gemCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -26281,6 +26788,10 @@ public final class EventMonsterProto {
           to_bitField0_ |= 0x00000002;
         }
         result.gemCost_ = gemCost_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -26312,6 +26823,9 @@ public final class EventMonsterProto {
         }
         if (other.hasGemCost()) {
           setGemCost(other.getGemCost());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -26597,6 +27111,38 @@ public final class EventMonsterProto {
       public Builder clearGemCost() {
         bitField0_ = (bitField0_ & ~0x00000004);
         gemCost_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000008;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 4;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        clientTime_ = 0L;
         onChanged();
         return this;
       }
@@ -33084,174 +33630,178 @@ public final class EventMonsterProto {
     java.lang.String[] descriptorData = {
       "\n\022EventMonster.proto\022\016com.lvl6.proto\032\014Ba" +
       "ttle.proto\032\022MonsterStuff.proto\032\026SharedEn" +
-      "umConfig.proto\032\nUser.proto\"\261\001\n\031EvolveMon" +
+      "umConfig.proto\032\nUser.proto\"\305\001\n\031EvolveMon" +
       "sterRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
       "vl6.proto.MinimumUserProto\022<\n\tevolution\030" +
       "\002 \001(\0132).com.lvl6.proto.UserMonsterEvolut" +
       "ionProto\022\021\n\tgemsSpent\030\003 \001(\005\022\021\n\toilChange" +
-      "\030\004 \001(\021\"~\n\032EvolveMonsterResponseProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.",
-      "ResponseStatus\"d\n\035EvolutionFinishedReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\021\n\tgemsSpent\030\002 \001(\005\"\300\001\n" +
+      "\030\004 \001(\021\022\022\n\nclientTime\030\005 \001(\003\"~\n\032EvolveMons" +
+      "terResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022.\n\006status\030\002 \001",
+      "(\0162\036.com.lvl6.proto.ResponseStatus\"x\n\035Ev" +
+      "olutionFinishedRequestProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\021\n" +
+      "\tgemsSpent\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003\"\300\001\n" +
       "\036EvolutionFinishedResponseProto\0220\n\006sende" +
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
       "o\022<\n\016evolvedMonster\030\002 \001(\0132$.com.lvl6.pro" +
       "to.FullUserMonsterProto\022.\n\006status\030\003 \001(\0162" +
-      "\036.com.lvl6.proto.ResponseStatus\"\315\002\n$Subm" +
-      "itMonsterEnhancementRequestProto\022@\n\006send" +
-      "er\030\001 \001(\01320.com.lvl6.proto.MinimumUserPro",
+      "\036.com.lvl6.proto.ResponseStatus\"\341\002\n$Subm" +
+      "itMonsterEnhancementRequestProto\022@\n\006send",
+      "er\030\001 \001(\01320.com.lvl6.proto.MinimumUserPro" +
       "toWithMaxResources\022@\n\nueipDelete\030\002 \003(\0132(" +
       ".com.lvl6.proto.UserEnhancementItemProto" +
       "B\002\030\001\022@\n\nueipUpdate\030\003 \003(\0132(.com.lvl6.prot" +
       "o.UserEnhancementItemProtoB\002\030\001\0229\n\007ueipNe" +
       "w\030\004 \003(\0132(.com.lvl6.proto.UserEnhancement" +
       "ItemProto\022\021\n\tgemsSpent\030\005 \001(\005\022\021\n\toilChang" +
-      "e\030\006 \001(\021\"\231\001\n%SubmitMonsterEnhancementResp" +
-      "onseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pro" +
-      "to.MinimumUserProtoWithMaxResources\022.\n\006s" +
-      "tatus\030\002 \001(\0162\036.com.lvl6.proto.ResponseSta",
-      "tus\"\374\001\n\'EnhancementWaitTimeCompleteReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016" +
-      "gemsForSpeedup\030\003 \001(\005\022=\n\005umcep\030\004 \001(\0132*.co" +
-      "m.lvl6.proto.UserMonsterCurrentExpProtoB" +
-      "\002\030\001\022\034\n\020userMonsterUuids\030\005 \003(\tB\002\030\001\022\027\n\017use" +
-      "rMonsterUuid\030\006 \001(\t\"\214\001\n(EnhancementWaitTi" +
-      "meCompleteResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      "e\030\006 \001(\021\022\022\n\nclientTime\030\007 \001(\003\"\231\001\n%SubmitMo" +
+      "nsterEnhancementResponseProto\022@\n\006sender\030" +
+      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW",
+      "ithMaxResources\022.\n\006status\030\002 \001(\0162\036.com.lv" +
+      "l6.proto.ResponseStatus\"\220\002\n\'EnhancementW" +
+      "aitTimeCompleteRequestProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\021\n" +
+      "\tisSpeedup\030\002 \001(\010\022\026\n\016gemsForSpeedup\030\003 \001(\005" +
+      "\022=\n\005umcep\030\004 \001(\0132*.com.lvl6.proto.UserMon" +
+      "sterCurrentExpProtoB\002\030\001\022\034\n\020userMonsterUu" +
+      "ids\030\005 \003(\tB\002\030\001\022\027\n\017userMonsterUuid\030\006 \001(\t\022\022" +
+      "\n\nclientTime\030\007 \001(\003\"\214\001\n(EnhancementWaitTi" +
+      "meCompleteResponseProto\0220\n\006sender\030\001 \001(\0132",
       " .com.lvl6.proto.MinimumUserProto\022.\n\006sta" +
-      "tus\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatu",
-      "s\"\256\001\n%CollectMonsterEnhancementRequestPr" +
+      "tus\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatu" +
+      "s\"\302\001\n%CollectMonsterEnhancementRequestPr" +
       "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
       "imumUserProto\0229\n\005umcep\030\002 \001(\0132*.com.lvl6." +
       "proto.UserMonsterCurrentExpProto\022\030\n\020user" +
-      "MonsterUuids\030\003 \003(\t\"\212\001\n&CollectMonsterEnh" +
-      "ancementResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022.\n\006statu" +
-      "s\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatus\"" +
-      "\200\002\n\032EnhanceMonsterRequestProto\0224\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto",
-      "B\002\030\001\0225\n\003uep\030\002 \001(\0132$.com.lvl6.proto.UserE" +
-      "nhancementProtoB\002\030\001\022G\n\017enhancingResult\030\003" +
-      " \001(\0132*.com.lvl6.proto.UserMonsterCurrent" +
-      "ExpProtoB\002\030\001\022\025\n\tgemsSpent\030\004 \001(\005B\002\030\001\022\025\n\to" +
-      "ilChange\030\005 \001(\021B\002\030\001\"\221\002\n\033EnhanceMonsterRes" +
-      "ponseProto\0224\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProtoB\002\030\001\022P\n\006status\030\002 \001(\016" +
-      "2@.com.lvl6.proto.EnhanceMonsterResponse" +
-      "Proto.EnhanceMonsterStatus\"j\n\024EnhanceMon" +
-      "sterStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFIC",
-      "IENT_GEMS\020\002\022\031\n\025FAIL_INSUFFICIENT_OIL\020\003\022\016" +
-      "\n\nFAIL_OTHER\020\004\"\314\002\n\037UpdateMonsterHealthRe" +
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022<\n\005umchp\030\002 \003(\0132-.co" +
-      "m.lvl6.proto.UserMonsterCurrentHealthPro" +
-      "to\022\022\n\nclientTime\030\003 \001(\003\022\024\n\014userTaskUuid\030\004" +
-      " \001(\t\022 \n\030isUpdateTaskStageForUser\030\005 \001(\010\022\025" +
-      "\n\rnuTaskStageId\030\006 \001(\005\022\030\n\020droplessTsfuUui" +
-      "d\030\007 \001(\t\022 \n\030changeNuPvpDmgMultiplier\030\010 \001(" +
-      "\010\022\032\n\022nuPvpDmgMultiplier\030\t \001(\002\"\204\001\n Update",
-      "MonsterHealthResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022.\n\006" +
-      "status\030\002 \001(\0162\036.com.lvl6.proto.ResponseSt" +
-      "atus\"\244\003\n\027HealMonsterRequestProto\022@\n\006send" +
-      "er\030\001 \001(\01320.com.lvl6.proto.MinimumUserPro" +
-      "toWithMaxResources\022:\n\tumhDelete\030\002 \003(\0132\'." +
-      "com.lvl6.proto.UserMonsterHealingProto\022:" +
-      "\n\tumhUpdate\030\003 \003(\0132\'.com.lvl6.proto.UserM" +
-      "onsterHealingProto\0227\n\006umhNew\030\004 \003(\0132\'.com" +
-      ".lvl6.proto.UserMonsterHealingProto\022\022\n\nc",
-      "ashChange\030\005 \001(\021\022\031\n\021gemCostForHealing\030\006 \001" +
-      "(\005\022\021\n\tisSpeedup\030\007 \001(\010\022\026\n\016gemsForSpeedup\030" +
-      "\010 \001(\005\022<\n\005umchp\030\t \003(\0132-.com.lvl6.proto.Us" +
-      "erMonsterCurrentHealthProto\"\214\001\n\030HealMons" +
+      "MonsterUuids\030\003 \003(\t\022\022\n\nclientTime\030\004 \001(\003\"\212" +
+      "\001\n&CollectMonsterEnhancementResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.p",
+      "roto.ResponseStatus\"\200\002\n\032EnhanceMonsterRe" +
+      "questProto\0224\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProtoB\002\030\001\0225\n\003uep\030\002 \001(\0132$." +
+      "com.lvl6.proto.UserEnhancementProtoB\002\030\001\022" +
+      "G\n\017enhancingResult\030\003 \001(\0132*.com.lvl6.prot" +
+      "o.UserMonsterCurrentExpProtoB\002\030\001\022\025\n\tgems" +
+      "Spent\030\004 \001(\005B\002\030\001\022\025\n\toilChange\030\005 \001(\021B\002\030\001\"\221" +
+      "\002\n\033EnhanceMonsterResponseProto\0224\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "B\002\030\001\022P\n\006status\030\002 \001(\0162@.com.lvl6.proto.En",
+      "hanceMonsterResponseProto.EnhanceMonster" +
+      "Status\"j\n\024EnhanceMonsterStatus\022\013\n\007SUCCES" +
+      "S\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031\n\025FAIL_" +
+      "INSUFFICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\314\002\n\037U" +
+      "pdateMonsterHealthRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022<\n\005umchp\030\002 \003(\0132-.com.lvl6.proto.UserMon" +
+      "sterCurrentHealthProto\022\022\n\nclientTime\030\003 \001" +
+      "(\003\022\024\n\014userTaskUuid\030\004 \001(\t\022 \n\030isUpdateTask" +
+      "StageForUser\030\005 \001(\010\022\025\n\rnuTaskStageId\030\006 \001(",
+      "\005\022\030\n\020droplessTsfuUuid\030\007 \001(\t\022 \n\030changeNuP" +
+      "vpDmgMultiplier\030\010 \001(\010\022\032\n\022nuPvpDmgMultipl" +
+      "ier\030\t \001(\002\"\204\001\n UpdateMonsterHealthRespons" +
+      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022.\n\006status\030\002 \001(\0162\036.com.l" +
+      "vl6.proto.ResponseStatus\"\270\003\n\027HealMonster" +
+      "RequestProto\022@\n\006sender\030\001 \001(\01320.com.lvl6." +
+      "proto.MinimumUserProtoWithMaxResources\022:" +
+      "\n\tumhDelete\030\002 \003(\0132\'.com.lvl6.proto.UserM" +
+      "onsterHealingProto\022:\n\tumhUpdate\030\003 \003(\0132\'.",
+      "com.lvl6.proto.UserMonsterHealingProto\0227" +
+      "\n\006umhNew\030\004 \003(\0132\'.com.lvl6.proto.UserMons" +
+      "terHealingProto\022\022\n\ncashChange\030\005 \001(\021\022\031\n\021g" +
+      "emCostForHealing\030\006 \001(\005\022\021\n\tisSpeedup\030\007 \001(" +
+      "\010\022\026\n\016gemsForSpeedup\030\010 \001(\005\022<\n\005umchp\030\t \003(\013" +
+      "2-.com.lvl6.proto.UserMonsterCurrentHeal" +
+      "thProto\022\022\n\nclientTime\030\n \001(\003\"\214\001\n\030HealMons" +
       "terResponseProto\022@\n\006sender\030\001 \001(\01320.com.l" +
       "vl6.proto.MinimumUserProtoWithMaxResourc" +
-      "es\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Resp" +
+      "es\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Resp",
       "onseStatus\"\204\001\n\"AddMonsterToBattleTeamReq" +
       "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022\023\n\013teamSlotNum\030\002 \001(\005",
+      "to.MinimumUserProto\022\023\n\013teamSlotNum\030\002 \001(\005" +
       "\022\027\n\017userMonsterUuid\030\003 \001(\t\"\207\001\n#AddMonster" +
       "ToBattleTeamResponseProto\0220\n\006sender\030\001 \001(" +
       "\0132 .com.lvl6.proto.MinimumUserProto\022.\n\006s" +
       "tatus\030\002 \001(\0162\036.com.lvl6.proto.ResponseSta" +
       "tus\"t\n\'RemoveMonsterFromBattleTeamReques" +
       "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\027\n\017userMonsterUuid\030\003 \001(" +
+      "MinimumUserProto\022\027\n\017userMonsterUuid\030\003 \001(",
       "\t\"\214\001\n(RemoveMonsterFromBattleTeamRespons" +
       "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022.\n\006status\030\002 \001(\0162\036.com.l",
+      "MinimumUserProto\022.\n\006status\030\002 \001(\0162\036.com.l" +
       "vl6.proto.ResponseStatus\"\272\002\n(IncreaseMon" +
       "sterInventorySlotRequestProto\0220\n\006sender\030" +
       "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
       "c\n\020increaseSlotType\030\002 \001(\0162I.com.lvl6.pro" +
       "to.IncreaseMonsterInventorySlotRequestPr" +
       "oto.IncreaseSlotType\022\026\n\016userStructUuid\030\003" +
-      " \001(\t\022 \n\030userFbInviteForSlotUuids\030\004 \003(\t\"=" +
+      " \001(\t\022 \n\030userFbInviteForSlotUuids\030\004 \003(\t\"=",
       "\n\020IncreaseSlotType\022\014\n\010PURCHASE\020\001\022\033\n\027REDE" +
       "EM_FACEBOOK_INVITES\020\002\"\215\001\n)IncreaseMonste" +
-      "rInventorySlotResponseProto\0220\n\006sender\030\001 ",
+      "rInventorySlotResponseProto\0220\n\006sender\030\001 " +
       "\001(\0132 .com.lvl6.proto.MinimumUserProto\022.\n" +
       "\006status\030\002 \001(\0162\036.com.lvl6.proto.ResponseS" +
       "tatus\"\243\002\n#InviteFbFriendsForSlotsRequest" +
       "Proto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.M" +
       "inimumUserProtoWithFacebookId\022\\\n\007invites" +
       "\030\002 \003(\0132K.com.lvl6.proto.InviteFbFriendsF" +
-      "orSlotsRequestProto.FacebookInviteStruct" +
+      "orSlotsRequestProto.FacebookInviteStruct",
       "ure\032^\n\027FacebookInviteStructure\022\022\n\nfbFrie" +
       "ndId\030\001 \001(\t\022\026\n\016userStructUuid\030\002 \001(\t\022\027\n\017us" +
-      "erStructFbLvl\030\003 \001(\005\"\332\001\n$InviteFbFriendsF",
+      "erStructFbLvl\030\003 \001(\005\"\332\001\n$InviteFbFriendsF" +
       "orSlotsResponseProto\022>\n\006sender\030\001 \001(\0132..c" +
       "om.lvl6.proto.MinimumUserProtoWithFacebo" +
       "okId\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Re" +
       "sponseStatus\022B\n\ninvitesNew\030\003 \003(\0132..com.l" +
       "vl6.proto.UserFacebookInviteForSlotProto" +
       "\"\247\001\n+AcceptAndRejectFbInviteForSlotsRequ" +
-      "estProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.prot" +
+      "estProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.prot",
       "o.MinimumUserProtoWithFacebookId\022\033\n\023acce" +
       "ptedInviteUuids\030\002 \003(\t\022\033\n\023rejectedInviteU" +
-      "uids\030\003 \003(\t\"\347\001\n,AcceptAndRejectFbInviteFo",
+      "uids\030\003 \003(\t\"\347\001\n,AcceptAndRejectFbInviteFo" +
       "rSlotsResponseProto\022>\n\006sender\030\001 \001(\0132..co" +
       "m.lvl6.proto.MinimumUserProtoWithFaceboo" +
       "kId\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Res" +
       "ponseStatus\022G\n\017acceptedInvites\030\003 \003(\0132..c" +
       "om.lvl6.proto.UserFacebookInviteForSlotP" +
-      "roto\"\203\001\n$CombineUserMonsterPiecesRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "roto\"\227\001\n$CombineUserMonsterPiecesRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M",
       "inimumUserProto\022\030\n\020userMonsterUuids\030\002 \003(" +
-      "\t\022\017\n\007gemCost\030\003 \001(\005\"\211\001\n%CombineUserMonste" +
-      "rPiecesResponseProto\0220\n\006sender\030\001 \001(\0132 .c",
-      "om.lvl6.proto.MinimumUserProto\022.\n\006status" +
-      "\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatus\"\233" +
-      "\001\n\033SellUserMonsterRequestProto\022@\n\006sender" +
-      "\030\001 \001(\01320.com.lvl6.proto.MinimumUserProto" +
-      "WithMaxResources\022:\n\005sales\030\002 \003(\0132+.com.lv" +
-      "l6.proto.MinimumUserMonsterSellProto\"\220\001\n" +
-      "\034SellUserMonsterResponseProto\022@\n\006sender\030" +
-      "\001 \001(\01320.com.lvl6.proto.MinimumUserProtoW" +
-      "ithMaxResources\022.\n\006status\030\002 \001(\0162\036.com.lv" +
-      "l6.proto.ResponseStatus\"m\n\037RestrictUserM",
-      "onsterRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022\030\n\020userMons" +
-      "terUuids\030\003 \003(\t\"\204\001\n RestrictUserMonsterRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022.\n\006status\030\002 \001(\0162\036." +
-      "com.lvl6.proto.ResponseStatus\"o\n!Unrestr" +
-      "ictUserMonsterRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\030\n\020" +
-      "userMonsterUuids\030\003 \003(\t\"\206\001\n\"UnrestrictUse" +
-      "rMonsterResponseProto\0220\n\006sender\030\001 \001(\0132 .",
-      "com.lvl6.proto.MinimumUserProto\022.\n\006statu" +
-      "s\030\002 \001(\0162\036.com.lvl6.proto.ResponseStatus\"" +
-      "j\n#RetrieveUserMonsterTeamRequestProto\0220" +
+      "\t\022\017\n\007gemCost\030\003 \001(\005\022\022\n\nclientTime\030\004 \001(\003\"\211" +
+      "\001\n%CombineUserMonsterPiecesResponseProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.pr" +
+      "oto.ResponseStatus\"\233\001\n\033SellUserMonsterRe" +
+      "questProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pr" +
+      "oto.MinimumUserProtoWithMaxResources\022:\n\005" +
+      "sales\030\002 \003(\0132+.com.lvl6.proto.MinimumUser" +
+      "MonsterSellProto\"\220\001\n\034SellUserMonsterResp",
+      "onseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pro" +
+      "to.MinimumUserProtoWithMaxResources\022.\n\006s" +
+      "tatus\030\002 \001(\0162\036.com.lvl6.proto.ResponseSta" +
+      "tus\"m\n\037RestrictUserMonsterRequestProto\0220" +
       "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\021\n\tuserUuids\030\002 \003(\t\"\273\001\n$Retrieve" +
-      "UserMonsterTeamResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022." +
-      "\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Response" +
-      "Status\0221\n\017userMonsterTeam\030\003 \003(\0132\030.com.lv" +
-      "l6.proto.PvpProtoB\023B\021EventMonsterProto"
+      "serProto\022\030\n\020userMonsterUuids\030\003 \003(\t\"\204\001\n R" +
+      "estrictUserMonsterResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Respo" +
+      "nseStatus\"o\n!UnrestrictUserMonsterReques",
+      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\030\n\020userMonsterUuids\030\003 \003" +
+      "(\t\"\206\001\n\"UnrestrictUserMonsterResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.p" +
+      "roto.ResponseStatus\"j\n#RetrieveUserMonst" +
+      "erTeamRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\021\n\tuserUuid" +
+      "s\030\002 \003(\t\"\273\001\n$RetrieveUserMonsterTeamRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot",
+      "o.MinimumUserProto\022.\n\006status\030\002 \001(\0162\036.com" +
+      ".lvl6.proto.ResponseStatus\0221\n\017userMonste" +
+      "rTeam\030\003 \003(\0132\030.com.lvl6.proto.PvpProtoB\023B" +
+      "\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -33274,7 +33824,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_EvolveMonsterRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EvolveMonsterRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Evolution", "GemsSpent", "OilChange", });
+        new java.lang.String[] { "Sender", "Evolution", "GemsSpent", "OilChange", "ClientTime", });
     internal_static_com_lvl6_proto_EvolveMonsterResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_EvolveMonsterResponseProto_fieldAccessorTable = new
@@ -33286,7 +33836,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EvolutionFinishedRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "GemsSpent", });
+        new java.lang.String[] { "Sender", "GemsSpent", "ClientTime", });
     internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_EvolutionFinishedResponseProto_fieldAccessorTable = new
@@ -33298,7 +33848,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UeipDelete", "UeipUpdate", "UeipNew", "GemsSpent", "OilChange", });
+        new java.lang.String[] { "Sender", "UeipDelete", "UeipUpdate", "UeipNew", "GemsSpent", "OilChange", "ClientTime", });
     internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_fieldAccessorTable = new
@@ -33310,7 +33860,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "Umcep", "UserMonsterUuids", "UserMonsterUuid", });
+        new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "Umcep", "UserMonsterUuids", "UserMonsterUuid", "ClientTime", });
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_com_lvl6_proto_EnhancementWaitTimeCompleteResponseProto_fieldAccessorTable = new
@@ -33322,7 +33872,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CollectMonsterEnhancementRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "Umcep", "UserMonsterUuids", });
+        new java.lang.String[] { "Sender", "Umcep", "UserMonsterUuids", "ClientTime", });
     internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_com_lvl6_proto_CollectMonsterEnhancementResponseProto_fieldAccessorTable = new
@@ -33358,7 +33908,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_HealMonsterRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UmhDelete", "UmhUpdate", "UmhNew", "CashChange", "GemCostForHealing", "IsSpeedup", "GemsForSpeedup", "Umchp", });
+        new java.lang.String[] { "Sender", "UmhDelete", "UmhUpdate", "UmhNew", "CashChange", "GemCostForHealing", "IsSpeedup", "GemsForSpeedup", "Umchp", "ClientTime", });
     internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(15);
     internal_static_com_lvl6_proto_HealMonsterResponseProto_fieldAccessorTable = new
@@ -33436,7 +33986,7 @@ public final class EventMonsterProto {
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UserMonsterUuids", "GemCost", });
+        new java.lang.String[] { "Sender", "UserMonsterUuids", "GemCost", "ClientTime", });
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(27);
     internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_fieldAccessorTable = new

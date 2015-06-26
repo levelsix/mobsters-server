@@ -13,18 +13,20 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CompleteBattleItemRequestEvent;
+import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
 import com.lvl6.events.response.CompleteBattleItemResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -32,6 +34,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CompleteBattleItemAction;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -65,6 +68,9 @@ public class CompleteBattleItemController extends EventController {
 
 	@Autowired
 	protected DeleteUtil deleteUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public CompleteBattleItemController() {
 		
@@ -90,6 +96,8 @@ public class CompleteBattleItemController extends EventController {
 		String userId = senderProto.getUserUuid();
 		List<BattleItemQueueForUserProto> completedprotoList = reqProto
 				.getBiqfuCompletedList();
+		
+		Date clientTime = new Date(reqProto.getClientTime());
 
 		List<BattleItemQueueForUser> completedList = getIdsToBattleItemQueueForUserFromProto(
 				completedprotoList, userId);
@@ -105,6 +113,16 @@ public class CompleteBattleItemController extends EventController {
 				.newBuilder();
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
+		
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

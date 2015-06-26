@@ -27,15 +27,16 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementRequestProto;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto;
 import com.lvl6.proto.EventMonsterProto.CollectMonsterEnhancementResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -61,6 +62,9 @@ public class CollectMonsterEnhancementController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public CollectMonsterEnhancementController() {
 		
@@ -86,6 +90,7 @@ public class CollectMonsterEnhancementController extends EventController {
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
+		Date clientTime = new Date(reqProto.getClientTime());
 		UserMonsterCurrentExpProto umcep = reqProto.getUmcep();
 		//user monster ids that will be deleted from monster enhancing for user table
 		List<String> userMonsterIdsThatFinished = reqProto
@@ -99,6 +104,16 @@ public class CollectMonsterEnhancementController extends EventController {
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
 
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
+		
 		UUID userUuid = null;
 		boolean invalidUuids = true;
 

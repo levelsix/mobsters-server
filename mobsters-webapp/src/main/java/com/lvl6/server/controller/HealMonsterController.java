@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.HealMonsterRequestEvent;
 import com.lvl6.events.response.HealMonsterResponseEvent;
+import com.lvl6.events.response.SubmitMonsterEnhancementResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
@@ -29,10 +30,10 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils2;
@@ -43,6 +44,7 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -73,6 +75,9 @@ public class HealMonsterController extends EventController {
 
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public HealMonsterController() {
 
@@ -115,6 +120,7 @@ public class HealMonsterController extends EventController {
 
 		int gemCost = gemCostForHealing + gemsForSpeedup;//reqProto.getTotalGemCost();
 		Timestamp curTime = new Timestamp((new Date()).getTime());
+		Date clientTime = new Date(reqProto.getClientTime());
 		int maxCash = senderResourcesProto.getMaxCash();
 
 		Map<String, UserMonsterHealingProto> deleteMap = monsterStuffUtils
@@ -134,6 +140,16 @@ public class HealMonsterController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
+		
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;

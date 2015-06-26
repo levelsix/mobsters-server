@@ -210,6 +210,15 @@ public final class EventBattleItemProto {
      * </pre>
      */
     int getGemCostForCreating();
+
+    /**
+     * <code>optional int64 clientTime = 8;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 8;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CreateBattleItemRequestProto}
@@ -313,6 +322,11 @@ public final class EventBattleItemProto {
             case 56: {
               bitField0_ |= 0x00000008;
               gemCostForCreating_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000010;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -622,6 +636,21 @@ public final class EventBattleItemProto {
       return gemCostForCreating_;
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 8;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 8;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int64 clientTime = 8;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       biqfuDelete_ = java.util.Collections.emptyList();
@@ -630,6 +659,7 @@ public final class EventBattleItemProto {
       cashChange_ = 0;
       oilChange_ = 0;
       gemCostForCreating_ = 0;
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -664,6 +694,9 @@ public final class EventBattleItemProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(7, gemCostForCreating_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(8, clientTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -701,6 +734,10 @@ public final class EventBattleItemProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, gemCostForCreating_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(8, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -853,6 +890,8 @@ public final class EventBattleItemProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         gemCostForCreating_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -928,6 +967,10 @@ public final class EventBattleItemProto {
           to_bitField0_ |= 0x00000008;
         }
         result.gemCostForCreating_ = gemCostForCreating_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1033,6 +1076,9 @@ public final class EventBattleItemProto {
         }
         if (other.hasGemCostForCreating()) {
           setGemCostForCreating(other.getGemCostForCreating());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2271,6 +2317,38 @@ public final class EventBattleItemProto {
         return this;
       }
 
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 8;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional int64 clientTime = 8;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 8;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000080;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 8;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CreateBattleItemRequestProto)
     }
 
@@ -3323,6 +3401,15 @@ public final class EventBattleItemProto {
      */
     com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProtoOrBuilder getBiqfuCompletedOrBuilder(
         int index);
+
+    /**
+     * <code>optional int64 clientTime = 5;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 5;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.CompleteBattleItemRequestProto}
@@ -3405,6 +3492,11 @@ public final class EventBattleItemProto {
                 mutable_bitField0_ |= 0x00000008;
               }
               biqfuCompleted_.add(input.readMessage(com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -3564,11 +3656,27 @@ public final class EventBattleItemProto {
       return biqfuCompleted_.get(index);
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 5;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 5;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int64 clientTime = 5;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       isSpeedup_ = false;
       gemsForSpeedup_ = 0;
       biqfuCompleted_ = java.util.Collections.emptyList();
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3595,6 +3703,9 @@ public final class EventBattleItemProto {
       for (int i = 0; i < biqfuCompleted_.size(); i++) {
         output.writeMessage(4, biqfuCompleted_.get(i));
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(5, clientTime_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -3619,6 +3730,10 @@ public final class EventBattleItemProto {
       for (int i = 0; i < biqfuCompleted_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, biqfuCompleted_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3755,6 +3870,8 @@ public final class EventBattleItemProto {
         } else {
           biqfuCompletedBuilder_.clear();
         }
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -3808,6 +3925,10 @@ public final class EventBattleItemProto {
         } else {
           result.biqfuCompleted_ = biqfuCompletedBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3858,6 +3979,9 @@ public final class EventBattleItemProto {
               biqfuCompletedBuilder_.addAllMessages(other.biqfuCompleted_);
             }
           }
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4392,6 +4516,38 @@ public final class EventBattleItemProto {
           biqfuCompleted_ = null;
         }
         return biqfuCompletedBuilder_;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 5;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int64 clientTime = 5;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 5;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000010;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 5;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CompleteBattleItemRequestProto)
@@ -5516,6 +5672,15 @@ public final class EventBattleItemProto {
      * </pre>
      */
     int getDiscardedBattleItemIds(int index);
+
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    boolean hasClientTime();
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    long getClientTime();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.DiscardBattleItemRequestProto}
@@ -5601,6 +5766,11 @@ public final class EventBattleItemProto {
                 discardedBattleItemIds_.add(input.readInt32());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              clientTime_ = input.readInt64();
               break;
             }
           }
@@ -5704,9 +5874,25 @@ public final class EventBattleItemProto {
       return discardedBattleItemIds_.get(index);
     }
 
+    public static final int CLIENTTIME_FIELD_NUMBER = 3;
+    private long clientTime_;
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int64 clientTime = 3;</code>
+     */
+    public long getClientTime() {
+      return clientTime_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       discardedBattleItemIds_ = java.util.Collections.emptyList();
+      clientTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5726,6 +5912,9 @@ public final class EventBattleItemProto {
       }
       for (int i = 0; i < discardedBattleItemIds_.size(); i++) {
         output.writeInt32(2, discardedBattleItemIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(3, clientTime_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5748,6 +5937,10 @@ public final class EventBattleItemProto {
         }
         size += dataSize;
         size += 1 * getDiscardedBattleItemIdsList().size();
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, clientTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5875,6 +6068,8 @@ public final class EventBattleItemProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         discardedBattleItemIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -5916,6 +6111,10 @@ public final class EventBattleItemProto {
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.discardedBattleItemIds_ = discardedBattleItemIds_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clientTime_ = clientTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5944,6 +6143,9 @@ public final class EventBattleItemProto {
             discardedBattleItemIds_.addAll(other.discardedBattleItemIds_);
           }
           onChanged();
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6185,6 +6387,38 @@ public final class EventBattleItemProto {
       public Builder clearDiscardedBattleItemIds() {
         discardedBattleItemIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      private long clientTime_ ;
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public long getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000004;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 clientTime = 3;</code>
+       */
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        clientTime_ = 0L;
         onChanged();
         return this;
       }
@@ -6836,7 +7070,7 @@ public final class EventBattleItemProto {
     java.lang.String[] descriptorData = {
       "\n\025EventBattleItem.proto\022\016com.lvl6.proto\032" +
       "\020BattleItem.proto\032\026SharedEnumConfig.prot" +
-      "o\032\nUser.proto\"\346\002\n\034CreateBattleItemReques" +
+      "o\032\nUser.proto\"\372\002\n\034CreateBattleItemReques" +
       "tProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto." +
       "MinimumUserProtoWithMaxResources\022@\n\013biqf" +
       "uDelete\030\002 \003(\0132+.com.lvl6.proto.BattleIte" +
@@ -6845,28 +7079,30 @@ public final class EventBattleItemProto {
       "roto\022=\n\010biqfuNew\030\004 \003(\0132+.com.lvl6.proto." +
       "BattleItemQueueForUserProto\022\022\n\ncashChang",
       "e\030\005 \001(\021\022\021\n\toilChange\030\006 \001(\021\022\032\n\022gemCostFor" +
-      "Creating\030\007 \001(\005\"\277\001\n\035CreateBattleItemRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022<\n\017userBattleItems\030\002 " +
-      "\003(\0132#.com.lvl6.proto.UserBattleItemProto" +
-      "\022.\n\006status\030\003 \001(\0162\036.com.lvl6.proto.Respon" +
-      "seStatus\"\302\001\n\036CompleteBattleItemRequestPr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gems" +
-      "ForSpeedup\030\003 \001(\005\022C\n\016biqfuCompleted\030\004 \003(\013",
-      "2+.com.lvl6.proto.BattleItemQueueForUser" +
-      "Proto\"\274\001\n\037CompleteBattleItemResponseProt" +
+      "Creating\030\007 \001(\005\022\022\n\nclientTime\030\010 \001(\003\"\277\001\n\035C" +
+      "reateBattleItemResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022<" +
+      "\n\017userBattleItems\030\002 \003(\0132#.com.lvl6.proto" +
+      ".UserBattleItemProto\022.\n\006status\030\003 \001(\0162\036.c" +
+      "om.lvl6.proto.ResponseStatus\"\326\001\n\036Complet" +
+      "eBattleItemRequestProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022\021\n\tisS" +
+      "peedup\030\002 \001(\010\022\026\n\016gemsForSpeedup\030\003 \001(\005\022C\n\016",
+      "biqfuCompleted\030\004 \003(\0132+.com.lvl6.proto.Ba" +
+      "ttleItemQueueForUserProto\022\022\n\nclientTime\030" +
+      "\005 \001(\003\"\274\001\n\037CompleteBattleItemResponseProt" +
       "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
       "umUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.p" +
       "roto.ResponseStatus\0227\n\nubiUpdated\030\003 \003(\0132" +
-      "#.com.lvl6.proto.UserBattleItemProto\"q\n\035" +
-      "DiscardBattleItemRequestProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\036\n\026discardedBattleItemIds\030\002 \003(\005\"\202\001\n\036Disc" +
-      "ardBattleItemResponseProto\0220\n\006sender\030\001 \001",
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022.\n\006" +
-      "status\030\002 \001(\0162\036.com.lvl6.proto.ResponseSt" +
-      "atusB\026B\024EventBattleItemProto"
+      "#.com.lvl6.proto.UserBattleItemProto\"\205\001\n" +
+      "\035DiscardBattleItemRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022\036\n\026discardedBattleItemIds\030\002 \003(\005\022\022\n\nclie",
+      "ntTime\030\003 \001(\003\"\202\001\n\036DiscardBattleItemRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022.\n\006status\030\002 \001(\0162\036.com." +
+      "lvl6.proto.ResponseStatusB\026B\024EventBattle" +
+      "ItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6888,7 +7124,7 @@ public final class EventBattleItemProto {
     internal_static_com_lvl6_proto_CreateBattleItemRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CreateBattleItemRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "BiqfuDelete", "BiqfuUpdate", "BiqfuNew", "CashChange", "OilChange", "GemCostForCreating", });
+        new java.lang.String[] { "Sender", "BiqfuDelete", "BiqfuUpdate", "BiqfuNew", "CashChange", "OilChange", "GemCostForCreating", "ClientTime", });
     internal_static_com_lvl6_proto_CreateBattleItemResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_lvl6_proto_CreateBattleItemResponseProto_fieldAccessorTable = new
@@ -6900,7 +7136,7 @@ public final class EventBattleItemProto {
     internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_CompleteBattleItemRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "BiqfuCompleted", });
+        new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "BiqfuCompleted", "ClientTime", });
     internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_lvl6_proto_CompleteBattleItemResponseProto_fieldAccessorTable = new
@@ -6912,7 +7148,7 @@ public final class EventBattleItemProto {
     internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DiscardedBattleItemIds", });
+        new java.lang.String[] { "Sender", "DiscardedBattleItemIds", "ClientTime", });
     internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_fieldAccessorTable = new

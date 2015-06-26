@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CombineUserMonsterPiecesRequestEvent;
 import com.lvl6.events.response.CombineUserMonsterPiecesResponseEvent;
+import com.lvl6.events.response.HealMonsterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
@@ -24,14 +25,15 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProto;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -51,6 +53,9 @@ public class CombineUserMonsterPiecesController extends EventController {
 	
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
+	
+	@Autowired
+	protected TimeUtils timeUtils;
 
 	public CombineUserMonsterPiecesController() {
 		
@@ -78,6 +83,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 		userMonsterIds = new ArrayList<String>(userMonsterIds);
 		int gemCost = reqProto.getGemCost();
 		Date curDate = new Date();
+		Date clientTime = new Date(reqProto.getClientTime());
 		Timestamp curTime = new Timestamp(curDate.getTime());
 		//    log.info("reqProto=" + reqProto);
 
@@ -86,6 +92,16 @@ public class CombineUserMonsterPiecesController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
+		
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
+			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
+			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
+			CombineUserMonsterPiecesResponseEvent resEvent = new CombineUserMonsterPiecesResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 
 		UUID userUuid = null;
 		boolean invalidUuids = false;
