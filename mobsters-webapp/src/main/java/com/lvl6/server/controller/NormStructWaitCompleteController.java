@@ -83,6 +83,7 @@ public class NormStructWaitCompleteController extends EventController {
 		List<String> userStructIds = reqProto.getUserStructUuidList();
 		userStructIds = new ArrayList<String>(userStructIds);
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
+		Date currentClientTime = new Date(reqProto.getCurrentClientTime());
 
 		//stuff to send to client
 		NormStructWaitCompleteResponseProto.Builder resBuilder = NormStructWaitCompleteResponseProto
@@ -90,7 +91,7 @@ public class NormStructWaitCompleteController extends EventController {
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getCurTime()), new Date()) > 
+		if(timeUtils.numMinutesDifference(currentClientTime, new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
