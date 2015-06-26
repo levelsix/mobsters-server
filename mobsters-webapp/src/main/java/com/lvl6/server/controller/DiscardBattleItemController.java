@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.DiscardBattleItemRequestEvent;
 import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.DiscardBattleItemResponseEvent;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.User;
@@ -88,6 +89,15 @@ public class DiscardBattleItemController extends EventController {
 				.newBuilder();
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 		
 		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

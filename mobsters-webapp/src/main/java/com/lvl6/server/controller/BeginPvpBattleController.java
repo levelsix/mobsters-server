@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginPvpBattleRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.BeginPvpBattleResponseEvent;
 import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.properties.ControllerConstants;
@@ -103,6 +104,14 @@ public class BeginPvpBattleController extends EventController {
 		BeginPvpBattleResponseEvent resEvent = new BeginPvpBattleResponseEvent(
 				attackerId);
 		resEvent.setTag(event.getTag());
+		
+		if(reqProto.getAttackStartTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
+		}
 		
 		if(timeUtil.numMinutesDifference(new Date(reqProto.getAttackStartTime()), new Date()) > 
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SolicitClanHelpRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.BeginClanRaidResponseEvent;
 import com.lvl6.events.response.SolicitClanHelpResponseEvent;
 import com.lvl6.info.Clan;
@@ -93,6 +94,15 @@ public class SolicitClanHelpController extends EventController {
 
 		if (null != senderProto.getClan()) {
 			clanId = senderProto.getClan().getClanUuid();
+		}
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		if(timeUtil.numMinutesDifference(clientDate, new Date()) > 

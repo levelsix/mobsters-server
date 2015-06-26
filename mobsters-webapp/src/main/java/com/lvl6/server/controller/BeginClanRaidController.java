@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginClanRaidRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.BeginClanRaidResponseEvent;
 import com.lvl6.events.response.RequestJoinClanResponseEvent;
 import com.lvl6.info.ClanEventPersistent;
@@ -155,6 +156,15 @@ public class BeginClanRaidController extends EventController {
 						"UUID error. incorrect userId=%s, clanId=%s", userId,
 						clanId), e);
 			}
+		}
+		
+		if(reqProto.getCurTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		if(timeUtils.numMinutesDifference(curDate, new Date()) > 

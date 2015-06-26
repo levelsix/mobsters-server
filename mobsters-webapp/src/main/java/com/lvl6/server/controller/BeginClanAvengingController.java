@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginClanAvengingRequestEvent;
+import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.BeginClanAvengingResponseEvent;
 import com.lvl6.info.ClanAvenge;
 import com.lvl6.properties.ControllerConstants;
@@ -90,6 +91,15 @@ public class BeginClanAvengingController extends EventController {
 			if (null != mcp && mcp.hasClanUuid()) {
 				clanId = mcp.getClanUuid();
 			}
+		}
+		
+		if(reqProto.getClientTime() == 0) {
+			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
+			log.error("clientTime not sent");
+			BeginClanAvengingResponseEvent resEvent = new BeginClanAvengingResponseEvent(senderProto.getUserUuid());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+			return;
 		}
 
 		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
