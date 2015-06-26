@@ -82,7 +82,7 @@ public class NormStructWaitCompleteController extends EventController {
 		String userId = senderProto.getUserUuid();
 		List<String> userStructIds = reqProto.getUserStructUuidList();
 		userStructIds = new ArrayList<String>(userStructIds);
-		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
+		Timestamp timeOfCompletion = new Timestamp(reqProto.getTimeOfCompletion());
 		Date currentClientTime = new Date(reqProto.getCurrentClientTime());
 
 		//stuff to send to client
@@ -141,7 +141,7 @@ public class NormStructWaitCompleteController extends EventController {
 			List<Timestamp> newRetrievedTimes = new ArrayList<Timestamp>();
 			boolean legitWaitComplete = checkLegitWaitComplete(resBuilder,
 					userStructs, userStructIds, senderProto.getUserUuid(),
-					clientTime, newRetrievedTimes);
+					timeOfCompletion, newRetrievedTimes);
 
 			boolean success = false;
 			if (legitWaitComplete) {
