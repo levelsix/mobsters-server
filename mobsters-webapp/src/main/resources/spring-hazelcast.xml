@@ -37,30 +37,30 @@
  
 	<hz:map id="lockMap" name="lockMap" instance-ref="hazel"/>
 	
-	<hz:map name="dailyHelpsMap"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:map name="dailyHelpsMap" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
 
-	<hz:map name="dailyDonateRequestsMap"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:map name="dailyDonateRequestsMap" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
 
-	<hz:map name="dailyDonateCompletesMap"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:map name="dailyDonateCompletesMap" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
 
-	<hz:map name="chatsPastHourMap"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:map name="chatsPastHourMap" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
 
-	<hz:map name="clanMemberCountMap"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:map name="clanMemberCountMap" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
 
 	
 <!-- 	<hz:map id="dailyHelpsMap" name="dailyHelpsMap" backup-count="6" read-backup-data="true" instance-ref="hazel"/> -->
@@ -74,35 +74,35 @@
 
 <!-- 	<hz:map id="clanMemberCountMap" name="clanMemberCountMap" backup="6" instance-ref="hazel"/> -->
 	
-	<hz:list name="leaderboardRanksList"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:list name="leaderboardRanksList" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
 
-	<hz:multimap name="leaderboardKeysByScoreMultiMap"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:multiMap name="leaderboardKeysByScoreMultiMap" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
                 
-	<hz:map name="leaderboardScoresByKeyMap"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:map name="leaderboardScoresByKeyMap" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
 	
-	<hz:lock name="leaderboardPendingLock"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:lock name="leaderboardPendingLock" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
                 
-	<hz:list name="leaderboardPendingQueue"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>             
+<!-- 	<hz:list name="leaderboardPendingQueue" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/>              -->
 
-	<hz:lock name="leaderboardLock"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:lock name="leaderboardLock" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
                                 	
 	
 <!-- 	<hz:list id="leaderboardRanksList" name="leaderboardRanksList" backup="6" instance-ref="hazel"/> -->
@@ -117,35 +117,35 @@
 	
 <!-- 	<hz:lock id="leaderboardLock" name = "leaderboardLock" backup="6" instance-ref="hazel"/> -->
 
-	<hz:list name="clanSearchRanksList"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:list name="clanSearchRanksList" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
 
-	<hz:multimap name="clanSearchKeysByScoreMultiMap"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:multiMap name="clanSearchKeysByScoreMultiMap" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
                 
-	<hz:map name="clanSearchScoresByKeyMap"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:map name="clanSearchScoresByKeyMap" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
 	
-	<hz:lock name="clanSearchPendingLock"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:lock name="clanSearchPendingLock" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
                 
-	<hz:list name="clanSearchPendingQueue"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>             
+<!-- 	<hz:list name="clanSearchPendingQueue" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/>              -->
 
-	<hz:lock name="clanSearchLock"
-                backup-count="6"
-                read-backup-data="true"
-                instance-ref="hazel"/>
+<!-- 	<hz:lock name="clanSearchLock" -->
+<!--                 backup-count="6" -->
+<!--                 read-backup-data="true" -->
+<!--                 instance-ref="hazel"/> -->
 
 
 <!-- 	<hz:list id="clanSearchRanksList" name="clanSearchRanksList" backup="6" instance-ref="hazel"/> -->
