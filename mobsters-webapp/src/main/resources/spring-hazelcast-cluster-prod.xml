@@ -55,8 +55,7 @@
                 backup-count="6"/>
 
 		<hz:multiMap name="leaderboardKeysByScoreMultiMap"
-                backup-count="6"
-                read-backup-data="true"/>
+                backup-count="6"/>
                 
 		<hz:map name="leaderboardScoresByKeyMap"
                 backup-count="6"
@@ -76,8 +75,7 @@
                 backup-count="6"/>
 
 		<hz:multiMap name="clanSearchKeysByScoreMultiMap"
-                backup-count="6"
-                read-backup-data="true"/>
+                backup-count="6"/>
                 
 		<hz:map name="clanSearchScoresByKeyMap"
                 backup-count="6"
