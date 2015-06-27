@@ -33,102 +33,69 @@
 	</hz:hazelcast>
 
 
-	<!-- <hz:atomicNumber id="connectedPlayerCount" name="connectedPlayerCount" 
-		instance-ref="hazel" /> -->
+	<hz:queue id="gameEventQueue" name="gameEventQueue"	instance-ref="hazel" />
+
+	<hz:map id="playersByPlayerId" name="playersByPlayerId"	instance-ref="hazel" />
 
 
-	<hz:queue id="gameEventQueue" name="gameEventQueue"
-		instance-ref="hazel" />
+	<hz:map id="playersPreDatabaseByUDID" name="playersPreDatabaseByUDID"	instance-ref="hazel" />
 
-	<hz:map id="playersByPlayerId" name="playersByPlayerId"
-		instance-ref="hazel" />
+	<hz:map id="messagesForDisconnectedPlayers" name="messagesForDisconnectedPlayers"	instance-ref="hazel" />
 
 
-	<hz:map id="playersPreDatabaseByUDID" name="playersPreDatabaseByUDID"
-		instance-ref="hazel" />
-
-	<hz:map id="messagesForDisconnectedPlayers" name="messagesForDisconnectedPlayers"
-		instance-ref="hazel" />
-
-
-	<hz:map id="playersInActionSet" name="playersInActionSet"
-		instance-ref="hazel" />
+	<hz:map id="playersInActionSet" name="playersInActionSet"		instance-ref="hazel" />
 
 	<hz:map id="scheduleTasks" name="scheduledTasks" instance-ref="hazel" />
 
 	<hz:list id="globalChat" name="globalChat" instance-ref="hazel" />
 
-	<hz:list id="goodEquipsRecievedFromBoosterPacks" name="goodEquipsRecievedFromBoosterPacks"
-		instance-ref="hazel" />
+	<hz:list id="goodEquipsRecievedFromBoosterPacks" name="goodEquipsRecievedFromBoosterPacks"	instance-ref="hazel" />
 
 	<hz:map id="lockMap" name="lockMap" instance-ref="hazel" />
 
 
-	<hz:map id="map" name="dailyHelpsMap" instance-ref="hazel" />
+	<hz:map id="dailyHelpsMap" name="dailyHelpsMap" instance-ref="hazel" />
 
-	<hz:map id="map" name="dailyDonateRequestsMap" instance-ref="hazel" />
+	<hz:map id="dailyDonateRequestsMap" name="dailyDonateRequestsMap" instance-ref="hazel" />
 
-	<hz:map id="map" name="dailyDonateCompletesMap" instance-ref="hazel" />
+	<hz:map id="dailyDonateCompletesMap" name="dailyDonateCompletesMap"	instance-ref="hazel" />
 
-	<hz:map id="map" name="chatsPastHourMap" instance-ref="hazel" />
+	<hz:map id="chatsPastHourMap" name="chatsPastHourMap"	instance-ref="hazel" />
 
-	<hz:map id="map" name="clanMemberCountMap" instance-ref="hazel" />
+	<hz:map id="clanMemberCountMap" name="clanMemberCountMap"	instance-ref="hazel" />
 
-	<!-- <hz:list id = "list" -->
-	<!-- name="clanSearchRanksList" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:list id="clanSearchRanksList" name="clanSearchRanksList" instance-ref="hazel" />
 
-	<!-- <hz:multiMap id = "multiMap" -->
-	<!-- name="clanSearchKeysByScoreMultiMap" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:multiMap id="clanSearchKeysByScoreMultiMap" name="clanSearchKeysByScoreMultiMap"	instance-ref="hazel" />
 
-	<!-- <hz:map id = "map" -->
-	<!-- name="clanSearchScoresByKeyMap" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:map id="clanSearchScoresByKeyMap" name="clanSearchScoresByKeyMap"	instance-ref="hazel" />
 
-	<!-- <hz:lock id = "lock" -->
-	<!-- name="clanSearchPendingLock" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:lock id="clanSearchPendingLock" name="clanSearchPendingLock" instance-ref="hazel" />
 
-	<!-- <hz:list id = "list" -->
-	<!-- name="clanSearchPendingQueue" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:list id="clanSearchPendingQueue" name="clanSearchPendingQueue"		instance-ref="hazel" />
 
-	<!-- <hz:lock id = "lock" -->
-	<!-- name="clanSearchLock" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:lock id="clanSearchLock" name="clanSearchLock"	instance-ref="hazel" />
 
 
 
 
-	<!-- <hz:list id = "list" -->
-	<!-- name="leaderboardRanksList" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:list id="list" name="leaderboardRanksList" instance-ref="hazel" />
 
-	<!-- <hz:multiMap id = "multiMap" -->
-	<!-- name="leaderboardKeysByScoreMultiMap" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:multiMap id="multiMap" name="leaderboardKeysByScoreMultiMap"	instance-ref="hazel" />
 
-	<!-- <hz:map id = "map" -->
-	<!-- name="leaderboardScoresByKeyMap" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:map id="leaderboardScoresByKeyMap" name="leaderboardScoresByKeyMap"		instance-ref="hazel" />
 
-	<!-- <hz:lock id = "lock" -->
-	<!-- name="leaderboardPendingLock" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:lock id="leaderboardPendingLock" name="leaderboardPendingLock"	instance-ref="hazel" />
 
-	<!-- <hz:list id = "list" -->
-	<!-- name="leaderboardPendingQueue" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:list id="leaderboardPendingQueue" name="leaderboardPendingQueue"	instance-ref="hazel" />
 
-	<!-- <hz:lock id = "lock" -->
-	<!-- name="leaderboardLock" -->
-	<!-- instance-ref="hazel"/> -->
+	<hz:lock id="leaderboardLock" name="leaderboardLock" instance-ref="hazel" />
 
 
 
-	<hz:map id="initializationFlags" name="initializationFlags"
-		instance-ref="hazel" />
+	<hz:map id="initializationFlags" name="initializationFlags"		instance-ref="hazel" />
+
+
 	<!-- need to prevent more than one initialization per cluster restart -->
 	<hz:map id="pvpUserMap" name="pvpUserMap" instance-ref="hazel" />
 	<hz:map id="clanRaidMonsterDmgMap" name="clanRaidMonsterDmgMap"
