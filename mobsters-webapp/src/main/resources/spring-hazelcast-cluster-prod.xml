@@ -52,7 +52,7 @@
 		
 		
 		<hz:list name="leaderboardRanksList"
-                backup-count="6""/>
+                backup-count="6"/>
 
 		<hz:multiMap name="leaderboardKeysByScoreMultiMap"
                 backup-count="6"
