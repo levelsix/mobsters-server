@@ -40,34 +40,48 @@
 
 	<hz:map 	id = "dailyHelpsMap"
 				name="dailyHelpsMap"
+				backup-count="6"
+				read-backup-data="true"
             	instance-ref="hazel"/>
 
 	<hz:map 	id = "dailyDonateRequestsMap"
 				name="dailyDonateRequestsMap"
+				backup-count="6"
+				read-backup-data="true"
             	instance-ref="hazel"/>
 
 	<hz:map 	id = "dailyDonateCompletesMap"
 				name="dailyDonateCompletesMap"
+				backup-count="6"
+				read-backup-data="true"
             	instance-ref="hazel"/>
 
 	<hz:map 	id = "chatsPastHourMap"
 				name="chatsPastHourMap"
+				backup-count="6"
+				read-backup-data="true"
             	instance-ref="hazel"/>
 
 	<hz:map 	id = "clanMemberCountMap"
 				name="clanMemberCountMap"
+				backup-count="6"
+				read-backup-data="true"
             	instance-ref="hazel"/>
 
 	<hz:list 	id = "clanSearchRanksList"
 				name="clanSearchRanksList"
+				backup-count="6"
                 instance-ref="hazel"/>
 
 	<hz:multiMap id = "clanSearchKeysByScoreMultiMap"
 				name="clanSearchKeysByScoreMultiMap"
+				backup-count="6"
                 instance-ref="hazel"/>
                 
 	<hz:map 	id = "clanSearchScoresByKeyMap"
 				name="clanSearchScoresByKeyMap"
+				backup-count="6"
+				read-backup-data="true"
                 instance-ref="hazel"/>
 	
 	<hz:lock 	id = "clanSearchPendingLock"
@@ -76,6 +90,7 @@
                 
 	<hz:list 	id = "clanSearchPendingQueue"
 				name="clanSearchPendingQueue"
+				backup-count="6"
                 instance-ref="hazel"/>             
 
 	<hz:lock 	id = "clanSearchLock"
@@ -87,14 +102,18 @@
 	
 	<hz:list 	id = "list"
 				name="leaderboardRanksList"
+				backup-count="6"
                 instance-ref="hazel"/>
 
 	<hz:multiMap id = "multiMap"
 				name="leaderboardKeysByScoreMultiMap"
+				backup-count="6"
                 instance-ref="hazel"/>
                 
 	<hz:map 	id = "leaderboardScoresByKeyMap"
 				name="leaderboardScoresByKeyMap"
+				backup-count="6"
+				read-backup-data="true"
                 instance-ref="hazel"/>
 	
 	<hz:lock 	id = "leaderboardPendingLock"
@@ -103,6 +122,7 @@
                 
 	<hz:list 	id = "leaderboardPendingQueue"
 				name="leaderboardPendingQueue"
+				backup-count="6"
                 instance-ref="hazel"/>             
 
 	<hz:lock 	id = "leaderboardLock"
