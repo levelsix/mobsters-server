@@ -39,6 +39,7 @@
             backup-count="6"/>
         
         <hz:multimap name="multimap"
+        	value-collection-type="LIST"
         	backup-count="6"/>
         	
         </hz:config>
