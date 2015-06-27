@@ -397,7 +397,7 @@ public class RetrieveClanInfoController extends EventController {
 			String clanId = c.getId();
 
 			if (clanMemberSize.containsKey(clanId)) {
-				int size = (int)clanMemberSize.get(clanId);
+				int size = clanMemberSize.get(clanId);
 				resBuilder.addClanInfo(createInfoProtoUtils
 						.createFullClanProtoWithClanSize(c, size));
 			} else {

@@ -31,32 +31,32 @@ import com.lvl6.utils.TimeUtils;
 
 @Component
 public class HazelcastClanSearchImpl {
-	
+
 	private static final Logger log = LoggerFactory
 			.getLogger(HazelcastClanSearchImpl.class);
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
-	
+
 	@Autowired
 	protected ClanChatPostDao2 clanChatPostDao;
-	
+
 	@Autowired
 	protected ClanHelpCountForUserDao2 clanHelpCountForUserDao;
-	
+
 	@Autowired
 	protected ClanMemberTeamDonationDao2 clanMemberTeamDonationDao;
-	
+
 	@Autowired
 	protected ClanForUserDao clanForUserDao;
-	
+
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils; 
-	
+
 
 	@Resource(name = "clanMemberCountMap")
 	IMap<String, Integer> clanMemberCountMap;
-	
+
 	public IMap<String, Integer> getClanMemberCountMap() {
 		return clanMemberCountMap;
 	}
@@ -65,10 +65,10 @@ public class HazelcastClanSearchImpl {
 			IMap<String, Integer> clanMemberCountMap) {
 		this.clanMemberCountMap = clanMemberCountMap;
 	}
-	
+
 	@Resource(name = "dailyHelpsMap")
 	IMap<String, Map<Date, Integer>> dailyHelpsMap;
-	
+
 	public IMap<String, Map<Date, Integer>> getDailyHelpsMap() {
 		return dailyHelpsMap;
 	}
@@ -80,7 +80,7 @@ public class HazelcastClanSearchImpl {
 
 	@Resource(name = "dailyDonateRequestsMap")
 	IMap<String, Map<Date, Integer>> dailyDonateRequestsMap;
-	
+
 	public IMap<String, Map<Date, Integer>> getdailyDonateRequestsMap() {
 		return dailyDonateRequestsMap;
 	}
@@ -89,10 +89,10 @@ public class HazelcastClanSearchImpl {
 			IMap<String, Map<Date, Integer>> dailyDonateRequestsMap) {
 		this.dailyDonateRequestsMap = dailyDonateRequestsMap;
 	}
-	
+
 	@Resource(name = "dailyDonateCompletesMap")
 	IMap<String, Map<Date, Integer>> dailyDonateCompletesMap;
-	
+
 	public IMap<String, Map<Date, Integer>> getdailyDonateCompletesMap() {
 		return dailyDonateCompletesMap;
 	}
@@ -101,10 +101,10 @@ public class HazelcastClanSearchImpl {
 			IMap<String, Map<Date, Integer>> dailyDonateCompletesMap) {
 		this.dailyDonateCompletesMap = dailyDonateCompletesMap;
 	}
-	
+
 	@Resource(name = "chatsPastHourMap")
 	IMap<String, Map<Date, Integer>> chatsPastHourMap;
-	
+
 	public IMap<String, Map<Date, Integer>> getchatsPastHourMap() {
 		return chatsPastHourMap;
 	}
@@ -113,19 +113,19 @@ public class HazelcastClanSearchImpl {
 			IMap<String, Map<Date, Integer>> chatsPastHourMap) {
 		this.chatsPastHourMap = chatsPastHourMap;
 	}
-	
+
 	protected DistributedZSet clanSearchRanking;
-	
+
 	@Autowired
 	protected HazelcastInstance hazelcastInstance;
-	
+
 	protected ILock clanSearchReloadLock;
 
-	
+
 	public HazelcastInstance getHazelcastInstance() {
 		return hazelcastInstance;
 	}
-	
+
 	@Autowired
 	public void setHazelcastInstance(HazelcastInstance hazelcastInstance) {
 		this.hazelcastInstance = hazelcastInstance;
@@ -133,11 +133,11 @@ public class HazelcastClanSearchImpl {
 				hazelcastInstance);
 		clanSearchReloadLock = hazelcastInstance.getLock("clanSearchLock");
 	}
-	
+
 	private static int minuteIntervals = 5;
 	private static int minutesPastHour = 60;
 	private static int minutesPastDay = 1440;
-	
+
 	public void updateRankForClanSearch(String clanId, Date now, int numHelps, 
 			int numDonateRequest, int numDonateComplete, int numChats,
 			int numNewMembers) {
@@ -157,11 +157,11 @@ public class HazelcastClanSearchImpl {
 			saveNumberOfMembers(clanMemberCountMap, clanId, numNewMembers);
 		}
 		//calculate the clan's current rank w/ arin's formula
-//		(members / 10) * (chats_in_past_hour+1) * (chats_in_past_24_hrs / 12) 
-//		* filled_donations_in_24hrs  * (helps_in_24_hrs/100)
-		
+		//		(members / 10) * (chats_in_past_hour+1) * (chats_in_past_24_hrs / 12) 
+		//		* filled_donations_in_24hrs  * (helps_in_24_hrs/100)
+
 		double members = (double) clanMemberCountMap.get(clanId);
-		
+
 		if(members == 0) {
 			clanSearchRanking.remove(clanId);
 			clanMemberCountMap.remove(clanId);
@@ -171,7 +171,7 @@ public class HazelcastClanSearchImpl {
 			chatsPastHourMap.remove(clanId);
 			return;
 		}
-		
+
 		double chatsPastHour = (double) retrieveFromHazelCast(chatsPastHourMap, clanId,
 				now, minutesPastHour);
 		double chatsPastDay = (double) retrieveFromHazelCast(chatsPastHourMap, clanId,
@@ -180,7 +180,7 @@ public class HazelcastClanSearchImpl {
 				clanId, now, minutesPastDay);
 		double helpsPastDay = (double) retrieveFromHazelCast(dailyHelpsMap, clanId, 
 				now, minutesPastDay);
-		
+
 		double clanStrength = members/(double)10 * (chatsPastHour + 1) * (chatsPastDay/(double)12) *
 				filledDonations * (helpsPastDay/(double)100);
 		long clanStrengthLong = (long) clanStrength;
@@ -192,14 +192,14 @@ public class HazelcastClanSearchImpl {
 		log.info("DAILY DONATE COMPLETES MAP: {}", dailyDonateCompletesMap);
 		log.info("CHATS PAST HR MAP: {}", chatsPastHourMap);
 	}
-	
-//	public List<String> getTopClanRanksForSearch() {
-//		List<String> returnList = new ArrayList<String>();
-//		for(ZSetMember m : clanSearchRanking.range(0, clanSearchRanking.size())) {
-//			
-//		}
-//	}
-	
+
+	//	public List<String> getTopClanRanksForSearch() {
+	//		List<String> returnList = new ArrayList<String>();
+	//		for(ZSetMember m : clanSearchRanking.range(0, clanSearchRanking.size())) {
+	//			
+	//		}
+	//	}
+
 	public void saveToHazelCast(IMap<String, Map<Date, Integer>> map, 
 			String clanId, Date now, int amount) {
 		log.info("attemping to save to hazelcast for map {}", map);
@@ -225,7 +225,7 @@ public class HazelcastClanSearchImpl {
 			}
 		}
 	}
-	
+
 	public void saveNumberOfMembers(IMap<String, Integer> map, String clanId, int numNewMembers) {
 		if(!map.containsKey(clanId)) {
 			map.put(clanId, 1);
@@ -235,7 +235,7 @@ public class HazelcastClanSearchImpl {
 		}
 		log.info("successful insert into clan members count map");
 	}
-	
+
 	public int retrieveFromHazelCast(IMap<String, Map<Date, Integer>> map, String clanId,
 			Date now, int pastMinutes) {
 		int total = 0;
@@ -251,7 +251,7 @@ public class HazelcastClanSearchImpl {
 		log.info("RETRIEVE amount = {}", total);
 		return total;
 	}
-	
+
 	public List<String> getTopNClans(int numOfClans) {
 		List<String> returnList = new ArrayList<String>();
 		for(ZSetMember m : clanSearchRanking.range(0, numOfClans)) {
@@ -260,7 +260,7 @@ public class HazelcastClanSearchImpl {
 		}
 		return returnList;
 	}
-	
+
 	public void reload() {
 		new Thread(new Runnable() {
 			@Override
@@ -284,7 +284,7 @@ public class HazelcastClanSearchImpl {
 			}
 		}).start();
 	}
-	
+
 	public void reloadClans() {
 		//retrieve all the data relevant (past hour or 24 hrs)
 		Date hourAgo = timeUtils.createDateAddHours(new Date(), -1);
@@ -295,13 +295,38 @@ public class HazelcastClanSearchImpl {
 		List<ClanForUserPojo> usersInClans = clanForUserDao.fetchByStatus(UserClanStatus.LEADER.toString(),
 				UserClanStatus.JUNIOR_LEADER.toString(), UserClanStatus.CAPTAIN.toString(),
 				UserClanStatus.MEMBER.toString());
-		
+
+		if(!chatsPastHourMap.isEmpty()) {
+			log.info("size of chatsPastHourMap is : {}", chatsPastHourMap.size());
+			chatsPastHourMap.evictAll();
+		}
+
+		if(!dailyDonateRequestsMap.isEmpty()) {
+			log.info("size of dailyDonateRequestsMap is : {}", dailyDonateRequestsMap.size());
+			dailyDonateRequestsMap.evictAll();
+		}
+
+		if(!dailyDonateCompletesMap.isEmpty()) {
+			log.info("size of dailyDonateCompletesMap is : {}", dailyDonateCompletesMap.size());
+			dailyDonateCompletesMap.evictAll();
+		}
+
+		if(!dailyHelpsMap.isEmpty()) {
+			log.info("size of dailyHelpsMap is : {}", dailyHelpsMap.size());
+			dailyHelpsMap.evictAll();
+		}
+
+		if(!clanMemberCountMap.isEmpty()) {
+			log.info("size of clanMemberCountMap is : {}", clanMemberCountMap.size());
+			clanMemberCountMap.evictAll();
+		}
+
 		//reorganize data retrieved
 		for(ClanChatPostPojo ccp : chatsPastDay) {
 			String clanId = ccp.getClanId();
 			saveToHazelCast(chatsPastHourMap, clanId, ccp.getTimeOfPost(), 1);
 		}
-		
+
 		for(ClanMemberTeamDonationPojo cmtd : donatesPastDay) {
 			String clanId = cmtd.getClanId();
 			saveToHazelCast(dailyDonateRequestsMap, clanId, cmtd.getTimeOfSolicitation(), 1);
@@ -309,18 +334,18 @@ public class HazelcastClanSearchImpl {
 				saveToHazelCast(dailyDonateCompletesMap, clanId, cmtd.getTimeOfSolicitation(), 1);
 			}
 		}
-		
+
 		for(ClanHelpCountForUserPojo chcfu : helpsPastDay) {
 			String clanId = chcfu.getClanId();
 			if(chcfu.getGiven() > 0)
 				saveToHazelCast(dailyHelpsMap, clanId, chcfu.getDate(), chcfu.getGiven());
 		}
-		
+
 		for(ClanForUserPojo cfu : usersInClans) {
 			String clanId = cfu.getClanId();
 			saveNumberOfMembers(clanMemberCountMap, clanId, 1);
 		}
-		
+
 		//calculate each clan's strength value and save to hz
 		Date now = new Date();
 		for(String clanId : clanMemberCountMap.keySet()) {
@@ -335,7 +360,7 @@ public class HazelcastClanSearchImpl {
 			double chatsPastDay2 = (double) retrieveFromHazelCast(chatsPastHourMap, clanId,
 					now, minutesPastDay);
 			log.info("chats past day {}", chatsPastDay2);
-			
+
 			double filledDonations2 = (double) retrieveFromHazelCast(dailyDonateCompletesMap, 
 					clanId, now, minutesPastDay);
 			log.info("filled donations {}", filledDonations2);
@@ -344,7 +369,7 @@ public class HazelcastClanSearchImpl {
 					now, minutesPastDay);
 			log.info("helps past day {}", helpsPastDay2);
 
-			
+
 			double clanStrength2 = members2/(double)10 * (chatsPastHour2 + 1) * (chatsPastDay2/(double)12) *
 					filledDonations2 * (helpsPastDay2/(double)100);
 			long clanStrength2Long = (long) clanStrength2;
