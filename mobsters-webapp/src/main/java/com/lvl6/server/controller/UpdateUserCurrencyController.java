@@ -91,6 +91,7 @@ public class UpdateUserCurrencyController extends EventController {
 			log.error("clientTime not sent");
 			UpdateUserCurrencyResponseEvent resEvent = new UpdateUserCurrencyResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -102,6 +103,7 @@ public class UpdateUserCurrencyController extends EventController {
 			UpdateUserCurrencyResponseEvent resEvent = 
 					new UpdateUserCurrencyResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

@@ -126,6 +126,7 @@ public class SendTangoGiftController extends EventController {
 			log.error("clientTime not sent");
 			SendTangoGiftResponseEvent resEvent = new SendTangoGiftResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -137,6 +138,7 @@ public class SendTangoGiftController extends EventController {
 			SendTangoGiftResponseEvent resEvent = 
 					new SendTangoGiftResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

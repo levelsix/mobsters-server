@@ -106,6 +106,7 @@ public class TradeItemForResourcesController extends EventController {
 			log.error("clientTime not sent");
 			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -117,6 +118,7 @@ public class TradeItemForResourcesController extends EventController {
 			TradeItemForResourcesResponseEvent resEvent = 
 					new TradeItemForResourcesResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

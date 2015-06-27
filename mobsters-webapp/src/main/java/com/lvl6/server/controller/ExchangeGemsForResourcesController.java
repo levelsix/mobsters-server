@@ -94,6 +94,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 			log.error("clientTime not sent");
 			ExchangeGemsForResourcesResponseEvent resEvent = new ExchangeGemsForResourcesResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -105,6 +106,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 			ExchangeGemsForResourcesResponseEvent resEvent = 
 					new ExchangeGemsForResourcesResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

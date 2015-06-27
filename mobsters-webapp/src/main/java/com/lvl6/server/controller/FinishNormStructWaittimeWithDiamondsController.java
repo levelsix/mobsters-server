@@ -98,6 +98,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 			log.error("clientTime not sent");
 			FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -109,6 +110,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 			FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new 
 					FinishNormStructWaittimeWithDiamondsResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

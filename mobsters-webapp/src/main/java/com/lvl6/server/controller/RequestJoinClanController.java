@@ -190,6 +190,7 @@ public class RequestJoinClanController extends EventController {
 			log.error("clientTime not sent");
 			RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -200,6 +201,7 @@ public class RequestJoinClanController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

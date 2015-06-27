@@ -115,6 +115,7 @@ public class ReviveInDungeonController extends EventController {
 			log.error("clientTime not sent");
 			ReviveInDungeonResponseEvent resEvent = new ReviveInDungeonResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -126,6 +127,7 @@ public class ReviveInDungeonController extends EventController {
 			ReviveInDungeonResponseEvent resEvent = 
 					new ReviveInDungeonResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

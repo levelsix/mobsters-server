@@ -137,6 +137,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			log.error("clientTime not sent");
 			AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -147,6 +148,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			AcceptOrRejectClanInviteResponseEvent resEvent = new AcceptOrRejectClanInviteResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

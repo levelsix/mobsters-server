@@ -147,6 +147,7 @@ public class HealMonsterController extends EventController {
 			log.error("clientTime not sent");
 			HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -157,6 +158,7 @@ public class HealMonsterController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

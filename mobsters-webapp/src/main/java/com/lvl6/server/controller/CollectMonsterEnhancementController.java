@@ -110,6 +110,7 @@ public class CollectMonsterEnhancementController extends EventController {
 			log.error("clientTime not sent");
 			CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -120,6 +121,7 @@ public class CollectMonsterEnhancementController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			CollectMonsterEnhancementResponseEvent resEvent = new CollectMonsterEnhancementResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

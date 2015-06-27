@@ -100,6 +100,7 @@ public class AchievementProgressController extends EventController {
 			log.error("clientTime not sent");
 			AchievementProgressResponseEvent resEvent = new AchievementProgressResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

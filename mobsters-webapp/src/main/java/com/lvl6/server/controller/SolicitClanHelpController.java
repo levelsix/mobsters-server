@@ -101,6 +101,7 @@ public class SolicitClanHelpController extends EventController {
 			log.error("clientTime not sent");
 			SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -111,6 +112,7 @@ public class SolicitClanHelpController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			SolicitClanHelpResponseEvent resEvent = new SolicitClanHelpResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

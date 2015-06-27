@@ -129,6 +129,7 @@ public class RetrieveMiniEventController extends EventController {
 			log.error("clientTime not sent");
 			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -139,6 +140,7 @@ public class RetrieveMiniEventController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			RetrieveMiniEventResponseEvent resEvent = new RetrieveMiniEventResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

@@ -104,6 +104,7 @@ public class SolicitTeamDonationController extends EventController {
 			log.error("clientTime not sent");
 			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -114,6 +115,7 @@ public class SolicitTeamDonationController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			SolicitTeamDonationResponseEvent resEvent = new SolicitTeamDonationResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

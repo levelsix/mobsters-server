@@ -97,6 +97,7 @@ public class NormStructWaitCompleteController extends EventController {
 			log.error("clientTime not sent");
 			NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -108,6 +109,7 @@ public class NormStructWaitCompleteController extends EventController {
 			NormStructWaitCompleteResponseEvent resEvent = 
 					new NormStructWaitCompleteResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

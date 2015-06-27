@@ -155,6 +155,7 @@ public class RedeemMiniJobController extends EventController {
 			log.error("clientTime not sent");
 			RedeemMiniJobResponseEvent resEvent = new RedeemMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -166,6 +167,7 @@ public class RedeemMiniJobController extends EventController {
 			RedeemMiniJobResponseEvent resEvent = 
 					new RedeemMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

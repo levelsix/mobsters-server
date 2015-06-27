@@ -179,6 +179,7 @@ public class PurchaseBoosterPackController extends EventController {
 			log.error("clientTime not sent");
 			PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

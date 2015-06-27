@@ -152,6 +152,7 @@ public class BeginDungeonController extends EventController {
 			log.error("clientTime not sent");
 			BeginDungeonResponseEvent resEvent = new BeginDungeonResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -163,6 +164,7 @@ public class BeginDungeonController extends EventController {
 			BeginDungeonResponseEvent resEvent = 
 					new BeginDungeonResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

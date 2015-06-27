@@ -163,6 +163,7 @@ public class BeginClanRaidController extends EventController {
 			log.error("clientTime not sent");
 			BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -173,6 +174,7 @@ public class BeginClanRaidController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

@@ -150,6 +150,7 @@ public class CollectGiftController extends EventController {
 			log.error("clientTime not sent");
 			CollectGiftResponseEvent resEvent = new CollectGiftResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -161,6 +162,7 @@ public class CollectGiftController extends EventController {
 			CollectGiftResponseEvent resEvent = 
 					new CollectGiftResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

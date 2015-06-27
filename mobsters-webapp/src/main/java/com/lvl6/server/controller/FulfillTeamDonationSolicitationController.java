@@ -118,6 +118,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 			log.error("clientTime not sent");
 			FulfillTeamDonationSolicitationResponseEvent resEvent = new FulfillTeamDonationSolicitationResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -129,6 +130,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 			FulfillTeamDonationSolicitationResponseEvent resEvent = 
 					new FulfillTeamDonationSolicitationResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

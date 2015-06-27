@@ -146,6 +146,7 @@ public class RedeemSecretGiftController extends EventController {
 			log.error("clientTime not sent");
 			RedeemSecretGiftResponseEvent resEvent = new RedeemSecretGiftResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -157,6 +158,7 @@ public class RedeemSecretGiftController extends EventController {
 			RedeemSecretGiftResponseEvent resEvent = 
 					new RedeemSecretGiftResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

@@ -99,6 +99,7 @@ public class BeginMiniJobController extends EventController {
 			log.error("clientTime not sent");
 			BeginMiniJobResponseEvent resEvent = new BeginMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -110,6 +111,7 @@ public class BeginMiniJobController extends EventController {
 			BeginMiniJobResponseEvent resEvent = 
 					new BeginMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

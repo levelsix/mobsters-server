@@ -120,6 +120,7 @@ public class PerformResearchController extends EventController {
 			log.error("clientTime not sent");
 			PerformResearchResponseEvent resEvent = new PerformResearchResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -131,6 +132,7 @@ public class PerformResearchController extends EventController {
 			PerformResearchResponseEvent resEvent = 
 					new PerformResearchResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

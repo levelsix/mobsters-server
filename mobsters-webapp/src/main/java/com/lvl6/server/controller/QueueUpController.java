@@ -169,6 +169,7 @@ public class QueueUpController extends EventController {
 			log.error("clientTime not sent");
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -180,6 +181,7 @@ public class QueueUpController extends EventController {
 			QueueUpResponseEvent resEvent = 
 					new QueueUpResponseEvent(attackerProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

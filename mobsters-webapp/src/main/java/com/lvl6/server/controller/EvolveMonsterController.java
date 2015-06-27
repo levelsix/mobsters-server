@@ -134,6 +134,7 @@ public class EvolveMonsterController extends EventController {
 			log.error("clientTime not sent");
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -144,6 +145,7 @@ public class EvolveMonsterController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			EvolveMonsterResponseEvent resEvent = new EvolveMonsterResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

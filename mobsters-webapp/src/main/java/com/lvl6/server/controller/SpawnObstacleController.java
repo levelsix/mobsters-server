@@ -95,6 +95,7 @@ public class SpawnObstacleController extends EventController {
 			log.error("clientTime not sent");
 			SpawnObstacleResponseEvent resEvent = new SpawnObstacleResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -106,6 +107,7 @@ public class SpawnObstacleController extends EventController {
 			SpawnObstacleResponseEvent resEvent = 
 					new SpawnObstacleResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

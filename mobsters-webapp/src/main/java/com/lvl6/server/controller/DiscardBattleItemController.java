@@ -95,6 +95,7 @@ public class DiscardBattleItemController extends EventController {
 			log.error("clientTime not sent");
 			DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -105,6 +106,7 @@ public class DiscardBattleItemController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			DiscardBattleItemResponseEvent resEvent = new DiscardBattleItemResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

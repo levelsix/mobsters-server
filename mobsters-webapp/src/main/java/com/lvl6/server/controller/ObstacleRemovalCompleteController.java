@@ -93,6 +93,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 			log.error("clientTime not sent");
 			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -104,6 +105,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 			ObstacleRemovalCompleteResponseEvent resEvent = 
 					new ObstacleRemovalCompleteResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

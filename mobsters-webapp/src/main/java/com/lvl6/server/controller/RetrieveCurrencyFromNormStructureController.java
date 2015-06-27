@@ -129,6 +129,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 			log.error("clientTime not sent");
 			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -140,6 +141,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 			RetrieveCurrencyFromNormStructureResponseEvent resEvent = new 
 					RetrieveCurrencyFromNormStructureResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

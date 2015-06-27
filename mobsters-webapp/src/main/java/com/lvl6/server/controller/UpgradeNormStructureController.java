@@ -98,6 +98,7 @@ public class UpgradeNormStructureController extends EventController {
 			log.error("clientTime not sent");
 			UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -109,6 +110,7 @@ public class UpgradeNormStructureController extends EventController {
 			UpgradeNormStructureResponseEvent resEvent = 
 					new UpgradeNormStructureResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

@@ -120,6 +120,7 @@ public class CompleteBattleItemController extends EventController {
 			log.error("clientTime not sent");
 			CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -130,6 +131,7 @@ public class CompleteBattleItemController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			CompleteBattleItemResponseEvent resEvent = new CompleteBattleItemResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

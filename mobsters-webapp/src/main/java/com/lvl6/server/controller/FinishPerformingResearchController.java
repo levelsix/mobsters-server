@@ -100,6 +100,7 @@ public class FinishPerformingResearchController extends EventController {
 			log.error("clientTime not sent");
 			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -110,6 +111,7 @@ public class FinishPerformingResearchController extends EventController {
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
 			FinishPerformingResearchResponseEvent resEvent = new FinishPerformingResearchResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

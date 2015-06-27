@@ -94,6 +94,7 @@ public class AchievementRedeemController extends EventController {
 			log.error("clientTime not sent");
 			AchievementRedeemResponseEvent resEvent = new AchievementRedeemResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}

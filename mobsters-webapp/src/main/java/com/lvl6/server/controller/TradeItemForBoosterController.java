@@ -164,6 +164,7 @@ public class TradeItemForBoosterController extends EventController {
 			log.error("clientTime not sent");
 			TradeItemForBoosterResponseEvent resEvent = new TradeItemForBoosterResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
@@ -175,6 +176,7 @@ public class TradeItemForBoosterController extends EventController {
 			TradeItemForBoosterResponseEvent resEvent = 
 					new TradeItemForBoosterResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
+			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
