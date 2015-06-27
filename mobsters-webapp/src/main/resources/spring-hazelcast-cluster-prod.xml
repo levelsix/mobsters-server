@@ -36,16 +36,14 @@
             read-backup-data="true"/>
             
         <hz:list name="list"
-            backup-count="6"
-            read-backup-data="true"/>
+            backup-count="6"/>
 
 		<hz:multiMap name="multiMap"
             backup-count="6"
             read-backup-data="true"/>
             
         <hz:lock name="lock"
-            backup-count="6"
-            read-backup-data="true"/>    
+            backup-count="6"/>    
         
         </hz:config>
 	</hz:hazelcast>
