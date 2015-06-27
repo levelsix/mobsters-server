@@ -79,7 +79,7 @@
 <!--                 read-backup-data="true" -->
 <!--                 instance-ref="hazel"/> -->
 
-	<hz:multiMap id="leaderboardKeysByScoreMultiMap" instance-ref="instance" name="leaderboardKeysByScoreMultiMap"/>
+	<hz:multiMap id="leaderboardKeysByScoreMultiMap" instance-ref="hazel" name="leaderboardKeysByScoreMultiMap"/>
 	
 
 <!-- 	<hz:multiMap name="leaderboardKeysByScoreMultiMap" -->
@@ -153,7 +153,7 @@
 
 <!-- 	<hz:list id="clanSearchRanksList" name="clanSearchRanksList" backup="6" instance-ref="hazel"/> -->
 	
-	<hz:multimap id="clanSearchKeysByScoreMultiMap" name="clanSearchkeysByScoreMultiMap" instance-ref="hazel"/>
+	<hz:multiMap id="clanSearchKeysByScoreMultiMap" name="clanSearchkeysByScoreMultiMap" instance-ref="hazel"/>
 	
 <!-- 	<hz:map id="clanSearchScoresByKeyMap" name="clanSearchScoresByKeyMap" backup="6" instance-ref="hazel"/> -->
 	
