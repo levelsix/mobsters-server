@@ -2419,9 +2419,9 @@ public final class MiniEventProtos {
        */
       GAIN_ENHANCE_STRENGTH(24, 24),
       /**
-       * <code>ENHANCE_CAKE_KID_BASE = 25;</code>
+       * <code>GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID = 25;</code>
        */
-      ENHANCE_CAKE_KID_BASE(25, 25),
+      GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID(25, 25),
       /**
        * <code>ENHANCE_CAKE_KID_FEEDER = 26;</code>
        */
@@ -2605,9 +2605,9 @@ public final class MiniEventProtos {
        */
       public static final int GAIN_ENHANCE_STRENGTH_VALUE = 24;
       /**
-       * <code>ENHANCE_CAKE_KID_BASE = 25;</code>
+       * <code>GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID = 25;</code>
        */
-      public static final int ENHANCE_CAKE_KID_BASE_VALUE = 25;
+      public static final int GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID_VALUE = 25;
       /**
        * <code>ENHANCE_CAKE_KID_FEEDER = 26;</code>
        */
@@ -2715,7 +2715,7 @@ public final class MiniEventProtos {
           case 21: return PVP_CATCH_ULTRA;
           case 22: return PVP_CATCH_EPIC;
           case 24: return GAIN_ENHANCE_STRENGTH;
-          case 25: return ENHANCE_CAKE_KID_BASE;
+          case 25: return GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID;
           case 26: return ENHANCE_CAKE_KID_FEEDER;
           case 27: return GAIN_EVOLUTION_STRENGTH;
           case 28: return PVP_WIN_AGAINST_BRONZE;
@@ -6458,6 +6458,15 @@ public final class MiniEventProtos {
     int getMiniEventId();
 
     /**
+     * <code>optional int32 miniEventTimetableId = 9;</code>
+     */
+    boolean hasMiniEventTimetableId();
+    /**
+     * <code>optional int32 miniEventTimetableId = 9;</code>
+     */
+    int getMiniEventTimetableId();
+
+    /**
      * <code>optional string userUuid = 2;</code>
      */
     boolean hasUserUuid();
@@ -6611,33 +6620,33 @@ public final class MiniEventProtos {
             }
             case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000004;
               userUuid_ = bs;
               break;
             }
             case 24: {
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
               userLvl_ = input.readInt32();
               break;
             }
             case 32: {
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000010;
               tierOneRedeemed_ = input.readBool();
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000020;
               tierTwoRedeemed_ = input.readBool();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               tierThreeRedeemed_ = input.readBool();
               break;
             }
             case 58: {
               com.lvl6.proto.MiniEventProtos.MiniEventProto.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+              if (((bitField0_ & 0x00000080) == 0x00000080)) {
                 subBuilder = miniEvent_.toBuilder();
               }
               miniEvent_ = input.readMessage(com.lvl6.proto.MiniEventProtos.MiniEventProto.PARSER, extensionRegistry);
@@ -6645,15 +6654,20 @@ public final class MiniEventProtos {
                 subBuilder.mergeFrom(miniEvent_);
                 miniEvent_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               break;
             }
             case 66: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
                 goals_ = new java.util.ArrayList<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto>();
-                mutable_bitField0_ |= 0x00000080;
+                mutable_bitField0_ |= 0x00000100;
               }
               goals_.add(input.readMessage(com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.PARSER, extensionRegistry));
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000002;
+              miniEventTimetableId_ = input.readInt32();
               break;
             }
           }
@@ -6664,7 +6678,7 @@ public final class MiniEventProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           goals_ = java.util.Collections.unmodifiableList(goals_);
         }
         this.unknownFields = unknownFields.build();
@@ -6714,13 +6728,28 @@ public final class MiniEventProtos {
       return miniEventId_;
     }
 
+    public static final int MINIEVENTTIMETABLEID_FIELD_NUMBER = 9;
+    private int miniEventTimetableId_;
+    /**
+     * <code>optional int32 miniEventTimetableId = 9;</code>
+     */
+    public boolean hasMiniEventTimetableId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 miniEventTimetableId = 9;</code>
+     */
+    public int getMiniEventTimetableId() {
+      return miniEventTimetableId_;
+    }
+
     public static final int USERUUID_FIELD_NUMBER = 2;
     private java.lang.Object userUuid_;
     /**
      * <code>optional string userUuid = 2;</code>
      */
     public boolean hasUserUuid() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional string userUuid = 2;</code>
@@ -6766,7 +6795,7 @@ public final class MiniEventProtos {
      * </pre>
      */
     public boolean hasUserLvl() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional int32 userLvl = 3;</code>
@@ -6785,7 +6814,7 @@ public final class MiniEventProtos {
      * <code>optional bool tierOneRedeemed = 4;</code>
      */
     public boolean hasTierOneRedeemed() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional bool tierOneRedeemed = 4;</code>
@@ -6800,7 +6829,7 @@ public final class MiniEventProtos {
      * <code>optional bool tierTwoRedeemed = 5;</code>
      */
     public boolean hasTierTwoRedeemed() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional bool tierTwoRedeemed = 5;</code>
@@ -6815,7 +6844,7 @@ public final class MiniEventProtos {
      * <code>optional bool tierThreeRedeemed = 6;</code>
      */
     public boolean hasTierThreeRedeemed() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional bool tierThreeRedeemed = 6;</code>
@@ -6830,7 +6859,7 @@ public final class MiniEventProtos {
      * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
      */
     public boolean hasMiniEvent() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
@@ -6882,6 +6911,7 @@ public final class MiniEventProtos {
 
     private void initFields() {
       miniEventId_ = 0;
+      miniEventTimetableId_ = 0;
       userUuid_ = "";
       userLvl_ = 0;
       tierOneRedeemed_ = false;
@@ -6906,26 +6936,29 @@ public final class MiniEventProtos {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, miniEventId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(2, getUserUuidBytes());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(3, userLvl_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBool(4, tierOneRedeemed_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBool(5, tierTwoRedeemed_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBool(6, tierThreeRedeemed_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeMessage(7, miniEvent_);
       }
       for (int i = 0; i < goals_.size(); i++) {
         output.writeMessage(8, goals_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(9, miniEventTimetableId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6940,33 +6973,37 @@ public final class MiniEventProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, miniEventId_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getUserUuidBytes());
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, userLvl_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(4, tierOneRedeemed_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, tierTwoRedeemed_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(6, tierThreeRedeemed_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(7, miniEvent_);
       }
       for (int i = 0; i < goals_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, goals_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, miniEventTimetableId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7089,25 +7126,27 @@ public final class MiniEventProtos {
         super.clear();
         miniEventId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        userUuid_ = "";
+        miniEventTimetableId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        userLvl_ = 0;
+        userUuid_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        tierOneRedeemed_ = false;
+        userLvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        tierTwoRedeemed_ = false;
+        tierOneRedeemed_ = false;
         bitField0_ = (bitField0_ & ~0x00000010);
-        tierThreeRedeemed_ = false;
+        tierTwoRedeemed_ = false;
         bitField0_ = (bitField0_ & ~0x00000020);
+        tierThreeRedeemed_ = false;
+        bitField0_ = (bitField0_ & ~0x00000040);
         if (miniEventBuilder_ == null) {
           miniEvent_ = com.lvl6.proto.MiniEventProtos.MiniEventProto.getDefaultInstance();
         } else {
           miniEventBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         if (goalsBuilder_ == null) {
           goals_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000100);
         } else {
           goalsBuilder_.clear();
         }
@@ -7146,25 +7185,29 @@ public final class MiniEventProtos {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.userUuid_ = userUuid_;
+        result.miniEventTimetableId_ = miniEventTimetableId_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.userLvl_ = userLvl_;
+        result.userUuid_ = userUuid_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.tierOneRedeemed_ = tierOneRedeemed_;
+        result.userLvl_ = userLvl_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.tierTwoRedeemed_ = tierTwoRedeemed_;
+        result.tierOneRedeemed_ = tierOneRedeemed_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.tierThreeRedeemed_ = tierThreeRedeemed_;
+        result.tierTwoRedeemed_ = tierTwoRedeemed_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
+        }
+        result.tierThreeRedeemed_ = tierThreeRedeemed_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
         }
         if (miniEventBuilder_ == null) {
           result.miniEvent_ = miniEvent_;
@@ -7172,9 +7215,9 @@ public final class MiniEventProtos {
           result.miniEvent_ = miniEventBuilder_.build();
         }
         if (goalsBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
             goals_ = java.util.Collections.unmodifiableList(goals_);
-            bitField0_ = (bitField0_ & ~0x00000080);
+            bitField0_ = (bitField0_ & ~0x00000100);
           }
           result.goals_ = goals_;
         } else {
@@ -7199,8 +7242,11 @@ public final class MiniEventProtos {
         if (other.hasMiniEventId()) {
           setMiniEventId(other.getMiniEventId());
         }
+        if (other.hasMiniEventTimetableId()) {
+          setMiniEventTimetableId(other.getMiniEventTimetableId());
+        }
         if (other.hasUserUuid()) {
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
           userUuid_ = other.userUuid_;
           onChanged();
         }
@@ -7223,7 +7269,7 @@ public final class MiniEventProtos {
           if (!other.goals_.isEmpty()) {
             if (goals_.isEmpty()) {
               goals_ = other.goals_;
-              bitField0_ = (bitField0_ & ~0x00000080);
+              bitField0_ = (bitField0_ & ~0x00000100);
             } else {
               ensureGoalsIsMutable();
               goals_.addAll(other.goals_);
@@ -7236,7 +7282,7 @@ public final class MiniEventProtos {
               goalsBuilder_.dispose();
               goalsBuilder_ = null;
               goals_ = other.goals_;
-              bitField0_ = (bitField0_ & ~0x00000080);
+              bitField0_ = (bitField0_ & ~0x00000100);
               goalsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getGoalsFieldBuilder() : null;
@@ -7304,12 +7350,44 @@ public final class MiniEventProtos {
         return this;
       }
 
+      private int miniEventTimetableId_ ;
+      /**
+       * <code>optional int32 miniEventTimetableId = 9;</code>
+       */
+      public boolean hasMiniEventTimetableId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 miniEventTimetableId = 9;</code>
+       */
+      public int getMiniEventTimetableId() {
+        return miniEventTimetableId_;
+      }
+      /**
+       * <code>optional int32 miniEventTimetableId = 9;</code>
+       */
+      public Builder setMiniEventTimetableId(int value) {
+        bitField0_ |= 0x00000002;
+        miniEventTimetableId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 miniEventTimetableId = 9;</code>
+       */
+      public Builder clearMiniEventTimetableId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        miniEventTimetableId_ = 0;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object userUuid_ = "";
       /**
        * <code>optional string userUuid = 2;</code>
        */
       public boolean hasUserUuid() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional string userUuid = 2;</code>
@@ -7352,7 +7430,7 @@ public final class MiniEventProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000004;
         userUuid_ = value;
         onChanged();
         return this;
@@ -7361,7 +7439,7 @@ public final class MiniEventProtos {
        * <code>optional string userUuid = 2;</code>
        */
       public Builder clearUserUuid() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         userUuid_ = getDefaultInstance().getUserUuid();
         onChanged();
         return this;
@@ -7374,7 +7452,7 @@ public final class MiniEventProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000004;
         userUuid_ = value;
         onChanged();
         return this;
@@ -7389,7 +7467,7 @@ public final class MiniEventProtos {
        * </pre>
        */
       public boolean hasUserLvl() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional int32 userLvl = 3;</code>
@@ -7409,7 +7487,7 @@ public final class MiniEventProtos {
        * </pre>
        */
       public Builder setUserLvl(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         userLvl_ = value;
         onChanged();
         return this;
@@ -7422,7 +7500,7 @@ public final class MiniEventProtos {
        * </pre>
        */
       public Builder clearUserLvl() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         userLvl_ = 0;
         onChanged();
         return this;
@@ -7433,7 +7511,7 @@ public final class MiniEventProtos {
        * <code>optional bool tierOneRedeemed = 4;</code>
        */
       public boolean hasTierOneRedeemed() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional bool tierOneRedeemed = 4;</code>
@@ -7445,7 +7523,7 @@ public final class MiniEventProtos {
        * <code>optional bool tierOneRedeemed = 4;</code>
        */
       public Builder setTierOneRedeemed(boolean value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         tierOneRedeemed_ = value;
         onChanged();
         return this;
@@ -7454,7 +7532,7 @@ public final class MiniEventProtos {
        * <code>optional bool tierOneRedeemed = 4;</code>
        */
       public Builder clearTierOneRedeemed() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         tierOneRedeemed_ = false;
         onChanged();
         return this;
@@ -7465,7 +7543,7 @@ public final class MiniEventProtos {
        * <code>optional bool tierTwoRedeemed = 5;</code>
        */
       public boolean hasTierTwoRedeemed() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional bool tierTwoRedeemed = 5;</code>
@@ -7477,7 +7555,7 @@ public final class MiniEventProtos {
        * <code>optional bool tierTwoRedeemed = 5;</code>
        */
       public Builder setTierTwoRedeemed(boolean value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         tierTwoRedeemed_ = value;
         onChanged();
         return this;
@@ -7486,7 +7564,7 @@ public final class MiniEventProtos {
        * <code>optional bool tierTwoRedeemed = 5;</code>
        */
       public Builder clearTierTwoRedeemed() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         tierTwoRedeemed_ = false;
         onChanged();
         return this;
@@ -7497,7 +7575,7 @@ public final class MiniEventProtos {
        * <code>optional bool tierThreeRedeemed = 6;</code>
        */
       public boolean hasTierThreeRedeemed() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional bool tierThreeRedeemed = 6;</code>
@@ -7509,7 +7587,7 @@ public final class MiniEventProtos {
        * <code>optional bool tierThreeRedeemed = 6;</code>
        */
       public Builder setTierThreeRedeemed(boolean value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         tierThreeRedeemed_ = value;
         onChanged();
         return this;
@@ -7518,7 +7596,7 @@ public final class MiniEventProtos {
        * <code>optional bool tierThreeRedeemed = 6;</code>
        */
       public Builder clearTierThreeRedeemed() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         tierThreeRedeemed_ = false;
         onChanged();
         return this;
@@ -7531,7 +7609,7 @@ public final class MiniEventProtos {
        * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       public boolean hasMiniEvent() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
@@ -7556,7 +7634,7 @@ public final class MiniEventProtos {
         } else {
           miniEventBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         return this;
       }
       /**
@@ -7570,7 +7648,7 @@ public final class MiniEventProtos {
         } else {
           miniEventBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         return this;
       }
       /**
@@ -7578,7 +7656,7 @@ public final class MiniEventProtos {
        */
       public Builder mergeMiniEvent(com.lvl6.proto.MiniEventProtos.MiniEventProto value) {
         if (miniEventBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+          if (((bitField0_ & 0x00000080) == 0x00000080) &&
               miniEvent_ != com.lvl6.proto.MiniEventProtos.MiniEventProto.getDefaultInstance()) {
             miniEvent_ =
               com.lvl6.proto.MiniEventProtos.MiniEventProto.newBuilder(miniEvent_).mergeFrom(value).buildPartial();
@@ -7589,7 +7667,7 @@ public final class MiniEventProtos {
         } else {
           miniEventBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         return this;
       }
       /**
@@ -7602,14 +7680,14 @@ public final class MiniEventProtos {
         } else {
           miniEventBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       /**
        * <code>optional .com.lvl6.proto.MiniEventProto miniEvent = 7;</code>
        */
       public com.lvl6.proto.MiniEventProtos.MiniEventProto.Builder getMiniEventBuilder() {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         onChanged();
         return getMiniEventFieldBuilder().getBuilder();
       }
@@ -7643,9 +7721,9 @@ public final class MiniEventProtos {
       private java.util.List<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto> goals_ =
         java.util.Collections.emptyList();
       private void ensureGoalsIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
           goals_ = new java.util.ArrayList<com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto>(goals_);
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000100;
          }
       }
 
@@ -7795,7 +7873,7 @@ public final class MiniEventProtos {
       public Builder clearGoals() {
         if (goalsBuilder_ == null) {
           goals_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000100);
           onChanged();
         } else {
           goalsBuilder_.clear();
@@ -7872,7 +7950,7 @@ public final class MiniEventProtos {
           goalsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProto.Builder, com.lvl6.proto.MiniEventProtos.UserMiniEventGoalProtoOrBuilder>(
                   goals_,
-                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  ((bitField0_ & 0x00000100) == 0x00000100),
                   getParentForChildren(),
                   isClean());
           goals_ = null;
@@ -7926,6 +8004,15 @@ public final class MiniEventProtos {
      * <code>optional int32 progress = 3;</code>
      */
     int getProgress();
+
+    /**
+     * <code>optional int32 miniEventTimetableId = 4;</code>
+     */
+    boolean hasMiniEventTimetableId();
+    /**
+     * <code>optional int32 miniEventTimetableId = 4;</code>
+     */
+    int getMiniEventTimetableId();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UserMiniEventGoalProto}
@@ -7993,6 +8080,11 @@ public final class MiniEventProtos {
             case 24: {
               bitField0_ |= 0x00000004;
               progress_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              miniEventTimetableId_ = input.readInt32();
               break;
             }
           }
@@ -8107,10 +8199,26 @@ public final class MiniEventProtos {
       return progress_;
     }
 
+    public static final int MINIEVENTTIMETABLEID_FIELD_NUMBER = 4;
+    private int miniEventTimetableId_;
+    /**
+     * <code>optional int32 miniEventTimetableId = 4;</code>
+     */
+    public boolean hasMiniEventTimetableId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 miniEventTimetableId = 4;</code>
+     */
+    public int getMiniEventTimetableId() {
+      return miniEventTimetableId_;
+    }
+
     private void initFields() {
       userUuid_ = "";
       miniEventGoalId_ = 0;
       progress_ = 0;
+      miniEventTimetableId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8134,6 +8242,9 @@ public final class MiniEventProtos {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, progress_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, miniEventTimetableId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -8154,6 +8265,10 @@ public final class MiniEventProtos {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, progress_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, miniEventTimetableId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8278,6 +8393,8 @@ public final class MiniEventProtos {
         bitField0_ = (bitField0_ & ~0x00000002);
         progress_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        miniEventTimetableId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -8318,6 +8435,10 @@ public final class MiniEventProtos {
           to_bitField0_ |= 0x00000004;
         }
         result.progress_ = progress_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.miniEventTimetableId_ = miniEventTimetableId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8344,6 +8465,9 @@ public final class MiniEventProtos {
         }
         if (other.hasProgress()) {
           setProgress(other.getProgress());
+        }
+        if (other.hasMiniEventTimetableId()) {
+          setMiniEventTimetableId(other.getMiniEventTimetableId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8512,6 +8636,38 @@ public final class MiniEventProtos {
         return this;
       }
 
+      private int miniEventTimetableId_ ;
+      /**
+       * <code>optional int32 miniEventTimetableId = 4;</code>
+       */
+      public boolean hasMiniEventTimetableId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 miniEventTimetableId = 4;</code>
+       */
+      public int getMiniEventTimetableId() {
+        return miniEventTimetableId_;
+      }
+      /**
+       * <code>optional int32 miniEventTimetableId = 4;</code>
+       */
+      public Builder setMiniEventTimetableId(int value) {
+        bitField0_ |= 0x00000008;
+        miniEventTimetableId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 miniEventTimetableId = 4;</code>
+       */
+      public Builder clearMiniEventTimetableId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        miniEventTimetableId_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserMiniEventGoalProto)
     }
 
@@ -8576,13 +8732,13 @@ public final class MiniEventProtos {
       "MiniEventGoalProto\022K\n\022leaderboardRewards" +
       "\030\006 \003(\0132/.com.lvl6.proto.MiniEventLeaderb" +
       "oardRewardProto\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 " +
-      "\001(\t\022\013\n\003img\030\t \001(\t\022\014\n\004icon\030\n \001(\t\"\234\n\n\022MiniE",
+      "\001(\t\022\013\n\003img\030\t \001(\t\022\014\n\004icon\030\n \001(\t\"\252\n\n\022MiniE",
       "ventGoalProto\022\027\n\017miniEventGoalId\030\001 \001(\005\022\023" +
       "\n\013miniEventId\030\002 \001(\005\022O\n\010goalType\030\003 \001(\01624." +
       "com.lvl6.proto.MiniEventGoalProto.MiniEv" +
       "entGoalType:\007NO_GOAL\022\017\n\007goalAmt\030\004 \001(\005\022\020\n" +
       "\010goalDesc\030\005 \001(\t\022\024\n\014pointsGained\030\006 \001(\005\022\031\n" +
-      "\021actionDescription\030\007 \001(\t\"\262\010\n\021MiniEventGo" +
+      "\021actionDescription\030\007 \001(\t\"\300\010\n\021MiniEventGo" +
       "alType\022\013\n\007NO_GOAL\020\001\022\032\n\026GAIN_BUILDING_STR" +
       "ENGTH\020\002\022\032\n\026GAIN_RESEARCH_STRENGTH\020\003\022\023\n\017S" +
       "PIN_BASIC_GRAB\020\004\022\026\n\022SPIN_ULTIMATE_GRAB\020\005" +
@@ -8595,43 +8751,45 @@ public final class MiniEventProtos {
       "STEAL_CASH\020\020\022\r\n\tSTEAL_OIL\020\021\022\024\n\020PVP_CATCH" +
       "_COMMON\020\022\022\022\n\016PVP_CATCH_RARE\020\023\022\023\n\017PVP_CAT" +
       "CH_SUPER\020\024\022\023\n\017PVP_CATCH_ULTRA\020\025\022\022\n\016PVP_C" +
-      "ATCH_EPIC\020\026\022\031\n\025GAIN_ENHANCE_STRENGTH\020\030\022\031" +
-      "\n\025ENHANCE_CAKE_KID_BASE\020\031\022\033\n\027ENHANCE_CAK",
-      "E_KID_FEEDER\020\032\022\033\n\027GAIN_EVOLUTION_STRENGT" +
-      "H\020\033\022\032\n\026PVP_WIN_AGAINST_BRONZE\020\034\022\032\n\026PVP_W" +
-      "IN_AGAINST_SILVER\020\035\022\030\n\024PVP_WIN_AGAINST_G" +
-      "OLD\020\036\022\034\n\030PVP_WIN_AGAINST_PLATINUM\020\037\022\033\n\027P" +
-      "VP_WIN_AGAINST_DIAMOND\020 \022\027\n\023COMPLETE_COM" +
-      "MON_JOB\020!\022\025\n\021COMPLETE_RARE_JOB\020\"\022\026\n\022COMP" +
-      "LETE_SUPER_JOB\020#\022\026\n\022COMPLETE_ULTRA_JOB\020$" +
-      "\022\025\n\021COMPLETE_EPIC_JOB\020%\022\034\n\030USE_HEALTH_PO" +
-      "TION_IN_PVP\020\'\022\035\n\031USE_CHILL_ANTIDOTE_IN_P" +
-      "VP\020(\022\036\n\032USE_POISON_ANTIDOTE_IN_PVP\020)\022\031\n\025",
-      "USE_ORB_HAMMER_IN_PVP\020*\022\030\n\024USE_HAND_SWAP" +
-      "_IN_PVP\020+\022\034\n\030USE_BOARD_SHUFFLE_IN_PVP\020,\022" +
-      "\024\n\020USE_PUTTY_IN_PVP\020-\"\362\001\n\034MiniEventForPl" +
-      "ayerLevelProto\022\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniE" +
-      "ventId\030\002 \001(\005\022\024\n\014playerLvlMin\030\003 \001(\005\022\024\n\014pl" +
-      "ayerLvlMax\030\004 \001(\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022" +
-      "\025\n\rtierTwoMinPts\030\006 \001(\005\022\027\n\017tierThreeMinPt" +
-      "s\030\007 \001(\005\0229\n\007rewards\030\010 \003(\0132(.com.lvl6.prot" +
-      "o.MiniEventTierRewardProto\"~\n\030MiniEventT" +
-      "ierRewardProto\022\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplI",
-      "d\030\002 \001(\005\0220\n\013rewardProto\030\003 \001(\0132\033.com.lvl6." +
-      "proto.RewardProto\022\017\n\007tierLvl\030\004 \001(\005\"\223\001\n\037M" +
-      "iniEventLeaderboardRewardProto\022\016\n\006melrId" +
-      "\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\0220\n\013rewardPro" +
-      "to\030\003 \001(\0132\033.com.lvl6.proto.RewardProto\022\031\n" +
-      "\021leaderboardMinPos\030\004 \001(\005\"\203\002\n\022UserMiniEve" +
-      "ntProto\022\023\n\013miniEventId\030\001 \001(\005\022\020\n\010userUuid" +
-      "\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRedeem" +
-      "ed\030\004 \001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021tie" +
-      "rThreeRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\0132",
-      "\036.com.lvl6.proto.MiniEventProto\0225\n\005goals" +
-      "\030\010 \003(\0132&.com.lvl6.proto.UserMiniEventGoa" +
-      "lProto\"U\n\026UserMiniEventGoalProto\022\020\n\010user" +
-      "Uuid\030\001 \001(\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022\020\n\010p" +
-      "rogress\030\003 \001(\005B\021B\017MiniEventProtos"
+      "ATCH_EPIC\020\026\022\031\n\025GAIN_ENHANCE_STRENGTH\020\030\022\'" +
+      "\n#GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID\020\031\022",
+      "\033\n\027ENHANCE_CAKE_KID_FEEDER\020\032\022\033\n\027GAIN_EVO" +
+      "LUTION_STRENGTH\020\033\022\032\n\026PVP_WIN_AGAINST_BRO" +
+      "NZE\020\034\022\032\n\026PVP_WIN_AGAINST_SILVER\020\035\022\030\n\024PVP" +
+      "_WIN_AGAINST_GOLD\020\036\022\034\n\030PVP_WIN_AGAINST_P" +
+      "LATINUM\020\037\022\033\n\027PVP_WIN_AGAINST_DIAMOND\020 \022\027" +
+      "\n\023COMPLETE_COMMON_JOB\020!\022\025\n\021COMPLETE_RARE" +
+      "_JOB\020\"\022\026\n\022COMPLETE_SUPER_JOB\020#\022\026\n\022COMPLE" +
+      "TE_ULTRA_JOB\020$\022\025\n\021COMPLETE_EPIC_JOB\020%\022\034\n" +
+      "\030USE_HEALTH_POTION_IN_PVP\020\'\022\035\n\031USE_CHILL" +
+      "_ANTIDOTE_IN_PVP\020(\022\036\n\032USE_POISON_ANTIDOT",
+      "E_IN_PVP\020)\022\031\n\025USE_ORB_HAMMER_IN_PVP\020*\022\030\n" +
+      "\024USE_HAND_SWAP_IN_PVP\020+\022\034\n\030USE_BOARD_SHU" +
+      "FFLE_IN_PVP\020,\022\024\n\020USE_PUTTY_IN_PVP\020-\"\362\001\n\034" +
+      "MiniEventForPlayerLevelProto\022\017\n\007mefplId\030" +
+      "\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024\n\014playerLvlM" +
+      "in\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001(\005\022\025\n\rtierOn" +
+      "eMinPts\030\005 \001(\005\022\025\n\rtierTwoMinPts\030\006 \001(\005\022\027\n\017" +
+      "tierThreeMinPts\030\007 \001(\005\0229\n\007rewards\030\010 \003(\0132(" +
+      ".com.lvl6.proto.MiniEventTierRewardProto" +
+      "\"~\n\030MiniEventTierRewardProto\022\016\n\006metrId\030\001",
+      " \001(\005\022\017\n\007mefplId\030\002 \001(\005\0220\n\013rewardProto\030\003 \001" +
+      "(\0132\033.com.lvl6.proto.RewardProto\022\017\n\007tierL" +
+      "vl\030\004 \001(\005\"\223\001\n\037MiniEventLeaderboardRewardP" +
+      "roto\022\016\n\006melrId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(" +
+      "\005\0220\n\013rewardProto\030\003 \001(\0132\033.com.lvl6.proto." +
+      "RewardProto\022\031\n\021leaderboardMinPos\030\004 \001(\005\"\241" +
+      "\002\n\022UserMiniEventProto\022\023\n\013miniEventId\030\001 \001" +
+      "(\005\022\034\n\024miniEventTimetableId\030\t \001(\005\022\020\n\010user" +
+      "Uuid\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRe" +
+      "deemed\030\004 \001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n",
+      "\021tierThreeRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 " +
+      "\001(\0132\036.com.lvl6.proto.MiniEventProto\0225\n\005g" +
+      "oals\030\010 \003(\0132&.com.lvl6.proto.UserMiniEven" +
+      "tGoalProto\"s\n\026UserMiniEventGoalProto\022\020\n\010" +
+      "userUuid\030\001 \001(\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022" +
+      "\020\n\010progress\030\003 \001(\005\022\034\n\024miniEventTimetableI" +
+      "d\030\004 \001(\005B\021B\017MiniEventProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8681,13 +8839,13 @@ public final class MiniEventProtos {
     internal_static_com_lvl6_proto_UserMiniEventProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMiniEventProto_descriptor,
-        new java.lang.String[] { "MiniEventId", "UserUuid", "UserLvl", "TierOneRedeemed", "TierTwoRedeemed", "TierThreeRedeemed", "MiniEvent", "Goals", });
+        new java.lang.String[] { "MiniEventId", "MiniEventTimetableId", "UserUuid", "UserLvl", "TierOneRedeemed", "TierTwoRedeemed", "TierThreeRedeemed", "MiniEvent", "Goals", });
     internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_com_lvl6_proto_UserMiniEventGoalProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UserMiniEventGoalProto_descriptor,
-        new java.lang.String[] { "UserUuid", "MiniEventGoalId", "Progress", });
+        new java.lang.String[] { "UserUuid", "MiniEventGoalId", "Progress", "MiniEventTimetableId", });
     com.lvl6.proto.RewardsProto.getDescriptor();
   }
 

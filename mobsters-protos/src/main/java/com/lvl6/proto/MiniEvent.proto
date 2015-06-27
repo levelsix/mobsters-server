@@ -71,7 +71,7 @@ message MiniEventGoalProto {
 		//SPIN_MULTI = 23;
 		
 		GAIN_ENHANCE_STRENGTH = 24; // Doesn't include strength from leveling up a cake kid
-		ENHANCE_CAKE_KID_BASE = 25;
+		GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID = 25;
 		ENHANCE_CAKE_KID_FEEDER = 26;
 		GAIN_EVOLUTION_STRENGTH = 27;
 		
