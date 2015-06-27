@@ -58,56 +58,56 @@
 				name="clanMemberCountMap"
             	instance-ref="hazel"/>
 
-	<hz:list 	id = "list"
-				name="clanSearchRanksList"
-                instance-ref="hazel"/>
+<!-- 	<hz:list 	id = "list" -->
+<!-- 				name="clanSearchRanksList" -->
+<!--                 instance-ref="hazel"/> -->
 
-	<hz:multiMap id = "multiMap"
-				name="clanSearchKeysByScoreMultiMap"
-                instance-ref="hazel"/>
+<!-- 	<hz:multiMap id = "multiMap" -->
+<!-- 				name="clanSearchKeysByScoreMultiMap" -->
+<!--                 instance-ref="hazel"/> -->
                 
-	<hz:map 	id = "map"
-				name="clanSearchScoresByKeyMap"
-                instance-ref="hazel"/>
+<!-- 	<hz:map 	id = "map" -->
+<!-- 				name="clanSearchScoresByKeyMap" -->
+<!--                 instance-ref="hazel"/> -->
 	
-	<hz:lock 	id = "lock"
-				name="clanSearchPendingLock"
-                instance-ref="hazel"/>
+<!-- 	<hz:lock 	id = "lock" -->
+<!-- 				name="clanSearchPendingLock" -->
+<!--                 instance-ref="hazel"/> -->
                 
-	<hz:list 	id = "list"
-				name="clanSearchPendingQueue"
-                instance-ref="hazel"/>             
+<!-- 	<hz:list 	id = "list" -->
+<!-- 				name="clanSearchPendingQueue" -->
+<!--                 instance-ref="hazel"/>              -->
 
-	<hz:lock 	id = "lock"
-				name="clanSearchLock"
-                instance-ref="hazel"/>
+<!-- 	<hz:lock 	id = "lock" -->
+<!-- 				name="clanSearchLock" -->
+<!--                 instance-ref="hazel"/> -->
 	
 	
 	
 	
-	<hz:list 	id = "list"
-				name="leaderboardRanksList"
-                instance-ref="hazel"/>
+<!-- 	<hz:list 	id = "list" -->
+<!-- 				name="leaderboardRanksList" -->
+<!--                 instance-ref="hazel"/> -->
 
-	<hz:multiMap id = "multiMap"
-				name="leaderboardKeysByScoreMultiMap"
-                instance-ref="hazel"/>
+<!-- 	<hz:multiMap id = "multiMap" -->
+<!-- 				name="leaderboardKeysByScoreMultiMap" -->
+<!--                 instance-ref="hazel"/> -->
                 
-	<hz:map 	id = "map"
-				name="leaderboardScoresByKeyMap"
-                instance-ref="hazel"/>
+<!-- 	<hz:map 	id = "map" -->
+<!-- 				name="leaderboardScoresByKeyMap" -->
+<!--                 instance-ref="hazel"/> -->
 	
-	<hz:lock 	id = "lock"
-				name="leaderboardPendingLock"
-                instance-ref="hazel"/>
+<!-- 	<hz:lock 	id = "lock" -->
+<!-- 				name="leaderboardPendingLock" -->
+<!--                 instance-ref="hazel"/> -->
                 
-	<hz:list 	id = "list"
-				name="leaderboardPendingQueue"
-                instance-ref="hazel"/>             
+<!-- 	<hz:list 	id = "list" -->
+<!-- 				name="leaderboardPendingQueue" -->
+<!--                 instance-ref="hazel"/>              -->
 
-	<hz:lock 	id = "lock"
-				name="leaderboardLock"
-                instance-ref="hazel"/>
+<!-- 	<hz:lock 	id = "lock" -->
+<!-- 				name="leaderboardLock" -->
+<!--                 instance-ref="hazel"/> -->
                 
 
 		
