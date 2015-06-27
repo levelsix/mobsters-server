@@ -37,9 +37,6 @@
             
         <hz:list name="list"
             backup-count="6"/>
-            
-        <hz:lock name="lock"
-            backup-count="6"/>    
         
         </hz:config>
 	</hz:hazelcast>
