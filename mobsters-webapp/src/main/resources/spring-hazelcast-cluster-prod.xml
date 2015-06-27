@@ -31,7 +31,7 @@
 				</hz:join>
 			</hz:network>
 		
-		<hz:map name="map"
+<!-- 		<hz:map name="map"
             backup-count="6"
             read-backup-data="true"/>
             
@@ -40,7 +40,7 @@
         
         <hz:multimap name="multimap"
         	value-collection-type="LIST"
-        	backup-count="6"/>
+        	backup-count="6"/> -->
         	
         </hz:config>
 	</hz:hazelcast>
