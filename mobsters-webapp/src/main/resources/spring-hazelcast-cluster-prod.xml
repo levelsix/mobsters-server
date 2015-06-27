@@ -30,67 +30,6 @@
 					 />
 				</hz:join>
 			</hz:network>
-		<hz:map name="dailyHelpsMap"
-                backup-count="6"
-                read-backup-data="true"/>
-
-		<hz:map name="dailyDonateRequestsMap"
-                backup-count="6"
-                read-backup-data="true"/>
-
-		<hz:map name="dailyDonateCompletesMap"
-                backup-count="6"
-                read-backup-data="true"/>
-
-		<hz:map name="chatsPastHourMap"
-                backup-count="6"
-                read-backup-data="true"/>
-
-		<hz:map name="clanMemberCountMap"
-                backup-count="6"
-                read-backup-data="true"/>
-		
-		
-		<hz:list name="leaderboardRanksList"
-                backup-count="6"/>
-
-<!-- 		<hz:multiMap name="leaderboardKeysByScoreMultiMap" -->
-<!--                 backup-count="6"/> -->
-                
-		<hz:map name="leaderboardScoresByKeyMap"
-                backup-count="6"
-                read-backup-data="true"/>
-	
-		<hz:lock name="leaderboardPendingLock"
-                backup-count="6"/>
-                
-		<hz:list name="leaderboardPendingQueue"
-                backup-count="6"/>             
-
-		<hz:lock name="leaderboardLock"
-                backup-count="6"/>
-                
-                
-       	<hz:list name="clanSearchRanksList"
-                backup-count="6"/>
-
-<!-- 		<hz:multiMap name="clanSearchKeysByScoreMultiMap" -->
-<!--                 backup-count="6"/> -->
-                
-		<hz:map name="clanSearchScoresByKeyMap"
-                backup-count="6"
-                read-backup-data="true"/>
-	
-		<hz:lock name="clanSearchPendingLock"
-                backup-count="6"/>
-                
-		<hz:list name="clanSearchPendingQueue"
-                backup-count="6"/>             
-
-		<hz:lock name="clanSearchLock"
-                backup-count="6"/>
-		
-			
 		</hz:config>
 	</hz:hazelcast>
 

@@ -37,133 +37,103 @@
  
 	<hz:map id="lockMap" name="lockMap" instance-ref="hazel"/>
 	
-<!-- 	<hz:map name="dailyHelpsMap" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
 
-<!-- 	<hz:map name="dailyDonateRequestsMap" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:map 	id = "map"
+				name="dailyHelpsMap"
+            	backup-count="6"
+            	read-backup-data="true"
+            	instance-ref="hazel"/>
 
-<!-- 	<hz:map name="dailyDonateCompletesMap" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:map 	id = "map"
+				name="dailyDonateRequestsMap"
+            	backup-count="6"
+            	read-backup-data="true"
+            	instance-ref="hazel"/>
 
-<!-- 	<hz:map name="chatsPastHourMap" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:map 	id = "map"
+				name="dailyDonateCompletesMap"
+            	backup-count="6"
+            	read-backup-data="true"
+            	instance-ref="hazel"/>
 
-<!-- 	<hz:map name="clanMemberCountMap" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:map 	id = "map"
+				name="chatsPastHourMap"
+            	backup-count="6"
+            	read-backup-data="true"
+            	instance-ref="hazel"/>
 
-	
-<!-- 	<hz:map id="dailyHelpsMap" name="dailyHelpsMap" backup-count="6" read-backup-data="true" instance-ref="hazel"/> -->
+	<hz:map 	id = "map"
+				name="clanMemberCountMap"
+            	backup-count="6"
+            	read-backup-data="true"
+            	instance-ref="hazel"/>
 
-	
-<!-- 	<hz:map id="dailyDonateRequestsMap" name="dailyDonateRequestsMap" backup="6" instance-ref="hazel"/> -->
-	
-<!-- 	<hz:map id="dailyDonateCompletesMap" name="dailyDonateCompletesMap" backup="6" instance-ref="hazel"/> -->
-	
-<!-- 	<hz:map id="chatsPastHourMap" name="chatsPastHourMap" backup="6" instance-ref="hazel"/> -->
+	<hz:list 	id = "list"
+				name="clanSearchRanksList"
+                backup-count="6"
+                instance-ref="hazel"/>
 
-<!-- 	<hz:map id="clanMemberCountMap" name="clanMemberCountMap" backup="6" instance-ref="hazel"/> -->
-	
-<!-- 	<hz:list name="leaderboardRanksList" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
-
-	<hz:multiMap id="leaderboardKeysByScoreMultiMap" instance-ref="hazel" name="leaderboardKeysByScoreMultiMap"/>
-	
-
-<!-- 	<hz:multiMap name="leaderboardKeysByScoreMultiMap" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:multiMap id = "multiMap"
+				name="clanSearchKeysByScoreMultiMap"
+                backup-count="6"
+                instance-ref="hazel"/>
                 
-<!-- 	<hz:map name="leaderboardScoresByKeyMap" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:map 	id = "map"
+				name="clanSearchScoresByKeyMap"
+                backup-count="6"
+                read-backup-data="true"
+                instance-ref="hazel"/>
 	
-<!-- 	<hz:lock name="leaderboardPendingLock" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:lock 	id = "lock"
+				name="clanSearchPendingLock"
+                backup-count="6"
+                instance-ref="hazel"/>
                 
-<!-- 	<hz:list name="leaderboardPendingQueue" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/>              -->
+	<hz:list 	id = "list"
+				name="clanSearchPendingQueue"
+                backup-count="6"
+                instance-ref="hazel"/>             
 
-<!-- 	<hz:lock name="leaderboardLock" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
-                                	
+	<hz:lock 	id = "lock"
+				name="clanSearchLock"
+                backup-count="6"
+                instance-ref="hazel"/>
 	
-<!-- 	<hz:list id="leaderboardRanksList" name="leaderboardRanksList" backup="6" instance-ref="hazel"/> -->
 	
-<!-- 	<hz:multimap id="leaderboardKeysByScoreMultiMap" name="leaderboardkeysByScoreMultiMap" backup="6" instance-ref="hazel"/> -->
 	
-<!-- 	<hz:map id="leaderboardScoresByKeyMap" name="leaderboardScoresByKeyMap" backup="6" instance-ref="hazel"/> -->
 	
-<!-- 	<hz:lock id="leaderboardPendingLock" name="leaderboardPendingLock" backup="6" instance-ref="hazel"/> -->
-	
-<!-- 	<hz:list id="leaderboardPendingQueue" name="leaderboardPendingQueue" backup="6" instance-ref="hazel"/> -->
-	
-<!-- 	<hz:lock id="leaderboardLock" name = "leaderboardLock" backup="6" instance-ref="hazel"/> -->
+	<hz:list 	id = "list"
+				name="leaderboardRanksList"
+                backup-count="6"
+                instance-ref="hazel/>
 
-<!-- 	<hz:list name="clanSearchRanksList" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
-
-<!-- 	<hz:multiMap name="clanSearchKeysByScoreMultiMap" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:multiMap id = "multiMap"
+				name="leaderboardKeysByScoreMultiMap"
+                backup-count="6"
+                instance-ref="hazel"/>
                 
-<!-- 	<hz:map name="clanSearchScoresByKeyMap" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:map 	id = "map"
+				name="leaderboardScoresByKeyMap"
+                backup-count="6"
+                read-backup-data="true"
+                instance-ref="hazel"/>
 	
-<!-- 	<hz:lock name="clanSearchPendingLock" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:lock 	id = "lock"
+				name="leaderboardPendingLock"
+                backup-count="6"
+                instance-ref="hazel"/>
                 
-<!-- 	<hz:list name="clanSearchPendingQueue" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/>              -->
+	<hz:list 	id = "list"
+				name="leaderboardPendingQueue"
+                backup-count="6"
+                instance-ref="hazel/>             
 
-<!-- 	<hz:lock name="clanSearchLock" -->
-<!--                 backup-count="6" -->
-<!--                 read-backup-data="true" -->
-<!--                 instance-ref="hazel"/> -->
+	<hz:lock 	id = "lock"
+				name="leaderboardLock"
+                backup-count="6"
+                instance-ref="hazel/>
+                
 
-
-<!-- 	<hz:list id="clanSearchRanksList" name="clanSearchRanksList" backup="6" instance-ref="hazel"/> -->
-	
-	<hz:multiMap id="clanSearchKeysByScoreMultiMap" name="clanSearchkeysByScoreMultiMap" instance-ref="hazel"/>
-	
-<!-- 	<hz:map id="clanSearchScoresByKeyMap" name="clanSearchScoresByKeyMap" backup="6" instance-ref="hazel"/> -->
-	
-<!-- 	<hz:lock id="clanSearchPendingLock" name="clanSearchPendingLock" backup="6" instance-ref="hazel"/> -->
-	
-<!-- 	<hz:list id="clanSearchPendingQueue" name="clanSearchPendingQueue" backup="6" instance-ref="hazel"/> -->
-	
-<!-- 	<hz:lock id="clanSearchLock" name = "clanSearchLock" backup="6" instance-ref="hazel"/> -->
-	
-		
 		
 	<hz:map id="initializationFlags" name="initializationFlags" instance-ref="hazel"/>
 	<!-- need to prevent more than one initialization per cluster restart -->
