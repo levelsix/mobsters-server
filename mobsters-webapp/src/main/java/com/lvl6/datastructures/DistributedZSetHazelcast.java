@@ -335,7 +335,7 @@ public class DistributedZSetHazelcast implements DistributedZSet {
 
 	protected void createHazelcastItems() {
 		ranks = hz.getList(name + "RanksList");
-		keysByScore = hz.getMultiMap(name + "keysByScoreMultiMap");
+		keysByScore = hz.getMultiMap(name + "KeysByScoreMultiMap");
 		scoresByKey = hz.getMap(name + "ScoresByKeyMap");
 		pendingChangesLock = hz.getLock(name + "PendingLock");
 		pendingQueue = hz.getList(name + "PendingQueue");

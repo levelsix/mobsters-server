@@ -60,9 +60,9 @@ public class LeaderBoardImpl {
 	@Autowired
 	public void setHazelcastInstance(HazelcastInstance hazelcastInstance) {
 		this.hazelcastInstance = hazelcastInstance;
-		strLeaderboard = new DistributedZSetHazelcast("strength leaderboard", 
+		strLeaderboard = new DistributedZSetHazelcast("leaderboard", 
 				hazelcastInstance);
-		leaderboardReloadLock = hazelcastInstance.getLock("leaderboard reload lock");
+		leaderboardReloadLock = hazelcastInstance.getLock("leaderboardLock");
 	}
 	
 	

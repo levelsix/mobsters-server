@@ -129,9 +129,9 @@ public class HazelcastClanSearchImpl {
 	@Autowired
 	public void setHazelcastInstance(HazelcastInstance hazelcastInstance) {
 		this.hazelcastInstance = hazelcastInstance;
-		clanSearchRanking = new DistributedZSetHazelcast("clan search ranking",
+		clanSearchRanking = new DistributedZSetHazelcast("clanSearch",
 				hazelcastInstance);
-		clanSearchReloadLock = hazelcastInstance.getLock("clan search reload lock");
+		clanSearchReloadLock = hazelcastInstance.getLock("clanSearchLock");
 	}
 	
 	private static int minuteIntervals = 5;
