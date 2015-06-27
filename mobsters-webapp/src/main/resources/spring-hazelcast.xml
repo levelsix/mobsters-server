@@ -42,7 +42,6 @@
 
 	<hz:map id="messagesForDisconnectedPlayers" name="messagesForDisconnectedPlayers"	instance-ref="hazel" />
 
-
 	<hz:map id="playersInActionSet" name="playersInActionSet"		instance-ref="hazel" />
 
 	<hz:map id="scheduleTasks" name="scheduledTasks" instance-ref="hazel" />
