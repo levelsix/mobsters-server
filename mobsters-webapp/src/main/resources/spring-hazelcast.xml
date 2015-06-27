@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:hz="http://www.hazelcast.com/schema/spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -10,160 +9,130 @@
 	http://www.hazelcast.com/schema/spring
         http://www.hazelcast.com/schema/spring/hazelcast-spring.xsd
 	">
-	
-	<import resource="classpath:spring-hazelcast-cluster-${hazelcast.config}.xml"/>
-	
-	
-	<!-- <hz:atomicNumber id="connectedPlayerCount" name="connectedPlayerCount" instance-ref="hazel" /> -->
-	
-	
-	<hz:queue id="gameEventQueue" name="gameEventQueue" instance-ref="hazel" />
-	
-	<hz:map id="playersByPlayerId" name="playersByPlayerId" instance-ref="hazel" />
-		
 
-	<hz:map id="playersPreDatabaseByUDID" name="playersPreDatabaseByUDID" instance-ref="hazel" />
-	
-	<hz:map id="messagesForDisconnectedPlayers" name="messagesForDisconnectedPlayers" instance-ref="hazel"/>
-		
-		
-	<hz:map id="playersInActionSet" name="playersInActionSet" instance-ref="hazel"/>
-	
-	<hz:map id="scheduleTasks" name="scheduledTasks" instance-ref="hazel"/>
-	
-	<hz:list id="globalChat" name="globalChat" instance-ref="hazel"/>
-	
-	<hz:list id="goodEquipsRecievedFromBoosterPacks" name="goodEquipsRecievedFromBoosterPacks" instance-ref="hazel" />
- 
-	<hz:map id="lockMap" name="lockMap" instance-ref="hazel"/>
-	
+	<hz:hazelcast id="hazel">
+		<hz:config>
+			<hz:group name="${hazelcast.group}" password="${hazelcast.pass}" />
+			<hz:properties>
+				<hz:property name="hazelcast.logging.type">slf4j</hz:property>
+				<hz:property name="hazelcast.max.no.heartbeat.seconds">40</hz:property>
 
-	<hz:map 	id = "dailyHelpsMap"
-				name="dailyHelpsMap"
-				backup-count="6"
-				read-backup-data="true"
-            	instance-ref="hazel"/>
+			</hz:properties>
+			<hz:network port="5701" port-auto-increment="false">
+				<hz:join>
+					<hz:multicast enabled="false" />
+					<hz:tcp-ip enabled="" $ hazelcast.tcpip.enabled }>
+						<hz:members>${hazelcast.dev.ips}</hz:members>
+					</hz:tcp-ip>
+					<hz:aws enabled="${hazelcast.aws.enabled}" access-key="${hazelcast.ec2.awsId}"
+						secret-key="${hazelcast.ec2.awsSecretKey}" region="${hazelcast.ec2.region}" />
+				</hz:join>
+			</hz:network>
 
-	<hz:map 	id = "dailyDonateRequestsMap"
-				name="dailyDonateRequestsMap"
-				backup-count="6"
-				read-backup-data="true"
-            	instance-ref="hazel"/>
+		</hz:config>
+	</hz:hazelcast>
 
-	<hz:map 	id = "dailyDonateCompletesMap"
-				name="dailyDonateCompletesMap"
-				backup-count="6"
-				read-backup-data="true"
-            	instance-ref="hazel"/>
 
-	<hz:map 	id = "chatsPastHourMap"
-				name="chatsPastHourMap"
-				backup-count="6"
-				read-backup-data="true"
-            	instance-ref="hazel"/>
+	<hz:queue id="gameEventQueue" name="gameEventQueue"	instance-ref="hazel" />
 
-	<hz:map 	id = "clanMemberCountMap"
-				name="clanMemberCountMap"
-				backup-count="6"
-				read-backup-data="true"
-            	instance-ref="hazel"/>
+	<hz:map id="playersByPlayerId" name="playersByPlayerId"	instance-ref="hazel" />
 
-	<hz:list 	id = "clanSearchRanksList"
-				name="clanSearchRanksList"
-				backup-count="6"
-                instance-ref="hazel"/>
 
-	<hz:multiMap id = "clanSearchKeysByScoreMultiMap"
-				name="clanSearchKeysByScoreMultiMap"
-				backup-count="6"
-                instance-ref="hazel"/>
-                
-	<hz:map 	id = "clanSearchScoresByKeyMap"
-				name="clanSearchScoresByKeyMap"
-				backup-count="6"
-				read-backup-data="true"
-                instance-ref="hazel"/>
-	
-	<hz:lock 	id = "clanSearchPendingLock"
-				name="clanSearchPendingLock"
-                instance-ref="hazel"/>
-                
-	<hz:list 	id = "clanSearchPendingQueue"
-				name="clanSearchPendingQueue"
-				backup-count="6"
-                instance-ref="hazel"/>             
+	<hz:map id="playersPreDatabaseByUDID" name="playersPreDatabaseByUDID"	instance-ref="hazel" />
 
-	<hz:lock 	id = "clanSearchLock"
-				name="clanSearchLock"
-                instance-ref="hazel"/>
-	
-	
-	
-	
-	<hz:list 	id = "list"
-				name="leaderboardRanksList"
-				backup-count="6"
-                instance-ref="hazel"/>
+	<hz:map id="messagesForDisconnectedPlayers" name="messagesForDisconnectedPlayers"	instance-ref="hazel" />
 
-	<hz:multiMap id = "multiMap"
-				name="leaderboardKeysByScoreMultiMap"
-				backup-count="6"
-                instance-ref="hazel"/>
-                
-	<hz:map 	id = "leaderboardScoresByKeyMap"
-				name="leaderboardScoresByKeyMap"
-				backup-count="6"
-				read-backup-data="true"
-                instance-ref="hazel"/>
-	
-	<hz:lock 	id = "leaderboardPendingLock"
-				name="leaderboardPendingLock"
-                instance-ref="hazel"/>
-                
-	<hz:list 	id = "leaderboardPendingQueue"
-				name="leaderboardPendingQueue"
-				backup-count="6"
-                instance-ref="hazel"/>             
 
-	<hz:lock 	id = "leaderboardLock"
-				name="leaderboardLock"
-                instance-ref="hazel"/>
-                
+	<hz:map id="playersInActionSet" name="playersInActionSet"		instance-ref="hazel" />
 
-		
-	<hz:map id="initializationFlags" name="initializationFlags" instance-ref="hazel"/>
+	<hz:map id="scheduleTasks" name="scheduledTasks" instance-ref="hazel" />
+
+	<hz:list id="globalChat" name="globalChat" instance-ref="hazel" />
+
+	<hz:list id="goodEquipsRecievedFromBoosterPacks" name="goodEquipsRecievedFromBoosterPacks"	instance-ref="hazel" />
+
+	<hz:map id="lockMap" name="lockMap" instance-ref="hazel" />
+
+
+	<hz:map id="dailyHelpsMap" name="dailyHelpsMap" instance-ref="hazel" />
+
+	<hz:map id="dailyDonateRequestsMap" name="dailyDonateRequestsMap" instance-ref="hazel" />
+
+	<hz:map id="dailyDonateCompletesMap" name="dailyDonateCompletesMap"	instance-ref="hazel" />
+
+	<hz:map id="chatsPastHourMap" name="chatsPastHourMap"	instance-ref="hazel" />
+
+	<hz:map id="clanMemberCountMap" name="clanMemberCountMap"	instance-ref="hazel" />
+
+	<hz:list id="clanSearchRanksList" name="clanSearchRanksList" instance-ref="hazel" />
+
+	<hz:multiMap id="clanSearchKeysByScoreMultiMap" name="clanSearchKeysByScoreMultiMap"	instance-ref="hazel" />
+
+	<hz:map id="clanSearchScoresByKeyMap" name="clanSearchScoresByKeyMap"	instance-ref="hazel" />
+
+	<hz:lock id="clanSearchPendingLock" name="clanSearchPendingLock" instance-ref="hazel" />
+
+	<hz:list id="clanSearchPendingQueue" name="clanSearchPendingQueue"		instance-ref="hazel" />
+
+	<hz:lock id="clanSearchLock" name="clanSearchLock"	instance-ref="hazel" />
+
+
+
+
+	<hz:list id="list" name="leaderboardRanksList" instance-ref="hazel" />
+
+	<hz:multiMap id="multiMap" name="leaderboardKeysByScoreMultiMap"	instance-ref="hazel" />
+
+	<hz:map id="leaderboardScoresByKeyMap" name="leaderboardScoresByKeyMap"		instance-ref="hazel" />
+
+	<hz:lock id="leaderboardPendingLock" name="leaderboardPendingLock"	instance-ref="hazel" />
+
+	<hz:list id="leaderboardPendingQueue" name="leaderboardPendingQueue"	instance-ref="hazel" />
+
+	<hz:lock id="leaderboardLock" name="leaderboardLock" instance-ref="hazel" />
+
+
+
+	<hz:map id="initializationFlags" name="initializationFlags"		instance-ref="hazel" />
+
+
 	<!-- need to prevent more than one initialization per cluster restart -->
-	<hz:map id="pvpUserMap" name="pvpUserMap" instance-ref="hazel"/>
-	<hz:map id="clanRaidMonsterDmgMap" name="clanRaidMonsterDmgMap" instance-ref="hazel"/>
-		
-		
-	<hz:topic id="serverEvents" name="serverEvents" instance-ref="hazel"/>
-	<hz:topic id="staticDataReloadDone" name="staticDataReloadDone" instance-ref="hazel"/>	
-		
-	<bean id="playersInAction" class="com.lvl6.utils.PlayerSet" scope="singleton" >
+	<hz:map id="pvpUserMap" name="pvpUserMap" instance-ref="hazel" />
+	<hz:map id="clanRaidMonsterDmgMap" name="clanRaidMonsterDmgMap"
+		instance-ref="hazel" />
+
+
+	<hz:topic id="serverEvents" name="serverEvents" instance-ref="hazel" />
+	<hz:topic id="staticDataReloadDone" name="staticDataReloadDone"
+		instance-ref="hazel" />
+
+	<bean id="playersInAction" class="com.lvl6.utils.PlayerSet" scope="singleton">
 		<property name="players" ref="playersInActionSet" />
 	</bean>
-	
+
 	<bean class="com.lvl6.clansearch.ClanChatPostDao2" id="clanChatPostDao">
-        <constructor-arg index="0" ref="config" />
-    </bean>
-    
-    <bean class="com.lvl6.clansearch.ClanHelpCountForUserDao2" id="clanHelpCountForUserDao">
-        <constructor-arg index="0" ref="config" />
-    </bean>
-    
-    <bean class="com.lvl6.clansearch.ClanMemberTeamDonationDao2" id="clanMemberTeamDonationDao">
-        <constructor-arg index="0" ref="config" />
-    </bean>
-    
-    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanForUserDao" id="clanForUserDao">
-        <constructor-arg index="0" ref="config" />
-    </bean>
-	 
-	
-	<bean id="serverMessageHandler" class="com.lvl6.eventhandlers.ServerEventHandler" lazy-init="false" scope="singleton" />
-	
-<!-- 	<bean id="hazelInstances" class="com.lvl6.eventhandlers.HazelInstanceListener" lazy-init="false" scope="singleton" /> -->
-	
-	
+		<constructor-arg index="0" ref="config" />
+	</bean>
+
+	<bean class="com.lvl6.clansearch.ClanHelpCountForUserDao2" id="clanHelpCountForUserDao">
+		<constructor-arg index="0" ref="config" />
+	</bean>
+
+	<bean class="com.lvl6.clansearch.ClanMemberTeamDonationDao2" id="clanMemberTeamDonationDao">
+		<constructor-arg index="0" ref="config" />
+	</bean>
+
+	<bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.ClanForUserDao"
+		id="clanForUserDao">
+		<constructor-arg index="0" ref="config" />
+	</bean>
+
+
+	<bean id="serverMessageHandler" class="com.lvl6.eventhandlers.ServerEventHandler"
+		lazy-init="false" scope="singleton" />
+
+	<!-- <bean id="hazelInstances" class="com.lvl6.eventhandlers.HazelInstanceListener" 
+		lazy-init="false" scope="singleton" /> -->
+
+
 </beans>
