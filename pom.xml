@@ -98,6 +98,8 @@
 		<hazelcast.dev.ips>127.0.0.1</hazelcast.dev.ips>
 		<server.ip>0.0.0.0</server.ip>
 		<server.port>10001</server.port>
+		<hazelcast.tcpip.enabled>true</hazelcast.tcpip.enabled>
+		<hazelcast.aws.enabled>false</hazelcast.aws.enabled>
 
 		<globals.addAllFbFriends>true</globals.addAllFbFriends>
 		<globals.isSandbox>true</globals.isSandbox>
