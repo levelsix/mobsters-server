@@ -21,7 +21,7 @@
 			<hz:network port="5701" port-auto-increment="false">
 				<hz:join>
 					<hz:multicast enabled="false" />
-					<hz:tcp-ip enabled="" $ hazelcast.tcpip.enabled }>
+					<hz:tcp-ip enabled="${hazelcast.tcpip.enabled}" >
 						<hz:members>${hazelcast.dev.ips}</hz:members>
 					</hz:tcp-ip>
 					<hz:aws enabled="${hazelcast.aws.enabled}" access-key="${hazelcast.ec2.awsId}"
