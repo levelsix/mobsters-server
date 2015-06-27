@@ -50,18 +50,18 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 
 	private String retrieverUserId;
 	private Collection<String> userUuids;
-	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
-	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtil; 
-	@Autowired protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil; 
-	@Autowired protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil; 
-	@Autowired protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil; 
-	@Autowired protected HazelcastPvpUtil hazelcastPvpUtil; 
-	@Autowired protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil; 
-	@Autowired protected PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil; 
-	@Autowired protected ResearchForUserRetrieveUtils researchForUserRetrieveUtil; 
-	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
-	@Autowired protected ServerToggleRetrieveUtils serverToggleRetrieveUtil; 
-	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil;
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtil;
+	@Autowired protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
+	@Autowired protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
+	@Autowired protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
+	@Autowired protected HazelcastPvpUtil hazelcastPvpUtil;
+	@Autowired protected PvpLeagueForUserRetrieveUtil2 pvpLeagueForUserRetrieveUtil;
+	@Autowired protected PvpBoardObstacleForUserRetrieveUtil pvpBoardObstacleForUserRetrieveUtil;
+	@Autowired protected ResearchForUserRetrieveUtils researchForUserRetrieveUtil;
+	@Autowired protected MonsterStuffUtils monsterStuffUtils;
+	@Autowired protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 
 	public RetrieveUserMonsterTeamAction(
 			String retrieverUserId,
@@ -183,7 +183,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 		//calculate the PvpDrops
 		log.info("calculating the Pvp drops");
 		allButRetrieverUserIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters, 
+				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters,
 						monsterLevelInfoRetrieveUtils);
 
 		//calculate the PvpBattleOutcome
@@ -243,6 +243,11 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 			String cmtdId = cmtd.getId();
 
 			cmtdIdToAllButRetrieverUserId.put(cmtdId, userId);
+
+			if (allButRetrieverUserIdToCmtd.containsKey(userId)) {
+				log.error("fuck fuck fuck, cmtd={}, existing={}",
+						cmtd, allButRetrieverUserIdToCmtd.get(userId));
+			}
 			allButRetrieverUserIdToCmtd.put(userId, cmtd);
 
 		}
@@ -261,13 +266,18 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 			String cmtdId = msfu.getIdInTable();
 			String userId = cmtdIdToAllButRetrieverUserId.get(cmtdId);
 
+			if (allButRetrieverUserIdToMsfu.containsKey(userId)) {
+				log.error("2fuck fuck fuck, msfu={}, existing={}",
+						msfu, allButRetrieverUserIdToMsfu.get(userId));
+			}
+
 			allButRetrieverUserIdToMsfu.put(userId, msfu);
 		}
 
 		//need to calculate whether or not these donated monsters drop a piece
 		if (!allButRetrieverUserIdToMsfu.isEmpty()) {
 			allButRetrieverUserIdToMsfuMonsterDropId = monsterStuffUtils
-					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu, 
+					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu,
 							monsterLevelInfoRetrieveUtils);
 		} else {
 			allButRetrieverUserIdToMsfuMonsterDropId = new HashMap<String, Integer>();
@@ -276,7 +286,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 		//pvp board obstacles
 		allButRetrieverUserIdToPvpBoardObstacles = pvpBoardObstacleForUserRetrieveUtil
 				.getPvpBoardObstacleForUserIds(userIdsExceptRetriever);
-		log.info("allButRetrieverUserIdToPvpBoardObstacles={}",
+		log.debug("allButRetrieverUserIdToPvpBoardObstacles={}",
 				allButRetrieverUserIdToPvpBoardObstacles);
 
 		allButRetrieverUserIdToUserResearch = researchForUserRetrieveUtil
@@ -563,7 +573,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 	public Map<String, List<ResearchForUser>> getAllButRetrieverUserIdToUserResearch() {
 		return allButRetrieverUserIdToUserResearch;
 	}
-	
+
 	public Map<String, User> getAllUsers() {
 		return userIdToUser;
 	}
@@ -579,5 +589,5 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 
 
 
-	
+
 }

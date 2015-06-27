@@ -372,7 +372,7 @@ class StartupService extends LazyLogging {
         || (clientSuperEqual && clientMajorGreater)
         || (clientSuperEqual && clientMajorEqual && clientMinorGreater)) {
         val preface = "CLIENT AND SERVER VERSION'S ARE OFF.";
-        logger.error(s"$preface clientVersion=$superNum.$majorNum.$minorNum \t serverVersion=$serverSuperNum.$serverMajorNum.$serverMinorNum")
+        logger.warn(s"$preface clientVersion=$superNum.$majorNum.$minorNum \t serverVersion=$serverSuperNum.$serverMajorNum.$serverMinorNum")
         updateStatus = UpdateStatus.NO_UPDATE;
       } else if (superNum < serverSuperNum || majorNum < serverMajorNum) {
         updateStatus = UpdateStatus.MAJOR_UPDATE;

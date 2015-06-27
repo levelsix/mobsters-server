@@ -139,6 +139,11 @@ public class GiftRewardRetrieveUtils {
 			return null;
 		}
 
+//		log.info("idsToGiftRewards={}", idsToGiftRewards);
+//		log.info("giftIdToProbabilitySum={}", giftIdToProbabilitySum);
+//		log.info("giftIdToGiftRewards={}", giftIdToGiftRewards);
+//		log.info("giftIdToGiftRewardsTree={}", giftIdToGiftRewardsTree);
+
 		TreeSet<GiftRewardConfigWrapper> rewardTree = giftIdToGiftRewardsTree.get(giftId);
 
 		//selects the GiftReward with the least probability that is still
@@ -153,6 +158,8 @@ public class GiftRewardRetrieveUtils {
 			return null;
 		}
 		int giftRewardId = nextGiftReward.getGiftRewardConfigId();
+
+		log.info("selected GiftReward={}", nextGiftReward);
 		return getGiftReward(giftRewardId);
 	}
 
@@ -252,11 +259,14 @@ public class GiftRewardRetrieveUtils {
 
 		double runningSum = 0D;
 		for (Integer id : idsList) {
+			GiftRewardConfigPojo grc = getGiftReward(id);
+			runningSum += grc.getChanceOfDrop();
+
 			GiftRewardConfigWrapper grcw = idToGiftRewardWrappers.get(id);
-			runningSum += grcw.getNormalizedProbability();
 			double normalizedProbability = runningSum / probSum;
 
 			grcw.setNormalizedProbability(normalizedProbability);
+//			log.info("giftId={}, added to tree: {}", giftId, grcw);
 			boolean added = grcwTree.add(grcw);
 			if (!added) {
 				log.error("unable to add {} to TreeSet={}", grcw, grcwTree);
