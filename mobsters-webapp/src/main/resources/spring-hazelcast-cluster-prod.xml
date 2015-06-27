@@ -39,8 +39,7 @@
             backup-count="6"/>
 
 		<hz:multiMap name="multiMap"
-            backup-count="6"
-            read-backup-data="true"/>
+            backup-count="6"/>
             
         <hz:lock name="lock"
             backup-count="6"/>    
