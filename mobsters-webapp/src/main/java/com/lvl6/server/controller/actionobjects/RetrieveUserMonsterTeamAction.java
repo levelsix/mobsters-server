@@ -243,6 +243,11 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 			String cmtdId = cmtd.getId();
 
 			cmtdIdToAllButRetrieverUserId.put(cmtdId, userId);
+
+			if (allButRetrieverUserIdToCmtd.containsKey(userId)) {
+				log.error("fuck fuck fuck, cmtd={}, existing={}",
+						cmtd, allButRetrieverUserIdToCmtd.get(userId));
+			}
 			allButRetrieverUserIdToCmtd.put(userId, cmtd);
 
 		}
@@ -260,6 +265,11 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 			//not to whom the msfu is donated
 			String cmtdId = msfu.getIdInTable();
 			String userId = cmtdIdToAllButRetrieverUserId.get(cmtdId);
+
+			if (allButRetrieverUserIdToMsfu.containsKey(userId)) {
+				log.error("2fuck fuck fuck, msfu={}, existing={}",
+						msfu, allButRetrieverUserIdToMsfu.get(userId));
+			}
 
 			allButRetrieverUserIdToMsfu.put(userId, msfu);
 		}

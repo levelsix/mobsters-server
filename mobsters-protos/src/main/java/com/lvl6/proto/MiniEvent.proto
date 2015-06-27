@@ -112,6 +112,8 @@ message MiniEventLeaderboardRewardProto {
 
 message UserMiniEventProto {
 	optional int32 miniEventId = 1;
+	optional int32 miniEventTimetableId = 9;
+	
     optional string userUuid = 2;
     //what the user's level is when mini event starts
 	optional int32 userLvl = 3; 
@@ -121,6 +123,8 @@ message UserMiniEventProto {
 	
 	optional MiniEventProto miniEvent = 7;
 	repeated UserMiniEventGoalProto goals = 8;
+	
+	//optional int32 miniEventTimetableId = 9; defined above
 }
 
 //------------------------------------------------------------------------------------------
@@ -129,6 +133,7 @@ message UserMiniEventGoalProto {
 	optional string userUuid = 1;
 	optional int32 miniEventGoalId = 2;
 	optional int32 progress = 3;
+	optional int32 miniEventTimetableId = 4;
 }
 
 //------------------------------------------------------------------------------------------
