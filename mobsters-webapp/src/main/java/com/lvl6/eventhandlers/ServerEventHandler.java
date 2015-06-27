@@ -22,6 +22,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
+import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.ServerMessage;
 
 public class ServerEventHandler implements MessageListener<ServerMessage>,
@@ -82,6 +83,9 @@ public class ServerEventHandler implements MessageListener<ServerMessage>,
 
 	@Autowired
 	protected ClanSearch clanSearch;
+	
+	@Autowired
+	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
 	public ClanSearch getClanSearch() {
 		return clanSearch;
@@ -97,7 +101,10 @@ public class ServerEventHandler implements MessageListener<ServerMessage>,
 		if (msg.getMessageObject().equals(ServerMessage.RELOAD_STATIC_DATA)) {
 			log.info("Reloading all static data");
 			reloadAllRareChangeStaticData.reloadAllRareChangeStaticData();
-			reloadRecommendedClans();
+			if(serverToggleRetrieveUtils.getToggleValueForName(
+					ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+				reloadRecommendedClans();
+			}
 			getStaticDataReloadDone().publish(
 					ServerMessage.DONE_RELOADING_STATIC_DATA);
 		}

@@ -296,6 +296,31 @@ public class HazelcastClanSearchImpl {
 				UserClanStatus.JUNIOR_LEADER.toString(), UserClanStatus.CAPTAIN.toString(),
 				UserClanStatus.MEMBER.toString());
 		
+		if(!chatsPastHourMap.isEmpty()) {
+			log.info("size of chatsPastHourMap is : {}", chatsPastHourMap.size());
+			chatsPastHourMap.evictAll();
+		}
+
+		if(!dailyDonateRequestsMap.isEmpty()) {
+			log.info("size of dailyDonateRequestsMap is : {}", dailyDonateRequestsMap.size());
+			dailyDonateRequestsMap.evictAll();
+		}
+
+		if(!dailyDonateCompletesMap.isEmpty()) {
+			log.info("size of dailyDonateCompletesMap is : {}", dailyDonateCompletesMap.size());
+			dailyDonateCompletesMap.evictAll();
+		}
+
+		if(!dailyHelpsMap.isEmpty()) {
+			log.info("size of dailyHelpsMap is : {}", dailyHelpsMap.size());
+			dailyHelpsMap.evictAll();
+		}
+
+		if(!clanMemberCountMap.isEmpty()) {
+			log.info("size of clanMemberCountMap is : {}", clanMemberCountMap.size());
+			clanMemberCountMap.evictAll();
+		}
+		
 		//reorganize data retrieved
 		for(ClanChatPostPojo ccp : chatsPastDay) {
 			String clanId = ccp.getClanId();

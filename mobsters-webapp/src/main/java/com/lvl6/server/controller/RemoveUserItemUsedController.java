@@ -126,7 +126,7 @@ public class RemoveUserItemUsedController extends EventController {
 			}
 
 		} finally {
-			locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
+			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
 					.getSimpleName());
 		}
 	}
