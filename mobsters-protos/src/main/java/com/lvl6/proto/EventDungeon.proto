@@ -49,6 +49,8 @@ message BeginDungeonRequestProto {
 	// whether or not the user completed the task, the client will tell
 	// the server if the user already completed the task. 
 	optional bool alreadyCompletedMiniTutorialTask = 11;//TODO: REMOVE
+	
+	optional bool hasBeatenTaskBefore = 12;
 }
 
 message BeginDungeonResponseProto {
