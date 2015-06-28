@@ -257,10 +257,10 @@ public class ControllerConstants {
 	//everything at index i goes together
 	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = { 200, 400,
 			600, 700, 825, /*170,*/1000 };
-	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = { 20F, 10F,
-			14F, 15F, 20F, /*15F,*/15F };
-	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = { 12F, 16F,
-			11F, 24F, 16F, /*-5F,*/17F };
+	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = { 24F, 12F,
+			18F, 18F, 24F, /*15F,*/18F };
+	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = { 11F, 16F,
+			11F, 26F, 16F, /*-5F,*/17F };
 	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = { 1, 100,
 			300 };
 
