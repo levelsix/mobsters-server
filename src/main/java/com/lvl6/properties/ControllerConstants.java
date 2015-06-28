@@ -272,14 +272,9 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_GEMS = 100;
 	public static final int TUTORIAL__GACHA_CREDITS = 500;
 	public static final int TUTORIAL__INIT_RANK = 100;
-	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2, 2, 2, 2, 2, 2,
-			2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-	public static final int[] TUTORIAL__INIT_OBSTACLE_X = { 2, 4, 5, 10, 22,
-			25, 26, 28, 3, 4, 7, 8, 17, 20, 23, 27, 28, 2, 2, 7, 8, 10, 15, 20,
-			25, 27, 28 };
-	public static final int[] TUTORIAL__INIT_OBSTACLE_Y = { 21, 13, 5, 25, 21,
-			4, 12, 27, 16, 25, 9, 28, 22, 5, 28, 9, 20, 10, 28, 20, 13, 6, 22,
-			26, 23, 16, 2 };
+	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = { 2,2,4,4,4,4,4,4,5,5,5,11,12,12,13,14,15,15,16,16,21,22,31,31,32 };
+	public static final int[] TUTORIAL__INIT_OBSTACLE_X = { 33,28,30,9,32,6,25,3,26,18,32,33,33,4,23,13,7,29,22,20,4,33,14,11,10 };
+	public static final int[] TUTORIAL__INIT_OBSTACLE_Y = { 5,29,10,33,32,6,24,17,3,24,26,15,21,12,31,3,21,21,6,24,28,18,29,11,25 };
 
 	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
 	public static final String UCHRFC__ACHIEVEMENT_REDEEM = "achievement redeemed";
