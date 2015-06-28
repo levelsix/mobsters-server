@@ -21,11 +21,13 @@
 			<hz:network port="5701" port-auto-increment="false">
 				<hz:join>
 					<hz:multicast enabled="false" />
-					<hz:tcp-ip enabled="" $ hazelcast.tcpip.enabled }>
+					<hz:tcp-ip enabled="${hazelcast.tcpip.enabled}" >
 						<hz:members>${hazelcast.dev.ips}</hz:members>
 					</hz:tcp-ip>
-					<hz:aws enabled="${hazelcast.aws.enabled}" access-key="${hazelcast.ec2.awsId}"
-						secret-key="${hazelcast.ec2.awsSecretKey}" region="${hazelcast.ec2.region}" />
+					<hz:aws enabled="${hazelcast.aws.enabled}" 
+					access-key="${hazelcast.ec2.awsId}"
+					secret-key="${hazelcast.ec2.awsSecretKey}" 
+					region="${hazelcast.ec2.region}" />
 				</hz:join>
 			</hz:network>
 
@@ -41,7 +43,6 @@
 	<hz:map id="playersPreDatabaseByUDID" name="playersPreDatabaseByUDID"	instance-ref="hazel" />
 
 	<hz:map id="messagesForDisconnectedPlayers" name="messagesForDisconnectedPlayers"	instance-ref="hazel" />
-
 
 	<hz:map id="playersInActionSet" name="playersInActionSet"		instance-ref="hazel" />
 

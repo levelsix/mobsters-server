@@ -87,10 +87,10 @@
 		<dynamodb.isLocal>true</dynamodb.isLocal>
 		<dynamodb.response.caching.enabled>true</dynamodb.response.caching.enabled>
 
-		<hazelcast.ec2.security.group></hazelcast.ec2.security.group>
-		<hazelcast.ec2.region></hazelcast.ec2.region>
-		<hazelcast.ec2.awsId></hazelcast.ec2.awsId>
-		<hazelcast.ec2.awsSecretKey></hazelcast.ec2.awsSecretKey>
+		<hazelcast.ec2.security.group>none</hazelcast.ec2.security.group>
+		<hazelcast.ec2.region>us-west-2</hazelcast.ec2.region>
+		<hazelcast.ec2.awsId>dummy</hazelcast.ec2.awsId>
+		<hazelcast.ec2.awsSecretKey>dummy</hazelcast.ec2.awsSecretKey>
 		<hazelcast.group>main</hazelcast.group>
 		<hazelcast.pass>lvl6</hazelcast.pass>
 		<hazelcast.config>dev</hazelcast.config>
