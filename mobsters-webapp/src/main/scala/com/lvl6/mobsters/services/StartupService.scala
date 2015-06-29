@@ -498,7 +498,7 @@ class StartupService extends LazyLogging {
       
     } catch {
       case t: Throwable =>
-        logger.error(s"", t)
+        logger.error(s"Error in loginExistingUser", t)
         loginFinished(playerId, responses)
     }
   }
