@@ -7,8 +7,6 @@ package com.lvl6.mobsters.db.jooq.generated.tables.records;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.interfaces.IMiniEventGoalForUser;
 
-import java.sql.Timestamp;
-
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,9 +38,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "mini_event_goal_for_user", schema = "mobsters", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"user_id", "mini_event_timetable_id", "mini_event_goal_id"})
 })
-public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoalForUserRecord> implements Record4<String, Timestamp, Integer, Integer>, IMiniEventGoalForUser {
+public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoalForUserRecord> implements Record4<String, Integer, Integer, Integer>, IMiniEventGoalForUser {
 
-	private static final long serialVersionUID = 202701545;
+	private static final long serialVersionUID = -1336250473;
 
 	/**
 	 * Setter for <code>mobsters.mini_event_goal_for_user.user_id</code>.
@@ -68,7 +66,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 * Setter for <code>mobsters.mini_event_goal_for_user.mini_event_timetable_id</code>.
 	 */
 	@Override
-	public MiniEventGoalForUserRecord setMiniEventTimetableId(Timestamp value) {
+	public MiniEventGoalForUserRecord setMiniEventTimetableId(Integer value) {
 		setValue(1, value);
 		return this;
 	}
@@ -76,11 +74,11 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	/**
 	 * Getter for <code>mobsters.mini_event_goal_for_user.mini_event_timetable_id</code>.
 	 */
-	@Column(name = "mini_event_timetable_id", nullable = false)
+	@Column(name = "mini_event_timetable_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
-	public Timestamp getMiniEventTimetableId() {
-		return (Timestamp) getValue(1);
+	public Integer getMiniEventTimetableId() {
+		return (Integer) getValue(1);
 	}
 
 	/**
@@ -128,7 +126,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record3<String, Timestamp, Integer> key() {
+	public Record3<String, Integer, Integer> key() {
 		return (Record3) super.key();
 	}
 
@@ -140,7 +138,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<String, Timestamp, Integer, Integer> fieldsRow() {
+	public Row4<String, Integer, Integer, Integer> fieldsRow() {
 		return (Row4) super.fieldsRow();
 	}
 
@@ -148,7 +146,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<String, Timestamp, Integer, Integer> valuesRow() {
+	public Row4<String, Integer, Integer, Integer> valuesRow() {
 		return (Row4) super.valuesRow();
 	}
 
@@ -164,7 +162,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<Timestamp> field2() {
+	public Field<Integer> field2() {
 		return MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER.MINI_EVENT_TIMETABLE_ID;
 	}
 
@@ -196,7 +194,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Timestamp value2() {
+	public Integer value2() {
 		return getMiniEventTimetableId();
 	}
 
@@ -229,7 +227,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MiniEventGoalForUserRecord value2(Timestamp value) {
+	public MiniEventGoalForUserRecord value2(Integer value) {
 		setMiniEventTimetableId(value);
 		return this;
 	}
@@ -256,7 +254,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MiniEventGoalForUserRecord values(String value1, Timestamp value2, Integer value3, Integer value4) {
+	public MiniEventGoalForUserRecord values(String value1, Integer value2, Integer value3, Integer value4) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -302,7 +300,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	/**
 	 * Create a detached, initialised MiniEventGoalForUserRecord
 	 */
-	public MiniEventGoalForUserRecord(String userId, Timestamp miniEventTimetableId, Integer miniEventGoalId, Integer progress) {
+	public MiniEventGoalForUserRecord(String userId, Integer miniEventTimetableId, Integer miniEventGoalId, Integer progress) {
 		super(MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER);
 
 		setValue(0, userId);

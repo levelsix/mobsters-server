@@ -8,7 +8,6 @@ import com.lvl6.mobsters.db.jooq.generated.Keys;
 import com.lvl6.mobsters.db.jooq.generated.Mobsters;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventGoalForUserRecord;
 
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MiniEventGoalForUser extends TableImpl<MiniEventGoalForUserRecord> {
 
-	private static final long serialVersionUID = -452611914;
+	private static final long serialVersionUID = 673744911;
 
 	/**
 	 * The reference instance of <code>mobsters.mini_event_goal_for_user</code>
@@ -57,7 +56,7 @@ public class MiniEventGoalForUser extends TableImpl<MiniEventGoalForUserRecord> 
 	/**
 	 * The column <code>mobsters.mini_event_goal_for_user.mini_event_timetable_id</code>.
 	 */
-	public final TableField<MiniEventGoalForUserRecord, Timestamp> MINI_EVENT_TIMETABLE_ID = createField("mini_event_timetable_id", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaulted(true), this, "");
+	public final TableField<MiniEventGoalForUserRecord, Integer> MINI_EVENT_TIMETABLE_ID = createField("mini_event_timetable_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_event_goal_for_user.mini_event_goal_id</code>.

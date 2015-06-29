@@ -5,7 +5,6 @@ package com.lvl6.mobsters.db.jooq.generated.tables.interfaces;
 
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 import javax.annotation.Generated;
 import javax.persistence.Column;
@@ -49,14 +48,14 @@ public interface IMiniEventGoalForUser extends Serializable {
 	/**
 	 * Setter for <code>mobsters.mini_event_goal_for_user.mini_event_timetable_id</code>.
 	 */
-	public IMiniEventGoalForUser setMiniEventTimetableId(Timestamp value);
+	public IMiniEventGoalForUser setMiniEventTimetableId(Integer value);
 
 	/**
 	 * Getter for <code>mobsters.mini_event_goal_for_user.mini_event_timetable_id</code>.
 	 */
-	@Column(name = "mini_event_timetable_id", nullable = false)
+	@Column(name = "mini_event_timetable_id", nullable = false, precision = 10)
 	@NotNull
-	public Timestamp getMiniEventTimetableId();
+	public Integer getMiniEventTimetableId();
 
 	/**
 	 * Setter for <code>mobsters.mini_event_goal_for_user.mini_event_goal_id</code>.
