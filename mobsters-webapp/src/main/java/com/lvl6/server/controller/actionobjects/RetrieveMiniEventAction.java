@@ -39,7 +39,9 @@ import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-@Component@Scope("prototype")public class RetrieveMiniEventAction {
+@Component
+@Scope("prototype")
+public class RetrieveMiniEventAction {
 
 	private static final Logger log = LoggerFactory.getLogger(RetrieveMiniEventAction.class);
 

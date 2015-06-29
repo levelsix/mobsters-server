@@ -19,9 +19,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record9;
+import org.jooq.Record10;
 import org.jooq.Row;
-import org.jooq.Row9;
+import org.jooq.Row10;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -38,9 +38,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "user_currency_history", schema = "mobsters")
-public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyHistoryRecord> implements Record9<String, String, Timestamp, String, Integer, Integer, Integer, String, String>, IUserCurrencyHistory {
+public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyHistoryRecord> implements Record10<String, String, Timestamp, String, Integer, Integer, Integer, String, String, Timestamp>, IUserCurrencyHistory {
 
-	private static final long serialVersionUID = -1461869140;
+	private static final long serialVersionUID = 1964126637;
 
 	/**
 	 * Setter for <code>mobsters.user_currency_history.id</code>.
@@ -211,6 +211,24 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 		return (String) getValue(8);
 	}
 
+	/**
+	 * Setter for <code>mobsters.user_currency_history.time_of_entry</code>.
+	 */
+	@Override
+	public UserCurrencyHistoryRecord setTimeOfEntry(Timestamp value) {
+		setValue(9, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.user_currency_history.time_of_entry</code>.
+	 */
+	@Column(name = "time_of_entry")
+	@Override
+	public Timestamp getTimeOfEntry() {
+		return (Timestamp) getValue(9);
+	}
+
 	// -------------------------------------------------------------------------
 	// Primary key information
 	// -------------------------------------------------------------------------
@@ -224,23 +242,23 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 	}
 
 	// -------------------------------------------------------------------------
-	// Record9 type implementation
+	// Record10 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row9<String, String, Timestamp, String, Integer, Integer, Integer, String, String> fieldsRow() {
-		return (Row9) super.fieldsRow();
+	public Row10<String, String, Timestamp, String, Integer, Integer, Integer, String, String, Timestamp> fieldsRow() {
+		return (Row10) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row9<String, String, Timestamp, String, Integer, Integer, Integer, String, String> valuesRow() {
-		return (Row9) super.valuesRow();
+	public Row10<String, String, Timestamp, String, Integer, Integer, Integer, String, String, Timestamp> valuesRow() {
+		return (Row10) super.valuesRow();
 	}
 
 	/**
@@ -319,6 +337,14 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Field<Timestamp> field10() {
+		return UserCurrencyHistory.USER_CURRENCY_HISTORY.TIME_OF_ENTRY;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String value1() {
 		return getId();
 	}
@@ -385,6 +411,14 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 	@Override
 	public String value9() {
 		return getDetails();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Timestamp value10() {
+		return getTimeOfEntry();
 	}
 
 	/**
@@ -472,7 +506,16 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UserCurrencyHistoryRecord values(String value1, String value2, Timestamp value3, String value4, Integer value5, Integer value6, Integer value7, String value8, String value9) {
+	public UserCurrencyHistoryRecord value10(Timestamp value) {
+		setTimeOfEntry(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public UserCurrencyHistoryRecord values(String value1, String value2, Timestamp value3, String value4, Integer value5, Integer value6, Integer value7, String value8, String value9, Timestamp value10) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -482,6 +525,7 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 		value7(value7);
 		value8(value8);
 		value9(value9);
+		value10(value10);
 		return this;
 	}
 
@@ -503,6 +547,7 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 		setCurrencyAfterChange(from.getCurrencyAfterChange());
 		setReasonForChange(from.getReasonForChange());
 		setDetails(from.getDetails());
+		setTimeOfEntry(from.getTimeOfEntry());
 	}
 
 	/**
@@ -528,7 +573,7 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 	/**
 	 * Create a detached, initialised UserCurrencyHistoryRecord
 	 */
-	public UserCurrencyHistoryRecord(String id, String userId, Timestamp date, String resourceType, Integer currencyChange, Integer currencyBeforeChange, Integer currencyAfterChange, String reasonForChange, String details) {
+	public UserCurrencyHistoryRecord(String id, String userId, Timestamp date, String resourceType, Integer currencyChange, Integer currencyBeforeChange, Integer currencyAfterChange, String reasonForChange, String details, Timestamp timeOfEntry) {
 		super(UserCurrencyHistory.USER_CURRENCY_HISTORY);
 
 		setValue(0, id);
@@ -540,5 +585,6 @@ public class UserCurrencyHistoryRecord extends UpdatableRecordImpl<UserCurrencyH
 		setValue(6, currencyAfterChange);
 		setValue(7, reasonForChange);
 		setValue(8, details);
+		setValue(9, timeOfEntry);
 	}
 }
