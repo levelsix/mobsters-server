@@ -38,7 +38,9 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
-@Component@Scope("prototype")public class RedeemMiniEventRewardAction {
+@Component
+@Scope("prototype")
+public class RedeemMiniEventRewardAction {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(RedeemMiniEventRewardAction.class);

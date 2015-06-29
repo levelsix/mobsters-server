@@ -5,12 +5,13 @@ package com.lvl6.mobsters.db.jooq.generated.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,7 +28,9 @@ import javax.validation.constraints.Size;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
-@Table(name = "mini_event_for_user", schema = "mobsters")
+@Table(name = "mini_event_for_user", schema = "mobsters", uniqueConstraints = {
+	@UniqueConstraint(columnNames = {"user_id", "mini_event_timetable_id"})
+})
 public interface IMiniEventForUser extends Serializable {
 
 	/**
@@ -38,11 +41,22 @@ public interface IMiniEventForUser extends Serializable {
 	/**
 	 * Getter for <code>mobsters.mini_event_for_user.user_id</code>.
 	 */
-	@Id
-	@Column(name = "user_id", unique = true, nullable = false, length = 36)
+	@Column(name = "user_id", nullable = false, length = 36)
 	@NotNull
 	@Size(max = 36)
 	public String getUserId();
+
+	/**
+	 * Setter for <code>mobsters.mini_event_for_user.mini_event_timetable_id</code>.
+	 */
+	public IMiniEventForUser setMiniEventTimetableId(Integer value);
+
+	/**
+	 * Getter for <code>mobsters.mini_event_for_user.mini_event_timetable_id</code>.
+	 */
+	@Column(name = "mini_event_timetable_id", nullable = false, precision = 10)
+	@NotNull
+	public Integer getMiniEventTimetableId();
 
 	/**
 	 * Setter for <code>mobsters.mini_event_for_user.mini_event_id</code>.
@@ -55,6 +69,18 @@ public interface IMiniEventForUser extends Serializable {
 	@Column(name = "mini_event_id", nullable = false, precision = 10)
 	@NotNull
 	public Integer getMiniEventId();
+
+	/**
+	 * Setter for <code>mobsters.mini_event_for_user.time_of_entry</code>.
+	 */
+	public IMiniEventForUser setTimeOfEntry(Timestamp value);
+
+	/**
+	 * Getter for <code>mobsters.mini_event_for_user.time_of_entry</code>.
+	 */
+	@Column(name = "time_of_entry", nullable = false)
+	@NotNull
+	public Timestamp getTimeOfEntry();
 
 	/**
 	 * Setter for <code>mobsters.mini_event_for_user.user_lvl</code>. level of the user when he started mini_event
@@ -99,6 +125,39 @@ public interface IMiniEventForUser extends Serializable {
 	 */
 	@Column(name = "tier_three_redeemed", precision = 1)
 	public Boolean getTierThreeRedeemed();
+
+	/**
+	 * Setter for <code>mobsters.mini_event_for_user.tier_one_redeemed_time</code>.
+	 */
+	public IMiniEventForUser setTierOneRedeemedTime(Timestamp value);
+
+	/**
+	 * Getter for <code>mobsters.mini_event_for_user.tier_one_redeemed_time</code>.
+	 */
+	@Column(name = "tier_one_redeemed_time")
+	public Timestamp getTierOneRedeemedTime();
+
+	/**
+	 * Setter for <code>mobsters.mini_event_for_user.tier_two_redeemed_time</code>.
+	 */
+	public IMiniEventForUser setTierTwoRedeemedTime(Timestamp value);
+
+	/**
+	 * Getter for <code>mobsters.mini_event_for_user.tier_two_redeemed_time</code>.
+	 */
+	@Column(name = "tier_two_redeemed_time")
+	public Timestamp getTierTwoRedeemedTime();
+
+	/**
+	 * Setter for <code>mobsters.mini_event_for_user.tier_three_redeemed_time</code>.
+	 */
+	public IMiniEventForUser setTierThreeRedeemedTime(Timestamp value);
+
+	/**
+	 * Getter for <code>mobsters.mini_event_for_user.tier_three_redeemed_time</code>.
+	 */
+	@Column(name = "tier_three_redeemed_time")
+	public Timestamp getTierThreeRedeemedTime();
 
 	// -------------------------------------------------------------------------
 	// FROM and INTO

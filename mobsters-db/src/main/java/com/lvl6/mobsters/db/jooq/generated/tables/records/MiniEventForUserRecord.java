@@ -7,19 +7,21 @@ package com.lvl6.mobsters.db.jooq.generated.tables.records;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.interfaces.IMiniEventForUser;
 
+import java.sql.Timestamp;
+
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.jooq.Field;
-import org.jooq.Record1;
-import org.jooq.Record6;
+import org.jooq.Record11;
+import org.jooq.Record2;
 import org.jooq.Row;
-import org.jooq.Row6;
+import org.jooq.Row11;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -35,10 +37,12 @@ import org.jooq.impl.UpdatableRecordImpl;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
-@Table(name = "mini_event_for_user", schema = "mobsters")
-public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUserRecord> implements Record6<String, Integer, Integer, Boolean, Boolean, Boolean>, IMiniEventForUser {
+@Table(name = "mini_event_for_user", schema = "mobsters", uniqueConstraints = {
+	@UniqueConstraint(columnNames = {"user_id", "mini_event_timetable_id"})
+})
+public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUserRecord> implements Record11<String, Integer, Integer, Timestamp, Integer, Boolean, Boolean, Boolean, Timestamp, Timestamp, Timestamp>, IMiniEventForUser {
 
-	private static final long serialVersionUID = -1775392961;
+	private static final long serialVersionUID = -1267411007;
 
 	/**
 	 * Setter for <code>mobsters.mini_event_for_user.user_id</code>.
@@ -52,8 +56,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	/**
 	 * Getter for <code>mobsters.mini_event_for_user.user_id</code>.
 	 */
-	@Id
-	@Column(name = "user_id", unique = true, nullable = false, length = 36)
+	@Column(name = "user_id", nullable = false, length = 36)
 	@NotNull
 	@Size(max = 36)
 	@Override
@@ -62,11 +65,30 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	}
 
 	/**
+	 * Setter for <code>mobsters.mini_event_for_user.mini_event_timetable_id</code>.
+	 */
+	@Override
+	public MiniEventForUserRecord setMiniEventTimetableId(Integer value) {
+		setValue(1, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.mini_event_for_user.mini_event_timetable_id</code>.
+	 */
+	@Column(name = "mini_event_timetable_id", nullable = false, precision = 10)
+	@NotNull
+	@Override
+	public Integer getMiniEventTimetableId() {
+		return (Integer) getValue(1);
+	}
+
+	/**
 	 * Setter for <code>mobsters.mini_event_for_user.mini_event_id</code>.
 	 */
 	@Override
 	public MiniEventForUserRecord setMiniEventId(Integer value) {
-		setValue(1, value);
+		setValue(2, value);
 		return this;
 	}
 
@@ -77,7 +99,26 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	@NotNull
 	@Override
 	public Integer getMiniEventId() {
-		return (Integer) getValue(1);
+		return (Integer) getValue(2);
+	}
+
+	/**
+	 * Setter for <code>mobsters.mini_event_for_user.time_of_entry</code>.
+	 */
+	@Override
+	public MiniEventForUserRecord setTimeOfEntry(Timestamp value) {
+		setValue(3, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.mini_event_for_user.time_of_entry</code>.
+	 */
+	@Column(name = "time_of_entry", nullable = false)
+	@NotNull
+	@Override
+	public Timestamp getTimeOfEntry() {
+		return (Timestamp) getValue(3);
 	}
 
 	/**
@@ -85,7 +126,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 */
 	@Override
 	public MiniEventForUserRecord setUserLvl(Integer value) {
-		setValue(2, value);
+		setValue(4, value);
 		return this;
 	}
 
@@ -95,7 +136,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	@Column(name = "user_lvl", precision = 10)
 	@Override
 	public Integer getUserLvl() {
-		return (Integer) getValue(2);
+		return (Integer) getValue(4);
 	}
 
 	/**
@@ -103,7 +144,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 */
 	@Override
 	public MiniEventForUserRecord setTierOneRedeemed(Boolean value) {
-		setValue(3, value);
+		setValue(5, value);
 		return this;
 	}
 
@@ -113,7 +154,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	@Column(name = "tier_one_redeemed", precision = 1)
 	@Override
 	public Boolean getTierOneRedeemed() {
-		return (Boolean) getValue(3);
+		return (Boolean) getValue(5);
 	}
 
 	/**
@@ -121,7 +162,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 */
 	@Override
 	public MiniEventForUserRecord setTierTwoRedeemed(Boolean value) {
-		setValue(4, value);
+		setValue(6, value);
 		return this;
 	}
 
@@ -131,7 +172,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	@Column(name = "tier_two_redeemed", precision = 1)
 	@Override
 	public Boolean getTierTwoRedeemed() {
-		return (Boolean) getValue(4);
+		return (Boolean) getValue(6);
 	}
 
 	/**
@@ -139,7 +180,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 */
 	@Override
 	public MiniEventForUserRecord setTierThreeRedeemed(Boolean value) {
-		setValue(5, value);
+		setValue(7, value);
 		return this;
 	}
 
@@ -149,7 +190,61 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	@Column(name = "tier_three_redeemed", precision = 1)
 	@Override
 	public Boolean getTierThreeRedeemed() {
-		return (Boolean) getValue(5);
+		return (Boolean) getValue(7);
+	}
+
+	/**
+	 * Setter for <code>mobsters.mini_event_for_user.tier_one_redeemed_time</code>.
+	 */
+	@Override
+	public MiniEventForUserRecord setTierOneRedeemedTime(Timestamp value) {
+		setValue(8, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.mini_event_for_user.tier_one_redeemed_time</code>.
+	 */
+	@Column(name = "tier_one_redeemed_time")
+	@Override
+	public Timestamp getTierOneRedeemedTime() {
+		return (Timestamp) getValue(8);
+	}
+
+	/**
+	 * Setter for <code>mobsters.mini_event_for_user.tier_two_redeemed_time</code>.
+	 */
+	@Override
+	public MiniEventForUserRecord setTierTwoRedeemedTime(Timestamp value) {
+		setValue(9, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.mini_event_for_user.tier_two_redeemed_time</code>.
+	 */
+	@Column(name = "tier_two_redeemed_time")
+	@Override
+	public Timestamp getTierTwoRedeemedTime() {
+		return (Timestamp) getValue(9);
+	}
+
+	/**
+	 * Setter for <code>mobsters.mini_event_for_user.tier_three_redeemed_time</code>.
+	 */
+	@Override
+	public MiniEventForUserRecord setTierThreeRedeemedTime(Timestamp value) {
+		setValue(10, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.mini_event_for_user.tier_three_redeemed_time</code>.
+	 */
+	@Column(name = "tier_three_redeemed_time")
+	@Override
+	public Timestamp getTierThreeRedeemedTime() {
+		return (Timestamp) getValue(10);
 	}
 
 	// -------------------------------------------------------------------------
@@ -160,28 +255,28 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record1<String> key() {
-		return (Record1) super.key();
+	public Record2<String, Integer> key() {
+		return (Record2) super.key();
 	}
 
 	// -------------------------------------------------------------------------
-	// Record6 type implementation
+	// Record11 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row6<String, Integer, Integer, Boolean, Boolean, Boolean> fieldsRow() {
-		return (Row6) super.fieldsRow();
+	public Row11<String, Integer, Integer, Timestamp, Integer, Boolean, Boolean, Boolean, Timestamp, Timestamp, Timestamp> fieldsRow() {
+		return (Row11) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row6<String, Integer, Integer, Boolean, Boolean, Boolean> valuesRow() {
-		return (Row6) super.valuesRow();
+	public Row11<String, Integer, Integer, Timestamp, Integer, Boolean, Boolean, Boolean, Timestamp, Timestamp, Timestamp> valuesRow() {
+		return (Row11) super.valuesRow();
 	}
 
 	/**
@@ -197,7 +292,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 */
 	@Override
 	public Field<Integer> field2() {
-		return MiniEventForUser.MINI_EVENT_FOR_USER.MINI_EVENT_ID;
+		return MiniEventForUser.MINI_EVENT_FOR_USER.MINI_EVENT_TIMETABLE_ID;
 	}
 
 	/**
@@ -205,6 +300,22 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 */
 	@Override
 	public Field<Integer> field3() {
+		return MiniEventForUser.MINI_EVENT_FOR_USER.MINI_EVENT_ID;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Timestamp> field4() {
+		return MiniEventForUser.MINI_EVENT_FOR_USER.TIME_OF_ENTRY;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Integer> field5() {
 		return MiniEventForUser.MINI_EVENT_FOR_USER.USER_LVL;
 	}
 
@@ -212,7 +323,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<Boolean> field4() {
+	public Field<Boolean> field6() {
 		return MiniEventForUser.MINI_EVENT_FOR_USER.TIER_ONE_REDEEMED;
 	}
 
@@ -220,7 +331,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<Boolean> field5() {
+	public Field<Boolean> field7() {
 		return MiniEventForUser.MINI_EVENT_FOR_USER.TIER_TWO_REDEEMED;
 	}
 
@@ -228,8 +339,32 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<Boolean> field6() {
+	public Field<Boolean> field8() {
 		return MiniEventForUser.MINI_EVENT_FOR_USER.TIER_THREE_REDEEMED;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Timestamp> field9() {
+		return MiniEventForUser.MINI_EVENT_FOR_USER.TIER_ONE_REDEEMED_TIME;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Timestamp> field10() {
+		return MiniEventForUser.MINI_EVENT_FOR_USER.TIER_TWO_REDEEMED_TIME;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Timestamp> field11() {
+		return MiniEventForUser.MINI_EVENT_FOR_USER.TIER_THREE_REDEEMED_TIME;
 	}
 
 	/**
@@ -245,7 +380,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 */
 	@Override
 	public Integer value2() {
-		return getMiniEventId();
+		return getMiniEventTimetableId();
 	}
 
 	/**
@@ -253,6 +388,22 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 */
 	@Override
 	public Integer value3() {
+		return getMiniEventId();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Timestamp value4() {
+		return getTimeOfEntry();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer value5() {
 		return getUserLvl();
 	}
 
@@ -260,7 +411,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Boolean value4() {
+	public Boolean value6() {
 		return getTierOneRedeemed();
 	}
 
@@ -268,7 +419,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Boolean value5() {
+	public Boolean value7() {
 		return getTierTwoRedeemed();
 	}
 
@@ -276,8 +427,32 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Boolean value6() {
+	public Boolean value8() {
 		return getTierThreeRedeemed();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Timestamp value9() {
+		return getTierOneRedeemedTime();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Timestamp value10() {
+		return getTierTwoRedeemedTime();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Timestamp value11() {
+		return getTierThreeRedeemedTime();
 	}
 
 	/**
@@ -294,7 +469,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 */
 	@Override
 	public MiniEventForUserRecord value2(Integer value) {
-		setMiniEventId(value);
+		setMiniEventTimetableId(value);
 		return this;
 	}
 
@@ -303,6 +478,24 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 */
 	@Override
 	public MiniEventForUserRecord value3(Integer value) {
+		setMiniEventId(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public MiniEventForUserRecord value4(Timestamp value) {
+		setTimeOfEntry(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public MiniEventForUserRecord value5(Integer value) {
 		setUserLvl(value);
 		return this;
 	}
@@ -311,7 +504,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MiniEventForUserRecord value4(Boolean value) {
+	public MiniEventForUserRecord value6(Boolean value) {
 		setTierOneRedeemed(value);
 		return this;
 	}
@@ -320,7 +513,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MiniEventForUserRecord value5(Boolean value) {
+	public MiniEventForUserRecord value7(Boolean value) {
 		setTierTwoRedeemed(value);
 		return this;
 	}
@@ -329,7 +522,7 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MiniEventForUserRecord value6(Boolean value) {
+	public MiniEventForUserRecord value8(Boolean value) {
 		setTierThreeRedeemed(value);
 		return this;
 	}
@@ -338,13 +531,45 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MiniEventForUserRecord values(String value1, Integer value2, Integer value3, Boolean value4, Boolean value5, Boolean value6) {
+	public MiniEventForUserRecord value9(Timestamp value) {
+		setTierOneRedeemedTime(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public MiniEventForUserRecord value10(Timestamp value) {
+		setTierTwoRedeemedTime(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public MiniEventForUserRecord value11(Timestamp value) {
+		setTierThreeRedeemedTime(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public MiniEventForUserRecord values(String value1, Integer value2, Integer value3, Timestamp value4, Integer value5, Boolean value6, Boolean value7, Boolean value8, Timestamp value9, Timestamp value10, Timestamp value11) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
 		value4(value4);
 		value5(value5);
 		value6(value6);
+		value7(value7);
+		value8(value8);
+		value9(value9);
+		value10(value10);
+		value11(value11);
 		return this;
 	}
 
@@ -358,11 +583,16 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	@Override
 	public void from(IMiniEventForUser from) {
 		setUserId(from.getUserId());
+		setMiniEventTimetableId(from.getMiniEventTimetableId());
 		setMiniEventId(from.getMiniEventId());
+		setTimeOfEntry(from.getTimeOfEntry());
 		setUserLvl(from.getUserLvl());
 		setTierOneRedeemed(from.getTierOneRedeemed());
 		setTierTwoRedeemed(from.getTierTwoRedeemed());
 		setTierThreeRedeemed(from.getTierThreeRedeemed());
+		setTierOneRedeemedTime(from.getTierOneRedeemedTime());
+		setTierTwoRedeemedTime(from.getTierTwoRedeemedTime());
+		setTierThreeRedeemedTime(from.getTierThreeRedeemedTime());
 	}
 
 	/**
@@ -388,14 +618,19 @@ public class MiniEventForUserRecord extends UpdatableRecordImpl<MiniEventForUser
 	/**
 	 * Create a detached, initialised MiniEventForUserRecord
 	 */
-	public MiniEventForUserRecord(String userId, Integer miniEventId, Integer userLvl, Boolean tierOneRedeemed, Boolean tierTwoRedeemed, Boolean tierThreeRedeemed) {
+	public MiniEventForUserRecord(String userId, Integer miniEventTimetableId, Integer miniEventId, Timestamp timeOfEntry, Integer userLvl, Boolean tierOneRedeemed, Boolean tierTwoRedeemed, Boolean tierThreeRedeemed, Timestamp tierOneRedeemedTime, Timestamp tierTwoRedeemedTime, Timestamp tierThreeRedeemedTime) {
 		super(MiniEventForUser.MINI_EVENT_FOR_USER);
 
 		setValue(0, userId);
-		setValue(1, miniEventId);
-		setValue(2, userLvl);
-		setValue(3, tierOneRedeemed);
-		setValue(4, tierTwoRedeemed);
-		setValue(5, tierThreeRedeemed);
+		setValue(1, miniEventTimetableId);
+		setValue(2, miniEventId);
+		setValue(3, timeOfEntry);
+		setValue(4, userLvl);
+		setValue(5, tierOneRedeemed);
+		setValue(6, tierTwoRedeemed);
+		setValue(7, tierThreeRedeemed);
+		setValue(8, tierOneRedeemedTime);
+		setValue(9, tierTwoRedeemedTime);
+		setValue(10, tierThreeRedeemedTime);
 	}
 }

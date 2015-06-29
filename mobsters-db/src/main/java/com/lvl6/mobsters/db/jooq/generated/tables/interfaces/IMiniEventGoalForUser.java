@@ -5,6 +5,7 @@ package com.lvl6.mobsters.db.jooq.generated.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.annotation.Generated;
 import javax.persistence.Column;
@@ -28,7 +29,7 @@ import javax.validation.constraints.Size;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "mini_event_goal_for_user", schema = "mobsters", uniqueConstraints = {
-	@UniqueConstraint(columnNames = {"user_id", "mini_event_goal_id"})
+	@UniqueConstraint(columnNames = {"user_id", "mini_event_timetable_id", "mini_event_goal_id"})
 })
 public interface IMiniEventGoalForUser extends Serializable {
 
@@ -44,6 +45,18 @@ public interface IMiniEventGoalForUser extends Serializable {
 	@NotNull
 	@Size(max = 36)
 	public String getUserId();
+
+	/**
+	 * Setter for <code>mobsters.mini_event_goal_for_user.mini_event_timetable_id</code>.
+	 */
+	public IMiniEventGoalForUser setMiniEventTimetableId(Timestamp value);
+
+	/**
+	 * Getter for <code>mobsters.mini_event_goal_for_user.mini_event_timetable_id</code>.
+	 */
+	@Column(name = "mini_event_timetable_id", nullable = false)
+	@NotNull
+	public Timestamp getMiniEventTimetableId();
 
 	/**
 	 * Setter for <code>mobsters.mini_event_goal_for_user.mini_event_goal_id</code>.

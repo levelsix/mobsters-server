@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserCurrencyHistory extends TableImpl<UserCurrencyHistoryRecord> {
 
-	private static final long serialVersionUID = 1526330646;
+	private static final long serialVersionUID = -2106910172;
 
 	/**
 	 * The reference instance of <code>mobsters.user_currency_history</code>
@@ -93,6 +93,11 @@ public class UserCurrencyHistory extends TableImpl<UserCurrencyHistoryRecord> {
 	 * The column <code>mobsters.user_currency_history.details</code>.
 	 */
 	public final TableField<UserCurrencyHistoryRecord, String> DETAILS = createField("details", org.jooq.impl.SQLDataType.CLOB, this, "");
+
+	/**
+	 * The column <code>mobsters.user_currency_history.time_of_entry</code>.
+	 */
+	public final TableField<UserCurrencyHistoryRecord, Timestamp> TIME_OF_ENTRY = createField("time_of_entry", org.jooq.impl.SQLDataType.TIMESTAMP.defaulted(true), this, "");
 
 	/**
 	 * Create a <code>mobsters.user_currency_history</code> table reference

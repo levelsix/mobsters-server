@@ -8,6 +8,7 @@ import com.lvl6.mobsters.db.jooq.generated.Keys;
 import com.lvl6.mobsters.db.jooq.generated.Mobsters;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventForUserRecord;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MiniEventForUser extends TableImpl<MiniEventForUserRecord> {
 
-	private static final long serialVersionUID = 452191519;
+	private static final long serialVersionUID = 1428148272;
 
 	/**
 	 * The reference instance of <code>mobsters.mini_event_for_user</code>
@@ -54,9 +55,19 @@ public class MiniEventForUser extends TableImpl<MiniEventForUserRecord> {
 	public final TableField<MiniEventForUserRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.CHAR.length(36).nullable(false), this, "");
 
 	/**
+	 * The column <code>mobsters.mini_event_for_user.mini_event_timetable_id</code>.
+	 */
+	public final TableField<MiniEventForUserRecord, Integer> MINI_EVENT_TIMETABLE_ID = createField("mini_event_timetable_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+	/**
 	 * The column <code>mobsters.mini_event_for_user.mini_event_id</code>.
 	 */
 	public final TableField<MiniEventForUserRecord, Integer> MINI_EVENT_ID = createField("mini_event_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+	/**
+	 * The column <code>mobsters.mini_event_for_user.time_of_entry</code>.
+	 */
+	public final TableField<MiniEventForUserRecord, Timestamp> TIME_OF_ENTRY = createField("time_of_entry", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_event_for_user.user_lvl</code>. level of the user when he started mini_event
@@ -66,17 +77,32 @@ public class MiniEventForUser extends TableImpl<MiniEventForUserRecord> {
 	/**
 	 * The column <code>mobsters.mini_event_for_user.tier_one_redeemed</code>.
 	 */
-	public final TableField<MiniEventForUserRecord, Boolean> TIER_ONE_REDEEMED = createField("tier_one_redeemed", org.jooq.impl.SQLDataType.BIT, this, "");
+	public final TableField<MiniEventForUserRecord, Boolean> TIER_ONE_REDEEMED = createField("tier_one_redeemed", org.jooq.impl.SQLDataType.BIT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_event_for_user.tier_two_redeemed</code>.
 	 */
-	public final TableField<MiniEventForUserRecord, Boolean> TIER_TWO_REDEEMED = createField("tier_two_redeemed", org.jooq.impl.SQLDataType.BIT, this, "");
+	public final TableField<MiniEventForUserRecord, Boolean> TIER_TWO_REDEEMED = createField("tier_two_redeemed", org.jooq.impl.SQLDataType.BIT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_event_for_user.tier_three_redeemed</code>.
 	 */
-	public final TableField<MiniEventForUserRecord, Boolean> TIER_THREE_REDEEMED = createField("tier_three_redeemed", org.jooq.impl.SQLDataType.BIT, this, "");
+	public final TableField<MiniEventForUserRecord, Boolean> TIER_THREE_REDEEMED = createField("tier_three_redeemed", org.jooq.impl.SQLDataType.BIT.defaulted(true), this, "");
+
+	/**
+	 * The column <code>mobsters.mini_event_for_user.tier_one_redeemed_time</code>.
+	 */
+	public final TableField<MiniEventForUserRecord, Timestamp> TIER_ONE_REDEEMED_TIME = createField("tier_one_redeemed_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
+
+	/**
+	 * The column <code>mobsters.mini_event_for_user.tier_two_redeemed_time</code>.
+	 */
+	public final TableField<MiniEventForUserRecord, Timestamp> TIER_TWO_REDEEMED_TIME = createField("tier_two_redeemed_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
+
+	/**
+	 * The column <code>mobsters.mini_event_for_user.tier_three_redeemed_time</code>.
+	 */
+	public final TableField<MiniEventForUserRecord, Timestamp> TIER_THREE_REDEEMED_TIME = createField("tier_three_redeemed_time", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
 
 	/**
 	 * Create a <code>mobsters.mini_event_for_user</code> table reference

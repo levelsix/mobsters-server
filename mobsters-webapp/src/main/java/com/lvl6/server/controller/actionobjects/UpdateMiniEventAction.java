@@ -15,7 +15,9 @@ import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-@Component@Scope("prototype")public class UpdateMiniEventAction {
+@Component
+@Scope("prototype")
+public class UpdateMiniEventAction {
 	private static Logger log = LoggerFactory.getLogger( UpdateMiniEventAction.class);
 
 	private String userId;
