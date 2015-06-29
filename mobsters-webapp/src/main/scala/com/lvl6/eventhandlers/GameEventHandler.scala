@@ -118,6 +118,9 @@ trait GameEventHandler extends LazyLogging  {
       responses.normalResponseEvents.foreach{ response =>
         responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response)))
       }
+      responses.preDBResponseEvents.foreach{ response =>
+        responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.event.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response.event)))
+      }
     }
   }
     
