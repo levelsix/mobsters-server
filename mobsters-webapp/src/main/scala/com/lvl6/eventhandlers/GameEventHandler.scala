@@ -66,7 +66,7 @@ trait GameEventHandler extends LazyLogging  {
             responseCacheService.getCachedResponses(eventUuid) match {
               case Some(responses) => {
             	  logger.info(s"Event $eventUuid was already cached.. sending cached responses")
-                responses.foreach{ cr => eventWriter.sendToSinglePlayer(plyrId, cr.event)}
+                responses.foreach{ cr => sendCachedResponse(cr)}
                 isCached = true
               }
               case None => logger.info("Cached responses was empty")
@@ -86,6 +86,8 @@ trait GameEventHandler extends LazyLogging  {
       case t:Throwable => logger.error("Error processing message", t)
     }
   }
+  
+  def sendCachedResponse(cachedResponse:CachedClientResponse)
   
   
   def sendResponses(responses:ToClientEvents)={

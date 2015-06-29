@@ -40,6 +40,7 @@ import scala.beans.BeanProperty
 import javax.annotation.Resource
 import com.lvl6.events.response.StartupResponseEvent
 import com.lvl6.server.eventsender.PreDBResponseEvent
+import com.lvl6.server.dynamodb.tables.CachedClientResponse
 
 @ServerEndpoint(value = "/client/connection")
 class ClientConnection extends GameEventHandler with LazyLogging with MessageListener{
@@ -180,6 +181,11 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
       apnsWriter.handleEvent(revent)
     }
     cacheResponses(responses)
+  }
+  
+  
+  def sendCachedResponse(cachedResponse:CachedClientResponse)={
+    sendToThisSocket(cachedResponse.event)
   }
   
   override def updatePlayerToServerMaps(parsedEvent:ParsedEvent)={
