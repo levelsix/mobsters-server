@@ -27,6 +27,7 @@ import com.lvl6.server.dynamodb.tables.CachedClientResponse
 import java.util.Date
 import scala.beans.BeanProperty
 import org.springframework.beans.factory.annotation.Value
+import com.lvl6.events.response.StartupResponseEvent
 
 
 trait GameEventHandler extends LazyLogging  {
@@ -119,7 +120,9 @@ trait GameEventHandler extends LazyLogging  {
         responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response)))
       }
       responses.preDBResponseEvents.foreach{ response =>
-        responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.event.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response.event)))
+        if(!response.event.isInstanceOf[StartupResponseEvent]) {
+          responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.event.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response.event)))
+        }
       }
     }
   }
