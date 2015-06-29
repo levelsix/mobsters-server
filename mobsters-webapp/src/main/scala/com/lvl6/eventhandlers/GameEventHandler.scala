@@ -28,6 +28,7 @@ import java.util.Date
 import scala.beans.BeanProperty
 import org.springframework.beans.factory.annotation.Value
 import com.lvl6.events.response.StartupResponseEvent
+import com.lvl6.events.response.ForceLogoutResponseEvent
 
 
 trait GameEventHandler extends LazyLogging  {
@@ -116,16 +117,20 @@ trait GameEventHandler extends LazyLogging  {
   }
   
   def cacheResponses(responses:ToClientEvents)={
-    if(responseCachingEnabled){
-      logger.info(s"Caching ${responses.normalResponseEvents.size} responses for request ${responses.requestUuid}")
-      responses.normalResponseEvents.foreach{ response =>
-        responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response)))
-      }
-      responses.preDBResponseEvents.foreach{ response =>
-        if(!response.event.isInstanceOf[StartupResponseEvent]) {
-          responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.event.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response.event)))
+    try {
+      if(responseCachingEnabled){
+        logger.info(s"Caching ${responses.normalResponseEvents.size} responses for request ${responses.requestUuid}")
+        responses.normalResponseEvents.foreach{ response =>
+          responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response)))
+        }
+        responses.preDBResponseEvents.foreach{ response =>
+          if(!response.event.isInstanceOf[StartupResponseEvent] && !response.event.isInstanceOf[ForceLogoutResponseEvent]) {
+            responseCacheService.cacheResponse(new CachedClientResponse(responses.requestUuid, System.currentTimeMillis(), response.event.getEventType.getNumber, EventParser.getResponseBytes(responses.requestUuid, response.event)))
+          }
         }
       }
+    }catch{
+      case t:Throwable => logger.error("Error caching responses", t)
     }
   }
     
