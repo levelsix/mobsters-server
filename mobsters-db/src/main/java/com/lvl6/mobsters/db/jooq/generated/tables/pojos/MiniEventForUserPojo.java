@@ -6,11 +6,13 @@ package com.lvl6.mobsters.db.jooq.generated.tables.pojos;
 
 import com.lvl6.mobsters.db.jooq.generated.tables.interfaces.IMiniEventForUser;
 
+import java.sql.Timestamp;
+
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,47 +29,68 @@ import javax.validation.constraints.Size;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
-@Table(name = "mini_event_for_user", schema = "mobsters")
+@Table(name = "mini_event_for_user", schema = "mobsters", uniqueConstraints = {
+	@UniqueConstraint(columnNames = {"user_id", "mini_event_timetable_id"})
+})
 public class MiniEventForUserPojo implements IMiniEventForUser {
 
-	private static final long serialVersionUID = 1478525372;
+	private static final long serialVersionUID = -148777914;
 
-	private String  userId;
-	private Integer miniEventId;
-	private Integer userLvl;
-	private Boolean tierOneRedeemed;
-	private Boolean tierTwoRedeemed;
-	private Boolean tierThreeRedeemed;
+	private String    userId;
+	private Integer   miniEventTimetableId;
+	private Integer   miniEventId;
+	private Timestamp timeOfEntry;
+	private Integer   userLvl;
+	private Boolean   tierOneRedeemed;
+	private Boolean   tierTwoRedeemed;
+	private Boolean   tierThreeRedeemed;
+	private Timestamp tierOneRedeemedTime;
+	private Timestamp tierTwoRedeemedTime;
+	private Timestamp tierThreeRedeemedTime;
 
 	public MiniEventForUserPojo() {}
 
 	public MiniEventForUserPojo(MiniEventForUserPojo value) {
 		this.userId = value.userId;
+		this.miniEventTimetableId = value.miniEventTimetableId;
 		this.miniEventId = value.miniEventId;
+		this.timeOfEntry = value.timeOfEntry;
 		this.userLvl = value.userLvl;
 		this.tierOneRedeemed = value.tierOneRedeemed;
 		this.tierTwoRedeemed = value.tierTwoRedeemed;
 		this.tierThreeRedeemed = value.tierThreeRedeemed;
+		this.tierOneRedeemedTime = value.tierOneRedeemedTime;
+		this.tierTwoRedeemedTime = value.tierTwoRedeemedTime;
+		this.tierThreeRedeemedTime = value.tierThreeRedeemedTime;
 	}
 
 	public MiniEventForUserPojo(
-		String  userId,
-		Integer miniEventId,
-		Integer userLvl,
-		Boolean tierOneRedeemed,
-		Boolean tierTwoRedeemed,
-		Boolean tierThreeRedeemed
+		String    userId,
+		Integer   miniEventTimetableId,
+		Integer   miniEventId,
+		Timestamp timeOfEntry,
+		Integer   userLvl,
+		Boolean   tierOneRedeemed,
+		Boolean   tierTwoRedeemed,
+		Boolean   tierThreeRedeemed,
+		Timestamp tierOneRedeemedTime,
+		Timestamp tierTwoRedeemedTime,
+		Timestamp tierThreeRedeemedTime
 	) {
 		this.userId = userId;
+		this.miniEventTimetableId = miniEventTimetableId;
 		this.miniEventId = miniEventId;
+		this.timeOfEntry = timeOfEntry;
 		this.userLvl = userLvl;
 		this.tierOneRedeemed = tierOneRedeemed;
 		this.tierTwoRedeemed = tierTwoRedeemed;
 		this.tierThreeRedeemed = tierThreeRedeemed;
+		this.tierOneRedeemedTime = tierOneRedeemedTime;
+		this.tierTwoRedeemedTime = tierTwoRedeemedTime;
+		this.tierThreeRedeemedTime = tierThreeRedeemedTime;
 	}
 
-	@Id
-	@Column(name = "user_id", unique = true, nullable = false, length = 36)
+	@Column(name = "user_id", nullable = false, length = 36)
 	@NotNull
 	@Size(max = 36)
 	@Override
@@ -81,6 +104,19 @@ public class MiniEventForUserPojo implements IMiniEventForUser {
 		return this;
 	}
 
+	@Column(name = "mini_event_timetable_id", nullable = false, precision = 10)
+	@NotNull
+	@Override
+	public Integer getMiniEventTimetableId() {
+		return this.miniEventTimetableId;
+	}
+
+	@Override
+	public MiniEventForUserPojo setMiniEventTimetableId(Integer miniEventTimetableId) {
+		this.miniEventTimetableId = miniEventTimetableId;
+		return this;
+	}
+
 	@Column(name = "mini_event_id", nullable = false, precision = 10)
 	@NotNull
 	@Override
@@ -91,6 +127,19 @@ public class MiniEventForUserPojo implements IMiniEventForUser {
 	@Override
 	public MiniEventForUserPojo setMiniEventId(Integer miniEventId) {
 		this.miniEventId = miniEventId;
+		return this;
+	}
+
+	@Column(name = "time_of_entry", nullable = false)
+	@NotNull
+	@Override
+	public Timestamp getTimeOfEntry() {
+		return this.timeOfEntry;
+	}
+
+	@Override
+	public MiniEventForUserPojo setTimeOfEntry(Timestamp timeOfEntry) {
+		this.timeOfEntry = timeOfEntry;
 		return this;
 	}
 
@@ -142,6 +191,42 @@ public class MiniEventForUserPojo implements IMiniEventForUser {
 		return this;
 	}
 
+	@Column(name = "tier_one_redeemed_time")
+	@Override
+	public Timestamp getTierOneRedeemedTime() {
+		return this.tierOneRedeemedTime;
+	}
+
+	@Override
+	public MiniEventForUserPojo setTierOneRedeemedTime(Timestamp tierOneRedeemedTime) {
+		this.tierOneRedeemedTime = tierOneRedeemedTime;
+		return this;
+	}
+
+	@Column(name = "tier_two_redeemed_time")
+	@Override
+	public Timestamp getTierTwoRedeemedTime() {
+		return this.tierTwoRedeemedTime;
+	}
+
+	@Override
+	public MiniEventForUserPojo setTierTwoRedeemedTime(Timestamp tierTwoRedeemedTime) {
+		this.tierTwoRedeemedTime = tierTwoRedeemedTime;
+		return this;
+	}
+
+	@Column(name = "tier_three_redeemed_time")
+	@Override
+	public Timestamp getTierThreeRedeemedTime() {
+		return this.tierThreeRedeemedTime;
+	}
+
+	@Override
+	public MiniEventForUserPojo setTierThreeRedeemedTime(Timestamp tierThreeRedeemedTime) {
+		this.tierThreeRedeemedTime = tierThreeRedeemedTime;
+		return this;
+	}
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -152,11 +237,16 @@ public class MiniEventForUserPojo implements IMiniEventForUser {
 	@Override
 	public void from(IMiniEventForUser from) {
 		setUserId(from.getUserId());
+		setMiniEventTimetableId(from.getMiniEventTimetableId());
 		setMiniEventId(from.getMiniEventId());
+		setTimeOfEntry(from.getTimeOfEntry());
 		setUserLvl(from.getUserLvl());
 		setTierOneRedeemed(from.getTierOneRedeemed());
 		setTierTwoRedeemed(from.getTierTwoRedeemed());
 		setTierThreeRedeemed(from.getTierThreeRedeemed());
+		setTierOneRedeemedTime(from.getTierOneRedeemedTime());
+		setTierTwoRedeemedTime(from.getTierTwoRedeemedTime());
+		setTierThreeRedeemedTime(from.getTierThreeRedeemedTime());
 	}
 
 	/**

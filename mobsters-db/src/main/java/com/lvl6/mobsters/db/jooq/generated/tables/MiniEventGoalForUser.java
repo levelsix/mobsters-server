@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MiniEventGoalForUser extends TableImpl<MiniEventGoalForUserRecord> {
 
-	private static final long serialVersionUID = 1590534639;
+	private static final long serialVersionUID = 673744911;
 
 	/**
 	 * The reference instance of <code>mobsters.mini_event_goal_for_user</code>
@@ -52,6 +52,11 @@ public class MiniEventGoalForUser extends TableImpl<MiniEventGoalForUserRecord> 
 	 * The column <code>mobsters.mini_event_goal_for_user.user_id</code>.
 	 */
 	public final TableField<MiniEventGoalForUserRecord, String> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.CHAR.length(36).nullable(false), this, "");
+
+	/**
+	 * The column <code>mobsters.mini_event_goal_for_user.mini_event_timetable_id</code>.
+	 */
+	public final TableField<MiniEventGoalForUserRecord, Integer> MINI_EVENT_TIMETABLE_ID = createField("mini_event_timetable_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
 	 * The column <code>mobsters.mini_event_goal_for_user.mini_event_goal_id</code>.

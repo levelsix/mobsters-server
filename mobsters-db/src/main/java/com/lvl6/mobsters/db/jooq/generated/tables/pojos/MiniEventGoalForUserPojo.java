@@ -28,13 +28,14 @@ import javax.validation.constraints.Size;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "mini_event_goal_for_user", schema = "mobsters", uniqueConstraints = {
-	@UniqueConstraint(columnNames = {"user_id", "mini_event_goal_id"})
+	@UniqueConstraint(columnNames = {"user_id", "mini_event_timetable_id", "mini_event_goal_id"})
 })
 public class MiniEventGoalForUserPojo implements IMiniEventGoalForUser {
 
-	private static final long serialVersionUID = -537315611;
+	private static final long serialVersionUID = -1402493772;
 
 	private String  userId;
+	private Integer miniEventTimetableId;
 	private Integer miniEventGoalId;
 	private Integer progress;
 
@@ -42,16 +43,19 @@ public class MiniEventGoalForUserPojo implements IMiniEventGoalForUser {
 
 	public MiniEventGoalForUserPojo(MiniEventGoalForUserPojo value) {
 		this.userId = value.userId;
+		this.miniEventTimetableId = value.miniEventTimetableId;
 		this.miniEventGoalId = value.miniEventGoalId;
 		this.progress = value.progress;
 	}
 
 	public MiniEventGoalForUserPojo(
 		String  userId,
+		Integer miniEventTimetableId,
 		Integer miniEventGoalId,
 		Integer progress
 	) {
 		this.userId = userId;
+		this.miniEventTimetableId = miniEventTimetableId;
 		this.miniEventGoalId = miniEventGoalId;
 		this.progress = progress;
 	}
@@ -67,6 +71,19 @@ public class MiniEventGoalForUserPojo implements IMiniEventGoalForUser {
 	@Override
 	public MiniEventGoalForUserPojo setUserId(String userId) {
 		this.userId = userId;
+		return this;
+	}
+
+	@Column(name = "mini_event_timetable_id", nullable = false, precision = 10)
+	@NotNull
+	@Override
+	public Integer getMiniEventTimetableId() {
+		return this.miniEventTimetableId;
+	}
+
+	@Override
+	public MiniEventGoalForUserPojo setMiniEventTimetableId(Integer miniEventTimetableId) {
+		this.miniEventTimetableId = miniEventTimetableId;
 		return this;
 	}
 
@@ -105,6 +122,7 @@ public class MiniEventGoalForUserPojo implements IMiniEventGoalForUser {
 	@Override
 	public void from(IMiniEventGoalForUser from) {
 		setUserId(from.getUserId());
+		setMiniEventTimetableId(from.getMiniEventTimetableId());
 		setMiniEventGoalId(from.getMiniEventGoalId());
 		setProgress(from.getProgress());
 	}

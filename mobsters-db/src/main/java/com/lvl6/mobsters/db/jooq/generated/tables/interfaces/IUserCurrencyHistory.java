@@ -137,6 +137,17 @@ public interface IUserCurrencyHistory extends Serializable {
 	@Size(max = 65535)
 	public String getDetails();
 
+	/**
+	 * Setter for <code>mobsters.user_currency_history.time_of_entry</code>.
+	 */
+	public IUserCurrencyHistory setTimeOfEntry(Timestamp value);
+
+	/**
+	 * Getter for <code>mobsters.user_currency_history.time_of_entry</code>.
+	 */
+	@Column(name = "time_of_entry")
+	public Timestamp getTimeOfEntry();
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------

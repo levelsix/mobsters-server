@@ -25,7 +25,8 @@ public class MiniEventTimetableRetrieveUtils {
 
 //	private static final String TABLE_NAME = DBConstants.TABLE_MINI_EVENT_TIMETABLE_CONFIG;
 
-	private Map<Integer, MiniEventTimetableConfigPojo> miniEventIdToMiniEventTimetable;
+//	private Map<Integer, TreeSet<MiniEventTimetableConfigPojo>> miniEventIdToMiniEventTimetable;
+	private Map<Integer, MiniEventTimetableConfigPojo> idToMiniEventTimetable;
 	private TreeSet<MiniEventTimetableConfigPojo> meStartTimeTree;
 	private TreeSet<MiniEventTimetableConfigPojo> meEndTimeTree;
 	private static final MeStartTimeComparator stComparator = new MeStartTimeComparator();
@@ -113,7 +114,26 @@ public class MiniEventTimetableRetrieveUtils {
 		}
 	}
 
-	public MiniEventTimetableConfigPojo getTimetableForMiniEventId(int miniEventId) {
+	public MiniEventTimetableConfigPojo getTimetableForId( int id )
+	{
+		log.debug("retrieving Timetable for id={}", id);
+
+		if (null == idToMiniEventTimetable || idToMiniEventTimetable.isEmpty()) {
+			reload();
+		}
+
+		if (!idToMiniEventTimetable.containsKey(id)) {
+			log.error("no MiniEventTimetable for id={}", id);
+			return null;
+		}
+		return idToMiniEventTimetable.get(id);
+	}
+
+	/*
+	public MiniEventTimetableConfigPojo getTimetableForMiniEventId(
+			int miniEventId,
+			Timestamp toe)
+	{
 		log.debug("retrieving Timetable for miniEventId={}", miniEventId);
 
 		if (null == miniEventIdToMiniEventTimetable || miniEventIdToMiniEventTimetable.isEmpty()) {
@@ -125,15 +145,15 @@ public class MiniEventTimetableRetrieveUtils {
 			return null;
 		}
 		return miniEventIdToMiniEventTimetable.get(miniEventId);
-	}
+	}*/
 
-	public Map<Integer, MiniEventTimetableConfigPojo> getAllIdsToMiniEventTimetableConfigs() {
-		if (null == miniEventIdToMiniEventTimetable) {
-			reload();
-		}
-
-		return miniEventIdToMiniEventTimetable;
-	}
+//	public Map<Integer, MiniEventTimetableConfigPojo> getAllIdsToMiniEventTimetableConfigs() {
+//		if (null == miniEventIdToMiniEventTimetable) {
+//			reload();
+//		}
+//
+//		return miniEventIdToMiniEventTimetable;
+//	}
 
 	public void reload() {
 		setStaticIdsToMiniEventTimetableConfigPojos();
@@ -143,25 +163,36 @@ public class MiniEventTimetableRetrieveUtils {
 	private void setStaticIdsToMiniEventTimetableConfigPojos() {
 		log.debug("setting static map of miniEventId to MiniEventTimetableConfigPojo");
 
-		Map<Integer, MiniEventTimetableConfigPojo> miniEventIdToMiniEventTimetableConfigPojoTemp = new HashMap<Integer, MiniEventTimetableConfigPojo>();
+//		Map<Integer, TreeSet<MiniEventTimetableConfigPojo>> miniEventIdToMiniEventTimetableConfigPojoTemp =
+//				new HashMap<Integer, TreeSet<MiniEventTimetableConfigPojo>>();
+		Map<Integer, MiniEventTimetableConfigPojo> idToMiniEventTimetableConfigTemp =
+				new HashMap<Integer, MiniEventTimetableConfigPojo>();
 		for (MiniEventTimetableConfigPojo metc : miniEventTimetableConfigDao.findAll())
 		{
-			int miniEventId = metc.getMiniEventId();
-			miniEventIdToMiniEventTimetableConfigPojoTemp.put(miniEventId, metc);
+//			int miniEventId = metc.getMiniEventId();
+//			if (!miniEventIdToMiniEventTimetableConfigPojoTemp.containsKey(miniEventId)) {
+//				TreeSet<MiniEventTimetableConfigPojo>
+//				miniEventIdToMiniEventTimetableConfigPojoTemp.put(miniEventId, value)
+//			}
+//			miniEventIdToMiniEventTimetableConfigPojoTemp.put(miniEventId, metc);
+
+			int id = metc.getId();
+			idToMiniEventTimetableConfigTemp.put(id, metc);
 		}
 
-		miniEventIdToMiniEventTimetable = miniEventIdToMiniEventTimetableConfigPojoTemp;
+//		miniEventIdToMiniEventTimetable = miniEventIdToMiniEventTimetableConfigPojoTemp;
+		idToMiniEventTimetable = idToMiniEventTimetableConfigTemp;
 	}
 
 	private void setOrderedMiniEventTimetableConfigs() {
-		if ( null == miniEventIdToMiniEventTimetable) {
+		if ( null == idToMiniEventTimetable) {
 			log.warn("NO MINIEVENTS!");
 			return;
 		}
 
 		TreeSet<MiniEventTimetableConfigPojo> meStartTimeTreeTemp = new TreeSet<MiniEventTimetableConfigPojo>(stComparator);
 		TreeSet<MiniEventTimetableConfigPojo> meEndTimeTreeTemp = new TreeSet<MiniEventTimetableConfigPojo>(etComparator);
-		for (MiniEventTimetableConfigPojo me : miniEventIdToMiniEventTimetable.values()) {
+		for (MiniEventTimetableConfigPojo me : idToMiniEventTimetable.values()) {
 			boolean added = meStartTimeTreeTemp.add(me);
 			if (!added) {
 				log.error("(shouldn't happen...) can't add MiniEventTimetableConfigPojo={} to treeSet={}",

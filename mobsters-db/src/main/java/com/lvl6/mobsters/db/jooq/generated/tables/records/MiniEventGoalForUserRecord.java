@@ -16,10 +16,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.jooq.Field;
-import org.jooq.Record2;
 import org.jooq.Record3;
+import org.jooq.Record4;
 import org.jooq.Row;
-import org.jooq.Row3;
+import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -36,11 +36,11 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "mini_event_goal_for_user", schema = "mobsters", uniqueConstraints = {
-	@UniqueConstraint(columnNames = {"user_id", "mini_event_goal_id"})
+	@UniqueConstraint(columnNames = {"user_id", "mini_event_timetable_id", "mini_event_goal_id"})
 })
-public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoalForUserRecord> implements Record3<String, Integer, Integer>, IMiniEventGoalForUser {
+public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoalForUserRecord> implements Record4<String, Integer, Integer, Integer>, IMiniEventGoalForUser {
 
-	private static final long serialVersionUID = -2011368635;
+	private static final long serialVersionUID = -1336250473;
 
 	/**
 	 * Setter for <code>mobsters.mini_event_goal_for_user.user_id</code>.
@@ -63,11 +63,30 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	}
 
 	/**
+	 * Setter for <code>mobsters.mini_event_goal_for_user.mini_event_timetable_id</code>.
+	 */
+	@Override
+	public MiniEventGoalForUserRecord setMiniEventTimetableId(Integer value) {
+		setValue(1, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.mini_event_goal_for_user.mini_event_timetable_id</code>.
+	 */
+	@Column(name = "mini_event_timetable_id", nullable = false, precision = 10)
+	@NotNull
+	@Override
+	public Integer getMiniEventTimetableId() {
+		return (Integer) getValue(1);
+	}
+
+	/**
 	 * Setter for <code>mobsters.mini_event_goal_for_user.mini_event_goal_id</code>.
 	 */
 	@Override
 	public MiniEventGoalForUserRecord setMiniEventGoalId(Integer value) {
-		setValue(1, value);
+		setValue(2, value);
 		return this;
 	}
 
@@ -78,7 +97,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	@NotNull
 	@Override
 	public Integer getMiniEventGoalId() {
-		return (Integer) getValue(1);
+		return (Integer) getValue(2);
 	}
 
 	/**
@@ -86,7 +105,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 */
 	@Override
 	public MiniEventGoalForUserRecord setProgress(Integer value) {
-		setValue(2, value);
+		setValue(3, value);
 		return this;
 	}
 
@@ -96,7 +115,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	@Column(name = "progress", precision = 10)
 	@Override
 	public Integer getProgress() {
-		return (Integer) getValue(2);
+		return (Integer) getValue(3);
 	}
 
 	// -------------------------------------------------------------------------
@@ -107,28 +126,28 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Record2<String, Integer> key() {
-		return (Record2) super.key();
+	public Record3<String, Integer, Integer> key() {
+		return (Record3) super.key();
 	}
 
 	// -------------------------------------------------------------------------
-	// Record3 type implementation
+	// Record4 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<String, Integer, Integer> fieldsRow() {
-		return (Row3) super.fieldsRow();
+	public Row4<String, Integer, Integer, Integer> fieldsRow() {
+		return (Row4) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row3<String, Integer, Integer> valuesRow() {
-		return (Row3) super.valuesRow();
+	public Row4<String, Integer, Integer, Integer> valuesRow() {
+		return (Row4) super.valuesRow();
 	}
 
 	/**
@@ -144,7 +163,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 */
 	@Override
 	public Field<Integer> field2() {
-		return MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER.MINI_EVENT_GOAL_ID;
+		return MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER.MINI_EVENT_TIMETABLE_ID;
 	}
 
 	/**
@@ -152,6 +171,14 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 */
 	@Override
 	public Field<Integer> field3() {
+		return MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER.MINI_EVENT_GOAL_ID;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Integer> field4() {
 		return MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER.PROGRESS;
 	}
 
@@ -168,7 +195,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 */
 	@Override
 	public Integer value2() {
-		return getMiniEventGoalId();
+		return getMiniEventTimetableId();
 	}
 
 	/**
@@ -176,6 +203,14 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 */
 	@Override
 	public Integer value3() {
+		return getMiniEventGoalId();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer value4() {
 		return getProgress();
 	}
 
@@ -193,7 +228,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 */
 	@Override
 	public MiniEventGoalForUserRecord value2(Integer value) {
-		setMiniEventGoalId(value);
+		setMiniEventTimetableId(value);
 		return this;
 	}
 
@@ -202,6 +237,15 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 */
 	@Override
 	public MiniEventGoalForUserRecord value3(Integer value) {
+		setMiniEventGoalId(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public MiniEventGoalForUserRecord value4(Integer value) {
 		setProgress(value);
 		return this;
 	}
@@ -210,10 +254,11 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MiniEventGoalForUserRecord values(String value1, Integer value2, Integer value3) {
+	public MiniEventGoalForUserRecord values(String value1, Integer value2, Integer value3, Integer value4) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
+		value4(value4);
 		return this;
 	}
 
@@ -227,6 +272,7 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	@Override
 	public void from(IMiniEventGoalForUser from) {
 		setUserId(from.getUserId());
+		setMiniEventTimetableId(from.getMiniEventTimetableId());
 		setMiniEventGoalId(from.getMiniEventGoalId());
 		setProgress(from.getProgress());
 	}
@@ -254,11 +300,12 @@ public class MiniEventGoalForUserRecord extends UpdatableRecordImpl<MiniEventGoa
 	/**
 	 * Create a detached, initialised MiniEventGoalForUserRecord
 	 */
-	public MiniEventGoalForUserRecord(String userId, Integer miniEventGoalId, Integer progress) {
+	public MiniEventGoalForUserRecord(String userId, Integer miniEventTimetableId, Integer miniEventGoalId, Integer progress) {
 		super(MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER);
 
 		setValue(0, userId);
-		setValue(1, miniEventGoalId);
-		setValue(2, progress);
+		setValue(1, miniEventTimetableId);
+		setValue(2, miniEventGoalId);
+		setValue(3, progress);
 	}
 }
