@@ -109,8 +109,7 @@ public class MiniEventForUserRetrieveUtil {
 		} catch (Exception e) {
 			log.error(
 					String.format(
-							"%s userId=%s, miniEventTimetableId=%s",
-							"most recent MiniEventForUserPojo retrieve db error.",
+							"most recent MiniEventForUserPojo retrieve db error. userId=%s",
 							userId),
 					e);
 		}
