@@ -32,8 +32,6 @@ import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
-import com.lvl6.info.MiniEventForUser;
-import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEnhanceHistory;
@@ -51,6 +49,8 @@ import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventGoalForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
@@ -2847,7 +2847,7 @@ public class InsertUtils implements InsertUtil {
 
 
 	@Override
-	public boolean insertIntoUpdateMiniEventForUser(MiniEventForUser mefu)
+	public boolean insertIntoUpdateMiniEventForUser(MiniEventForUserPojo mefu)
 	{
 		String tableName = DBConstants.TABLE_MINI_EVENT_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
@@ -2860,11 +2860,23 @@ public class InsertUtils implements InsertUtil {
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__USER_LVL,
 				mefu.getUserLvl());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED,
-				mefu.isTierOneRedeemed());
+				mefu.getTierOneRedeemed());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED,
-				mefu.isTierTwoRedeemed());
+				mefu.getTierTwoRedeemed());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED,
-				mefu.isTierThreeRedeemed());
+				mefu.getTierThreeRedeemed());
+		if (null != mefu.getTierOneRedeemedTime()) {
+			newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED_TIME,
+					mefu.getTierOneRedeemedTime());
+		}
+		if (null != mefu.getTierTwoRedeemedTime()) {
+			newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED_TIME,
+				mefu.getTierTwoRedeemedTime());
+		}
+		if (null != mefu.getTierThreeRedeemedTime()) {
+			newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED_TIME,
+				mefu.getTierThreeRedeemedTime());
+		}
 		newRows.add(newRow);
 
 		Set<String> replaceTheseColumns = new HashSet<String>();
@@ -2873,6 +2885,9 @@ public class InsertUtils implements InsertUtil {
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED);
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED_TIME);
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED_TIME);
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED_TIME);
 
 		int numUpdated = DBConnection.get()
 				.insertOnDuplicateKeyUpdateColumnsAbsolute(tableName, newRows,
@@ -2888,12 +2903,12 @@ public class InsertUtils implements InsertUtil {
 
 	@Override
 	public boolean insertIntoUpdateMiniEventGoalForUser(
-			Collection<MiniEventGoalForUser> megfuList)
+			Collection<MiniEventGoalForUserPojo> megfuList)
 	{
 		String tableName = DBConstants.TABLE_MINI_EVENT_GOAL_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
-		for (MiniEventGoalForUser megfu : megfuList) {
+		for (MiniEventGoalForUserPojo megfu : megfuList) {
 			Map<String, Object> newRow = new HashMap<String, Object>();
 			newRow.put(DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID,
 					megfu.getUserId());

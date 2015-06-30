@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.MiniEventGoal;
-import com.lvl6.info.MiniEventGoalForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventGoalForUserPojo;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto.Builder;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.rarechange.MiniEventGoalRetrieveUtils;
@@ -21,12 +21,12 @@ public class UpdateMiniEventAction {
 	private static Logger log = LoggerFactory.getLogger( UpdateMiniEventAction.class);
 
 	private String userId;
-	private List<MiniEventGoalForUser> megfuList;
-	@Autowired protected InsertUtil insertUtil; 
-	@Autowired protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils; 
+	private List<MiniEventGoalForUserPojo> megfuList;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
 
 	public UpdateMiniEventAction(String userId,
-			List<MiniEventGoalForUser> megfuList,
+			List<MiniEventGoalForUserPojo> megfuList,
 			InsertUtil insertUtil,
 			MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils)
 	{
@@ -80,7 +80,7 @@ public class UpdateMiniEventAction {
 	private boolean verifySyntax(Builder resBuilder) {
 
 		if (megfuList.isEmpty()) {
-			log.error("client didn't send any MiniEventGoalForUsers to be updated");
+			log.error("client didn't send any MiniEventGoalForUserPojos to be updated");
 			return false;
 		}
 
@@ -89,13 +89,13 @@ public class UpdateMiniEventAction {
 
 	private boolean verifySemantics(Builder resBuilder) {
 
-		for(MiniEventGoalForUser megfu : megfuList) {
+		for(MiniEventGoalForUserPojo megfu : megfuList) {
 			int miniEventGoalId = megfu.getMiniEventGoalId();
 
 			MiniEventGoal meg = miniEventGoalRetrieveUtils
 					.getMiniEventGoalById(miniEventGoalId);
 			if (null == meg) {
-				log.error("nonexistent MiniEventGoalForUser: {}, ", megfu);
+				log.error("nonexistent MiniEventGoalForUserPojo: {}, ", megfu);
 				return false;
 			}
 		}

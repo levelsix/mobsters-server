@@ -14,15 +14,15 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MiniEventForPlayerLvl;
-import com.lvl6.info.MiniEventForUser;
 import com.lvl6.info.MiniEventTierReward;
 import com.lvl6.info.Reward;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardRequestProto.RewardTier;
 import com.lvl6.proto.EventMiniEventProto.RedeemMiniEventRewardResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
@@ -52,20 +52,20 @@ public class RedeemMiniEventRewardAction {
 	private int mefplId;
 	private RewardTier rt;
 	private Date clientTime;
-	@Autowired protected GiftRetrieveUtils giftRetrieveUtil; 
-	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils; 
-	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
-	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
-	@Autowired protected MiniEventForUserRetrieveUtil mefuRetrieveUtil; 
-	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
-	@Autowired protected InsertUtil insertUtil; 
-	@Autowired protected UpdateUtil updateUtil; 
-	@Autowired protected MonsterStuffUtils monsterStuffUtils; 
-	@Autowired protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils; 
-	@Autowired protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils; 
-	@Autowired protected RewardRetrieveUtils rewardRetrieveUtils; 
-	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils; 
-	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
+	@Autowired protected GiftRetrieveUtils giftRetrieveUtil;
+	@Autowired protected GiftRewardRetrieveUtils giftRewardRetrieveUtils;
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil;
+	@Autowired protected MiniEventForUserRetrieveUtil mefuRetrieveUtil;
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected MonsterStuffUtils monsterStuffUtils;
+	@Autowired protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+	@Autowired protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
+	@Autowired protected RewardRetrieveUtils rewardRetrieveUtils;
+	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public RedeemMiniEventRewardAction(String userId, User user,
 			int maxCash, int maxOil, int mefplId, RewardTier rt,
@@ -122,7 +122,7 @@ public class RedeemMiniEventRewardAction {
 
 	//derived state
 	private Collection<MiniEventTierReward> miniEventTierRewards;
-	private MiniEventForUser mefu;
+	private MiniEventForUserPojo mefu;
 	private Collection<ItemForUser> nuOrUpdatedItems;
 	private List<FullUserMonsterProto> nuOrUpdatedMonsters;
 	private boolean awardedResources;
@@ -203,28 +203,34 @@ public class RedeemMiniEventRewardAction {
 		}
 		miniEventTierRewards = miniEventTierRewardsTemp;
 
-		mefu = mefuRetrieveUtil.getSpecificUserMiniEvent(userId);
+		mefu = mefuRetrieveUtil.getMostRecentUserMiniEvent(userId);
 		if (null == mefu) {
-			log.error("user has no MiniEventForUser, userId={}", userId);
+			log.error("user has no MiniEventForUserPojo, userId={}", userId);
 			return false;
 		}
-		
+
+		if (mefu.getMiniEventId() != me.getMiniEventId()) {
+			log.error("inconsistent miniEventId. MiniEventForUser={}. MiniEventForPlayerLvl={}",
+					mefu, me);
+			return false;
+		}
+
 		if(rewardTier == 1) {
-			if(mefu.isTierOneRedeemed() || mefu.isTierTwoRedeemed() || mefu.isTierThreeRedeemed()) {
+			if(mefu.getTierOneRedeemed() || mefu.getTierTwoRedeemed() || mefu.getTierThreeRedeemed()) {
 				log.error("trying to redeem tier 1 reward when already redeemed t1, t2, or t3, "
 						+ "mefu {}", mefu);
 				return false;
 			}
 		}
 		if(rewardTier == 2) {
-			if(!mefu.isTierOneRedeemed() || mefu.isTierTwoRedeemed() || mefu.isTierThreeRedeemed()) {
+			if(!mefu.getTierOneRedeemed() || mefu.getTierTwoRedeemed() || mefu.getTierThreeRedeemed()) {
 				log.error("trying to redeem tier 2 reward when havent redeemed t1, or alrdy redeem"
 						+ " t2 or t3, mefu {}", mefu);
 				return false;
 			}
 		}
 		if(rewardTier == 3) {
-			if(!mefu.isTierOneRedeemed() || !mefu.isTierTwoRedeemed() || mefu.isTierThreeRedeemed()) {
+			if(!mefu.getTierOneRedeemed() || !mefu.getTierTwoRedeemed() || mefu.getTierThreeRedeemed()) {
 				log.error("trying to redeem tier 3 reward when haven't redeemed t1 or t2,"
 						+ "or already redeemed t3, mefu {}", mefu);
 				return false;
