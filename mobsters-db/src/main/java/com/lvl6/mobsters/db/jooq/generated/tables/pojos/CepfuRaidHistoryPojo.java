@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class CepfuRaidHistoryPojo implements ICepfuRaidHistory {
 
-	private static final long serialVersionUID = -246611566;
+	private static final long serialVersionUID = -1837078173;
 
 	private String    userId;
 	private Timestamp timeOfEntry;
@@ -242,5 +242,12 @@ public class CepfuRaidHistoryPojo implements ICepfuRaidHistory {
 	public <E extends ICepfuRaidHistory> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.CepfuRaidHistoryRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.CepfuRaidHistoryRecord();
+		poop.from(this);
+		return "CepfuRaidHistoryPojo[" + poop.valuesRow() + "]";
 	}
 }

@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "structure_lab_config", schema = "mobsters")
 public class StructureLabConfigPojo implements IStructureLabConfig {
 
-	private static final long serialVersionUID = 2042863592;
+	private static final long serialVersionUID = -473285540;
 
 	private Integer structId;
 	private Byte    queueSize;
@@ -113,5 +113,12 @@ public class StructureLabConfigPojo implements IStructureLabConfig {
 	public <E extends IStructureLabConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructureLabConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructureLabConfigRecord();
+		poop.from(this);
+		return "StructureLabConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

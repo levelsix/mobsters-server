@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class CityElementConfigPojo implements ICityElementConfig {
 
-	private static final long serialVersionUID = -999749889;
+	private static final long serialVersionUID = 1854690124;
 
 	private Integer cityId;
 	private Integer assetId;
@@ -258,5 +258,12 @@ public class CityElementConfigPojo implements ICityElementConfig {
 	public <E extends ICityElementConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.CityElementConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.CityElementConfigRecord();
+		poop.from(this);
+		return "CityElementConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

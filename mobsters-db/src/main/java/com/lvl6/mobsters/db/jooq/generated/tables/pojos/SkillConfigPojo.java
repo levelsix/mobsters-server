@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "skill_config", schema = "mobsters")
 public class SkillConfigPojo implements ISkillConfig {
 
-	private static final long serialVersionUID = 1984198896;
+	private static final long serialVersionUID = 151667325;
 
 	private Integer id;
 	private String  name;
@@ -294,5 +294,12 @@ public class SkillConfigPojo implements ISkillConfig {
 	public <E extends ISkillConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.SkillConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.SkillConfigRecord();
+		poop.from(this);
+		return "SkillConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

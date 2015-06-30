@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -244,10 +245,13 @@ public class RedeemMiniEventRewardAction {
 
 		if (RewardTier.TIER_ONE.equals(rt)) {
 			mefu.setTierOneRedeemed(true);
+			mefu.setTierOneRedeemedTime(new Timestamp(clientTime.getTime()));
 		} else if (RewardTier.TIER_TWO.equals(rt)) {
 			mefu.setTierTwoRedeemed(true);
+			mefu.setTierTwoRedeemedTime(new Timestamp(clientTime.getTime()));
 		} else {
 			mefu.setTierThreeRedeemed(true);
+			mefu.setTierThreeRedeemedTime(new Timestamp(clientTime.getTime()));
 		}
 
 		boolean success = insertUtil.insertIntoUpdateMiniEventForUser(mefu);

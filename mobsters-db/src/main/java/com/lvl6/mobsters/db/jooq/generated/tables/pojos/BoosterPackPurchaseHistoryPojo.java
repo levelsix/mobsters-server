@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class BoosterPackPurchaseHistoryPojo implements IBoosterPackPurchaseHistory {
 
-	private static final long serialVersionUID = -866425201;
+	private static final long serialVersionUID = -381483485;
 
 	private String    userId;
 	private Integer   boosterPackId;
@@ -273,5 +273,12 @@ public class BoosterPackPurchaseHistoryPojo implements IBoosterPackPurchaseHisto
 	public <E extends IBoosterPackPurchaseHistory> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.BoosterPackPurchaseHistoryRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.BoosterPackPurchaseHistoryRecord();
+		poop.from(this);
+		return "BoosterPackPurchaseHistoryPojo[" + poop.valuesRow() + "]";
 	}
 }

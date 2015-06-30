@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "structure_money_tree_config", schema = "mobsters")
 public class StructureMoneyTreeConfigPojo implements IStructureMoneyTreeConfig {
 
-	private static final long serialVersionUID = -1864286644;
+	private static final long serialVersionUID = 1443390217;
 
 	private Integer structId;
 	private Double  productionRate;
@@ -186,5 +186,12 @@ public class StructureMoneyTreeConfigPojo implements IStructureMoneyTreeConfig {
 	public <E extends IStructureMoneyTreeConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructureMoneyTreeConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructureMoneyTreeConfigRecord();
+		poop.from(this);
+		return "StructureMoneyTreeConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class ClanEventPersistentForUserPojo implements IClanEventPersistentForUser {
 
-	private static final long serialVersionUID = 50935784;
+	private static final long serialVersionUID = -810028711;
 
 	private String  userId;
 	private String  clanId;
@@ -256,5 +256,12 @@ public class ClanEventPersistentForUserPojo implements IClanEventPersistentForUs
 	public <E extends IClanEventPersistentForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ClanEventPersistentForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ClanEventPersistentForUserRecord();
+		poop.from(this);
+		return "ClanEventPersistentForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

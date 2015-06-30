@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "task_for_user_client_state", schema = "mobsters")
 public class TaskForUserClientStatePojo implements ITaskForUserClientState {
 
-	private static final long serialVersionUID = 1882272810;
+	private static final long serialVersionUID = 758201621;
 
 	private String userId;
 	private byte[] clientState;
@@ -97,5 +97,12 @@ public class TaskForUserClientStatePojo implements ITaskForUserClientState {
 	public <E extends ITaskForUserClientState> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TaskForUserClientStateRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TaskForUserClientStateRecord();
+		poop.from(this);
+		return "TaskForUserClientStatePojo[" + poop.valuesRow() + "]";
 	}
 }

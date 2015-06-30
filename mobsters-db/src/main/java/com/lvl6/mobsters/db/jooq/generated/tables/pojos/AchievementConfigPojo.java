@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "achievement_config", schema = "mobsters")
 public class AchievementConfigPojo implements IAchievementConfig {
 
-	private static final long serialVersionUID = 82067159;
+	private static final long serialVersionUID = 993512446;
 
 	private Integer id;
 	private String  name;
@@ -327,5 +327,12 @@ public class AchievementConfigPojo implements IAchievementConfig {
 	public <E extends IAchievementConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.AchievementConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.AchievementConfigRecord();
+		poop.from(this);
+		return "AchievementConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

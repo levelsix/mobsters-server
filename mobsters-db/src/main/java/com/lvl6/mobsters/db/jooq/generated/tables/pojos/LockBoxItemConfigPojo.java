@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "lock_box_item_config", schema = "mobsters")
 public class LockBoxItemConfigPojo implements ILockBoxItemConfig {
 
-	private static final long serialVersionUID = -1352392443;
+	private static final long serialVersionUID = 1087574168;
 
 	private Integer id;
 	private Integer lockBoxEventId;
@@ -200,5 +200,12 @@ public class LockBoxItemConfigPojo implements ILockBoxItemConfig {
 	public <E extends ILockBoxItemConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.LockBoxItemConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.LockBoxItemConfigRecord();
+		poop.from(this);
+		return "LockBoxItemConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

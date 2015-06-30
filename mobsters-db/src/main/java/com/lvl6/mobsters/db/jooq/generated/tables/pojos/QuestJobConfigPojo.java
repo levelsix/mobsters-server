@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "quest_job_config", schema = "mobsters")
 public class QuestJobConfigPojo implements IQuestJobConfig {
 
-	private static final long serialVersionUID = -1440504844;
+	private static final long serialVersionUID = -396983471;
 
 	private Integer id;
 	private Integer questId;
@@ -217,5 +217,12 @@ public class QuestJobConfigPojo implements IQuestJobConfig {
 	public <E extends IQuestJobConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.QuestJobConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.QuestJobConfigRecord();
+		poop.from(this);
+		return "QuestJobConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

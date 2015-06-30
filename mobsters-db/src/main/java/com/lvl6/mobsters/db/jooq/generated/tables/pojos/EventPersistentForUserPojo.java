@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class EventPersistentForUserPojo implements IEventPersistentForUser {
 
-	private static final long serialVersionUID = 408061460;
+	private static final long serialVersionUID = 144750839;
 
 	private String    userId;
 	private Integer   eventPersistentId;
@@ -118,5 +118,12 @@ public class EventPersistentForUserPojo implements IEventPersistentForUser {
 	public <E extends IEventPersistentForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.EventPersistentForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.EventPersistentForUserRecord();
+		poop.from(this);
+		return "EventPersistentForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

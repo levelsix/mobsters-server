@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class MonsterEvolvingForUserPojo implements IMonsterEvolvingForUser {
 
-	private static final long serialVersionUID = 1584709603;
+	private static final long serialVersionUID = -805466267;
 
 	private String    catalystUserMonsterId;
 	private String    userMonsterIdOne;
@@ -156,5 +156,12 @@ public class MonsterEvolvingForUserPojo implements IMonsterEvolvingForUser {
 	public <E extends IMonsterEvolvingForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MonsterEvolvingForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MonsterEvolvingForUserRecord();
+		poop.from(this);
+		return "MonsterEvolvingForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

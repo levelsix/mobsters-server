@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class BattleItemQueueForUserPojo implements IBattleItemQueueForUser {
 
-	private static final long serialVersionUID = -934572955;
+	private static final long serialVersionUID = -27390159;
 
 	private String    userId;
 	private Integer   priority;
@@ -154,5 +154,12 @@ public class BattleItemQueueForUserPojo implements IBattleItemQueueForUser {
 	public <E extends IBattleItemQueueForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.BattleItemQueueForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.BattleItemQueueForUserRecord();
+		poop.from(this);
+		return "BattleItemQueueForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

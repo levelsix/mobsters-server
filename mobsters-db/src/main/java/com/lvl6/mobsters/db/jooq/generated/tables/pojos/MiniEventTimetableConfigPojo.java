@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "mini_event_timetable_config", schema = "mobsters")
 public class MiniEventTimetableConfigPojo implements IMiniEventTimetableConfig {
 
-	private static final long serialVersionUID = 98954809;
+	private static final long serialVersionUID = -885818577;
 
 	private Integer   id;
 	private Integer   miniEventId;
@@ -131,5 +131,12 @@ public class MiniEventTimetableConfigPojo implements IMiniEventTimetableConfig {
 	public <E extends IMiniEventTimetableConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventTimetableConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventTimetableConfigRecord();
+		poop.from(this);
+		return "MiniEventTimetableConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

@@ -35,7 +35,7 @@ import javax.validation.constraints.Size;
 })
 public class ClanMemberTeamDonationPojo implements IClanMemberTeamDonation {
 
-	private static final long serialVersionUID = 1929524506;
+	private static final long serialVersionUID = 1498773965;
 
 	private String    id;
 	private String    userId;
@@ -191,5 +191,12 @@ public class ClanMemberTeamDonationPojo implements IClanMemberTeamDonation {
 	public <E extends IClanMemberTeamDonation> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ClanMemberTeamDonationRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ClanMemberTeamDonationRecord();
+		poop.from(this);
+		return "ClanMemberTeamDonationPojo[" + poop.valuesRow() + "]";
 	}
 }

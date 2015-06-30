@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class CustomMenuConfigPojo implements ICustomMenuConfig {
 
-	private static final long serialVersionUID = -1313067363;
+	private static final long serialVersionUID = -417539683;
 
 	private Integer customMenuId;
 	private Integer positionX;
@@ -201,5 +201,12 @@ public class CustomMenuConfigPojo implements ICustomMenuConfig {
 	public <E extends ICustomMenuConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.CustomMenuConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.CustomMenuConfigRecord();
+		poop.from(this);
+		return "CustomMenuConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

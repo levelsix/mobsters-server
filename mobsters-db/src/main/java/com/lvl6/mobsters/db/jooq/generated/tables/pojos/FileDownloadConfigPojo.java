@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "file_download_config", schema = "mobsters")
 public class FileDownloadConfigPojo implements IFileDownloadConfig {
 
-	private static final long serialVersionUID = -119816463;
+	private static final long serialVersionUID = -377464643;
 
 	private Integer id;
 	private String  filename;
@@ -170,5 +170,12 @@ public class FileDownloadConfigPojo implements IFileDownloadConfig {
 	public <E extends IFileDownloadConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.FileDownloadConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.FileDownloadConfigRecord();
+		poop.from(this);
+		return "FileDownloadConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

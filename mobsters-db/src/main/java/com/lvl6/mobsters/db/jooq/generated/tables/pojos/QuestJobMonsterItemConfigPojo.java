@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 })
 public class QuestJobMonsterItemConfigPojo implements IQuestJobMonsterItemConfig {
 
-	private static final long serialVersionUID = 1860500161;
+	private static final long serialVersionUID = -1003635503;
 
 	private Integer questJobId;
 	private Integer monsterId;
@@ -131,5 +131,12 @@ public class QuestJobMonsterItemConfigPojo implements IQuestJobMonsterItemConfig
 	public <E extends IQuestJobMonsterItemConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.QuestJobMonsterItemConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.QuestJobMonsterItemConfigRecord();
+		poop.from(this);
+		return "QuestJobMonsterItemConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

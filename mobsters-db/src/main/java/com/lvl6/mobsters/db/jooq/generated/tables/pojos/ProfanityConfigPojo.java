@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "profanity_config", schema = "mobsters")
 public class ProfanityConfigPojo implements IProfanityConfig {
 
-	private static final long serialVersionUID = -1972675557;
+	private static final long serialVersionUID = -1887271763;
 
 	private String term;
 
@@ -80,5 +80,12 @@ public class ProfanityConfigPojo implements IProfanityConfig {
 	public <E extends IProfanityConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ProfanityConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ProfanityConfigRecord();
+		poop.from(this);
+		return "ProfanityConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

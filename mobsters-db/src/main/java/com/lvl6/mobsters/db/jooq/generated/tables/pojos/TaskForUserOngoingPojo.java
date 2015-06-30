@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "task_for_user_ongoing", schema = "mobsters")
 public class TaskForUserOngoingPojo implements ITaskForUserOngoing {
 
-	private static final long serialVersionUID = -142819585;
+	private static final long serialVersionUID = -1082636875;
 
 	private String    id;
 	private String    userId;
@@ -221,5 +221,12 @@ public class TaskForUserOngoingPojo implements ITaskForUserOngoing {
 	public <E extends ITaskForUserOngoing> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TaskForUserOngoingRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TaskForUserOngoingRecord();
+		poop.from(this);
+		return "TaskForUserOngoingPojo[" + poop.valuesRow() + "]";
 	}
 }

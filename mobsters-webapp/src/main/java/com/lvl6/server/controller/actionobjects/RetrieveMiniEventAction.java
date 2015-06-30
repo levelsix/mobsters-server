@@ -467,7 +467,7 @@ public class RetrieveMiniEventAction {
 
 	private boolean retrieveCurrentUserMiniEvent()
 	{
-		int metId = mefu.getMiniEventId();
+		int metId = mefu.getMiniEventTimetableId();
 		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil
 				.getTimetableForId(metId);
 		if (null == curActiveMiniEventTimetable) {

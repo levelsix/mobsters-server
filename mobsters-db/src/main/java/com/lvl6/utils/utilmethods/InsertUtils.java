@@ -2855,6 +2855,8 @@ public class InsertUtils implements InsertUtil {
 		Map<String, Object> newRow = new HashMap<String, Object>();
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__USER_ID,
 				mefu.getUserId());
+		newRow.put(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_TIMETABLE_ID,
+				mefu.getMiniEventTimetableId());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID,
 				mefu.getMiniEventId());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__USER_LVL,
@@ -2880,8 +2882,6 @@ public class InsertUtils implements InsertUtil {
 		newRows.add(newRow);
 
 		Set<String> replaceTheseColumns = new HashSet<String>();
-		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID);
-		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__USER_LVL);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED);
@@ -2912,6 +2912,8 @@ public class InsertUtils implements InsertUtil {
 			Map<String, Object> newRow = new HashMap<String, Object>();
 			newRow.put(DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID,
 					megfu.getUserId());
+			newRow.put(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_TIMETABLE_ID,
+					megfu.getMiniEventTimetableId());
 			newRow.put(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_GOAL_ID,
 					megfu.getMiniEventGoalId());
 			newRow.put(DBConstants.MINI_EVENT_GOAL_FOR_USER__PROGRESS,

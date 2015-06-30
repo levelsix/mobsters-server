@@ -181,6 +181,8 @@ public class MiniEventGoalForUserRetrieveUtil {
 			MiniEventGoalForUserPojo megfu = new MiniEventGoalForUserPojo();
 			megfu.setUserId(rs
 					.getString(DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID));
+			megfu.setMiniEventTimetableId(rs
+					.getInt(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_TIMETABLE_ID));
 			megfu.setMiniEventGoalId(rs
 					.getInt(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_GOAL_ID));
 			megfu.setProgress(
@@ -193,6 +195,7 @@ public class MiniEventGoalForUserRetrieveUtil {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
 				columnsSelected.add(DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID);
+				columnsSelected.add(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_TIMETABLE_ID);
 				columnsSelected.add(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_GOAL_ID);
 				columnsSelected.add(DBConstants.MINI_EVENT_GOAL_FOR_USER__PROGRESS);
 			}

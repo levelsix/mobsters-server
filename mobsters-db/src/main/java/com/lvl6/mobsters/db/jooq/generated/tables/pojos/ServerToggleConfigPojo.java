@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "server_toggle_config", schema = "mobsters")
 public class ServerToggleConfigPojo implements IServerToggleConfig {
 
-	private static final long serialVersionUID = -95663038;
+	private static final long serialVersionUID = -92597313;
 
 	private Integer id;
 	private String  name;
@@ -115,5 +115,12 @@ public class ServerToggleConfigPojo implements IServerToggleConfig {
 	public <E extends IServerToggleConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ServerToggleConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ServerToggleConfigRecord();
+		poop.from(this);
+		return "ServerToggleConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

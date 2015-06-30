@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class TournamentEventForUserPojo implements ITournamentEventForUser {
 
-	private static final long serialVersionUID = 722490927;
+	private static final long serialVersionUID = -614308;
 
 	private Integer tournamentEventId;
 	private String  userId;
@@ -150,5 +150,12 @@ public class TournamentEventForUserPojo implements ITournamentEventForUser {
 	public <E extends ITournamentEventForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TournamentEventForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TournamentEventForUserRecord();
+		poop.from(this);
+		return "TournamentEventForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

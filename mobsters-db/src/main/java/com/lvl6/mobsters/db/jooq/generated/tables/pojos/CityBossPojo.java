@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "city_boss", schema = "mobsters")
 public class CityBossPojo implements ICityBoss {
 
-	private static final long serialVersionUID = -1418369844;
+	private static final long serialVersionUID = 1896595572;
 
 	private Integer id;
 	private Integer cityId;
@@ -197,5 +197,12 @@ public class CityBossPojo implements ICityBoss {
 	public <E extends ICityBoss> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.CityBossRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.CityBossRecord();
+		poop.from(this);
+		return "CityBossPojo[" + poop.valuesRow() + "]";
 	}
 }

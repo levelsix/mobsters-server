@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class ClanChatPostPojo implements IClanChatPost {
 
-	private static final long serialVersionUID = -356408860;
+	private static final long serialVersionUID = 991836978;
 
 	private String    id;
 	private String    posterId;
@@ -157,5 +157,12 @@ public class ClanChatPostPojo implements IClanChatPost {
 	public <E extends IClanChatPost> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ClanChatPostRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ClanChatPostRecord();
+		poop.from(this);
+		return "ClanChatPostPojo[" + poop.valuesRow() + "]";
 	}
 }

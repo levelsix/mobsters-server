@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class ClanAvengeUserPojo implements IClanAvengeUser {
 
-	private static final long serialVersionUID = -1541089401;
+	private static final long serialVersionUID = -1214854690;
 
 	private String    clanId;
 	private String    clanAvengeId;
@@ -138,5 +138,12 @@ public class ClanAvengeUserPojo implements IClanAvengeUser {
 	public <E extends IClanAvengeUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ClanAvengeUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ClanAvengeUserRecord();
+		poop.from(this);
+		return "ClanAvengeUserPojo[" + poop.valuesRow() + "]";
 	}
 }

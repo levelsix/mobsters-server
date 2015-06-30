@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class TaskForUserCompletedPojo implements ITaskForUserCompleted {
 
-	private static final long serialVersionUID = 1318091144;
+	private static final long serialVersionUID = -1645137828;
 
 	private String    userId;
 	private Integer   taskId;
@@ -152,5 +152,12 @@ public class TaskForUserCompletedPojo implements ITaskForUserCompleted {
 	public <E extends ITaskForUserCompleted> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TaskForUserCompletedRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TaskForUserCompletedRecord();
+		poop.from(this);
+		return "TaskForUserCompletedPojo[" + poop.valuesRow() + "]";
 	}
 }

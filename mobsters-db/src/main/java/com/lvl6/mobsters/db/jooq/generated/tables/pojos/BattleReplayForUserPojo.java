@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "battle_replay_for_user", schema = "mobsters")
 public class BattleReplayForUserPojo implements IBattleReplayForUser {
 
-	private static final long serialVersionUID = -1669265248;
+	private static final long serialVersionUID = -122167757;
 
 	private String    id;
 	private String    creatorId;
@@ -134,5 +134,12 @@ public class BattleReplayForUserPojo implements IBattleReplayForUser {
 	public <E extends IBattleReplayForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.BattleReplayForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.BattleReplayForUserRecord();
+		poop.from(this);
+		return "BattleReplayForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

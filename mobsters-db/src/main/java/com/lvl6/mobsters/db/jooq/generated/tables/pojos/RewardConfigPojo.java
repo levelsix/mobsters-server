@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "reward_config", schema = "mobsters")
 public class RewardConfigPojo implements IRewardConfig {
 
-	private static final long serialVersionUID = -1644474182;
+	private static final long serialVersionUID = 1742575039;
 
 	private Integer id;
 	private Integer staticDataId;
@@ -131,5 +131,12 @@ public class RewardConfigPojo implements IRewardConfig {
 	public <E extends IRewardConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.RewardConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.RewardConfigRecord();
+		poop.from(this);
+		return "RewardConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

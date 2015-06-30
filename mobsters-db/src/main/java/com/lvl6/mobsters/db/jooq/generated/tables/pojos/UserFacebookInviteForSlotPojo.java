@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "user_facebook_invite_for_slot", schema = "mobsters")
 public class UserFacebookInviteForSlotPojo implements IUserFacebookInviteForSlot {
 
-	private static final long serialVersionUID = 2095398863;
+	private static final long serialVersionUID = 1666505674;
 
 	private String    id;
 	private String    inviterUserId;
@@ -204,5 +204,12 @@ public class UserFacebookInviteForSlotPojo implements IUserFacebookInviteForSlot
 	public <E extends IUserFacebookInviteForSlot> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.UserFacebookInviteForSlotRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.UserFacebookInviteForSlotRecord();
+		poop.from(this);
+		return "UserFacebookInviteForSlotPojo[" + poop.valuesRow() + "]";
 	}
 }

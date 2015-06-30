@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "monster_for_pvp_config", schema = "mobsters")
 public class MonsterForPvpConfigPojo implements IMonsterForPvpConfig {
 
-	private static final long serialVersionUID = 204217577;
+	private static final long serialVersionUID = -1836158124;
 
 	private Integer id;
 	private Integer monsterId;
@@ -197,5 +197,12 @@ public class MonsterForPvpConfigPojo implements IMonsterForPvpConfig {
 	public <E extends IMonsterForPvpConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MonsterForPvpConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MonsterForPvpConfigRecord();
+		poop.from(this);
+		return "MonsterForPvpConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

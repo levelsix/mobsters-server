@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "referral_code_generated_config", schema = "mobsters")
 public class ReferralCodeGeneratedConfigPojo implements IReferralCodeGeneratedConfig {
 
-	private static final long serialVersionUID = 759787596;
+	private static final long serialVersionUID = -1135362187;
 
 	private Integer id;
 	private String  code;
@@ -98,5 +98,12 @@ public class ReferralCodeGeneratedConfigPojo implements IReferralCodeGeneratedCo
 	public <E extends IReferralCodeGeneratedConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ReferralCodeGeneratedConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ReferralCodeGeneratedConfigRecord();
+		poop.from(this);
+		return "ReferralCodeGeneratedConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

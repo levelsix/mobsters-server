@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "sales_item_config", schema = "mobsters")
 public class SalesItemConfigPojo implements ISalesItemConfig {
 
-	private static final long serialVersionUID = 9111695;
+	private static final long serialVersionUID = -1681781914;
 
 	private Integer id;
 	private Integer salesPackageId;
@@ -112,5 +112,12 @@ public class SalesItemConfigPojo implements ISalesItemConfig {
 	public <E extends ISalesItemConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.SalesItemConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.SalesItemConfigRecord();
+		poop.from(this);
+		return "SalesItemConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

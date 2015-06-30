@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class UserClanBossContributionPojo implements IUserClanBossContribution {
 
-	private static final long serialVersionUID = 2066273388;
+	private static final long serialVersionUID = 1595462170;
 
 	private String  userId;
 	private String  clanId;
@@ -237,5 +237,12 @@ public class UserClanBossContributionPojo implements IUserClanBossContribution {
 	public <E extends IUserClanBossContribution> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.UserClanBossContributionRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.UserClanBossContributionRecord();
+		poop.from(this);
+		return "UserClanBossContributionPojo[" + poop.valuesRow() + "]";
 	}
 }

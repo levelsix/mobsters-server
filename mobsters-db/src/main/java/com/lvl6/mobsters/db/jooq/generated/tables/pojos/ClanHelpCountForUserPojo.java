@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class ClanHelpCountForUserPojo implements IClanHelpCountForUser {
 
-	private static final long serialVersionUID = -325782742;
+	private static final long serialVersionUID = 1259944666;
 
 	private String    userId;
 	private String    clanId;
@@ -154,5 +154,12 @@ public class ClanHelpCountForUserPojo implements IClanHelpCountForUser {
 	public <E extends IClanHelpCountForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ClanHelpCountForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ClanHelpCountForUserRecord();
+		poop.from(this);
+		return "ClanHelpCountForUserPojo[" + poop.valuesRow() + "]";
 	}
 }
