@@ -132,6 +132,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillPropertyConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillSideEffectConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StaticLevelInfoConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.StrengthLeaderboard;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureBattleItemFactoryConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureClanHouseConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureConfig;
@@ -197,7 +198,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
-	private static final long serialVersionUID = 1376499560;
+	private static final long serialVersionUID = -198350597;
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -348,6 +349,7 @@ public class Mobsters extends SchemaImpl {
 			SkillPropertyConfig.SKILL_PROPERTY_CONFIG,
 			SkillSideEffectConfig.SKILL_SIDE_EFFECT_CONFIG,
 			StaticLevelInfoConfig.STATIC_LEVEL_INFO_CONFIG,
+			StrengthLeaderboard.STRENGTH_LEADERBOARD,
 			StructureBattleItemFactoryConfig.STRUCTURE_BATTLE_ITEM_FACTORY_CONFIG,
 			StructureClanHouseConfig.STRUCTURE_CLAN_HOUSE_CONFIG,
 			StructureConfig.STRUCTURE_CONFIG,

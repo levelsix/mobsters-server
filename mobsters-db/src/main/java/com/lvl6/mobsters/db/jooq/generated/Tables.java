@@ -132,6 +132,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillPropertyConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillSideEffectConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StaticLevelInfoConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.StrengthLeaderboard;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureBattleItemFactoryConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureClanHouseConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureConfig;
@@ -829,6 +830,11 @@ public class Tables {
 	 * The table mobsters.static_level_info_config
 	 */
 	public static final StaticLevelInfoConfig STATIC_LEVEL_INFO_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.StaticLevelInfoConfig.STATIC_LEVEL_INFO_CONFIG;
+
+	/**
+	 * VIEW
+	 */
+	public static final StrengthLeaderboard STRENGTH_LEADERBOARD = com.lvl6.mobsters.db.jooq.generated.tables.StrengthLeaderboard.STRENGTH_LEADERBOARD;
 
 	/**
 	 * The table mobsters.structure_battle_item_factory_config

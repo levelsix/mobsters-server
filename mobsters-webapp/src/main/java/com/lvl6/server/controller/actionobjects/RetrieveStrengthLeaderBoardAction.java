@@ -10,9 +10,10 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.StrengthLeaderBoard;
 import com.lvl6.leaderboards.LeaderBoardImpl;
+import com.lvl6.mobsters.jooq.daos.service.LeaderBoardService;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
@@ -22,12 +23,12 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	private String retrieverUserId;
 	private int minRank;
 	private int maxRank;
-	private LeaderBoardImpl leaderBoard;
+	private LeaderBoardService leaderBoard;
 	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
 	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 
 	public RetrieveStrengthLeaderBoardAction( String retrieverUserId, 
-			int minRank, int maxRank, LeaderBoardImpl leaderBoard,
+			int minRank, int maxRank, LeaderBoardService leaderBoard,
 			UserRetrieveUtils2 userRetrieveUtils,
 			CreateInfoProtoUtils createInfoProtoUtils)
 	{
@@ -76,17 +77,17 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {		
-		if (leaderBoard.getSize() == 0) {
-			resBuilder.setStatus(ResponseStatus.FAIL_NO_RESULTS);
-			log.info("!!!!!!!!!!!!!!!!LEADERBOARD IS EMPTY!!!!!!!!!!!!!!!!!!!!");
-			return false;
-		}
-		
-		if(leaderBoard.getSize() < minRank) {
-			resBuilder.setStatus(ResponseStatus.FAIL_NO_RESULTS);
-			log.info("the leaderboard ranks request fall outside the possible range");
-			return false;
-		}
+//		if (leaderBoard.getSize() == 0) {
+//			resBuilder.setStatus(ResponseStatus.FAIL_NO_RESULTS);
+//			log.info("!!!!!!!!!!!!!!!!LEADERBOARD IS EMPTY!!!!!!!!!!!!!!!!!!!!");
+//			return false;
+//		}
+//		
+//		if(leaderBoard.getSize() < minRank) {
+//			resBuilder.setStatus(ResponseStatus.FAIL_NO_RESULTS);
+//			log.info("the leaderboard ranks request fall outside the possible range");
+//			return false;
+//		}
 		return true;
 	}
 
@@ -100,13 +101,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		b.setRank(retrieverRank);
 		resBuilder.setSenderLeaderBoardInfo(b.build());
 		
-		List<StrengthLeaderBoard> slbpList = leaderBoard.getStrengths(minRank, maxRank);
-		for(StrengthLeaderBoard slb : slbpList) {
-			log.info("rank {}, str {}", slb.getRank(), slb.getStrength());
-		}
-
-		resBuilder.addAllLeaderBoardInfo(createInfoProtoUtils.
-                createStrengthLeaderBoardProtos(slbpList, userRetrieveUtils));
+		resBuilder.addAllLeaderBoardInfo(leaderBoard.getStrengths(minRank, maxRank));
 	}
 
 
@@ -132,14 +127,6 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
 	public void setMaxRank(int maxRank) {
 		this.maxRank = maxRank;
-	}
-
-	public LeaderBoardImpl getLeaderBoard() {
-		return leaderBoard;
-	}
-
-	public void setLeaderBoard(LeaderBoardImpl leaderBoard) {
-		this.leaderBoard = leaderBoard;
 	}
 
 	public UserRetrieveUtils2 getUserRetrieveUtils() {

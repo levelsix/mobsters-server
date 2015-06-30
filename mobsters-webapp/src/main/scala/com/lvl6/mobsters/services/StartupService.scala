@@ -481,7 +481,6 @@ class StartupService extends LazyLogging {
         sbiqfu <- setBattleItemQueueForUser(resBuilder, userId)
         ssfu <- setSalesForUser(resBuilder, user)
         scrs <- setClanRaidStuff(resBuilder, user, userId, now)
-        sttslb <- setTopThreeStrengthLeaderBoard(resBuilder)
         plfu <- pvpBattleStuff(resBuilder, user, userId, freshRestart, now)
       } yield plfu
 
@@ -1390,16 +1389,6 @@ class StartupService extends LazyLogging {
         if (null != dlp) {
           resBuilder.setUserDefaultLanguages(dlp);
         }
-      }
-    }
-  }
-
-  def setTopThreeStrengthLeaderBoard(resBuilder: Builder): Future[Unit] = {
-    Future {
-      timed("StartupServer.setTopThreeStrengthLeaderBoard") {
-        val leaderBoardList = leaderBoard.getTopNStrengths(2);
-        resBuilder.addAllTopStrengthLeaderBoards(createInfoProtoUtils.
-          createStrengthLeaderBoardProtosWithMonsterId(leaderBoardList, userRetrieveUtils, monsterForUserRetrieveUtils));
       }
     }
   }

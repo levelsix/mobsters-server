@@ -102,7 +102,7 @@ public class UpdateUserStrengthController extends EventController {
 		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
 			UpdateUserStrengthAction uusa = new UpdateUserStrengthAction(userId, updatedStrength, 
-					userRetrieveUtils, updateUtil, leaderBoardImpl);
+					userRetrieveUtils, updateUtil);
 
 			uusa.execute(resBuilder);
 
