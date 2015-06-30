@@ -215,8 +215,12 @@ public class MiniEventForUserRetrieveUtil {
 			MiniEventForUserPojo bifu = new MiniEventForUserPojo();
 			bifu.setUserId(rs
 					.getString(DBConstants.MINI_EVENT_FOR_USER__USER_ID));
+			bifu.setMiniEventTimetableId(rs
+					.getInt(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_TIMETABLE_ID));
 			bifu.setMiniEventId(rs
 					.getInt(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID));
+			bifu.setTimeOfEntry(rs
+					.getTimestamp(DBConstants.MINI_EVENT_FOR_USER__TIME_OF_ENTRY));
 			bifu.setUserLvl(
 					rs.getInt(DBConstants.MINI_EVENT_FOR_USER__USER_LVL));
 			bifu.setTierOneRedeemed(
@@ -225,21 +229,31 @@ public class MiniEventForUserRetrieveUtil {
 					rs.getBoolean(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED));
 			bifu.setTierThreeRedeemed(
 					rs.getBoolean(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED));
-
+			bifu.setTierOneRedeemedTime(
+					rs.getTimestamp(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED_TIME));
+			bifu.setTierTwoRedeemedTime(
+					rs.getTimestamp(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED_TIME));
+			bifu.setTierThreeRedeemedTime(
+					rs.getTimestamp(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED_TIME));
 
 			return bifu;
 		}
+
 
 		public static Set<String> getColumnsSelected() {
 			if (null == columnsSelected) {
 				columnsSelected = new HashSet<String>();
 				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__USER_ID);
-				columnsSelected
-				.add(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_TIMETABLE_ID);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIME_OF_ENTRY);
 				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__USER_LVL);
 				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED);
 				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED);
 				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED_TIME);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED_TIME);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED_TIME);
 			}
 			return columnsSelected;
 		}
