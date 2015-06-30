@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class MiniEventGoalForUserPojo implements IMiniEventGoalForUser {
 
-	private static final long serialVersionUID = -1402493772;
+	private static final long serialVersionUID = -699074318;
 
 	private String  userId;
 	private Integer miniEventTimetableId;
@@ -134,5 +134,12 @@ public class MiniEventGoalForUserPojo implements IMiniEventGoalForUser {
 	public <E extends IMiniEventGoalForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventGoalForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventGoalForUserRecord();
+		poop.from(this);
+		return "MiniEventGoalForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

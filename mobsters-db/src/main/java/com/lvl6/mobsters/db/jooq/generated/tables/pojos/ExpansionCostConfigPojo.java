@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "expansion_cost_config", schema = "mobsters")
 public class ExpansionCostConfigPojo implements IExpansionCostConfig {
 
-	private static final long serialVersionUID = -2134908573;
+	private static final long serialVersionUID = -385324031;
 
 	private Integer id;
 	private Integer expansionCostCash;
@@ -130,5 +130,12 @@ public class ExpansionCostConfigPojo implements IExpansionCostConfig {
 	public <E extends IExpansionCostConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ExpansionCostConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ExpansionCostConfigRecord();
+		poop.from(this);
+		return "ExpansionCostConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "task_map_element_config", schema = "mobsters")
 public class TaskMapElementConfigPojo implements ITaskMapElementConfig {
 
-	private static final long serialVersionUID = -990996788;
+	private static final long serialVersionUID = -1606821661;
 
 	private Integer id;
 	private Integer taskId;
@@ -358,5 +358,12 @@ public class TaskMapElementConfigPojo implements ITaskMapElementConfig {
 	public <E extends ITaskMapElementConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TaskMapElementConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TaskMapElementConfigRecord();
+		poop.from(this);
+		return "TaskMapElementConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

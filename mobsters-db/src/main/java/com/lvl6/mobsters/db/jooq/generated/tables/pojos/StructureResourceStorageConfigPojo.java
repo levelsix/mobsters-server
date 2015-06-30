@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "structure_resource_storage_config", schema = "mobsters")
 public class StructureResourceStorageConfigPojo implements IStructureResourceStorageConfig {
 
-	private static final long serialVersionUID = 1207090167;
+	private static final long serialVersionUID = -2057350355;
 
 	private Integer structId;
 	private String  resourceTypeStored;
@@ -116,5 +116,12 @@ public class StructureResourceStorageConfigPojo implements IStructureResourceSto
 	public <E extends IStructureResourceStorageConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructureResourceStorageConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructureResourceStorageConfigRecord();
+		poop.from(this);
+		return "StructureResourceStorageConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

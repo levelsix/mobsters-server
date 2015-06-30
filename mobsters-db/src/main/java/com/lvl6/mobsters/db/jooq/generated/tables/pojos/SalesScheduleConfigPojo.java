@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "sales_schedule_config", schema = "mobsters")
 public class SalesScheduleConfigPojo implements ISalesScheduleConfig {
 
-	private static final long serialVersionUID = 1898351081;
+	private static final long serialVersionUID = 1796196684;
 
 	private Integer   id;
 	private Integer   salesPackageId;
@@ -132,5 +132,12 @@ public class SalesScheduleConfigPojo implements ISalesScheduleConfig {
 	public <E extends ISalesScheduleConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.SalesScheduleConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.SalesScheduleConfigRecord();
+		poop.from(this);
+		return "SalesScheduleConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

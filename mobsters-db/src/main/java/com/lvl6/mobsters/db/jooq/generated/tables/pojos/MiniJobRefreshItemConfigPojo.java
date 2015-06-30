@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 })
 public class MiniJobRefreshItemConfigPojo implements IMiniJobRefreshItemConfig {
 
-	private static final long serialVersionUID = 1051009352;
+	private static final long serialVersionUID = 1064249962;
 
 	private Integer structId;
 	private Integer itemId;
@@ -114,5 +114,12 @@ public class MiniJobRefreshItemConfigPojo implements IMiniJobRefreshItemConfig {
 	public <E extends IMiniJobRefreshItemConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MiniJobRefreshItemConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MiniJobRefreshItemConfigRecord();
+		poop.from(this);
+		return "MiniJobRefreshItemConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

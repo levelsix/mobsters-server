@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "mini_event_config", schema = "mobsters")
 public class MiniEventConfigPojo implements IMiniEventConfig {
 
-	private static final long serialVersionUID = -894442991;
+	private static final long serialVersionUID = -426295884;
 
 	private Integer   id;
 	private Timestamp startTime;
@@ -187,5 +187,12 @@ public class MiniEventConfigPojo implements IMiniEventConfig {
 	public <E extends IMiniEventConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventConfigRecord();
+		poop.from(this);
+		return "MiniEventConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

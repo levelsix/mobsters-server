@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class QuestForUserPojo implements IQuestForUser {
 
-	private static final long serialVersionUID = -1742164591;
+	private static final long serialVersionUID = 455273417;
 
 	private String  userId;
 	private Integer questId;
@@ -134,5 +134,12 @@ public class QuestForUserPojo implements IQuestForUser {
 	public <E extends IQuestForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.QuestForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.QuestForUserRecord();
+		poop.from(this);
+		return "QuestForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

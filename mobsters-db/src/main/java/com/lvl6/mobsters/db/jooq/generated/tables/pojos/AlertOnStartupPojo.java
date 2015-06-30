@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "alert_on_startup", schema = "mobsters")
 public class AlertOnStartupPojo implements IAlertOnStartup {
 
-	private static final long serialVersionUID = -837605139;
+	private static final long serialVersionUID = -1720148387;
 
 	private Integer id;
 	private String  message;
@@ -114,5 +114,12 @@ public class AlertOnStartupPojo implements IAlertOnStartup {
 	public <E extends IAlertOnStartup> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.AlertOnStartupRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.AlertOnStartupRecord();
+		poop.from(this);
+		return "AlertOnStartupPojo[" + poop.valuesRow() + "]";
 	}
 }

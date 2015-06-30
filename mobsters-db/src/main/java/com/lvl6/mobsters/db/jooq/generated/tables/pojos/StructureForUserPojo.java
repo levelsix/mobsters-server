@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "structure_for_user", schema = "mobsters")
 public class StructureForUserPojo implements IStructureForUser {
 
-	private static final long serialVersionUID = 449932752;
+	private static final long serialVersionUID = 1973403737;
 
 	private String    id;
 	private String    userId;
@@ -242,5 +242,12 @@ public class StructureForUserPojo implements IStructureForUser {
 	public <E extends IStructureForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructureForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructureForUserRecord();
+		poop.from(this);
+		return "StructureForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

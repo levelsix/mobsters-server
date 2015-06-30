@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class MonsterLevelInfoConfigPojo implements IMonsterLevelInfoConfig {
 
-	private static final long serialVersionUID = 729985182;
+	private static final long serialVersionUID = 2147081380;
 
 	private Integer monsterId;
 	private Integer level;
@@ -559,5 +559,12 @@ public class MonsterLevelInfoConfigPojo implements IMonsterLevelInfoConfig {
 	public <E extends IMonsterLevelInfoConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MonsterLevelInfoConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MonsterLevelInfoConfigRecord();
+		poop.from(this);
+		return "MonsterLevelInfoConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

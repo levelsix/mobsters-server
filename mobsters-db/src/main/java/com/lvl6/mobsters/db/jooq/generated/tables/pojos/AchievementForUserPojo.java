@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class AchievementForUserPojo implements IAchievementForUser {
 
-	private static final long serialVersionUID = 950260534;
+	private static final long serialVersionUID = 370389815;
 
 	private String    userId;
 	private Integer   achievementId;
@@ -186,5 +186,12 @@ public class AchievementForUserPojo implements IAchievementForUser {
 	public <E extends IAchievementForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.AchievementForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.AchievementForUserRecord();
+		poop.from(this);
+		return "AchievementForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

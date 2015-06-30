@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "clan_event_persistent_for_clan", schema = "mobsters")
 public class ClanEventPersistentForClanPojo implements IClanEventPersistentForClan {
 
-	private static final long serialVersionUID = 1190337846;
+	private static final long serialVersionUID = -809204362;
 
 	private String    clanId;
 	private Integer   clanEventPersistentId;
@@ -184,5 +184,12 @@ public class ClanEventPersistentForClanPojo implements IClanEventPersistentForCl
 	public <E extends IClanEventPersistentForClan> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ClanEventPersistentForClanRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ClanEventPersistentForClanRecord();
+		poop.from(this);
+		return "ClanEventPersistentForClanPojo[" + poop.valuesRow() + "]";
 	}
 }

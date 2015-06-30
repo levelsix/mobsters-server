@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "task_config", schema = "mobsters")
 public class TaskConfigPojo implements ITaskConfig {
 
-	private static final long serialVersionUID = -1903869996;
+	private static final long serialVersionUID = 1387091259;
 
 	private Integer id;
 	private String  goodName;
@@ -289,5 +289,12 @@ public class TaskConfigPojo implements ITaskConfig {
 	public <E extends ITaskConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TaskConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TaskConfigRecord();
+		poop.from(this);
+		return "TaskConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

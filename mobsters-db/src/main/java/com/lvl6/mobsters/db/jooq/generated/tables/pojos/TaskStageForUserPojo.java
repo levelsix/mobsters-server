@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "task_stage_for_user", schema = "mobsters")
 public class TaskStageForUserPojo implements ITaskStageForUser {
 
-	private static final long serialVersionUID = 912527478;
+	private static final long serialVersionUID = 2046707309;
 
 	private String  id;
 	private String  taskForUserId;
@@ -252,5 +252,12 @@ public class TaskStageForUserPojo implements ITaskStageForUser {
 	public <E extends ITaskStageForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TaskStageForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TaskStageForUserRecord();
+		poop.from(this);
+		return "TaskStageForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

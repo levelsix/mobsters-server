@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "load_testing_events", schema = "mobsters")
 public class LoadTestingEventsPojo implements ILoadTestingEvents {
 
-	private static final long serialVersionUID = 1158275095;
+	private static final long serialVersionUID = -233124524;
 
 	private Integer   id;
 	private String    userId;
@@ -154,5 +154,12 @@ public class LoadTestingEventsPojo implements ILoadTestingEvents {
 	public <E extends ILoadTestingEvents> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.LoadTestingEventsRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.LoadTestingEventsRecord();
+		poop.from(this);
+		return "LoadTestingEventsPojo[" + poop.valuesRow() + "]";
 	}
 }

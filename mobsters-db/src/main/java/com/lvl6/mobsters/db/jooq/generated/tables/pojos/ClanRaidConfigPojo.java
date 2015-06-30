@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "clan_raid_config", schema = "mobsters")
 public class ClanRaidConfigPojo implements IClanRaidConfig {
 
-	private static final long serialVersionUID = -1481880120;
+	private static final long serialVersionUID = 1657066018;
 
 	private Integer id;
 	private String  clanRaidName;
@@ -223,5 +223,12 @@ public class ClanRaidConfigPojo implements IClanRaidConfig {
 	public <E extends IClanRaidConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ClanRaidConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ClanRaidConfigRecord();
+		poop.from(this);
+		return "ClanRaidConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

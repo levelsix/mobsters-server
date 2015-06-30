@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "clan_raid_stage_reward_config", schema = "mobsters")
 public class ClanRaidStageRewardConfigPojo implements IClanRaidStageRewardConfig {
 
-	private static final long serialVersionUID = 377388384;
+	private static final long serialVersionUID = -994988607;
 
 	private Integer id;
 	private Integer clanRaidStageId;
@@ -204,5 +204,12 @@ public class ClanRaidStageRewardConfigPojo implements IClanRaidStageRewardConfig
 	public <E extends IClanRaidStageRewardConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ClanRaidStageRewardConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ClanRaidStageRewardConfigRecord();
+		poop.from(this);
+		return "ClanRaidStageRewardConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

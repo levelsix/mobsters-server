@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "pvp_battle_for_user", schema = "mobsters")
 public class PvpBattleForUserPojo implements IPvpBattleForUser {
 
-	private static final long serialVersionUID = 1244441173;
+	private static final long serialVersionUID = -986674075;
 
 	private String    attackerId;
 	private String    defenderId;
@@ -190,5 +190,12 @@ public class PvpBattleForUserPojo implements IPvpBattleForUser {
 	public <E extends IPvpBattleForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.PvpBattleForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.PvpBattleForUserRecord();
+		poop.from(this);
+		return "PvpBattleForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

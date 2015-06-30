@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class LockBoxEventForUserPojo implements ILockBoxEventForUser {
 
-	private static final long serialVersionUID = 1905295276;
+	private static final long serialVersionUID = -257059314;
 
 	private Integer   lockBoxEventId;
 	private String    userId;
@@ -169,5 +169,12 @@ public class LockBoxEventForUserPojo implements ILockBoxEventForUser {
 	public <E extends ILockBoxEventForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.LockBoxEventForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.LockBoxEventForUserRecord();
+		poop.from(this);
+		return "LockBoxEventForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

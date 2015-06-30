@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "monster_battle_dialogue_config", schema = "mobsters")
 public class MonsterBattleDialogueConfigPojo implements IMonsterBattleDialogueConfig {
 
-	private static final long serialVersionUID = -2145941103;
+	private static final long serialVersionUID = 1447918121;
 
 	private Integer id;
 	private Integer monsterId;
@@ -153,5 +153,12 @@ public class MonsterBattleDialogueConfigPojo implements IMonsterBattleDialogueCo
 	public <E extends IMonsterBattleDialogueConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MonsterBattleDialogueConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MonsterBattleDialogueConfigRecord();
+		poop.from(this);
+		return "MonsterBattleDialogueConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

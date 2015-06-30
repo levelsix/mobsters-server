@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "structure_pvp_board_config", schema = "mobsters")
 public class StructurePvpBoardConfigPojo implements IStructurePvpBoardConfig {
 
-	private static final long serialVersionUID = -1135309735;
+	private static final long serialVersionUID = -272408128;
 
 	private Integer structId;
 	private Integer powerLimit;
@@ -95,5 +95,12 @@ public class StructurePvpBoardConfigPojo implements IStructurePvpBoardConfig {
 	public <E extends IStructurePvpBoardConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructurePvpBoardConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructurePvpBoardConfigRecord();
+		poop.from(this);
+		return "StructurePvpBoardConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

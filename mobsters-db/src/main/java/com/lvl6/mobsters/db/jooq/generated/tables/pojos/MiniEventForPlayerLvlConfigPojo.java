@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "mini_event_for_player_lvl_config", schema = "mobsters")
 public class MiniEventForPlayerLvlConfigPojo implements IMiniEventForPlayerLvlConfig {
 
-	private static final long serialVersionUID = 1486589052;
+	private static final long serialVersionUID = 1092766119;
 
 	private Integer id;
 	private Integer miniEventId;
@@ -180,5 +180,12 @@ public class MiniEventForPlayerLvlConfigPojo implements IMiniEventForPlayerLvlCo
 	public <E extends IMiniEventForPlayerLvlConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventForPlayerLvlConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventForPlayerLvlConfigRecord();
+		poop.from(this);
+		return "MiniEventForPlayerLvlConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

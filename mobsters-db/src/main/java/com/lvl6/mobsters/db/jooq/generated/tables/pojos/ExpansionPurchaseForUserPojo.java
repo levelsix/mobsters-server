@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class ExpansionPurchaseForUserPojo implements IExpansionPurchaseForUser {
 
-	private static final long serialVersionUID = 1936067599;
+	private static final long serialVersionUID = -1764211571;
 
 	private String    userId;
 	private Integer   xPosition;
@@ -153,5 +153,12 @@ public class ExpansionPurchaseForUserPojo implements IExpansionPurchaseForUser {
 	public <E extends IExpansionPurchaseForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ExpansionPurchaseForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ExpansionPurchaseForUserRecord();
+		poop.from(this);
+		return "ExpansionPurchaseForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

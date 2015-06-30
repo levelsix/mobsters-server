@@ -31,7 +31,7 @@ import javax.validation.constraints.Size;
 @Table(name = "user_session", schema = "mobsters")
 public class UserSessionPojo implements IUserSession {
 
-	private static final long serialVersionUID = 431479764;
+	private static final long serialVersionUID = -254241943;
 
 	private String    userId;
 	private Timestamp loginTime;
@@ -114,5 +114,12 @@ public class UserSessionPojo implements IUserSession {
 	public <E extends IUserSession> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.UserSessionRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.UserSessionRecord();
+		poop.from(this);
+		return "UserSessionPojo[" + poop.valuesRow() + "]";
 	}
 }

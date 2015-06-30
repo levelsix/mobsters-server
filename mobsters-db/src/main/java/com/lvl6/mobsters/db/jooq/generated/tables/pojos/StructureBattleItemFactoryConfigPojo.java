@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "structure_battle_item_factory_config", schema = "mobsters")
 public class StructureBattleItemFactoryConfigPojo implements IStructureBattleItemFactoryConfig {
 
-	private static final long serialVersionUID = -431938692;
+	private static final long serialVersionUID = 1534030810;
 
 	private Integer structId;
 	private Integer powerLimit;
@@ -96,5 +96,12 @@ public class StructureBattleItemFactoryConfigPojo implements IStructureBattleIte
 	public <E extends IStructureBattleItemFactoryConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructureBattleItemFactoryConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructureBattleItemFactoryConfigRecord();
+		poop.from(this);
+		return "StructureBattleItemFactoryConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

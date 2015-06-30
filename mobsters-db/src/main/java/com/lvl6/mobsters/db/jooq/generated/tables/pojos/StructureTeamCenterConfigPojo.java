@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "structure_team_center_config", schema = "mobsters")
 public class StructureTeamCenterConfigPojo implements IStructureTeamCenterConfig {
 
-	private static final long serialVersionUID = -442636297;
+	private static final long serialVersionUID = 844653760;
 
 	private Integer structId;
 	private Integer teamCostLimit;
@@ -95,5 +95,12 @@ public class StructureTeamCenterConfigPojo implements IStructureTeamCenterConfig
 	public <E extends IStructureTeamCenterConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructureTeamCenterConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructureTeamCenterConfigRecord();
+		poop.from(this);
+		return "StructureTeamCenterConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

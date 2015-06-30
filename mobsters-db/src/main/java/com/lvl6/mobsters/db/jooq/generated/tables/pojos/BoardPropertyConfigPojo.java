@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "board_property_config", schema = "mobsters")
 public class BoardPropertyConfigPojo implements IBoardPropertyConfig {
 
-	private static final long serialVersionUID = 1900382903;
+	private static final long serialVersionUID = 304275042;
 
 	private Integer id;
 	private Integer boardId;
@@ -200,5 +200,12 @@ public class BoardPropertyConfigPojo implements IBoardPropertyConfig {
 	public <E extends IBoardPropertyConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.BoardPropertyConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.BoardPropertyConfigRecord();
+		poop.from(this);
+		return "BoardPropertyConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

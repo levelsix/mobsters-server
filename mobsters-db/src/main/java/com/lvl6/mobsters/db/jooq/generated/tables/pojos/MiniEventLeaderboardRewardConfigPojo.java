@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "mini_event_leaderboard_reward_config", schema = "mobsters")
 public class MiniEventLeaderboardRewardConfigPojo implements IMiniEventLeaderboardRewardConfig {
 
-	private static final long serialVersionUID = 155461364;
+	private static final long serialVersionUID = 1362473247;
 
 	private Integer id;
 	private Integer miniEventId;
@@ -129,5 +129,12 @@ public class MiniEventLeaderboardRewardConfigPojo implements IMiniEventLeaderboa
 	public <E extends IMiniEventLeaderboardRewardConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventLeaderboardRewardConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventLeaderboardRewardConfigRecord();
+		poop.from(this);
+		return "MiniEventLeaderboardRewardConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

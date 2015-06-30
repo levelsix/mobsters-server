@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "mini_event_tier_reward_config", schema = "mobsters")
 public class MiniEventTierRewardConfigPojo implements IMiniEventTierRewardConfig {
 
-	private static final long serialVersionUID = 1767563639;
+	private static final long serialVersionUID = -605865075;
 
 	private Integer id;
 	private Integer miniEventForPlayerLvlId;
@@ -129,5 +129,12 @@ public class MiniEventTierRewardConfigPojo implements IMiniEventTierRewardConfig
 	public <E extends IMiniEventTierRewardConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventTierRewardConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventTierRewardConfigRecord();
+		poop.from(this);
+		return "MiniEventTierRewardConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

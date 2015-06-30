@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class MiniEventForUserPojo implements IMiniEventForUser {
 
-	private static final long serialVersionUID = -148777914;
+	private static final long serialVersionUID = 1078566675;
 
 	private String    userId;
 	private Integer   miniEventTimetableId;
@@ -256,5 +256,12 @@ public class MiniEventForUserPojo implements IMiniEventForUser {
 	public <E extends IMiniEventForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MiniEventForUserRecord();
+		poop.from(this);
+		return "MiniEventForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

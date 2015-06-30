@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class ItemForUserUsagePojo implements IItemForUserUsage {
 
-	private static final long serialVersionUID = -464959069;
+	private static final long serialVersionUID = -1368602043;
 
 	private String    id;
 	private String    userId;
@@ -173,5 +173,12 @@ public class ItemForUserUsagePojo implements IItemForUserUsage {
 	public <E extends IItemForUserUsage> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ItemForUserUsageRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ItemForUserUsageRecord();
+		poop.from(this);
+		return "ItemForUserUsagePojo[" + poop.valuesRow() + "]";
 	}
 }
