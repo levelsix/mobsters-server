@@ -87,7 +87,7 @@
                clientAuth="false" sslProtocol="TLS" />
     -->
 
-    <Connector port="8443" protocol="org.apache.coyote.http11.Http11Nio2Protocol"
+    <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
                maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
                clientAuth="false" sslProtocol="TLS" 
 			   keystoreFile="/usr/share/tomcat8/conf/.keystore" keystorePass="robashen123" />
