@@ -32,6 +32,8 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanAvengeUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanBoss;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanBossReward;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPost;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPostsCountLastHour;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPostsCountLast_24Hours;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentForClan;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentForClanHistory;
@@ -40,13 +42,17 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentUserReward;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelp;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelpCountForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelpCountLast_24Hours;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanIconConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanInvite;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanMemberTeamDonation;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanMembersCount;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageMonsterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageRewardConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanStrength;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanTeamDonationCounts;
 import com.lvl6.mobsters.db.jooq.generated.tables.CustomMenuConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.CustomTranslations;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentConfig;
@@ -114,6 +120,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ResearchConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ResearchForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ResearchPropertyConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.RewardConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SafariZoneConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesDisplayItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
@@ -324,6 +331,16 @@ public class Tables {
 	public static final ClanChatPost CLAN_CHAT_POST = com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPost.CLAN_CHAT_POST;
 
 	/**
+	 * VIEW
+	 */
+	public static final ClanChatPostsCountLast_24Hours CLAN_CHAT_POSTS_COUNT_LAST_24_HOURS = com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPostsCountLast_24Hours.CLAN_CHAT_POSTS_COUNT_LAST_24_HOURS;
+
+	/**
+	 * VIEW
+	 */
+	public static final ClanChatPostsCountLastHour CLAN_CHAT_POSTS_COUNT_LAST_HOUR = com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPostsCountLastHour.CLAN_CHAT_POSTS_COUNT_LAST_HOUR;
+
+	/**
 	 * The table mobsters.clan_event_persistent_config
 	 */
 	public static final ClanEventPersistentConfig CLAN_EVENT_PERSISTENT_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentConfig.CLAN_EVENT_PERSISTENT_CONFIG;
@@ -364,6 +381,11 @@ public class Tables {
 	public static final ClanHelpCountForUser CLAN_HELP_COUNT_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.ClanHelpCountForUser.CLAN_HELP_COUNT_FOR_USER;
 
 	/**
+	 * VIEW
+	 */
+	public static final ClanHelpCountLast_24Hours CLAN_HELP_COUNT_LAST_24_HOURS = com.lvl6.mobsters.db.jooq.generated.tables.ClanHelpCountLast_24Hours.CLAN_HELP_COUNT_LAST_24_HOURS;
+
+	/**
 	 * The table mobsters.clan_icon_config
 	 */
 	public static final ClanIconConfig CLAN_ICON_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.ClanIconConfig.CLAN_ICON_CONFIG;
@@ -372,6 +394,11 @@ public class Tables {
 	 * The table mobsters.clan_invite
 	 */
 	public static final ClanInvite CLAN_INVITE = com.lvl6.mobsters.db.jooq.generated.tables.ClanInvite.CLAN_INVITE;
+
+	/**
+	 * VIEW
+	 */
+	public static final ClanMembersCount CLAN_MEMBERS_COUNT = com.lvl6.mobsters.db.jooq.generated.tables.ClanMembersCount.CLAN_MEMBERS_COUNT;
 
 	/**
 	 * The table mobsters.clan_member_team_donation
@@ -397,6 +424,16 @@ public class Tables {
 	 * The table mobsters.clan_raid_stage_reward_config
 	 */
 	public static final ClanRaidStageRewardConfig CLAN_RAID_STAGE_REWARD_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG;
+
+	/**
+	 * VIEW
+	 */
+	public static final ClanStrength CLAN_STRENGTH = com.lvl6.mobsters.db.jooq.generated.tables.ClanStrength.CLAN_STRENGTH;
+
+	/**
+	 * VIEW
+	 */
+	public static final ClanTeamDonationCounts CLAN_TEAM_DONATION_COUNTS = com.lvl6.mobsters.db.jooq.generated.tables.ClanTeamDonationCounts.CLAN_TEAM_DONATION_COUNTS;
 
 	/**
 	 * The table mobsters.custom_menu_config
@@ -732,6 +769,11 @@ public class Tables {
 	 * The table mobsters.reward_config
 	 */
 	public static final RewardConfig REWARD_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.RewardConfig.REWARD_CONFIG;
+
+	/**
+	 * The table mobsters.safari_zone_config
+	 */
+	public static final SafariZoneConfig SAFARI_ZONE_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.SafariZoneConfig.SAFARI_ZONE_CONFIG;
 
 	/**
 	 * The table mobsters.sales_display_item_config
