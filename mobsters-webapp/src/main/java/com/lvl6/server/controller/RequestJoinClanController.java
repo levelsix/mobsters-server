@@ -141,7 +141,7 @@ public class RequestJoinClanController extends EventController {
 	@Autowired
 	protected ClanSearch clanSearch;
 
-	@Autowired
+	@Autowired	
 	protected ServerToggleRetrieveUtils toggle;
 	
 	@Autowired
@@ -165,6 +165,7 @@ public class RequestJoinClanController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RequestJoinClanRequestProto reqProto = ((RequestJoinClanRequestEvent) event)
 				.getRequestJoinClanRequestProto();
+		log.info("reqProto : {}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String clanId = reqProto.getClanUuid();
