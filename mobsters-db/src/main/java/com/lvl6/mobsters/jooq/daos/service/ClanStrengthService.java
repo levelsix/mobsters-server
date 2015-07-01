@@ -33,7 +33,9 @@ public class ClanStrengthService {
 		
 		List<String> returnList = new ArrayList<String>();
 		for(int i=0; i<num; i++) {
-			returnList.add(clanStrengths.get(i).getClan());
+			if(i<clanStrengths.size()) {
+				returnList.add(clanStrengths.get(i).getClan());	
+			}
 		}
 		return returnList;
 	}
