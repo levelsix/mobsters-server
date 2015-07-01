@@ -101,6 +101,7 @@ public class SalesScheduleRetrieveUtils {
 
 	private void setStaticSalesScheduleIdsToSalesSchedules() {
 		log.debug("setting static map of salesScheduleIds to salesSchedules");
+		salesScheduleIdsToSalesSchedules = new HashMap<Integer, SalesScheduleConfigPojo>();
 
 		List<SalesScheduleConfigPojo> salesSchedules = sscDao.findAll(); 
 		for(SalesScheduleConfigPojo sscp : salesSchedules) {
