@@ -107,6 +107,8 @@ public class CustomMenuRetrieveUtils {
 		int positionZ = rs.getInt(DBConstants.CUSTOM_MENU__POSITION_Z);
         boolean isJiggle = rs.getBoolean(DBConstants.CUSTOM_MENU__IS_JIGGLE);
         String imgName = rs.getString(DBConstants.CUSTOM_MENU__IMAGE_NAME);
+        int ipadPositionX = rs.getInt(DBConstants.CUSTOM_MENU__IPAD_POSITION_X);
+        int ipadPositionY = rs.getInt(DBConstants.CUSTOM_MENU__IPAD_POSITION_Y);
 
         CustomMenuConfigPojo cmcp = new CustomMenuConfigPojo();
         cmcp.setCustomMenuId(id);
@@ -115,6 +117,8 @@ public class CustomMenuRetrieveUtils {
         cmcp.setPositionZ(positionZ);
         cmcp.setIsJiggle(isJiggle);
         cmcp.setImageName(imgName);
+        cmcp.setIpadPositionX(ipadPositionX);
+        cmcp.setIpadPositionY(ipadPositionY);
         
 		return cmcp;
 	}
