@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveStrengthLeaderBoardRequestEvent;
 import com.lvl6.events.response.RetrieveStrengthLeaderBoardResponseEvent;
-import com.lvl6.leaderboards.LeaderBoardImpl;
+import com.lvl6.mobsters.jooq.daos.service.LeaderBoardService;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardRequestProto;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -41,7 +41,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
-	protected LeaderBoardImpl leaderBoard;
+	protected LeaderBoardService leaderBoard;
 
 
 	public RetrieveStrengthLeaderBoardController() {

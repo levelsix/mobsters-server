@@ -38,15 +38,15 @@ public class UpdateUserStrengthController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-
+	
 	@Autowired
 	protected LeaderBoardImpl leaderBoardImpl;
-
+	
 //	@Autowired
 //	protected LeaderBoardImpl leaderBoardImpl;
 
 	public UpdateUserStrengthController() {
-
+		
 	}
 
 	@Override
@@ -103,8 +103,8 @@ public class UpdateUserStrengthController extends EventController {
 		try {
 			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 
-			UpdateUserStrengthAction uusa = new UpdateUserStrengthAction(userId, updatedStrength,
-					userRetrieveUtils, updateUtil, leaderBoardImpl);
+			UpdateUserStrengthAction uusa = new UpdateUserStrengthAction(userId, updatedStrength, 
+					userRetrieveUtils, updateUtil);
 
 			uusa.execute(resBuilder);
 
