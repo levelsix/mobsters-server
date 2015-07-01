@@ -9,8 +9,8 @@ import org.jooq.Configuration;
 import org.jooq.Record2;
 import org.jooq.impl.DefaultConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.lvl6.info.StrengthLeaderBoard;
 import com.lvl6.mobsters.db.jooq.generated.Tables;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.StrengthLeaderboardRecord;
@@ -18,6 +18,7 @@ import com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 
+@Component
 public class LeaderBoardService extends UserDao {
 
 	public LeaderBoardService() {
