@@ -8,6 +8,8 @@ import java.util.List;
 import org.jooq.Configuration;
 import org.jooq.Record2;
 import org.jooq.impl.DefaultConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,9 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 @Component
 public class LeaderBoardService extends UserDao {
 
+	private static final Logger log = LoggerFactory
+			.getLogger(LeaderBoardService.class);
+	
 	public LeaderBoardService() {
 		super();
 	}
@@ -42,7 +47,7 @@ public class LeaderBoardService extends UserDao {
 				.selectFrom(Tables.STRENGTH_LEADERBOARD)
 				.orderBy(com.lvl6.mobsters.db.jooq.generated.tables.StrengthLeaderboard.STRENGTH_LEADERBOARD.STRENGTH.desc())
 				.fetch();
-		
+				
 		int rank = 1;
 		List<StrengthLeaderBoardProto> returnList = new ArrayList<StrengthLeaderBoardProto>();
 		for(StrengthLeaderboardRecord slbr : userStrengths) {
@@ -69,6 +74,7 @@ public class LeaderBoardService extends UserDao {
 		List<Record2<String, Integer>> userStrengths = using(configuration())
 				.select(com.lvl6.mobsters.db.jooq.generated.tables.StrengthLeaderboard.STRENGTH_LEADERBOARD.USER_ID, 
 						com.lvl6.mobsters.db.jooq.generated.tables.StrengthLeaderboard.STRENGTH_LEADERBOARD.STRENGTH)
+				.from(Tables.STRENGTH_LEADERBOARD)
 				.orderBy(com.lvl6.mobsters.db.jooq.generated.tables.StrengthLeaderboard.STRENGTH_LEADERBOARD.STRENGTH.desc())
 				.fetch();
 		
