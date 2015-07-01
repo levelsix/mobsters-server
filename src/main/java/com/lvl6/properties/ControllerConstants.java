@@ -76,7 +76,7 @@ public class ControllerConstants {
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
 
 	//FACEBOOK POP UP
-	public static final boolean FACEBOOK_POP_UP__ACTIVE = true;
+	public static final boolean FACEBOOK_POP_UP__ACTIVE = false;
 
 	public static final int ITEM_ID__HIGH_ROLLER_MODE = 50000;
 
