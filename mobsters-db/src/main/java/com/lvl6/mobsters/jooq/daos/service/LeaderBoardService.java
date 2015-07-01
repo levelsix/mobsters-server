@@ -51,9 +51,11 @@ public class LeaderBoardService extends UserDao {
 				b.setRank(rank);
 				b.setStrength(slbr.getStrength());
 				MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
-				MinimumClanProto.Builder mcpb = MinimumClanProto.newBuilder();
-				mcpb.setTag(slbr.getClanTag());
-				mupb.setClan(mcpb.build());
+				if(slbr.getClanTag() != null) {
+					MinimumClanProto.Builder mcpb = MinimumClanProto.newBuilder();
+					mcpb.setTag(slbr.getClanTag());
+					mupb.setClan(mcpb.build());
+				}
 				mupb.setName(slbr.getName());
 				b.setMup(mupb.build());
 				returnList.add(b.build());
