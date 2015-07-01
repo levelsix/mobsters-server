@@ -48,7 +48,7 @@ public class LeaderBoardService extends UserDao {
 				.orderBy(com.lvl6.mobsters.db.jooq.generated.tables.StrengthLeaderboard.STRENGTH_LEADERBOARD.STRENGTH.desc())
 				.fetch();
 				
-		int rank = 0;
+		int rank = 1;
 		List<StrengthLeaderBoardProto> returnList = new ArrayList<StrengthLeaderBoardProto>();
 		for(StrengthLeaderboardRecord slbr : userStrengths) {
 			if(rank >= minRank && rank<= maxRank) {
