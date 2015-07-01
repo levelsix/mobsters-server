@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "structure_mini_job_config", schema = "mobsters")
 public class StructureMiniJobConfigPojo implements IStructureMiniJobConfig {
 
-	private static final long serialVersionUID = 1979236992;
+	private static final long serialVersionUID = -1621205059;
 
 	private Integer structId;
 	private Integer generatedJobLimit;
@@ -112,5 +112,12 @@ public class StructureMiniJobConfigPojo implements IStructureMiniJobConfig {
 	public <E extends IStructureMiniJobConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructureMiniJobConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructureMiniJobConfigRecord();
+		poop.from(this);
+		return "StructureMiniJobConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

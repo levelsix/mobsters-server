@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "gold_sale_config", schema = "mobsters")
 public class GoldSaleConfigPojo implements IGoldSaleConfig {
 
-	private static final long serialVersionUID = 959126559;
+	private static final long serialVersionUID = 775483346;
 
 	private Integer   id;
 	private Timestamp startTime;
@@ -331,5 +331,12 @@ public class GoldSaleConfigPojo implements IGoldSaleConfig {
 	public <E extends IGoldSaleConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.GoldSaleConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.GoldSaleConfigRecord();
+		poop.from(this);
+		return "GoldSaleConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

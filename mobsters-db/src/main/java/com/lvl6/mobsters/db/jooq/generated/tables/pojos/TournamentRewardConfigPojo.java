@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class TournamentRewardConfigPojo implements ITournamentRewardConfig {
 
-	private static final long serialVersionUID = 887721466;
+	private static final long serialVersionUID = 78645160;
 
 	private Integer id;
 	private Integer minRank;
@@ -220,5 +220,12 @@ public class TournamentRewardConfigPojo implements ITournamentRewardConfig {
 	public <E extends ITournamentRewardConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TournamentRewardConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TournamentRewardConfigRecord();
+		poop.from(this);
+		return "TournamentRewardConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

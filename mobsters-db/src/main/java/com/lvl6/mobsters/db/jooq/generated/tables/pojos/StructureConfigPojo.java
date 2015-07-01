@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "structure_config", schema = "mobsters")
 public class StructureConfigPojo implements IStructureConfig {
 
-	private static final long serialVersionUID = 2000187901;
+	private static final long serialVersionUID = 2016055408;
 
 	private Integer id;
 	private String  name;
@@ -451,5 +451,12 @@ public class StructureConfigPojo implements IStructureConfig {
 	public <E extends IStructureConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructureConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructureConfigRecord();
+		poop.from(this);
+		return "StructureConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

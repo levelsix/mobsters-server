@@ -19,12 +19,13 @@ import org.springframework.stereotype.Component;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.info.*;
-import com.lvl6.mobsters.db.jooq.generated.tables.SecretGiftForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.CustomMenuConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventGoalForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfigPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
@@ -142,6 +143,7 @@ import com.lvl6.proto.SharedEnumConfigProto.Element;
 import com.lvl6.proto.SharedEnumConfigProto.GameActionType;
 import com.lvl6.proto.SharedEnumConfigProto.GameType;
 import com.lvl6.proto.SharedEnumConfigProto.Quality;
+import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.proto.SkillsProto.SideEffectBlendMode;
 import com.lvl6.proto.SkillsProto.SideEffectPositionType;
 import com.lvl6.proto.SkillsProto.SideEffectTraitType;
@@ -169,7 +171,6 @@ import com.lvl6.proto.StructureProto.ResearchHouseProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
@@ -220,7 +221,7 @@ import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 public class CreateInfoProtoUtils {
 
 	private static Logger log = LoggerFactory.getLogger(CreateInfoProtoUtils.class);
-	
+
 	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
 
@@ -260,7 +261,7 @@ public class CreateInfoProtoUtils {
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
 
-	
+
 
 
 	/** Achievement.proto ***************************************************/
@@ -2388,9 +2389,9 @@ public class CreateInfoProtoUtils {
 	}
 
 	/** MiniEvent.proto ********************************************/
-	public UserMiniEventProto createUserMiniEventProto(MiniEventForUser mefu,
+	public UserMiniEventProto createUserMiniEventProto(MiniEventForUserPojo mefu,
 			MiniEventConfigPojo me, MiniEventTimetableConfigPojo metc,
-			Collection<MiniEventGoalForUser> megfus,
+			Collection<MiniEventGoalForUserPojo> megfus,
 			MiniEventForPlayerLvl mefpl, Collection<MiniEventTierReward> rewards,
 			Collection<MiniEventGoal> goals,
 			Collection<MiniEventLeaderboardReward> leaderboardRewards,
@@ -2414,15 +2415,16 @@ public class CreateInfoProtoUtils {
 	}
 
 	public UserMiniEventProto.Builder createUserMiniEventProto(
-			MiniEventForUser mefu)
+			MiniEventForUserPojo mefu)
 	{
 		UserMiniEventProto.Builder umepb = UserMiniEventProto.newBuilder();
 		umepb.setMiniEventId(mefu.getMiniEventId());
+		umepb.setMiniEventTimetableId(mefu.getMiniEventTimetableId());
 		umepb.setUserUuid(mefu.getUserId());
 		umepb.setUserLvl(mefu.getUserLvl());
-		umepb.setTierOneRedeemed(mefu.isTierOneRedeemed());
-		umepb.setTierTwoRedeemed(mefu.isTierTwoRedeemed());
-		umepb.setTierThreeRedeemed(mefu.isTierThreeRedeemed());
+		umepb.setTierOneRedeemed(mefu.getTierOneRedeemed());
+		umepb.setTierTwoRedeemed(mefu.getTierTwoRedeemed());
+		umepb.setTierThreeRedeemed(mefu.getTierThreeRedeemed());
 		return umepb;
 	}
 
@@ -2623,7 +2625,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	private Collection<UserMiniEventGoalProto> createUserMiniEventGoalProto(
-			Collection<MiniEventGoalForUser> megfus)
+			Collection<MiniEventGoalForUserPojo> megfus)
 	{
 		Collection<UserMiniEventGoalProto> goalProtos =
 				new ArrayList<UserMiniEventGoalProto>();
@@ -2632,7 +2634,7 @@ public class CreateInfoProtoUtils {
 			return goalProtos;
 		}
 
-		for (MiniEventGoalForUser megfu : megfus) {
+		for (MiniEventGoalForUserPojo megfu : megfus) {
 			UserMiniEventGoalProto umegp = createUserMiniEventGoalProto(megfu);
 			goalProtos.add(umegp);
 		}
@@ -2641,7 +2643,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	private UserMiniEventGoalProto createUserMiniEventGoalProto(
-			MiniEventGoalForUser megfu)
+			MiniEventGoalForUserPojo megfu)
 	{
 		UserMiniEventGoalProto.Builder umegpb = UserMiniEventGoalProto.newBuilder();
 		umegpb.setUserUuid(megfu.getUserId());

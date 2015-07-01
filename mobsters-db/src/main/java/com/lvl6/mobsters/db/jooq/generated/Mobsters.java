@@ -32,6 +32,8 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanAvengeUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanBoss;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanBossReward;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPost;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPostsCountLastHour;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanChatPostsCountLast_24Hours;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentForClan;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentForClanHistory;
@@ -40,13 +42,17 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ClanEventPersistentUserReward;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelp;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelpCountForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanHelpCountLast_24Hours;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanIconConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanInvite;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanMemberTeamDonation;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanMembersCount;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageMonsterConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ClanRaidStageRewardConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanStrength;
+import com.lvl6.mobsters.db.jooq.generated.tables.ClanTeamDonationCounts;
 import com.lvl6.mobsters.db.jooq.generated.tables.CustomMenuConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.CustomTranslations;
 import com.lvl6.mobsters.db.jooq.generated.tables.EventPersistentConfig;
@@ -114,6 +120,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ResearchConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ResearchForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ResearchPropertyConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.RewardConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.SafariZoneConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesDisplayItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesItemConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SalesPackageConfig;
@@ -125,6 +132,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.SkillConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillPropertyConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.SkillSideEffectConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StaticLevelInfoConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.StrengthLeaderboard;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureBattleItemFactoryConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureClanHouseConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.StructureConfig;
@@ -190,7 +198,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
-	private static final long serialVersionUID = 1177084752;
+	private static final long serialVersionUID = -198350597;
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -241,6 +249,8 @@ public class Mobsters extends SchemaImpl {
 			ClanBoss.CLAN_BOSS,
 			ClanBossReward.CLAN_BOSS_REWARD,
 			ClanChatPost.CLAN_CHAT_POST,
+			ClanChatPostsCountLast_24Hours.CLAN_CHAT_POSTS_COUNT_LAST_24_HOURS,
+			ClanChatPostsCountLastHour.CLAN_CHAT_POSTS_COUNT_LAST_HOUR,
 			ClanEventPersistentConfig.CLAN_EVENT_PERSISTENT_CONFIG,
 			ClanEventPersistentForClan.CLAN_EVENT_PERSISTENT_FOR_CLAN,
 			ClanEventPersistentForClanHistory.CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY,
@@ -249,13 +259,17 @@ public class Mobsters extends SchemaImpl {
 			ClanForUser.CLAN_FOR_USER,
 			ClanHelp.CLAN_HELP,
 			ClanHelpCountForUser.CLAN_HELP_COUNT_FOR_USER,
+			ClanHelpCountLast_24Hours.CLAN_HELP_COUNT_LAST_24_HOURS,
 			ClanIconConfig.CLAN_ICON_CONFIG,
 			ClanInvite.CLAN_INVITE,
+			ClanMembersCount.CLAN_MEMBERS_COUNT,
 			ClanMemberTeamDonation.CLAN_MEMBER_TEAM_DONATION,
 			ClanRaidConfig.CLAN_RAID_CONFIG,
 			ClanRaidStageConfig.CLAN_RAID_STAGE_CONFIG,
 			ClanRaidStageMonsterConfig.CLAN_RAID_STAGE_MONSTER_CONFIG,
 			ClanRaidStageRewardConfig.CLAN_RAID_STAGE_REWARD_CONFIG,
+			ClanStrength.CLAN_STRENGTH,
+			ClanTeamDonationCounts.CLAN_TEAM_DONATION_COUNTS,
 			CustomMenuConfig.CUSTOM_MENU_CONFIG,
 			CustomTranslations.CUSTOM_TRANSLATIONS,
 			EventPersistentConfig.EVENT_PERSISTENT_CONFIG,
@@ -323,6 +337,7 @@ public class Mobsters extends SchemaImpl {
 			ResearchForUser.RESEARCH_FOR_USER,
 			ResearchPropertyConfig.RESEARCH_PROPERTY_CONFIG,
 			RewardConfig.REWARD_CONFIG,
+			SafariZoneConfig.SAFARI_ZONE_CONFIG,
 			SalesDisplayItemConfig.SALES_DISPLAY_ITEM_CONFIG,
 			SalesItemConfig.SALES_ITEM_CONFIG,
 			SalesPackageConfig.SALES_PACKAGE_CONFIG,
@@ -334,6 +349,7 @@ public class Mobsters extends SchemaImpl {
 			SkillPropertyConfig.SKILL_PROPERTY_CONFIG,
 			SkillSideEffectConfig.SKILL_SIDE_EFFECT_CONFIG,
 			StaticLevelInfoConfig.STATIC_LEVEL_INFO_CONFIG,
+			StrengthLeaderboard.STRENGTH_LEADERBOARD,
 			StructureBattleItemFactoryConfig.STRUCTURE_BATTLE_ITEM_FACTORY_CONFIG,
 			StructureClanHouseConfig.STRUCTURE_CLAN_HOUSE_CONFIG,
 			StructureConfig.STRUCTURE_CONFIG,

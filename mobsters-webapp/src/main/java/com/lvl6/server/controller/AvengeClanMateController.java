@@ -60,7 +60,7 @@ public class AvengeClanMateController extends EventController {
 	protected TimeUtils timeUtils;
 	
 	public AvengeClanMateController() {
-		
+
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class AvengeClanMateController extends EventController {
 		AvengeClanMateRequestProto reqProto = ((AvengeClanMateRequestEvent) event)
 				.getAvengeClanMateRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -158,11 +158,11 @@ public class AvengeClanMateController extends EventController {
 			//			List<ClanAvengeUser> cauList = ClanStuffUtils
 			//				.extractClanAvengeUser(clanAvenge.getUsersAvengingList());
 			//			ClanAvengeUser cau = null;
-			//			
+			//
 			//			if (null != cauList && !cauList.isEmpty())
 			//			{
 			//				cau = cauList.get(0);
-			//				
+			//
 			//				if (cauList.size() > 1) {
 			//					log.warn("client sent more than one user to avenge clan mate. {}",
 			//						clanAvenge.getUsersAvengingList());
@@ -268,7 +268,7 @@ public class AvengeClanMateController extends EventController {
 	//			  RetrieveClanDataResponseProto.newBuilder();
 	//		  rcdrpb.setMup(senderProto);
 	//		  rcdrpb.setClanData(cdp);
-	//		  
+	//
 	//		  rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
 	//		  responses.normalResponseEvents().add(rcdre);
 	//	  }

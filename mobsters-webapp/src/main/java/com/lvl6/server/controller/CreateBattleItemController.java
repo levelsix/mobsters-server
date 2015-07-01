@@ -45,7 +45,7 @@ public class CreateBattleItemController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -68,7 +68,7 @@ public class CreateBattleItemController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public CreateBattleItemController() {
-		
+
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class CreateBattleItemController extends EventController {
 		int maxCash = senderMaxResourcesProto.getMaxCash();
 		int maxOil = senderMaxResourcesProto.getMaxOil();
 
-		//the new items added to queue, updated refers to those finished as well as 
+		//the new items added to queue, updated refers to those finished as well as
 		//priorities changing, deleted refers to those removed from queue and completed
 
 		List<BattleItemQueueForUserProto> deletedBattleItemQueueList = reqProto
@@ -167,8 +167,9 @@ public class CreateBattleItemController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 
 			CreateBattleItemAction cbia = new CreateBattleItemAction(userId,
 					deletedList, updatedList, newList, cashChange, maxCash,
@@ -213,7 +214,9 @@ public class CreateBattleItemController extends EventController {
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "custom_translations", schema = "mobsters")
 public class CustomTranslationsPojo implements ICustomTranslations {
 
-	private static final long serialVersionUID = 749367177;
+	private static final long serialVersionUID = 1056307058;
 
 	private Integer id;
 	private String  phrase;
@@ -115,5 +115,12 @@ public class CustomTranslationsPojo implements ICustomTranslations {
 	public <E extends ICustomTranslations> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.CustomTranslationsRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.CustomTranslationsRecord();
+		poop.from(this);
+		return "CustomTranslationsPojo[" + poop.valuesRow() + "]";
 	}
 }

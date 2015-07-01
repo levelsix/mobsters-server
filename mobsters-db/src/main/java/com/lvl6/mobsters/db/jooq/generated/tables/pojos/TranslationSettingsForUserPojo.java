@@ -33,7 +33,7 @@ import javax.validation.constraints.Size;
 })
 public class TranslationSettingsForUserPojo implements ITranslationSettingsForUser {
 
-	private static final long serialVersionUID = 1514801554;
+	private static final long serialVersionUID = -996838378;
 
 	private String  id;
 	private String  receiverUserId;
@@ -172,5 +172,12 @@ public class TranslationSettingsForUserPojo implements ITranslationSettingsForUs
 	public <E extends ITranslationSettingsForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TranslationSettingsForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TranslationSettingsForUserRecord();
+		poop.from(this);
+		return "TranslationSettingsForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

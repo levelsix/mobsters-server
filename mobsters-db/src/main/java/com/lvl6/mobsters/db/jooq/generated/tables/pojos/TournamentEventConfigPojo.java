@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "tournament_event_config", schema = "mobsters")
 public class TournamentEventConfigPojo implements ITournamentEventConfig {
 
-	private static final long serialVersionUID = -1652823942;
+	private static final long serialVersionUID = -1047376025;
 
 	private Integer   id;
 	private Timestamp startTime;
@@ -150,5 +150,12 @@ public class TournamentEventConfigPojo implements ITournamentEventConfig {
 	public <E extends ITournamentEventConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TournamentEventConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TournamentEventConfigRecord();
+		poop.from(this);
+		return "TournamentEventConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

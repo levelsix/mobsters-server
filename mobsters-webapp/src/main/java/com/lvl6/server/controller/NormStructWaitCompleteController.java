@@ -43,7 +43,7 @@ public class NormStructWaitCompleteController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -52,7 +52,7 @@ public class NormStructWaitCompleteController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
 	
@@ -60,7 +60,7 @@ public class NormStructWaitCompleteController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public NormStructWaitCompleteController() {
-		
+
 	}
 
 	@Override
@@ -77,6 +77,7 @@ public class NormStructWaitCompleteController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		NormStructWaitCompleteRequestProto reqProto = ((NormStructWaitCompleteRequestEvent) event)
 				.getNormStructWaitCompleteRequestProto();
+		log.info("reqProto={}", reqProto);
 
 		//stuff client sent
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -145,8 +146,10 @@ public class NormStructWaitCompleteController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			List<StructureForUser> userStructs = getStructureForUserRetrieveUtils()
 					.getSpecificOrAllUserStructsForUser(userId, userStructIds);
 
@@ -199,7 +202,9 @@ public class NormStructWaitCompleteController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -273,13 +278,13 @@ public class NormStructWaitCompleteController extends EventController {
 
 			if (null != purchaseDate) {
 				//      	long timeBuildFinishes = purchaseDate.getTime() + buildTimeMillis;
-				//      	
+				//
 				//      	if (timeBuildFinishes > clientTime.getTime()) {
 				//      		log.warn(String.format(
 				//      			"building not done yet. userstruct=%s, client_time=%s, purchase_time=%s, time_build_finishes=%s",
 				//      			us, clientTime, purchaseDate, timeBuildFinishes));
 				//      		continue;
-				//        }//else this building is done now     
+				//        }//else this building is done now
 
 				validUserStructIds.add(us.getId());
 				validUserStructs.add(us);

@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "task_stage_config", schema = "mobsters")
 public class TaskStageConfigPojo implements ITaskStageConfig {
 
-	private static final long serialVersionUID = 302796876;
+	private static final long serialVersionUID = -1038328111;
 
 	private Integer id;
 	private Integer taskId;
@@ -129,5 +129,12 @@ public class TaskStageConfigPojo implements ITaskStageConfig {
 	public <E extends ITaskStageConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.TaskStageConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.TaskStageConfigRecord();
+		poop.from(this);
+		return "TaskStageConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

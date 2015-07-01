@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "sales_package_config", schema = "mobsters")
 public class SalesPackageConfigPojo implements ISalesPackageConfig {
 
-	private static final long serialVersionUID = -1839089073;
+	private static final long serialVersionUID = -16834987;
 
 	private Integer   id;
 	private String    productId;
@@ -293,5 +293,12 @@ public class SalesPackageConfigPojo implements ISalesPackageConfig {
 	public <E extends ISalesPackageConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.SalesPackageConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.SalesPackageConfigRecord();
+		poop.from(this);
+		return "SalesPackageConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

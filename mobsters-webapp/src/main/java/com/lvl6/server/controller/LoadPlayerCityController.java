@@ -38,7 +38,7 @@ public class LoadPlayerCityController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -108,10 +108,12 @@ public class LoadPlayerCityController extends EventController {
 			return;
 		}
 
+		boolean gotLock = false;
 		//I guess in case someone attacks this guy while loading the city, want
 		//both people to have one consistent view
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			User owner = getUserRetrieveUtils().getUserById(cityOwnerId);
 
 			List<StructureForUser> userStructs = getUserStructRetrieveUtils()
@@ -164,7 +166,9 @@ public class LoadPlayerCityController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

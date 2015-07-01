@@ -56,7 +56,7 @@ public class EvolutionFinishedController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -68,16 +68,16 @@ public class EvolutionFinishedController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
 	
@@ -86,7 +86,7 @@ public class EvolutionFinishedController extends EventController {
 
 
 	public EvolutionFinishedController() {
-		
+
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class EvolutionFinishedController extends EventController {
 		EvolutionFinishedRequestProto reqProto = ((EvolutionFinishedRequestEvent) event)
 				.getEvolutionFinishedRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -164,8 +164,10 @@ public class EvolutionFinishedController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, getClass().getSimpleName());
+
 			int previousGems = 0;
 			//get whatever we need from the database
 			User aUser = userRetrieveUtil.getUserById(userId);
@@ -183,9 +185,9 @@ public class EvolutionFinishedController extends EventController {
 			Map<String, MonsterForUser> existingUserMonsters = getMonstersUsedInEvolution(
 					userId, evolution);
 
-			log.info(String.format("evolution=%s", evolution));
-			log.info(String.format("existingUserMonsters=%s",
-					existingUserMonsters));
+			log.debug("evolution={}", evolution);
+			log.debug("existingUserMonsters={}",
+					existingUserMonsters);
 
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId,
 					evolution, existingUserMonsters, gemsSpent);
@@ -240,7 +242,9 @@ public class EvolutionFinishedController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 		} finally {
-			getLocker().unlockPlayer(userUuid, getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -391,7 +395,7 @@ public class EvolutionFinishedController extends EventController {
 		boolean hasAllPieces = true;
 		boolean isComplete = true;
 		MonsterForUser mfu = monsterStuffUtils.createNewUserMonster(uId,
-				numPieces, evolvedMonster, now, hasAllPieces, isComplete, 
+				numPieces, evolvedMonster, now, hasAllPieces, isComplete,
 				monsterLevelInfoRetrieveUtils);
 
 		return mfu;

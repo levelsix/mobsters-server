@@ -2,8 +2,9 @@ package com.lvl6.retrieveutils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -15,7 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.MiniEventForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventForUserPojo;
 import com.lvl6.properties.DBConstants;
 
 @Component
@@ -49,7 +50,7 @@ public class MiniEventForUserRetrieveUtil {
 		} catch (Exception e) {
 			log.error(
 					String.format(
-							"MiniEventForUser retrieve db error. userId=%s",
+							"MiniEventForUserPojo retrieve db error. userId=%s",
 							userId),
 					e);
 			userMiniEvents = new ArrayList<MiniEventForUser>();
@@ -62,14 +63,14 @@ public class MiniEventForUserRetrieveUtil {
 	////@Cacheable(value="structIdsToUserStructsForUser", key="#userId")
 	public Map<Integer, MiniEventForUser> getMiniEventIdsToUserMiniEventForUser(
 			String userId) {
-		log.debug("retrieving map of MiniEventId to MiniEventForUser for userId {}", userId);
+		log.debug("retrieving map of MiniEventId to MiniEventForUserPojo for userId {}", userId);
 
-		Map<Integer, MiniEventForUser> miniEventIdToMiniEventForUser = new HashMap<Integer, MiniEventForUser>();
+		Map<Integer, MiniEventForUser> miniEventIdToMiniEventForUserPojo = new HashMap<Integer, MiniEventForUser>();
 		try {
 
 			List<MiniEventForUser> bifuList = getUserMiniEventsForUser(userId);
 
-			for (MiniEventForUser bifu : bifuList) {
+			for (MiniEventForUserPojo bifu : bifuList) {
 				int miniEventId = bifu.getMiniEventId();
 				miniEventIdToMiniEventForUser.put(miniEventId, bifu);
 			}
@@ -77,7 +78,7 @@ public class MiniEventForUserRetrieveUtil {
 		} catch (Exception e) {
 			log.error(
 					String.format(
-							"MiniEventForUser retrieve db error. userId=%s",
+							"MiniEventForUserPojo retrieve db error. userId=%s",
 							userId),
 					e);
 		}
@@ -85,21 +86,20 @@ public class MiniEventForUserRetrieveUtil {
 		return miniEventIdToMiniEventForUser;
 	}*/
 
-	////@Cacheable(value="specificUserStruct", key="#userStructId")
-	public MiniEventForUser getSpecificUserMiniEvent(String userId)//,
-			//int miniEventId)
+	public MiniEventForUserPojo getMostRecentUserMiniEvent(String userId)
 	{
 		log.debug(
-				"retrieving MiniEventForUser with userId={}",
+				"retrieving MiniEventForUserPojo with userId={}",
 				userId);
 
 		Object[] values = { userId };
-		String query = String.format("select * from %s where %s=?",
-				TABLE_NAME, DBConstants.MINI_EVENT_FOR_USER__USER_ID);
+		String query = String.format("select * from %s where %s=? order by %s desc limit 1",
+				TABLE_NAME, DBConstants.MINI_EVENT_FOR_USER__USER_ID,
+				DBConstants.MINI_EVENT_FOR_USER__TIME_OF_ENTRY);
 
-		MiniEventForUser userMiniEvent = null;
+		MiniEventForUserPojo userMiniEvent = null;
 		try {
-			List<MiniEventForUser> mefuList = this.jdbcTemplate.query(query,
+			List<MiniEventForUserPojo> mefuList = this.jdbcTemplate.query(query,
 					values, rowMapper);
 
 			if (null != mefuList && !mefuList.isEmpty()) {
@@ -109,8 +109,43 @@ public class MiniEventForUserRetrieveUtil {
 		} catch (Exception e) {
 			log.error(
 					String.format(
-							"MiniEventForUser retrieve db error. userId=%s",
-							userId), e);
+							"most recent MiniEventForUserPojo retrieve db error. userId=%s",
+							userId),
+					e);
+		}
+
+		return userMiniEvent;
+	}
+
+	////@Cacheable(value="specificUserStruct", key="#userStructId")
+	public MiniEventForUserPojo getSpecificUserMiniEvent(String userId,
+			int miniEventTimetableId)
+	{
+		log.debug(
+				"retrieving MiniEventForUserPojo with userId={}",
+				userId);
+
+		Object[] values = { userId, miniEventTimetableId };
+		String query = String.format("select * from %s where %s=? and %s=?",
+				TABLE_NAME, DBConstants.MINI_EVENT_FOR_USER__USER_ID,
+				DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_TIMETABLE_ID);
+
+		MiniEventForUserPojo userMiniEvent = null;
+		try {
+			List<MiniEventForUserPojo> mefuList = this.jdbcTemplate.query(query,
+					values, rowMapper);
+
+			if (null != mefuList && !mefuList.isEmpty()) {
+				userMiniEvent = mefuList.get(0);
+			}
+
+		} catch (Exception e) {
+			log.error(
+					String.format(
+							"%s userId=%s, miniEventTimetableId=%s",
+							"MiniEventForUserPojo retrieve db error.",
+							userId, miniEventTimetableId),
+					e);
 		}
 
 		return userMiniEvent;
@@ -170,18 +205,22 @@ public class MiniEventForUserRetrieveUtil {
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
 	private static final class UserMiniEventForClientMapper implements
-	RowMapper<MiniEventForUser> {
+	RowMapper<MiniEventForUserPojo> {
 
-		private static List<String> columnsSelected;
+		private static Set<String> columnsSelected;
 
 		@Override
-		public MiniEventForUser mapRow(ResultSet rs, int rowNum)
+		public MiniEventForUserPojo mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			MiniEventForUser bifu = new MiniEventForUser();
+			MiniEventForUserPojo bifu = new MiniEventForUserPojo();
 			bifu.setUserId(rs
 					.getString(DBConstants.MINI_EVENT_FOR_USER__USER_ID));
+			bifu.setMiniEventTimetableId(rs
+					.getInt(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_TIMETABLE_ID));
 			bifu.setMiniEventId(rs
 					.getInt(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID));
+			bifu.setTimeOfEntry(rs
+					.getTimestamp(DBConstants.MINI_EVENT_FOR_USER__TIME_OF_ENTRY));
 			bifu.setUserLvl(
 					rs.getInt(DBConstants.MINI_EVENT_FOR_USER__USER_LVL));
 			bifu.setTierOneRedeemed(
@@ -190,21 +229,31 @@ public class MiniEventForUserRetrieveUtil {
 					rs.getBoolean(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED));
 			bifu.setTierThreeRedeemed(
 					rs.getBoolean(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED));
-
+			bifu.setTierOneRedeemedTime(
+					rs.getTimestamp(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED_TIME));
+			bifu.setTierTwoRedeemedTime(
+					rs.getTimestamp(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED_TIME));
+			bifu.setTierThreeRedeemedTime(
+					rs.getTimestamp(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED_TIME));
 
 			return bifu;
 		}
 
-		public static List<String> getColumnsSelected() {
+
+		public static Set<String> getColumnsSelected() {
 			if (null == columnsSelected) {
-				columnsSelected = new ArrayList<String>();
+				columnsSelected = new HashSet<String>();
 				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__USER_ID);
-				columnsSelected
-				.add(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_TIMETABLE_ID);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIME_OF_ENTRY);
 				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__USER_LVL);
 				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED);
 				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED);
 				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED_TIME);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED_TIME);
+				columnsSelected.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED_TIME);
 			}
 			return columnsSelected;
 		}

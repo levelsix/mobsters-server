@@ -180,6 +180,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			userClanStatus = UserClanStatus.MEMBER.name();
 		}
 
+		log.info("inserting user clan");
 		if (!insertUtil.insertUserClan(userId, clanId, userClanStatus,
 				clientTime)) {
 			log.error("problem inserting user clan data for user={}, and clan id {}",

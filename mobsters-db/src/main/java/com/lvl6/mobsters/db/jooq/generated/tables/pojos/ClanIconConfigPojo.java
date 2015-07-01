@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "clan_icon_config", schema = "mobsters")
 public class ClanIconConfigPojo implements IClanIconConfig {
 
-	private static final long serialVersionUID = -289762973;
+	private static final long serialVersionUID = -2142289610;
 
 	private Integer id;
 	private String  imgName;
@@ -114,5 +114,12 @@ public class ClanIconConfigPojo implements IClanIconConfig {
 	public <E extends IClanIconConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ClanIconConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ClanIconConfigRecord();
+		poop.from(this);
+		return "ClanIconConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

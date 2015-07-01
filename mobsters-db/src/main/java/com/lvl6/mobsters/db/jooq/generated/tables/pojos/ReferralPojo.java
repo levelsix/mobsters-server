@@ -33,7 +33,7 @@ import javax.validation.constraints.NotNull;
 })
 public class ReferralPojo implements IReferral {
 
-	private static final long serialVersionUID = 537540827;
+	private static final long serialVersionUID = 1878254410;
 
 	private Integer   referrerId;
 	private Integer   newlyReferredId;
@@ -133,5 +133,12 @@ public class ReferralPojo implements IReferral {
 	public <E extends IReferral> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ReferralRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ReferralRecord();
+		poop.from(this);
+		return "ReferralPojo[" + poop.valuesRow() + "]";
 	}
 }

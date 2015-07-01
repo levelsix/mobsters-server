@@ -39,7 +39,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class CreateClanController extends EventController {
 
-	
+
 	private static final Logger log = LoggerFactory.getLogger(CreateClanController.class);
 
 	@Autowired
@@ -56,34 +56,34 @@ public class CreateClanController extends EventController {
 
 	@Autowired
 	protected HazelcastClanSearchImpl hzClanSearch;
-	
+
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
+
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
-	
+
 	@Autowired
 	protected ResourceUtil resourceUtil;
-	
+
 	@Autowired
 	protected PvpLeagueForUserDao pvpLeagueForUserDao;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils serverToggleRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanSearch clanSearch;
-	
-	
+
+
 	public CreateClanController() {
-		
+
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class CreateClanController extends EventController {
 	@Override
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		CreateClanRequestProto reqProto = ((CreateClanRequestEvent)event).getCreateClanRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -139,13 +139,14 @@ public class CreateClanController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
-			
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			CreateClanAction cca = new CreateClanAction(userId, cashChange, gemsSpent, userRetrieveUtil,
-					insertUtil, deleteUtil, miscMethods, clanName, tag, requestToJoinRequired, 
+					insertUtil, deleteUtil, miscMethods, clanName, tag, requestToJoinRequired,
 					description, clanIconId, clanRetrieveUtils, resourceUtil);
-			
+
 			cca.execute(resBuilder);
 
 			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -155,7 +156,7 @@ public class CreateClanController extends EventController {
 
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
 			resEvent.setTag(event.getTag());
-			resEvent.setResponseProto(resBuilder.build());  
+			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			responses.setUserId(userId);
 			responses.setClanChanged(true);
@@ -186,7 +187,9 @@ public class CreateClanController extends EventController {
 				log.error("exception2 in CreateClan processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

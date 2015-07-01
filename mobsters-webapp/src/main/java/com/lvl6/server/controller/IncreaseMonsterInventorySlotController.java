@@ -145,8 +145,10 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			int previousGems = 0;
 			//get stuff from the db
 			User aUser = getUserRetrieveUtils().getUserById(userId);
@@ -217,7 +219,9 @@ public class IncreaseMonsterInventorySlotController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

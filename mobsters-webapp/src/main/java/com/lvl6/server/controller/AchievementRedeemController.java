@@ -44,10 +44,10 @@ public class AchievementRedeemController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	AchievementRetrieveUtils achievementRetrieveUtils;
 
@@ -61,7 +61,7 @@ public class AchievementRedeemController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public AchievementRedeemController() {
-		
+
 	}
 
 	@Override
@@ -132,8 +132,9 @@ public class AchievementRedeemController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			//retrieve whatever is necessary from the db
 			//TODO: consider only retrieving user if the request is valid
 			User user = userRetrieveUtil.getUserById(senderProto.getUserUuid());
@@ -193,7 +194,9 @@ public class AchievementRedeemController extends EventController {
 				log.error("exception2 in AchievementRedeem processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

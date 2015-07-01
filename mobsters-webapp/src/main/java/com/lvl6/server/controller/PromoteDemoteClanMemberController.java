@@ -134,10 +134,9 @@ public class PromoteDemoteClanMemberController extends EventController {
 		}
 
 		boolean lockedClan = false;
-		if (clanUuid != null) {
-			lockedClan = getLocker().lockClan(clanUuid);
-		}
 		try {
+			lockedClan = locker.lockClan(clanUuid);
+
 			PromoteDemoteClanMemberAction pdcma = new PromoteDemoteClanMemberAction(userId, victimId,
 					newUserClanStatus, lockedClan, userRetrieveUtils, updateUtil, deleteUtil,
 					userClanRetrieveUtils, clanStuffUtils);
@@ -181,8 +180,8 @@ public class PromoteDemoteClanMemberController extends EventController {
 						e);
 			}
 		} finally {
-			if (clanId != null && lockedClan) {
-				getLocker().unlockClan(clanUuid);
+			if (lockedClan) {
+				locker.unlockClan(clanUuid);
 			}
 		}
 	}

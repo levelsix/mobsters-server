@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TradeItemForBoosterRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.ReceivedGiftResponseEvent;
 import com.lvl6.events.response.TradeItemForBoosterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -52,6 +51,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.AwardRewardAction;
 import com.lvl6.server.controller.utils.BoosterItemUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -118,6 +118,9 @@ public class TradeItemForBoosterController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	@Autowired
+	protected Locker locker;
+
+	@Autowired
 	protected InsertUtil insertUtil;
 
 	@Autowired
@@ -128,7 +131,7 @@ public class TradeItemForBoosterController extends EventController {
 
 	@Autowired
 	protected BoosterItemUtils boosterItemUtils;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
@@ -158,7 +161,7 @@ public class TradeItemForBoosterController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -168,12 +171,12 @@ public class TradeItemForBoosterController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			TradeItemForBoosterResponseEvent resEvent = 
+			TradeItemForBoosterResponseEvent resEvent =
 					new TradeItemForBoosterResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -181,9 +184,10 @@ public class TradeItemForBoosterController extends EventController {
 			return;
 		}
 
+		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
-			UUID.fromString(userId);
+			userUuid = UUID.fromString(userId);
 
 			invalidUuids = false;
 		} catch (Exception e) {
@@ -203,9 +207,10 @@ public class TradeItemForBoosterController extends EventController {
 			return;
 		}
 
-		//    locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
+		boolean gotLock = false;
 		//TODO: Logic similar to PurchaseBoosterPack, see what else can be optimized/shared
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			User aUser = userRetrieveUtils.getUserById(
 					senderProto.getUserUuid());
 			Item itm = itemRetrieveUtils.getItemForId(itemId);
@@ -315,7 +320,9 @@ public class TradeItemForBoosterController extends EventController {
 			}
 
 		} finally {
-			//      locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

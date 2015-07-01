@@ -27,7 +27,7 @@ import javax.persistence.Table;
 @Table(name = "temp1", schema = "mobsters")
 public class Temp1Pojo implements ITemp1 {
 
-	private static final long serialVersionUID = -1538185081;
+	private static final long serialVersionUID = -1388991150;
 
 	private Long    id;
 	private Integer monsterId;
@@ -91,5 +91,12 @@ public class Temp1Pojo implements ITemp1 {
 	public <E extends ITemp1> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.Temp1Record poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.Temp1Record();
+		poop.from(this);
+		return "Temp1Pojo[" + poop.valuesRow() + "]";
 	}
 }

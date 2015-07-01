@@ -20,17 +20,15 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private long updatedStrength;
 	private UserRetrieveUtils2  userRetrieveUtils;
 	@Autowired protected UpdateUtil updateUtil; 
-	private LeaderBoardImpl leaderBoardImpl;
 
 	public UpdateUserStrengthAction(String userId,
 			long updatedStrength, UserRetrieveUtils2 userRetrieveUtils,
-			UpdateUtil updateUtil, LeaderBoardImpl leaderBoardImpl)	{
+			UpdateUtil updateUtil)	{
 		super();
 		this.userId = userId;
 		this.updatedStrength = updatedStrength;
 		this.userRetrieveUtils = userRetrieveUtils;
 		this.updateUtil = updateUtil;
-		this.leaderBoardImpl = leaderBoardImpl;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -90,7 +88,6 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		boolean success = updateUtil.updateUserStrength(userId, updatedStrength);
 		log.info("successful update of user strength: {}", success );
 		user.setTotalStrength(updatedStrength);
-		leaderBoardImpl.addToLeaderboard(userId, updatedStrength);
 		return success;
 	}
 	

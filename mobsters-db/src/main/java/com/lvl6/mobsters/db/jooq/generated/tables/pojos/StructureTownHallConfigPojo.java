@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "structure_town_hall_config", schema = "mobsters")
 public class StructureTownHallConfigPojo implements IStructureTownHallConfig {
 
-	private static final long serialVersionUID = -2000952628;
+	private static final long serialVersionUID = -1961487136;
 
 	private Integer structId;
 	private Byte    numResourceOneGenerators;
@@ -273,5 +273,12 @@ public class StructureTownHallConfigPojo implements IStructureTownHallConfig {
 	public <E extends IStructureTownHallConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructureTownHallConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructureTownHallConfigRecord();
+		poop.from(this);
+		return "StructureTownHallConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

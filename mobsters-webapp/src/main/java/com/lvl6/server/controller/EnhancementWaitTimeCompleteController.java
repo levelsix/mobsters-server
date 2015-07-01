@@ -42,7 +42,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -53,7 +53,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public EnhancementWaitTimeCompleteController() {
-		
+
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 		EnhancementWaitTimeCompleteRequestProto reqProto = ((EnhancementWaitTimeCompleteRequestEvent) event)
 				.getEnhancementWaitTimeCompleteRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -138,8 +138,9 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			int previousGems = 0;
 			//			List<Long> userMonsterIds = new ArrayList<Long>();
 			//			userMonsterIds.add(umcep.getUserMonsterId()); //monster being enhanced
@@ -211,17 +212,19 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
 	/**
 	 * Return true if user request is valid; false otherwise and set the builder
 	 * status to the appropriate value.
-	 * 
+	 *
 	 * If user wants to speed up and if user does not have enough funds, will
 	 * return fail.
-	 * 
+	 *
 	 * @param resBuilder
 	 * @param u
 	 * @param userId
@@ -271,7 +274,7 @@ public class EnhancementWaitTimeCompleteController extends EventController {
 		//user's monsters
 		//		if (!idsToUserMonsters.containsKey(userMonsterIdBeingEnhanced)) {
 		//			log.error(String.format(
-		//				"monster being enhanced doesn't exist!. userMonsterIdBeingEnhanced=%s, deleteIds=%s, inEnhancing=%s, gemsForSpeedup=%s, speedup=%s", 
+		//				"monster being enhanced doesn't exist!. userMonsterIdBeingEnhanced=%s, deleteIds=%s, inEnhancing=%s, gemsForSpeedup=%s, speedup=%s",
 		//				userMonsterIdBeingEnhanced, usedUpMonsterIds, inEnhancing, gemsForSpeedup, speedup));
 		//			return false;
 		//		}

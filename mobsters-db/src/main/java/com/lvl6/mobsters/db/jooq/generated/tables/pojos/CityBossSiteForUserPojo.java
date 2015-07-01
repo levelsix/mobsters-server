@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class CityBossSiteForUserPojo implements ICityBossSiteForUser {
 
-	private static final long serialVersionUID = -971350945;
+	private static final long serialVersionUID = 1812566290;
 
 	private Integer   cityId;
 	private String    userId;
@@ -152,5 +152,12 @@ public class CityBossSiteForUserPojo implements ICityBossSiteForUser {
 	public <E extends ICityBossSiteForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.CityBossSiteForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.CityBossSiteForUserRecord();
+		poop.from(this);
+		return "CityBossSiteForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "lock_box_event_config", schema = "mobsters")
 public class LockBoxEventConfigPojo implements ILockBoxEventConfig {
 
-	private static final long serialVersionUID = -821262495;
+	private static final long serialVersionUID = 1128508867;
 
 	private Integer   id;
 	private Timestamp startTime;
@@ -222,5 +222,12 @@ public class LockBoxEventConfigPojo implements ILockBoxEventConfig {
 	public <E extends ILockBoxEventConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.LockBoxEventConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.LockBoxEventConfigRecord();
+		poop.from(this);
+		return "LockBoxEventConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

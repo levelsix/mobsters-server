@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.MiniEventGoalForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventGoalForUserPojo;
 import com.lvl6.properties.DBConstants;
 
 @Component
@@ -36,24 +36,24 @@ public class MiniEventGoalForUserRetrieveUtil {
 	}
 
 	/*
-	public List<MiniEventGoalForUser> getUserMiniEventsForUser(String userId) {
+	public List<MiniEventGoalForUserPojo> getUserMiniEventsForUser(String userId) {
 		log.debug("retrieving user MiniEvents for userId {}", userId);
 
 		Object[] values = { userId };
 		String query = String.format("select * from %s where %s=?", TABLE_NAME,
 				DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID);
 
-		List<MiniEventGoalForUser> userMiniEvents = null;
+		List<MiniEventGoalForUserPojo> userMiniEvents = null;
 		try {
 			userMiniEvents = this.jdbcTemplate.query(query, values, rowMapper);
 
 		} catch (Exception e) {
 			log.error(
 					String.format(
-							"MiniEventGoalForUser retrieve db error. userId=%s",
+							"MiniEventGoalForUserPojo retrieve db error. userId=%s",
 							userId),
 					e);
-			userMiniEvents = new ArrayList<MiniEventGoalForUser>();
+			userMiniEvents = new ArrayList<MiniEventGoalForUserPojo>();
 			//		} finally {
 			//			DBConnection.get().close(rs, null, conn);
 		}
@@ -61,61 +61,64 @@ public class MiniEventGoalForUserRetrieveUtil {
 	}
 
 	////@Cacheable(value="structIdsToUserStructsForUser", key="#userId")
-	public Map<Integer, MiniEventGoalForUser> getMiniEventIdsToUserMiniEventGoalForUser(
+	public Map<Integer, MiniEventGoalForUserPojo> getMiniEventIdsToUserMiniEventGoalForUserPojo(
 			String userId) {
-		log.debug("retrieving map of MiniEventId to MiniEventGoalForUser for userId {}", userId);
+		log.debug("retrieving map of MiniEventId to MiniEventGoalForUserPojo for userId {}", userId);
 
-		Map<Integer, MiniEventGoalForUser> miniEventIdToMiniEventGoalForUser = new HashMap<Integer, MiniEventGoalForUser>();
+		Map<Integer, MiniEventGoalForUserPojo> miniEventIdToMiniEventGoalForUserPojo = new HashMap<Integer, MiniEventGoalForUserPojo>();
 		try {
 
-			List<MiniEventGoalForUser> bifuList = getUserMiniEventsForUser(userId);
+			List<MiniEventGoalForUserPojo> bifuList = getUserMiniEventsForUser(userId);
 
-			for (MiniEventGoalForUser bifu : bifuList) {
+			for (MiniEventGoalForUserPojo bifu : bifuList) {
 				int miniEventId = bifu.getMiniEventId();
-				miniEventIdToMiniEventGoalForUser.put(miniEventId, bifu);
+				miniEventIdToMiniEventGoalForUserPojo.put(miniEventId, bifu);
 			}
 
 		} catch (Exception e) {
 			log.error(
 					String.format(
-							"MiniEventGoalForUser retrieve db error. userId=%s",
+							"MiniEventGoalForUserPojo retrieve db error. userId=%s",
 							userId),
 					e);
 		}
 
-		return miniEventIdToMiniEventGoalForUser;
+		return miniEventIdToMiniEventGoalForUserPojo;
 	}*/
 
 	////@Cacheable(value="specificUserStruct", key="#userStructId")
-	public Collection<MiniEventGoalForUser> getUserMiniEventGoals(String userId)//,
-			//int miniEventId)
+	public Collection<MiniEventGoalForUserPojo> getUserMiniEventGoals(String userId,
+			int miniEventTimetableId)
 	{
 		log.debug(
-				"retrieving MiniEventGoalForUser with userId={}",
-				userId);
+				"retrieving MiniEventGoalForUserPojo with userId={}, miniEventTimeTableId={}",
+				userId, miniEventTimetableId);
 
-		Object[] values = { userId };
-		String query = String.format("select * from %s where %s=?",
-				TABLE_NAME, DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID);
+		Object[] values = { userId, miniEventTimetableId };
+		String query = String.format("select * from %s where %s=? and %s=?",
+				TABLE_NAME, DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID,
+				DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_TIMETABLE_ID);
 
-		Collection<MiniEventGoalForUser> megfuList;
+		Collection<MiniEventGoalForUserPojo> megfuList;
 		try {
 			megfuList = this.jdbcTemplate.query(query,
 					values, rowMapper);
 
 		} catch (Exception e) {
-			megfuList = new ArrayList<MiniEventGoalForUser>();
+			megfuList = new ArrayList<MiniEventGoalForUserPojo>();
 			log.error(
 					String.format(
-							"MiniEventGoalForUser retrieve db error. userId=%s",
-							userId), e);
+							"%s userId=%s, miniEventTimetableId=%s",
+							"MiniEventGoalForUserPojo retrieve db error.",
+							userId, miniEventTimetableId),
+					e);
 		}
 
 		return megfuList;
 	}
 
 	/*
-	public List<MiniEventGoalForUser> getSpecificOrAllUserMiniEventsForUser(
+	public List<MiniEventGoalForUserPojo> getSpecificOrAllUserMiniEventsForUser(
 			String userId, List<Integer> userMiniEventMiniEventIds) {
 
 		StringBuilder querySb = new StringBuilder();
@@ -149,14 +152,14 @@ public class MiniEventGoalForUserRetrieveUtil {
 		String query = querySb.toString();
 		log.info("query={}, values={}", query, values);
 
-		List<MiniEventGoalForUser> userMiniEvents = null;
+		List<MiniEventGoalForUserPojo> userMiniEvents = null;
 		try {
 			userMiniEvents = this.jdbcTemplate.query(query, values.toArray(),
 					rowMapper);
 
 		} catch (Exception e) {
 			log.error("structure for user retrieve db error.", e);
-			userMiniEvents = new ArrayList<MiniEventGoalForUser>();
+			userMiniEvents = new ArrayList<MiniEventGoalForUserPojo>();
 
 		}
 
@@ -168,16 +171,18 @@ public class MiniEventGoalForUserRetrieveUtil {
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
 	private static final class UserMiniEventForClientMapper implements
-	RowMapper<MiniEventGoalForUser> {
+	RowMapper<MiniEventGoalForUserPojo> {
 
 		private static List<String> columnsSelected;
 
 		@Override
-		public MiniEventGoalForUser mapRow(ResultSet rs, int rowNum)
+		public MiniEventGoalForUserPojo mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			MiniEventGoalForUser megfu = new MiniEventGoalForUser();
+			MiniEventGoalForUserPojo megfu = new MiniEventGoalForUserPojo();
 			megfu.setUserId(rs
 					.getString(DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID));
+			megfu.setMiniEventTimetableId(rs
+					.getInt(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_TIMETABLE_ID));
 			megfu.setMiniEventGoalId(rs
 					.getInt(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_GOAL_ID));
 			megfu.setProgress(
@@ -190,6 +195,7 @@ public class MiniEventGoalForUserRetrieveUtil {
 			if (null == columnsSelected) {
 				columnsSelected = new ArrayList<String>();
 				columnsSelected.add(DBConstants.MINI_EVENT_GOAL_FOR_USER__USER_ID);
+				columnsSelected.add(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_TIMETABLE_ID);
 				columnsSelected.add(DBConstants.MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_GOAL_ID);
 				columnsSelected.add(DBConstants.MINI_EVENT_GOAL_FOR_USER__PROGRESS);
 			}

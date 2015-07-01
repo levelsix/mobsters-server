@@ -26,16 +26,17 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
+import com.lvl6.mobsters.jooq.daos.service.ClanStrengthService;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
@@ -46,10 +47,10 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
-import com.lvl6.utils.TimeUtils;
+import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 
 @Component
 
@@ -79,23 +80,23 @@ public class RetrieveClanInfoController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
+	protected ClanStrengthService clanStrength;
 
 	@Autowired
 	protected ClanHelpCountForUserRetrieveUtil clanHelpCountForUserRetrieveUtil;
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected ClanSearch clanSearch;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils toggle;
 
 
 	public RetrieveClanInfoController() {
-		
+
 	}
 
 	@Override
@@ -113,7 +114,7 @@ public class RetrieveClanInfoController extends EventController {
 		RetrieveClanInfoRequestProto reqProto = ((RetrieveClanInfoRequestEvent) event)
 				.getRetrieveClanInfoRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String clanName = reqProto.getClanName();
@@ -209,7 +210,7 @@ public class RetrieveClanInfoController extends EventController {
 				clanIds = clanSearch.getTopNClans(ControllerConstants.CLAN__TOP_N_CLANS);
 			}
 			else {
-				clanIds = hzClanSearch.getTopNClans(100);
+				clanIds = clanStrength.getTopNClans(100);
 			}
 
 			List<Clan> clanList = orderRecommendedClans(clanIds);
@@ -339,10 +340,10 @@ public class RetrieveClanInfoController extends EventController {
 		}
 	}
 
-	//ordering is 4 open, 1 closed, 4 open, 1 closed etc... 
+	//ordering is 4 open, 1 closed, 4 open, 1 closed etc...
 	private List<Clan> orderRecommendedClans(List<String> clanIds) {
 		Map<String, Clan> clanMap = clanRetrieveUtils.getClansByIds(clanIds);
-		
+
 		List<Clan> clanList = new ArrayList<Clan>();
 		if (null == clanMap || clanMap.isEmpty()) {
 			return clanList;
@@ -352,7 +353,7 @@ public class RetrieveClanInfoController extends EventController {
 		LinkedList<String> closedClans = new LinkedList<String>();
 		LinkedList<String> openClans = new LinkedList<String>();
 		int size = clanIds.size();
-		
+
 		for(String clanId : clanIds) {
 			if(clanMap.get(clanId).isRequestToJoinRequired()) {
 				closedClans.add(clanId);
@@ -361,7 +362,7 @@ public class RetrieveClanInfoController extends EventController {
 				openClans.add(clanId);
 			}
 		}
-		
+
 		for(int i=1; i<=size; i++) {
 			if(i%5 == 0) {
 				if(!closedClans.isEmpty()) {
@@ -391,15 +392,15 @@ public class RetrieveClanInfoController extends EventController {
 		if (null == clanList || clanList.isEmpty()) {
 			return;
 		}
-		IMap<String, Integer> clanMemberSize = hzClanSearch.getClanMemberCountMap();
+		Map<String, Long> clanMemberSize = clanStrength.getClanMemberCountMap();
 
 		for (Clan c : clanList) {
 			String clanId = c.getId();
 
 			if (clanMemberSize.containsKey(clanId)) {
-				int size = clanMemberSize.get(clanId);
+				long size = clanMemberSize.get(clanId);
 				resBuilder.addClanInfo(createInfoProtoUtils
-						.createFullClanProtoWithClanSize(c, size));
+						.createFullClanProtoWithClanSize(c, (int)size));
 			} else {
 				log.error("clan with no active members! {}", c);
 			}
@@ -540,15 +541,6 @@ public class RetrieveClanInfoController extends EventController {
 	public void setMonsterForUserRetrieveUtils(
 			MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils) {
 		this.monsterForUserRetrieveUtils = monsterForUserRetrieveUtils;
-	}
-
-
-	public HazelcastClanSearchImpl getHzClanSearch() {
-		return hzClanSearch;
-	}
-
-	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
-		this.hzClanSearch = hzClanSearch;
 	}
 
 	public ClanHelpCountForUserRetrieveUtil getClanHelpCountForUserRetrieveUtil() {

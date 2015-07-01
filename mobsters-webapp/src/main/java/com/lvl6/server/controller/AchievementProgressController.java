@@ -42,7 +42,7 @@ public class AchievementProgressController extends EventController {
 
 	@Autowired
 	protected AchievementStuffUtil achievementStuffUtil;
-	
+
 	@Autowired
 	AchievementRetrieveUtils achievementRetrieveUtils;
 
@@ -60,7 +60,7 @@ public class AchievementProgressController extends EventController {
 	
 
 	public AchievementProgressController() {
-		
+
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class AchievementProgressController extends EventController {
 		AchievementProgressRequestProto reqProto = ((AchievementProgressRequestEvent) event)
 				.getAchievementProgressRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get stuff client sent
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -139,8 +139,9 @@ public class AchievementProgressController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			//retrieve whatever is necessary from the db
 			
 			//achievementIdsToUap might be modified
@@ -172,7 +173,9 @@ public class AchievementProgressController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

@@ -21,8 +21,6 @@ import com.lvl6.info.ClanHelpCountForUser;
 import com.lvl6.info.ClanMemberTeamDonation;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUserUsage;
-import com.lvl6.info.MiniEventForUser;
-import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniJobForUser;
 import com.lvl6.info.MonsterDeleteHistory;
 import com.lvl6.info.MonsterEnhanceHistory;
@@ -40,6 +38,8 @@ import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventGoalForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
@@ -337,18 +337,18 @@ public interface InsertUtil {
 	public abstract boolean insertMonsterEnhanceHistory(
 			MonsterEnhanceHistory meh);
 
-	public abstract boolean insertIntoUpdateMiniEventForUser(MiniEventForUser mefu);
+	public abstract boolean insertIntoUpdateMiniEventForUser(MiniEventForUserPojo mefu);
 
 	public abstract boolean insertIntoUpdateMiniEventGoalForUser(
-			Collection<MiniEventGoalForUser> megfus);
+			Collection<MiniEventGoalForUserPojo> megfus);
 
 	public abstract boolean insertMultipleTranslationsForPrivateChat(
 			List<PrivateChatPost> listOfPrivateChatPosts,
 			ChatTranslationsRetrieveUtils chatTranslationsRetrieveUtils);
-	
+
 	public abstract boolean insertIntoUserRewardHistory(String userId, Timestamp ts,
 			Collection<Reward> listOfRewards, String reasonForReward, String awardReasonDetail);
-	
+
 
 //	public abstract boolean insertClanGiftForUsers(Map<String, Integer> userIdsToRewardIds,
 //			String gifterUserId, int clanGiftId, String reasonForGift);

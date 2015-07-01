@@ -57,25 +57,25 @@ public class RetrieveUsersForUserIdsController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected ResearchForUserDao2 rfuDao;
-	
+
 	@Autowired
 	protected ResearchUtil researchUtil;
-	
+
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
-	
+
 	@Autowired
 	protected ResearchPropertyRetrieveUtils researchPropertyRetrieveUtils;
 
 
 	public RetrieveUsersForUserIdsController() {
-		
+
 	}
 
 	@Override
@@ -120,9 +120,13 @@ public class RetrieveUsersForUserIdsController extends EventController {
 
 		//    boolean includePotentialPoints = reqProto.getIncludePotentialPointsForClanTowers();
 		//    User sender = includePotentialPoints ? RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid()) : null;
-		Map<String, User> usersByIds = getUserRetrieveUtils().getUsersByIds(
-				requestedUserIds);
-		if (usersByIds != null) {
+		Map<String, User> usersByIds = null;
+
+		if (!invalidUuids) {
+			usersByIds = userRetrieveUtils.getUsersByIds(
+					requestedUserIds);
+		}
+		if (usersByIds != null && !usersByIds.isEmpty()) {
 
 			Set<String> clanIds = new HashSet<String>();
 			for (User user : usersByIds.values()) {
@@ -174,7 +178,7 @@ public class RetrieveUsersForUserIdsController extends EventController {
 			}
 
 		} else {
-			log.error("no users with the ids " + requestedUserIds);
+			log.error("no users with the ids {}", requestedUserIds);
 		}
 		RetrieveUsersForUserIdsResponseProto resProto = resBuilder.build();
 		RetrieveUsersForUserIdsResponseEvent resEvent = new RetrieveUsersForUserIdsResponseEvent(
@@ -208,12 +212,12 @@ public class RetrieveUsersForUserIdsController extends EventController {
 
 		return retVal;
 	}
-	
+
 	public List<AllUserResearchProto> createResearchProtos(List<String> userIds) {
 		Map<String, List<ResearchForUserPojo>> rfuMap = rfuDao.fetchByUserIds(userIds);
 		return researchUtil.createAllUserResearchProto(rfuMap, researchRetrieveUtils, researchPropertyRetrieveUtils);
 	}
-	
+
 
 	public HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;

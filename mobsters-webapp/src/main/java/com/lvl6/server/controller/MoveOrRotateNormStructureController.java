@@ -37,7 +37,7 @@ public class MoveOrRotateNormStructureController extends EventController {
 	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils;
 
 	public MoveOrRotateNormStructureController() {
-		
+
 	}
 
 	@Override
@@ -99,9 +99,11 @@ public class MoveOrRotateNormStructureController extends EventController {
 			return;
 		}
 
-		//only locking so you cant moveOrRotate it hella times
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			//only locking so you cant moveOrRotate it hella times
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			boolean legit = true;
 			resBuilder.setStatus(ResponseStatus.SUCCESS);
 
@@ -172,7 +174,9 @@ public class MoveOrRotateNormStructureController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

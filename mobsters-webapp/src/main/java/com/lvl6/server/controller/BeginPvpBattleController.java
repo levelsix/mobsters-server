@@ -150,12 +150,13 @@ public class BeginPvpBattleController extends EventController {
 			return;
 		}
 
+		boolean gotLock = false;
 		//lock the user that client is going to attack, in order to prevent others from
 		//attacking same guy, only lock a real user
-		if (null != enemyUserId && !enemyUserId.isEmpty()) {
-			locker.lockPlayer(enemyUserUuid, this.getClass().getSimpleName());
-		}
 		try {
+			if (null != enemyUserId && !enemyUserId.isEmpty()) {
+				gotLock = locker.lockPlayer(enemyUserUuid, this.getClass().getSimpleName());
+			}
 			Date curDate = new Date(reqProto.getAttackStartTime());
 			int enemyElo = enemyProto.getPvpLeagueStats().getElo();
 
@@ -183,7 +184,7 @@ public class BeginPvpBattleController extends EventController {
 			}
 
 		} finally {
-			if (null != enemyUserId && !enemyUserId.isEmpty()) {
+			if (null != enemyUserId && !enemyUserId.isEmpty() && gotLock) {
 				//only unlock if real user
 				locker.unlockPlayer(enemyUserUuid, this.getClass()
 						.getSimpleName());

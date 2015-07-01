@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class PvpBoardObstacleForUserPojo implements IPvpBoardObstacleForUser {
 
-	private static final long serialVersionUID = 1934944671;
+	private static final long serialVersionUID = -591346482;
 
 	private String  userId;
 	private Integer id;
@@ -150,5 +150,12 @@ public class PvpBoardObstacleForUserPojo implements IPvpBoardObstacleForUser {
 	public <E extends IPvpBoardObstacleForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.PvpBoardObstacleForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.PvpBoardObstacleForUserRecord();
+		poop.from(this);
+		return "PvpBoardObstacleForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

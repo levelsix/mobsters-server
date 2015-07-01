@@ -41,7 +41,7 @@ public class PerformResearchController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -59,12 +59,12 @@ public class PerformResearchController extends EventController {
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	@Autowired
 	protected ResearchRetrieveUtils researchRetrieveUtils;
 
 	public PerformResearchController() {
-		
+
 	}
 
 	@Override
@@ -164,13 +164,14 @@ public class PerformResearchController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 
 			PerformResearchAction pra = new PerformResearchAction(userId,
 					userRetrieveUtils, researchId, userResearchUuid, gemsCost,
 					resourceCost, resourceType, nowTimestamp, insertUtil,
-					updateUtil, researchForUserRetrieveUtils, researchRetrieveUtils, 
+					updateUtil, researchForUserRetrieveUtils, researchRetrieveUtils,
 					miscMethods);
 
 			pra.execute(resBuilder);
@@ -195,7 +196,7 @@ public class PerformResearchController extends EventController {
 								pra.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
-				
+
 				writeToUserCurrencyHistory(userId, nowTimestamp, pra);
 			}
 
@@ -215,7 +216,9 @@ public class PerformResearchController extends EventController {
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

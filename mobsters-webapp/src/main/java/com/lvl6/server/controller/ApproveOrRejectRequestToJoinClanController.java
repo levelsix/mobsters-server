@@ -131,7 +131,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		ApproveOrRejectRequestToJoinClanRequestProto reqProto = ((ApproveOrRejectRequestToJoinClanRequestEvent) event)
 				.getApproveOrRejectRequestToJoinClanRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -181,8 +181,10 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			return;
 		}
 
-		boolean lockedClan = getLocker().lockClan(clanUuid);
+		boolean lockedClan = false;
 		try {
+			lockedClan = locker.lockClan(clanUuid);
+
 			ApproveOrRejectRequestToJoinAction aorrtja = new ApproveOrRejectRequestToJoinAction(userId,
 					requesterId, accept, lockedClan, userRetrieveUtil, updateUtil, deleteUtil,
 					userClanRetrieveUtils, clanStuffUtils);
@@ -267,8 +269,8 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 						e);
 			}
 		} finally {
-			if (null != clanUuid && lockedClan) {
-				getLocker().unlockClan(clanUuid);
+			if (lockedClan) {
+				locker.unlockClan(clanUuid);
 			}
 		}
 	}

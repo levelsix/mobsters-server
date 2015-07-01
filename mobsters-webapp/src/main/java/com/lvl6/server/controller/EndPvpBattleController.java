@@ -249,20 +249,21 @@ public class EndPvpBattleController extends EventController {
 			return;
 		}
 
-		//NEED TO LOCK BOTH PLAYERS, well need to lock defender because defender can be online,
-		//Lock attacker because someone might be attacking him while attacker is attacking defender?
-		if (null != defenderUuid) {
-			getLocker().lockPlayers(defenderUuid, attackerUuid,
-					this.getClass().getSimpleName());
-			log.info("locked defender and attacker");
-		} else {
-			//ONLY ATTACKER IF DEFENDER IS FAKE
-			getLocker().lockPlayer(attackerUuid,
-					this.getClass().getSimpleName());
-			log.info("locked attacker");
-		}
-
+		boolean gotLock = false;
 		try {
+			//NEED TO LOCK BOTH PLAYERS, well need to lock defender because defender can be online,
+			//Lock attacker because someone might be attacking him while attacker is attacking defender?
+			if (null != defenderUuid) {
+				gotLock = locker.lockPlayers(defenderUuid, attackerUuid,
+						this.getClass().getSimpleName());
+				log.info("locked defender and attacker");
+			} else {
+				//ONLY ATTACKER IF DEFENDER IS FAKE
+				gotLock = locker.lockPlayer(attackerUuid,
+						this.getClass().getSimpleName());
+				log.info("locked attacker");
+			}
+
 			EndPvpBattleAction epba = new EndPvpBattleAction(attackerId,
 					defenderId, attackerAttacked, attackerWon, oilStolenFromStorage,
 					cashStolenFromStorage, nuPvpDmgMultiplier, monsterDropIds,
@@ -370,14 +371,16 @@ public class EndPvpBattleController extends EventController {
 			}
 
 		} finally {
-			if (null != defenderUuid) {
-				getLocker().unlockPlayers(defenderUuid, attackerUuid,
-						this.getClass().getSimpleName());
-				log.info("unlocked defender and attacker");
-			} else {
-				getLocker().unlockPlayer(attackerUuid,
-						this.getClass().getSimpleName());
-				log.info("unlocked attacker");
+			if (gotLock) {
+				if (null != defenderUuid) {
+					locker.unlockPlayers(defenderUuid, attackerUuid,
+							this.getClass().getSimpleName());
+					log.info("unlocked defender and attacker");
+				} else {
+					locker.unlockPlayer(attackerUuid,
+							this.getClass().getSimpleName());
+					log.info("unlocked attacker");
+				}
 			}
 		}
 	}

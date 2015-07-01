@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.AchievementForUser;
 import com.lvl6.info.MiniEventForPlayerLvl;
-import com.lvl6.info.MiniEventForUser;
 import com.lvl6.info.MiniEventGoal;
-import com.lvl6.info.MiniEventGoalForUser;
 import com.lvl6.info.MiniEventLeaderboardReward;
 import com.lvl6.info.MiniEventTierReward;
 import com.lvl6.info.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventConfigPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventGoalForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventTimetableConfigPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.RetrieveMiniEventResponseProto.Builder;
@@ -39,7 +39,9 @@ import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
-@Component@Scope("prototype")public class RetrieveMiniEventAction {
+@Component
+@Scope("prototype")
+public class RetrieveMiniEventAction {
 
 	private static final Logger log = LoggerFactory.getLogger(RetrieveMiniEventAction.class);
 
@@ -47,18 +49,18 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private Date now;
 	private boolean completedClanAchievements;
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	@Autowired protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil; 
-	@Autowired protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil; 
-	@Autowired protected MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil; 
-	@Autowired protected InsertUtil insertUtil; 
-	@Autowired protected DeleteUtil deleteUtil; 
-	@Autowired protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils; 
-	@Autowired protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils; 
-	@Autowired protected MiniEventRetrieveUtils miniEventRetrieveUtils; 
-	@Autowired protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils; 
-	@Autowired protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils; 
-	@Autowired protected MiniEventTimetableRetrieveUtils miniEventTimetableRetrieveUtil; 
-	@Autowired protected TimeUtils timeUtil; 
+	@Autowired protected AchievementForUserRetrieveUtil achievementForUserRetrieveUtil;
+	@Autowired protected MiniEventForUserRetrieveUtil miniEventForUserRetrieveUtil;
+	@Autowired protected MiniEventGoalForUserRetrieveUtil miniEventGoalForUserRetrieveUtil;
+	@Autowired protected InsertUtil insertUtil;
+	@Autowired protected DeleteUtil deleteUtil;
+	@Autowired protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
+	@Autowired protected MiniEventForPlayerLvlRetrieveUtils miniEventForPlayerLvlRetrieveUtils;
+	@Autowired protected MiniEventRetrieveUtils miniEventRetrieveUtils;
+	@Autowired protected MiniEventTierRewardRetrieveUtils miniEventTierRewardRetrieveUtils;
+	@Autowired protected MiniEventLeaderboardRewardRetrieveUtils miniEventLeaderboardRewardRetrieveUtils;
+	@Autowired protected MiniEventTimetableRetrieveUtils miniEventTimetableRetrieveUtil;
+	@Autowired protected TimeUtils timeUtil;
 
 	public RetrieveMiniEventAction(
 			String userId,
@@ -114,9 +116,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private MiniEventConfigPojo curActiveMiniEvent;
 	private MiniEventTimetableConfigPojo curActiveMiniEventTimetable;
 	private MiniEventForPlayerLvl lvlEntered;
-	private MiniEventForUser mefu;
-	private Collection<MiniEventGoalForUser> megfus;
-	private boolean replaceExistingUserMiniEvent;
+	private MiniEventForUserPojo mefu;
+	private Collection<MiniEventGoalForUserPojo> megfus;
+	//if false then just retrieve current MiniEventForUser
+	private boolean addNewUserMiniEvent;
 	private Collection<MiniEventTierReward> rewards;
 	private Collection<MiniEventGoal> goals;
 	private Collection<MiniEventLeaderboardReward> leaderboardRewards;
@@ -154,8 +157,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private boolean verifySemantics(Builder resBuilder) {
 
 		u = userRetrieveUtil.getUserById(userId);
-		replaceExistingUserMiniEvent = false;
-
+		addNewUserMiniEvent = false;
 		if (null == u) {
 			log.error("no user with id={}", userId);
 			return false;
@@ -168,22 +170,34 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return true;
 		}
 
+
 		mefu = miniEventForUserRetrieveUtil
-				.getSpecificUserMiniEvent(userId);
+				.getMostRecentUserMiniEvent(userId);
 		if (null == mefu) {
+			addNewUserMiniEvent = true;
 			return true;
 		}
 
-		int miniEventId = mefu.getMiniEventId();
-		//if the event has not even started yet then don't send it
+		int miniEventTimetableId = mefu.getMiniEventTimetableId();
+		//if user's recorded event has not even started yet then don't send it
 		MiniEventTimetableConfigPojo meTimetable = miniEventTimetableRetrieveUtil
-				.getTimetableForMiniEventId(miniEventId);
+				.getTimetableForId(miniEventTimetableId);
 		if (null == meTimetable ||
 				timeUtil.isFirstEarlierThanSecond(now, meTimetable.getStartTime()))
 		{
-			log.warn("user's miniEvent not active. {}.\t timeActive={}", mefu, meTimetable);
+			log.warn("user's miniEvent not active/nonexistent. {}.\t timeActive={}",
+					mefu, meTimetable);
 			mefu = null;
+			addNewUserMiniEvent = true;
 			return true;
+		}
+
+		int miniEventId = meTimetable.getMiniEventId();
+		//sanity check
+		if (mefu.getMiniEventId() != miniEventId) {
+			log.error("miniEventId mismatch. mefu={}, MiniEventTimetable={}",
+					mefu, meTimetable);
+			addNewUserMiniEvent = true;
 		}
 
 		MiniEventConfigPojo me = miniEventRetrieveUtils.getMiniEventById(miniEventId);
@@ -195,19 +209,21 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			log.warn("WTF...missing MiniEvent data. So, invalid mefu={}, me={}",
 					mefu, me);
 			mefu = null;
-			cleanUp();
+			//cleanUp();
 			return true;
 		}
 
-		megfus = miniEventGoalForUserRetrieveUtil.getUserMiniEventGoals(userId);
+		megfus = miniEventGoalForUserRetrieveUtil.getUserMiniEventGoals(
+				userId, mefu.getMiniEventTimetableId());
 
-		//name should be "all eligible rewards collected"
-		boolean allRewardsCollected = verifyRewardsCollected();
-
-		if (allRewardsCollected) {
-			replaceExistingUserMiniEvent = true;
+		boolean allEligibleRewardsCollected = verifyRewardsCollected();
+		if (!allEligibleRewardsCollected) {
+			return true;
 		}
 
+		//since user collected all eligible rewards, replace his existing UserMiniEvent
+		//with a new one if possible
+		addNewUserMiniEvent = true;
 		return true;
 	}
 
@@ -300,17 +316,17 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		} else if (curPts >= tierOne && curPts < tierTwo) {
 			log.warn("new event only if rewards1 are redeemed. mefu={}\t lvlEntered={}",
 					mefu, lvlEntered);
-			return mefu.isTierOneRedeemed();
+			return mefu.getTierOneRedeemed();
 
 		} else if (curPts >= tierTwo && curPts < tierThree) {
 			log.warn("new event only if rewards2 are redeemed. mefu={}\t lvlEntered={}",
 					mefu, lvlEntered);
-			return mefu.isTierTwoRedeemed();
+			return mefu.getTierTwoRedeemed();
 
 		} else if (curPts >= tierThree) {
 			log.warn("new event only if rewards3 are redeemed. mefu={}\t lvlEntered={}",
 					mefu, lvlEntered);
-			return mefu.isTierThreeRedeemed();
+			return mefu.getTierThreeRedeemed();
 		}
 
 		//don't think code will ever reach here...
@@ -327,11 +343,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 
 		int totalPts = 0;
-		for (MiniEventGoalForUser megfu : megfus)
+		for (MiniEventGoalForUserPojo megfu : megfus)
 		{
 			int goalId = megfu.getMiniEventGoalId();
 			if (!goalIdToGoal.containsKey(goalId)) {
-				log.error("MiniEventGoalForUser {} inconsistent with MiniEventGoals. {}",
+				log.error("MiniEventGoalForUserPojo {} inconsistent with MiniEventGoals. {}",
 						megfu, goals);
 				continue;
 			}
@@ -345,7 +361,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			int curPts = pts * multiplier;
 			totalPts += curPts;
 
-			log.info("MiniEventGoal, MiniEventGoalForUser, pts. {}, {}, {}",
+			log.info("MiniEventGoal, MiniEventGoalForUserPojo, pts. {}, {}, {}",
 					new Object[] { meg, megfu, curPts } );
 		}
 
@@ -361,7 +377,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 
 		if (null == mefu) {
-			return processNonexistentUserMiniEvent();
+			return addUserMiniEvent();
 		} else {
 			log.info("process existing UserMiniEvent:{}\t lvlEntered:{}\t progress:{}",
 					new Object[] { mefu, lvlEntered, megfus } );
@@ -370,11 +386,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 	}
 
-	private boolean processNonexistentUserMiniEvent()
+	private boolean addUserMiniEvent()
 	{
 		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil.getCurrentlyActiveMiniEvent(now);
 		if (null == curActiveMiniEventTimetable) {
 			log.info("no currently active MiniEvent");
+			curActiveMiniEvent = null;
 			return true;
 		}
 		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(
@@ -382,18 +399,21 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 		int meId = curActiveMiniEvent.getId();
 		int userLvl = u.getLevel();
-		log.info("this is the currently active MiniEvent: {}", curActiveMiniEvent);
+		log.info("this is the currently active MiniEvent={}, timetable={}",
+				curActiveMiniEvent, curActiveMiniEventTimetable);
 
 		boolean success = retrieveMiniEventRelatedData(meId, curActiveMiniEvent, userLvl);
 
 		if (!success) {
-			log.warn("unable to continue processNonexistentUserMiniEvent()");
+			log.warn("unable to continue addUserMiniEvent()");
 			curActiveMiniEvent = null;
+			curActiveMiniEventTimetable = null;
 			return true;
 		}
 
-		log.info("processNonexistentUserMiniEvent, newEvent:{}", curActiveMiniEvent);
-		success = insertUpdateUserMiniEvent(meId, userLvl);
+		log.info("addUserMiniEvent, newEvent:{}", curActiveMiniEvent);
+		int metId = curActiveMiniEventTimetable.getId();
+		success = insertUpdateUserMiniEvent(meId, metId, userLvl);
 		if (!success) {
 			log.warn("unable to create a new MiniEvent for the user.");
 		}
@@ -401,27 +421,30 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		return success;
 	}
 
-	private boolean insertUpdateUserMiniEvent(int meId, int userLvl)
+	private boolean insertUpdateUserMiniEvent(int meId, int metId, int userLvl)
 	{
-		cleanUp();
+		//cleanUp();
 
 		//active MiniEvent going on and user doesn't have one so create one
-		MiniEventForUser oldMefu = mefu;
-		mefu = generateNewMiniEvent(meId, userLvl);
+		MiniEventForUserPojo oldMefu = mefu;
+		mefu = generateNewMiniEvent(meId, metId, userLvl);
 
 		log.info("inserting/updating. oldMefu={} \t newMefu={}", oldMefu, mefu);
 		return insertUtil.insertIntoUpdateMiniEventForUser(mefu);
 	}
 
-	private void cleanUp() {
+	/*private void cleanUp() {
 		//in case the user has remnants from previous MiniEvents
-		int numDeleted = deleteUtil.deleteMiniEventGoalForUser(userId);
-		log.info("MiniEventGoalForUser numDeleted={}", numDeleted);
-	}
+		int numDeleted = deleteUtil.deleteMiniEventGoalForUserPojo(userId);
+		log.info("MiniEventGoalForUserPojo numDeleted={}", numDeleted);
+	}*/
 
-	private MiniEventForUser generateNewMiniEvent(int meId, int userLvl) {
-		MiniEventForUser mefu = new MiniEventForUser();
+	private MiniEventForUserPojo generateNewMiniEvent(
+			int meId, int metId, int userLvl)
+	{
+		MiniEventForUserPojo mefu = new MiniEventForUserPojo();
 		mefu.setUserId(userId);
+		mefu.setMiniEventTimetableId(metId);
 		mefu.setMiniEventId(meId);
 		mefu.setUserLvl(userLvl);
 		mefu.setTierOneRedeemed(false);
@@ -434,23 +457,33 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private boolean processExistingUserMiniEvent()
 	{
 		//two cases
-		if (!replaceExistingUserMiniEvent) {
+		if (!addNewUserMiniEvent) {
+			log.info("just retrieving UserMiniEvent");
 			return retrieveCurrentUserMiniEvent();
 		}
 
-		return replaceCurrentUserMiniEvent();
+		return addUserMiniEvent();
 	}
 
 	private boolean retrieveCurrentUserMiniEvent()
 	{
-		int meId = mefu.getMiniEventId();
+		int metId = mefu.getMiniEventTimetableId();
+		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil
+				.getTimetableForId(metId);
+		if (null == curActiveMiniEventTimetable) {
+			//uncommon case because someone would have to delete the MiniEventTimetable
+			log.error("MiniEventTimetable no longer exists. {}. Giving user new one",
+					curActiveMiniEvent);
+			return addUserMiniEvent();
+		}
+
+		int meId = curActiveMiniEventTimetable.getMiniEventId();
 		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(meId);
-		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil.getTimetableForMiniEventId(meId);
 		if (null == curActiveMiniEvent) {
 			//uncommon case because someone would have to delete the MiniEvent
 			log.error("MiniEvent no longer exists. {}. Giving user new one",
 					curActiveMiniEvent);
-			return processNonexistentUserMiniEvent();
+			return addUserMiniEvent();
 		}
 
 		//common case: MiniEvent exists
@@ -467,6 +500,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		return success;
 	}
 
+	/*
 	private boolean replaceCurrentUserMiniEvent()
 	{
 		int meId = mefu.getMiniEventId();
@@ -510,6 +544,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 		return success;
 	}
+	 */
 
 	public User getU() {
 		return u;
@@ -531,11 +566,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		return lvlEntered;
 	}
 
-	public MiniEventForUser getMefu() {
+	public MiniEventForUserPojo getMefu() {
 		return mefu;
 	}
 
-	public Collection<MiniEventGoalForUser> getMegfus() {
+	public Collection<MiniEventGoalForUserPojo> getMegfus() {
 		return megfus;
 	}
 

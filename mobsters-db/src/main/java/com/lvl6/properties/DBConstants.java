@@ -457,14 +457,20 @@ public class DBConstants {
 
 	/*MINI EVENT FOR USER*/
 	public static final String MINI_EVENT_FOR_USER__USER_ID = "user_id";
+	public static final String MINI_EVENT_FOR_USER__MINI_EVENT_TIMETABLE_ID = "mini_event_timetable_id";
 	public static final String MINI_EVENT_FOR_USER__MINI_EVENT_ID = "mini_event_id";
+	public static final String MINI_EVENT_FOR_USER__TIME_OF_ENTRY = "time_of_entry";
 	public static final String MINI_EVENT_FOR_USER__USER_LVL = "user_lvl";
 	public static final String MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED = "tier_one_redeemed";
 	public static final String MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED = "tier_two_redeemed";
 	public static final String MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED = "tier_three_redeemed";
+	public static final String MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED_TIME = "tier_one_redeemed_time";
+	public static final String MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED_TIME = "tier_two_redeemed_time";
+	public static final String MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED_TIME = "tier_three_redeemed_time";
 
 	/*MINI EVENT GOAL FOR USER*/
 	public static final String MINI_EVENT_GOAL_FOR_USER__USER_ID = "user_id";
+	public static final String MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_TIMETABLE_ID = "mini_event_timetable_id";
 	public static final String MINI_EVENT_GOAL_FOR_USER__MINI_EVENT_GOAL_ID = "mini_event_goal_id";
 	public static final String MINI_EVENT_GOAL_FOR_USER__PROGRESS = "progress";
 
@@ -898,7 +904,7 @@ public class DBConstants {
 	public static final String USER_PRIVATE_CHAT_POSTS__TIME_OF_POST = "time_of_post";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT = "content";
 	public static final String USER_PRIVATE_CHAT_POSTS__CONTENT_LANGUAGE = "content_language";
-	
+
 	/*USER REWARD HISTORY*/
 	public static final String USER_REWARD_HISTORY__ID = GENERIC__ID;
 	public static final String USER_REWARD_HISTORY__USER_ID = "user_id";

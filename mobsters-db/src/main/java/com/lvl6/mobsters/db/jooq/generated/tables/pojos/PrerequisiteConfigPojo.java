@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "prerequisite_config", schema = "mobsters")
 public class PrerequisiteConfigPojo implements IPrerequisiteConfig {
 
-	private static final long serialVersionUID = 401075209;
+	private static final long serialVersionUID = -273167241;
 
 	private Integer id;
 	private String  gameType;
@@ -166,5 +166,12 @@ public class PrerequisiteConfigPojo implements IPrerequisiteConfig {
 	public <E extends IPrerequisiteConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.PrerequisiteConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.PrerequisiteConfigRecord();
+		poop.from(this);
+		return "PrerequisiteConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

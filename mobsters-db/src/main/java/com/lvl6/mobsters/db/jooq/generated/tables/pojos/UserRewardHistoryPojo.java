@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "user_reward_history", schema = "mobsters")
 public class UserRewardHistoryPojo implements IUserRewardHistory {
 
-	private static final long serialVersionUID = 1707829157;
+	private static final long serialVersionUID = 1640692327;
 
 	private String    id;
 	private String    userId;
@@ -170,5 +170,12 @@ public class UserRewardHistoryPojo implements IUserRewardHistory {
 	public <E extends IUserRewardHistory> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.UserRewardHistoryRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.UserRewardHistoryRecord();
+		poop.from(this);
+		return "UserRewardHistoryPojo[" + poop.valuesRow() + "]";
 	}
 }

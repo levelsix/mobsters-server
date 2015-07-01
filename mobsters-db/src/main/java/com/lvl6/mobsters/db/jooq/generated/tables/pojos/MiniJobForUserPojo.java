@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class MiniJobForUserPojo implements IMiniJobForUser {
 
-	private static final long serialVersionUID = -1160306017;
+	private static final long serialVersionUID = 1482396727;
 
 	private String    id;
 	private String    userId;
@@ -222,5 +222,12 @@ public class MiniJobForUserPojo implements IMiniJobForUser {
 	public <E extends IMiniJobForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MiniJobForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MiniJobForUserRecord();
+		poop.from(this);
+		return "MiniJobForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

@@ -143,7 +143,7 @@ public class RequestJoinClanController extends EventController {
 
 	@Autowired
 	protected ServerToggleRetrieveUtils toggle;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
@@ -165,6 +165,7 @@ public class RequestJoinClanController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RequestJoinClanRequestProto reqProto = ((RequestJoinClanRequestEvent) event)
 				.getRequestJoinClanRequestProto();
+		log.info("reqProto : {}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String clanId = reqProto.getClanUuid();
@@ -184,7 +185,7 @@ public class RequestJoinClanController extends EventController {
 		resBuilder.setSender(senderProto);
 		resBuilder.setClanUuid(clanId);
 		resBuilder.setClientTime(clientTime.getTime());
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -195,7 +196,7 @@ public class RequestJoinClanController extends EventController {
 			return;
 		}
 
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) >
 				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
@@ -205,7 +206,7 @@ public class RequestJoinClanController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
+
 		UUID clanUuid = null;
 		boolean invalidUuids = true;
 		try {
@@ -230,10 +231,10 @@ public class RequestJoinClanController extends EventController {
 		}
 
 		boolean lockedClan = false;
-		if (clanUuid != null) {
-			lockedClan = getLocker().lockClan(clanUuid);
-		}
 		try {
+			if (clanUuid != null) {
+				lockedClan = locker.lockClan(clanUuid);
+			}
 			RequestJoinClanAction rjca = new RequestJoinClanAction(userId, clanId,
 					clientTime, lockedClan, userRetrieveUtil, insertUtil, deleteUtil,
 					clanRetrieveUtils, userClanRetrieveUtils);
@@ -337,7 +338,7 @@ public class RequestJoinClanController extends EventController {
 			}
 		} finally {
 			if (clanUuid != null && lockedClan) {
-				getLocker().unlockClan(clanUuid);
+				locker.unlockClan(clanUuid);
 			}
 		}
 	}

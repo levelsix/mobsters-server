@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 })
 public class MonsterSnapshotForUserPojo implements IMonsterSnapshotForUser {
 
-	private static final long serialVersionUID = 1421402724;
+	private static final long serialVersionUID = -73880390;
 
 	private String  id;
 	private String  timeOfEntry;
@@ -292,5 +292,12 @@ public class MonsterSnapshotForUserPojo implements IMonsterSnapshotForUser {
 	public <E extends IMonsterSnapshotForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.MonsterSnapshotForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.MonsterSnapshotForUserRecord();
+		poop.from(this);
+		return "MonsterSnapshotForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

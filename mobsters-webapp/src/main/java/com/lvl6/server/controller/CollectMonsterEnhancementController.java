@@ -51,7 +51,7 @@ public class CollectMonsterEnhancementController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -68,7 +68,7 @@ public class CollectMonsterEnhancementController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public CollectMonsterEnhancementController() {
-		
+
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class CollectMonsterEnhancementController extends EventController {
 		CollectMonsterEnhancementRequestProto reqProto = ((CollectMonsterEnhancementRequestEvent) event)
 				.getCollectMonsterEnhancementRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -154,8 +154,10 @@ public class CollectMonsterEnhancementController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			List<String> userMonsterIds = new ArrayList<String>();
 			if (null != umcep && !userMonsterIdsThatFinished.isEmpty()) {
 				userMonsterIds.add(umcep.getUserMonsterUuid()); //monster being enhanced
@@ -229,7 +231,9 @@ public class CollectMonsterEnhancementController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -239,7 +243,7 @@ public class CollectMonsterEnhancementController extends EventController {
 	 *
 	 * True if monster being enhanced has completed enhancing and all the
 	 * monsters involved in enhancing is accounted for by what client sent
-	 * 
+	 *
 	 * @param resBuilder
 	 * @param u
 	 * @param userId

@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "booster_display_item_config", schema = "mobsters")
 public class BoosterDisplayItemConfigPojo implements IBoosterDisplayItemConfig {
 
-	private static final long serialVersionUID = -584157935;
+	private static final long serialVersionUID = 995296990;
 
 	private Integer id;
 	private Integer boosterPackId;
@@ -233,5 +233,12 @@ public class BoosterDisplayItemConfigPojo implements IBoosterDisplayItemConfig {
 	public <E extends IBoosterDisplayItemConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.BoosterDisplayItemConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.BoosterDisplayItemConfigRecord();
+		poop.from(this);
+		return "BoosterDisplayItemConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

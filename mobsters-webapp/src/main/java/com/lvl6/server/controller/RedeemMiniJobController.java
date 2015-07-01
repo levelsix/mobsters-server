@@ -108,7 +108,7 @@ public class RedeemMiniJobController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
@@ -131,7 +131,7 @@ public class RedeemMiniJobController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		RedeemMiniJobRequestProto reqProto = ((RedeemMiniJobRequestEvent) event)
 				.getRedeemMiniJobRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
 				.getSender();
@@ -149,7 +149,7 @@ public class RedeemMiniJobController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -159,12 +159,12 @@ public class RedeemMiniJobController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			RedeemMiniJobResponseEvent resEvent = 
+			RedeemMiniJobResponseEvent resEvent =
 					new RedeemMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -197,8 +197,9 @@ public class RedeemMiniJobController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			RedeemMiniJobAction rmja = new RedeemMiniJobAction(userId, userMiniJobId, clientTime,
 					giftRetrieveUtil, giftRewardRetrieveUtils, userClanRetrieveUtils,
 					userRetrieveUtils, itemForUserRetrieveUtil,
@@ -252,7 +253,9 @@ public class RedeemMiniJobController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

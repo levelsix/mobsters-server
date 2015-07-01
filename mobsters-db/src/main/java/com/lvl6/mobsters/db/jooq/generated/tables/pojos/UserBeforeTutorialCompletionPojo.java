@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "user_before_tutorial_completion", schema = "mobsters")
 public class UserBeforeTutorialCompletionPojo implements IUserBeforeTutorialCompletion {
 
-	private static final long serialVersionUID = 1915409714;
+	private static final long serialVersionUID = -2016051462;
 
 	private String    id;
 	private String    openUdid;
@@ -171,5 +171,12 @@ public class UserBeforeTutorialCompletionPojo implements IUserBeforeTutorialComp
 	public <E extends IUserBeforeTutorialCompletion> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.UserBeforeTutorialCompletionRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.UserBeforeTutorialCompletionRecord();
+		poop.from(this);
+		return "UserBeforeTutorialCompletionPojo[" + poop.valuesRow() + "]";
 	}
 }

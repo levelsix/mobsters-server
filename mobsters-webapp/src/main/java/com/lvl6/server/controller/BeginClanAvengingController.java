@@ -73,7 +73,7 @@ public class BeginClanAvengingController extends EventController {
 		BeginClanAvengingRequestProto reqProto = ((BeginClanAvengingRequestEvent) event)
 				.getBeginClanAvengingRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -157,8 +157,10 @@ public class BeginClanAvengingController extends EventController {
 		}
 
 		//		boolean lockedClan = getLocker().lockClan(clanUuid);
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			List<ClanAvenge> caList = clanStuffUtils.javafyPvpHistoryProto(
 					userId, clanId, recentNBattles, clientTime);
 			Map<String, MinimumUserProto> attackerMupMap = clanStuffUtils
@@ -213,7 +215,9 @@ public class BeginClanAvengingController extends EventController {
 			//			if (null != clanUuid && lockedClan) {
 			//				getLocker().unlockClan(clanUuid);
 			//			}
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

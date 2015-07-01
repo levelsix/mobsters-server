@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "event_persistent_config", schema = "mobsters")
 public class EventPersistentConfigPojo implements IEventPersistentConfig {
 
-	private static final long serialVersionUID = 879415195;
+	private static final long serialVersionUID = -838848984;
 
 	private Integer id;
 	private String  dayOfWeek;
@@ -201,5 +201,12 @@ public class EventPersistentConfigPojo implements IEventPersistentConfig {
 	public <E extends IEventPersistentConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.EventPersistentConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.EventPersistentConfigRecord();
+		poop.from(this);
+		return "EventPersistentConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

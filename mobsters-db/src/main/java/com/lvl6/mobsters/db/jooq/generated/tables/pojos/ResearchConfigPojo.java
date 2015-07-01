@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "research_config", schema = "mobsters")
 public class ResearchConfigPojo implements IResearchConfig {
 
-	private static final long serialVersionUID = -1644591440;
+	private static final long serialVersionUID = -683102155;
 
 	private Integer id;
 	private String  researchType;
@@ -323,5 +323,12 @@ public class ResearchConfigPojo implements IResearchConfig {
 	public <E extends IResearchConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.ResearchConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.ResearchConfigRecord();
+		poop.from(this);
+		return "ResearchConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "static_level_info_config", schema = "mobsters")
 public class StaticLevelInfoConfigPojo implements IStaticLevelInfoConfig {
 
-	private static final long serialVersionUID = -341689643;
+	private static final long serialVersionUID = -400921925;
 
 	private Integer levelId;
 	private Integer requiredExperience;
@@ -96,5 +96,12 @@ public class StaticLevelInfoConfigPojo implements IStaticLevelInfoConfig {
 	public <E extends IStaticLevelInfoConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StaticLevelInfoConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StaticLevelInfoConfigRecord();
+		poop.from(this);
+		return "StaticLevelInfoConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

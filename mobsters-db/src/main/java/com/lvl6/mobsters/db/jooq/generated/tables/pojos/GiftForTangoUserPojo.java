@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "gift_for_tango_user", schema = "mobsters")
 public class GiftForTangoUserPojo implements IGiftForTangoUser {
 
-	private static final long serialVersionUID = 1473853880;
+	private static final long serialVersionUID = 191523499;
 
 	private String giftForUserId;
 	private String gifterTangoName;
@@ -98,5 +98,12 @@ public class GiftForTangoUserPojo implements IGiftForTangoUser {
 	public <E extends IGiftForTangoUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.GiftForTangoUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.GiftForTangoUserRecord();
+		poop.from(this);
+		return "GiftForTangoUserPojo[" + poop.valuesRow() + "]";
 	}
 }

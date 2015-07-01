@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "user_banned", schema = "mobsters")
 public class UserBannedPojo implements IUserBanned {
 
-	private static final long serialVersionUID = 1287357531;
+	private static final long serialVersionUID = -1284174346;
 
 	private String userId;
 
@@ -80,5 +80,12 @@ public class UserBannedPojo implements IUserBanned {
 	public <E extends IUserBanned> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.UserBannedRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.UserBannedRecord();
+		poop.from(this);
+		return "UserBannedPojo[" + poop.valuesRow() + "]";
 	}
 }

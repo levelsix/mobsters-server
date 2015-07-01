@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "user_currency_history", schema = "mobsters")
 public class UserCurrencyHistoryPojo implements IUserCurrencyHistory {
 
-	private static final long serialVersionUID = -789098445;
+	private static final long serialVersionUID = 56037860;
 
 	private String    id;
 	private String    userId;
@@ -43,6 +43,7 @@ public class UserCurrencyHistoryPojo implements IUserCurrencyHistory {
 	private Integer   currencyAfterChange;
 	private String    reasonForChange;
 	private String    details;
+	private Timestamp timeOfEntry;
 
 	public UserCurrencyHistoryPojo() {}
 
@@ -56,6 +57,7 @@ public class UserCurrencyHistoryPojo implements IUserCurrencyHistory {
 		this.currencyAfterChange = value.currencyAfterChange;
 		this.reasonForChange = value.reasonForChange;
 		this.details = value.details;
+		this.timeOfEntry = value.timeOfEntry;
 	}
 
 	public UserCurrencyHistoryPojo(
@@ -67,7 +69,8 @@ public class UserCurrencyHistoryPojo implements IUserCurrencyHistory {
 		Integer   currencyBeforeChange,
 		Integer   currencyAfterChange,
 		String    reasonForChange,
-		String    details
+		String    details,
+		Timestamp timeOfEntry
 	) {
 		this.id = id;
 		this.userId = userId;
@@ -78,6 +81,7 @@ public class UserCurrencyHistoryPojo implements IUserCurrencyHistory {
 		this.currencyAfterChange = currencyAfterChange;
 		this.reasonForChange = reasonForChange;
 		this.details = details;
+		this.timeOfEntry = timeOfEntry;
 	}
 
 	@Id
@@ -195,6 +199,18 @@ public class UserCurrencyHistoryPojo implements IUserCurrencyHistory {
 		return this;
 	}
 
+	@Column(name = "time_of_entry")
+	@Override
+	public Timestamp getTimeOfEntry() {
+		return this.timeOfEntry;
+	}
+
+	@Override
+	public UserCurrencyHistoryPojo setTimeOfEntry(Timestamp timeOfEntry) {
+		this.timeOfEntry = timeOfEntry;
+		return this;
+	}
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -213,6 +229,7 @@ public class UserCurrencyHistoryPojo implements IUserCurrencyHistory {
 		setCurrencyAfterChange(from.getCurrencyAfterChange());
 		setReasonForChange(from.getReasonForChange());
 		setDetails(from.getDetails());
+		setTimeOfEntry(from.getTimeOfEntry());
 	}
 
 	/**
@@ -222,5 +239,12 @@ public class UserCurrencyHistoryPojo implements IUserCurrencyHistory {
 	public <E extends IUserCurrencyHistory> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.UserCurrencyHistoryRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.UserCurrencyHistoryRecord();
+		poop.from(this);
+		return "UserCurrencyHistoryPojo[" + poop.valuesRow() + "]";
 	}
 }

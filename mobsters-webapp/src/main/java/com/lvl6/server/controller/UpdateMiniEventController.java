@@ -12,9 +12,8 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateMiniEventRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.UpdateMiniEventResponseEvent;
-import com.lvl6.info.MiniEventGoalForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventGoalForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventRequestProto;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventResponseProto;
@@ -36,9 +35,9 @@ public class UpdateMiniEventController extends EventController {
 	private static Logger log = LoggerFactory.getLogger(UpdateMiniEventController.class);
 
 	public UpdateMiniEventController() {
-		
+
 	}
-	
+
 	@Autowired
 	protected Locker locker;
 
@@ -47,10 +46,10 @@ public class UpdateMiniEventController extends EventController {
 
 	@Autowired
 	protected MiniEventGoalRetrieveUtils miniEventGoalRetrieveUtils;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
-	
+
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new UpdateMiniEventRequestEvent();
@@ -71,14 +70,14 @@ public class UpdateMiniEventController extends EventController {
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		List<UserMiniEventGoalProto> umegpList = reqProto.getUpdatedGoalsList();
-		
+
 		Date clientTime = new Date(reqProto.getClientTime());
 
 		UpdateMiniEventResponseProto.Builder resBuilder = UpdateMiniEventResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -88,8 +87,8 @@ public class UpdateMiniEventController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
@@ -100,9 +99,10 @@ public class UpdateMiniEventController extends EventController {
 			return;
 		}
 
+		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
-			UUID.fromString(userId);
+			userUuid = UUID.fromString(userId);
 
 			for (UserMiniEventGoalProto umegp : umegpList) {
 				UUID.fromString(umegp.getUserUuid());
@@ -127,9 +127,11 @@ public class UpdateMiniEventController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
-			List<MiniEventGoalForUser> megfuList = javafyUserMiniEventProto(umegpList);
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
+			List<MiniEventGoalForUserPojo> megfuList = javafyUserMiniEventProto(umegpList);
 
 			UpdateMiniEventAction rmea = new UpdateMiniEventAction(
 					userId, megfuList, insertUtil, miniEventGoalRetrieveUtils);
@@ -160,19 +162,22 @@ public class UpdateMiniEventController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
-	private List<MiniEventGoalForUser> javafyUserMiniEventProto(
+	private List<MiniEventGoalForUserPojo> javafyUserMiniEventProto(
 			List<UserMiniEventGoalProto> umegpList)
 	{
-		List<MiniEventGoalForUser> megfuList = new ArrayList<MiniEventGoalForUser>();
+		List<MiniEventGoalForUserPojo> megfuList = new ArrayList<MiniEventGoalForUserPojo>();
 
 		for (UserMiniEventGoalProto umegp : umegpList) {
 
-			MiniEventGoalForUser megfu = new MiniEventGoalForUser();
+			MiniEventGoalForUserPojo megfu = new MiniEventGoalForUserPojo();
 			megfu.setUserId(umegp.getUserUuid());
+			megfu.setMiniEventTimetableId(umegp.getMiniEventTimetableId());
 			megfu.setMiniEventGoalId(umegp.getMiniEventGoalId());
 			megfu.setProgress(umegp.getProgress());
 

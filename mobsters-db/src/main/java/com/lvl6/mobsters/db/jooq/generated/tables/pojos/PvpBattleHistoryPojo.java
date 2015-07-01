@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class PvpBattleHistoryPojo implements IPvpBattleHistory {
 
-	private static final long serialVersionUID = 1389305326;
+	private static final long serialVersionUID = -935282548;
 
 	private String    attackerId;
 	private String    defenderId;
@@ -631,5 +631,12 @@ public class PvpBattleHistoryPojo implements IPvpBattleHistory {
 	public <E extends IPvpBattleHistory> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.PvpBattleHistoryRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.PvpBattleHistoryRecord();
+		poop.from(this);
+		return "PvpBattleHistoryPojo[" + poop.valuesRow() + "]";
 	}
 }

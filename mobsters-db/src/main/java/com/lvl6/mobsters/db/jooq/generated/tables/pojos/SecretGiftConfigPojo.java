@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "secret_gift_config", schema = "mobsters")
 public class SecretGiftConfigPojo implements ISecretGiftConfig {
 
-	private static final long serialVersionUID = 1859564269;
+	private static final long serialVersionUID = -1085865763;
 
 	private Integer id;
 	private Integer rewardId;
@@ -112,5 +112,12 @@ public class SecretGiftConfigPojo implements ISecretGiftConfig {
 	public <E extends ISecretGiftConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.SecretGiftConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.SecretGiftConfigRecord();
+		poop.from(this);
+		return "SecretGiftConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

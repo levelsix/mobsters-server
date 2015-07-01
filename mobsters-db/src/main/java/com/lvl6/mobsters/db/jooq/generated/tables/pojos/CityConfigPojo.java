@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "city_config", schema = "mobsters")
 public class CityConfigPojo implements ICityConfig {
 
-	private static final long serialVersionUID = 749425182;
+	private static final long serialVersionUID = -439054377;
 
 	private Integer id;
 	private String  name;
@@ -241,5 +241,12 @@ public class CityConfigPojo implements ICityConfig {
 	public <E extends ICityConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.CityConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.CityConfigRecord();
+		poop.from(this);
+		return "CityConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

@@ -69,14 +69,28 @@ s"""
     sb.append(nl).append("""</beans>""")
   }*/
   
-//  override def generatePojoClassFooter(table:TableDefinition, out:JavaWriter)={
-//      super.generatePojoClassFooter(table, out)
-//      
-//      out.println();
-//      out.tab(1).println()
-//      out.tab(1).println("public String toString() {");
-//      out.tab(2).println("return \"MyRecord[\" + valuesRow() + \"]\"");
-//      out.tab(1).println(";}");
-//  }
+  override def generatePojoClassFooter(table:TableDefinition, out:JavaWriter)={
+      super.generatePojoClassFooter(table, out)
+      
+      val recordClassName = getStrategy().getFullJavaClassName(table, Mode.RECORD);
+      val pojoClassName = getStrategy().getJavaClassName(table, Mode.POJO);
+      
+      val toStringHelperName = "poop"
+      
+      var sb = new StringBuilder()
+      sb.append("return \"")
+      sb.append(pojoClassName)
+      sb.append("[\" + ")
+      sb.append(toStringHelperName)
+      sb.append(".valuesRow() + \"]\";")
+      
+      out.println();
+      out.tab(1).println()
+      out.tab(1).println("public String toString() {");
+      out.tab(2).println(s"$recordClassName $toStringHelperName = new $recordClassName();");
+      out.tab(2).println(s"$toStringHelperName.from(this);")
+      out.tab(2).println(sb.toString());
+      out.tab(1).println("}");
+  }
 
 }

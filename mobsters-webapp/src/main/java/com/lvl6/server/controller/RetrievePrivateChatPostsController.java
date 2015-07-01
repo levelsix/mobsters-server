@@ -90,7 +90,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 		RetrievePrivateChatPostsRequestProto reqProto = ((RetrievePrivateChatPostsRequestEvent) event)
 				.getRetrievePrivateChatPostsRequestProto();
 
-		log.info(""+ reqProto);
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -202,7 +202,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 							if(translateLanguage != null && !translateLanguage.equals(TranslateLanguages.NO_TRANSLATION)) {
 								chatIdsToTranslations =
 										chatTranslationsRetrieveUtils.getChatTranslationsForSpecificChatIds(chatIds);
-								log.info("{}", chatIdsToTranslations);
+								log.debug("{}", chatIdsToTranslations);
 
 								for(String chatId : chatIdsToTranslations.keySet()) {
 									if(!returnMap.containsKey(chatId)) {
@@ -282,7 +282,7 @@ public class RetrievePrivateChatPostsController extends EventController {
 							if(textArray.length != 0) {
 								String[] translatedTextArray = translationUtils.translateInBulk(textArray,
 										translationUtils.convertFromEnumToLanguage(translateLanguage), toggle);
-								
+
 								//add results to returnMap
 								if (translatedTextArray != null) {
 									for(int i=0; i<chatIdsArray.length; i++) {

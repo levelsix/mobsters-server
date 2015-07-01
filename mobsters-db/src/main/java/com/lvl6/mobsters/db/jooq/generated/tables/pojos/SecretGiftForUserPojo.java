@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 })
 public class SecretGiftForUserPojo implements ISecretGiftForUser {
 
-	private static final long serialVersionUID = -1399247570;
+	private static final long serialVersionUID = -1734588322;
 
 	private String    id;
 	private String    userId;
@@ -154,5 +154,12 @@ public class SecretGiftForUserPojo implements ISecretGiftForUser {
 	public <E extends ISecretGiftForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.SecretGiftForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.SecretGiftForUserRecord();
+		poop.from(this);
+		return "SecretGiftForUserPojo[" + poop.valuesRow() + "]";
 	}
 }

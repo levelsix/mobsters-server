@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "structure_evo_chamber_config", schema = "mobsters")
 public class StructureEvoChamberConfigPojo implements IStructureEvoChamberConfig {
 
-	private static final long serialVersionUID = -544325333;
+	private static final long serialVersionUID = -1486293026;
 
 	private Integer structId;
 	private String  qualityUnlocked;
@@ -114,5 +114,12 @@ public class StructureEvoChamberConfigPojo implements IStructureEvoChamberConfig
 	public <E extends IStructureEvoChamberConfig> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.StructureEvoChamberConfigRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.StructureEvoChamberConfigRecord();
+		poop.from(this);
+		return "StructureEvoChamberConfigPojo[" + poop.valuesRow() + "]";
 	}
 }

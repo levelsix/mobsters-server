@@ -121,4 +121,11 @@ public class UserCurrencyHistoryDao extends DAOImpl<UserCurrencyHistoryRecord, U
 	public List<UserCurrencyHistoryPojo> fetchByDetails(String... values) {
 		return fetch(UserCurrencyHistory.USER_CURRENCY_HISTORY.DETAILS, values);
 	}
+
+	/**
+	 * Fetch records that have <code>time_of_entry IN (values)</code>
+	 */
+	public List<UserCurrencyHistoryPojo> fetchByTimeOfEntry(Timestamp... values) {
+		return fetch(UserCurrencyHistory.USER_CURRENCY_HISTORY.TIME_OF_ENTRY, values);
+	}
 }

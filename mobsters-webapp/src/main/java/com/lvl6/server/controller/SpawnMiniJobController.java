@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SpawnMiniJobRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.SpawnMiniJobResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MiniJob;
@@ -33,6 +32,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.MiniJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -61,15 +61,15 @@ public class SpawnMiniJobController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
-	//	@Autowired
-	//	protected Locker locker;
+	@Autowired
+	protected Locker locker;
 
 	public SpawnMiniJobController() {
-		
+
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class SpawnMiniJobController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SpawnMiniJobRequestProto reqProto = ((SpawnMiniJobRequestEvent) event)
 				.getSpawnMiniJobRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -100,7 +100,7 @@ public class SpawnMiniJobController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -110,12 +110,12 @@ public class SpawnMiniJobController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			SpawnMiniJobResponseEvent resEvent = 
+			SpawnMiniJobResponseEvent resEvent =
 					new SpawnMiniJobResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -146,9 +146,9 @@ public class SpawnMiniJobController extends EventController {
 			return;
 		}
 
-		//TODO: figure out if locking is needed
-		//		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			User user = getUserRetrieveUtils().getUserById(userId);
 			Map<Integer, MiniJob> miniJobIdToMiniJob = miniJobRetrieveUtils
 					.getMiniJobForStructId(structId);
@@ -207,9 +207,11 @@ public class SpawnMiniJobController extends EventController {
 			} catch (Exception e2) {
 				log.error("exception2 in SpawnMiniJobController processEvent",
 						e);
+			} finally {
+				if (gotLock) {
+					locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+				}
 			}
-			//		} finally {
-			//			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 		}
 	}
 

@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "gift_for_user", schema = "mobsters")
 public class GiftForUserPojo implements IGiftForUser {
 
-	private static final long serialVersionUID = 673574216;
+	private static final long serialVersionUID = -2079699480;
 
 	private String    id;
 	private String    gifterUserId;
@@ -221,5 +221,12 @@ public class GiftForUserPojo implements IGiftForUser {
 	public <E extends IGiftForUser> E into(E into) {
 		into.from(this);
 		return into;
+	}
+
+
+	public String toString() {
+		com.lvl6.mobsters.db.jooq.generated.tables.records.GiftForUserRecord poop = new com.lvl6.mobsters.db.jooq.generated.tables.records.GiftForUserRecord();
+		poop.from(this);
+		return "GiftForUserPojo[" + poop.valuesRow() + "]";
 	}
 }
