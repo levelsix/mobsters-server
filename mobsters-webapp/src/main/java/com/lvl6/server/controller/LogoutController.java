@@ -118,18 +118,6 @@ public class LogoutController extends EventController {
 						log.error("problem with updating user's last logout time for user "
 								+ userId);
 					}
-					if (!InsertUtils.get()
-							.insertLastLoginLastLogoutToUserSessions(
-									user.getId(), null, lastLogout)) {
-						log.error("problem with inserting last logout time for user "
-								+ user + ", logout=" + lastLogout);
-					}
-					String udid = user.getUdid();
-					boolean isLogin = false;
-					boolean isNewUser = false;
-					InsertUtils.get().insertIntoLoginHistory(udid, userId,
-							lastLogout, isLogin, isNewUser);
-
 					//put this user back into pool of people who can be attacked,
 					//don't really need to, since will most likely still be there. eh might as well
 					//			    int elo = user.getElo();

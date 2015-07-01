@@ -99,9 +99,6 @@ public interface InsertUtil {
 	//	public abstract boolean insertMarketplaceItemIntoHistory(
 	//			MarketplacePost mp, int buyerId, boolean sellerHasLicense, Timestamp timeOfPurchase);
 
-	public abstract boolean insertReferral(int referrerId, int referredId,
-			int coinsGivenToReferrer);
-
 	// returns -1 if error
 	public abstract String insertUser(String name, String udid, int level,
 			int experience, int cash, int oil, int gems, boolean isFake,
@@ -111,9 +108,6 @@ public interface InsertUtil {
 	public abstract int insertPvpLeagueForUser(String userId, int pvpLeagueId,
 			int rank, int elo, Timestamp shieldEndTime,
 			Timestamp inBattleShieldEndTime);
-
-	public abstract boolean insertLastLoginLastLogoutToUserSessions(
-			String userId, Timestamp loginTime, Timestamp logoutTime);
 
 	//	public abstract boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge);
 
@@ -147,12 +141,6 @@ public interface InsertUtil {
 			List<String> resourceTypes, List<Integer> currenciesChange,
 			List<Integer> currenciesBefore, List<Integer> currentCurrencies,
 			List<String> reasonsForChanges, List<String> details);
-
-	public abstract int insertIntoLoginHistory(String udid, String userId,
-			Timestamp now, boolean isLogin, boolean goingThroughTutorial);
-
-	public abstract int insertIntoFirstTimeUsers(String openUdid, String udid,
-			String mac, String advertiserId, Timestamp now);
 
 //	public abstract int insertIntoBoosterPackPurchaseHistory(String userId,
 //			int boosterPackId, Timestamp timeOfPurchase, BoosterItem bi,
