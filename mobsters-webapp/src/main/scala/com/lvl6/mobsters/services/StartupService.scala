@@ -79,13 +79,11 @@ import com.lvl6.retrieveutils.ClanHelpRetrieveUtil
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil
 import com.lvl6.retrieveutils.ClanRetrieveUtils2
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils2
-import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils
 import com.lvl6.retrieveutils.GiftForTangoUserRetrieveUtil
 import com.lvl6.retrieveutils.GiftForUserRetrieveUtils
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil
 import com.lvl6.retrieveutils.ItemForUserUsageRetrieveUtil
-import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils
 import com.lvl6.retrieveutils.MiniEventForUserRetrieveUtil
 import com.lvl6.retrieveutils.MiniEventGoalForUserRetrieveUtil
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil
@@ -325,7 +323,6 @@ class StartupService extends LazyLogging {
         logger.info(s"tutorial player with udid=$udid");
         goingThroughTutorial = true;
         userIdSet = false;
-        tutorialUserAccounting(reqProto, udid, now);
         val sd = StartupData(resBuilder, udid, fbId, playerId, now, nowDate, isLogin, goingThroughTutorial, userIdSet, startupStatus, resEvent, user, apsalarId, newNumConsecutiveDaysLoggedIn, freshRestart)
         finishStartup(sd, responses)
       }
@@ -348,10 +345,6 @@ class StartupService extends LazyLogging {
     logger.debug(s"Writing event response: $resEvent")
     //server.writePreDBEvent(resEvent, sd.udid);
     responses.preDBResponseEvents.add(PreDBResponseEvent(resEvent, sd.udid))
-    timed("StartupService.startupFinished") {
-      insertUtil.insertIntoLoginHistory(sd.udid, sd.playerId, sd.now, sd.isLogin, sd.goingThroughTutorial);
-      updateLeaderboard(sd.apsalarId, sd.user, sd.now, sd.newNumConsecutiveDaysLoggedIn);
-    }
   }
 
   def getUpdateStatus(version: VersionNumberProto, clientVersionNum: Float): UpdateStatus = {
@@ -419,32 +412,6 @@ class StartupService extends LazyLogging {
     }
     //didn't find user with specified fbId
     return udidUser;
-  }
-
-  def tutorialUserAccounting(reqProto: StartupRequestProto, udid: String, now: Timestamp) = {
-    timed("StartupService.tutorialUserAccounting") {
-      val userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
-      val numOldAccounts = userRetrieveUtils.numAccountsForUDID(udid);
-      val alreadyInFirstTimeUsers = FirstTimeUsersRetrieveUtils.userExistsWithUDID(udid);
-      var isFirstTimeUser = false;
-      if (!userLoggedIn && 0 >= numOldAccounts && !alreadyInFirstTimeUsers) {
-        isFirstTimeUser = true;
-      }
-
-      logger.info("\n userLoggedIn=" + userLoggedIn + "\t numOldAccounts="
-        + numOldAccounts + "\t alreadyInFirstTimeUsers="
-        + alreadyInFirstTimeUsers + "\t isFirstTimeUser="
-        + isFirstTimeUser);
-
-      if (isFirstTimeUser) {
-        logger.info(s"new player with udid $udid");
-        insertUtil.insertIntoFirstTimeUsers(udid, null, reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
-      }
-
-      if (Globals.OFFERCHART_ENABLED() && isFirstTimeUser) {
-        sendOfferChartInstall(now, reqProto.getAdvertiserId());
-      }
-    }
   }
 
   def loginExistingUser(sd: StartupData, responses: ToClientEvents) = {
@@ -1455,73 +1422,6 @@ class StartupService extends LazyLogging {
     }
   }
 
-  def sendOfferChartInstall(installTime: Date, advertiserId: String): Future[Unit] = {
-    Future {
-      val clientId = "15";
-      val appId = "648221050";
-      val geo = "N/A";
-      val installTimeStr = "" + installTime.getTime();
-      val devicePlatform = "iphone";
-      val deviceType = "iphone";
-
-      var urlString = new StringBuilder()
-        .append("http://offerchart.com/mobileapp/api/send_install_ping?")
-        .append("client_id=")
-        .append(clientId)
-        .append("&app_id=")
-        .append(appId)
-        .append("&device_id=")
-        .append(advertiserId)
-        .append("&device_type=")
-        .append(deviceType)
-        .append("&geo=")
-        .append(geo)
-        .append("&install_time=")
-        .append(installTimeStr)
-        .append("&device_platform=")
-        .append(devicePlatform)
-        .toString();
-
-      logger.info(s"Sending offerchart request:\n $urlString");
-      val httpclient = new DefaultHttpClient();
-      val httpGet = new HttpGet(urlString);
-
-      try {
-        val response1 = httpclient.execute(httpGet);
-        val rd = new BufferedReader(new InputStreamReader(response1.getEntity().getContent()));
-        var responseString = Stream.continually(rd.readLine()).takeWhile(_ != null).mkString("\n")
-        logger.info(s"Received response: $responseString");
-      } catch {
-        case t: Throwable => logger.error("failed to make offer chart call", t);
-      }
-    }
-  }
-
-  def syncApsalaridLastloginConsecutivedaysloggedinResetBadges(
-    user: User,
-    apsalarID: String,
-    loginTime: Timestamp,
-    newNumConsecutiveDaysLoggedIn: Int) {
-    var apsalarId: String = null
-    if (user.getApsalarId() != null && apsalarID == null) {
-      apsalarId = user.getApsalarId();
-    } else {
-      apsalarId = apsalarID
-    }
-    if (!user.updateAbsoluteApsalaridLastloginBadgesNumConsecutiveDaysLoggedIn(
-      apsalarId, loginTime, 0, newNumConsecutiveDaysLoggedIn)) {
-      logger.error("problem with updating apsalar id to " + apsalarId
-        + ", last login to " + loginTime
-        + ", and badge count to 0 for " + user
-        + " and newNumConsecutiveDaysLoggedIn is "
-        + newNumConsecutiveDaysLoggedIn);
-    }
-    if (!insertUtil.insertLastLoginLastLogoutToUserSessions(user.getId(), loginTime, null)) {
-      logger.error("problem with inserting last login time for user " + user
-        + ", loginTime=" + loginTime);
-    }
-  }
-
   def setConstants(startupBuilder: Builder, startupStatus: StartupStatus) = {
     startupBuilder.setStartupConstants(miscMethods.createStartupConstantsProto(globals));
     if (startupStatus == StartupStatus.USER_NOT_IN_DB) {
@@ -1530,11 +1430,4 @@ class StartupService extends LazyLogging {
     }
   }
 
-  def updateLeaderboard(apsalarId: String, user: User, now: Timestamp, newNumConsecutiveDaysLoggedIn: Int) = {
-    if (user != null) {
-      val userId = user.getId()
-      logger.info(s"Updating leaderboard for user $userId");
-      syncApsalaridLastloginConsecutivedaysloggedinResetBadges(user, apsalarId, now, newNumConsecutiveDaysLoggedIn)
-    }
-  }
 }

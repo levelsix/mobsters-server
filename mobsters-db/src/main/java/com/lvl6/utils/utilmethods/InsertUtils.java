@@ -129,22 +129,6 @@ public class InsertUtils implements InsertUtil {
 	}
 
 	@Override
-	public boolean insertLastLoginLastLogoutToUserSessions(String userId,
-			Timestamp loginTime, Timestamp logoutTime) {
-		Map<String, Object> insertParams = new HashMap<String, Object>();
-		insertParams.put(DBConstants.USER_SESSIONS__USER_ID, userId);
-		insertParams.put(DBConstants.USER_SESSIONS__LOGIN_TIME, loginTime);
-		insertParams.put(DBConstants.USER_SESSIONS__LOGOUT_TIME, logoutTime);
-
-		int numInserted = DBConnection.get().insertIntoTableBasic(
-				DBConstants.TABLE_USER_SESSION, insertParams);
-		if (numInserted == 1) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
 	public int insertUserQuest(String userId, int questId) {
 		String tablename = DBConstants.TABLE_QUEST_FOR_USER;
 
@@ -362,29 +346,6 @@ public class InsertUtils implements InsertUtil {
 		}
 		int numInserted = DBConnection.get().insertIntoTableBasic(
 				DBConstants.TABLE_IAP_HISTORY, insertParams);
-		if (numInserted == 1) {
-			return true;
-		}
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.InsertUtil#insertReferral(int, int, int)
-	 */
-	@Override
-	public boolean insertReferral(int referrerId, int referredId,
-			int coinsGivenToReferrer) {
-		Map<String, Object> insertParams = new HashMap<String, Object>();
-
-		insertParams.put(DBConstants.REFERRALS__REFERRER_ID, referrerId);
-		insertParams.put(DBConstants.REFERRALS__NEWLY_REFERRED_ID, referredId);
-		insertParams.put(DBConstants.REFERRALS__TIME_OF_REFERRAL,
-				new Timestamp(new Date().getTime()));
-		insertParams.put(DBConstants.REFERRALS__COINS_GIVEN_TO_REFERRER,
-				new Timestamp(new Date().getTime()));
-
-		int numInserted = DBConnection.get().insertIntoTableBasic(
-				DBConstants.TABLE_REFERRAL, insertParams);
 		if (numInserted == 1) {
 			return true;
 		}
@@ -685,57 +646,6 @@ public class InsertUtils implements InsertUtil {
 
 		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
 				tablename, insertParams, numRows);
-
-		return numInserted;
-	}
-
-	@Override
-	public int insertIntoLoginHistory(String udid, String userId,
-			Timestamp now, boolean isLogin, boolean goingThroughTutorial) {
-		String loginId = randomUUID();
-
-		String tableName = DBConstants.TABLE_LOGIN_HISTORY;
-		Map<String, Object> insertParams = new HashMap<String, Object>();
-
-		insertParams.put(DBConstants.LOGIN_HISTORY__ID, loginId);
-		insertParams.put(DBConstants.LOGIN_HISTORY__UDID, udid);
-		//if going through tutorial, no id exists
-		if (!goingThroughTutorial) {
-			insertParams.put(DBConstants.LOGIN_HISTORY__USER_ID, userId);
-		}
-		insertParams.put(DBConstants.LOGIN_HISTORY__DATE, now);
-		insertParams.put(DBConstants.LOGIN_HISTORY__IS_LOGIN, isLogin);
-
-		int numInserted = DBConnection.get().insertIntoTableBasic(tableName,
-				insertParams);
-
-		return numInserted;
-	}
-
-	@Override
-	public int insertIntoFirstTimeUsers(String openUdid, String udid,
-			String mac, String advertiserId, Timestamp now) {
-		String loginId = randomUUID();
-
-		String tableName = DBConstants.TABLE_USER_BEFORE_TUTORIAL_COMPLETION;
-		Map<String, Object> insertParams = new HashMap<String, Object>();
-
-		insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__ID,
-				loginId);
-		insertParams.put(
-				DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__OPEN_UDID,
-				openUdid);
-		insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__UDID,
-				udid);
-		insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__MAC, mac);
-		insertParams.put(
-				DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__ADVERTISER_ID,
-				advertiserId);
-		insertParams.put(
-				DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__CREATE_TIME, now);
-
-		int numInserted = DBConnection.get().insertIntoTableBasic(tableName,
-				insertParams);
 
 		return numInserted;
 	}

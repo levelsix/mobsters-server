@@ -28,35 +28,6 @@ public class DeleteUtils implements DeleteUtil {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.DeleteUtil#deleteAvailableReferralCode(java.lang.String)
-	 */
-	@Override
-	public boolean deleteAvailableReferralCode(String referralCode) {
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.AVAILABLE_REFERRAL_CODES__CODE,
-				referralCode);
-
-		int numDeleted = DBConnection.get().deleteRows(
-				DBConstants.TABLE_REFERRAL_CODE_AVAILABLE_CONFIG,
-				conditionParams, "and");
-		if (numDeleted != 1) {
-			return false;
-		}
-		return true;
-	}
-
-	//  public boolean deleteBlacksmithAttempt(int blacksmithId) {
-	//    Map <String, Object> conditionParams = new HashMap<String, Object>();
-	//    conditionParams.put(DBConstants.MONSTER_EVOLVING__ID, blacksmithId);
-	//
-	//    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER, conditionParams, "and");
-	//    if (numDeleted == 1) {
-	//      return true;
-	//    }
-	//    return false;
-	//  }
-
-	/* (non-Javadoc)
 	 * @see com.lvl6.utils.utilmethods.DeleteUtil#deleteUserStruct(int)
 	 */
 	@Override

@@ -61,7 +61,6 @@ public class DBConstants {
 	public static final String TABLE_LOCK_BOX_EVENT_CONFIG = "lock_box_event_config";			//TODO: delete
 	public static final String TABLE_LOCK_BOX_EVENT_FOR_USER = "lock_box_event_for_user";		//TODO: delete
 	public static final String TABLE_LOCK_BOX_ITEM_CONFIG = "lock_box_item_config";				//TODO: delete
-	public static final String TABLE_LOGIN_HISTORY = "login_history";
 	public static final String TABLE_MINI_EVENT_CONFIG = "mini_event_config";
 	public static final String TABLE_MINI_EVENT_FOR_PLAYER_LVL_CONFIG = "mini_event_for_player_lvl_config";
 	public static final String TABLE_MINI_EVENT_FOR_USER = "mini_event_for_user";
@@ -101,9 +100,6 @@ public class DBConstants {
 	public static final String TABLE_QUEST_JOB_CONFIG = "quest_job_config";
 	public static final String TABLE_QUEST_JOB_FOR_USER = "quest_job_for_user";
 	public static final String TABLE_QUEST_JOB_MONSTER_ITEM_CONFIG = "quest_job_monster_item_config";
-	public static final String TABLE_REFERRAL = "referral";			//TODO: delete
-	public static final String TABLE_REFERRAL_CODE_AVAILABLE_CONFIG = "referral_code_available_config";	//TODO: delete
-	public static final String TABLE_REFERRAL_CODE_GENERATED_CONFIG = "referral_code_generated_config";	//TODO: delete
 	public static final String TABLE_RESEARCH_CONFIG = "research_config";
 	public static final String TABLE_RESEARCH_PROPERTY_CONFIG = "research_property_config";
 	public static final String TABLE_RESEARCH_FOR_USER = "research_for_user";
@@ -151,12 +147,10 @@ public class DBConstants {
 	public static final String TABLE_TRANSLATION_SETTINGS_FOR_USER = "translation_settings_for_user";
 	public static final String TABLE_USER = "user";
 	public static final String TABLE_BANNED_USER = "user_banned";
-	public static final String TABLE_USER_BEFORE_TUTORIAL_COMPLETION = "user_before_tutorial_completion";
 	public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
 	public static final String TABLE_USER_FACEBOOK_INVITE_FOR_SLOT = "user_facebook_invite_for_slot";
 	public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
 	public static final String TABLE_USER_REWARD_HISTORY = "user_reward_history";
-	public static final String TABLE_USER_SESSION = "user_session";
 
 	/*COLUMNNAMES*/
 	public static final String GENERIC__USER_ID = "user_id";
@@ -170,10 +164,6 @@ public class DBConstants {
 	public static final String ACHIEVEMENT_FOR_USER__IS_REDEEMED = "is_redeemed";
 	public static final String ACHIEVEMENT_FOR_USER__TIME_COMPLETED = "time_completed";
 	public static final String ACHIEVEMENT_FOR_USER__TIME_REDEEMED = "time_redeemed";
-
-	/*AVAILABLE REFERRAL CODES*/
-	public static final String AVAILABLE_REFERRAL_CODES__ID = GENERIC__ID;
-	public static final String AVAILABLE_REFERRAL_CODES__CODE = "code";
 
 	/*BATTLE ITEM FOR USER*/
 	public static final String BATTLE_ITEM_FOR_USER__ID = GENERIC__ID;
@@ -449,13 +439,6 @@ public class DBConstants {
 	public static final String LOCK_BOX_EVENT_FOR_USER__NUM_TIMES_COMPLETED = "num_times_completed";
 	public static final String LOCK_BOX_EVENT_FOR_USER__HAS_BEEN_REDEEMED = "has_been_redeemed";
 
-	/*LOGIN HISTORY*/
-	public static final String LOGIN_HISTORY__ID = GENERIC__ID;
-	public static final String LOGIN_HISTORY__UDID = "udid";
-	public static final String LOGIN_HISTORY__USER_ID = GENERIC__USER_ID;
-	public static final String LOGIN_HISTORY__DATE = "date";
-	public static final String LOGIN_HISTORY__IS_LOGIN = "is_login";
-
 	/*MINI EVENT FOR USER*/
 	public static final String MINI_EVENT_FOR_USER__USER_ID = "user_id";
 	public static final String MINI_EVENT_FOR_USER__MINI_EVENT_TIMETABLE_ID = "mini_event_timetable_id";
@@ -683,12 +666,6 @@ public class DBConstants {
 	public static final String QUEST_JOB_FOR_USER__IS_COMPLETE = "is_complete";
 	public static final String QUEST_JOB_FOR_USER__PROGRESS = "progress";
 
-	/*REFERRALS*/
-	public static final String REFERRALS__REFERRER_ID = "referrer_id";
-	public static final String REFERRALS__NEWLY_REFERRED_ID = "newly_referred_id";
-	public static final String REFERRALS__TIME_OF_REFERRAL = "time_of_referral";
-	public static final String REFERRALS__COINS_GIVEN_TO_REFERRER = "coins_given_to_referrer";
-
 	/*RESEARCH FOR USER TABLE*/
 	public static final String RESEARCH_FOR_USER__ID = GENERIC__ID;
 	public static final String RESEARCH_FOR_USER__USER_ID = "user_id";
@@ -869,14 +846,6 @@ public class DBConstants {
 	public static final String USER__LAST_TANGO_GIFT_SENT_TIME = "last_tango_gift_sent_time";
 	public static final String USER__TANGO_ID = "tango_id";
 
-	/* USER BEFORE TUTORIAL COMPLETION*/
-	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
-	public static final String USER_BEFORE_TUTORIAL_COMPLETION__OPEN_UDID = "open_udid";
-	public static final String USER_BEFORE_TUTORIAL_COMPLETION__UDID = "udid";
-	public static final String USER_BEFORE_TUTORIAL_COMPLETION__MAC = "mac";
-	public static final String USER_BEFORE_TUTORIAL_COMPLETION__ADVERTISER_ID = "advertiser_id";
-	public static final String USER_BEFORE_TUTORIAL_COMPLETION__CREATE_TIME = "create_time";
-
 	/*USER CURRENCY HISTORY (FOR GOLD/DIAMONDS AND SILVER/COINS*/
 	public static final String USER_CURRENCY_HISTORY__ID = GENERIC__ID;
 	public static final String USER_CURRENCY_HISTORY__USER_ID = GENERIC__USER_ID;
@@ -913,11 +882,6 @@ public class DBConstants {
 	public static final String USER_REWARD_HISTORY__REWARD_ID = "reward_id";
 	public static final String USER_REWARD_HISTORY__REASON_FOR_REWARD = "reason_for_reward";
 	public static final String USER_REWARD_HISTORY__DETAILS = "details";
-
-	/*USER SESSIONS*/
-	public static final String USER_SESSIONS__USER_ID = GENERIC__USER_ID;
-	public static final String USER_SESSIONS__LOGIN_TIME = "login_time";
-	public static final String USER_SESSIONS__LOGOUT_TIME = "logout_time";
 
 	/************** CONFIGURATION DATA TABLES *****************************/
 

@@ -73,7 +73,6 @@ import com.lvl6.mobsters.db.jooq.generated.tables.LoadTestingEvents;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxItemConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.LoginHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForPlayerLvlConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForUser;
@@ -113,9 +112,6 @@ import com.lvl6.mobsters.db.jooq.generated.tables.QuestForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.QuestJobConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.QuestJobForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.QuestJobMonsterItemConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.Referral;
-import com.lvl6.mobsters.db.jooq.generated.tables.ReferralCodeAvailableConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.ReferralCodeGeneratedConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ResearchConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ResearchForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ResearchPropertyConfig;
@@ -166,14 +162,12 @@ import com.lvl6.mobsters.db.jooq.generated.tables.TournamentRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TranslationSettingsForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserBanned;
-import com.lvl6.mobsters.db.jooq.generated.tables.UserBeforeTutorialCompletion;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossContribution;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossRewardHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserCurrencyHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserFacebookInviteForSlot;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserPrivateChatPost;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserRewardHistory;
-import com.lvl6.mobsters.db.jooq.generated.tables.UserSession;
 
 import javax.annotation.Generated;
 
@@ -537,11 +531,6 @@ public class Tables {
 	public static final LockBoxItemConfig LOCK_BOX_ITEM_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.LockBoxItemConfig.LOCK_BOX_ITEM_CONFIG;
 
 	/**
-	 * The table mobsters.login_history
-	 */
-	public static final LoginHistory LOGIN_HISTORY = com.lvl6.mobsters.db.jooq.generated.tables.LoginHistory.LOGIN_HISTORY;
-
-	/**
 	 * The table mobsters.mini_event_config
 	 */
 	public static final MiniEventConfig MINI_EVENT_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.MiniEventConfig.MINI_EVENT_CONFIG;
@@ -735,21 +724,6 @@ public class Tables {
 	 * The table mobsters.quest_job_monster_item_config
 	 */
 	public static final QuestJobMonsterItemConfig QUEST_JOB_MONSTER_ITEM_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.QuestJobMonsterItemConfig.QUEST_JOB_MONSTER_ITEM_CONFIG;
-
-	/**
-	 * The table mobsters.referral
-	 */
-	public static final Referral REFERRAL = com.lvl6.mobsters.db.jooq.generated.tables.Referral.REFERRAL;
-
-	/**
-	 * The table mobsters.referral_code_available_config
-	 */
-	public static final ReferralCodeAvailableConfig REFERRAL_CODE_AVAILABLE_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.ReferralCodeAvailableConfig.REFERRAL_CODE_AVAILABLE_CONFIG;
-
-	/**
-	 * The table mobsters.referral_code_generated_config
-	 */
-	public static final ReferralCodeGeneratedConfig REFERRAL_CODE_GENERATED_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.ReferralCodeGeneratedConfig.REFERRAL_CODE_GENERATED_CONFIG;
 
 	/**
 	 * The table mobsters.research_config
@@ -1002,11 +976,6 @@ public class Tables {
 	public static final UserBanned USER_BANNED = com.lvl6.mobsters.db.jooq.generated.tables.UserBanned.USER_BANNED;
 
 	/**
-	 * The table mobsters.user_before_tutorial_completion
-	 */
-	public static final UserBeforeTutorialCompletion USER_BEFORE_TUTORIAL_COMPLETION = com.lvl6.mobsters.db.jooq.generated.tables.UserBeforeTutorialCompletion.USER_BEFORE_TUTORIAL_COMPLETION;
-
-	/**
 	 * The table mobsters.user_clan_boss_contribution
 	 */
 	public static final UserClanBossContribution USER_CLAN_BOSS_CONTRIBUTION = com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossContribution.USER_CLAN_BOSS_CONTRIBUTION;
@@ -1035,9 +1004,4 @@ public class Tables {
 	 * The table mobsters.user_reward_history
 	 */
 	public static final UserRewardHistory USER_REWARD_HISTORY = com.lvl6.mobsters.db.jooq.generated.tables.UserRewardHistory.USER_REWARD_HISTORY;
-
-	/**
-	 * The table mobsters.user_session
-	 */
-	public static final UserSession USER_SESSION = com.lvl6.mobsters.db.jooq.generated.tables.UserSession.USER_SESSION;
 }
