@@ -25,7 +25,7 @@ import com.lvl6.utils.TimeUtils;
 @Component
 @DependsOn("gameServer")
 public class SalesScheduleRetrieveUtils {
-	
+
 	@Autowired
 	protected SalesScheduleConfigDao sscDao;
 
@@ -89,11 +89,13 @@ public class SalesScheduleRetrieveUtils {
 		Map<Integer, SalesScheduleConfigPojo> listOfSalesPackageIds = new HashMap<Integer, SalesScheduleConfigPojo>();
 		for(Integer salesScheduleId : salesScheduleIdsToSalesSchedules.keySet()) {
 			SalesScheduleConfigPojo ss = salesScheduleIdsToSalesSchedules.get(salesScheduleId);
-			Date timeStart = new Date(ss.getTimeStart().getTime());
-			Date timeEnd = new Date(ss.getTimeEnd().getTime());
-			if(timeUtils.isFirstEarlierThanSecond(timeStart, now) &&
-                        timeUtils.isFirstEarlierThanSecond(now, timeEnd)) {
-				listOfSalesPackageIds.put(ss.getSalesPackageId(), ss);
+			if(ss.getTimeStart() != null) {
+				Date timeStart = new Date(ss.getTimeStart().getTime());
+				Date timeEnd = new Date(ss.getTimeEnd().getTime());
+				if(timeUtils.isFirstEarlierThanSecond(timeStart, now) &&
+						timeUtils.isFirstEarlierThanSecond(now, timeEnd)) {
+					listOfSalesPackageIds.put(ss.getSalesPackageId(), ss);
+				}	
 			}
 		}
 		return listOfSalesPackageIds;
