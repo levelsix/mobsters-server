@@ -123,5 +123,8 @@
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.SecretGiftConfigDao" id="secretGiftConfigDao">
         <constructor-arg index="0" ref="config" />
     </bean>
+        <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.SalesScheduleConfigDao" id="salesScheduleConfigDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
     
 </beans>
