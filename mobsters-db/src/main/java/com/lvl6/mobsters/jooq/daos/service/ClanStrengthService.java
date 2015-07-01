@@ -43,6 +43,7 @@ public class ClanStrengthService {
 	public Map<String, Long> getClanMemberCountMap() {
 		List<Record2<String, Long>> clanMemberCount = using(configuration)
 				.select(com.lvl6.mobsters.db.jooq.generated.tables.ClanStrength.CLAN_STRENGTH.CLAN, com.lvl6.mobsters.db.jooq.generated.tables.ClanStrength.CLAN_STRENGTH.MEMBERS)
+				.from(Tables.CLAN_STRENGTH)
 				.fetch();
 		
 		Map<String, Long> returnMap = new HashMap<String, Long>();
