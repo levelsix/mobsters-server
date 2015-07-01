@@ -14627,6 +14627,24 @@ public final class EventUserProto {
      * <code>optional int64 updatedStrength = 2;</code>
      */
     long getUpdatedStrength();
+
+    /**
+     * <code>optional int32 highestToonHp = 3;</code>
+     */
+    boolean hasHighestToonHp();
+    /**
+     * <code>optional int32 highestToonHp = 3;</code>
+     */
+    int getHighestToonHp();
+
+    /**
+     * <code>optional int32 highestToonAtk = 4;</code>
+     */
+    boolean hasHighestToonAtk();
+    /**
+     * <code>optional int32 highestToonAtk = 4;</code>
+     */
+    int getHighestToonAtk();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.UpdateUserStrengthRequestProto}
@@ -14696,6 +14714,16 @@ public final class EventUserProto {
             case 16: {
               bitField0_ |= 0x00000002;
               updatedStrength_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              highestToonHp_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              highestToonAtk_ = input.readInt32();
               break;
             }
           }
@@ -14774,9 +14802,41 @@ public final class EventUserProto {
       return updatedStrength_;
     }
 
+    public static final int HIGHESTTOONHP_FIELD_NUMBER = 3;
+    private int highestToonHp_;
+    /**
+     * <code>optional int32 highestToonHp = 3;</code>
+     */
+    public boolean hasHighestToonHp() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 highestToonHp = 3;</code>
+     */
+    public int getHighestToonHp() {
+      return highestToonHp_;
+    }
+
+    public static final int HIGHESTTOONATK_FIELD_NUMBER = 4;
+    private int highestToonAtk_;
+    /**
+     * <code>optional int32 highestToonAtk = 4;</code>
+     */
+    public boolean hasHighestToonAtk() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 highestToonAtk = 4;</code>
+     */
+    public int getHighestToonAtk() {
+      return highestToonAtk_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       updatedStrength_ = 0L;
+      highestToonHp_ = 0;
+      highestToonAtk_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -14797,6 +14857,12 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(2, updatedStrength_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, highestToonHp_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, highestToonAtk_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -14813,6 +14879,14 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, updatedStrength_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, highestToonHp_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, highestToonAtk_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -14940,6 +15014,10 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         updatedStrength_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
+        highestToonHp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        highestToonAtk_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -14980,6 +15058,14 @@ public final class EventUserProto {
           to_bitField0_ |= 0x00000002;
         }
         result.updatedStrength_ = updatedStrength_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.highestToonHp_ = highestToonHp_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.highestToonAtk_ = highestToonAtk_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -15001,6 +15087,12 @@ public final class EventUserProto {
         }
         if (other.hasUpdatedStrength()) {
           setUpdatedStrength(other.getUpdatedStrength());
+        }
+        if (other.hasHighestToonHp()) {
+          setHighestToonHp(other.getHighestToonHp());
+        }
+        if (other.hasHighestToonAtk()) {
+          setHighestToonAtk(other.getHighestToonAtk());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15173,6 +15265,70 @@ public final class EventUserProto {
       public Builder clearUpdatedStrength() {
         bitField0_ = (bitField0_ & ~0x00000002);
         updatedStrength_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int highestToonHp_ ;
+      /**
+       * <code>optional int32 highestToonHp = 3;</code>
+       */
+      public boolean hasHighestToonHp() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 highestToonHp = 3;</code>
+       */
+      public int getHighestToonHp() {
+        return highestToonHp_;
+      }
+      /**
+       * <code>optional int32 highestToonHp = 3;</code>
+       */
+      public Builder setHighestToonHp(int value) {
+        bitField0_ |= 0x00000004;
+        highestToonHp_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 highestToonHp = 3;</code>
+       */
+      public Builder clearHighestToonHp() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        highestToonHp_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int highestToonAtk_ ;
+      /**
+       * <code>optional int32 highestToonAtk = 4;</code>
+       */
+      public boolean hasHighestToonAtk() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 highestToonAtk = 4;</code>
+       */
+      public int getHighestToonAtk() {
+        return highestToonAtk_;
+      }
+      /**
+       * <code>optional int32 highestToonAtk = 4;</code>
+       */
+      public Builder setHighestToonAtk(int value) {
+        bitField0_ |= 0x00000008;
+        highestToonAtk_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 highestToonAtk = 4;</code>
+       */
+      public Builder clearHighestToonAtk() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        highestToonAtk_ = 0;
         onChanged();
         return this;
       }
@@ -17385,19 +17541,20 @@ public final class EventUserProto {
       "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
       ".MinimumUserProto\022\021\n\ttaskState\030\002 \001(\014\022.\n\006" +
       "status\030\003 \001(\0162\036.com.lvl6.proto.ResponseSt" +
-      "atus\"k\n\036UpdateUserStrengthRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\027\n\017updatedStrength\030\002 \001(\003\"\203\001\n\037Up" +
-      "dateUserStrengthResponseProto\0220\n\006sender\030",
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      ".\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Respons" +
-      "eStatus\"[\n\026SetTangoIdRequestProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\017\n\007tangoId\030\002 \001(\t\"\214\001\n\027SetTangoIdRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\017\n\007tangoId\030\002 \001(\t\022.\n\006s" +
-      "tatus\030\003 \001(\0162\036.com.lvl6.proto.ResponseSta" +
-      "tusB\020B\016EventUserProto"
+      "atus\"\232\001\n\036UpdateUserStrengthRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022\027\n\017updatedStrength\030\002 \001(\003\022\025\n\rhi" +
+      "ghestToonHp\030\003 \001(\005\022\026\n\016highestToonAtk\030\004 \001(",
+      "\005\"\203\001\n\037UpdateUserStrengthResponseProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.proto" +
+      ".ResponseStatus\"[\n\026SetTangoIdRequestProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022\017\n\007tangoId\030\002 \001(\t\"\214\001\n\027SetTang" +
+      "oIdResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\017\n\007tangoId\030\002 " +
+      "\001(\t\022.\n\006status\030\003 \001(\0162\036.com.lvl6.proto.Res" +
+      "ponseStatusB\020B\016EventUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17529,7 +17686,7 @@ public final class EventUserProto {
     internal_static_com_lvl6_proto_UpdateUserStrengthRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_UpdateUserStrengthRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "UpdatedStrength", });
+        new java.lang.String[] { "Sender", "UpdatedStrength", "HighestToonHp", "HighestToonAtk", });
     internal_static_com_lvl6_proto_UpdateUserStrengthResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(19);
     internal_static_com_lvl6_proto_UpdateUserStrengthResponseProto_fieldAccessorTable = new

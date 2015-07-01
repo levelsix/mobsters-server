@@ -182,6 +182,8 @@ message UpdateClientTaskStateResponseProto {
 message UpdateUserStrengthRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int64 updatedStrength = 2;
+	optional int32 highestToonHp = 3;
+	optional int32 highestToonAtk = 4;
 
 }
 
