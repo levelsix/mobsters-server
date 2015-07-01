@@ -73,7 +73,6 @@ import com.lvl6.mobsters.db.jooq.generated.tables.LoadTestingEvents;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxEventForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.LockBoxItemConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.LoginHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForPlayerLvlConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForUser;
@@ -113,9 +112,6 @@ import com.lvl6.mobsters.db.jooq.generated.tables.QuestForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.QuestJobConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.QuestJobForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.QuestJobMonsterItemConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.Referral;
-import com.lvl6.mobsters.db.jooq.generated.tables.ReferralCodeAvailableConfig;
-import com.lvl6.mobsters.db.jooq.generated.tables.ReferralCodeGeneratedConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ResearchConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ResearchForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.ResearchPropertyConfig;
@@ -166,14 +162,12 @@ import com.lvl6.mobsters.db.jooq.generated.tables.TournamentRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TranslationSettingsForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserBanned;
-import com.lvl6.mobsters.db.jooq.generated.tables.UserBeforeTutorialCompletion;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossContribution;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossRewardHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserCurrencyHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserFacebookInviteForSlot;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserPrivateChatPost;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserRewardHistory;
-import com.lvl6.mobsters.db.jooq.generated.tables.UserSession;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -198,7 +192,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
-	private static final long serialVersionUID = -198350597;
+	private static final long serialVersionUID = 1420635347;
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -290,7 +284,6 @@ public class Mobsters extends SchemaImpl {
 			LockBoxEventConfig.LOCK_BOX_EVENT_CONFIG,
 			LockBoxEventForUser.LOCK_BOX_EVENT_FOR_USER,
 			LockBoxItemConfig.LOCK_BOX_ITEM_CONFIG,
-			LoginHistory.LOGIN_HISTORY,
 			MiniEventConfig.MINI_EVENT_CONFIG,
 			MiniEventForPlayerLvlConfig.MINI_EVENT_FOR_PLAYER_LVL_CONFIG,
 			MiniEventForUser.MINI_EVENT_FOR_USER,
@@ -330,9 +323,6 @@ public class Mobsters extends SchemaImpl {
 			QuestJobConfig.QUEST_JOB_CONFIG,
 			QuestJobForUser.QUEST_JOB_FOR_USER,
 			QuestJobMonsterItemConfig.QUEST_JOB_MONSTER_ITEM_CONFIG,
-			Referral.REFERRAL,
-			ReferralCodeAvailableConfig.REFERRAL_CODE_AVAILABLE_CONFIG,
-			ReferralCodeGeneratedConfig.REFERRAL_CODE_GENERATED_CONFIG,
 			ResearchConfig.RESEARCH_CONFIG,
 			ResearchForUser.RESEARCH_FOR_USER,
 			ResearchPropertyConfig.RESEARCH_PROPERTY_CONFIG,
@@ -383,13 +373,11 @@ public class Mobsters extends SchemaImpl {
 			TranslationSettingsForUser.TRANSLATION_SETTINGS_FOR_USER,
 			User.USER,
 			UserBanned.USER_BANNED,
-			UserBeforeTutorialCompletion.USER_BEFORE_TUTORIAL_COMPLETION,
 			UserClanBossContribution.USER_CLAN_BOSS_CONTRIBUTION,
 			UserClanBossRewardHistory.USER_CLAN_BOSS_REWARD_HISTORY,
 			UserCurrencyHistory.USER_CURRENCY_HISTORY,
 			UserFacebookInviteForSlot.USER_FACEBOOK_INVITE_FOR_SLOT,
 			UserPrivateChatPost.USER_PRIVATE_CHAT_POST,
-			UserRewardHistory.USER_REWARD_HISTORY,
-			UserSession.USER_SESSION);
+			UserRewardHistory.USER_REWARD_HISTORY);
 	}
 }

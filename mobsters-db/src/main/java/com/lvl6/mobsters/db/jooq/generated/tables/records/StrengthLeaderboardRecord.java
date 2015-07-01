@@ -15,9 +15,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.jooq.Field;
-import org.jooq.Record4;
+import org.jooq.Record5;
 import org.jooq.Row;
-import org.jooq.Row4;
+import org.jooq.Row5;
 import org.jooq.impl.TableRecordImpl;
 
 
@@ -34,9 +34,9 @@ import org.jooq.impl.TableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "strength_leaderboard", schema = "mobsters")
-public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboardRecord> implements Record4<String, String, Integer, String>, IStrengthLeaderboard {
+public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboardRecord> implements Record5<String, String, Integer, Integer, String>, IStrengthLeaderboard {
 
-	private static final long serialVersionUID = -162468902;
+	private static final long serialVersionUID = -559794557;
 
 	/**
 	 * Setter for <code>mobsters.strength_leaderboard.user_id</code>.
@@ -78,11 +78,29 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	}
 
 	/**
+	 * Setter for <code>mobsters.strength_leaderboard.avatar_id</code>.
+	 */
+	@Override
+	public StrengthLeaderboardRecord setAvatarId(Integer value) {
+		setValue(2, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.strength_leaderboard.avatar_id</code>.
+	 */
+	@Column(name = "avatar_id", precision = 10)
+	@Override
+	public Integer getAvatarId() {
+		return (Integer) getValue(2);
+	}
+
+	/**
 	 * Setter for <code>mobsters.strength_leaderboard.strength</code>.
 	 */
 	@Override
 	public StrengthLeaderboardRecord setStrength(Integer value) {
-		setValue(2, value);
+		setValue(3, value);
 		return this;
 	}
 
@@ -92,7 +110,7 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	@Column(name = "strength", precision = 10)
 	@Override
 	public Integer getStrength() {
-		return (Integer) getValue(2);
+		return (Integer) getValue(3);
 	}
 
 	/**
@@ -100,7 +118,7 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	 */
 	@Override
 	public StrengthLeaderboardRecord setClanTag(String value) {
-		setValue(3, value);
+		setValue(4, value);
 		return this;
 	}
 
@@ -111,27 +129,27 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	@Size(max = 127)
 	@Override
 	public String getClanTag() {
-		return (String) getValue(3);
+		return (String) getValue(4);
 	}
 
 	// -------------------------------------------------------------------------
-	// Record4 type implementation
+	// Record5 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<String, String, Integer, String> fieldsRow() {
-		return (Row4) super.fieldsRow();
+	public Row5<String, String, Integer, Integer, String> fieldsRow() {
+		return (Row5) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row4<String, String, Integer, String> valuesRow() {
-		return (Row4) super.valuesRow();
+	public Row5<String, String, Integer, Integer, String> valuesRow() {
+		return (Row5) super.valuesRow();
 	}
 
 	/**
@@ -155,6 +173,14 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	 */
 	@Override
 	public Field<Integer> field3() {
+		return StrengthLeaderboard.STRENGTH_LEADERBOARD.AVATAR_ID;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Integer> field4() {
 		return StrengthLeaderboard.STRENGTH_LEADERBOARD.STRENGTH;
 	}
 
@@ -162,7 +188,7 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field4() {
+	public Field<String> field5() {
 		return StrengthLeaderboard.STRENGTH_LEADERBOARD.CLAN_TAG;
 	}
 
@@ -187,6 +213,14 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	 */
 	@Override
 	public Integer value3() {
+		return getAvatarId();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer value4() {
 		return getStrength();
 	}
 
@@ -194,7 +228,7 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value4() {
+	public String value5() {
 		return getClanTag();
 	}
 
@@ -221,6 +255,15 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	 */
 	@Override
 	public StrengthLeaderboardRecord value3(Integer value) {
+		setAvatarId(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public StrengthLeaderboardRecord value4(Integer value) {
 		setStrength(value);
 		return this;
 	}
@@ -229,7 +272,7 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StrengthLeaderboardRecord value4(String value) {
+	public StrengthLeaderboardRecord value5(String value) {
 		setClanTag(value);
 		return this;
 	}
@@ -238,11 +281,12 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StrengthLeaderboardRecord values(String value1, String value2, Integer value3, String value4) {
+	public StrengthLeaderboardRecord values(String value1, String value2, Integer value3, Integer value4, String value5) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
 		value4(value4);
+		value5(value5);
 		return this;
 	}
 
@@ -257,6 +301,7 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	public void from(IStrengthLeaderboard from) {
 		setUserId(from.getUserId());
 		setName(from.getName());
+		setAvatarId(from.getAvatarId());
 		setStrength(from.getStrength());
 		setClanTag(from.getClanTag());
 	}
@@ -284,12 +329,13 @@ public class StrengthLeaderboardRecord extends TableRecordImpl<StrengthLeaderboa
 	/**
 	 * Create a detached, initialised StrengthLeaderboardRecord
 	 */
-	public StrengthLeaderboardRecord(String userId, String name, Integer strength, String clanTag) {
+	public StrengthLeaderboardRecord(String userId, String name, Integer avatarId, Integer strength, String clanTag) {
 		super(StrengthLeaderboard.STRENGTH_LEADERBOARD);
 
 		setValue(0, userId);
 		setValue(1, name);
-		setValue(2, strength);
-		setValue(3, clanTag);
+		setValue(2, avatarId);
+		setValue(3, strength);
+		setValue(4, clanTag);
 	}
 }

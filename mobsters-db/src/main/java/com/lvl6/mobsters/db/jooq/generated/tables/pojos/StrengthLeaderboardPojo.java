@@ -29,10 +29,11 @@ import javax.validation.constraints.Size;
 @Table(name = "strength_leaderboard", schema = "mobsters")
 public class StrengthLeaderboardPojo implements IStrengthLeaderboard {
 
-	private static final long serialVersionUID = 373811764;
+	private static final long serialVersionUID = 475789794;
 
 	private String  userId;
 	private String  name;
+	private Integer avatarId;
 	private Integer strength;
 	private String  clanTag;
 
@@ -41,6 +42,7 @@ public class StrengthLeaderboardPojo implements IStrengthLeaderboard {
 	public StrengthLeaderboardPojo(StrengthLeaderboardPojo value) {
 		this.userId = value.userId;
 		this.name = value.name;
+		this.avatarId = value.avatarId;
 		this.strength = value.strength;
 		this.clanTag = value.clanTag;
 	}
@@ -48,11 +50,13 @@ public class StrengthLeaderboardPojo implements IStrengthLeaderboard {
 	public StrengthLeaderboardPojo(
 		String  userId,
 		String  name,
+		Integer avatarId,
 		Integer strength,
 		String  clanTag
 	) {
 		this.userId = userId;
 		this.name = name;
+		this.avatarId = avatarId;
 		this.strength = strength;
 		this.clanTag = clanTag;
 	}
@@ -81,6 +85,18 @@ public class StrengthLeaderboardPojo implements IStrengthLeaderboard {
 	@Override
 	public StrengthLeaderboardPojo setName(String name) {
 		this.name = name;
+		return this;
+	}
+
+	@Column(name = "avatar_id", precision = 10)
+	@Override
+	public Integer getAvatarId() {
+		return this.avatarId;
+	}
+
+	@Override
+	public StrengthLeaderboardPojo setAvatarId(Integer avatarId) {
+		this.avatarId = avatarId;
 		return this;
 	}
 
@@ -120,6 +136,7 @@ public class StrengthLeaderboardPojo implements IStrengthLeaderboard {
 	public void from(IStrengthLeaderboard from) {
 		setUserId(from.getUserId());
 		setName(from.getName());
+		setAvatarId(from.getAvatarId());
 		setStrength(from.getStrength());
 		setClanTag(from.getClanTag());
 	}

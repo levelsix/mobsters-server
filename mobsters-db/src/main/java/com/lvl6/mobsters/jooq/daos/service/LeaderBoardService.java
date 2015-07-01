@@ -62,6 +62,8 @@ public class LeaderBoardService extends UserDao {
 					mupb.setClan(mcpb.build());
 				}
 				mupb.setName(slbr.getName());
+				mupb.setUserUuid(slbr.getUserId());
+				mupb.setAvatarMonsterId(slbr.getAvatarId());
 				b.setMup(mupb.build());
 				returnList.add(b.build());
 			}

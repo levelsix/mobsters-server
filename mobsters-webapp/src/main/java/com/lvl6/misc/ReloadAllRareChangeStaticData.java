@@ -55,6 +55,7 @@ import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesPackageRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.SalesScheduleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SecretGiftRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SkillPropertyRetrieveUtils;
@@ -232,6 +233,9 @@ public class ReloadAllRareChangeStaticData {
 
 	@Autowired
 	protected SalesPackageRetrieveUtils salesPackageRetrieveUtils;
+	
+	@Autowired
+	protected SalesScheduleRetrieveUtils salesScheduleRetrieveUtils;
 
 	@Autowired
 	protected SecretGiftRetrieveUtils secretGiftRetrieveUtil;
@@ -374,6 +378,7 @@ public class ReloadAllRareChangeStaticData {
 		salesDisplayItemRetrieveUtils.reload();
 		salesItemRetrieveUtils.reload();
 		salesPackageRetrieveUtils.reload();
+		salesScheduleRetrieveUtils.reload();
 		secretGiftRetrieveUtil.reload();
 		serverToggleRetrieveUtils.reload();
 		skillPropertyRetrieveUtils.reload();

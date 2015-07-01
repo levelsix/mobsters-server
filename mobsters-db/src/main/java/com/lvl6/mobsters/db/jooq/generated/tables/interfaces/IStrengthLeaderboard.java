@@ -55,6 +55,17 @@ public interface IStrengthLeaderboard extends Serializable {
 	public String getName();
 
 	/**
+	 * Setter for <code>mobsters.strength_leaderboard.avatar_id</code>.
+	 */
+	public IStrengthLeaderboard setAvatarId(Integer value);
+
+	/**
+	 * Getter for <code>mobsters.strength_leaderboard.avatar_id</code>.
+	 */
+	@Column(name = "avatar_id", precision = 10)
+	public Integer getAvatarId();
+
+	/**
 	 * Setter for <code>mobsters.strength_leaderboard.strength</code>.
 	 */
 	public IStrengthLeaderboard setStrength(Integer value);

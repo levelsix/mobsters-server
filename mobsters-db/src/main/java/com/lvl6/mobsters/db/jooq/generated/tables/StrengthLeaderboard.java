@@ -28,7 +28,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StrengthLeaderboard extends TableImpl<StrengthLeaderboardRecord> {
 
-	private static final long serialVersionUID = -1151229121;
+	private static final long serialVersionUID = 839641289;
 
 	/**
 	 * The reference instance of <code>mobsters.strength_leaderboard</code>
@@ -52,6 +52,11 @@ public class StrengthLeaderboard extends TableImpl<StrengthLeaderboardRecord> {
 	 * The column <code>mobsters.strength_leaderboard.name</code>.
 	 */
 	public final TableField<StrengthLeaderboardRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR.length(400), this, "");
+
+	/**
+	 * The column <code>mobsters.strength_leaderboard.avatar_id</code>.
+	 */
+	public final TableField<StrengthLeaderboardRecord, Integer> AVATAR_ID = createField("avatar_id", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.strength_leaderboard.strength</code>.
