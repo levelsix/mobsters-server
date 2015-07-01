@@ -38,7 +38,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
 
 	public AddMonsterToBattleTeamController() {
-		
+
 	}
 
 	@Override
@@ -90,8 +90,9 @@ public class AddMonsterToBattleTeamController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 
 			// make sure it exists
 			Map<String, MonsterForUser> idsToMonsters = monsterForUserRetrieveUtil
@@ -145,7 +146,9 @@ public class AddMonsterToBattleTeamController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -183,7 +186,7 @@ public class AddMonsterToBattleTeamController extends EventController {
 		 * log.error("user error: user is trying to \"equip\" a monster that is in"
 		 * + " enhancing." + "\t userId=" + userId + "\t monsterForUser=" + mfu
 		 * + " inEnhancing=" + inEnhancing); return false; }
-		 * 
+		 *
 		 * //inHealing has userMonsterId values for keys //NOT IN HEALING if
 		 * (inHealing.containsKey(userMonsterId)) {
 		 * log.error("user error: user is trying to \"equip\" a monster that is in"

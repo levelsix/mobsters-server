@@ -62,7 +62,7 @@ public class RetrieveStrengthLeaderBoardController extends EventController {
 		RetrieveStrengthLeaderBoardRequestProto reqProto = ((RetrieveStrengthLeaderBoardRequestEvent) event)
 				.getRetrieveStrengthLeaderBoardRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();

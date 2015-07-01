@@ -33,12 +33,12 @@ public class LevelUpController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	public LevelUpController() {
-		
+
 	}
 
 	@Override
@@ -87,8 +87,10 @@ public class LevelUpController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			User user = getUserRetrieveUtils().getUserById(userId);
 			boolean legitLevelUp = checkLegitLevelUp(resBuilder, user);
 
@@ -130,7 +132,9 @@ public class LevelUpController extends EventController {
 				log.error("exception2 in LevelUpController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

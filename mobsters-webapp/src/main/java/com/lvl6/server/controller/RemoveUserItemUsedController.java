@@ -30,13 +30,13 @@ public class RemoveUserItemUsedController extends EventController {
 	private static Logger log = LoggerFactory.getLogger(RemoveUserItemUsedController.class);
 
 	public RemoveUserItemUsedController() {
-		
+
 	}
 
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	ItemForUserRetrieveUtil itemForUserRetrieveUtil;
 
@@ -55,7 +55,7 @@ public class RemoveUserItemUsedController extends EventController {
 		RemoveUserItemUsedRequestProto reqProto = ((RemoveUserItemUsedRequestEvent) event)
 				.getRemoveUserItemUsedRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -91,11 +91,11 @@ public class RemoveUserItemUsedController extends EventController {
 			return;
 		}
 
-		
-		
-		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
-				.getSimpleName());
+
+
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 
 			RemoveUserItemUsedAction tifsua = new RemoveUserItemUsedAction(
 					userId, userItemUsedIdList, DeleteUtils.get());
@@ -126,8 +126,9 @@ public class RemoveUserItemUsedController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
-					.getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

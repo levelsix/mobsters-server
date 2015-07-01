@@ -50,10 +50,10 @@ public class SellUserMonsterController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 
@@ -61,7 +61,7 @@ public class SellUserMonsterController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public SellUserMonsterController() {
-		
+
 	}
 
 	@Override
@@ -132,8 +132,9 @@ public class SellUserMonsterController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			int previousCash = 0;
 
 			User aUser = getUserRetrieveUtils().getUserById(userId);
@@ -194,7 +195,9 @@ public class SellUserMonsterController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -202,7 +205,7 @@ public class SellUserMonsterController extends EventController {
 	 * Return true if user request is valid; false otherwise and set the builder
 	 * status to the appropriate value. "userMonsterIds" might be modified to
 	 * contain only those user monsters that exist (and hence can be sold)
-	 * 
+	 *
 	 * Example. client gives ids (a, b, c, d). Let's say 'a,' 'b,' and 'c' don't
 	 * exist but 'd' does, so "userMonsterIds" will be modified to only contain
 	 * 'd'

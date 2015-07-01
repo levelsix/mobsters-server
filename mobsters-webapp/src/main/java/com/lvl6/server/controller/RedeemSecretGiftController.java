@@ -110,7 +110,7 @@ public class RedeemSecretGiftController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
@@ -140,7 +140,7 @@ public class RedeemSecretGiftController extends EventController {
 				.newBuilder();
 		resBuilder.setMup(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -150,12 +150,12 @@ public class RedeemSecretGiftController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			RedeemSecretGiftResponseEvent resEvent = 
+			RedeemSecretGiftResponseEvent resEvent =
 					new RedeemSecretGiftResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -163,9 +163,10 @@ public class RedeemSecretGiftController extends EventController {
 			return;
 		}
 
+		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
-			UUID.fromString(userId);
+			userUuid = UUID.fromString(userId);
 			StringUtils.convertToUUID(idsRedeemed);
 			invalidUuids = false;
 		} catch (Exception e) {
@@ -187,9 +188,9 @@ public class RedeemSecretGiftController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
-				.getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			RedeemSecretGiftAction rsga = new RedeemSecretGiftAction(userId,
 					idsRedeemed, clientTime, secretGiftForUserRetrieveUtil,
 					userRetrieveUtil, itemForUserRetrieveUtil,
@@ -248,8 +249,9 @@ public class RedeemSecretGiftController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
-					.getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

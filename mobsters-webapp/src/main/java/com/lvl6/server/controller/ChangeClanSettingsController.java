@@ -46,10 +46,10 @@ public class ChangeClanSettingsController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -70,19 +70,19 @@ public class ChangeClanSettingsController extends EventController {
 
 	@Autowired
 	protected ClanSearch clanSearch;
-	
+
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
-	
+
 	@Autowired
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
-		
+
 
 	public ChangeClanSettingsController() {
 	}
@@ -147,15 +147,16 @@ public class ChangeClanSettingsController extends EventController {
 			return;
 		}
 
-		boolean lockedClan = getLocker().lockClan(clanUuid);
-
+		boolean lockedClan = false;
 		try {
+			lockedClan = locker.lockClan(clanUuid);
+
 			ChangeClanSettingsAction ccsa = new ChangeClanSettingsAction(userId, isChangeDescription,
 					description, isChangeJoinType, requestToJoinRequired, isChangeIcon, iconId, lockedClan,
 					userRetrieveUtils, updateUtil, miscMethods, clanRetrieveUtils, userClanRetrieveUtils,
 					clanIconRetrieveUtils);
 			ccsa.execute(resBuilder);
-			
+
 			List<Integer> clanSizeContainer = new ArrayList<Integer>();
 
 			if(ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -174,7 +175,7 @@ public class ChangeClanSettingsController extends EventController {
 				responses.normalResponseEvents().add(resEvent);
 
 			} else {
-				//only write to clan if successful 
+				//only write to clan if successful
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, ccsa.getClan().getId(), false));
 
 				updateClanCache(clanId, clanSizeContainer, isChangeJoinType,
@@ -194,8 +195,8 @@ public class ChangeClanSettingsController extends EventController {
 				log.error("exception2 in ChangeClanSettings processEvent", e);
 			}
 		} finally {
-			if (null != clanUuid && lockedClan) {
-				getLocker().unlockClan(clanUuid);
+			if (lockedClan) {
+				locker.unlockClan(clanUuid);
 			}
 		}
 	}
@@ -232,7 +233,7 @@ public class ChangeClanSettingsController extends EventController {
 		Date lastChatTime = null;
 		int clanSize = clanSizeContainer.get(0);
 		if (requestToJoinRequired) {
-			//since people can't join freely, this clan has a low rank 
+			//since people can't join freely, this clan has a low rank
 			lastChatTime = ControllerConstants.INCEPTION_DATE;
 			clanSize = ClanSearch.penalizedClanSize;
 		} else {

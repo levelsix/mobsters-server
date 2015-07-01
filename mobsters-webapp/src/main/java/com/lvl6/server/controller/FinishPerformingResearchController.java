@@ -39,7 +39,7 @@ public class FinishPerformingResearchController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -60,7 +60,7 @@ public class FinishPerformingResearchController extends EventController {
 
 	
 	public FinishPerformingResearchController() {
-		
+
 	}
 
 	@Override
@@ -140,8 +140,10 @@ public class FinishPerformingResearchController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			User user = userRetrieveUtils.getUserById(userId);
 			Date now = new Date();
 			FinishPerformingResearchAction fpra = new FinishPerformingResearchAction(
@@ -165,7 +167,7 @@ public class FinishPerformingResearchController extends EventController {
 								fpra.getUser(), null, null);
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
-				
+
 				writeToUserCurrencyHistory(userId, nowTimestamp, fpra);
 			}
 
@@ -188,7 +190,9 @@ public class FinishPerformingResearchController extends EventController {
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

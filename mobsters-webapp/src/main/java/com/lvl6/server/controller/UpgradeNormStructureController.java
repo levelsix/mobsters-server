@@ -50,18 +50,18 @@ public class UpgradeNormStructureController extends EventController {
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
 	public UpgradeNormStructureController() {
-		
+
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class UpgradeNormStructureController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getTimeOfUpgrade() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -102,12 +102,12 @@ public class UpgradeNormStructureController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getTimeOfUpgrade()), new Date()) > 
+
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getTimeOfUpgrade()), new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			UpgradeNormStructureResponseEvent resEvent = 
+			UpgradeNormStructureResponseEvent resEvent =
 					new UpgradeNormStructureResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -139,8 +139,10 @@ public class UpgradeNormStructureController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			User user = getUserRetrieveUtils().getUserById(userId);
 			Structure currentStruct = null;
 			Structure nextLevelStruct = null;
@@ -199,7 +201,9 @@ public class UpgradeNormStructureController extends EventController {
 				log.error("exception2 in UpgradeNormStructure processEvent", e2);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -280,7 +284,7 @@ public class UpgradeNormStructureController extends EventController {
 			}
 		}
 
-		/*//TODO: only make one user struct retrieve call 
+		/*//TODO: only make one user struct retrieve call
 		List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
 		if (userStructs != null) {
 		  for (StructureForUser us : userStructs) {
@@ -309,7 +313,7 @@ public class UpgradeNormStructureController extends EventController {
 							timeOfUpgrade, userStruct));
 		}
 
-		//charge the user  	
+		//charge the user
 		int cashChange = 0;
 		int oilChange = 0;
 		int gemChange = -1 * Math.abs(gemsSpent);

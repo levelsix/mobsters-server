@@ -149,8 +149,8 @@ public class BootPlayerFromClanController extends EventController {
 		}
 
 		boolean lockedClan = false;
-		lockedClan = getLocker().lockClan(clanUuid);
 		try {
+			lockedClan = locker.lockClan(clanUuid);
 			BootPlayerFromClanAction bpfca = new BootPlayerFromClanAction(userId, playerToBootId,
 					lockedClan, userRetrieveUtils, insertUtil, updateUtil, deleteUtil, timeUtils, 
 					clanRetrieveUtils, userClanRetrieveUtils, clanStuffUtils, 
@@ -193,7 +193,7 @@ public class BootPlayerFromClanController extends EventController {
 			}
 		} finally {
 			if (null != clanUuid && lockedClan) {
-				getLocker().unlockClan(clanUuid);
+				locker.unlockClan(clanUuid);
 			}
 		}
 	}

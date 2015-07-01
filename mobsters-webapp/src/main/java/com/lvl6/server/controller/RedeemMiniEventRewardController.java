@@ -63,7 +63,7 @@ public class RedeemMiniEventRewardController extends EventController {
 
 	@Autowired
 	protected TimeUtils timeUtils;
-	
+
 	@Autowired
 	protected Locker locker;
 
@@ -139,7 +139,7 @@ public class RedeemMiniEventRewardController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -150,18 +150,18 @@ public class RedeemMiniEventRewardController extends EventController {
 			return;
 		}
 
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			RedeemMiniEventRewardResponseEvent resEvent = 
+			RedeemMiniEventRewardResponseEvent resEvent =
 					new RedeemMiniEventRewardResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
+
 		boolean invalidUuids = true;
 		try {
 			UUID.fromString(userId);
@@ -185,9 +185,9 @@ public class RedeemMiniEventRewardController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
-
+			gotLock = locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
 			RedeemMiniEventRewardAction rmera = new RedeemMiniEventRewardAction(
 					userId, null, maxCash, maxOil, mefplId, rt, clientTime,
 					giftRetrieveUtil,
@@ -259,7 +259,9 @@ public class RedeemMiniEventRewardController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
+			}
 		}
 	}
 

@@ -231,9 +231,11 @@ public class InAppPurchaseController extends EventController {
             return;
         }
 
-        // Lock this player's ID
-        locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+        boolean gotLock = false;
         try {
+        	// Lock this player's ID
+        	gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
             User user = userRetrieveUtil.getUserById(userId);
 
             JSONObject response;
@@ -376,8 +378,10 @@ public class InAppPurchaseController extends EventController {
                         e);
             }
         } finally {
-            // Unlock this player
-            locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+        	if (gotLock) {
+        		// Unlock this player
+        		locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+        	}
         }
     }
 

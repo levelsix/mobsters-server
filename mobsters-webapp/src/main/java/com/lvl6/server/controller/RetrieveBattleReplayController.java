@@ -89,9 +89,10 @@ public class RetrieveBattleReplayController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(senderProto.getUserUuid(), this.getClass()
-				.getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(senderProto.getUserUuid(), this.getClass()
+					.getSimpleName());
 			//
 			RetrieveBattleReplayAction rsga = new RetrieveBattleReplayAction(userId, replayId,
 					battleReplayForUserRetrieveUtil);
@@ -128,8 +129,10 @@ public class RetrieveBattleReplayController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(senderProto.getUserUuid(), this.getClass()
-					.getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(senderProto.getUserUuid(), this.getClass()
+						.getSimpleName());
+			}
 		}
 	}
 

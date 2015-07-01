@@ -77,13 +77,13 @@ public class AttackClanRaidMonsterController extends EventController {
 
 	@Autowired
 	protected TimeUtils timeUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected ClanEventUtil clanEventUtil;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -98,23 +98,23 @@ public class AttackClanRaidMonsterController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
-	
-	@Autowired 
+
+	@Autowired
 	protected ClanRaidStageRewardRetrieveUtils clanRaidStageRewardRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 
 
 	public AttackClanRaidMonsterController() {
-		
+
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class AttackClanRaidMonsterController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		AttackClanRaidMonsterRequestProto reqProto = ((AttackClanRaidMonsterRequestEvent) event)
 				.getAttackClanRaidMonsterRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto sender = reqProto.getSender();
 		String userId = sender.getUserUuid();
@@ -162,14 +162,14 @@ public class AttackClanRaidMonsterController extends EventController {
 		resBuilder.setUserMonsterThatAttacked(userMonsterThatAttacked);
 		resBuilder.setDmgDealt(damageDealt);
 
-		//OUTLINE: 
+		//OUTLINE:
 		//get the clan lock; get the clan raid object for the clan;
 		//for the first ever (initial attack) in the raid, stage and stageMonster start time
 		//are already set.
 		//When user kills curMonster, the crsmId changes to the next monster and
 		//the stageMonster start time changes to when curMonster was killed.
 		//When user kills curMonster and go to the next stage, the stage and stageMonster
-		//StartTime and crsmId is set to nothing, crsId changes to the next stage, 
+		//StartTime and crsmId is set to nothing, crsId changes to the next stage,
 
 		ClanEventPersistentForClan clanEvent = null;
 		Map<String, ClanEventPersistentForUser> userIdToCepfu = new HashMap<String, ClanEventPersistentForUser>();
@@ -229,8 +229,8 @@ public class AttackClanRaidMonsterController extends EventController {
 		}
 
 		boolean lockedClan = false;
-		lockedClan = getLocker().lockClan(clanUuid);
 		try {
+			lockedClan = locker.lockClan(clanUuid);
 			//so as to prevent another db read call to get the same information
 
 			boolean legitRequest = checkLegitRequest(resBuilder, lockedClan,
@@ -292,8 +292,8 @@ public class AttackClanRaidMonsterController extends EventController {
 			}
 		} finally {
 
-			if (null != clanUuid && lockedClan) {
-				getLocker().unlockClan(clanUuid);
+			if (lockedClan) {
+				locker.unlockClan(clanUuid);
 			}
 
 		}
@@ -350,12 +350,12 @@ public class AttackClanRaidMonsterController extends EventController {
 
 		//still want to deduct user's monsters' healths
 		//    if (null == raidStartedByClan) {
-		//    	
+		//
 		//    }
 
 		if (null != raidStartedByClan
 				&& raidStartedByClan.equals(eventClientSent)) {// &&
-			//null != raidStartedByClan.getStageStartTime()) { 
+			//null != raidStartedByClan.getStageStartTime()) {
 			//stageStartTime won't be null in eventClientSent (this would mean stage has not
 			//started, so user can't attack, so this event should not have been sent)
 
@@ -446,7 +446,7 @@ public class AttackClanRaidMonsterController extends EventController {
 
 	//ClanEventPersistentForClan clanEvent MIGHT BE UPDATED
 	//Map<Integer, ClanEventPersistentForUser> userIdToCepfu will be populated if the
-	//monster died 
+	//monster died
 	private void updateClanRaid(Builder resBuilder, String userId,
 			String clanId, int dmgDealt, Timestamp curTime,
 			ClanEventPersistentForClan clanEvent,
@@ -480,7 +480,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		if (null == nextStage && monsterDied) {
 			log.info("user killed the monster and ended the raid!");
 			//this user just killed the last clan raid monster: this means
-			//put all the clan users' clan raid info into the history table 
+			//put all the clan users' clan raid info into the history table
 			recordClanRaidVictory(clanId, clanEvent, curTime, userIdToCepfu);
 
 			//TODO: GIVE OUT THE REWARDS AFTER EVERY STAGE THAT HAS JUST ENDED
@@ -657,7 +657,7 @@ public class AttackClanRaidMonsterController extends EventController {
 		//to the client
 		if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
 			//more often than not, don't have it so get it
-			//only case where would have it is ClanEventUtil.java (Hazelcast) doesn't 
+			//only case where would have it is ClanEventUtil.java (Hazelcast) doesn't
 			Map<String, ClanEventPersistentForUser> newUserIdToCepfu = clanEventPersistentForUserRetrieveUtil
 					.getPersistentEventUserInfoForClanId(clanId);
 			userIdToCepfu.putAll(newUserIdToCepfu);
@@ -896,14 +896,14 @@ public class AttackClanRaidMonsterController extends EventController {
 		float userCrsContribution = (userCrsDmg) / (stageHp);
 
 		int staticDataId = 0;
-		//TODO: FIGURE OUT IF CURRENCY CALCULATION IS OK (right now just truncating the value) 
+		//TODO: FIGURE OUT IF CURRENCY CALCULATION IS OK (right now just truncating the value)
 		//create the userOilReward maybe
 		int userOilReward = (int) ((reward.getOilDrop()) * userCrsContribution);
 		createClanEventPersistentUserReward(miscMethods.OIL, userOilReward,
 				staticDataId, crsId, crsStartDate, crsEndDate, clanEventId,
 				userId, userRewards);
 
-		//create the userOilReward maybe  	
+		//create the userOilReward maybe
 		int userCashReward = (int) ((reward.getCashDrop()) * userCrsContribution);
 		createClanEventPersistentUserReward(miscMethods.CASH, userCashReward,
 				staticDataId, crsId, crsStartDate, crsEndDate, clanEventId,

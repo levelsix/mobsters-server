@@ -98,7 +98,7 @@ public class HealMonsterController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		HealMonsterRequestProto reqProto = ((HealMonsterRequestEvent) event)
 				.getHealMonsterRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
@@ -193,8 +193,10 @@ public class HealMonsterController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			int previousCash = 0;
 			int previousGems = 0;
 			//get whatever we need from the database
@@ -276,7 +278,9 @@ public class HealMonsterController extends EventController {
 				log.error("exception2 in HealMonsterController processEvent", e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

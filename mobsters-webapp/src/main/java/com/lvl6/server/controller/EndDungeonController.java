@@ -68,7 +68,7 @@ public class EndDungeonController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -86,22 +86,22 @@ public class EndDungeonController extends EventController {
 
 	@Autowired
 	protected TaskStageForUserRetrieveUtils2 taskStageForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected TaskStageMonsterRetrieveUtils taskStageMonsterRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskMapElementRetrieveUtils taskMapElementRetrieveUtils;
-	
+
 	@Autowired
 	protected TaskRetrieveUtils taskRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 	
@@ -109,7 +109,7 @@ public class EndDungeonController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public EndDungeonController() {
-		
+
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public class EndDungeonController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		EndDungeonRequestProto reqProto = ((EndDungeonRequestEvent) event)
 				.getEndDungeonRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
@@ -197,8 +197,10 @@ public class EndDungeonController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			User aUser = userRetrieveUtil.getUserById(userId);
 			int previousCash = 0;
 			int previousOil = 0;
@@ -308,7 +310,9 @@ public class EndDungeonController extends EventController {
 				log.error("exception2 in EndDungeonController processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -388,7 +392,7 @@ public class EndDungeonController extends EventController {
 			}
 		}
 		log.info(String.format("user after currency change. %s", u));
-		//TODO: MOVE THIS INTO A UTIL METHOD FOR TASK 
+		//TODO: MOVE THIS INTO A UTIL METHOD FOR TASK
 		//delete from user_task and insert it into user_task_history
 		String utId = ut.getId();
 		int numRevives = ut.getNumRevives();
@@ -429,7 +433,7 @@ public class EndDungeonController extends EventController {
 				unclaimedResourceContainer);
 
 		utc.setUnclaimedCash(unclaimedResourceContainer.get(0));
-		//could reset unclaimedResourceContainer... 
+		//could reset unclaimedResourceContainer...
 
 		//unclaimedOil is populated after this call
 		int oilGained = calcResourceGained(miscMethods.OIL, u.getOil(),
@@ -481,7 +485,7 @@ public class EndDungeonController extends EventController {
 
 			//		  String prefix = String.format(
 			//			  "task resources overflow user %s storage.",
-			//			  resource); 
+			//			  resource);
 			//		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
 			//			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
 			//			  resourceGained, additionalResources }
@@ -490,7 +494,7 @@ public class EndDungeonController extends EventController {
 		} else {
 			//		  String prefix = String.format(
 			//			  "task resources do not overflow user %s storage.",
-			//			  resource); 
+			//			  resource);
 			//		  log.info("{} currentAmt={} capacity={}, resourceGained={}, additional={}",
 			//			  new Object[] { prefix, currentResourceAmt, maxResourceAmt,
 			//			  resourceGained, additionalResources }
@@ -705,16 +709,16 @@ public class EndDungeonController extends EventController {
 	 private Map<Integer, ItemForUser> updateUserItems(List<TaskStageForUser> tsfuList,
 			int userId) {
 		Map<Integer, Integer> itemIdsToQuantities = getItemsDropped(tsfuList);
-		
-		//retrieve these specific items for the user, so as to update them 
+
+		//retrieve these specific items for the user, so as to update them
 		Collection<Integer> itemIds = itemIdsToQuantities.keySet();
-		
+
 		Map<Integer, ItemForUser> itemIdToUserItem = ItemForUserRetrieveUtils
 				.getSpecificOrAllUserItems(userId, itemIds);
 		log.info("items user won: " + itemIdsToQuantities);
 		log.info("existing items before modification: " + itemIdToUserItem);
 		//update how many items the user has now
-		
+
 		for (Integer itemId : itemIds) {
 			//get cur amount of items
 
@@ -724,41 +728,41 @@ public class EndDungeonController extends EventController {
 				ItemForUser ifu = new ItemForUser(userId, itemId, 0);
 				itemIdToUserItem.put(itemId, ifu);
 			}
-			
+
 			ItemForUser ifu = itemIdToUserItem.get(itemId);
 			int curAmount = ifu.getQuantity();
-			
+
 			//update it
 			int delta = itemIdsToQuantities.get(itemId);
 			curAmount += delta;
 			ifu.setQuantity(curAmount);
 		}
-		
-		
+
+
 		int numUpdated = UpdateUtils.get().updateUserItems(userId, itemIdToUserItem);
 		log.info("existing items after modification: " + itemIdToUserItem + "\t numUpdated=" +
 				numUpdated);
-		
-		
+
+
 		return itemIdToUserItem;
 	}
-	
+
 	//go through list of task stage for user, aggregate all the item ids with non zero
 	//quantities
 	private Map<Integer, Integer> getItemsDropped(List<TaskStageForUser> tsfuList) {
 		Map<Integer, Integer> itemIdsToQuantities = new HashMap<Integer, Integer>();
-		
+
 		for (TaskStageForUser tsfu : tsfuList) {
 			//if item dropped, add it in with the others
 			int itemIdDropped = tsfu.getItemIdDropped();
-			
+
 			if (itemIdDropped <= 0) {
 				//item didn't drop
 				continue;
 			}
-			
+
 			int quantity = 0;
-			
+
 			//if item dropped before, get how much dropped
 			if (itemIdsToQuantities.containsKey(itemIdDropped)) {
 				quantity = itemIdsToQuantities.get(itemIdDropped);
@@ -767,7 +771,7 @@ public class EndDungeonController extends EventController {
 			quantity++;
 			itemIdsToQuantities.put(itemIdDropped, quantity);
 		}
-		
+
 		return itemIdsToQuantities;
 	}
 	*/

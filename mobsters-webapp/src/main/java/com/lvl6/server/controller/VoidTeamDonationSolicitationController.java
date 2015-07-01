@@ -39,12 +39,12 @@ public class VoidTeamDonationSolicitationController extends EventController {
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 
 	public VoidTeamDonationSolicitationController() {
-		
+
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 		VoidTeamDonationSolicitationRequestProto reqProto = ((VoidTeamDonationSolicitationRequestEvent) event)
 				.getVoidTeamDonationSolicitationRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -176,7 +176,7 @@ public class VoidTeamDonationSolicitationController extends EventController {
 				for (String clanId : clanIds) {
 					responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				}
-				//this works for other clan members, but not for the person 
+				//this works for other clan members, but not for the person
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
 

@@ -33,7 +33,7 @@ public class LogoutController extends EventController {
 	private static Logger log = LoggerFactory.getLogger(LogoutController.class);
 
 	public LogoutController() {
-		
+
 	}
 
 	@Resource(name = "playersByPlayerId")
@@ -98,8 +98,10 @@ public class LogoutController extends EventController {
 				return;
 			}
 
-			getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+			boolean gotLock = false;
 			try {
+				gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 				User user = getUserRetrieveUtils().getUserById(userId);
 				if (null != user) {
 					//TODO: figure out if still deducting elo from user after logging out
@@ -107,7 +109,7 @@ public class LogoutController extends EventController {
 					//if user has unfinished battle, reward defender and penalize attacker
 					//					List<Integer> eloChangeList = new ArrayList<Integer>();
 					//					pvpBattleStuff(user, userId, eloChangeList, lastLogout);
-					//					
+					//
 					//					int eloChange = 0;
 					//					if (!eloChangeList.isEmpty()) {
 					//						eloChange = eloChangeList.get(0);
@@ -136,15 +138,16 @@ public class LogoutController extends EventController {
 					//			    Date inBattleEndTime = user.getInBattleShieldEndTime();
 					//			    PvpUser userOpu = new PvpUser(userIdStr, elo, shieldEndTime, inBattleEndTime);
 					//			    getHazelcastPvpUtil().replacePvpUser(userOpu, userId);
-					//			    
+					//
 				}
-				log.info("Player logged out: " + userId);
+				log.info("Player logged out: {}", userId);
 				playersByPlayerId.remove(userId);
 			} catch (Exception e) {
 				log.error("exception in updating user logout", e);
 			} finally {
-				getLocker().unlockPlayer(userUuid,
-						this.getClass().getSimpleName());
+				if (gotLock) {
+					locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+				}
 			}
 		} else {
 			log.error("cannot update last logout because playerid of sender:"
@@ -158,7 +161,7 @@ public class LogoutController extends EventController {
 			Timestamp now) {
 		PvpBattleForUser battle = PvpBattleForUserRetrieveUtils
 			.getPvpBattleForUserForAttacker(userId);
-		
+
 		if (null == battle) {
 			return;
 		}
@@ -172,7 +175,7 @@ public class LogoutController extends EventController {
 		}
 		int defenderId = battle.getDefenderId();
 		int eloDefenderWins = battle.getDefenderWinEloChange();
-		
+
 		//user has unfinished battle, reward defender and penalize attacker
 	//nested try catch's in order to prevent exception bubbling up, all because of
 	//some stinkin' elo XP
@@ -194,7 +197,7 @@ public class LogoutController extends EventController {
 		//doesn't reeeally matter if can't penalize defender...
 		User defender = null;
 		PvpUser defenderOpu = null;
-		
+
 
 		//only lock real users
 	//		if (0 != defenderId) {
@@ -205,20 +208,20 @@ public class LogoutController extends EventController {
 				defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
 				defenderOpu = getHazelcastPvpUtil().getPvpUser(defenderId);
 			}
-			
+
 			//update attacker
 			eloChange.add(eloAttackerLoses);
-			
+
 			//TODO: figure out if still doing any of this
 			//update defender if real, might need to cap defenderElo, defender can now be
 			//attacked
 	//			if (null != defender) {
 	//				defender.updateEloInBattleEndTime(eloDefenderWins, now);
-	//				int defenderElo = defender.getElo();                    
+	//				int defenderElo = defender.getElo();
 	//				defenderOpu = new PvpUser();
-	//				defenderOpu.setElo(defenderElo);                        
-	//				Date nowDate = new Date(now.getTime());                 
-	//				defenderOpu.setInBattleEndTime(nowDate);                
+	//				defenderOpu.setElo(defenderElo);
+	//				Date nowDate = new Date(now.getTime());
+	//				defenderOpu.setInBattleEndTime(nowDate);
 	//				getHazelcastPvpUtil().replacePvpUser(defenderOpu, defenderId);
 	//			}
 	//			if (null != defenderOpu) { //update if exists
@@ -228,12 +231,12 @@ public class LogoutController extends EventController {
 	//				defenderOpu.setInBattleEndTime(nowDate);
 	//				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
 	//			}
-			
+
 			//delete that this battle occurred
 			DeleteUtils.get().deletePvpBattleForUser(userId);
 			log.info("successfully penalized, rewarded attacker, defender respectively. battle= " +
 					battle);
-			
+
 		} catch (Exception e){
 			log.error("tried to penalize, reward attacker, defender respectively. battle=" +
 					battle, e);

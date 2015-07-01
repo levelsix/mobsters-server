@@ -33,16 +33,16 @@ public class RetractRequestJoinClanController extends EventController {
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
-	
+
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
+
 	@Autowired
 	protected InsertUtil insertUtil;
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
@@ -104,12 +104,12 @@ public class RetractRequestJoinClanController extends EventController {
 		}
 
 		boolean lockedClan = false;
-		if (clanUuid != null) {
-			lockedClan = getLocker().lockClan(clanUuid);
-		}
-		try {			
+		try {
+			if (clanUuid != null) {
+				lockedClan = locker.lockClan(clanUuid);
+			}
 			RetractRequestJoinClanAction rrjca = new RetractRequestJoinClanAction(userId, clanId,
-					lockedClan, userRetrieveUtils, insertUtil, deleteUtil, clanRetrieveUtils, 
+					lockedClan, userRetrieveUtils, insertUtil, deleteUtil, clanRetrieveUtils,
 					userClanRetrieveUtils);
 			rrjca.execute(resBuilder);
 
@@ -140,7 +140,7 @@ public class RetractRequestJoinClanController extends EventController {
 			}
 		} finally {
 			if (clanUuid != null && lockedClan) {
-				getLocker().unlockClan(clanUuid);
+				locker.unlockClan(clanUuid);
 			}
 		}
 	}

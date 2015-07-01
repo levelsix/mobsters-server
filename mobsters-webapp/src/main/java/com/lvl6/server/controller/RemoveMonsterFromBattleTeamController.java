@@ -35,7 +35,7 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public RemoveMonsterFromBattleTeamController() {
-		
+
 	}
 
 	@Override
@@ -91,8 +91,9 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			//User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
 			//make sure it exists
@@ -141,7 +142,9 @@ public class RemoveMonsterFromBattleTeamController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

@@ -74,7 +74,7 @@ public class InviteFbFriendsForSlotsController extends EventController {
 		InviteFbFriendsForSlotsRequestProto reqProto = ((InviteFbFriendsForSlotsRequestEvent) event)
 				.getInviteFbFriendsForSlotsRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
@@ -117,8 +117,10 @@ public class InviteFbFriendsForSlotsController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			User aUser = getUserRetrieveUtils().getUserById(userId);
 			//get all the invites the user sent
 			List<String> specificIds = null;
@@ -215,7 +217,9 @@ public class InviteFbFriendsForSlotsController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

@@ -49,7 +49,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -58,10 +58,10 @@ public class RetrieveCurrencyFromNormStructureController extends
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtil;
-	
+
 	@Autowired
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureResourceGeneratorRetrieveUtils structureResourceGeneratorRetrieveUtils;
 
@@ -72,7 +72,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 	protected TimeUtils timeUtils;
 	
 	public RetrieveCurrencyFromNormStructureController() {
-		
+
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class RetrieveCurrencyFromNormStructureController extends
 		//		Map<String, Integer> userStructIdsToAmountCollected = new HashMap<String, Integer>();
 		//create map from ids to times and check for duplicates
 		//		getIdsAndTimes(structRetrievals, duplicates,
-		//				userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected); 
+		//				userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected);
 
 		//		List<String> userStructIds = new ArrayList<String>(userStructIdsToTimesOfRetrieval.keySet());
 
@@ -176,13 +176,14 @@ public class RetrieveCurrencyFromNormStructureController extends
 			return;
 		}
 
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 
 			RetrieveCurrencyFromNormStructureAction rcfnsa = new RetrieveCurrencyFromNormStructureAction(
 					userId, maxCash, maxOil, duplicates,
 					userStructIdsToStructRetrievals, userRetrieveUtil,
-					userStructRetrieveUtil, structureMoneyTreeRetrieveUtils, 
+					userStructRetrieveUtil, structureMoneyTreeRetrieveUtils,
 					structureResourceGeneratorRetrieveUtils, updateUtil,
 					miscMethods);
 
@@ -227,7 +228,9 @@ public class RetrieveCurrencyFromNormStructureController extends
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

@@ -218,8 +218,10 @@ public class PurchaseBoosterPackController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			PurchaseBoosterPackAction pbpa = new PurchaseBoosterPackAction(
 					userId, boosterPackId, now, nowTimestamp, freeBoosterPack,
 					buyingInBulk, gemsSpent, gachaCreditsChange, timeUtils,
@@ -296,7 +298,9 @@ public class PurchaseBoosterPackController extends EventController {
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

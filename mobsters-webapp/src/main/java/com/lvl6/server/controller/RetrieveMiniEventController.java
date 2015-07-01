@@ -118,12 +118,12 @@ public class RetrieveMiniEventController extends EventController {
 		String userId = senderProto.getUserUuid();
 		Date now = new Date();
 		Date clientTime = new Date(reqProto.getClientTime());
-		
+
 		RetrieveMiniEventResponseProto.Builder resBuilder = RetrieveMiniEventResponseProto
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -133,8 +133,8 @@ public class RetrieveMiniEventController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtil.numMinutesDifference(clientTime, new Date()) > 
+
+		if(timeUtil.numMinutesDifference(clientTime, new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
@@ -145,9 +145,10 @@ public class RetrieveMiniEventController extends EventController {
 			return;
 		}
 
+		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
-			UUID.fromString(userId);
+			userUuid = UUID.fromString(userId);
 
 			invalidUuids = false;
 		} catch (Exception e) {
@@ -168,8 +169,9 @@ public class RetrieveMiniEventController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 
 			RetrieveMiniEventAction rmea = new RetrieveMiniEventAction(
 					userId, now, true, userRetrieveUtil,
@@ -224,7 +226,9 @@ public class RetrieveMiniEventController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

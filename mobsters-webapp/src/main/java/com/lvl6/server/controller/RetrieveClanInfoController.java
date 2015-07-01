@@ -86,16 +86,16 @@ public class RetrieveClanInfoController extends EventController {
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected ClanSearch clanSearch;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils toggle;
 
 
 	public RetrieveClanInfoController() {
-		
+
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class RetrieveClanInfoController extends EventController {
 		RetrieveClanInfoRequestProto reqProto = ((RetrieveClanInfoRequestEvent) event)
 				.getRetrieveClanInfoRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String clanName = reqProto.getClanName();
@@ -339,10 +339,10 @@ public class RetrieveClanInfoController extends EventController {
 		}
 	}
 
-	//ordering is 4 open, 1 closed, 4 open, 1 closed etc... 
+	//ordering is 4 open, 1 closed, 4 open, 1 closed etc...
 	private List<Clan> orderRecommendedClans(List<String> clanIds) {
 		Map<String, Clan> clanMap = clanRetrieveUtils.getClansByIds(clanIds);
-		
+
 		List<Clan> clanList = new ArrayList<Clan>();
 		if (null == clanMap || clanMap.isEmpty()) {
 			return clanList;
@@ -352,7 +352,7 @@ public class RetrieveClanInfoController extends EventController {
 		LinkedList<String> closedClans = new LinkedList<String>();
 		LinkedList<String> openClans = new LinkedList<String>();
 		int size = clanIds.size();
-		
+
 		for(String clanId : clanIds) {
 			if(clanMap.get(clanId).isRequestToJoinRequired()) {
 				closedClans.add(clanId);
@@ -361,7 +361,7 @@ public class RetrieveClanInfoController extends EventController {
 				openClans.add(clanId);
 			}
 		}
-		
+
 		for(int i=1; i<=size; i++) {
 			if(i%5 == 0) {
 				if(!closedClans.isEmpty()) {

@@ -38,15 +38,15 @@ public class UpdateUserStrengthController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected LeaderBoardImpl leaderBoardImpl;
-	
+
 //	@Autowired
 //	protected LeaderBoardImpl leaderBoardImpl;
 
 	public UpdateUserStrengthController() {
-		
+
 	}
 
 	@Override
@@ -99,9 +99,11 @@ public class UpdateUserStrengthController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
-			UpdateUserStrengthAction uusa = new UpdateUserStrengthAction(userId, updatedStrength, 
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
+			UpdateUserStrengthAction uusa = new UpdateUserStrengthAction(userId, updatedStrength,
 					userRetrieveUtils, updateUtil, leaderBoardImpl);
 
 			uusa.execute(resBuilder);
@@ -140,7 +142,9 @@ public class UpdateUserStrengthController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

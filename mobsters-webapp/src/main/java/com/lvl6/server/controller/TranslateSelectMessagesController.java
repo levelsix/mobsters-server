@@ -155,8 +155,9 @@ public class TranslateSelectMessagesController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(recipientUserUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(recipientUserUuid, this.getClass().getSimpleName());
 
 			TranslateSelectMessagesAction tsma = new TranslateSelectMessagesAction(recipientUserId,
 					senderUserId, language, listOfPrivateChatPosts, ct, translationSettingsForUserRetrieveUtil,
@@ -173,7 +174,7 @@ public class TranslateSelectMessagesController extends EventController {
 				if (null != privateChatPostMap && !privateChatPostMap.isEmpty()) {
 					List<PrivateChatPostProto> pcppList = createNewPrivateChatPostProtoWithTranslations(
 							listOfPrivateChatProtos, privateChatPostMap);
-					log.info("pcppList" + pcppList);
+					log.info("pcppList{}", pcppList);
 					resBuilder.addAllMessagesTranslated(pcppList);
 				}
 			}
@@ -200,7 +201,9 @@ public class TranslateSelectMessagesController extends EventController {
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(recipientUserUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(recipientUserUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

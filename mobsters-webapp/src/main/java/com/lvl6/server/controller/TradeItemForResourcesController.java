@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TradeItemForResourcesRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.TradeItemForResourcesResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemForUser;
@@ -44,9 +43,9 @@ public class TradeItemForResourcesController extends EventController {
 	private static Logger log = LoggerFactory.getLogger(TradeItemForResourcesController.class);
 
 	public TradeItemForResourcesController() {
-		
+
 	}
-	
+
 	@Autowired
 	protected Locker locker;
 
@@ -55,16 +54,16 @@ public class TradeItemForResourcesController extends EventController {
 
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	protected ItemRetrieveUtils itemRetrieveUtils;
-	
+
 	@Autowired
 	protected HistoryUtils historyUtils;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
@@ -83,7 +82,7 @@ public class TradeItemForResourcesController extends EventController {
 		TradeItemForResourcesRequestProto reqProto = ((TradeItemForResourcesRequestEvent) event)
 				.getTradeItemForResourcesRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProtoWithMaxResources mupMaxResources = reqProto.getSender();
 		int maxCash = mupMaxResources.getMaxCash();
@@ -100,7 +99,7 @@ public class TradeItemForResourcesController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(mupMaxResources);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -110,12 +109,12 @@ public class TradeItemForResourcesController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			TradeItemForResourcesResponseEvent resEvent = 
+			TradeItemForResourcesResponseEvent resEvent =
 					new TradeItemForResourcesResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -146,9 +145,9 @@ public class TradeItemForResourcesController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
-				.getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			List<ItemForUser> nuUserItems = null;
 			if (null != nuUserItemsProtos && !nuUserItemsProtos.isEmpty()) {
 				nuUserItems = ItemUtil.javafyUserItemProto(nuUserItemsProtos);
@@ -199,8 +198,9 @@ public class TradeItemForResourcesController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
-					.getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

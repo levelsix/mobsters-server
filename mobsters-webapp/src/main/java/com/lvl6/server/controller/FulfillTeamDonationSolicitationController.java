@@ -42,34 +42,34 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(FulfillTeamDonationSolicitationController.class);
 
-	
+
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected ClanStuffUtils clanStuffUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected HazelcastClanSearchImpl hzClanSearch;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
-	
+
 
 	public FulfillTeamDonationSolicitationController() {
-		
+
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 		FulfillTeamDonationSolicitationRequestProto reqProto = ((FulfillTeamDonationSolicitationRequestEvent) event)
 				.getFulfillTeamDonationSolicitationRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String donatorId = senderProto.getUserUuid();
@@ -112,7 +112,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 		if (null != senderProto.getClan()) {
 			clanId = senderProto.getClan().getClanUuid();
 		}
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -123,11 +123,11 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 			return;
 		}
 
-		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) >
 				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			FulfillTeamDonationSolicitationResponseEvent resEvent = 
+			FulfillTeamDonationSolicitationResponseEvent resEvent =
 					new FulfillTeamDonationSolicitationResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -136,6 +136,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 		}
 
 		boolean invalidUuids = true;
+		UUID solicitorUuid = null;
 		try {
 			UUID.fromString(donatorId);
 			UUID.fromString(clanId);
@@ -146,6 +147,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 			UUID.fromString(cmtd.getClanId());
 
 			solicitorId = cmtd.getUserId();
+			solicitorUuid = UUID.fromString(solicitorId);
 
 			invalidUuids = false;
 		} catch (Exception e) {
@@ -181,8 +183,10 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 		lockedClan = getLocker().lockClan(clanId);
 		} else {
 		}*/
-		locker.lockPlayer(UUID.fromString(solicitorId), this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(solicitorUuid, this.getClass().getSimpleName());
+
 			FulfillTeamDonationSolicitationAction ftdsa = new FulfillTeamDonationSolicitationAction(
 					donatorId, clanId, msfu, cmtd, clientTime,
 					clanMemberTeamDonationRetrieveUtil, UpdateUtils.get(),
@@ -212,13 +216,13 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 								msfuNew, solicitationProto.getSolicitor(),
 								senderProto);
 				resBuilder.setSolicitation(cmtdp);
-				
+
 				hzClanSearch.updateRankForClanSearch(clanId, clientTime, 0, 0, 1, 0, 0);
 
 				resEvent.setResponseProto(resBuilder
 						.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
-				//this works for other clan members, but not for the person 
+				//this works for other clan members, but not for the person
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
 				/*
@@ -252,7 +256,9 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(UUID.fromString(solicitorId), this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(solicitorUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

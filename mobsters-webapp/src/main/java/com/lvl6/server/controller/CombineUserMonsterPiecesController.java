@@ -45,13 +45,13 @@ public class CombineUserMonsterPiecesController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 	
@@ -59,7 +59,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public CombineUserMonsterPiecesController() {
-		
+
 	}
 
 	@Override
@@ -137,8 +137,9 @@ public class CombineUserMonsterPiecesController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			int previousGems = 0;
 
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -198,7 +199,9 @@ public class CombineUserMonsterPiecesController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -207,7 +210,7 @@ public class CombineUserMonsterPiecesController extends EventController {
 	 * builder status to the appropriate value.
 	 * userMonsterIds might be modified to contain only those user monsters that
 	 * can be combined
-	 * 
+	 *
 	 * Example. client gives ids (a, b, c, d). Let's say 'a' is already
 	 *  completed/combined, 'b' is missing a piece, 'c' doesn't exist and 'd'
 	 *  can be completed  so "userMonsterIds" will be modified to only contain

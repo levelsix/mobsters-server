@@ -111,7 +111,7 @@ public class AcceptOrRejectClanInviteController extends EventController {
 		AcceptOrRejectClanInviteRequestProto reqProto = ((AcceptOrRejectClanInviteRequestEvent) event)
 				.getAcceptOrRejectClanInviteRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -178,8 +178,10 @@ public class AcceptOrRejectClanInviteController extends EventController {
 			return;
 		}
 
-		boolean lockedClan = getLocker().lockClan(clanUuid);
+		boolean lockedClan = false;
 		try {
+			lockedClan = locker.lockClan(clanUuid);
+
 			AcceptOrRejectClanInviteAction aorcia = null;
 			if (lockedClan) {
 				String inviteId = "";
@@ -253,8 +255,8 @@ public class AcceptOrRejectClanInviteController extends EventController {
 						e);
 			}
 		} finally {
-			if (null != clanUuid && lockedClan) {
-				getLocker().unlockClan(clanUuid);
+			if (lockedClan) {
+				locker.unlockClan(clanUuid);
 			}
 		}
 	}

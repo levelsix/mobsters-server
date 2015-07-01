@@ -110,7 +110,7 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected ClanSearch clanSearch;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
@@ -149,7 +149,7 @@ public class SendGroupChatController extends EventController {
 		SendGroupChatResponseEvent resEvent = new SendGroupChatResponseEvent(
 				senderProto.getUserUuid());
 		resEvent.setTag(event.getTag());
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -159,7 +159,7 @@ public class SendGroupChatController extends EventController {
 			return;
 		}
 
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) >
 				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
@@ -189,8 +189,9 @@ public class SendGroupChatController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			final User user = getUserRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
 
@@ -300,7 +301,9 @@ public class SendGroupChatController extends EventController {
 				log.error("exception2 in SendGroupChat processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

@@ -56,7 +56,7 @@ public class SetDefendingMsgController extends EventController {
 		SetDefendingMsgRequestProto reqProto = ((SetDefendingMsgRequestEvent) event)
 				.getSetDefendingMsgRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -67,9 +67,10 @@ public class SetDefendingMsgController extends EventController {
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
+		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
-			UUID.fromString(userId);
+			userUuid = UUID.fromString(userId);
 			invalidUuids = false;
 		} catch (Exception e) {
 			log.error(String.format("UUID error. incorrect userId=%s", userId),
@@ -89,9 +90,9 @@ public class SetDefendingMsgController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
-				.getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			//
 			SetDefendingMsgAction rsga = new SetDefendingMsgAction(userId, msg,
 					userRetrieveUtil, miscMethods);
@@ -121,8 +122,9 @@ public class SetDefendingMsgController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
-					.getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

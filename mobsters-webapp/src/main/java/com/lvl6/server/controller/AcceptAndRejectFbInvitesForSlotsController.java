@@ -75,7 +75,7 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 		AcceptAndRejectFbInviteForSlotsRequestProto reqProto = ((AcceptAndRejectFbInviteForSlotsRequestEvent) event)
 				.getAcceptAndRejectFbInviteForSlotsRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 		//get values sent from the client (the request proto)
 		MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
 		MinimumUserProto sender = senderProto.getMinUserProto();
@@ -128,8 +128,9 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			//these will be populated. by checkLegit()
 			Map<String, UserFacebookInviteForSlot> idsToInvitesInDb = new HashMap<String, UserFacebookInviteForSlot>();
 
@@ -223,7 +224,9 @@ public class AcceptAndRejectFbInvitesForSlotsController extends EventController 
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

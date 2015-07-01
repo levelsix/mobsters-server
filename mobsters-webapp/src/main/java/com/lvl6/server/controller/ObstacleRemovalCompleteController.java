@@ -44,7 +44,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected ObstacleForUserRetrieveUtil2 obstacleForUserRetrieveUtil;
 
@@ -55,7 +55,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public ObstacleRemovalCompleteController() {
-		
+
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class ObstacleRemovalCompleteController extends EventController {
 		ObstacleRemovalCompleteRequestProto reqProto = ((ObstacleRemovalCompleteRequestEvent) event)
 				.getObstacleRemovalCompleteRequestProto();
 
-		log.info("reqProto=" + reqProto);
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -136,8 +136,10 @@ public class ObstacleRemovalCompleteController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			User user = getUserRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
 			ObstacleForUser ofu = getObstacleForUserRetrieveUtil()
@@ -192,7 +194,9 @@ public class ObstacleRemovalCompleteController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if(gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

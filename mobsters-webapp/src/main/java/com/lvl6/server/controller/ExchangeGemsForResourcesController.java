@@ -40,7 +40,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -51,7 +51,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public ExchangeGemsForResourcesController() {
-		
+
 	}
 
 	@Override
@@ -69,8 +69,8 @@ public class ExchangeGemsForResourcesController extends EventController {
 		ExchangeGemsForResourcesRequestProto reqProto = ((ExchangeGemsForResourcesRequestEvent) event)
 				.getExchangeGemsForResourcesRequestProto();
 
-		log.info("reqProto: ", reqProto);
-		
+		log.info("reqProto: {}", reqProto);
+
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
 				.getSender();
 		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
@@ -131,8 +131,10 @@ public class ExchangeGemsForResourcesController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			User user = userRetrieveUtil.getUserById(userId);
 
 			boolean legit = checkLegit(resBuilder, user, numGems, resourceType,
@@ -184,7 +186,9 @@ public class ExchangeGemsForResourcesController extends EventController {
 					.build());
 			responses.normalResponseEvents().add(resEvent);
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -242,7 +246,7 @@ public class ExchangeGemsForResourcesController extends EventController {
 		} else if (ResourceType.GACHA_CREDITS == resourceType) {
 			gachaCreditsChange = numResources;
 		}
-		
+
 
 		if (0 == oilChange && 0 == cashChange && 0 == gachaCreditsChange) {
 			//  		log.error("oil and cash (user exchanged) for gems are both 0. oilChange=" +

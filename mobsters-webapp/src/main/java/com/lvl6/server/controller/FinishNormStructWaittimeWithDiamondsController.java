@@ -44,7 +44,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -53,7 +53,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 userStructRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
 	
@@ -61,7 +61,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 	protected TimeUtils timeUtils;
 
 	public FinishNormStructWaittimeWithDiamondsController() {
-		
+
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 
 		FinishNormStructWaittimeWithDiamondsRequestProto reqProto = ((FinishNormStructWaittimeWithDiamondsRequestEvent) event)
 				.getFinishNormStructWaittimeWithDiamondsRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -141,11 +141,15 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			User user = getUserRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
-			log.info(String.format("user=%s", user));
+
+			log.debug("user={}", user);
+
 			int previousGems = 0;
 			StructureForUser userStruct = getUserStructRetrieveUtils()
 					.getSpecificUserStruct(userStructId);
@@ -209,7 +213,9 @@ public class FinishNormStructWaittimeWithDiamondsController extends
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
