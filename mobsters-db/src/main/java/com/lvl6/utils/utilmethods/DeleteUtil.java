@@ -8,8 +8,6 @@ import com.lvl6.info.MonsterSnapshotForUser;
 
 public interface DeleteUtil {
 
-	public abstract boolean deleteAvailableReferralCode(String referralCode);
-
 	/*@Caching(evict = {
 			////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
 			////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
@@ -20,8 +18,6 @@ public interface DeleteUtil {
 			int numRowsToDelete);
 
 	public abstract boolean deleteClanWithClanId(String clanId);
-
-	//  public abstract boolean deleteBlacksmithAttempt(int blacksmithId);
 
 	public abstract boolean deleteUserClan(String userId, String clanId);
 

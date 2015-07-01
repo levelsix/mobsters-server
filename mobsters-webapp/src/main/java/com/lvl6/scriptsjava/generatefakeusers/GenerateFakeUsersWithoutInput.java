@@ -10,10 +10,8 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.Resource;
 
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.retrieveutils.AvailableReferralCodeRetrieveUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
-import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 public class GenerateFakeUsersWithoutInput {
@@ -62,17 +60,6 @@ public class GenerateFakeUsersWithoutInput {
 			name = name.toLowerCase();
 		if (Math.random() < .3)
 			name = name + (int) (Math.ceil(Math.random() * 98));
-
-		String newReferCode = AvailableReferralCodeRetrieveUtils
-				.getAvailableReferralCode();
-		if (newReferCode != null && newReferCode.length() > 0) {
-			while (!DeleteUtils.get().deleteAvailableReferralCode(newReferCode)) {
-				newReferCode = AvailableReferralCodeRetrieveUtils
-						.getAvailableReferralCode();
-			}
-		} else {
-			//TODO: generate more codes?
-		}
 
 		InsertUtil insertUtils = (InsertUtil) AppContext
 				.get().getBean("insertUtils");

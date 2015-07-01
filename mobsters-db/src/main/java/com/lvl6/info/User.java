@@ -302,6 +302,7 @@ public class User implements Serializable {
 	//		return false;
 	//	}
 
+	/*
 	public boolean updateAbsoluteApsalaridLastloginBadgesNumConsecutiveDaysLoggedIn(
 			String newApsalarId, Timestamp loginTime, int newBadges,
 			int newNumConsecutiveDaysLoggedIn) {
@@ -309,7 +310,7 @@ public class User implements Serializable {
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__APSALAR_ID, newApsalarId);
+		absoluteParams.put(DBConstants.USER__APSALAR_ID, newApsalarId);//TODO CONSIDER DELETING THIS COLUMN
 		absoluteParams.put(DBConstants.USER__LAST_LOGIN, loginTime);
 		absoluteParams.put(DBConstants.USER__NUM_BADGES, newBadges);
 		absoluteParams.put(DBConstants.USER__NUM_CONSECUTIVE_DAYS_PLAYED,
@@ -325,7 +326,7 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	public boolean updateLastLogout(Timestamp lastLogout) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
