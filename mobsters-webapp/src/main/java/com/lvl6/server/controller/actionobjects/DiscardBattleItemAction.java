@@ -23,12 +23,12 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private String userId;
 	private User user;
 	private Map<Integer, Integer> deletedBattleItemIdsToQuantity;
-	@Autowired protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil; 
+	@Autowired protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
 	@Autowired protected UpdateUtil updateUtil;
 
 	public DiscardBattleItemAction(String userId, User user,
 			Map<Integer, Integer> deletedBattleItemIdsToQuantity,
-			BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil, 
+			BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil,
 			UpdateUtil updateUtil) {
 		super();
 		this.userId = userId;
@@ -82,19 +82,22 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 		else return false;
 	}
-	
+
 	private List<BattleItemForUser> createMapForUserBattleItems(Map<Integer, Integer> deletedBattleItemIdsToQuantity) {
+		//this is really a Set, since each BatleItemForUser is different than another.
 		List<BattleItemForUser> userBattleItemsList = battleItemForUserRetrieveUtil.getUserBattleItemsForUser(userId);
 		List<BattleItemForUser> updatedBattleItemsList = new ArrayList<BattleItemForUser>();
-		
+
 		for(BattleItemForUser bifu : userBattleItemsList) {
 			if(deletedBattleItemIdsToQuantity.containsKey(bifu.getBattleItemId())) {
 				int newQuantity = bifu.getQuantity() - deletedBattleItemIdsToQuantity.get(bifu.getBattleItemId());
 				if(newQuantity < 0) {
+					log.error("client deleted more items than the user has. has={}, deleted={}",
+							userBattleItemsList, deletedBattleItemIdsToQuantity);
 					bifu.setQuantity(0);
 				}
 				else bifu.setQuantity(newQuantity);
-				
+
 				updatedBattleItemsList.add(bifu);
 			}
 		}

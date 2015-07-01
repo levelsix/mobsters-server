@@ -42,12 +42,12 @@ public class DestroyMoneyTreeStructureController extends EventController {
 
 	@Autowired
 	protected StructureForUserRetrieveUtils2 structureForUserRetrieveUtils2;
-	
+
 	@Autowired
 	protected StructureMoneyTreeRetrieveUtils structureMoneyTreeRetrieveUtils;
 
 	public DestroyMoneyTreeStructureController() {
-		
+
 	}
 
 	@Override
@@ -101,9 +101,10 @@ public class DestroyMoneyTreeStructureController extends EventController {
 			return;
 		}
 
-		// Lock this player's ID
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			// Lock this player's ID
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 
 			writeChangesToDb(userId, resBuilder, userStructIdList);
 
@@ -125,10 +126,20 @@ public class DestroyMoneyTreeStructureController extends EventController {
 			log.error(
 					"exception in DestroyMoneyTreeStructureController processEvent",
 					e);
+			resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
+
+			DestroyMoneyTreeStructureResponseEvent resEvent = new DestroyMoneyTreeStructureResponseEvent(
+					senderProto.getUserUuid());
+			resEvent.setTag(event.getTag());
+			resEvent.setResponseProto(resBuilder.build());
+			responses.normalResponseEvents().add(resEvent);
+
 			//don't let the client hang
 		} finally {
-			// Unlock this player
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				// Unlock this player
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

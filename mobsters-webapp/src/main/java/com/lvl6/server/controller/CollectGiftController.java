@@ -179,9 +179,10 @@ public class CollectGiftController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
-			//
+			gotLock = locker.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+
 			CollectGiftAction cga = new CollectGiftAction(userId,
 					maxCash, maxOil, ugIds, clientTime, giftForUserRetrieveUtil,
 					userRetrieveUtil, rewardRetrieveUtil, itemForUserRetrieveUtil,
@@ -230,7 +231,9 @@ public class CollectGiftController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			}
 		}
 	}
 

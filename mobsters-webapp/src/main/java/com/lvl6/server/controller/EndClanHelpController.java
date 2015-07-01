@@ -33,7 +33,7 @@ public class EndClanHelpController extends EventController {
 	protected Locker locker;
 
 	public EndClanHelpController() {
-		
+
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class EndClanHelpController extends EventController {
 		EndClanHelpRequestProto reqProto = ((EndClanHelpRequestEvent) event)
 				.getEndClanHelpRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		List<String> clanHelpIdList = reqProto.getClanHelpUuidsList();
@@ -119,7 +119,7 @@ public class EndClanHelpController extends EventController {
 				resBuilder.setStatus(ResponseStatus.SUCCESS);
 				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
-				//this works for other clan members, but not for the person 
+				//this works for other clan members, but not for the person
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
 			}

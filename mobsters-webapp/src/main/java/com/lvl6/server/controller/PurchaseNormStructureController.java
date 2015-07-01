@@ -48,13 +48,13 @@ public class PurchaseNormStructureController extends EventController {
 
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected InsertUtil insertUtils;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected StructureRetrieveUtils structureRetrieveUtils;
 	
@@ -62,7 +62,7 @@ public class PurchaseNormStructureController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public PurchaseNormStructureController() {
-		
+
 	}
 
 	@Override
@@ -145,12 +145,15 @@ public class PurchaseNormStructureController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			//get things from the db
 			User user = getUserRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
-			log.info("user={}", user);
+			log.debug("user={}", user);
+
 			Structure struct = structureRetrieveUtils
 					.getStructForStructId(structId);
 
@@ -215,7 +218,9 @@ public class PurchaseNormStructureController extends EventController {
 				log.error("exception2 in PurchaseNormStructure processEvent", e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

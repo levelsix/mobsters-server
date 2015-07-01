@@ -41,15 +41,15 @@ public class UpdateUserCurrencyController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
 	public UpdateUserCurrencyController() {
-		
+
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class UpdateUserCurrencyController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -95,12 +95,12 @@ public class UpdateUserCurrencyController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			UpdateUserCurrencyResponseEvent resEvent = 
+			UpdateUserCurrencyResponseEvent resEvent =
 					new UpdateUserCurrencyResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -130,8 +130,10 @@ public class UpdateUserCurrencyController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			User aUser = getUserRetrieveUtils().getUserById(userId);
 			int previousGems = 0;
 			int previousCash = 0;
@@ -199,7 +201,9 @@ public class UpdateUserCurrencyController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

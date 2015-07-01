@@ -1,6 +1,5 @@
 package com.lvl6.server.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,13 +13,9 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.DiscardBattleItemRequestEvent;
-import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.DiscardBattleItemResponseEvent;
-import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -45,18 +40,18 @@ public class DiscardBattleItemController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
 	public DiscardBattleItemController() {
-		
+
 	}
 
 	@Override
@@ -78,18 +73,18 @@ public class DiscardBattleItemController extends EventController {
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		Date clientTime = new Date(reqProto.getClientTime());
-		
-		//the new items added to queue, updated refers to those finished as well as 
+
+		//the new items added to queue, updated refers to those finished as well as
 		//priorities changing, deleted refers to those removed from queue and completed
 		List<Integer> discardedBattleItemIdsList = reqProto
 				.getDiscardedBattleItemIdsList();
 		Map<Integer, Integer> battleItemIdsToQuantity = battleItemIdsToQuantity(discardedBattleItemIdsList);
-		
+
 		DiscardBattleItemResponseProto.Builder resBuilder = DiscardBattleItemResponseProto
 				.newBuilder();
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -99,8 +94,8 @@ public class DiscardBattleItemController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
@@ -134,8 +129,9 @@ public class DiscardBattleItemController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			User user = userRetrieveUtil.getUserById(userId);
 
 			DiscardBattleItemAction dbia = new DiscardBattleItemAction(userId,
@@ -166,31 +162,12 @@ public class DiscardBattleItemController extends EventController {
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
-	private List<BattleItemForUser> getBattleItemForUserListFromProtos(
-			List<UserBattleItemProto> protosList) {
-		List<BattleItemForUser> battleItemForUserList = null;
-		if (protosList == null || protosList.isEmpty()) {
-			log.error("DiscardBattleItem request did not send any battle items for user ids");
-			return battleItemForUserList;
-		}
-
-		battleItemForUserList = new ArrayList<BattleItemForUser>();
-
-		for (UserBattleItemProto ubiProto : protosList) {
-			BattleItemForUser bifu = new BattleItemForUser();
-			bifu.setBattleItemId(ubiProto.getBattleItemId());
-			bifu.setUserId(ubiProto.getUserUuid());
-			bifu.setQuantity(ubiProto.getQuantity());
-			battleItemForUserList.add(bifu);
-		}
-
-		return battleItemForUserList;
-	}
-	
 	private Map<Integer, Integer> battleItemIdsToQuantity(List<Integer> battleItemIdsList) {
 		Map<Integer, Integer> returnMap = new HashMap<Integer, Integer>();
 		for(Integer id : battleItemIdsList) {

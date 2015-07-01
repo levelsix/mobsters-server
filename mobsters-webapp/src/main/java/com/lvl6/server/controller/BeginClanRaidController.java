@@ -72,13 +72,13 @@ public class BeginClanRaidController extends EventController {
 
 	@Autowired
 	protected ClanEventPersistentForUserRetrieveUtils2 clanEventPersistentForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected ClanEventPersistentRetrieveUtils clanEventPersistentRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageRetrieveUtils clanRaidStageRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanRaidStageMonsterRetrieveUtils clanRaidStageMonsterRetrieveUtils;
 
@@ -87,15 +87,15 @@ public class BeginClanRaidController extends EventController {
 
 	@Autowired
 	protected ClanEventUtil clanEventUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	public BeginClanRaidController() {
-		
+
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class BeginClanRaidController extends EventController {
 		BeginClanRaidRequestProto reqProto = ((BeginClanRaidRequestEvent) event)
 				.getBeginClanRaidRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		MinimumClanProto mcp = senderProto.getClan();
@@ -135,7 +135,7 @@ public class BeginClanRaidController extends EventController {
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 		resBuilder.setSender(senderProto);
 
-		//OUTLINE: 
+		//OUTLINE:
 		//get the clan lock; get the clan raid object for the clan;
 		// If doesn't exist, create it. If does exist, check to see if the raids are different.
 		// If different, replace it with a new one. Else, do nothing.
@@ -192,11 +192,11 @@ public class BeginClanRaidController extends EventController {
 
 		//ONLY GET CLAN LOCK IF TRYING TO BEGIN A RAID
 		boolean lockedClan = false;
-		if (null != clanUuid && !setMonsterTeamForRaid) {
-			log.info(String.format("locking clanId=%s", clanId));
-			lockedClan = getLocker().lockClan(clanUuid);
-		}
 		try {
+			if (!setMonsterTeamForRaid) {
+				log.info("locking clanId={}", clanId);
+				lockedClan = locker.lockClan(clanUuid);
+			}
 			//      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 			UserClan uc = RetrieveUtils.userClanRetrieveUtils()
 					.getSpecificUserClan(userId, clanId);
@@ -235,7 +235,7 @@ public class BeginClanRaidController extends EventController {
 					userId);
 			resEvent.setTag(event.getTag());
 			resEvent.setResponseProto(resBuilder.build());
-			log.info("resBuilder=" + resBuilder.build());
+			log.info("resBuilder={}", resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 
 			if (success) {
@@ -261,8 +261,8 @@ public class BeginClanRaidController extends EventController {
 			//if (null != mcp && mcp.hasClanId()) {
 			//if (0 != clanId && !setMonsterTeamForRaid && lockedClan) {
 			if (lockedClan) {
-				getLocker().unlockClan(clanUuid);
-				log.info(String.format("unlocked clanId=%s", clanId));
+				locker.unlockClan(clanUuid);
+				log.info("unlocked clanId={}", clanId);
 			}
 			//}
 
@@ -327,7 +327,7 @@ public class BeginClanRaidController extends EventController {
 		}
 
 		//Don't think any checks need to be made
-		//(user needs to equip user monsters before beginning raid; checks are done there) 
+		//(user needs to equip user monsters before beginning raid; checks are done there)
 		if (setMonsterTeamForRaid
 				&& (null == userMonsterIds || userMonsterIds.isEmpty())) {
 			resBuilder.setStatus(ResponseStatus.FAIL_NO_MONSTERS_SENT);
@@ -408,7 +408,7 @@ public class BeginClanRaidController extends EventController {
 			return false;
 		}
 
-		//maybe clan started event last week and didn't push the clan related 
+		//maybe clan started event last week and didn't push the clan related
 		//information on the raid to the history table when event ended.
 		//TODO: if so, do it now and do it for the clan users' stuff as well
 		//  	Date raidStartedByClanDate = raidStartedByClan.getStageStartTime();
@@ -532,7 +532,7 @@ public class BeginClanRaidController extends EventController {
 			String clanId, int clanRaidId, List<String> userMonsterIds,
 			List<FullUserMonsterProto> userMonsters) {
 		//crsId and crsmId is not needed in PersistentClanEventUserInfoProto
-		//should already be in the db table 
+		//should already be in the db table
 		//  	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
 		//    		.getPersistentEventForClanId(clanId);
 

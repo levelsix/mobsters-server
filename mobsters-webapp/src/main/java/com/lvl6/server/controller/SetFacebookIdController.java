@@ -35,10 +35,10 @@ public class SetFacebookIdController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -46,7 +46,7 @@ public class SetFacebookIdController extends EventController {
 	protected UserRetrieveUtils2 userRetrieveUtils;
 
 	public SetFacebookIdController() {
-		
+
 	}
 
 	@Override
@@ -112,8 +112,9 @@ public class SetFacebookIdController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			//      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserUuid());
 			Map<String, User> userMap = getUserRetrieveUtils()
 					.getUsersForFacebookIdsOrUserIds(facebookIds, userIds);
@@ -160,7 +161,9 @@ public class SetFacebookIdController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

@@ -44,15 +44,15 @@ public class UpdateMonsterHealthController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
 	public UpdateMonsterHealthController() {
-		
+
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class UpdateMonsterHealthController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		UpdateMonsterHealthRequestProto reqProto = ((UpdateMonsterHealthRequestEvent) event)
 				.getUpdateMonsterHealthRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -101,7 +101,7 @@ public class UpdateMonsterHealthController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER); //default
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -111,12 +111,12 @@ public class UpdateMonsterHealthController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) > 
+
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getClientTime()), new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			UpdateMonsterHealthResponseEvent resEvent = 
+			UpdateMonsterHealthResponseEvent resEvent =
 					new UpdateMonsterHealthResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -157,8 +157,10 @@ public class UpdateMonsterHealthController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			Map<String, Integer> userMonsterIdToExpectedHealth = new HashMap<String, Integer>();
 
 			boolean legit = checkLegit(resBuilder, userId, umchpList,
@@ -200,7 +202,9 @@ public class UpdateMonsterHealthController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -256,7 +260,7 @@ public class UpdateMonsterHealthController extends EventController {
 			String userTaskId, boolean isUpdateTaskStageForUser,
 			int nuTaskStageId, String droplessTsfuId,
 			boolean changeDmgMultipier, float nuPvpDmgMultiplier) {
-		//replace existing health for these user monsters with new values 
+		//replace existing health for these user monsters with new values
 		if (!userMonsterIdToExpectedHealth.isEmpty()) {
 			log.info("updating user's monsters' healths");
 			int numUpdated = UpdateUtils.get().updateUserMonstersHealth(

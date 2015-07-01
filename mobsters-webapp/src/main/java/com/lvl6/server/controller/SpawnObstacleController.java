@@ -43,10 +43,10 @@ public class SpawnObstacleController extends EventController {
 
 	@Autowired
 	protected StructureStuffUtil structureStuffUtil;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -55,12 +55,12 @@ public class SpawnObstacleController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
 	public SpawnObstacleController() {
-		
+
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class SpawnObstacleController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		SpawnObstacleRequestProto reqProto = ((SpawnObstacleRequestEvent) event)
 				.getSpawnObstacleRequestProto();
-		log.info("reqProto=" + reqProto);
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -89,7 +89,7 @@ public class SpawnObstacleController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getCurTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -99,12 +99,12 @@ public class SpawnObstacleController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(new Date(reqProto.getCurTime()), new Date()) > 
+
+		if(timeUtils.numMinutesDifference(new Date(reqProto.getCurTime()), new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			SpawnObstacleResponseEvent resEvent = 
+			SpawnObstacleResponseEvent resEvent =
 					new SpawnObstacleResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -135,8 +135,9 @@ public class SpawnObstacleController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			User user = getUserRetrieveUtils().getUserById(
 					senderProto.getUserUuid());
 
@@ -191,7 +192,9 @@ public class SpawnObstacleController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

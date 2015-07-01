@@ -35,27 +35,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 @Component
 public class TradeItemForSpeedUpsController extends EventController {
 
-	
+
 	private static final Logger log = LoggerFactory.getLogger(TradeItemForSpeedUpsController.class);
 
 	public TradeItemForSpeedUpsController() {
 	}
-	
+
 	@Autowired
 	protected Locker locker;
 
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected HistoryUtils historyUtils;
-	
+
 	@Override
 	public RequestEvent createRequestEvent() {
 		return new TradeItemForSpeedUpsRequestEvent();
@@ -71,7 +71,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 		TradeItemForSpeedUpsRequestProto reqProto = ((TradeItemForSpeedUpsRequestEvent) event)
 				.getTradeItemForSpeedUpsRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -107,10 +107,10 @@ public class TradeItemForSpeedUpsController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
-				.getSimpleName());
+		boolean gotLock = false;
 		//TODO: Logic similar to PurchaseSpeedUpsPack, see what else can be optimized/shared
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			List<ItemForUserUsage> itemsUsed = null;
 			List<ItemForUser> nuUserItems = null;
 
@@ -138,7 +138,7 @@ public class TradeItemForSpeedUpsController extends EventController {
 					resBuilder.addAllItemsUsed(uiupList);
 				}
 			}
-			
+
 			if (resBuilder.getStatus().equals(
 					ResponseStatus.SUCCESS)) {
 				//null PvpLeagueFromUser means will pull from hazelcast instead
@@ -175,12 +175,13 @@ public class TradeItemForSpeedUpsController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass()
-					.getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
-	
-	
+
+
 	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
 		return itemForUserRetrieveUtil;
 	}

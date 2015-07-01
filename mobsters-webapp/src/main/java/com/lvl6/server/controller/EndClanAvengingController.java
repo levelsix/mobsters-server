@@ -34,7 +34,7 @@ public class EndClanAvengingController extends EventController {
 	protected Locker locker;
 
 	public EndClanAvengingController() {
-		
+
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class EndClanAvengingController extends EventController {
 		EndClanAvengingRequestProto reqProto = ((EndClanAvengingRequestEvent) event)
 				.getEndClanAvengingRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -192,7 +192,7 @@ public class EndClanAvengingController extends EventController {
 	//			  RetrieveClanDataResponseProto.newBuilder();
 	//		  rcdrpb.setMup(senderProto);
 	//		  rcdrpb.setClanData(cdp);
-	//		  
+	//
 	//		  rcdre.setRetrieveClanDataResponseProto(rcdrpb.build());
 	//		  responses.normalResponseEvents().add(rcdre);
 	//	  }

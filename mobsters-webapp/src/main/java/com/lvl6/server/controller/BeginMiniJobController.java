@@ -31,6 +31,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MiniJobForUserRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.TimeUtils;
@@ -42,8 +43,8 @@ public class BeginMiniJobController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(BeginMiniJobController.class);
 
-	//	@Autowired
-	//	protected Locker locker;
+	@Autowired
+	protected Locker locker;
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
@@ -53,7 +54,7 @@ public class BeginMiniJobController extends EventController {
 
 	@Autowired
 	protected QueryConstructionUtil queryConstructionUtil;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 	
@@ -61,7 +62,7 @@ public class BeginMiniJobController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public BeginMiniJobController() {
-		
+
 	}
 
 	@Override
@@ -79,7 +80,7 @@ public class BeginMiniJobController extends EventController {
 		BeginMiniJobRequestProto reqProto = ((BeginMiniJobRequestEvent) event)
 				.getBeginMiniJobRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -137,9 +138,9 @@ public class BeginMiniJobController extends EventController {
 			return;
 		}
 
-		//TODO: figure out if locking is needed
-		//		getLocker().lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
 
 			boolean legit = checkLegit(resBuilder, userId, userMonsterIds,
 					userMiniJobId);
@@ -175,8 +176,10 @@ public class BeginMiniJobController extends EventController {
 				log.error("exception2 in BeginMiniJobController processEvent",
 						e);
 			}
-			//		} finally {
-			//			getLocker().unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());      
+		} finally {
+			if (gotLock) {
+				locker.unlockPlayer(senderProto.getUserUuid(), this.getClass().getSimpleName());
+			}
 		}
 	}
 

@@ -114,7 +114,7 @@ public class BeginDungeonController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		BeginDungeonRequestProto reqProto = ((BeginDungeonRequestEvent) event)
 				.getBeginDungeonRequestProto();
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get values sent from the client (the request proto)
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -190,8 +190,9 @@ public class BeginDungeonController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 			Task aTask = taskRetrieveUtils.getTaskForTaskId(taskId);
 
@@ -218,9 +219,8 @@ public class BeginDungeonController extends EventController {
 				setResponseBuilder(resBuilder, userTaskIdList,
 						stageNumsToProtos);
 			}
-			log.info(String.format("successful=%s", successful));
-			//      log.info("resBuilder=" + resBuilder);
-			log.info(String.format("resBuilder=%s", resBuilder.build()));
+			log.info("successful={}, resBuilder={}",
+					successful, resBuilder.build());
 
 			BeginDungeonResponseEvent resEvent = new BeginDungeonResponseEvent(
 					userId);
@@ -254,7 +254,9 @@ public class BeginDungeonController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

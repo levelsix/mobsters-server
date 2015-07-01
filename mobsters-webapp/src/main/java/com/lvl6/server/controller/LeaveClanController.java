@@ -128,15 +128,10 @@ public class LeaveClanController extends EventController {
 			return;
 		}
 
-		//maybe should get clan lock instead of locking person
-		//but going to modify user, so lock user. however maybe locking is not necessary
 		boolean lockedClan = false;
-		if (null != clanId) {
-			lockedClan = getLocker().lockClan(clanUuid);
-		}/* else {
-			locker.lockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
-			}*/
 		try {
+			lockedClan = locker.lockClan(clanUuid);
+
 			LeaveClanAction lca = new LeaveClanAction(userId, clanId, lockedClan,
 					userRetrieveUtils, insertUtil, deleteUtil, clanRetrieveUtils,
 					userClanRetrieveUtils, hzClanSearch, clanChatPostRetrieveUtil,
@@ -174,11 +169,9 @@ public class LeaveClanController extends EventController {
 				log.error("exception2 in LeaveClan processEvent", e);
 			}
 		} finally {
-			if (null != clanUuid && lockedClan) {
-				getLocker().unlockClan(clanUuid);
-			}/* else {
-				locker.unlockPlayer(UUID.fromString(senderProto.getUserUuid()), this.getClass().getSimpleName());
-				}*/
+			if (lockedClan) {
+				locker.unlockClan(clanUuid);
+			}
 		}
 	}
 

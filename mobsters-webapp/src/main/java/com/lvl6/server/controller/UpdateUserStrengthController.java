@@ -99,8 +99,10 @@ public class UpdateUserStrengthController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			UpdateUserStrengthAction uusa = new UpdateUserStrengthAction(userId, updatedStrength, 
 					userRetrieveUtils, updateUtil);
 
@@ -140,7 +142,9 @@ public class UpdateUserStrengthController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

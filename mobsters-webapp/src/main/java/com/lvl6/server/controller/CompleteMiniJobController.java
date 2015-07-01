@@ -44,7 +44,7 @@ public class CompleteMiniJobController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -62,7 +62,7 @@ public class CompleteMiniJobController extends EventController {
 	
 
 	public CompleteMiniJobController() {
-		
+
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class CompleteMiniJobController extends EventController {
 		CompleteMiniJobRequestProto reqProto = ((CompleteMiniJobRequestEvent) event)
 				.getCompleteMiniJobRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -142,8 +142,9 @@ public class CompleteMiniJobController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			//retrieve whatever is necessary from the db
 			//TODO: consider only retrieving user if the request is valid
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(
@@ -200,7 +201,9 @@ public class CompleteMiniJobController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

@@ -39,29 +39,29 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class SolicitTeamDonationController extends EventController {
 
-	
+
 	private static final Logger log = LoggerFactory.getLogger(SolicitTeamDonationController.class);
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
-	
+
 	@Autowired
 	protected HazelcastClanSearchImpl hzClanSearch;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
 	public SolicitTeamDonationController() {
-		
+
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class SolicitTeamDonationController extends EventController {
 		SolicitTeamDonationRequestProto reqProto = ((SolicitTeamDonationRequestEvent) event)
 				.getSolicitTeamDonationRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -98,7 +98,7 @@ public class SolicitTeamDonationController extends EventController {
 		if (null != senderProto.getClan()) {
 			clanId = senderProto.getClan().getClanUuid();
 		}
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -108,8 +108,8 @@ public class SolicitTeamDonationController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(clientTime, new Date()) > 
+
+		if(timeUtils.numMinutesDifference(clientTime, new Date()) >
 				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
@@ -188,7 +188,7 @@ public class SolicitTeamDonationController extends EventController {
 				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 
-				//this works for other clan members, but not for the person 
+				//this works for other clan members, but not for the person
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
 				if (gemsSpent > 0) {

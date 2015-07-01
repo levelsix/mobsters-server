@@ -62,7 +62,7 @@ public class EvolveMonsterController extends EventController {
 
 	@Autowired
 	protected InsertUtil insertUtil;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -82,7 +82,7 @@ public class EvolveMonsterController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public EvolveMonsterController() {
-		
+
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class EvolveMonsterController extends EventController {
 		EvolveMonsterRequestProto reqProto = ((EvolveMonsterRequestEvent) event)
 				.getEvolveMonsterRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -176,8 +176,10 @@ public class EvolveMonsterController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, getClass().getSimpleName());
+
 			int previousOil = 0;
 			int previousGems = 0;
 			//get whatever we need from the database
@@ -202,9 +204,8 @@ public class EvolveMonsterController extends EventController {
 				newIds.addAll(evolvingUserMonsterIds);
 				existingUserMonsters = monsterForUserRetrieveUtil
 						.getSpecificOrAllUserMonstersForUser(userId, newIds);
-				log.info(String.format(
-						"retrieved user monsters. existingUserMonsters=%s",
-						existingUserMonsters));
+				log.debug( "retrieved user monsters. existingUserMonsters={}",
+						existingUserMonsters);
 			}
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId,
 					existingUserMonsters, alreadyEnhancing, alreadyHealing,
@@ -263,7 +264,9 @@ public class EvolveMonsterController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 		} finally {
-			getLocker().unlockPlayer(userUuid, getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, getClass().getSimpleName());
+			}
 		}
 	}
 

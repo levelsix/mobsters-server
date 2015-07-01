@@ -42,7 +42,7 @@ public class TransferClanOwnershipController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -54,15 +54,15 @@ public class TransferClanOwnershipController extends EventController {
 
 	@Autowired
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
-	
+
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected DeleteUtil deleteUtil;
 
 	public TransferClanOwnershipController() {
-		
+
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class TransferClanOwnershipController extends EventController {
 	public void processRequestEvent(RequestEvent event, ToClientEvents responses)  {
 		TransferClanOwnershipRequestProto reqProto = ((TransferClanOwnershipRequestEvent) event)
 				.getTransferClanOwnershipRequestProto();
-		log.info("reqProto=" + reqProto);
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -129,10 +129,10 @@ public class TransferClanOwnershipController extends EventController {
 		}
 
 		boolean lockedClan = false;
-		if (clanUuid != null) {
-			lockedClan = getLocker().lockClan(clanUuid);
-		}
 		try {
+			if (clanUuid != null) {
+				lockedClan = locker.lockClan(clanUuid);
+			}
 			TransferClanOwnershipAction tcoa = new TransferClanOwnershipAction(userId,
 					newClanOwnerId, lockedClan, userRetrieveUtils, updateUtil,
 					deleteUtil, userClanRetrieveUtils);
@@ -174,7 +174,7 @@ public class TransferClanOwnershipController extends EventController {
 			}
 		} finally {
 			if (clanUuid != null && lockedClan) {
-				getLocker().unlockClan(clanUuid);
+				locker.unlockClan(clanUuid);
 			}
 		}
 	}

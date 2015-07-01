@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateMiniEventRequestEvent;
 import com.lvl6.events.response.UpdateMiniEventResponseEvent;
-import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventGoalForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMiniEventProto.UpdateMiniEventRequestProto;
@@ -100,9 +99,10 @@ public class UpdateMiniEventController extends EventController {
 			return;
 		}
 
+		UUID userUuid = null;
 		boolean invalidUuids = true;
 		try {
-			UUID.fromString(userId);
+			userUuid = UUID.fromString(userId);
 
 			for (UserMiniEventGoalProto umegp : umegpList) {
 				UUID.fromString(umegp.getUserUuid());
@@ -127,8 +127,10 @@ public class UpdateMiniEventController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+
 			List<MiniEventGoalForUserPojo> megfuList = javafyUserMiniEventProto(umegpList);
 
 			UpdateMiniEventAction rmea = new UpdateMiniEventAction(
@@ -160,7 +162,9 @@ public class UpdateMiniEventController extends EventController {
 			}
 
 		} finally {
-			locker.unlockPlayer(UUID.fromString(userId), this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

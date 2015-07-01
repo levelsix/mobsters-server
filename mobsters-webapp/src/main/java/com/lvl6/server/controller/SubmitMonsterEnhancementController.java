@@ -59,7 +59,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected MonsterEnhancingForUserRetrieveUtils2 monsterEnhancingForUserRetrieveUtils;
 	@Autowired
@@ -69,10 +69,10 @@ public class SubmitMonsterEnhancementController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
@@ -80,7 +80,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
 
 	public SubmitMonsterEnhancementController() {
-		
+
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		SubmitMonsterEnhancementRequestProto reqProto = ((SubmitMonsterEnhancementRequestEvent) event)
 				.getSubmitMonsterEnhancementRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		//get data client sent
 		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto
@@ -115,7 +115,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		Timestamp clientTime = new Timestamp((new Date()).getTime());
 		int maxOil = senderResourcesProto.getMaxOil();
 		Date clientTimeDate = new Date(reqProto.getClientTime());
-		
+
 		Map<String, UserEnhancementItemProto> newMap = monsterStuffUtils
 				.convertIntoUserMonsterIdToUeipProtoMap(ueipNew);
 
@@ -124,7 +124,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 				.newBuilder();
 		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -134,8 +134,8 @@ public class SubmitMonsterEnhancementController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(clientTimeDate, new Date()) > 
+
+		if(timeUtils.numMinutesDifference(clientTimeDate, new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
@@ -177,8 +177,9 @@ public class SubmitMonsterEnhancementController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(userUuid, getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, getClass().getSimpleName());
 			int previousOil = 0;
 			int previousGems = 0;
 			//get whatever we need from the database
@@ -256,25 +257,27 @@ public class SubmitMonsterEnhancementController extends EventController {
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, getClass().getSimpleName());
+			}
 		}
 	}
 
 	/*
 	 * Return true if user request is valid; false otherwise and set the
 	 * 	builder status to the appropriate value.
-	 * 
+	 *
 	 * Will return fail if user does not have enough funds, or if any
 	 * of the monsters are currently engaged in something else, such as
-	 * healing, enhancing 
-	 * 
+	 * healing, enhancing
+	 *
 	 * Note: If any of the monsters have "restricted" property set to true,
-	 * 	then said monster can only be the base monster. 
-	 * 
+	 * 	then said monster can only be the base monster.
+	 *
 	 * Ex. If user wants to delete a monster (A) that isn't enhancing, along with some
 	 * monsters already enhancing (B), only the valid monsters (B) will be deleted.
-	 * Same logic with update and new. 
-	 * 
+	 * Same logic with update and new.
+	 *
 	 */
 	private boolean checkLegit(Builder resBuilder, User u, String userId,
 			Map<String, MonsterForUser> existingUserMonsters,
@@ -477,7 +480,7 @@ public class SubmitMonsterEnhancementController extends EventController {
 		//		List<MonsterEnhancingForUser> updateMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
 		//	  		uId, protoUpdateMap);
 		//		log.info(String.format("updateMap=%s", updateMap));
-		//		
+		//
 		List<MonsterEnhancingForUser> newMap = monsterStuffUtils
 				.convertToMonsterEnhancingForUser(uId, protoNewMap);
 		log.info(String.format("newMap=%s", newMap));

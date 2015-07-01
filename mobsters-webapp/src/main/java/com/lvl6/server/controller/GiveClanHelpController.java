@@ -47,18 +47,18 @@ public class GiveClanHelpController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected TimeUtils timeUtil;
-	
+
 	@Autowired
 	protected HazelcastClanSearchImpl hzClanSearch;
 
 	public GiveClanHelpController() {
-		
+
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class GiveClanHelpController extends EventController {
 		GiveClanHelpRequestProto reqProto = ((GiveClanHelpRequestEvent) event)
 				.getGiveClanHelpRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
@@ -127,7 +127,7 @@ public class GiveClanHelpController extends EventController {
 		if (senderProto.hasClan() && null != senderProto.getClan()) {
 			clanId = senderProto.getClan().getClanId();
 		}
-		
+
 		//maybe should get clan lock instead of locking person
 		//but going to modify user, so lock user. however maybe locking is not necessary
 		boolean lockedClan = false;
@@ -245,11 +245,11 @@ public class GiveClanHelpController extends EventController {
 	/*
 	private void notifyClan(User aUser, Clan aClan) {
 	  int clanId = aClan.getId();
-	  
+
 	  int level = aUser.getLevel();
 	  String deserter = aUser.getName();
 	  Notification aNote = new Notification();
-	  
+
 	  aNote.setAsUserLeftClan(level, deserter);
 	  MiscMethods.writeClanApnsNotification(aNote, server, clanId);
 	}*/

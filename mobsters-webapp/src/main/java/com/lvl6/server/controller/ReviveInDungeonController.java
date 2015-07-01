@@ -44,7 +44,7 @@ public class ReviveInDungeonController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
 
@@ -53,7 +53,7 @@ public class ReviveInDungeonController extends EventController {
 
 	@Autowired
 	protected MonsterForUserRetrieveUtils2 monsterForUserRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterStuffUtils monsterStuffUtils;
 	
@@ -61,7 +61,7 @@ public class ReviveInDungeonController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public ReviveInDungeonController() {
-		
+
 	}
 
 	@Override
@@ -143,8 +143,9 @@ public class ReviveInDungeonController extends EventController {
 			return;
 		}
 
-		getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			User aUser = getUserRetrieveUtils().getUserById(userId);
 			int previousGems = 0;
 
@@ -201,7 +202,9 @@ public class ReviveInDungeonController extends EventController {
 						e);
 			}
 		} finally {
-			getLocker().unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
@@ -217,7 +220,7 @@ public class ReviveInDungeonController extends EventController {
 			log.error("unexpected error: user is null. user=" + u);
 			return false;
 		}
-		//    
+		//
 		//    //make sure user task exists
 		//    TaskForUserOngoing ut = TaskForUserOngoingRetrieveUtils.getUserTaskForId(userTaskId);
 		//    if (null == ut) {
@@ -298,7 +301,7 @@ public class ReviveInDungeonController extends EventController {
 		}
 
 		//HEAL THE USER MONSTERS
-		//replace existing health for these user monsters with new values 
+		//replace existing health for these user monsters with new values
 		numUpdated = UpdateUtils.get().updateUserMonstersHealth(
 				userMonsterIdToExpectedHealth);
 

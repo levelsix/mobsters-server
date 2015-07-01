@@ -48,10 +48,10 @@ public class CompleteBattleItemController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -74,7 +74,7 @@ public class CompleteBattleItemController extends EventController {
 	protected TimeUtils timeUtils;
 
 	public CompleteBattleItemController() {
-		
+
 	}
 
 	@Override
@@ -159,12 +159,13 @@ public class CompleteBattleItemController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 
 			CompleteBattleItemAction cbia = new CompleteBattleItemAction(
 					userId, completedList, gemsForSpeedUp, userRetrieveUtil,
-					battleItemForUserRetrieveUtil, insertUtil, deleteUtil, 
+					battleItemForUserRetrieveUtil, insertUtil, deleteUtil,
 					miscMethods);
 
 			cbia.execute(resBuilder);
@@ -215,7 +216,9 @@ public class CompleteBattleItemController extends EventController {
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 

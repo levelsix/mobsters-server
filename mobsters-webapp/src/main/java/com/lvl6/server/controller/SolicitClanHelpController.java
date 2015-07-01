@@ -45,7 +45,7 @@ public class SolicitClanHelpController extends EventController {
 
 	@Autowired
 	protected Locker locker;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
@@ -59,7 +59,7 @@ public class SolicitClanHelpController extends EventController {
 	protected TimeUtils timeUtil;
 
 	public SolicitClanHelpController() {
-		
+
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class SolicitClanHelpController extends EventController {
 		SolicitClanHelpRequestProto reqProto = ((SolicitClanHelpRequestEvent) event)
 				.getSolicitClanHelpRequestProto();
 
-		log.info(String.format("reqProto=%s", reqProto));
+		log.info("reqProto={}", reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		List<ClanHelpNoticeProto> chnpList = reqProto.getNoticeList();
@@ -95,7 +95,7 @@ public class SolicitClanHelpController extends EventController {
 		if (null != senderProto.getClan()) {
 			clanId = senderProto.getClan().getClanUuid();
 		}
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -106,7 +106,7 @@ public class SolicitClanHelpController extends EventController {
 			return;
 		}
 
-		if(timeUtil.numMinutesDifference(clientDate, new Date()) > 
+		if(timeUtil.numMinutesDifference(clientDate, new Date()) >
 				ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
@@ -116,7 +116,7 @@ public class SolicitClanHelpController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
+
 		boolean invalidUuids = true;
 		try {
 			UUID.fromString(userId);
@@ -145,7 +145,7 @@ public class SolicitClanHelpController extends EventController {
 		if (senderProto.hasClan() && null != senderProto.getClan()) {
 			clanId = senderProto.getClan().getClanId();
 		}
-		
+
 		//maybe should get clan lock instead of locking person
 		//but going to modify user, so lock user. however maybe locking is not necessary
 		boolean lockedClan = false;
@@ -186,7 +186,7 @@ public class SolicitClanHelpController extends EventController {
 				resBuilder.setStatus(ResponseStatus.SUCCESS);
 				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
-				//this works for other clan members, but not for the person 
+				//this works for other clan members, but not for the person
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
 			}
@@ -294,11 +294,11 @@ public class SolicitClanHelpController extends EventController {
 	/*
 	private void notifyClan(User aUser, Clan aClan) {
 	  int clanId = aClan.getId();
-	  
+
 	  int level = aUser.getLevel();
 	  String deserter = aUser.getName();
 	  Notification aNote = new Notification();
-	  
+
 	  aNote.setAsUserLeftClan(level, deserter);
 	  MiscMethods.writeClanApnsNotification(aNote, server, clanId);
 	}*/

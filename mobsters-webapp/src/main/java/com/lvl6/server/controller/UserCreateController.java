@@ -66,19 +66,19 @@ public class UserCreateController extends EventController {
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
-	
+
 	@Autowired
 	protected MonsterRetrieveUtils monsterRetrieveUtils;
-	
+
 	@Autowired
 	protected PvpLeagueRetrieveUtils pvpLeagueRetrieveUtils;
-	
+
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected TaskRetrieveUtils taskRetrieveUtils;
 
@@ -127,11 +127,11 @@ public class UserCreateController extends EventController {
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
 
 		boolean gotLock = true;
-		if (null != fbId && !fbId.isEmpty()) {
-			//this is to prevent one user on two devices creating account with one fbId
-			gotLock = getLocker().lockFbId(fbId);
-		}
 		try {
+			if (null != fbId && !fbId.isEmpty()) {
+				//this is to prevent one user on two devices creating account with one fbId
+				gotLock = locker.lockFbId(fbId);
+			}
 			boolean legitUserCreate = checkLegitUserCreate(gotLock, resBuilder,
 					udid, facebookId, name);
 
@@ -201,7 +201,7 @@ public class UserCreateController extends EventController {
 			}
 		} finally {
 			if (gotLock) {
-				getLocker().unlockFbId(fbId);
+				locker.unlockFbId(fbId);
 			}
 		}
 	}
@@ -513,7 +513,7 @@ public class UserCreateController extends EventController {
 	//      getLocker().lockPlayer(referrer.getId(), this.getClass().getSimpleName());
 	//      try {
 	//        int previousSilver = referrer.getCash();
-	//        
+	//
 	//        int coinsGivenToReferrer = miscMethods.calculateCoinsGivenToReferrer(referrer);
 	//        if (!referrer.updateRelativeCoinsNumreferrals(coinsGivenToReferrer, 1)) {
 	//          log.error("problem with rewarding the referrer " + referrer + " with this many coins: " + coinsGivenToReferrer);
@@ -529,13 +529,13 @@ public class UserCreateController extends EventController {
 	//              .setCoinsGivenToReferrer(coinsGivenToReferrer).build();
 	//          resEvent.setResponseProto(resProto);
 	//          responses.apnsResponseEvents().add((resEvent);
-	//          
+	//
 	//          writeToUserCurrencyHistoryTwo(referrer, coinsGivenToReferrer, previousSilver);
 	//        }
 	//      } catch (Exception e) {
 	//        log.error("exception in UserCreateController processEvent", e);
 	//      } finally {
-	//        getLocker().unlockPlayer(referrer.getId(), this.getClass().getSimpleName()); 
+	//        getLocker().unlockPlayer(referrer.getId(), this.getClass().getSimpleName());
 	//      }
 	//    }
 	//  }
@@ -581,11 +581,11 @@ public class UserCreateController extends EventController {
 		//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
 		//    String silver = miscMethods.cash;
 		//    String reasonForChange = ControllerConstants.UCHRFC__USER_CREATE_REFERRED_A_USER;
-		//    
+		//
 		//    goldSilverChange.put(silver, coinChange);
 		//    previousGoldSilver.put(silver, previousSilver);
 		//    reasonsForChanges.put(silver, reasonForChange);
-		//    
+		//
 		//    miscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
 		//        previousGoldSilver, reasonsForChanges);
 	}

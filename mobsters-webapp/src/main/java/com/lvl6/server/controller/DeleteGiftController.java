@@ -139,8 +139,9 @@ public class DeleteGiftController extends EventController {
 			return;
 		}
 
-		locker.lockPlayer(userUuid, this.getClass().getSimpleName());
+		boolean gotLock = false;
 		try {
+			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 			DeleteGiftAction dga = new DeleteGiftAction(userId, giftForUserIds,
 					giftForTangoUserGfuIds, deleteUtil);
 
@@ -169,7 +170,9 @@ public class DeleteGiftController extends EventController {
 						e);
 			}
 		} finally {
-			locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
+			}
 		}
 	}
 
