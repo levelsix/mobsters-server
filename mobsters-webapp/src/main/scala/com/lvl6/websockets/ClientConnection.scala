@@ -203,6 +203,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   }
   
   override def updatePlayerToServerMaps(parsedEvent:ParsedEvent)={
+    playersOnlineService.updatePlayerToServerMaps(parsedEvent.event)
     val event = parsedEvent.event
     if(event.isInstanceOf[StartupRequestEvent] ){
       //set facebookId and udid
