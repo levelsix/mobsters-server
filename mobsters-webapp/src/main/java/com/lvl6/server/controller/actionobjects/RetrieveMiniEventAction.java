@@ -414,7 +414,7 @@ public class RetrieveMiniEventAction {
 			return true;
 		}
 
-		log.info("addUserMiniEvent, newEvent:{}", curActiveMiniEvent);
+//		log.info("addUserMiniEvent, newEvent:{}", curActiveMiniEvent);
 		int metId = curActiveMiniEventTimetable.getId();
 		success = insertUpdateUserMiniEvent(meId, metId, userLvl);
 		if (!success) {
