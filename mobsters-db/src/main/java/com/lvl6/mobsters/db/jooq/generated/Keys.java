@@ -154,6 +154,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.TournamentRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TranslationSettingsForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserBanned;
+import com.lvl6.mobsters.db.jooq.generated.tables.UserBattleItemHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossContribution;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossRewardHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserCurrencyHistory;
@@ -309,6 +310,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.records.TournamentEventForUser
 import com.lvl6.mobsters.db.jooq.generated.tables.records.TournamentRewardConfigRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.TranslationSettingsForUserRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.UserBannedRecord;
+import com.lvl6.mobsters.db.jooq.generated.tables.records.UserBattleItemHistoryRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.UserClanBossContributionRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.UserClanBossRewardHistoryRecord;
 import com.lvl6.mobsters.db.jooq.generated.tables.records.UserCurrencyHistoryRecord;
@@ -548,6 +550,7 @@ public class Keys {
 	public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = UniqueKeys0.KEY_USER_PRIMARY;
 	public static final UniqueKey<UserRecord> KEY_USER_USER_2eRECRUIT_CODE_UNIQUE = UniqueKeys0.KEY_USER_USER_2eRECRUIT_CODE_UNIQUE;
 	public static final UniqueKey<UserBannedRecord> KEY_USER_BANNED_PRIMARY = UniqueKeys0.KEY_USER_BANNED_PRIMARY;
+	public static final UniqueKey<UserBattleItemHistoryRecord> KEY_USER_BATTLE_ITEM_HISTORY_PRIMARY = UniqueKeys0.KEY_USER_BATTLE_ITEM_HISTORY_PRIMARY;
 	public static final UniqueKey<UserClanBossContributionRecord> KEY_USER_CLAN_BOSS_CONTRIBUTION_PRIMARY = UniqueKeys0.KEY_USER_CLAN_BOSS_CONTRIBUTION_PRIMARY;
 	public static final UniqueKey<UserClanBossRewardHistoryRecord> KEY_USER_CLAN_BOSS_REWARD_HISTORY_PRIMARY = UniqueKeys0.KEY_USER_CLAN_BOSS_REWARD_HISTORY_PRIMARY;
 	public static final UniqueKey<UserCurrencyHistoryRecord> KEY_USER_CURRENCY_HISTORY_PRIMARY = UniqueKeys0.KEY_USER_CURRENCY_HISTORY_PRIMARY;
@@ -769,6 +772,7 @@ public class Keys {
 		public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = createUniqueKey(User.USER, User.USER.ID);
 		public static final UniqueKey<UserRecord> KEY_USER_USER_2eRECRUIT_CODE_UNIQUE = createUniqueKey(User.USER, User.USER.REFERRAL_CODE);
 		public static final UniqueKey<UserBannedRecord> KEY_USER_BANNED_PRIMARY = createUniqueKey(UserBanned.USER_BANNED, UserBanned.USER_BANNED.USER_ID);
+		public static final UniqueKey<UserBattleItemHistoryRecord> KEY_USER_BATTLE_ITEM_HISTORY_PRIMARY = createUniqueKey(UserBattleItemHistory.USER_BATTLE_ITEM_HISTORY, UserBattleItemHistory.USER_BATTLE_ITEM_HISTORY.ID);
 		public static final UniqueKey<UserClanBossContributionRecord> KEY_USER_CLAN_BOSS_CONTRIBUTION_PRIMARY = createUniqueKey(UserClanBossContribution.USER_CLAN_BOSS_CONTRIBUTION, UserClanBossContribution.USER_CLAN_BOSS_CONTRIBUTION.USER_ID, UserClanBossContribution.USER_CLAN_BOSS_CONTRIBUTION.CLAN_ID, UserClanBossContribution.USER_CLAN_BOSS_CONTRIBUTION.BOSS_ID);
 		public static final UniqueKey<UserClanBossRewardHistoryRecord> KEY_USER_CLAN_BOSS_REWARD_HISTORY_PRIMARY = createUniqueKey(UserClanBossRewardHistory.USER_CLAN_BOSS_REWARD_HISTORY, UserClanBossRewardHistory.USER_CLAN_BOSS_REWARD_HISTORY.ID);
 		public static final UniqueKey<UserCurrencyHistoryRecord> KEY_USER_CURRENCY_HISTORY_PRIMARY = createUniqueKey(UserCurrencyHistory.USER_CURRENCY_HISTORY, UserCurrencyHistory.USER_CURRENCY_HISTORY.ID);

@@ -162,6 +162,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.TournamentRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TranslationSettingsForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserBanned;
+import com.lvl6.mobsters.db.jooq.generated.tables.UserBattleItemHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossContribution;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossRewardHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserCurrencyHistory;
@@ -192,7 +193,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
-	private static final long serialVersionUID = 1420635347;
+	private static final long serialVersionUID = 1392569096;
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -373,6 +374,7 @@ public class Mobsters extends SchemaImpl {
 			TranslationSettingsForUser.TRANSLATION_SETTINGS_FOR_USER,
 			User.USER,
 			UserBanned.USER_BANNED,
+			UserBattleItemHistory.USER_BATTLE_ITEM_HISTORY,
 			UserClanBossContribution.USER_CLAN_BOSS_CONTRIBUTION,
 			UserClanBossRewardHistory.USER_CLAN_BOSS_REWARD_HISTORY,
 			UserCurrencyHistory.USER_CURRENCY_HISTORY,

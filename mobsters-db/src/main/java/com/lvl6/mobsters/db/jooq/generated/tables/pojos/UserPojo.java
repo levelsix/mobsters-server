@@ -32,7 +32,7 @@ import javax.validation.constraints.Size;
 @Table(name = "user", schema = "mobsters")
 public class UserPojo implements IUser {
 
-	private static final long serialVersionUID = -961342708;
+	private static final long serialVersionUID = -882705590;
 
 	private String    id;
 	private String    name;
@@ -85,6 +85,8 @@ public class UserPojo implements IUser {
 	private Integer   gachaCredits;
 	private Timestamp lastTangoGiftSentTime;
 	private String    tangoId;
+	private Integer   highestToonAtk;
+	private Integer   highestToonHp;
 
 	public UserPojo() {}
 
@@ -140,6 +142,8 @@ public class UserPojo implements IUser {
 		this.gachaCredits = value.gachaCredits;
 		this.lastTangoGiftSentTime = value.lastTangoGiftSentTime;
 		this.tangoId = value.tangoId;
+		this.highestToonAtk = value.highestToonAtk;
+		this.highestToonHp = value.highestToonHp;
 	}
 
 	public UserPojo(
@@ -193,7 +197,9 @@ public class UserPojo implements IUser {
 		Integer   segmentationGroup,
 		Integer   gachaCredits,
 		Timestamp lastTangoGiftSentTime,
-		String    tangoId
+		String    tangoId,
+		Integer   highestToonAtk,
+		Integer   highestToonHp
 	) {
 		this.id = id;
 		this.name = name;
@@ -246,6 +252,8 @@ public class UserPojo implements IUser {
 		this.gachaCredits = gachaCredits;
 		this.lastTangoGiftSentTime = lastTangoGiftSentTime;
 		this.tangoId = tangoId;
+		this.highestToonAtk = highestToonAtk;
+		this.highestToonHp = highestToonHp;
 	}
 
 	@Id
@@ -888,6 +896,30 @@ public class UserPojo implements IUser {
 		return this;
 	}
 
+	@Column(name = "highest_toon_atk", precision = 10)
+	@Override
+	public Integer getHighestToonAtk() {
+		return this.highestToonAtk;
+	}
+
+	@Override
+	public UserPojo setHighestToonAtk(Integer highestToonAtk) {
+		this.highestToonAtk = highestToonAtk;
+		return this;
+	}
+
+	@Column(name = "highest_toon_hp", precision = 10)
+	@Override
+	public Integer getHighestToonHp() {
+		return this.highestToonHp;
+	}
+
+	@Override
+	public UserPojo setHighestToonHp(Integer highestToonHp) {
+		this.highestToonHp = highestToonHp;
+		return this;
+	}
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -948,6 +980,8 @@ public class UserPojo implements IUser {
 		setGachaCredits(from.getGachaCredits());
 		setLastTangoGiftSentTime(from.getLastTangoGiftSentTime());
 		setTangoId(from.getTangoId());
+		setHighestToonAtk(from.getHighestToonAtk());
+		setHighestToonHp(from.getHighestToonHp());
 	}
 
 	/**
