@@ -2371,45 +2371,49 @@ public final class MiniEventProtos {
        */
       SEND_CLAN_GIFT(13, 38),
       /**
+       * <code>DONATE_TOON_STRENGTH = 46;</code>
+       */
+      DONATE_TOON_STRENGTH(14, 46),
+      /**
        * <code>BATTLE_AVENGE_REQUEST = 13;</code>
        */
-      BATTLE_AVENGE_REQUEST(14, 13),
+      BATTLE_AVENGE_REQUEST(15, 13),
       /**
        * <code>BATTLE_AVENGE_WIN = 14;</code>
        */
-      BATTLE_AVENGE_WIN(15, 14),
+      BATTLE_AVENGE_WIN(16, 14),
       /**
        * <code>BATTLE_REVENGE_WIN = 15;</code>
        */
-      BATTLE_REVENGE_WIN(16, 15),
+      BATTLE_REVENGE_WIN(17, 15),
       /**
        * <code>STEAL_CASH = 16;</code>
        */
-      STEAL_CASH(17, 16),
+      STEAL_CASH(18, 16),
       /**
        * <code>STEAL_OIL = 17;</code>
        */
-      STEAL_OIL(18, 17),
+      STEAL_OIL(19, 17),
       /**
        * <code>PVP_CATCH_COMMON = 18;</code>
        */
-      PVP_CATCH_COMMON(19, 18),
+      PVP_CATCH_COMMON(20, 18),
       /**
        * <code>PVP_CATCH_RARE = 19;</code>
        */
-      PVP_CATCH_RARE(20, 19),
+      PVP_CATCH_RARE(21, 19),
       /**
        * <code>PVP_CATCH_SUPER = 20;</code>
        */
-      PVP_CATCH_SUPER(21, 20),
+      PVP_CATCH_SUPER(22, 20),
       /**
        * <code>PVP_CATCH_ULTRA = 21;</code>
        */
-      PVP_CATCH_ULTRA(22, 21),
+      PVP_CATCH_ULTRA(23, 21),
       /**
        * <code>PVP_CATCH_EPIC = 22;</code>
        */
-      PVP_CATCH_EPIC(23, 22),
+      PVP_CATCH_EPIC(24, 22),
       /**
        * <code>GAIN_ENHANCE_STRENGTH = 24;</code>
        *
@@ -2417,87 +2421,87 @@ public final class MiniEventProtos {
        * Doesn't include strength from leveling up a cake kid
        * </pre>
        */
-      GAIN_ENHANCE_STRENGTH(24, 24),
+      GAIN_ENHANCE_STRENGTH(25, 24),
       /**
        * <code>GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID = 25;</code>
        */
-      GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID(25, 25),
+      GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID(26, 25),
       /**
        * <code>ENHANCE_CAKE_KID_FEEDER = 26;</code>
        */
-      ENHANCE_CAKE_KID_FEEDER(26, 26),
+      ENHANCE_CAKE_KID_FEEDER(27, 26),
       /**
        * <code>GAIN_EVOLUTION_STRENGTH = 27;</code>
        */
-      GAIN_EVOLUTION_STRENGTH(27, 27),
+      GAIN_EVOLUTION_STRENGTH(28, 27),
       /**
        * <code>PVP_WIN_AGAINST_BRONZE = 28;</code>
        */
-      PVP_WIN_AGAINST_BRONZE(28, 28),
+      PVP_WIN_AGAINST_BRONZE(29, 28),
       /**
        * <code>PVP_WIN_AGAINST_SILVER = 29;</code>
        */
-      PVP_WIN_AGAINST_SILVER(29, 29),
+      PVP_WIN_AGAINST_SILVER(30, 29),
       /**
        * <code>PVP_WIN_AGAINST_GOLD = 30;</code>
        */
-      PVP_WIN_AGAINST_GOLD(30, 30),
+      PVP_WIN_AGAINST_GOLD(31, 30),
       /**
        * <code>PVP_WIN_AGAINST_PLATINUM = 31;</code>
        */
-      PVP_WIN_AGAINST_PLATINUM(31, 31),
+      PVP_WIN_AGAINST_PLATINUM(32, 31),
       /**
        * <code>PVP_WIN_AGAINST_DIAMOND = 32;</code>
        */
-      PVP_WIN_AGAINST_DIAMOND(32, 32),
+      PVP_WIN_AGAINST_DIAMOND(33, 32),
       /**
        * <code>COMPLETE_COMMON_JOB = 33;</code>
        */
-      COMPLETE_COMMON_JOB(33, 33),
+      COMPLETE_COMMON_JOB(34, 33),
       /**
        * <code>COMPLETE_RARE_JOB = 34;</code>
        */
-      COMPLETE_RARE_JOB(34, 34),
+      COMPLETE_RARE_JOB(35, 34),
       /**
        * <code>COMPLETE_SUPER_JOB = 35;</code>
        */
-      COMPLETE_SUPER_JOB(35, 35),
+      COMPLETE_SUPER_JOB(36, 35),
       /**
        * <code>COMPLETE_ULTRA_JOB = 36;</code>
        */
-      COMPLETE_ULTRA_JOB(36, 36),
+      COMPLETE_ULTRA_JOB(37, 36),
       /**
        * <code>COMPLETE_EPIC_JOB = 37;</code>
        */
-      COMPLETE_EPIC_JOB(37, 37),
+      COMPLETE_EPIC_JOB(38, 37),
       /**
        * <code>USE_HEALTH_POTION_IN_PVP = 39;</code>
        */
-      USE_HEALTH_POTION_IN_PVP(38, 39),
+      USE_HEALTH_POTION_IN_PVP(39, 39),
       /**
        * <code>USE_CHILL_ANTIDOTE_IN_PVP = 40;</code>
        */
-      USE_CHILL_ANTIDOTE_IN_PVP(39, 40),
+      USE_CHILL_ANTIDOTE_IN_PVP(40, 40),
       /**
        * <code>USE_POISON_ANTIDOTE_IN_PVP = 41;</code>
        */
-      USE_POISON_ANTIDOTE_IN_PVP(40, 41),
+      USE_POISON_ANTIDOTE_IN_PVP(41, 41),
       /**
        * <code>USE_ORB_HAMMER_IN_PVP = 42;</code>
        */
-      USE_ORB_HAMMER_IN_PVP(41, 42),
+      USE_ORB_HAMMER_IN_PVP(42, 42),
       /**
        * <code>USE_HAND_SWAP_IN_PVP = 43;</code>
        */
-      USE_HAND_SWAP_IN_PVP(42, 43),
+      USE_HAND_SWAP_IN_PVP(43, 43),
       /**
        * <code>USE_BOARD_SHUFFLE_IN_PVP = 44;</code>
        */
-      USE_BOARD_SHUFFLE_IN_PVP(43, 44),
+      USE_BOARD_SHUFFLE_IN_PVP(44, 44),
       /**
        * <code>USE_PUTTY_IN_PVP = 45;</code>
        */
-      USE_PUTTY_IN_PVP(44, 45),
+      USE_PUTTY_IN_PVP(45, 45),
       ;
 
       /**
@@ -2556,6 +2560,10 @@ public final class MiniEventProtos {
        * <code>SEND_CLAN_GIFT = 38;</code>
        */
       public static final int SEND_CLAN_GIFT_VALUE = 38;
+      /**
+       * <code>DONATE_TOON_STRENGTH = 46;</code>
+       */
+      public static final int DONATE_TOON_STRENGTH_VALUE = 46;
       /**
        * <code>BATTLE_AVENGE_REQUEST = 13;</code>
        */
@@ -2704,6 +2712,7 @@ public final class MiniEventProtos {
           case 11: return CLAN_HELP;
           case 12: return CLAN_DONATE;
           case 38: return SEND_CLAN_GIFT;
+          case 46: return DONATE_TOON_STRENGTH;
           case 13: return BATTLE_AVENGE_REQUEST;
           case 14: return BATTLE_AVENGE_WIN;
           case 15: return BATTLE_REVENGE_WIN;
@@ -8732,13 +8741,13 @@ public final class MiniEventProtos {
       "MiniEventGoalProto\022K\n\022leaderboardRewards" +
       "\030\006 \003(\0132/.com.lvl6.proto.MiniEventLeaderb" +
       "oardRewardProto\022\014\n\004name\030\007 \001(\t\022\014\n\004desc\030\010 " +
-      "\001(\t\022\013\n\003img\030\t \001(\t\022\014\n\004icon\030\n \001(\t\"\252\n\n\022MiniE",
+      "\001(\t\022\013\n\003img\030\t \001(\t\022\014\n\004icon\030\n \001(\t\"\304\n\n\022MiniE",
       "ventGoalProto\022\027\n\017miniEventGoalId\030\001 \001(\005\022\023" +
       "\n\013miniEventId\030\002 \001(\005\022O\n\010goalType\030\003 \001(\01624." +
       "com.lvl6.proto.MiniEventGoalProto.MiniEv" +
       "entGoalType:\007NO_GOAL\022\017\n\007goalAmt\030\004 \001(\005\022\020\n" +
       "\010goalDesc\030\005 \001(\t\022\024\n\014pointsGained\030\006 \001(\005\022\031\n" +
-      "\021actionDescription\030\007 \001(\t\"\300\010\n\021MiniEventGo" +
+      "\021actionDescription\030\007 \001(\t\"\332\010\n\021MiniEventGo" +
       "alType\022\013\n\007NO_GOAL\020\001\022\032\n\026GAIN_BUILDING_STR" +
       "ENGTH\020\002\022\032\n\026GAIN_RESEARCH_STRENGTH\020\003\022\023\n\017S" +
       "PIN_BASIC_GRAB\020\004\022\026\n\022SPIN_ULTIMATE_GRAB\020\005" +
@@ -8746,50 +8755,51 @@ public final class MiniEventProtos {
       "ENHANCE_RARE\020\007\022\021\n\rENHANCE_SUPER\020\010\022\021\n\rENH" +
       "ANCE_ULTRA\020\t\022\020\n\014ENHANCE_EPIC\020\n\022\r\n\tCLAN_H" +
       "ELP\020\013\022\017\n\013CLAN_DONATE\020\014\022\022\n\016SEND_CLAN_GIFT" +
-      "\020&\022\031\n\025BATTLE_AVENGE_REQUEST\020\r\022\025\n\021BATTLE_" +
-      "AVENGE_WIN\020\016\022\026\n\022BATTLE_REVENGE_WIN\020\017\022\016\n\n" +
-      "STEAL_CASH\020\020\022\r\n\tSTEAL_OIL\020\021\022\024\n\020PVP_CATCH" +
-      "_COMMON\020\022\022\022\n\016PVP_CATCH_RARE\020\023\022\023\n\017PVP_CAT" +
-      "CH_SUPER\020\024\022\023\n\017PVP_CATCH_ULTRA\020\025\022\022\n\016PVP_C" +
-      "ATCH_EPIC\020\026\022\031\n\025GAIN_ENHANCE_STRENGTH\020\030\022\'" +
-      "\n#GAIN_ENHANCE_STRENGTH_FROM_CAKE_KID\020\031\022",
-      "\033\n\027ENHANCE_CAKE_KID_FEEDER\020\032\022\033\n\027GAIN_EVO" +
-      "LUTION_STRENGTH\020\033\022\032\n\026PVP_WIN_AGAINST_BRO" +
-      "NZE\020\034\022\032\n\026PVP_WIN_AGAINST_SILVER\020\035\022\030\n\024PVP" +
-      "_WIN_AGAINST_GOLD\020\036\022\034\n\030PVP_WIN_AGAINST_P" +
-      "LATINUM\020\037\022\033\n\027PVP_WIN_AGAINST_DIAMOND\020 \022\027" +
-      "\n\023COMPLETE_COMMON_JOB\020!\022\025\n\021COMPLETE_RARE" +
-      "_JOB\020\"\022\026\n\022COMPLETE_SUPER_JOB\020#\022\026\n\022COMPLE" +
-      "TE_ULTRA_JOB\020$\022\025\n\021COMPLETE_EPIC_JOB\020%\022\034\n" +
-      "\030USE_HEALTH_POTION_IN_PVP\020\'\022\035\n\031USE_CHILL" +
-      "_ANTIDOTE_IN_PVP\020(\022\036\n\032USE_POISON_ANTIDOT",
-      "E_IN_PVP\020)\022\031\n\025USE_ORB_HAMMER_IN_PVP\020*\022\030\n" +
-      "\024USE_HAND_SWAP_IN_PVP\020+\022\034\n\030USE_BOARD_SHU" +
-      "FFLE_IN_PVP\020,\022\024\n\020USE_PUTTY_IN_PVP\020-\"\362\001\n\034" +
-      "MiniEventForPlayerLevelProto\022\017\n\007mefplId\030" +
-      "\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\022\024\n\014playerLvlM" +
-      "in\030\003 \001(\005\022\024\n\014playerLvlMax\030\004 \001(\005\022\025\n\rtierOn" +
-      "eMinPts\030\005 \001(\005\022\025\n\rtierTwoMinPts\030\006 \001(\005\022\027\n\017" +
-      "tierThreeMinPts\030\007 \001(\005\0229\n\007rewards\030\010 \003(\0132(" +
-      ".com.lvl6.proto.MiniEventTierRewardProto" +
-      "\"~\n\030MiniEventTierRewardProto\022\016\n\006metrId\030\001",
-      " \001(\005\022\017\n\007mefplId\030\002 \001(\005\0220\n\013rewardProto\030\003 \001" +
-      "(\0132\033.com.lvl6.proto.RewardProto\022\017\n\007tierL" +
-      "vl\030\004 \001(\005\"\223\001\n\037MiniEventLeaderboardRewardP" +
-      "roto\022\016\n\006melrId\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(" +
-      "\005\0220\n\013rewardProto\030\003 \001(\0132\033.com.lvl6.proto." +
-      "RewardProto\022\031\n\021leaderboardMinPos\030\004 \001(\005\"\241" +
-      "\002\n\022UserMiniEventProto\022\023\n\013miniEventId\030\001 \001" +
-      "(\005\022\034\n\024miniEventTimetableId\030\t \001(\005\022\020\n\010user" +
-      "Uuid\030\002 \001(\t\022\017\n\007userLvl\030\003 \001(\005\022\027\n\017tierOneRe" +
-      "deemed\030\004 \001(\010\022\027\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n",
-      "\021tierThreeRedeemed\030\006 \001(\010\0221\n\tminiEvent\030\007 " +
-      "\001(\0132\036.com.lvl6.proto.MiniEventProto\0225\n\005g" +
-      "oals\030\010 \003(\0132&.com.lvl6.proto.UserMiniEven" +
-      "tGoalProto\"s\n\026UserMiniEventGoalProto\022\020\n\010" +
-      "userUuid\030\001 \001(\t\022\027\n\017miniEventGoalId\030\002 \001(\005\022" +
-      "\020\n\010progress\030\003 \001(\005\022\034\n\024miniEventTimetableI" +
-      "d\030\004 \001(\005B\021B\017MiniEventProtos"
+      "\020&\022\030\n\024DONATE_TOON_STRENGTH\020.\022\031\n\025BATTLE_A" +
+      "VENGE_REQUEST\020\r\022\025\n\021BATTLE_AVENGE_WIN\020\016\022\026" +
+      "\n\022BATTLE_REVENGE_WIN\020\017\022\016\n\nSTEAL_CASH\020\020\022\r" +
+      "\n\tSTEAL_OIL\020\021\022\024\n\020PVP_CATCH_COMMON\020\022\022\022\n\016P" +
+      "VP_CATCH_RARE\020\023\022\023\n\017PVP_CATCH_SUPER\020\024\022\023\n\017" +
+      "PVP_CATCH_ULTRA\020\025\022\022\n\016PVP_CATCH_EPIC\020\026\022\031\n" +
+      "\025GAIN_ENHANCE_STRENGTH\020\030\022\'\n#GAIN_ENHANCE",
+      "_STRENGTH_FROM_CAKE_KID\020\031\022\033\n\027ENHANCE_CAK" +
+      "E_KID_FEEDER\020\032\022\033\n\027GAIN_EVOLUTION_STRENGT" +
+      "H\020\033\022\032\n\026PVP_WIN_AGAINST_BRONZE\020\034\022\032\n\026PVP_W" +
+      "IN_AGAINST_SILVER\020\035\022\030\n\024PVP_WIN_AGAINST_G" +
+      "OLD\020\036\022\034\n\030PVP_WIN_AGAINST_PLATINUM\020\037\022\033\n\027P" +
+      "VP_WIN_AGAINST_DIAMOND\020 \022\027\n\023COMPLETE_COM" +
+      "MON_JOB\020!\022\025\n\021COMPLETE_RARE_JOB\020\"\022\026\n\022COMP" +
+      "LETE_SUPER_JOB\020#\022\026\n\022COMPLETE_ULTRA_JOB\020$" +
+      "\022\025\n\021COMPLETE_EPIC_JOB\020%\022\034\n\030USE_HEALTH_PO" +
+      "TION_IN_PVP\020\'\022\035\n\031USE_CHILL_ANTIDOTE_IN_P",
+      "VP\020(\022\036\n\032USE_POISON_ANTIDOTE_IN_PVP\020)\022\031\n\025" +
+      "USE_ORB_HAMMER_IN_PVP\020*\022\030\n\024USE_HAND_SWAP" +
+      "_IN_PVP\020+\022\034\n\030USE_BOARD_SHUFFLE_IN_PVP\020,\022" +
+      "\024\n\020USE_PUTTY_IN_PVP\020-\"\362\001\n\034MiniEventForPl" +
+      "ayerLevelProto\022\017\n\007mefplId\030\001 \001(\005\022\023\n\013miniE" +
+      "ventId\030\002 \001(\005\022\024\n\014playerLvlMin\030\003 \001(\005\022\024\n\014pl" +
+      "ayerLvlMax\030\004 \001(\005\022\025\n\rtierOneMinPts\030\005 \001(\005\022" +
+      "\025\n\rtierTwoMinPts\030\006 \001(\005\022\027\n\017tierThreeMinPt" +
+      "s\030\007 \001(\005\0229\n\007rewards\030\010 \003(\0132(.com.lvl6.prot" +
+      "o.MiniEventTierRewardProto\"~\n\030MiniEventT",
+      "ierRewardProto\022\016\n\006metrId\030\001 \001(\005\022\017\n\007mefplI" +
+      "d\030\002 \001(\005\0220\n\013rewardProto\030\003 \001(\0132\033.com.lvl6." +
+      "proto.RewardProto\022\017\n\007tierLvl\030\004 \001(\005\"\223\001\n\037M" +
+      "iniEventLeaderboardRewardProto\022\016\n\006melrId" +
+      "\030\001 \001(\005\022\023\n\013miniEventId\030\002 \001(\005\0220\n\013rewardPro" +
+      "to\030\003 \001(\0132\033.com.lvl6.proto.RewardProto\022\031\n" +
+      "\021leaderboardMinPos\030\004 \001(\005\"\241\002\n\022UserMiniEve" +
+      "ntProto\022\023\n\013miniEventId\030\001 \001(\005\022\034\n\024miniEven" +
+      "tTimetableId\030\t \001(\005\022\020\n\010userUuid\030\002 \001(\t\022\017\n\007" +
+      "userLvl\030\003 \001(\005\022\027\n\017tierOneRedeemed\030\004 \001(\010\022\027",
+      "\n\017tierTwoRedeemed\030\005 \001(\010\022\031\n\021tierThreeRede" +
+      "emed\030\006 \001(\010\0221\n\tminiEvent\030\007 \001(\0132\036.com.lvl6" +
+      ".proto.MiniEventProto\0225\n\005goals\030\010 \003(\0132&.c" +
+      "om.lvl6.proto.UserMiniEventGoalProto\"s\n\026" +
+      "UserMiniEventGoalProto\022\020\n\010userUuid\030\001 \001(\t" +
+      "\022\027\n\017miniEventGoalId\030\002 \001(\005\022\020\n\010progress\030\003 " +
+      "\001(\005\022\034\n\024miniEventTimetableId\030\004 \001(\005B\021B\017Min" +
+      "iEventProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
