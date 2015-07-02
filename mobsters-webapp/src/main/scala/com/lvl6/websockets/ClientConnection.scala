@@ -41,6 +41,7 @@ import javax.annotation.Resource
 import com.lvl6.events.response.StartupResponseEvent
 import com.lvl6.server.eventsender.PreDBResponseEvent
 import com.lvl6.server.dynamodb.tables.CachedClientResponse
+import com.lvl6.events.ResponseEvent
 
 @ServerEndpoint(value = "/client/connection")
 class ClientConnection extends GameEventHandler with LazyLogging with MessageListener{
@@ -147,21 +148,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     responses.normalResponseEvents.foreach{ revent =>
       logger.info(s"Sending normal response: $revent")
       val plyrId = revent.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId
-      val bytes = EventParser.getResponseBytes(responses.requestUuid, revent)
-      //If it's the requester this should be their connection
-      if(userId.get.equals(plyrId)) {
-        sendToThisSocket(bytes)
-      }else {
-        ClientConnections.getConnection(plyrId) match{
-          //If it's not the requester then the player might have a socket on this server
-          case Some(lc)=> lc.sendToThisSocket(bytes)
-     		  //If they are not on this server send to amqp
-          case None=> {
-            logger.info(s"No connection found on this server for playerId: plyrId  sending to amqp")
-            eventWriter.sendToSinglePlayer(plyrId, bytes)
-          }
-        }
-      }
+      sendToPlayer(plyrId, responses.requestUuid, revent)
     }
     responses.preDBResponseEvents.foreach{ revent =>
       logger.info(s"Sending preDbResponse event: $revent")
@@ -182,9 +169,31 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     }
     responses.apnsResponseEvents.foreach{ revent =>
       logger.info("Sending apnsResponse event")
-      apnsWriter.handleEvent(revent)
+      val player = playersOnlineService.getConnectedPlayer(revent.asInstanceOf[NormalResponseEvent[_ <: GeneratedMessage]].getPlayerId())
+      player match{
+        case Some(p)=> sendToPlayer(p.getPlayerId, responses.requestUuid, revent)
+        case None => apnsWriter.handleEvent(revent)
+      }
     }
     cacheResponses(responses)
+  }
+  
+  protected def sendToPlayer(plyrId:String, requestUuid:String, revent:ResponseEvent[_ <: GeneratedMessage])={
+    val bytes = EventParser.getResponseBytes(requestUuid, revent)
+    //If it's the requester this should be their connection
+    if(userId.get.equals(plyrId)) {
+      sendToThisSocket(bytes)
+    }else {
+      ClientConnections.getConnection(plyrId) match{
+        //If it's not the requester then the player might have a socket on this server
+        case Some(lc)=> lc.sendToThisSocket(bytes)
+        //If they are not on this server send to amqp
+        case None=> {
+          logger.info(s"No connection found on this server for playerId: plyrId  sending to amqp")
+          eventWriter.sendToSinglePlayer(plyrId, bytes)
+        }
+      }
+    }
   }
   
   
