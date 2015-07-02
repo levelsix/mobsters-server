@@ -173,7 +173,7 @@ public class RetrieveMiniEventAction {
 
 		mefu = miniEventForUserRetrieveUtil
 				.getMostRecentUserMiniEvent(userId);
-		log.info("mefu={}", mefu);
+//		log.info("mefu={}", mefu);
 		if (null == mefu) {
 //			addNewUserMiniEvent = true;
 			return true;
@@ -296,7 +296,7 @@ public class RetrieveMiniEventAction {
 		if (null == leaderboardRewards || leaderboardRewards.isEmpty()) {
 //			log.error("MiniEvent has no leaderboardRewards. MiniEvent={}", curActiveMiniEvent);
 //			return false;
-			log.warn("MiniEvent has no leaderboardRewards. MiniEvent={}, MiniEventForPlayerLvl={}",
+			log.warn("MiniEvent has no leaderboardRewards. {}, {}",
 					me, lvlEntered);
 		}
 
@@ -362,8 +362,8 @@ public class RetrieveMiniEventAction {
 			int curPts = pts * multiplier;
 			totalPts += curPts;
 
-			log.info("MiniEventGoal, MiniEventGoalForUserPojo, pts. {}, {}, {}",
-					new Object[] { meg, megfu, curPts } );
+//			log.info("MiniEventGoal, MiniEventGoalForUserPojo, pts. {}, {}, {}",
+//					new Object[] { meg, megfu, curPts } );
 		}
 
 		return totalPts;
@@ -491,11 +491,11 @@ public class RetrieveMiniEventAction {
 		//common case: MiniEvent exists
 //		int userLvl = u.getLevel();
 		int userLvl = mefu.getUserLvl();
-		log.info("user's current MiniEvent: {}", curActiveMiniEvent);
+//		log.debug("user's current MiniEvent: {}", curActiveMiniEvent);
 
 		boolean success = retrieveMiniEventRelatedData(meId, curActiveMiniEvent, userLvl);
 		if (!success) {
-			log.info("issue retrieving MiniEvent data regarding user's MiniEvent. {}",
+			log.warn("issue retrieving MiniEvent data regarding user's MiniEvent. {}",
 					curActiveMiniEvent);
 		}
 

@@ -97,7 +97,7 @@ public class MiniEventForUserRetrieveUtil {
 				TABLE_NAME, DBConstants.MINI_EVENT_FOR_USER__USER_ID,
 				DBConstants.MINI_EVENT_FOR_USER__TIME_OF_ENTRY);
 
-		log.info("query={}, values={}", query, values);
+//		log.info("query={}, values={}", query, values);
 
 		MiniEventForUserPojo userMiniEvent = null;
 		try {
