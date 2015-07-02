@@ -119,6 +119,7 @@ public class RetrieveMiniEventAction {
 	private MiniEventForUserPojo mefu;
 	private Collection<MiniEventGoalForUserPojo> megfus;
 	//if false then just retrieve current MiniEventForUser
+	boolean allEligibleRewardsCollected;
 //	private boolean addNewUserMiniEvent;
 	private Collection<MiniEventTierReward> rewards;
 	private Collection<MiniEventGoal> goals;
@@ -217,10 +218,10 @@ public class RetrieveMiniEventAction {
 		megfus = miniEventGoalForUserRetrieveUtil.getUserMiniEventGoals(
 				userId, mefu.getMiniEventTimetableId());
 
-		boolean allEligibleRewardsCollected = verifyRewardsCollected();
-		if (!allEligibleRewardsCollected) {
-			return true;
-		}
+		allEligibleRewardsCollected = verifyRewardsCollected();
+//		if (!allEligibleRewardsCollected) {
+//			return true;
+//		}
 
 		//since user collected all eligible rewards, replace his existing UserMiniEvent
 		//with a new one if possible
@@ -380,10 +381,10 @@ public class RetrieveMiniEventAction {
 		if (null == mefu) {
 			return addUserMiniEvent();
 		} else {
-			log.info("process existing UserMiniEvent:{}\t lvlEntered:{}\t progress:{}",
-					new Object[] { mefu, lvlEntered, megfus } );
-			//return processExistingUserMiniEvent();
-			return retrieveCurrentUserMiniEvent();
+			log.info("process existing {}\t lvlEntered:{}\t progress:{}. allEligibleRewardsCollected={}",
+					new Object[] { mefu, lvlEntered, megfus, allEligibleRewardsCollected } );
+			return processExistingUserMiniEvent();
+//			return retrieveCurrentUserMiniEvent();
 		}
 
 	}
@@ -456,16 +457,16 @@ public class RetrieveMiniEventAction {
 		return mefu;
 	}
 
-//	private boolean processExistingUserMiniEvent()
-//	{
-//		//two cases
-//		if (!addNewUserMiniEvent) {
-//			log.info("just retrieving UserMiniEvent");
-//			return retrieveCurrentUserMiniEvent();
-//		}
-//
-//		return addUserMiniEvent();
-//	}
+	private boolean processExistingUserMiniEvent()
+	{
+		//two cases
+		if (allEligibleRewardsCollected) {
+			return addUserMiniEvent();
+		}
+
+		log.info("just retrieving UserMiniEvent");
+		return retrieveCurrentUserMiniEvent();
+	}
 
 	private boolean retrieveCurrentUserMiniEvent()
 	{
