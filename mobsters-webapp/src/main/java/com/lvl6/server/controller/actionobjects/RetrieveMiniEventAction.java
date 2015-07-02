@@ -173,7 +173,7 @@ public class RetrieveMiniEventAction {
 
 		mefu = miniEventForUserRetrieveUtil
 				.getMostRecentUserMiniEvent(userId);
-		log.info("mefu={}");
+		log.info("mefu={}", mefu);
 		if (null == mefu) {
 //			addNewUserMiniEvent = true;
 			return true;
