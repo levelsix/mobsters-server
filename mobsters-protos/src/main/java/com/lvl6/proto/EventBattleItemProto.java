@@ -5681,6 +5681,15 @@ public final class EventBattleItemProto {
      * <code>optional int64 clientTime = 3;</code>
      */
     long getClientTime();
+
+    /**
+     * <code>optional bool usedInBattle = 4;</code>
+     */
+    boolean hasUsedInBattle();
+    /**
+     * <code>optional bool usedInBattle = 4;</code>
+     */
+    boolean getUsedInBattle();
   }
   /**
    * Protobuf type {@code com.lvl6.proto.DiscardBattleItemRequestProto}
@@ -5771,6 +5780,11 @@ public final class EventBattleItemProto {
             case 24: {
               bitField0_ |= 0x00000002;
               clientTime_ = input.readInt64();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              usedInBattle_ = input.readBool();
               break;
             }
           }
@@ -5889,10 +5903,26 @@ public final class EventBattleItemProto {
       return clientTime_;
     }
 
+    public static final int USEDINBATTLE_FIELD_NUMBER = 4;
+    private boolean usedInBattle_;
+    /**
+     * <code>optional bool usedInBattle = 4;</code>
+     */
+    public boolean hasUsedInBattle() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bool usedInBattle = 4;</code>
+     */
+    public boolean getUsedInBattle() {
+      return usedInBattle_;
+    }
+
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       discardedBattleItemIds_ = java.util.Collections.emptyList();
       clientTime_ = 0L;
+      usedInBattle_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5915,6 +5945,9 @@ public final class EventBattleItemProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(3, clientTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(4, usedInBattle_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5941,6 +5974,10 @@ public final class EventBattleItemProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, clientTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, usedInBattle_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6070,6 +6107,8 @@ public final class EventBattleItemProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
+        usedInBattle_ = false;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -6115,6 +6154,10 @@ public final class EventBattleItemProto {
           to_bitField0_ |= 0x00000002;
         }
         result.clientTime_ = clientTime_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.usedInBattle_ = usedInBattle_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6146,6 +6189,9 @@ public final class EventBattleItemProto {
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
+        }
+        if (other.hasUsedInBattle()) {
+          setUsedInBattle(other.getUsedInBattle());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6419,6 +6465,38 @@ public final class EventBattleItemProto {
       public Builder clearClientTime() {
         bitField0_ = (bitField0_ & ~0x00000004);
         clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private boolean usedInBattle_ ;
+      /**
+       * <code>optional bool usedInBattle = 4;</code>
+       */
+      public boolean hasUsedInBattle() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional bool usedInBattle = 4;</code>
+       */
+      public boolean getUsedInBattle() {
+        return usedInBattle_;
+      }
+      /**
+       * <code>optional bool usedInBattle = 4;</code>
+       */
+      public Builder setUsedInBattle(boolean value) {
+        bitField0_ |= 0x00000008;
+        usedInBattle_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool usedInBattle = 4;</code>
+       */
+      public Builder clearUsedInBattle() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        usedInBattle_ = false;
         onChanged();
         return this;
       }
@@ -7094,15 +7172,15 @@ public final class EventBattleItemProto {
       "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
       "umUserProto\022.\n\006status\030\002 \001(\0162\036.com.lvl6.p" +
       "roto.ResponseStatus\0227\n\nubiUpdated\030\003 \003(\0132" +
-      "#.com.lvl6.proto.UserBattleItemProto\"\205\001\n" +
+      "#.com.lvl6.proto.UserBattleItemProto\"\233\001\n" +
       "\035DiscardBattleItemRequestProto\0220\n\006sender" +
       "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
       "\022\036\n\026discardedBattleItemIds\030\002 \003(\005\022\022\n\nclie",
-      "ntTime\030\003 \001(\003\"\202\001\n\036DiscardBattleItemRespon" +
-      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022.\n\006status\030\002 \001(\0162\036.com." +
-      "lvl6.proto.ResponseStatusB\026B\024EventBattle" +
-      "ItemProto"
+      "ntTime\030\003 \001(\003\022\024\n\014usedInBattle\030\004 \001(\010\"\202\001\n\036D" +
+      "iscardBattleItemResponseProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      ".\n\006status\030\002 \001(\0162\036.com.lvl6.proto.Respons" +
+      "eStatusB\026B\024EventBattleItemProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7148,7 +7226,7 @@ public final class EventBattleItemProto {
     internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_lvl6_proto_DiscardBattleItemRequestProto_descriptor,
-        new java.lang.String[] { "Sender", "DiscardedBattleItemIds", "ClientTime", });
+        new java.lang.String[] { "Sender", "DiscardedBattleItemIds", "ClientTime", "UsedInBattle", });
     internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_com_lvl6_proto_DiscardBattleItemResponseProto_fieldAccessorTable = new

@@ -1,5 +1,6 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
+import "BattleItem.proto";
 import "BoosterPackStuff.proto";
 import "Item.proto";
 import "MonsterStuff.proto";
@@ -68,7 +69,6 @@ message RemoveUserItemUsedResponseProto {
 	
 }
 
-//------------------------------------------------------------------------------------------
 
 message TradeItemForResourcesRequestProto {
 	//NOTE: server not enforcing resource cap
@@ -87,3 +87,19 @@ message TradeItemForResourcesResponseProto {
 	optional ResponseStatus status = 2;
 	
 }
+
+//------------------------------------------------------------------------------------------
+
+message RedeemVoucherForBattleItemRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 clientTime = 2;
+	repeated int32 itemIdsUsed = 3;
+	repeated UserBattleItemProto nuUserBattleItems = 4;
+}
+
+message RedeemVoucherForBattleItemResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional ResponseStatus status = 2;
+}
+	
+

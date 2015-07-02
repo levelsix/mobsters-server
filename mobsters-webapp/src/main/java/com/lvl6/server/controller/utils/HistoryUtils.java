@@ -12,13 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.IapHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserBattleItemHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.IapHistoryPojo;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserBattleItemHistoryPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
-
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.IAPValues;
 
 @Component
@@ -78,8 +78,8 @@ public class HistoryUtils {
 			uch.setDate(new Timestamp(now.getTime()));
 			uch.setReasonForChange(reasonForChange);
 			uch.setDetails(details);
-			userCurrencyHistoryDao.insert(uch);
 		}
+		userCurrencyHistoryDao.insert(uchList);
 	}
 	
 	public void insertUserCurrencyHistoryForGacha(String userId, Date now, int currChange,
@@ -170,6 +170,35 @@ public class HistoryUtils {
 			pbh.setReplayId(replayId);
 		}
 		return pbh;
+	}
+	
+	public UserBattleItemHistoryPojo createBattleItemHistory(String userId, int battleItemId, Timestamp now,
+			boolean gainedBattleItem, boolean usedInBattle, String reasonForChange, String details) {
+		UserBattleItemHistoryPojo ubih = new UserBattleItemHistoryPojo();
+		ubih.setId(randomUUID());
+		ubih.setBattleItemId(battleItemId);
+		ubih.setDate(now);
+		
+		if(details != null) {
+			ubih.setDetails(details);	
+		}
+		
+		if(gainedBattleItem) {
+			ubih.setGainedBattleItem((byte)1);	
+		}
+		else ubih.setGainedBattleItem((byte)0);
+		
+		if(reasonForChange != null) {
+			ubih.setReasonForChange(reasonForChange);	
+		}
+		
+		if(usedInBattle) {
+			ubih.setUsedInBattle((byte)1);
+		}
+		else ubih.setUsedInBattle((byte)0);
+		
+		ubih.setUserId(userId);
+		return ubih;
 	}
 		
 }

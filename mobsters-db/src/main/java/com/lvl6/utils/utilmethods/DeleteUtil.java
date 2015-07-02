@@ -101,5 +101,7 @@ public interface DeleteUtil {
 	public abstract int deleteGiftForUser(Collection<String> gfuIds);
 
 	public abstract int deleteGiftForTangoUser(Collection<String> gfuIds);
+	
+	public abstract int deleteUserItems(String userId, List<Integer> itemIdsUsed);
 
 }

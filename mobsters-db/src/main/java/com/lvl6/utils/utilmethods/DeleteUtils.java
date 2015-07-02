@@ -725,5 +725,26 @@ public class DeleteUtils implements DeleteUtil {
 				values);
 		return numDeleted;
 	}
+	
+	@Override
+	public int deleteUserItems(String userId, List<Integer> itemIdsUsed) {
+		String tableName = DBConstants.TABLE_ITEM_FOR_USER;
+		int size = itemIdsUsed.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionMarks = StringUtils.csvList(questions);
+
+		String query = String.format(
+				"DELETE FROM %s WHERE %s=? and %s IN (%s)", tableName,
+				DBConstants.ITEM_FOR_USER__USER_ID,
+				DBConstants.ITEM_FOR_USER__ITEM_ID, questionMarks);
+
+		List<Object> values = new ArrayList<Object>();
+		values.add(userId);
+		values.addAll(itemIdsUsed);
+
+		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query,
+				values);
+		return numDeleted;
+	}
 
 }

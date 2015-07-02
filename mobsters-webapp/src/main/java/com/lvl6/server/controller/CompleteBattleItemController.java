@@ -13,14 +13,13 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CompleteBattleItemRequestEvent;
-import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.CompleteBattleItemResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserBattleItemHistoryDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleItemsProto.BattleItemQueueForUserProto;
 import com.lvl6.proto.BattleItemsProto.UserBattleItemProto;
@@ -33,6 +32,7 @@ import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.CompleteBattleItemAction;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.TimeUtils;
@@ -72,6 +72,12 @@ public class CompleteBattleItemController extends EventController {
 	
 	@Autowired
 	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected HistoryUtils historyUtils;
+	
+	@Autowired
+	protected UserBattleItemHistoryDao ubihDao;
 
 	public CompleteBattleItemController() {
 
@@ -166,7 +172,7 @@ public class CompleteBattleItemController extends EventController {
 			CompleteBattleItemAction cbia = new CompleteBattleItemAction(
 					userId, completedList, gemsForSpeedUp, userRetrieveUtil,
 					battleItemForUserRetrieveUtil, insertUtil, deleteUtil,
-					miscMethods);
+					miscMethods, historyUtils, clientTime, ubihDao);
 
 			cbia.execute(resBuilder);
 

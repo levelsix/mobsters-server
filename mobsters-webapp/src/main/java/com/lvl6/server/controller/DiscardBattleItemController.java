@@ -15,6 +15,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.DiscardBattleItemRequestEvent;
 import com.lvl6.events.response.DiscardBattleItemResponseEvent;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserBattleItemHistoryDao;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemRequestProto;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto;
@@ -25,6 +26,7 @@ import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.DiscardBattleItemAction;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
@@ -49,6 +51,12 @@ public class DiscardBattleItemController extends EventController {
 
 	@Autowired
 	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected HistoryUtils historyUtils;
+	
+	@Autowired
+	protected UserBattleItemHistoryDao ubihDao;
 
 	public DiscardBattleItemController() {
 
@@ -73,6 +81,7 @@ public class DiscardBattleItemController extends EventController {
 		MinimumUserProto senderProto = reqProto.getSender();
 		String userId = senderProto.getUserUuid();
 		Date clientTime = new Date(reqProto.getClientTime());
+		boolean usedInBattle = reqProto.getUsedInBattle();
 
 		//the new items added to queue, updated refers to those finished as well as
 		//priorities changing, deleted refers to those removed from queue and completed
@@ -135,7 +144,8 @@ public class DiscardBattleItemController extends EventController {
 			User user = userRetrieveUtil.getUserById(userId);
 
 			DiscardBattleItemAction dbia = new DiscardBattleItemAction(userId,
-					user, battleItemIdsToQuantity, battleItemForUserRetrieveUtil, updateUtil);
+					user, battleItemIdsToQuantity, battleItemForUserRetrieveUtil, updateUtil,
+					historyUtils, ubihDao, clientTime, usedInBattle);
 
 			dbia.execute(resBuilder);
 

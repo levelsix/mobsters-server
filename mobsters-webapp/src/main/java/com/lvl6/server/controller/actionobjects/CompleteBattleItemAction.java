@@ -1,6 +1,8 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +18,14 @@ import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.BattleItemQueueForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserBattleItemHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserBattleItemHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventBattleItemProto.CompleteBattleItemResponseProto.Builder;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -35,6 +40,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	@Autowired protected InsertUtil insertUtil;
 	@Autowired protected DeleteUtil deleteUtil;
 	private MiscMethods miscMethods;
+	private HistoryUtils historyUtils;
+	private Date clientTime;
+	private UserBattleItemHistoryDao ubihDao;
 
 	public CompleteBattleItemAction(
 			String userId,
@@ -42,7 +50,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			int gemsForSpeedUp, UserRetrieveUtils2 userRetrieveUtil,
 			BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil,
 			InsertUtil insertUtil, DeleteUtil deleteUtil,
-			MiscMethods miscMethods) {
+			MiscMethods miscMethods, HistoryUtils historyUtils,
+			Date clientTime, UserBattleItemHistoryDao ubihDao) {
 		super();
 		this.userId = userId;
 		this.completedList = completedList;
@@ -52,6 +61,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		this.insertUtil = insertUtil;
 		this.deleteUtil = deleteUtil;
 		this.miscMethods = miscMethods;
+		this.historyUtils = historyUtils;
+		this.clientTime = clientTime;
+		this.ubihDao = ubihDao;
 	}
 
 	private User user;
@@ -179,6 +191,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 
 		prepCurrencyHistory();
+		saveToBattleItemHistory();
 
 		return true;
 	}
@@ -208,6 +221,15 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			details.put(gems, detailSb1.toString());
 		}
 
+	}
+	
+	public void saveToBattleItemHistory() {
+		List<UserBattleItemHistoryPojo> ubihList = new ArrayList<UserBattleItemHistoryPojo>();
+		for(BattleItemForUser bifu : bifuCompletedList) {
+			ubihList.add(historyUtils.createBattleItemHistory(bifu.getUserId(), bifu.getBattleItemId(), 
+					new Timestamp(clientTime.getTime()), true, false, "finish making battle item", null));
+		}
+		ubihDao.insert(ubihList);
 	}
 
 	private String randomUUID() {

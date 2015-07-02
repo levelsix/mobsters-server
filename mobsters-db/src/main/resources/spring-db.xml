@@ -100,6 +100,18 @@
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao" id="UserCurrencyHistoryDao">
        <constructor-arg index="0" ref="config" />
     </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao" id="UserDao">
+       <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.BattleItemForUserDao" id="BattleItemForUserDao">
+       <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.ItemForUserDao" id="ItemForUserDao">
+       <constructor-arg index="0" ref="config" />
+    </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.UserBattleItemHistoryDao" id="UserBattleItemHistoryDao">
+       <constructor-arg index="0" ref="config" />
+    </bean>
 <!--     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.StructureForUserDao" id="structureForUserDao"> -->
 <!--         <constructor-arg index="0" ref="config" /> -->
 <!--     </bean> -->

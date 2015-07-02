@@ -78,6 +78,7 @@ message DiscardBattleItemRequestProto {
 	repeated int32 discardedBattleItemIds = 2;
 	
 	optional int64 clientTime = 3;
+	optional bool usedInBattle = 4;
 	
 
 }
@@ -87,5 +88,16 @@ message DiscardBattleItemResponseProto {
 	optional ResponseStatus status = 2;
 	
 }	
+
+//------------------------------------------------------------------------------------------
+
+
+	
+	
+	
+	
+	
+	
+	
 
 

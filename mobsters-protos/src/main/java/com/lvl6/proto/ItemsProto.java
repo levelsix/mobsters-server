@@ -55,6 +55,10 @@ public final class ItemsProto {
      * <code>GACHA_MULTI_SPIN = 7;</code>
      */
     GACHA_MULTI_SPIN(7, 7),
+    /**
+     * <code>BATTLE_ITEM_VOUCHER = 9;</code>
+     */
+    BATTLE_ITEM_VOUCHER(8, 9),
     ;
 
     /**
@@ -99,6 +103,10 @@ public final class ItemsProto {
      * <code>GACHA_MULTI_SPIN = 7;</code>
      */
     public static final int GACHA_MULTI_SPIN_VALUE = 7;
+    /**
+     * <code>BATTLE_ITEM_VOUCHER = 9;</code>
+     */
+    public static final int BATTLE_ITEM_VOUCHER_VALUE = 9;
 
 
     public final int getNumber() { return value; }
@@ -113,6 +121,7 @@ public final class ItemsProto {
         case 5: return BUILDER;
         case 6: return REFRESH_MINI_JOB;
         case 7: return GACHA_MULTI_SPIN;
+        case 9: return BATTLE_ITEM_VOUCHER;
         default: return null;
       }
     }
@@ -3956,12 +3965,12 @@ public final class ItemsProto {
       "\024\n\014userDataUuid\030\005 \001(\t\022;\n\nactionType\030\006 \001(" +
       "\0162\036.com.lvl6.proto.GameActionType:\007NO_HE" +
       "LP\"G\n\021ItemGemPriceProto\022\016\n\006itemId\030\001 \001(\005\022" +
-      "\020\n\010gemPrice\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005*\227\001\n\010" +
+      "\020\n\010gemPrice\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005*\260\001\n\010" +
       "ItemType\022\020\n\014BOOSTER_PACK\020\001\022\014\n\010ITEM_OIL\020\002" +
       "\022\r\n\tITEM_CASH\020\003\022\025\n\021ITEM_GACHA_CREDIT\020\010\022\014" +
       "\n\010SPEED_UP\020\004\022\013\n\007BUILDER\020\005\022\024\n\020REFRESH_MIN",
-      "I_JOB\020\006\022\024\n\020GACHA_MULTI_SPIN\020\007B\014B\nItemsPr" +
-      "oto"
+      "I_JOB\020\006\022\024\n\020GACHA_MULTI_SPIN\020\007\022\027\n\023BATTLE_" +
+      "ITEM_VOUCHER\020\tB\014B\nItemsProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

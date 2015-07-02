@@ -1,6 +1,8 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +14,12 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BattleItemForUser;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserBattleItemHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserBattleItemHistoryPojo;
 import com.lvl6.proto.EventBattleItemProto.DiscardBattleItemResponseProto.Builder;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.BattleItemForUserRetrieveUtil;
+import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component@Scope("prototype")public class DiscardBattleItemAction {
@@ -25,18 +30,30 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private Map<Integer, Integer> deletedBattleItemIdsToQuantity;
 	@Autowired protected BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil;
 	@Autowired protected UpdateUtil updateUtil;
+	private HistoryUtils historyUtils;
+	private UserBattleItemHistoryDao ubihDao;
+	private Date clientTime;
+	private boolean usedInBattle;
 
 	public DiscardBattleItemAction(String userId, User user,
 			Map<Integer, Integer> deletedBattleItemIdsToQuantity,
 			BattleItemForUserRetrieveUtil battleItemForUserRetrieveUtil,
-			UpdateUtil updateUtil) {
+			UpdateUtil updateUtil, HistoryUtils historyUtils, 
+			UserBattleItemHistoryDao ubihDao, Date clientTime,
+			boolean usedInBattle) {
 		super();
 		this.userId = userId;
 		this.user = user;
 		this.deletedBattleItemIdsToQuantity = deletedBattleItemIdsToQuantity;
 		this.battleItemForUserRetrieveUtil = battleItemForUserRetrieveUtil;
 		this.updateUtil = updateUtil;
+		this.historyUtils = historyUtils;
+		this.ubihDao = ubihDao;
+		this.clientTime = clientTime;
+		this.usedInBattle = usedInBattle;
 	}
+	
+	private List<BattleItemForUser> updateList;
 
 	public void execute(Builder resBuilder) {
 		resBuilder.setStatus(ResponseStatus.FAIL_OTHER);
@@ -75,9 +92,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
-		List<BattleItemForUser> updateList = createMapForUserBattleItems(deletedBattleItemIdsToQuantity);
+		updateList = createMapForUserBattleItems(deletedBattleItemIdsToQuantity);
 		boolean success = updateUtil.updateUserBattleItems(userId, updateList);
 		if(success) {
+			saveToBattleItemHistory();
 			return true;
 		}
 		else return false;
@@ -102,6 +120,15 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			}
 		}
 		return updatedBattleItemsList;
+	}
+	
+	public void saveToBattleItemHistory() {
+		List<UserBattleItemHistoryPojo> ubihList = new ArrayList<UserBattleItemHistoryPojo>();
+		for(BattleItemForUser bifu : updateList) {
+			ubihList.add(historyUtils.createBattleItemHistory(bifu.getUserId(), bifu.getBattleItemId(), 
+					new Timestamp(clientTime.getTime()), false, usedInBattle, "discarded battle item", null));
+		}
+		ubihDao.insert(ubihList);
 	}
 
 }

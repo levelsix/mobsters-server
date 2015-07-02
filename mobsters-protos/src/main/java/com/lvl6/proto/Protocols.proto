@@ -215,6 +215,8 @@ enum EventProtocolRequest {
 	
 	C_RECONNECT_EVENT = 505;
 	
+	C_REDEEM_VOUCHER_FOR_BATTLE_ITEM_EVENT = 506;
+	
 }
 
 enum EventProtocolResponse {
@@ -379,6 +381,8 @@ enum EventProtocolResponse {
 	
 	S_RECONNECT_EVENT = 504;
 	S_PURCHASE_ITEMS_WITH_GEMS_EVENT = 505;
+	
+	S_REDEEM_VOUCHER_FOR_BATTLE_ITEM_EVENT = 506;
 	
 	
 }
