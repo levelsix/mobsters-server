@@ -2769,6 +2769,8 @@ public class InsertUtils implements InsertUtil {
 				mefu.getMiniEventTimetableId());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__MINI_EVENT_ID,
 				mefu.getMiniEventId());
+		newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIME_OF_ENTRY,
+				mefu.getTimeOfEntry());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__USER_LVL,
 				mefu.getUserLvl());
 		newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED,
@@ -2792,6 +2794,7 @@ public class InsertUtils implements InsertUtil {
 		newRows.add(newRow);
 
 		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIME_OF_ENTRY);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_ONE_REDEEMED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED);
 		replaceTheseColumns.add(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED);

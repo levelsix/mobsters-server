@@ -36,7 +36,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "user", schema = "mobsters")
 public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser {
 
-	private static final long serialVersionUID = 2114283124;
+	private static final long serialVersionUID = 1050380745;
 
 	/**
 	 * Setter for <code>mobsters.user.id</code>.
@@ -998,6 +998,42 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 		return (String) getValue(50);
 	}
 
+	/**
+	 * Setter for <code>mobsters.user.highest_toon_atk</code>. used to scale cake kids
+	 */
+	@Override
+	public UserRecord setHighestToonAtk(Integer value) {
+		setValue(51, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.user.highest_toon_atk</code>. used to scale cake kids
+	 */
+	@Column(name = "highest_toon_atk", precision = 10)
+	@Override
+	public Integer getHighestToonAtk() {
+		return (Integer) getValue(51);
+	}
+
+	/**
+	 * Setter for <code>mobsters.user.highest_toon_hp</code>. used to scale cake kids
+	 */
+	@Override
+	public UserRecord setHighestToonHp(Integer value) {
+		setValue(52, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.user.highest_toon_hp</code>. used to scale cake kids
+	 */
+	@Column(name = "highest_toon_hp", precision = 10)
+	@Override
+	public Integer getHighestToonHp() {
+		return (Integer) getValue(52);
+	}
+
 	// -------------------------------------------------------------------------
 	// Primary key information
 	// -------------------------------------------------------------------------
@@ -1070,6 +1106,8 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 		setGachaCredits(from.getGachaCredits());
 		setLastTangoGiftSentTime(from.getLastTangoGiftSentTime());
 		setTangoId(from.getTangoId());
+		setHighestToonAtk(from.getHighestToonAtk());
+		setHighestToonHp(from.getHighestToonHp());
 	}
 
 	/**
@@ -1095,7 +1133,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 	/**
 	 * Create a detached, initialised UserRecord
 	 */
-	public UserRecord(String id, String name, Integer level, Integer gems, Integer cash, Integer oil, Integer experience, Integer tasksCompleted, String referralCode, Integer numReferrals, String udidForHistory, Timestamp lastLogin, Timestamp lastLogout, String deviceToken, Integer numBadges, Byte isFake, Timestamp createTime, Byte isAdmin, String apsalarId, Integer numCoinsRetrievedFromStructs, Integer numOilRetrievedFromStructs, Integer numConsecutiveDaysPlayed, String clanId, Timestamp lastWallPostNotificationTime, Integer kabamNaid, Byte hasReceivedFbReward, Integer numBeginnerSalesPurchased, String facebookId, Boolean fbIdSetOnUserCreate, String gameCenterId, String udid, Timestamp lastObstacleSpawnedTime, Integer numObstaclesRemoved, Timestamp lastMiniJobGeneratedTime, Integer avatarMonsterId, String email, String fbData, Timestamp lastFreeBoosterPackTime, Integer clanHelps, Timestamp lastSecretGiftCollectTime, String pvpDefendingMessage, Timestamp lastTeamDonateSolicitation, Boolean boughtRiggedBoosterPack, Integer salesValue, Timestamp salesLastPurchaseTime, Boolean salesJumpTwoTiers, Integer totalStrength, Integer segmentationGroup, Integer gachaCredits, Timestamp lastTangoGiftSentTime, String tangoId) {
+	public UserRecord(String id, String name, Integer level, Integer gems, Integer cash, Integer oil, Integer experience, Integer tasksCompleted, String referralCode, Integer numReferrals, String udidForHistory, Timestamp lastLogin, Timestamp lastLogout, String deviceToken, Integer numBadges, Byte isFake, Timestamp createTime, Byte isAdmin, String apsalarId, Integer numCoinsRetrievedFromStructs, Integer numOilRetrievedFromStructs, Integer numConsecutiveDaysPlayed, String clanId, Timestamp lastWallPostNotificationTime, Integer kabamNaid, Byte hasReceivedFbReward, Integer numBeginnerSalesPurchased, String facebookId, Boolean fbIdSetOnUserCreate, String gameCenterId, String udid, Timestamp lastObstacleSpawnedTime, Integer numObstaclesRemoved, Timestamp lastMiniJobGeneratedTime, Integer avatarMonsterId, String email, String fbData, Timestamp lastFreeBoosterPackTime, Integer clanHelps, Timestamp lastSecretGiftCollectTime, String pvpDefendingMessage, Timestamp lastTeamDonateSolicitation, Boolean boughtRiggedBoosterPack, Integer salesValue, Timestamp salesLastPurchaseTime, Boolean salesJumpTwoTiers, Integer totalStrength, Integer segmentationGroup, Integer gachaCredits, Timestamp lastTangoGiftSentTime, String tangoId, Integer highestToonAtk, Integer highestToonHp) {
 		super(User.USER);
 
 		setValue(0, id);
@@ -1149,5 +1187,7 @@ public class UserRecord extends UpdatableRecordImpl<UserRecord> implements IUser
 		setValue(48, gachaCredits);
 		setValue(49, lastTangoGiftSentTime);
 		setValue(50, tangoId);
+		setValue(51, highestToonAtk);
+		setValue(52, highestToonHp);
 	}
 }

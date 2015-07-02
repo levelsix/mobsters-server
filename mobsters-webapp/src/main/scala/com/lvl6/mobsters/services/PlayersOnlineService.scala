@@ -41,10 +41,12 @@ class PlayersOnlineService extends LazyLogging{
     if(event.isInstanceOf[PreDatabaseRequestEvent]){
       val pdb = event.asInstanceOf[PreDatabaseRequestEvent]
       cp.setUdid(pdb.getUdid)
+      logger.info(s"Putting player with udid ${pdb.getUdid} into playersPreDatabaseByUDID map")
       playersPreDatabaseByUDID.put(pdb.getUdid, cp, PlayersOnlineService.DEFAULT_TTL, TimeUnit.MINUTES)
     }else{
       notNullOrEmpty(event.getPlayerId) match {
         case Some(playerId)=> {
+          logger.info(s"Putting player $playerId into playersByPlayerId map")
           cp.setPlayerId(playerId)
           playersByPlayerId.put(playerId, cp, PlayersOnlineService.DEFAULT_TTL, TimeUnit.MINUTES)
         }
@@ -55,6 +57,7 @@ class PlayersOnlineService extends LazyLogging{
   
   def getConnectedPlayer(playerId:String):Option[ConnectedPlayer]={
     val cp = playersByPlayerId.get(playerId)
+    logger.info(s"Getting connected player $playerId. Found: $cp")
     if(cp != null) Some(cp) else  None
   }
   

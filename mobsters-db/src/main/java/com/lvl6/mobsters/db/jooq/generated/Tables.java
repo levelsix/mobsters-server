@@ -162,6 +162,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.TournamentRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.TranslationSettingsForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserBanned;
+import com.lvl6.mobsters.db.jooq.generated.tables.UserBattleItemHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossContribution;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserClanBossRewardHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.UserCurrencyHistory;
@@ -974,6 +975,11 @@ public class Tables {
 	 * The table mobsters.user_banned
 	 */
 	public static final UserBanned USER_BANNED = com.lvl6.mobsters.db.jooq.generated.tables.UserBanned.USER_BANNED;
+
+	/**
+	 * The table mobsters.user_battle_item_history
+	 */
+	public static final UserBattleItemHistory USER_BATTLE_ITEM_HISTORY = com.lvl6.mobsters.db.jooq.generated.tables.UserBattleItemHistory.USER_BATTLE_ITEM_HISTORY;
 
 	/**
 	 * The table mobsters.user_clan_boss_contribution

@@ -69,6 +69,8 @@ public class User implements Serializable {
 	private int gachaCredits;
 	private Date lastTangoGiftSentTime;
 	private String tangoId;
+	private int highestToonAtk;
+	private int highestToonHp;
 
 	public User() {
 		super();
@@ -91,7 +93,8 @@ public class User implements Serializable {
 			Date lastTeamDonateSolicitation, boolean boughtRiggedBoosterPack,
 			int salesValue, Date lastPurchaseTime, boolean salesJumpTwoTiers,
 			long totalStrength, int segmentationGroup, int gachaCredits,
-			Date lastTangoGiftSentTime, String tangoId)
+			Date lastTangoGiftSentTime, String tangoId, int highestToonAtk,
+			int highestToonHp)
 	{
 		super();
 		this.id = id;
@@ -143,6 +146,8 @@ public class User implements Serializable {
 		this.gachaCredits = gachaCredits;
 		this.lastTangoGiftSentTime = lastTangoGiftSentTime;
 		this.tangoId = tangoId;
+		this.highestToonAtk = highestToonAtk;
+		this.highestToonHp = highestToonHp;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -327,6 +332,34 @@ public class User implements Serializable {
 		}
 		return false;
 	}*/
+
+	public boolean updateLastLogin(Timestamp lastLogin) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		if (null != lastLogin) {
+			absoluteParams.put(DBConstants.USER__LAST_LOGIN, lastLogin);
+		}
+		//don't update anything if empty
+		if (absoluteParams.isEmpty()) {
+			return true;
+		}
+
+		Map<String, Object> relativeParams = null;
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER, relativeParams, absoluteParams,
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			if (null != lastLogin) {
+				this.lastLogin = lastLogin;
+			}
+
+			return true;
+		}
+		return false;
+
+	}
 
 	public boolean updateLastLogout(Timestamp lastLogout) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -1200,6 +1233,40 @@ public class User implements Serializable {
 		return false;
 	}
 
+	public boolean updateStrengthHighestToonStats(long strength,
+			int highestToonAtk, int highestToonHp)
+	{
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		if (strength != 0) {
+			absoluteParams.put(DBConstants.USER__TOTAL_STRENGTH, strength);
+		}
+		if (highestToonAtk != 0) {
+			absoluteParams.put(DBConstants.USER__HIGHEST_TOON_ATK, highestToonAtk);
+		}
+		if (highestToonHp != 0) {
+			absoluteParams.put(DBConstants.USER__HIGHEST_TOON_HP, highestToonHp);
+		}
+
+		if (absoluteParams.isEmpty()) {
+			return true;
+		}
+
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER, null, absoluteParams, conditionParams,
+				"and");
+
+		if (numUpdated == 1) {
+			this.totalStrength += strength;
+			this.highestToonAtk += highestToonAtk;
+			this.highestToonHp += highestToonHp;
+
+			return true;
+		}
+		return false;
+	}
 
 	public String getId() {
 		return id;

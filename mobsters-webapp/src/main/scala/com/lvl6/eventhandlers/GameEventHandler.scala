@@ -157,9 +157,9 @@ trait GameEventHandler extends LazyLogging  {
   } 
   
   def updatePlayerToServerMaps(parsedEvent:ParsedEvent):Unit={
-    Future{
+    //Future{
       playersOnlineService.updatePlayerToServerMaps(parsedEvent.event)
-    }
+    //}
   }
   
 }

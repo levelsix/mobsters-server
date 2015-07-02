@@ -845,6 +845,8 @@ public class DBConstants {
 	public static final String USER__GACHA_CREDITS = "gacha_credits";
 	public static final String USER__LAST_TANGO_GIFT_SENT_TIME = "last_tango_gift_sent_time";
 	public static final String USER__TANGO_ID = "tango_id";
+	public static final String USER__HIGHEST_TOON_HP = "highest_toon_hp";
+	public static final String USER__HIGHEST_TOON_ATK = "highest_toon_atk";
 
 	/*USER CURRENCY HISTORY (FOR GOLD/DIAMONDS AND SILVER/COINS*/
 	public static final String USER_CURRENCY_HISTORY__ID = GENERIC__ID;

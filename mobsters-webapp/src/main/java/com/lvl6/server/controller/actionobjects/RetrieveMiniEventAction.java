@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -119,7 +120,8 @@ public class RetrieveMiniEventAction {
 	private MiniEventForUserPojo mefu;
 	private Collection<MiniEventGoalForUserPojo> megfus;
 	//if false then just retrieve current MiniEventForUser
-	private boolean addNewUserMiniEvent;
+	boolean allEligibleRewardsCollected;
+//	private boolean addNewUserMiniEvent;
 	private Collection<MiniEventTierReward> rewards;
 	private Collection<MiniEventGoal> goals;
 	private Collection<MiniEventLeaderboardReward> leaderboardRewards;
@@ -157,7 +159,7 @@ public class RetrieveMiniEventAction {
 	private boolean verifySemantics(Builder resBuilder) {
 
 		u = userRetrieveUtil.getUserById(userId);
-		addNewUserMiniEvent = false;
+//		addNewUserMiniEvent = false;
 		if (null == u) {
 			log.error("no user with id={}", userId);
 			return false;
@@ -173,8 +175,9 @@ public class RetrieveMiniEventAction {
 
 		mefu = miniEventForUserRetrieveUtil
 				.getMostRecentUserMiniEvent(userId);
+//		log.info("mefu={}", mefu);
 		if (null == mefu) {
-			addNewUserMiniEvent = true;
+//			addNewUserMiniEvent = true;
 			return true;
 		}
 
@@ -188,7 +191,7 @@ public class RetrieveMiniEventAction {
 			log.warn("user's miniEvent not active/nonexistent. {}.\t timeActive={}",
 					mefu, meTimetable);
 			mefu = null;
-			addNewUserMiniEvent = true;
+//			addNewUserMiniEvent = true;
 			return true;
 		}
 
@@ -197,7 +200,7 @@ public class RetrieveMiniEventAction {
 		if (mefu.getMiniEventId() != miniEventId) {
 			log.error("miniEventId mismatch. mefu={}, MiniEventTimetable={}",
 					mefu, meTimetable);
-			addNewUserMiniEvent = true;
+//			addNewUserMiniEvent = true;
 		}
 
 		MiniEventConfigPojo me = miniEventRetrieveUtils.getMiniEventById(miniEventId);
@@ -215,15 +218,8 @@ public class RetrieveMiniEventAction {
 
 		megfus = miniEventGoalForUserRetrieveUtil.getUserMiniEventGoals(
 				userId, mefu.getMiniEventTimetableId());
+		allEligibleRewardsCollected = verifyRewardsCollected();
 
-		boolean allEligibleRewardsCollected = verifyRewardsCollected();
-		if (!allEligibleRewardsCollected) {
-			return true;
-		}
-
-		//since user collected all eligible rewards, replace his existing UserMiniEvent
-		//with a new one if possible
-		addNewUserMiniEvent = true;
 		return true;
 	}
 
@@ -295,7 +291,7 @@ public class RetrieveMiniEventAction {
 		if (null == leaderboardRewards || leaderboardRewards.isEmpty()) {
 //			log.error("MiniEvent has no leaderboardRewards. MiniEvent={}", curActiveMiniEvent);
 //			return false;
-			log.warn("MiniEvent has no leaderboardRewards. MiniEvent={}, MiniEventForPlayerLvl={}",
+			log.warn("MiniEvent has no leaderboardRewards. {}, {}",
 					me, lvlEntered);
 		}
 
@@ -361,8 +357,8 @@ public class RetrieveMiniEventAction {
 			int curPts = pts * multiplier;
 			totalPts += curPts;
 
-			log.info("MiniEventGoal, MiniEventGoalForUserPojo, pts. {}, {}, {}",
-					new Object[] { meg, megfu, curPts } );
+//			log.info("MiniEventGoal, MiniEventGoalForUserPojo, pts. {}, {}, {}",
+//					new Object[] { meg, megfu, curPts } );
 		}
 
 		return totalPts;
@@ -379,9 +375,10 @@ public class RetrieveMiniEventAction {
 		if (null == mefu) {
 			return addUserMiniEvent();
 		} else {
-			log.info("process existing UserMiniEvent:{}\t lvlEntered:{}\t progress:{}",
-					new Object[] { mefu, lvlEntered, megfus } );
+			log.info("process existing {}\t lvlEntered:{}\t progress:{}. allEligibleRewardsCollected={}",
+					new Object[] { mefu, lvlEntered, megfus, allEligibleRewardsCollected } );
 			return processExistingUserMiniEvent();
+//			return retrieveCurrentUserMiniEvent();
 		}
 
 	}
@@ -411,7 +408,7 @@ public class RetrieveMiniEventAction {
 			return true;
 		}
 
-		log.info("addUserMiniEvent, newEvent:{}", curActiveMiniEvent);
+//		log.info("addUserMiniEvent, newEvent:{}", curActiveMiniEvent);
 		int metId = curActiveMiniEventTimetable.getId();
 		success = insertUpdateUserMiniEvent(meId, metId, userLvl);
 		if (!success) {
@@ -446,6 +443,7 @@ public class RetrieveMiniEventAction {
 		mefu.setUserId(userId);
 		mefu.setMiniEventTimetableId(metId);
 		mefu.setMiniEventId(meId);
+		mefu.setTimeOfEntry(new Timestamp(now.getTime()));
 		mefu.setUserLvl(userLvl);
 		mefu.setTierOneRedeemed(false);
 		mefu.setTierTwoRedeemed(false);
@@ -457,12 +455,12 @@ public class RetrieveMiniEventAction {
 	private boolean processExistingUserMiniEvent()
 	{
 		//two cases
-		if (!addNewUserMiniEvent) {
-			log.info("just retrieving UserMiniEvent");
-			return retrieveCurrentUserMiniEvent();
+		if (allEligibleRewardsCollected) {
+			return createOrRetrieveCurrentUserMiniEvent();
 		}
 
-		return addUserMiniEvent();
+		log.info("just retrieving UserMiniEvent");
+		return retrieveCurrentUserMiniEvent();
 	}
 
 	private boolean retrieveCurrentUserMiniEvent()
@@ -489,62 +487,95 @@ public class RetrieveMiniEventAction {
 		//common case: MiniEvent exists
 //		int userLvl = u.getLevel();
 		int userLvl = mefu.getUserLvl();
-		log.info("user's current MiniEvent: {}", curActiveMiniEvent);
+//		log.debug("user's current MiniEvent: {}", curActiveMiniEvent);
 
 		boolean success = retrieveMiniEventRelatedData(meId, curActiveMiniEvent, userLvl);
 		if (!success) {
-			log.info("issue retrieving MiniEvent data regarding user's MiniEvent. {}",
+			log.warn("issue retrieving MiniEvent data regarding user's MiniEvent. {}",
 					curActiveMiniEvent);
 		}
 
 		return success;
 	}
 
-	/*
-	private boolean replaceCurrentUserMiniEvent()
-	{
-		int meId = mefu.getMiniEventId();
-		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil.getCurrentlyActiveMiniEvent(now);
 
+	private boolean createOrRetrieveCurrentUserMiniEvent()
+	{
+		//NOTE: reaching here means, user has collected all the rewards he can
+
+		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil.getCurrentlyActiveMiniEvent(now);
 		if (null == curActiveMiniEventTimetable) {
-			//NOTE: reaching here means, user has collected all the rewards he can
 			//since there is no active MiniEvent, act as if the user doesn't have one
 			log.info("client wants new UserMiniEvent; no active MiniEvent");
 			mefu = null;
+			curActiveMiniEvent = null;
+			curActiveMiniEventTimetable = null;
 			return true;
 		}
-		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(
-				curActiveMiniEventTimetable.getMiniEventId());
+		int metId = mefu.getMiniEventTimetableId();
+		int curActiveMetId = curActiveMiniEventTimetable.getId();
 
-		int curActiveMeId = curActiveMiniEvent.getId();
-//		int userLvl = u.getLevel();
-		int userLvl = mefu.getUserLvl();
-		if (meId == curActiveMeId) {
-			log.info("not replacing UserMiniEvent since the same MiniEvent is still ongoing");
-			return retrieveMiniEventRelatedData(meId, curActiveMiniEvent, userLvl);
+		int curActiveMeId = curActiveMiniEventTimetable.getMiniEventId();
+		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(curActiveMeId);
+		if (metId == curActiveMetId) {
+			int userLvl = mefu.getUserLvl();
+			//no need to get megfus because it was calculated earlier
+			log.info("not replacing UserMiniEvent since the same MiniEventTimetable is still ongoing");
+			return retrieveMiniEventRelatedData(curActiveMeId, curActiveMiniEvent, userLvl);
 		}
 
-		//mini events are different, since user getting new MiniEvent use his cur lvl
+		//mini event timetables are different,
+		//gotta check if there already exists a UserMiniEvent with said metId
+		MiniEventForUserPojo preexistingMefu = miniEventForUserRetrieveUtil
+				.getSpecificUserMiniEvent(userId, curActiveMetId);
+		if (null != preexistingMefu) {
+			return revertToPreexistingUserMiniEvent(curActiveMeId,
+					preexistingMefu);
+		}
+
+		//since no preexisting UserMiniEvent with said metId,
+		//user getting new MiniEvent so use his cur lvl
 		int currUserLvl = u.getLevel();
 		boolean success = retrieveMiniEventRelatedData(curActiveMeId, curActiveMiniEvent, currUserLvl);
 		if (!success) {
 			log.warn("invalid/insufficient MiniEventData: so no MiniEvent. existingMefu={}, curMe={}, usrLvl={}",
 					new Object[] { mefu, curActiveMiniEvent, currUserLvl });
-			curActiveMiniEvent = null;
 			mefu = null;
+			curActiveMiniEvent = null;
+			curActiveMiniEventTimetable = null;
 			return true;
 		}
 
-		log.info("replaceCurrentUserMiniEvent. oldId:{}, \t newEvent:{}",
-				meId, curActiveMiniEvent);
-		success = insertUpdateUserMiniEvent(curActiveMeId, currUserLvl);
+		success = insertUpdateUserMiniEvent(curActiveMeId, curActiveMetId, currUserLvl);
 		if (!success) {
 			log.warn("unable to replace MiniEvent for the user.");
 		}
 
 		return success;
 	}
-	 */
+
+	private boolean revertToPreexistingUserMiniEvent(int curActiveMeId,
+			MiniEventForUserPojo preexistingMefu) {
+		log.warn("data people fucked up: started an event but replaced with another.");
+		mefu = preexistingMefu;
+		//need what the progress was
+		megfus = miniEventGoalForUserRetrieveUtil.getUserMiniEventGoals(
+				userId, mefu.getMiniEventTimetableId());
+		//update the start_time
+		mefu.setTimeOfEntry(new Timestamp(now.getTime()));
+		if ( insertUtil.insertIntoUpdateMiniEventForUser(mefu) ) {
+			return retrieveMiniEventRelatedData(curActiveMeId, curActiveMiniEvent, preexistingMefu.getUserLvl());
+
+		} else {
+			log.error("unable to update existing UserMiniEvent.timeOfEntry to now. {}, now={}",
+					mefu, now);
+			mefu = null;
+			megfus = null;
+			curActiveMiniEvent = null;
+			curActiveMiniEventTimetable = null;
+			return true;
+		}
+	}
 
 	public User getU() {
 		return u;
