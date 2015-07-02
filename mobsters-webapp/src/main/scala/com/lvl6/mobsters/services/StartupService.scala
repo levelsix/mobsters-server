@@ -1044,7 +1044,6 @@ class StartupService extends LazyLogging {
             rmea.getLeaderboardRewards(),
             rewardRetrieveUtil);
           resBuilder.setUserMiniEvent(umep);
-          logger.info("umep={}", umep);
         }
       }
     }

@@ -119,7 +119,7 @@ public class RetrieveMiniEventAction {
 	private MiniEventForUserPojo mefu;
 	private Collection<MiniEventGoalForUserPojo> megfus;
 	//if false then just retrieve current MiniEventForUser
-	private boolean addNewUserMiniEvent;
+//	private boolean addNewUserMiniEvent;
 	private Collection<MiniEventTierReward> rewards;
 	private Collection<MiniEventGoal> goals;
 	private Collection<MiniEventLeaderboardReward> leaderboardRewards;
@@ -157,7 +157,7 @@ public class RetrieveMiniEventAction {
 	private boolean verifySemantics(Builder resBuilder) {
 
 		u = userRetrieveUtil.getUserById(userId);
-		addNewUserMiniEvent = false;
+//		addNewUserMiniEvent = false;
 		if (null == u) {
 			log.error("no user with id={}", userId);
 			return false;
@@ -173,8 +173,9 @@ public class RetrieveMiniEventAction {
 
 		mefu = miniEventForUserRetrieveUtil
 				.getMostRecentUserMiniEvent(userId);
+		log.info("mefu={}");
 		if (null == mefu) {
-			addNewUserMiniEvent = true;
+//			addNewUserMiniEvent = true;
 			return true;
 		}
 
@@ -188,7 +189,7 @@ public class RetrieveMiniEventAction {
 			log.warn("user's miniEvent not active/nonexistent. {}.\t timeActive={}",
 					mefu, meTimetable);
 			mefu = null;
-			addNewUserMiniEvent = true;
+//			addNewUserMiniEvent = true;
 			return true;
 		}
 
@@ -197,7 +198,7 @@ public class RetrieveMiniEventAction {
 		if (mefu.getMiniEventId() != miniEventId) {
 			log.error("miniEventId mismatch. mefu={}, MiniEventTimetable={}",
 					mefu, meTimetable);
-			addNewUserMiniEvent = true;
+//			addNewUserMiniEvent = true;
 		}
 
 		MiniEventConfigPojo me = miniEventRetrieveUtils.getMiniEventById(miniEventId);
@@ -223,7 +224,7 @@ public class RetrieveMiniEventAction {
 
 		//since user collected all eligible rewards, replace his existing UserMiniEvent
 		//with a new one if possible
-		addNewUserMiniEvent = true;
+//		addNewUserMiniEvent = true;
 		return true;
 	}
 
@@ -381,7 +382,8 @@ public class RetrieveMiniEventAction {
 		} else {
 			log.info("process existing UserMiniEvent:{}\t lvlEntered:{}\t progress:{}",
 					new Object[] { mefu, lvlEntered, megfus } );
-			return processExistingUserMiniEvent();
+			//return processExistingUserMiniEvent();
+			return retrieveCurrentUserMiniEvent();
 		}
 
 	}
@@ -454,16 +456,16 @@ public class RetrieveMiniEventAction {
 		return mefu;
 	}
 
-	private boolean processExistingUserMiniEvent()
-	{
-		//two cases
-		if (!addNewUserMiniEvent) {
-			log.info("just retrieving UserMiniEvent");
-			return retrieveCurrentUserMiniEvent();
-		}
-
-		return addUserMiniEvent();
-	}
+//	private boolean processExistingUserMiniEvent()
+//	{
+//		//two cases
+//		if (!addNewUserMiniEvent) {
+//			log.info("just retrieving UserMiniEvent");
+//			return retrieveCurrentUserMiniEvent();
+//		}
+//
+//		return addUserMiniEvent();
+//	}
 
 	private boolean retrieveCurrentUserMiniEvent()
 	{
