@@ -209,6 +209,7 @@ public class RedeemMiniEventRewardAction {
 			log.error("user has no MiniEventForUserPojo, userId={}", userId);
 			return false;
 		}
+		log.info("mefu={}", mefu);
 
 		if (mefu.getMiniEventId() != me.getMiniEventId()) {
 			log.error("inconsistent miniEventId. MiniEventForUser={}. MiniEventForPlayerLvl={}",
