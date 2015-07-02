@@ -217,15 +217,8 @@ public class RetrieveMiniEventAction {
 
 		megfus = miniEventGoalForUserRetrieveUtil.getUserMiniEventGoals(
 				userId, mefu.getMiniEventTimetableId());
-
 		allEligibleRewardsCollected = verifyRewardsCollected();
-//		if (!allEligibleRewardsCollected) {
-//			return true;
-//		}
 
-		//since user collected all eligible rewards, replace his existing UserMiniEvent
-		//with a new one if possible
-//		addNewUserMiniEvent = true;
 		return true;
 	}
 
@@ -461,7 +454,7 @@ public class RetrieveMiniEventAction {
 	{
 		//two cases
 		if (allEligibleRewardsCollected) {
-			return addUserMiniEvent();
+			return createOrRetrieveCurrentUserMiniEvent();
 		}
 
 		log.info("just retrieving UserMiniEvent");
@@ -503,10 +496,9 @@ public class RetrieveMiniEventAction {
 		return success;
 	}
 
-	/*
-	private boolean replaceCurrentUserMiniEvent()
+
+	private boolean createOrRetrieveCurrentUserMiniEvent()
 	{
-		int meId = mefu.getMiniEventId();
 		curActiveMiniEventTimetable = miniEventTimetableRetrieveUtil.getCurrentlyActiveMiniEvent(now);
 
 		if (null == curActiveMiniEventTimetable) {
@@ -514,17 +506,28 @@ public class RetrieveMiniEventAction {
 			//since there is no active MiniEvent, act as if the user doesn't have one
 			log.info("client wants new UserMiniEvent; no active MiniEvent");
 			mefu = null;
+			curActiveMiniEvent = null;
+			curActiveMiniEventTimetable = null;
 			return true;
 		}
-		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(
-				curActiveMiniEventTimetable.getMiniEventId());
-
-		int curActiveMeId = curActiveMiniEvent.getId();
-//		int userLvl = u.getLevel();
+		int metId = mefu.getMiniEventTimetableId();
+		int curActiveMetId = curActiveMiniEventTimetable.getId();
 		int userLvl = mefu.getUserLvl();
-		if (meId == curActiveMeId) {
-			log.info("not replacing UserMiniEvent since the same MiniEvent is still ongoing");
-			return retrieveMiniEventRelatedData(meId, curActiveMiniEvent, userLvl);
+
+		int curActiveMeId = curActiveMiniEventTimetable.getMiniEventId();
+		curActiveMiniEvent = miniEventRetrieveUtils.getMiniEventById(curActiveMeId);
+		if (mefu.getMiniEventId() != curActiveMeId) {
+			log.error("existing MiniEventForUser/MiniEvent inconsistent. {} {} {}",
+					new Object[] {mefu, curActiveMiniEvent, curActiveMiniEventTimetable} );
+			mefu = null;
+			curActiveMiniEvent = null;
+			curActiveMiniEventTimetable = null;
+			return true;
+		}
+
+		if (metId == curActiveMetId) {
+			log.info("not replacing UserMiniEvent since the same MiniEventTimetable is still ongoing");
+			return retrieveMiniEventRelatedData(curActiveMeId, curActiveMiniEvent, userLvl);
 		}
 
 		//mini events are different, since user getting new MiniEvent use his cur lvl
@@ -533,21 +536,19 @@ public class RetrieveMiniEventAction {
 		if (!success) {
 			log.warn("invalid/insufficient MiniEventData: so no MiniEvent. existingMefu={}, curMe={}, usrLvl={}",
 					new Object[] { mefu, curActiveMiniEvent, currUserLvl });
-			curActiveMiniEvent = null;
 			mefu = null;
+			curActiveMiniEvent = null;
+			curActiveMiniEventTimetable = null;
 			return true;
 		}
 
-		log.info("replaceCurrentUserMiniEvent. oldId:{}, \t newEvent:{}",
-				meId, curActiveMiniEvent);
-		success = insertUpdateUserMiniEvent(curActiveMeId, currUserLvl);
+		success = insertUpdateUserMiniEvent(curActiveMeId, curActiveMetId, currUserLvl);
 		if (!success) {
 			log.warn("unable to replace MiniEvent for the user.");
 		}
 
 		return success;
 	}
-	 */
 
 	public User getU() {
 		return u;

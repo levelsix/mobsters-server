@@ -345,6 +345,11 @@ class StartupService extends LazyLogging {
     logger.debug(s"Writing event response: $resEvent")
     //server.writePreDBEvent(resEvent, sd.udid);
     responses.preDBResponseEvents.add(PreDBResponseEvent(resEvent, sd.udid))
+    timed("StartupService.startupFinished") {
+        if (null != sd.user) {
+            sd.user.updateLastLogin(sd.now)
+        }
+    }
   }
 
   def getUpdateStatus(version: VersionNumberProto, clientVersionNum: Float): UpdateStatus = {

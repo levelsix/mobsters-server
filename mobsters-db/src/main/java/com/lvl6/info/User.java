@@ -328,6 +328,34 @@ public class User implements Serializable {
 		return false;
 	}*/
 
+	public boolean updateLastLogin(Timestamp lastLogin) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		if (null != lastLogin) {
+			absoluteParams.put(DBConstants.USER__LAST_LOGIN, lastLogin);
+		}
+		//don't update anything if empty
+		if (absoluteParams.isEmpty()) {
+			return true;
+		}
+
+		Map<String, Object> relativeParams = null;
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER, relativeParams, absoluteParams,
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			if (null != lastLogin) {
+				this.lastLogin = lastLogin;
+			}
+
+			return true;
+		}
+		return false;
+
+	}
+
 	public boolean updateLastLogout(Timestamp lastLogout) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
