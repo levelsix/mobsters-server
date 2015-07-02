@@ -179,6 +179,7 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   }
   
   protected def sendToPlayer(plyrId:String, requestUuid:String, revent:ResponseEvent[_ <: GeneratedMessage])={
+    logger.info(s"Sending message to player: $plyrId requestUuid: $requestUuid message: $revent")
     val bytes = EventParser.getResponseBytes(requestUuid, revent)
     //If it's the requester this should be their connection
     if(userId.get.equals(plyrId)) {
