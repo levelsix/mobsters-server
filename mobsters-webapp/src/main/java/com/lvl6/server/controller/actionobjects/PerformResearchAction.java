@@ -263,7 +263,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		details = new HashMap<String, String>();
 
 		if (0 != gemsCost) {
-			currencyDeltas.put(gems, gemsCost);
+			currencyDeltas.put(gems, -1 * gemsCost);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,
 					ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
