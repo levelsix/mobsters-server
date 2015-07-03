@@ -216,7 +216,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		curCurrencies = new HashMap<String, Integer>();
 		reasonsForChanges = new HashMap<String, String>();
 		if (0 != gemsSpent) {
-			currencyDeltas.put(gems, gemsSpent);
+			currencyDeltas.put(gems, -1 * gemsSpent);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges
 					.put(gems,
