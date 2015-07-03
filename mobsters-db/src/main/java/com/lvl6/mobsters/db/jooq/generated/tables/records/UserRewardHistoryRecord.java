@@ -19,9 +19,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record6;
+import org.jooq.Record8;
 import org.jooq.Row;
-import org.jooq.Row6;
+import org.jooq.Row8;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -38,9 +38,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "user_reward_history", schema = "mobsters")
-public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHistoryRecord> implements Record6<String, String, Timestamp, Integer, String, String>, IUserRewardHistory {
+public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHistoryRecord> implements Record8<String, String, Timestamp, Integer, Integer, String, String, String>, IUserRewardHistory {
 
-	private static final long serialVersionUID = -1966041131;
+	private static final long serialVersionUID = 1013734108;
 
 	/**
 	 * Setter for <code>mobsters.user_reward_history.id</code>.
@@ -119,11 +119,48 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	}
 
 	/**
+	 * Setter for <code>mobsters.user_reward_history.static_data_id</code>.
+	 */
+	@Override
+	public UserRewardHistoryRecord setStaticDataId(Integer value) {
+		setValue(4, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.user_reward_history.static_data_id</code>.
+	 */
+	@Column(name = "static_data_id", precision = 10)
+	@Override
+	public Integer getStaticDataId() {
+		return (Integer) getValue(4);
+	}
+
+	/**
+	 * Setter for <code>mobsters.user_reward_history.reward_type</code>.
+	 */
+	@Override
+	public UserRewardHistoryRecord setRewardType(String value) {
+		setValue(5, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.user_reward_history.reward_type</code>.
+	 */
+	@Column(name = "reward_type", length = 45)
+	@Size(max = 45)
+	@Override
+	public String getRewardType() {
+		return (String) getValue(5);
+	}
+
+	/**
 	 * Setter for <code>mobsters.user_reward_history.reason_for_reward</code>.
 	 */
 	@Override
 	public UserRewardHistoryRecord setReasonForReward(String value) {
-		setValue(4, value);
+		setValue(6, value);
 		return this;
 	}
 
@@ -134,7 +171,7 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	@Size(max = 100)
 	@Override
 	public String getReasonForReward() {
-		return (String) getValue(4);
+		return (String) getValue(6);
 	}
 
 	/**
@@ -142,7 +179,7 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	 */
 	@Override
 	public UserRewardHistoryRecord setDetails(String value) {
-		setValue(5, value);
+		setValue(7, value);
 		return this;
 	}
 
@@ -153,7 +190,7 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	@Size(max = 255)
 	@Override
 	public String getDetails() {
-		return (String) getValue(5);
+		return (String) getValue(7);
 	}
 
 	// -------------------------------------------------------------------------
@@ -169,23 +206,23 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	}
 
 	// -------------------------------------------------------------------------
-	// Record6 type implementation
+	// Record8 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row6<String, String, Timestamp, Integer, String, String> fieldsRow() {
-		return (Row6) super.fieldsRow();
+	public Row8<String, String, Timestamp, Integer, Integer, String, String, String> fieldsRow() {
+		return (Row8) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row6<String, String, Timestamp, Integer, String, String> valuesRow() {
-		return (Row6) super.valuesRow();
+	public Row8<String, String, Timestamp, Integer, Integer, String, String, String> valuesRow() {
+		return (Row8) super.valuesRow();
 	}
 
 	/**
@@ -224,8 +261,8 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Field<String> field5() {
-		return UserRewardHistory.USER_REWARD_HISTORY.REASON_FOR_REWARD;
+	public Field<Integer> field5() {
+		return UserRewardHistory.USER_REWARD_HISTORY.STATIC_DATA_ID;
 	}
 
 	/**
@@ -233,6 +270,22 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	 */
 	@Override
 	public Field<String> field6() {
+		return UserRewardHistory.USER_REWARD_HISTORY.REWARD_TYPE;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<String> field7() {
+		return UserRewardHistory.USER_REWARD_HISTORY.REASON_FOR_REWARD;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<String> field8() {
 		return UserRewardHistory.USER_REWARD_HISTORY.DETAILS;
 	}
 
@@ -272,8 +325,8 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String value5() {
-		return getReasonForReward();
+	public Integer value5() {
+		return getStaticDataId();
 	}
 
 	/**
@@ -281,6 +334,22 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	 */
 	@Override
 	public String value6() {
+		return getRewardType();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String value7() {
+		return getReasonForReward();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String value8() {
 		return getDetails();
 	}
 
@@ -324,8 +393,8 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UserRewardHistoryRecord value5(String value) {
-		setReasonForReward(value);
+	public UserRewardHistoryRecord value5(Integer value) {
+		setStaticDataId(value);
 		return this;
 	}
 
@@ -334,6 +403,24 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	 */
 	@Override
 	public UserRewardHistoryRecord value6(String value) {
+		setRewardType(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public UserRewardHistoryRecord value7(String value) {
+		setReasonForReward(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public UserRewardHistoryRecord value8(String value) {
 		setDetails(value);
 		return this;
 	}
@@ -342,13 +429,15 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	 * {@inheritDoc}
 	 */
 	@Override
-	public UserRewardHistoryRecord values(String value1, String value2, Timestamp value3, Integer value4, String value5, String value6) {
+	public UserRewardHistoryRecord values(String value1, String value2, Timestamp value3, Integer value4, Integer value5, String value6, String value7, String value8) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
 		value4(value4);
 		value5(value5);
 		value6(value6);
+		value7(value7);
+		value8(value8);
 		return this;
 	}
 
@@ -365,6 +454,8 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 		setUserId(from.getUserId());
 		setDate(from.getDate());
 		setRewardId(from.getRewardId());
+		setStaticDataId(from.getStaticDataId());
+		setRewardType(from.getRewardType());
 		setReasonForReward(from.getReasonForReward());
 		setDetails(from.getDetails());
 	}
@@ -392,14 +483,16 @@ public class UserRewardHistoryRecord extends UpdatableRecordImpl<UserRewardHisto
 	/**
 	 * Create a detached, initialised UserRewardHistoryRecord
 	 */
-	public UserRewardHistoryRecord(String id, String userId, Timestamp date, Integer rewardId, String reasonForReward, String details) {
+	public UserRewardHistoryRecord(String id, String userId, Timestamp date, Integer rewardId, Integer staticDataId, String rewardType, String reasonForReward, String details) {
 		super(UserRewardHistory.USER_REWARD_HISTORY);
 
 		setValue(0, id);
 		setValue(1, userId);
 		setValue(2, date);
 		setValue(3, rewardId);
-		setValue(4, reasonForReward);
-		setValue(5, details);
+		setValue(4, staticDataId);
+		setValue(5, rewardType);
+		setValue(6, reasonForReward);
+		setValue(7, details);
 	}
 }

@@ -40,7 +40,6 @@ import com.lvl6.info.TaskForUserOngoing
 import com.lvl6.info.TaskStageForUser
 import com.lvl6.info.User
 import com.lvl6.info.UserClan
-import com.lvl6.leaderboards.LeaderBoardImpl
 import com.lvl6.misc.MiscMethods
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo
 import com.lvl6.properties.ControllerConstants
@@ -259,7 +258,6 @@ class StartupService extends LazyLogging {
   @Autowired var timeUtils: TimeUtils = null
   @Autowired var miscMethods: MiscMethods = null
   @Autowired var locker: Locker = null
-  @Autowired var leaderBoard: LeaderBoardImpl = null
 
 
 

@@ -845,6 +845,8 @@ public class DBConstants {
 	public static final String USER__GACHA_CREDITS = "gacha_credits";
 	public static final String USER__LAST_TANGO_GIFT_SENT_TIME = "last_tango_gift_sent_time";
 	public static final String USER__TANGO_ID = "tango_id";
+	public static final String USER__HIGHEST_TOON_HP = "highest_toon_hp";
+	public static final String USER__HIGHEST_TOON_ATK = "highest_toon_atk";
 
 	/*USER CURRENCY HISTORY (FOR GOLD/DIAMONDS AND SILVER/COINS*/
 	public static final String USER_CURRENCY_HISTORY__ID = GENERIC__ID;
@@ -882,6 +884,8 @@ public class DBConstants {
 	public static final String USER_REWARD_HISTORY__REWARD_ID = "reward_id";
 	public static final String USER_REWARD_HISTORY__REASON_FOR_REWARD = "reason_for_reward";
 	public static final String USER_REWARD_HISTORY__DETAILS = "details";
+	public static final String USER_REWARD_HISTORY__STATIC_DATA_ID = "static_data_id";
+	public static final String USER_REWARD_HISTORY__REWARD_TYPE = "reward_type";
 
 	/************** CONFIGURATION DATA TABLES *****************************/
 

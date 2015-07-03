@@ -443,6 +443,7 @@ public class RetrieveMiniEventAction {
 		mefu.setUserId(userId);
 		mefu.setMiniEventTimetableId(metId);
 		mefu.setMiniEventId(meId);
+		mefu.setTimeOfEntry(new Timestamp(now.getTime()));
 		mefu.setUserLvl(userLvl);
 		mefu.setTierOneRedeemed(false);
 		mefu.setTierTwoRedeemed(false);

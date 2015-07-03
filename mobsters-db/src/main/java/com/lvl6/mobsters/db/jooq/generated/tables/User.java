@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-	private static final long serialVersionUID = 1863727104;
+	private static final long serialVersionUID = 492813566;
 
 	/**
 	 * The reference instance of <code>mobsters.user</code>
@@ -310,6 +310,16 @@ public class User extends TableImpl<UserRecord> {
 	 * The column <code>mobsters.user.tango_id</code>.
 	 */
 	public final TableField<UserRecord, String> TANGO_ID = createField("tango_id", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
+
+	/**
+	 * The column <code>mobsters.user.highest_toon_atk</code>. used to scale cake kids
+	 */
+	public final TableField<UserRecord, Integer> HIGHEST_TOON_ATK = createField("highest_toon_atk", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "used to scale cake kids");
+
+	/**
+	 * The column <code>mobsters.user.highest_toon_hp</code>. used to scale cake kids
+	 */
+	public final TableField<UserRecord, Integer> HIGHEST_TOON_HP = createField("highest_toon_hp", org.jooq.impl.SQLDataType.INTEGER.defaulted(true), this, "used to scale cake kids");
 
 	/**
 	 * Create a <code>mobsters.user</code> table reference

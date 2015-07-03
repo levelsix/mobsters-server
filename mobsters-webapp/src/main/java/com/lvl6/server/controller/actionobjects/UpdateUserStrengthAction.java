@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.User;
-import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto.Builder;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
@@ -18,15 +17,22 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	private String userId;
 	private long updatedStrength;
+	private int highestToonAtk;
+	private int highestToonHp;
 	private UserRetrieveUtils2  userRetrieveUtils;
-	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected UpdateUtil updateUtil;
 
 	public UpdateUserStrengthAction(String userId,
-			long updatedStrength, UserRetrieveUtils2 userRetrieveUtils,
+			long updatedStrength,
+			int highestToonAtk,
+			int highestToonHp,
+			UserRetrieveUtils2 userRetrieveUtils,
 			UpdateUtil updateUtil)	{
 		super();
 		this.userId = userId;
 		this.updatedStrength = updatedStrength;
+		this.highestToonAtk = highestToonAtk;
+		this.highestToonHp = highestToonHp;
 		this.userRetrieveUtils = userRetrieveUtils;
 		this.updateUtil = updateUtil;
 	}
@@ -69,12 +75,12 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	private boolean verifySyntax(Builder resBuilder) {
 		user = userRetrieveUtils.getUserById(userId);
-		
+
 		if (user == null) {
 			log.error("user is null");
 			return false;
 		}
-		
+
 		if(updatedStrength < 0) {
 			log.error("strength is negative for userId: {}", userId);
 			return false;
@@ -85,12 +91,17 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 
-		boolean success = updateUtil.updateUserStrength(userId, updatedStrength);
-		log.info("successful update of user strength: {}", success );
-		user.setTotalStrength(updatedStrength);
+//		boolean success = updateUtil.updateUserStrength(userId, updatedStrength);
+//		log.info("successful update of user strength: {}", success );
+//		user.setTotalStrength(updatedStrength);
+
+		boolean success = user.updateStrengthHighestToonStats(
+				updatedStrength, highestToonAtk, highestToonHp);
+		log.info("updated user strength, highestToonAtk, highestToonHp: {}",
+				success );
 		return success;
 	}
-	
+
 	public static Logger getLog() {
 		return log;
 	}

@@ -562,6 +562,8 @@ public class UserRetrieveUtils2 {
 			}
 
 			String tangoId = rs.getString(DBConstants.USER__TANGO_ID);
+			int highestToonAtk = rs.getInt(DBConstants.USER__HIGHEST_TOON_ATK);
+			int highestToonHp = rs.getInt(DBConstants.USER__HIGHEST_TOON_HP);
 
 			User user = new User(id, name, level, gems, cash, oil, experience,
 					tasksCompleted, referralCode, numReferrals, udidForHistory,
@@ -578,7 +580,7 @@ public class UserRetrieveUtils2 {
 					lastTeamDonateSolicitation, boughtRiggedBoosterPack,
 					salesValue, lastPurchaseTime, salesJumpTwoTiers, totalStrength,
 					segmentationGroup, gachaCredits, lastTangoGiftSentTime,
-					tangoId);
+					tangoId, highestToonAtk, highestToonHp);
 
 			return user;
 		}

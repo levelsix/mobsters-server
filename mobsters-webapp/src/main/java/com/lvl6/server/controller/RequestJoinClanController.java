@@ -14,10 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RequestJoinClanRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.RequestJoinClanResponseEvent;
 import com.lvl6.events.response.RetrieveClanDataResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -113,9 +111,6 @@ public class RequestJoinClanController extends EventController {
 
 	@Autowired
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
-
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
@@ -273,7 +268,7 @@ public class RequestJoinClanController extends EventController {
 				cdp = scdpa.execute();
 
 				//update clan cache
-				updateClanCache(clanId, rjca.getClanSizeList(), lastChatTimeContainer);
+//				updateClanCache(clanId, rjca.getClanSizeList(), lastChatTimeContainer);
 
 			}
 			RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(
@@ -462,19 +457,19 @@ public class RequestJoinClanController extends EventController {
 	//	  return cdpb.build();
 	//  }
 
-	private void updateClanCache(String clanId, List<Integer> clanSizeList,
-			List<Date> lastChatTimeContainer) {
-		//need to account for this user joining clan
-		if(toggle.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
-			int clanSize = clanSizeList.get(0) + 1;
-			Date lastChatTime = lastChatTimeContainer.get(0);
-
-			clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
-		}
-		else {
-			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
-		}
-	}
+//	private void updateClanCache(String clanId, List<Integer> clanSizeList,
+//			List<Date> lastChatTimeContainer) {
+//		//need to account for this user joining clan
+//		if(toggle.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+//			int clanSize = clanSizeList.get(0) + 1;
+//			Date lastChatTime = lastChatTimeContainer.get(0);
+//
+//			clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+//		}
+//		else {
+//			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
+//		}
+//	}
 
 	private void sendClanData(RequestEvent event, MinimumUserProto senderProto,	String userId, ClanDataProto cdp, ToClientEvents responses) {
 		if (null == cdp) {
@@ -597,14 +592,6 @@ public class RequestJoinClanController extends EventController {
 		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
 	}
 
-
-	public HazelcastClanSearchImpl getHzClanSearch() {
-		return hzClanSearch;
-	}
-
-	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
-		this.hzClanSearch = hzClanSearch;
-	}
 
 	public ClanRetrieveUtils2 getClanRetrieveUtil() {
 		return clanRetrieveUtil;

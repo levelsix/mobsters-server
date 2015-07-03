@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
@@ -41,7 +40,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	@Autowired protected DeleteUtil deleteUtil;
 	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtils; 
 	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
-	private HazelcastClanSearchImpl hzClanSearch;
 	@Autowired protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil; 
 	@Autowired protected TimeUtils timeUtils; 
 	private ClanSearch clanSearch;
@@ -53,7 +51,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			InsertUtil insertUtil, DeleteUtil deleteUtil,
 			ClanRetrieveUtils2 clanRetrieveUtils,
 			UserClanRetrieveUtils2 userClanRetrieveUtils,
-			HazelcastClanSearchImpl hzClanSearch,
 			ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil,
 			TimeUtils timeUtils, ClanSearch clanSearch,
 			ServerToggleRetrieveUtils toggle) {
@@ -66,7 +63,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		this.deleteUtil = deleteUtil;
 		this.clanRetrieveUtils = clanRetrieveUtils;
 		this.userClanRetrieveUtils = userClanRetrieveUtils;
-		this.hzClanSearch = hzClanSearch;
 		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
 		this.timeUtils = timeUtils;
 		this.clanSearch = clanSearch;
@@ -204,7 +200,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		//need to account for this user leaving clan
 		ExitClanAction eca = new ExitClanAction(userId, clanId, clanSize - 1,
-				lastChatPost, timeUtils, UpdateUtils.get(), hzClanSearch, clanSearch, toggle);
+				lastChatPost, timeUtils, UpdateUtils.get(), clanSearch, toggle);
 		eca.execute();
 
 		return true;
@@ -312,14 +308,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	public void setClan(Clan clan) {
 		this.clan = clan;
-	}
-
-	public HazelcastClanSearchImpl getHzClanSearch() {
-		return hzClanSearch;
-	}
-
-	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
-		this.hzClanSearch = hzClanSearch;
 	}
 
 	public ClanChatPostRetrieveUtils2 getClanChatPostRetrieveUtil() {

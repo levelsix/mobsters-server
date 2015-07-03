@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.utils.TimeUtils;
@@ -27,13 +26,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	private Date lastChatPost;
 	@Autowired protected TimeUtils timeUtil; 
 	@Autowired protected UpdateUtil updateUtil; 
-	private HazelcastClanSearchImpl hzClanSearch;
 	private ClanSearch clanSearch;
 	private ServerToggleRetrieveUtils toggle;
 
 	public ExitClanAction(String userId, String clanId, int clanSize,
 			Date lastChatPost, TimeUtils timeUtil, UpdateUtil updateUtil,
-			HazelcastClanSearchImpl hzClanSearch, ClanSearch clanSearch,
+			ClanSearch clanSearch,
 			ServerToggleRetrieveUtils toggle) {
 		super();
 		this.userId = userId;
@@ -42,7 +40,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		this.lastChatPost = lastChatPost;
 		this.timeUtil = timeUtil;
 		this.updateUtil = updateUtil;
-		this.hzClanSearch = hzClanSearch;
 		this.clanSearch = clanSearch;
 		this.toggle = toggle;
 	}
@@ -68,13 +65,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				numUpdated);
 
 		//if user is last user in clan, clan gets removed from hz
-		if(toggle.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
-			if (clanSize > 0) {
-				clanSearch.updateClanSearchRank(clanId, clanSize, lastChatPost);
-			}
-		}
-		else {
-			hzClanSearch.updateRankForClanSearch(clanId, now, 0, 0, 0, 0, -1);
-		}
+//		if(toggle.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+//			if (clanSize > 0) {
+//				clanSearch.updateClanSearchRank(clanId, clanSize, lastChatPost);
+//			}
+//		}
+//		else {
+//			hzClanSearch.updateRankForClanSearch(clanId, now, 0, 0, 0, 0, -1);
+//		}
 	}
 }

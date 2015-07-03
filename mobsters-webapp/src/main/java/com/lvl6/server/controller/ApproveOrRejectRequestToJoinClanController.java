@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ApproveOrRejectRequestToJoinClanRequestEvent;
 import com.lvl6.events.response.ApproveOrRejectRequestToJoinClanResponseEvent;
@@ -82,8 +81,8 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 	@Autowired
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
 
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
+//	@Autowired
+//	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected ClanStuffUtils clanStuffUtils;
@@ -208,9 +207,9 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 					cdp = scdpa.execute();
 
 					//update clan cache
-					updateClanCache(clanId, aorrtja.getClanSizeList(),
-							lastChatTimeContainer,
-							clan.isRequestToJoinRequired());
+//					updateClanCache(clanId, aorrtja.getClanSizeList(),
+//							lastChatTimeContainer,
+//							clan.isRequestToJoinRequired());
 
 					log.info(String.format("ClanDataProto=%s", cdp));
 					setResponseBuilderStuff(resBuilder, clan, aorrtja.getClanSizeList());
@@ -275,23 +274,23 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		}
 	}
 
-	private void updateClanCache(String clanId, List<Integer> clanSizeList,
-			List<Date> lastChatTimeContainer, boolean requestToJoinRequired) {
-		if (serverToggleRetrieveUtils.getToggleValueForName(
-				ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
-			int clanSize = clanSizeList.get(0) + 1;
-			Date lastChatTime = lastChatTimeContainer.get(0);
-
-			if (requestToJoinRequired) {
-				clanSize = ClanSearch.penalizedClanSize;
-				lastChatTime = ControllerConstants.INCEPTION_DATE;
-			}
-			clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
-		}
-		else {
-			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
-		}
-	}
+//	private void updateClanCache(String clanId, List<Integer> clanSizeList,
+//			List<Date> lastChatTimeContainer, boolean requestToJoinRequired) {
+//		if (serverToggleRetrieveUtils.getToggleValueForName(
+//				ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+//			int clanSize = clanSizeList.get(0) + 1;
+//			Date lastChatTime = lastChatTimeContainer.get(0);
+//
+//			if (requestToJoinRequired) {
+//				clanSize = ClanSearch.penalizedClanSize;
+//				lastChatTime = ControllerConstants.INCEPTION_DATE;
+//			}
+//			clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+//		}
+//		else {
+//			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
+//		}
+//	}
 
 	private void setResponseBuilderStuff(Builder resBuilder, Clan clan,
 			List<Integer> clanSizeList) {
@@ -393,14 +392,6 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 		this.clanAvengeUserRetrieveUtil = clanAvengeUserRetrieveUtil;
 	}
 
-
-	public HazelcastClanSearchImpl getHzClanSearch() {
-		return hzClanSearch;
-	}
-
-	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
-		this.hzClanSearch = hzClanSearch;
-	}
 
 	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil() {
 		return clanMemberTeamDonationRetrieveUtil;

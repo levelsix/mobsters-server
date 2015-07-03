@@ -21,9 +21,9 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.HazelcastInstanceAware;
 import com.hazelcast.core.IMap;
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
+//import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.ResponseEvent;
-import com.lvl6.leaderboards.LeaderBoardImpl;
+//import com.lvl6.leaderboards.LeaderBoardImpl;
 //import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.misc.ReloadAllRareChangeStaticData;
 import com.lvl6.properties.ControllerConstants;
@@ -46,11 +46,11 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	@Autowired
 	protected ReloadAllRareChangeStaticData reloadAllRareChangeStaticData;
 	
-	@Autowired
-	protected LeaderBoardImpl leaderBoardImpl;
-	
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
+//	@Autowired
+//	protected LeaderBoardImpl leaderBoardImpl;
+//	
+//	@Autowired
+//	protected HazelcastClanSearchImpl hzClanSearch;
 
 
 	@Resource(name = "playersPreDatabaseByUDID")
@@ -185,9 +185,9 @@ public class GameServer implements InitializingBean, HazelcastInstanceAware {
 	public void init() {
 		log.info("init : Server initializing");
 		reloadAllRareChangeStaticData.reloadAllRareChangeStaticData();
-		reloadRecommendedClans();
-		leaderBoardImpl.reload();
-		hzClanSearch.reload();
+//		reloadRecommendedClans();
+//		leaderBoardImpl.reload();
+//		hzClanSearch.reload();
 		log.info("finished init");
 	}
 

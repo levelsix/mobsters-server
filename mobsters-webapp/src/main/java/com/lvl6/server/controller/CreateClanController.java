@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.CreateClanRequestEvent;
 import com.lvl6.events.response.CreateClanResponseEvent;
@@ -53,9 +52,6 @@ public class CreateClanController extends EventController {
 
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtil;
-
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtil;
@@ -151,7 +147,7 @@ public class CreateClanController extends EventController {
 
 			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				resBuilder.setClanInfo(createInfoProtoUtils.createMinimumClanProtoFromClan(cca.getCreatedClan()));
-				updateClanCache(cca.getCreatedClan());
+//				updateClanCache(cca.getCreatedClan());
 			}
 
 			CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserUuid());
@@ -201,20 +197,20 @@ public class CreateClanController extends EventController {
 		responses.globalChatResponseEvents().add(miscMethods.getGlobalNotification(createClanNotification));
 	}
 
-	private void updateClanCache(Clan clan) {
-		String clanId = clan.getId();
-		if(serverToggleRetrieveUtils.getToggleValueForName(
-				ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
-			//need to account for this user creating clan
-			int clanSize = 1;
-			Date lastChatTime = ControllerConstants.INCEPTION_DATE;
-
-			clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
-		}
-		else {
-			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
-		}
-	}
+//	private void updateClanCache(Clan clan) {
+//		String clanId = clan.getId();
+//		if(serverToggleRetrieveUtils.getToggleValueForName(
+//				ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+//			//need to account for this user creating clan
+//			int clanSize = 1;
+//			Date lastChatTime = ControllerConstants.INCEPTION_DATE;
+//
+//			clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+//		}
+//		else {
+//			hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
+//		}
+//	}
 
 	private void writeToUserCurrencyHistory(CreateClanAction cca) {
 		miscMethods.writeToUserCurrencyOneUser(cca.getUserId(), cca.getCreateTime(),
@@ -239,13 +235,6 @@ public class CreateClanController extends EventController {
 		this.clanRetrieveUtil = clanRetrieveUtil;
 	}
 
-	public HazelcastClanSearchImpl getHzClanSearch() {
-		return hzClanSearch;
-	}
-
-	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
-		this.hzClanSearch = hzClanSearch;
-	}
 
 
 }

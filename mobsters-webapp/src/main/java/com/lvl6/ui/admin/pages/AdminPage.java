@@ -17,8 +17,6 @@ import com.lvl6.server.ServerAdmin;
 import com.lvl6.spring.AppContext;
 import com.lvl6.ui.admin.components.MaintenanceModeForm;
 import com.lvl6.ui.admin.components.RecentPurchasesPanel;
-import com.lvl6.ui.admin.components.ReloadClanSearchLink;
-import com.lvl6.ui.admin.components.ReloadLeaderboardLink;
 import com.lvl6.ui.admin.components.ReloadStaticDataLink;
 import com.lvl6.ui.admin.components.StatsPanelDynamic;
 import com.lvl6.ui.admin.components.TopSpendersPanel;
@@ -76,8 +74,6 @@ public class AdminPage extends TemplatePage {
 
 	private void setTools() {
 		add(new ReloadStaticDataLink("reloadStaticDataLink"));
-		add(new ReloadLeaderboardLink("reloadLeaderboardLink"));
-		add(new ReloadClanSearchLink("reloadClanSearchLink"));
 
 		//		add(new ReloadRecommendedClansLink("reloadRecommendedClansLink"));
 	}

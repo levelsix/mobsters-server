@@ -681,7 +681,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			monsterIdToNumPieces.put(monsterId, nuQuantity);
 		}
 
-		String mfusop = String.format("{} a={}, d={}, time={}",
+		String mfusop = String.format("%s a=%s, d=%s, time=%s",
 				new Object[] {
 						ControllerConstants.MFUSOP__PVP, attackerId,
 						defenderId, clientDateTime });

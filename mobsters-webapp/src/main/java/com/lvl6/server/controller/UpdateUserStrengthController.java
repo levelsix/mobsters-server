@@ -12,7 +12,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateUserStrengthRequestEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.events.response.UpdateUserStrengthResponseEvent;
-import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthRequestProto;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
@@ -38,15 +37,13 @@ public class UpdateUserStrengthController extends EventController {
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
-	@Autowired
-	protected LeaderBoardImpl leaderBoardImpl;
-	
+
+
 //	@Autowired
 //	protected LeaderBoardImpl leaderBoardImpl;
 
 	public UpdateUserStrengthController() {
-		
+
 	}
 
 	@Override
@@ -70,6 +67,8 @@ public class UpdateUserStrengthController extends EventController {
 
 		//all positive numbers, server will change to negative
 		long updatedStrength = reqProto.getUpdatedStrength();
+		int highestToonAtk = reqProto.getHighestToonAtk();
+		int highestToonHp = reqProto.getHighestToonHp();
 
 		//set some values to send to the client (the response proto)
 		UpdateUserStrengthResponseProto.Builder resBuilder = UpdateUserStrengthResponseProto
@@ -103,8 +102,8 @@ public class UpdateUserStrengthController extends EventController {
 		try {
 			gotLock = locker.lockPlayer(userUuid, this.getClass().getSimpleName());
 
-			UpdateUserStrengthAction uusa = new UpdateUserStrengthAction(userId, updatedStrength, 
-					userRetrieveUtils, updateUtil);
+			UpdateUserStrengthAction uusa = new UpdateUserStrengthAction(userId, updatedStrength,
+					highestToonAtk, highestToonHp, userRetrieveUtils, updateUtil);
 
 			uusa.execute(resBuilder);
 

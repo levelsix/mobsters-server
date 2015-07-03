@@ -422,4 +422,18 @@ public class UserDao extends DAOImpl<UserRecord, UserPojo, String> {
 	public List<UserPojo> fetchByTangoId(String... values) {
 		return fetch(User.USER.TANGO_ID, values);
 	}
+
+	/**
+	 * Fetch records that have <code>highest_toon_atk IN (values)</code>
+	 */
+	public List<UserPojo> fetchByHighestToonAtk(Integer... values) {
+		return fetch(User.USER.HIGHEST_TOON_ATK, values);
+	}
+
+	/**
+	 * Fetch records that have <code>highest_toon_hp IN (values)</code>
+	 */
+	public List<UserPojo> fetchByHighestToonHp(Integer... values) {
+		return fetch(User.USER.HIGHEST_TOON_HP, values);
+	}
 }

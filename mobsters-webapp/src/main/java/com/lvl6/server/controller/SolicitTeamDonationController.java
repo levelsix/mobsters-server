@@ -9,10 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SolicitTeamDonationRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.SolicitTeamDonationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ClanMemberTeamDonation;
@@ -23,6 +21,7 @@ import com.lvl6.proto.EventClanProto.SolicitTeamDonationRequestProto;
 import com.lvl6.proto.EventClanProto.SolicitTeamDonationResponseProto;
 import com.lvl6.proto.MonsterStuffProto.ClanMemberTeamDonationProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+//import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
@@ -54,8 +53,8 @@ public class SolicitTeamDonationController extends EventController {
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
+//	@Autowired
+//	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected TimeUtils timeUtils;
@@ -184,7 +183,7 @@ public class SolicitTeamDonationController extends EventController {
 								senderProto, null);
 				resBuilder.setSolicitation(cmtdp);
 
-				hzClanSearch.updateRankForClanSearch(clanId, clientTime, 0, 1, 0, 0, 0);
+//				hzClanSearch.updateRankForClanSearch(clanId, clientTime, 0, 1, 0, 0, 0);
 				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 

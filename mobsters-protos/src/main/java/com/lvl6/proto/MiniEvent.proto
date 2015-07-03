@@ -54,6 +54,7 @@ message MiniEventGoalProto {
 		CLAN_HELP = 11;
 		CLAN_DONATE = 12;
 		SEND_CLAN_GIFT = 38;
+		DONATE_TOON_STRENGTH = 46;
 
 		BATTLE_AVENGE_REQUEST = 13;
 		BATTLE_AVENGE_WIN = 14;
@@ -96,6 +97,8 @@ message MiniEventGoalProto {
 		USE_HAND_SWAP_IN_PVP = 43;
 		USE_BOARD_SHUFFLE_IN_PVP = 44;
 		USE_PUTTY_IN_PVP = 45;
+		
+		//DONATE_TOON_STRENGTH = 46;
 	} 
 }
 

@@ -634,6 +634,28 @@ public interface IUser extends Serializable {
 	@Size(max = 100)
 	public String getTangoId();
 
+	/**
+	 * Setter for <code>mobsters.user.highest_toon_atk</code>. used to scale cake kids
+	 */
+	public IUser setHighestToonAtk(Integer value);
+
+	/**
+	 * Getter for <code>mobsters.user.highest_toon_atk</code>. used to scale cake kids
+	 */
+	@Column(name = "highest_toon_atk", precision = 10)
+	public Integer getHighestToonAtk();
+
+	/**
+	 * Setter for <code>mobsters.user.highest_toon_hp</code>. used to scale cake kids
+	 */
+	public IUser setHighestToonHp(Integer value);
+
+	/**
+	 * Getter for <code>mobsters.user.highest_toon_hp</code>. used to scale cake kids
+	 */
+	@Column(name = "highest_toon_hp", precision = 10)
+	public Integer getHighestToonHp();
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------

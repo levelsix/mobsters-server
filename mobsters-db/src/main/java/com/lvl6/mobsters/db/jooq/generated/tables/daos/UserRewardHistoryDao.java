@@ -88,6 +88,20 @@ public class UserRewardHistoryDao extends DAOImpl<UserRewardHistoryRecord, UserR
 	}
 
 	/**
+	 * Fetch records that have <code>static_data_id IN (values)</code>
+	 */
+	public List<UserRewardHistoryPojo> fetchByStaticDataId(Integer... values) {
+		return fetch(UserRewardHistory.USER_REWARD_HISTORY.STATIC_DATA_ID, values);
+	}
+
+	/**
+	 * Fetch records that have <code>reward_type IN (values)</code>
+	 */
+	public List<UserRewardHistoryPojo> fetchByRewardType(String... values) {
+		return fetch(UserRewardHistory.USER_REWARD_HISTORY.REWARD_TYPE, values);
+	}
+
+	/**
 	 * Fetch records that have <code>reason_for_reward IN (values)</code>
 	 */
 	public List<UserRewardHistoryPojo> fetchByReasonForReward(String... values) {
