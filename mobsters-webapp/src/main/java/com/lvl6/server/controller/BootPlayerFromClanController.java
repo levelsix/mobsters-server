@@ -9,14 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BootPlayerFromClanRequestEvent;
 import com.lvl6.events.response.BootPlayerFromClanResponseEvent;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanRequestProto;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -55,8 +54,6 @@ public class BootPlayerFromClanController extends EventController {
 	@Autowired
 	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
 	
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
@@ -154,7 +151,7 @@ public class BootPlayerFromClanController extends EventController {
 			BootPlayerFromClanAction bpfca = new BootPlayerFromClanAction(userId, playerToBootId,
 					lockedClan, userRetrieveUtils, insertUtil, updateUtil, deleteUtil, timeUtils, 
 					clanRetrieveUtils, userClanRetrieveUtils, clanStuffUtils, 
-					clanChatPostRetrieveUtil, hzClanSearch, clanSearch, toggle);
+					clanChatPostRetrieveUtil, clanSearch, toggle);
 			bpfca.execute(resBuilder);
 			
 			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
@@ -232,13 +229,6 @@ public class BootPlayerFromClanController extends EventController {
 		this.clanChatPostRetrieveUtil = clanChatPostRetrieveUtil;
 	}
 
-	public HazelcastClanSearchImpl getHzClanSearch() {
-		return hzClanSearch;
-	}
-
-	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
-		this.hzClanSearch = hzClanSearch;
-	}
 
 
 

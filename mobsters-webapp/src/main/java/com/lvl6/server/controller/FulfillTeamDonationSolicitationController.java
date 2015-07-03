@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.FulfillTeamDonationSolicitationRequestEvent;
 import com.lvl6.events.response.AchievementProgressResponseEvent;
@@ -61,8 +60,6 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected TimeUtils timeUtils;
@@ -217,7 +214,7 @@ public class FulfillTeamDonationSolicitationController extends EventController {
 								senderProto);
 				resBuilder.setSolicitation(cmtdp);
 
-				hzClanSearch.updateRankForClanSearch(clanId, clientTime, 0, 0, 1, 0, 0);
+//				hzClanSearch.updateRankForClanSearch(clanId, clientTime, 0, 0, 1, 0, 0);
 
 				resEvent.setResponseProto(resBuilder
 						.build());

@@ -20,9 +20,9 @@ import com.hazelcast.core.ILock;
 import com.hazelcast.core.ITopic;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
+//import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.response.PurgeClientStaticDataResponseEvent;
-import com.lvl6.leaderboards.LeaderBoardImpl;
+//import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
@@ -92,11 +92,11 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 	@Autowired
 	protected HazelcastInstance hazel;
 	
-	@Autowired
-	protected LeaderBoardImpl leaderboard;
-	
-	@Autowired
-	protected HazelcastClanSearchImpl clanSearch;
+//	@Autowired
+//	protected LeaderBoardImpl leaderboard;
+//	
+//	@Autowired
+//	protected HazelcastClanSearchImpl clanSearch;
 
 	public HazelcastInstance getHazel() {
 		return hazel;
@@ -169,14 +169,14 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 			log.error("Could not obtain lock for reloading instances", e);
 		}
 	}
-
-	public void reloadLeaderboard() {
-		leaderboard.reload();
-	}
-	
-	public void reloadClanSearch() {
-		clanSearch.reload();
-	}
+//
+//	public void reloadLeaderboard() {
+//		leaderboard.reload();
+//	}
+//	
+//	public void reloadClanSearch() {
+//		clanSearch.reload();
+//	}
 
 	public void setApplicationMode(Boolean maintenanceMode,
 			String messageForUsers) {

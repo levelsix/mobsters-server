@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IList;
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SendGroupChatRequestEvent;
 import com.lvl6.events.response.AchievementProgressResponseEvent;
@@ -92,9 +91,6 @@ public class SendGroupChatController extends EventController {
 
 	@Autowired
 	protected TranslationSettingsForUserRetrieveUtil translationSettingsForUserRetrieveUtil;
-
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected TranslationUtils translationUtils;
@@ -380,30 +376,30 @@ public class SendGroupChatController extends EventController {
 //			}
 
 			//update clan cache
-			if(toggle.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
-				Clan c = clanRetrieveUtil.getClanWithId(clanId);
-				int clanSize = ClanSearch.penalizedClanSize;
-				Date lastChatTime = ControllerConstants.INCEPTION_DATE;
-
-				if (!c.isRequestToJoinRequired()) {
-					//people can join clan freely
-					List<String> clanIdList = Collections.singletonList(clanId);
-					List<String> statuses = new ArrayList<String>();
-					statuses.add(UserClanStatus.LEADER.name());
-					statuses.add(UserClanStatus.JUNIOR_LEADER.name());
-					statuses.add(UserClanStatus.CAPTAIN.name());
-					statuses.add(UserClanStatus.MEMBER.name());
-					Map<String, Integer> clanIdToSize = userClanRetrieveUtil
-							.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
-
-					clanSize = clanIdToSize.get(clanId);
-					lastChatTime = new Date(timeOfPost.getTime());
-				}
-				clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
-			}
-			else {
-				hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 1, 0);
-			}
+//			if(toggle.getToggleValueForName(ControllerConstants.SERVER_TOGGLE__OLD_CLAN_SEARCH)) {
+//				Clan c = clanRetrieveUtil.getClanWithId(clanId);
+//				int clanSize = ClanSearch.penalizedClanSize;
+//				Date lastChatTime = ControllerConstants.INCEPTION_DATE;
+//
+//				if (!c.isRequestToJoinRequired()) {
+//					//people can join clan freely
+//					List<String> clanIdList = Collections.singletonList(clanId);
+//					List<String> statuses = new ArrayList<String>();
+//					statuses.add(UserClanStatus.LEADER.name());
+//					statuses.add(UserClanStatus.JUNIOR_LEADER.name());
+//					statuses.add(UserClanStatus.CAPTAIN.name());
+//					statuses.add(UserClanStatus.MEMBER.name());
+//					Map<String, Integer> clanIdToSize = userClanRetrieveUtil
+//							.getClanSizeForClanIdsAndStatuses(clanIdList, statuses);
+//
+//					clanSize = clanIdToSize.get(clanId);
+//					lastChatTime = new Date(timeOfPost.getTime());
+//				}
+//				clanSearch.updateClanSearchRank(clanId, clanSize, lastChatTime);
+//			}
+//			else {
+//				hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 1, 0);
+//			}
 		}
 	}
 
@@ -478,15 +474,6 @@ public class SendGroupChatController extends EventController {
 	public void setClanRetrieveUtil(ClanRetrieveUtils2 clanRetrieveUtil) {
 		this.clanRetrieveUtil = clanRetrieveUtil;
 	}
-
-	public HazelcastClanSearchImpl getHzClanSearch() {
-		return hzClanSearch;
-	}
-
-	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
-		this.hzClanSearch = hzClanSearch;
-	}
-
 
 
 

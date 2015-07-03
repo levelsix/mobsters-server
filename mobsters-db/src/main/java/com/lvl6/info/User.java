@@ -1259,9 +1259,9 @@ public class User implements Serializable {
 				"and");
 
 		if (numUpdated == 1) {
-			this.totalStrength += strength;
-			this.highestToonAtk += highestToonAtk;
-			this.highestToonHp += highestToonHp;
+			this.totalStrength = strength;
+			this.highestToonAtk = highestToonAtk;
+			this.highestToonHp = highestToonHp;
 
 			return true;
 		}

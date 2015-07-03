@@ -12,7 +12,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateUserStrengthRequestEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.events.response.UpdateUserStrengthResponseEvent;
-import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthRequestProto;
 import com.lvl6.proto.EventUserProto.UpdateUserStrengthResponseProto;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
@@ -39,8 +38,6 @@ public class UpdateUserStrengthController extends EventController {
 	@Autowired
 	protected UpdateUtil updateUtil;
 
-	@Autowired
-	protected LeaderBoardImpl leaderBoardImpl;
 
 //	@Autowired
 //	protected LeaderBoardImpl leaderBoardImpl;

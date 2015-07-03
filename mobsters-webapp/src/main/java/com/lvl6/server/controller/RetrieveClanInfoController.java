@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.IMap;
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
 import com.lvl6.events.response.RetrieveClanInfoResponseEvent;

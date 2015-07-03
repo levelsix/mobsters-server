@@ -230,6 +230,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 
 		//save to reward history
+		log.info("{}\t {}\t {}\t {}\t {}",
+				new Object[] {userId, new Timestamp(now.getTime()),
+				rewards, awardReason, awardReasonDetail});
 		success = insertUtil.insertIntoUserRewardHistory(userId, new Timestamp(now.getTime()),
 				rewards, awardReason, awardReasonDetail);
 		if(!success) {
