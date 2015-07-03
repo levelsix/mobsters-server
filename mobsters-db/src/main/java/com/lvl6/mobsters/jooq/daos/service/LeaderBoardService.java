@@ -80,7 +80,7 @@ public class LeaderBoardService extends UserDao {
 				.orderBy(com.lvl6.mobsters.db.jooq.generated.tables.StrengthLeaderboard.STRENGTH_LEADERBOARD.STRENGTH.desc())
 				.fetch();
 		
-		int rank = 0;
+		int rank = 1;
 		for(Record2<String, Integer> record : userStrengths) {
 			if(record.value1().equals(userId)) {
 				return rank;
