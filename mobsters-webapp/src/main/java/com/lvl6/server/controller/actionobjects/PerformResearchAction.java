@@ -274,7 +274,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		if (resourceCost > 0) {
 			if (resourceType == ResourceType.CASH) {
-				currencyDeltas.put(cash, resourceCost);
+				currencyDeltas.put(cash, -1 *resourceCost);
 				curCurrencies.put(cash, user.getCash());
 				reasonsForChanges.put(cash,
 						ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
@@ -283,7 +283,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				details.put(cash, detailSb2.toString());
 
 			} else if (resourceType == ResourceType.OIL) {
-				currencyDeltas.put(oil, resourceCost);
+				currencyDeltas.put(oil, -1 *resourceCost);
 				curCurrencies.put(oil, user.getOil());
 				reasonsForChanges.put(oil,
 						ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
