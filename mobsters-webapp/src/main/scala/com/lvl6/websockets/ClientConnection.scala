@@ -70,9 +70,9 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   var rabbitConnectionFactory:ConnectionFactory = null
   @Autowired
   var amqpAdmin:AmqpAdmin = null
-  @Resource(name="gamemessages")
+  @Resource(name="gamemessagesWS")
   var gameExchange:DirectExchange = null
-  @Resource(name="chatmessages")
+  @Resource(name="chatmessagesWS")
   var chatExchange:TopicExchange = null
   
   
