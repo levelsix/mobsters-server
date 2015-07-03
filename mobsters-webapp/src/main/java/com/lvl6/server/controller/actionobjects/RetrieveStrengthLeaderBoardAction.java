@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.StrengthLeaderBoard;
-import com.lvl6.leaderboards.LeaderBoardImpl;
 import com.lvl6.mobsters.jooq.daos.service.LeaderBoardService;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.Builder;
 import com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto;

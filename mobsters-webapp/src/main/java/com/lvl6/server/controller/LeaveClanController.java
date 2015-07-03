@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.clansearch.ClanSearch;
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LeaveClanRequestEvent;
 import com.lvl6.events.response.LeaveClanResponseEvent;
@@ -54,9 +53,6 @@ public class LeaveClanController extends EventController {
 
 	@Autowired
 	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
-
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected InsertUtil insertUtil;
@@ -134,7 +130,7 @@ public class LeaveClanController extends EventController {
 
 			LeaveClanAction lca = new LeaveClanAction(userId, clanId, lockedClan,
 					userRetrieveUtils, insertUtil, deleteUtil, clanRetrieveUtils,
-					userClanRetrieveUtils, hzClanSearch, clanChatPostRetrieveUtil,
+					userClanRetrieveUtils, clanChatPostRetrieveUtil,
 					timeUtils, clanSearch, toggle);
 			lca.execute(resBuilder);
 
@@ -236,14 +232,5 @@ public class LeaveClanController extends EventController {
 	public void setTimeUtil(TimeUtils timeUtil) {
 		this.timeUtils = timeUtil;
 	}
-
-	public HazelcastClanSearchImpl getHzClanSearch() {
-		return hzClanSearch;
-	}
-
-	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
-		this.hzClanSearch = hzClanSearch;
-	}
-
 
 }

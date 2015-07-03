@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.GiveClanHelpRequestEvent;
 import com.lvl6.events.response.GiveClanHelpResponseEvent;
@@ -54,8 +53,6 @@ public class GiveClanHelpController extends EventController {
 	@Autowired
 	protected TimeUtils timeUtil;
 
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
 
 	public GiveClanHelpController() {
 
@@ -157,7 +154,7 @@ public class GiveClanHelpController extends EventController {
 				//only write to clan if success
 				//send back most up to date ClanHelps that changed
 				//NOTE: Sending most up to date ClanHelps incurs a db read
-				hzClanSearch.updateRankForClanSearch(clanId, new Date(), clanHelpIds.size(), 0, 0, 0, 0);
+//				hzClanSearch.updateRankForClanSearch(clanId, new Date(), clanHelpIds.size(), 0, 0, 0, 0);
 				setClanHelpings(resBuilder, null, senderProto, clanHelpIds);
 				resBuilder.setStatus(ResponseStatus.SUCCESS);
 				resEvent.setResponseProto(resBuilder.build());

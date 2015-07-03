@@ -55,42 +55,42 @@
 	<hz:map id="lockMap" name="lockMap" instance-ref="hazel" />
 
 
-	<hz:map id="dailyHelpsMap" name="dailyHelpsMap" instance-ref="hazel" />
+<!-- 	<hz:map id="dailyHelpsMap" name="dailyHelpsMap" instance-ref="hazel" /> -->
 
-	<hz:map id="dailyDonateRequestsMap" name="dailyDonateRequestsMap" instance-ref="hazel" />
+<!-- 	<hz:map id="dailyDonateRequestsMap" name="dailyDonateRequestsMap" instance-ref="hazel" /> -->
 
-	<hz:map id="dailyDonateCompletesMap" name="dailyDonateCompletesMap"	instance-ref="hazel" />
+<!-- 	<hz:map id="dailyDonateCompletesMap" name="dailyDonateCompletesMap"	instance-ref="hazel" /> -->
 
-	<hz:map id="chatsPastHourMap" name="chatsPastHourMap"	instance-ref="hazel" />
+<!-- 	<hz:map id="chatsPastHourMap" name="chatsPastHourMap"	instance-ref="hazel" /> -->
 
-	<hz:map id="clanMemberCountMap" name="clanMemberCountMap"	instance-ref="hazel" />
+<!-- 	<hz:map id="clanMemberCountMap" name="clanMemberCountMap"	instance-ref="hazel" /> -->
 
-	<hz:list id="clanSearchRanksList" name="clanSearchRanksList" instance-ref="hazel" />
+<!-- 	<hz:list id="clanSearchRanksList" name="clanSearchRanksList" instance-ref="hazel" /> -->
 
-	<hz:multiMap id="clanSearchKeysByScoreMultiMap" name="clanSearchKeysByScoreMultiMap"	instance-ref="hazel" />
+<!-- 	<hz:multiMap id="clanSearchKeysByScoreMultiMap" name="clanSearchKeysByScoreMultiMap"	instance-ref="hazel" /> -->
 
-	<hz:map id="clanSearchScoresByKeyMap" name="clanSearchScoresByKeyMap"	instance-ref="hazel" />
+<!-- 	<hz:map id="clanSearchScoresByKeyMap" name="clanSearchScoresByKeyMap"	instance-ref="hazel" /> -->
 
-	<hz:lock id="clanSearchPendingLock" name="clanSearchPendingLock" instance-ref="hazel" />
+<!-- 	<hz:lock id="clanSearchPendingLock" name="clanSearchPendingLock" instance-ref="hazel" /> -->
 
-	<hz:list id="clanSearchPendingQueue" name="clanSearchPendingQueue"		instance-ref="hazel" />
+<!-- 	<hz:list id="clanSearchPendingQueue" name="clanSearchPendingQueue"		instance-ref="hazel" /> -->
 
-	<hz:lock id="clanSearchLock" name="clanSearchLock"	instance-ref="hazel" />
-
-
+<!-- 	<hz:lock id="clanSearchLock" name="clanSearchLock"	instance-ref="hazel" /> -->
 
 
-	<hz:list id="list" name="leaderboardRanksList" instance-ref="hazel" />
 
-	<hz:multiMap id="multiMap" name="leaderboardKeysByScoreMultiMap"	instance-ref="hazel" />
 
-	<hz:map id="leaderboardScoresByKeyMap" name="leaderboardScoresByKeyMap"		instance-ref="hazel" />
+<!-- 	<hz:list id="list" name="leaderboardRanksList" instance-ref="hazel" /> -->
 
-	<hz:lock id="leaderboardPendingLock" name="leaderboardPendingLock"	instance-ref="hazel" />
+<!-- 	<hz:multiMap id="multiMap" name="leaderboardKeysByScoreMultiMap"	instance-ref="hazel" /> -->
 
-	<hz:list id="leaderboardPendingQueue" name="leaderboardPendingQueue"	instance-ref="hazel" />
+<!-- 	<hz:map id="leaderboardScoresByKeyMap" name="leaderboardScoresByKeyMap"		instance-ref="hazel" /> -->
 
-	<hz:lock id="leaderboardLock" name="leaderboardLock" instance-ref="hazel" />
+<!-- 	<hz:lock id="leaderboardPendingLock" name="leaderboardPendingLock"	instance-ref="hazel" /> -->
+
+<!-- 	<hz:list id="leaderboardPendingQueue" name="leaderboardPendingQueue"	instance-ref="hazel" /> -->
+
+<!-- 	<hz:lock id="leaderboardLock" name="leaderboardLock" instance-ref="hazel" /> -->
 
 
 

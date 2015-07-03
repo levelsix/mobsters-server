@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.clansearch.HazelcastClanSearchImpl;
+//import com.lvl6.clansearch.HazelcastClanSearchImpl;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AcceptOrRejectClanInviteRequestEvent;
 import com.lvl6.events.response.AcceptOrRejectClanInviteResponseEvent;
@@ -84,8 +84,8 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	@Autowired
 	protected ClanAvengeUserRetrieveUtil clanAvengeUserRetrieveUtil;
 
-	@Autowired
-	protected HazelcastClanSearchImpl hzClanSearch;
+//	@Autowired
+//	protected HazelcastClanSearchImpl hzClanSearch;
 
 	@Autowired
 	protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
@@ -231,8 +231,8 @@ public class AcceptOrRejectClanInviteController extends EventController {
 				sendClanData(event, senderProto, userId, cdp, responses);
 
 				//update clan cache
-				updateClanCache(clanId, aorcia.getClanSize(),
-						lastChatTimeContainer, clan.isRequestToJoinRequired());
+//				updateClanCache(clanId, aorcia.getClanSize(),
+//						lastChatTimeContainer, clan.isRequestToJoinRequired());
 
 			} else {
 				//only write to user if just reject or fail
@@ -310,10 +310,10 @@ public class AcceptOrRejectClanInviteController extends EventController {
 		responses.normalResponseEvents().add(rcdre);
 	}
 
-	private void updateClanCache(String clanId, int clanSize,
-			List<Date> lastChatTimeContainer, boolean requestToJoinRequired) {
-		hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
-	}
+//	private void updateClanCache(String clanId, int clanSize,
+//			List<Date> lastChatTimeContainer, boolean requestToJoinRequired) {
+//		hzClanSearch.updateRankForClanSearch(clanId, new Date(), 0, 0, 0, 0, 1);
+//	}
 
 	public Locker getLocker() {
 		return locker;
@@ -385,13 +385,13 @@ public class AcceptOrRejectClanInviteController extends EventController {
 	}
 
 
-	public HazelcastClanSearchImpl getHzClanSearch() {
-		return hzClanSearch;
-	}
-
-	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
-		this.hzClanSearch = hzClanSearch;
-	}
+//	public HazelcastClanSearchImpl getHzClanSearch() {
+//		return hzClanSearch;
+//	}
+//
+//	public void setHzClanSearch(HazelcastClanSearchImpl hzClanSearch) {
+//		this.hzClanSearch = hzClanSearch;
+//	}
 
 	public ClanMemberTeamDonationRetrieveUtil getClanMemberTeamDonationRetrieveUtil() {
 		return clanMemberTeamDonationRetrieveUtil;
