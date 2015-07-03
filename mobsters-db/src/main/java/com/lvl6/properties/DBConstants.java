@@ -884,6 +884,8 @@ public class DBConstants {
 	public static final String USER_REWARD_HISTORY__REWARD_ID = "reward_id";
 	public static final String USER_REWARD_HISTORY__REASON_FOR_REWARD = "reason_for_reward";
 	public static final String USER_REWARD_HISTORY__DETAILS = "details";
+	public static final String USER_REWARD_HISTORY__STATIC_DATA_ID = "static_data_id";
+	public static final String USER_REWARD_HISTORY__REWARD_TYPE = "reward_type";
 
 	/************** CONFIGURATION DATA TABLES *****************************/
 

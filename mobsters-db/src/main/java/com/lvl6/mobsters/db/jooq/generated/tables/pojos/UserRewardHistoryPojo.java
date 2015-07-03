@@ -32,12 +32,14 @@ import javax.validation.constraints.Size;
 @Table(name = "user_reward_history", schema = "mobsters")
 public class UserRewardHistoryPojo implements IUserRewardHistory {
 
-	private static final long serialVersionUID = 1640692327;
+	private static final long serialVersionUID = 1459740091;
 
 	private String    id;
 	private String    userId;
 	private Timestamp date;
 	private Integer   rewardId;
+	private Integer   staticDataId;
+	private String    rewardType;
 	private String    reasonForReward;
 	private String    details;
 
@@ -48,6 +50,8 @@ public class UserRewardHistoryPojo implements IUserRewardHistory {
 		this.userId = value.userId;
 		this.date = value.date;
 		this.rewardId = value.rewardId;
+		this.staticDataId = value.staticDataId;
+		this.rewardType = value.rewardType;
 		this.reasonForReward = value.reasonForReward;
 		this.details = value.details;
 	}
@@ -57,6 +61,8 @@ public class UserRewardHistoryPojo implements IUserRewardHistory {
 		String    userId,
 		Timestamp date,
 		Integer   rewardId,
+		Integer   staticDataId,
+		String    rewardType,
 		String    reasonForReward,
 		String    details
 	) {
@@ -64,6 +70,8 @@ public class UserRewardHistoryPojo implements IUserRewardHistory {
 		this.userId = userId;
 		this.date = date;
 		this.rewardId = rewardId;
+		this.staticDataId = staticDataId;
+		this.rewardType = rewardType;
 		this.reasonForReward = reasonForReward;
 		this.details = details;
 	}
@@ -120,6 +128,31 @@ public class UserRewardHistoryPojo implements IUserRewardHistory {
 		return this;
 	}
 
+	@Column(name = "static_data_id", precision = 10)
+	@Override
+	public Integer getStaticDataId() {
+		return this.staticDataId;
+	}
+
+	@Override
+	public UserRewardHistoryPojo setStaticDataId(Integer staticDataId) {
+		this.staticDataId = staticDataId;
+		return this;
+	}
+
+	@Column(name = "reward_type", length = 45)
+	@Size(max = 45)
+	@Override
+	public String getRewardType() {
+		return this.rewardType;
+	}
+
+	@Override
+	public UserRewardHistoryPojo setRewardType(String rewardType) {
+		this.rewardType = rewardType;
+		return this;
+	}
+
 	@Column(name = "reason_for_reward", length = 100)
 	@Size(max = 100)
 	@Override
@@ -159,6 +192,8 @@ public class UserRewardHistoryPojo implements IUserRewardHistory {
 		setUserId(from.getUserId());
 		setDate(from.getDate());
 		setRewardId(from.getRewardId());
+		setStaticDataId(from.getStaticDataId());
+		setRewardType(from.getRewardType());
 		setReasonForReward(from.getReasonForReward());
 		setDetails(from.getDetails());
 	}

@@ -80,6 +80,29 @@ public interface IUserRewardHistory extends Serializable {
 	public Integer getRewardId();
 
 	/**
+	 * Setter for <code>mobsters.user_reward_history.static_data_id</code>.
+	 */
+	public IUserRewardHistory setStaticDataId(Integer value);
+
+	/**
+	 * Getter for <code>mobsters.user_reward_history.static_data_id</code>.
+	 */
+	@Column(name = "static_data_id", precision = 10)
+	public Integer getStaticDataId();
+
+	/**
+	 * Setter for <code>mobsters.user_reward_history.reward_type</code>.
+	 */
+	public IUserRewardHistory setRewardType(String value);
+
+	/**
+	 * Getter for <code>mobsters.user_reward_history.reward_type</code>.
+	 */
+	@Column(name = "reward_type", length = 45)
+	@Size(max = 45)
+	public String getRewardType();
+
+	/**
 	 * Setter for <code>mobsters.user_reward_history.reason_for_reward</code>.
 	 */
 	public IUserRewardHistory setReasonForReward(String value);

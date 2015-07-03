@@ -2785,11 +2785,11 @@ public class InsertUtils implements InsertUtil {
 		}
 		if (null != mefu.getTierTwoRedeemedTime()) {
 			newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_TWO_REDEEMED_TIME,
-				mefu.getTierTwoRedeemedTime());
+					mefu.getTierTwoRedeemedTime());
 		}
 		if (null != mefu.getTierThreeRedeemedTime()) {
 			newRow.put(DBConstants.MINI_EVENT_FOR_USER__TIER_THREE_REDEEMED_TIME,
-				mefu.getTierThreeRedeemedTime());
+					mefu.getTierThreeRedeemedTime());
 		}
 		newRows.add(newRow);
 
@@ -2867,6 +2867,8 @@ public class InsertUtils implements InsertUtil {
 		List<Integer> rewardIdList = new ArrayList<Integer>();
 		List<String> reasonForRewardList = new ArrayList<String>();
 		List<String> awardReasonDetailList = new ArrayList<String>();
+		List<Integer> staticDataIdList = new ArrayList<Integer>();
+		List<String> rewardTypeList = new ArrayList<String>();
 
 		try {
 			for(Reward r : listOfRewards) {
@@ -2877,7 +2879,18 @@ public class InsertUtils implements InsertUtil {
 				timestampList.add(ts);
 				rewardIdList.add(rewardId);
 				reasonForRewardList.add(reasonForReward);
+				
+				if(awardReasonDetail != null) {
 				awardReasonDetailList.add(awardReasonDetail);
+				}
+				
+				if(r.getStaticDataId() != 0) {
+					staticDataIdList.add(r.getStaticDataId());	
+				}
+				
+				if(r.getType() != null) {
+					rewardTypeList.add(r.getType());
+				}
 			}
 		} catch (Exception e) {
 			log.error("error converting language to string");
@@ -2889,6 +2902,9 @@ public class InsertUtils implements InsertUtil {
 		insertParams.put(DBConstants.USER_REWARD_HISTORY__DATE, timestampList);
 		insertParams.put(DBConstants.USER_REWARD_HISTORY__REWARD_ID, rewardIdList);
 		insertParams.put(DBConstants.USER_REWARD_HISTORY__REASON_FOR_REWARD, reasonForRewardList);
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__STATIC_DATA_ID, staticDataIdList);
+		insertParams.put(DBConstants.USER_REWARD_HISTORY__REWARD_TYPE, rewardTypeList);
+
 		if(awardReasonDetail != null) {
 			insertParams.put(DBConstants.USER_REWARD_HISTORY__DETAILS, awardReasonDetailList);
 		}
@@ -2902,62 +2918,62 @@ public class InsertUtils implements InsertUtil {
 			return false;
 	}
 
-//	@Override
-//	public boolean insertClanGiftForUsers(Map<String, Integer> userIdsToRewardIds,
-//			String gifterUserId, int clanGiftId, String reasonForGift) {
-//		if(userIdsToRewardIds == null || userIdsToRewardIds.isEmpty()) {
-//			log.error("map containing ids to translations is null/empty");
-//		}
-//
-//		String tableName = DBConstants.TABLE_CLAN_GIFT_FOR_USER;
-//		int size = userIdsToRewardIds.size();
-//		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-//
-//		List<String> idList = new ArrayList<String>();
-//		List<String> receiverUserIdList = new ArrayList<String>();
-//		List<Integer> rewardIdList = new ArrayList<Integer>();
-//		List<String> gifterUserIdList = new ArrayList<String>();
-//		List<Integer> clanGiftIdList = new ArrayList<Integer>();
-//		List<Timestamp> timeReceivedList = new ArrayList<Timestamp>();
-//		List<String> reasonForGiftList = new ArrayList<String>();
-//		Timestamp now = new Timestamp(new Date().getTime());
-//
-//		try {
-//			for(String receiverUserId : userIdsToRewardIds.keySet()) {
-//				idList.add(randomUUID());
-//				receiverUserIdList.add(receiverUserId);
-//				rewardIdList.add(userIdsToRewardIds.get(receiverUserId));
-//				if(gifterUserId != null) {
-//					gifterUserIdList.add(gifterUserId);
-//				}
-//				clanGiftIdList.add(clanGiftId);
-//				timeReceivedList.add(now);
-//				reasonForGiftList.add(reasonForGift);
-//			}
-//		} catch (Exception e) {
-//			log.error("error converting language to string", e);
-//		}
-//
-//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__ID, idList);
-//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__RECEIVER_USER_ID, receiverUserIdList);
-//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__REWARD_ID, rewardIdList);
-//
-//		if(!gifterUserIdList.isEmpty()) {
-//			insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__GIFTER_USER_ID, gifterUserIdList);
-//		}
-//
-//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__CLAN_GIFT_ID, clanGiftIdList);
-//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__TIME_RECEIVED, timeReceivedList);
-//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__REASON_FOR_GIFT, reasonForGiftList);
-//
-//		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
-//				tableName, insertParams, size);
-//
-//		if (numInserted == size) {
-//			return true;
-//		}
-//		else return false;
-//	}
+	//	@Override
+	//	public boolean insertClanGiftForUsers(Map<String, Integer> userIdsToRewardIds,
+	//			String gifterUserId, int clanGiftId, String reasonForGift) {
+	//		if(userIdsToRewardIds == null || userIdsToRewardIds.isEmpty()) {
+	//			log.error("map containing ids to translations is null/empty");
+	//		}
+	//
+	//		String tableName = DBConstants.TABLE_CLAN_GIFT_FOR_USER;
+	//		int size = userIdsToRewardIds.size();
+	//		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+	//
+	//		List<String> idList = new ArrayList<String>();
+	//		List<String> receiverUserIdList = new ArrayList<String>();
+	//		List<Integer> rewardIdList = new ArrayList<Integer>();
+	//		List<String> gifterUserIdList = new ArrayList<String>();
+	//		List<Integer> clanGiftIdList = new ArrayList<Integer>();
+	//		List<Timestamp> timeReceivedList = new ArrayList<Timestamp>();
+	//		List<String> reasonForGiftList = new ArrayList<String>();
+	//		Timestamp now = new Timestamp(new Date().getTime());
+	//
+	//		try {
+	//			for(String receiverUserId : userIdsToRewardIds.keySet()) {
+	//				idList.add(randomUUID());
+	//				receiverUserIdList.add(receiverUserId);
+	//				rewardIdList.add(userIdsToRewardIds.get(receiverUserId));
+	//				if(gifterUserId != null) {
+	//					gifterUserIdList.add(gifterUserId);
+	//				}
+	//				clanGiftIdList.add(clanGiftId);
+	//				timeReceivedList.add(now);
+	//				reasonForGiftList.add(reasonForGift);
+	//			}
+	//		} catch (Exception e) {
+	//			log.error("error converting language to string", e);
+	//		}
+	//
+	//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__ID, idList);
+	//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__RECEIVER_USER_ID, receiverUserIdList);
+	//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__REWARD_ID, rewardIdList);
+	//
+	//		if(!gifterUserIdList.isEmpty()) {
+	//			insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__GIFTER_USER_ID, gifterUserIdList);
+	//		}
+	//
+	//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__CLAN_GIFT_ID, clanGiftIdList);
+	//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__TIME_RECEIVED, timeReceivedList);
+	//		insertParams.put(DBConstants.CLAN_GIFT_FOR_USER__REASON_FOR_GIFT, reasonForGiftList);
+	//
+	//		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+	//				tableName, insertParams, size);
+	//
+	//		if (numInserted == size) {
+	//			return true;
+	//		}
+	//		else return false;
+	//	}
 
 	@Override
 	public boolean insertGiftForUser(Collection<GiftForUserPojo> giftForUsers) {
