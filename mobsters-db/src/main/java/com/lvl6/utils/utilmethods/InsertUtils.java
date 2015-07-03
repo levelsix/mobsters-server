@@ -2879,17 +2879,21 @@ public class InsertUtils implements InsertUtil {
 				timestampList.add(ts);
 				rewardIdList.add(rewardId);
 				reasonForRewardList.add(reasonForReward);
-				
+
 				if(awardReasonDetail != null) {
-				awardReasonDetailList.add(awardReasonDetail);
+					awardReasonDetailList.add(awardReasonDetail);
+				} else {
+					awardReasonDetailList.add("");
 				}
-				
-				if(r.getStaticDataId() != 0) {
-					staticDataIdList.add(r.getStaticDataId());	
-				}
-				
+
+				//if(r.getStaticDataId() != 0) {
+				staticDataIdList.add(r.getStaticDataId());
+				//}
+
 				if(r.getType() != null) {
 					rewardTypeList.add(r.getType());
+				} else {
+					rewardTypeList.add("");
 				}
 			}
 		} catch (Exception e) {
