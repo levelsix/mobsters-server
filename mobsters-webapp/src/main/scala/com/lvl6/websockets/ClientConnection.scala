@@ -190,14 +190,12 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     if(userId.get.equals(plyrId)) {
       sendToThisSocket(bytes)
     }else {
-      ClientConnections.getConnection(plyrId) match{
-        //If it's not the requester then the player might have a socket on this server
-        case Some(lc)=> lc.sendToThisSocket(bytes)
-        //If they are not on this server send to amqp
-        case None=> {
-          logger.info(s"No connection found on this server for playerId: plyrId  sending to amqp")
-          eventWriter.sendToSinglePlayer(plyrId, bytes)
-        }
+      val sentLocal = onLocalConnection(plyrId){ lc:ClientConnection =>
+        lc.sendToThisSocket(bytes)
+      }
+      if(!sentLocal) {
+        logger.info(s"No connection found on this server for playerId: plyrId  sending to amqp")
+        eventWriter.sendToSinglePlayer(plyrId, bytes)
       }
     }
   }
@@ -209,10 +207,29 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   
   
   def sendClanChangeServerEvent(changeClanMap:java.util.Map[String, String])={
+    val ccm = changeClanMap.filter{ case(usrId, clnId) =>
+      //If user is connected to this server then filter it so it doesn't get sent to other servers
+      !onLocalConnection(usrId){ lc:ClientConnection =>
+        lc.changeClan(clnId)  
+      }
+    }
     val ev = new ClanChangeServerEvent()
-    ev.setUserIdToNewClanIdMap(changeClanMap)
+    ev.setUserIdToNewClanIdMap(ccm)
     serverMessagesTemplate.convertAndSend(RoutingKeys.clanChangeRoutingKey, ev)
   }
+  
+  protected def onLocalConnection(userId:String)(doOnLC:ClientConnection => Unit):Boolean={
+    ClientConnections.getConnection(userId) match{
+      case Some(lc)=> {
+        doOnLC(lc)
+        true
+      }
+      case None=> {
+        false
+      }
+    }      
+  }
+  
   
   override def updatePlayerToServerMaps(parsedEvent:ParsedEvent)={
     playersOnlineService.updatePlayerToServerMaps(parsedEvent.event)
