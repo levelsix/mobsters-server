@@ -42,6 +42,9 @@ import com.lvl6.events.response.StartupResponseEvent
 import com.lvl6.server.eventsender.PreDBResponseEvent
 import com.lvl6.server.dynamodb.tables.CachedClientResponse
 import com.lvl6.events.ResponseEvent
+import org.springframework.amqp.rabbit.core.RabbitTemplate
+import com.lvl6.server.events.ClanChangeServerEvent
+import com.lvl6.server.eventsender.RoutingKeys
 
 @ServerEndpoint(value = "/client/connection")
 class ClientConnection extends GameEventHandler with LazyLogging with MessageListener{
@@ -74,6 +77,8 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   var gameExchange:DirectExchange = null
   @Resource(name="chatmessagesWS")
   var chatExchange:TopicExchange = null
+  @Resource(name = "serverMessagesTemplate")
+  var serverMessagesTemplate:RabbitTemplate = null
   
   
   
@@ -141,8 +146,8 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
         }
       }
     }
-    if(responses.clanChanged) {
-      changeClan(responses.newClanId)
+    if(!responses.changeClansMap.isEmpty) {
+      sendClanChangeServerEvent(responses.changeClansMap)
     }
     //Normal responses can be a response to the requesting player or to another player
     responses.normalResponseEvents.foreach{ revent =>
@@ -200,6 +205,13 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   
   def sendCachedResponse(cachedResponse:CachedClientResponse)={
     sendToThisSocket(cachedResponse.event)
+  }
+  
+  
+  def sendClanChangeServerEvent(changeClanMap:java.util.Map[String, String])={
+    val ev = new ClanChangeServerEvent()
+    ev.setUserIdToNewClanIdMap(changeClanMap)
+    serverMessagesTemplate.convertAndSend(RoutingKeys.clanChangeRoutingKey, ev)
   }
   
   override def updatePlayerToServerMaps(parsedEvent:ParsedEvent)={

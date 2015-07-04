@@ -7,4 +7,8 @@ object RoutingKeys {
   def clanRoutingKey(clanId:String) = "clan_"+clanId
   val globalchatRoutingKey = "chat_global"
   
+  
+  //server to server keys
+  var maintenanceModeRoutingKey = "maintenanceModeEvent"
+  var clanChangeRoutingKey = "clanChangeEvent"
 }
