@@ -163,6 +163,7 @@ import com.lvl6.server.eventsender.AsyncResponder
 import com.lvl6.spring.AppContext
 import scala.beans.BeanProperty
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesScheduleConfigPojo
+import java.util.Collections
 
 case class StartupData(
   resBuilder: Builder,
@@ -729,6 +730,15 @@ class StartupService extends LazyLogging {
             } catch {
               case t: Throwable => logger.error(s"unable to delete orphaned enhancements", t)
             }
+          } else if (feederUserMonsterIds.isEmpty()) {
+              logger.error(s"no feeders. deleting inEnhancing=$userMonstersEnhancing.values()")
+              try {
+                val numDeleted = deleteUtil.deleteMonsterEnhancingForUser(
+                        userId, Collections.singletonList(baseMonster.getUserMonsterUuid))
+                logger.info(s"numDeleted enhancements: $numDeleted")
+              } catch {
+                  case t: Throwable => logger.error(s"unable to delete orphaned enhancements", t)
+              }
           } else {
             val uep = createInfoProtoUtils.createUserEnhancementProtoFromObj(userId, baseMonster, feederProtos)
             resBuilder.setEnhancements(uep)
