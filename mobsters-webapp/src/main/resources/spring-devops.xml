@@ -44,6 +44,6 @@
 		</property>
 	</bean> -->
 
-	<bean id="applicationMode" class="com.lvl6.server.ApplicationMode" scope="singleton" />
+	<bean id="applicationMode" class="com.lvl6.server.events.ApplicationMode" scope="singleton" />
 		
 </beans>
