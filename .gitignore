@@ -17,6 +17,7 @@ src/main/resources/KingdomAPNSProdKey.p12
 .metadata
 .cache
 .cache-main
+.cache-tests
 target/
 */target/
 
