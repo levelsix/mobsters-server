@@ -1871,6 +1871,7 @@ public class UpdateUtils implements UpdateUtil {
 		if (numUpdated == 1) {
 			return true;
 		}
+		log.error("error updating user research userResearchId {}", userResearchUuid);
 		return false;
 	}
 

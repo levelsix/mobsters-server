@@ -3,6 +3,7 @@ package com.lvl6.server.controller.actionobjects;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -12,12 +13,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Research;
+import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
@@ -195,6 +197,17 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 					userResearchUuid, research.getId(), timeOfPurchase);
 		} else {
 			boolean isComplete = false;
+			//check if user already has research, don't want to insert two rows. this is
+			//due to the guccigucci situation where they have double research
+			List<ResearchForUser> allUserResearch = researchForUserRetrieveUtil.getAllResearchForUser(userId);
+			for(ResearchForUser rfu : allUserResearch) {
+				Research r = researchRetrieveUtils.getResearchForId(rfu.getResearchId());
+				if(research.getName().equals(r.getName())) {
+					log.error("user trying to build a research when they already have one with the same name,"
+							+ "userId {}, researchId {}", userId, researchId);
+					return false;
+				}
+			}
 			userResearchUuid = insertUtil.insertUserResearch(userId, research,
 					timeOfPurchase, isComplete);
 			if (userResearchUuid != null) {
