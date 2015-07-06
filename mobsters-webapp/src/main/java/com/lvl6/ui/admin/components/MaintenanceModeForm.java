@@ -5,7 +5,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 
-import com.lvl6.server.ApplicationMode;
+import com.lvl6.server.events.ApplicationMode;
 import com.lvl6.spring.AppContext;
 
 public class MaintenanceModeForm extends Form<ApplicationMode> {

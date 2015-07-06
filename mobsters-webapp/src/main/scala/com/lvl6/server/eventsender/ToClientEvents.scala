@@ -15,11 +15,10 @@ case class ToClientEvents(
     preDBFacebookEvents:java.util.List[PreDBFacebookEvent]= new ArrayList[PreDBFacebookEvent](),
     clanResponseEvents:java.util.List[ClanResponseEvent]= new ArrayList[ClanResponseEvent](),
     apnsResponseEvents:java.util.List[ResponseEvent[_ <: GeneratedMessage]]= new ArrayList[ResponseEvent[_ <: GeneratedMessage]]()) {
-  
+ 
+
   @BeanProperty
-  var clanChanged = false
-  @BeanProperty
-  var newClanId = "";
+  var changeClansMap = new java.util.HashMap[String, String]()//userId, newClanId
   @BeanProperty
   var userId = ""
 }

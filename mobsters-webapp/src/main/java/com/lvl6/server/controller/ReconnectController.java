@@ -60,8 +60,7 @@ public class ReconnectController extends EventController {
 			responses.setUserId(senderProto.getUserUuid());
 
 			if (senderProto.hasClan() && senderProto.getClan().getClanUuid() != null && senderProto.getClan().getClanUuid().length() > 0) {
-				responses.setNewClanId(senderProto.getClan().getClanUuid());
-				responses.setClanChanged(true);
+				responses.changeClansMap().put(senderProto.getUserUuid(), senderProto.getClan().getClanUuid());
 			}
 		} else {
 			log.error("reconnect called with no user.");

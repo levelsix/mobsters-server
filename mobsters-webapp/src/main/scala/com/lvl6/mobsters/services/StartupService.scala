@@ -163,6 +163,7 @@ import com.lvl6.server.eventsender.AsyncResponder
 import com.lvl6.spring.AppContext
 import scala.beans.BeanProperty
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesScheduleConfigPojo
+import java.util.Collections
 
 case class StartupData(
   resBuilder: Builder,
@@ -572,8 +573,7 @@ class StartupService extends LazyLogging {
         var clan: Clan = null;
         if (user.getClanId() != null) {
           clan = fillMe.getClanIdsToClans().get(user.getClanId());
-          responses.clanChanged = true;//for setting up amqp clan listeners
-          responses.newClanId = user.getClanId()
+          responses.changeClansMap.put(user.getId,user.getClanId());
         }
         val fup = createInfoProtoUtils.createFullUserProtoFromUser(user, plfu, clan);
         resBuilder.setSender(fup);
@@ -730,6 +730,15 @@ class StartupService extends LazyLogging {
             } catch {
               case t: Throwable => logger.error(s"unable to delete orphaned enhancements", t)
             }
+          } else if (feederUserMonsterIds.isEmpty()) {
+              logger.error(s"no feeders. deleting inEnhancing=$userMonstersEnhancing.values()")
+              try {
+                val numDeleted = deleteUtil.deleteMonsterEnhancingForUser(
+                        userId, Collections.singletonList(baseMonster.getUserMonsterUuid))
+                logger.info(s"numDeleted enhancements: $numDeleted")
+              } catch {
+                  case t: Throwable => logger.error(s"unable to delete orphaned enhancements", t)
+              }
           } else {
             val uep = createInfoProtoUtils.createUserEnhancementProtoFromObj(userId, baseMonster, feederProtos)
             resBuilder.setEnhancements(uep)

@@ -27,7 +27,9 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
+import com.lvl6.server.events.ApplicationMode;
 import com.lvl6.server.eventsender.EventWriter;
+import com.lvl6.server.eventsender.RoutingKeys;
 import com.lvl6.utils.ConnectedPlayer;
 
 public class ServerAdmin implements MessageListener<ServerMessage> {
@@ -184,7 +186,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 				maintenanceMode, messageForUsers);
 		appMode.setMaintenanceMode(maintenanceMode);
 		appMode.setMessageForUsers(messageForUsers);
-		serverMessagesTemplate.convertAndSend(appMode);
+		serverMessagesTemplate.convertAndSend(RoutingKeys.maintenanceModeRoutingKey(), appMode);
 	}
 
 	protected void sendPurgeStaticDataNotificationToAllClients() {

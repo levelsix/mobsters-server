@@ -1,4 +1,4 @@
-package com.lvl6.server;
+package com.lvl6.server.events;
 
 import java.io.Serializable;
 

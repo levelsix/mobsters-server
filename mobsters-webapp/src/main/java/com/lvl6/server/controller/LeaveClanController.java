@@ -146,8 +146,7 @@ public class LeaveClanController extends EventController {
 				resEvent.setResponseProto(resBuilder.build());
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				responses.setUserId(userId);
-				responses.setClanChanged(true);
-				responses.setNewClanId(clanId);
+				responses.changeClansMap().put(userId, clanId);
 				//this works for other clan members, but not for the person
 				//who left (they see the message when they join a clan, reenter clan house
 				//notifyClan(user, clan);
