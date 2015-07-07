@@ -47,44 +47,44 @@ public class BootPlayerFromClanController extends EventController {
 
 	@Autowired
 	protected UserClanRetrieveUtils2 userClanRetrieveUtils;
-	
+
 	@Autowired
 	protected CreateInfoProtoUtils createInfoProtoUtils;
 
 	@Autowired
 	protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 
-	
+
 	@Autowired
 	protected UserRetrieveUtils2 userRetrieveUtils;
-	
+
 	@Autowired
 	protected InsertUtil insertUtil;
 
 	@Autowired
 	protected UpdateUtil updateUtil;
-	
+
 	@Autowired
 	protected DeleteUtil deleteUtil;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
-	
+
 	@Autowired
 	protected ClanRetrieveUtils2 clanRetrieveUtils;
-	
+
 	@Autowired
 	protected ClanStuffUtils clanStuffUtils;
-	
+
 	@Autowired
 	protected ClanSearch clanSearch;
-	
+
 	@Autowired
 	protected ServerToggleRetrieveUtils toggle;
-	
-	
+
+
 	public BootPlayerFromClanController() {
-		
+
 	}
 
 	@Override
@@ -149,11 +149,11 @@ public class BootPlayerFromClanController extends EventController {
 		try {
 			lockedClan = locker.lockClan(clanUuid);
 			BootPlayerFromClanAction bpfca = new BootPlayerFromClanAction(userId, playerToBootId,
-					lockedClan, userRetrieveUtils, insertUtil, updateUtil, deleteUtil, timeUtils, 
-					clanRetrieveUtils, userClanRetrieveUtils, clanStuffUtils, 
+					lockedClan, userRetrieveUtils, insertUtil, updateUtil, deleteUtil, timeUtils,
+					clanRetrieveUtils, userClanRetrieveUtils, clanStuffUtils,
 					clanChatPostRetrieveUtil, clanSearch, toggle);
 			bpfca.execute(resBuilder);
-			
+
 			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				MinimumUserProto mup = createInfoProtoUtils
 						.createMinimumUserProtoFromUserAndClan(bpfca.getPlayerToBoot(),
@@ -170,7 +170,7 @@ public class BootPlayerFromClanController extends EventController {
 				//if successful write to clan
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				responses.setUserId(userId);
-				responses.changeClansMap().put(userId, clanId);
+				responses.changeClansMap().put(playerToBootId, null);
 			} else {
 				//write to user if fail
 				responses.normalResponseEvents().add(resEvent);

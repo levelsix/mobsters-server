@@ -19,6 +19,7 @@ import org.springframework.context.ApplicationContextAware;
 import com.lvl6.events.GameEvent;
 import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.events.ResponseEvent;
+import com.lvl6.events.response.EndPvpBattleResponseEvent;
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.PrivateChatPostResponseEvent;
 import com.lvl6.info.User;
@@ -28,7 +29,9 @@ import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto;
+import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;
@@ -123,6 +126,10 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 
 					if (PrivateChatPostResponseEvent.class.isInstance(event)) {
 						handlePrivateChatPostNotification(service, (PrivateChatPostResponseEvent) event, user, user.getDeviceToken());
+					}
+					
+					if(EndPvpBattleResponseEvent.class.isInstance(event)) {
+						handleEndPvpNotification(service, (EndPvpBattleResponseEvent) event, user, user.getDeviceToken());
 					}
 
 					if (GeneralNotificationResponseEvent.class.isInstance(event)) {
@@ -294,6 +301,58 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 			} else {
 				log.error("PlayloadBuilder isTooLong to send apns message");
 			}
+		}
+	}
+	
+	private void handleEndPvpNotification(ApnsService service, EndPvpBattleResponseEvent event, User user, String token) {
+		PayloadBuilder pb = APNS.newPayload().actionKey("View").badge(1);
+		log.info("EndPvpNotification for user {}", user);
+		EndPvpBattleResponseProto resProto = event.getEndPvpBattleResponseProto();
+		boolean attackerWon = resProto.getAttackerWon();
+		MinimumUserProtoWithMaxResources mup = resProto.getSender();
+		String clanId = mup.getMinUserProto().getClan().getClanUuid();
+		String tag = mup.getMinUserProto().getClan().getTag();
+		String name = mup.getMinUserProto().getName();
+		String clan = !clanId.isEmpty() ? "[" + tag + "] " : "";
+		String message = clan + name;
+		
+		int randomNum = (int)(Math.random()*5);
+		if(attackerWon) {
+			switch(randomNum) {
+				case 1: message = "You've just been humiliated by " + message + ". Don't let em get away with it!"; 
+						break;
+				case 2: message = "You just got spanked by " + message + " . Get back on and tell em you liked it!";
+						break;
+				case 3: message = message + " totally embarassed you in front of all your friends. Win back your honor!";
+						break;
+				case 4: message = "UTTER DEVASTATION was just unleashed by " + message + " on you. You ok bro?";
+						break;
+				default: message = message + " just defeated you. Go get your revenge";
+						break;
+			}
+		}
+		else {
+			switch(randomNum) {
+				case 1: message = message + " totally just tried to beat you and failed miserably. Get back on and laugh at em";
+						break;
+				case 2: message = message + " just tried to beat you...it was honestly pretty sad. Get back on and end their misery";
+						break;
+				case 3: message = "WOW you strong like a rock! " + message + " weak unlike a rock. Get on and show him how strong "
+						+ "rock is!";
+						break;
+				case 4: message = "Party foul!! " + message + " just tried to get you with your back turned. Go mess em up!";
+						break;
+				default: message = message + " has failed to defeated you. Get on and teach em who's boss";
+						break;
+			}
+		}
+		
+		pb.alertBody(message);
+		if (!pb.isTooLong()) {
+			log.info("Pushing apns message");
+			service.push(token, pb.build());
+		} else {
+			log.error("PlayloadBuilder isTooLong to send apns message");
 		}
 	}
 

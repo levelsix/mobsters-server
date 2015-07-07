@@ -87,6 +87,9 @@ public interface DeleteUtil {
 	public abstract int deleteMonsterSnapshotForUser(
 			List<MonsterSnapshotForUser> snapshots);
 
+	public int deleteMonsterSnapshotsFromUser(
+			String type, List<String> idInTable);
+
 	public abstract int deletePvpBoardObstacleForUser(Collection<Integer> ids,
 			String userId);
 
