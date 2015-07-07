@@ -167,7 +167,13 @@ public class BootPlayerFromClanController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 
 			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
-				responses.normalResponseEvents().add(resEvent);
+				//send message to the booted guy
+				BootPlayerFromClanResponseEvent resEvent2 =
+						new BootPlayerFromClanResponseEvent(playerToBootId);
+				resEvent2.setResponseProto(resBuilder.build());
+				responses.normalResponseEvents().add(resEvent2);
+
+				//write to the clan
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				responses.setUserId(userId);
 				responses.changeClansMap().put(playerToBootId, "");
