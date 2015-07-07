@@ -349,6 +349,7 @@ public class EndPvpBattleController extends EventController {
 									defender, epba.getDefenderPlfu(), null);
 					resEventUpdateDefender.setTag(0);
 					responses.normalResponseEvents().add(resEventUpdateDefender);
+					responses.apnsResponseEvents().add(resEvent);
 				}
 
 //				if (attackerWon) {
