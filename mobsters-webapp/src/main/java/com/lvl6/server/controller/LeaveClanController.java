@@ -142,8 +142,10 @@ public class LeaveClanController extends EventController {
 				responses.normalResponseEvents().add(resEvent);
 
 			} else {
-				//only write to clan if success
 				resEvent.setResponseProto(resBuilder.build());
+				//need to send to client because user no longer in the clan
+				responses.normalResponseEvents().add(resEvent);
+
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				responses.setUserId(userId);
 				responses.changeClansMap().put(userId, "");
