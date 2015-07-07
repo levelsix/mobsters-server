@@ -506,7 +506,7 @@ public class MiscMethods {
 		//SET TOURNAMENT CONSTANTS HERE
 
 		cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
-		cb.setFaqFileName(ControllerConstants.STARTUP__CREDITS_FILE_NAME);
+		cb.setCreditsFileName(ControllerConstants.STARTUP__CREDITS_FILE_NAME);
 		cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
 
 		User adminChatUser = startupStuffRetrieveUtils.getAdminChatUser();
