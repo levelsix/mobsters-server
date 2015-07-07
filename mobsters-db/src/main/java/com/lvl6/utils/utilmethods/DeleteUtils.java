@@ -597,6 +597,30 @@ public class DeleteUtils implements DeleteUtil {
 	}
 
 	@Override
+	public int deleteMonsterSnapshotsFromUser(
+			String type, List<String> idInTable) {
+		String tableName = DBConstants.TABLE_MONSTER_SNAPSHOT_FOR_USER;
+
+		int size = idInTable.size();
+		List<String> questions = Collections.nCopies(size, "?");
+		String questionMarks = StringUtils.csvList(questions);
+
+		String query = String.format("DELETE FROM %s WHERE %s=? and %s IN (%s)",
+				tableName,
+				DBConstants.MONSTER_SNAPSHOT_FOR_USER__TYPE,
+				DBConstants.MONSTER_SNAPSHOT_FOR_USER__ID_IN_TABLE,
+				questionMarks);
+
+		List<Object> values = new ArrayList<Object>();
+		values.add(type);
+		values.addAll(idInTable);
+
+		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query,
+				values);
+		return numDeleted;
+	}
+
+	@Override
 	public int deleteFromBattleItemQueueForUser(String userId,
 			List<BattleItemQueueForUser> biqfuList) {
 		String tableName = DBConstants.TABLE_BATTLE_ITEM_QUEUE_FOR_USER;
