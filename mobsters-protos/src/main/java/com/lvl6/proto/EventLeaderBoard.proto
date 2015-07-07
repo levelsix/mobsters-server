@@ -32,3 +32,19 @@ message RetrieveStrengthLeaderBoardResponseProto {
 	
 
 }
+
+//------------------------------------------------------------------------------------------
+
+message RetrieveMiniEventLeaderBoardRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 miniEventTimetableId = 2;
+	optional int32 minRank = 3;
+	optional int32 maxRank = 4;
+}
+
+message RetrieveMiniEventLeaderBoardResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional MiniEventLeaderBoardProto senderLeaderBoardInfo = 2; //if rank of 0 sent back, they didn't participate in mini event
+	repeated MiniEventLeaderBoardProto leaderBoardInfo = 3;
+	optional ResponseStatus status = 4;
+}

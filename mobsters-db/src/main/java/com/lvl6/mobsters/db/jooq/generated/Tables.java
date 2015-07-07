@@ -78,6 +78,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForPlayerLvlConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboard;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboardRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTierRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTimetableConfig;
@@ -555,6 +556,11 @@ public class Tables {
 	 * The table mobsters.mini_event_goal_for_user
 	 */
 	public static final MiniEventGoalForUser MINI_EVENT_GOAL_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER;
+
+	/**
+	 * VIEW
+	 */
+	public static final MiniEventLeaderboard MINI_EVENT_LEADERBOARD = com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboard.MINI_EVENT_LEADERBOARD;
 
 	/**
 	 * The table mobsters.mini_event_leaderboard_reward_config
