@@ -85,6 +85,45 @@ public class ClanMemberTeamDonationRetrieveUtil {
 		return clanMemberTeamDonations;
 	}
 
+	public List<ClanMemberTeamDonation> getClanMemberTeamDonationForUserId(
+			String userId) {
+		List<ClanMemberTeamDonation> clanMemberTeamDonations = null;
+		try {
+			List<String> columnsToSelected = ClanMemberTeamDonationForClientMapper
+					.getColumnsSelected();
+
+			Map<String, Object> equalityConditions = new HashMap<String, Object>();
+			equalityConditions.put(
+					DBConstants.CLAN_MEMBER_TEAM_DONATION__USER_ID, userId);
+
+			String eqDelim = getQueryConstructionUtil().getAnd();
+
+			//query db, "values" is not used
+			//(its purpose is to hold the values that were supposed to be put
+			// into a prepared statement)
+			List<Object> values = new ArrayList<Object>();
+			boolean preparedStatement = true;
+
+			String query = getQueryConstructionUtil()
+					.selectRowsQueryEqualityConditions(columnsToSelected,
+							TABLE_NAME, equalityConditions, eqDelim, values,
+							preparedStatement);
+			log.info(
+					"getUserIdToClanMemberTeamDonationForUserId() query={}, values={}",
+					query, values);
+			clanMemberTeamDonations = this.jdbcTemplate.query(query,
+					values.toArray(), rowMapper);
+//			log.info("clanMemberTeamDonations={}", clanMemberTeamDonations);
+
+		} catch (Exception e) {
+			log.error(String.format(
+					"could not retrieve clan invites for userId=%s", userId), e);
+			clanMemberTeamDonations = new ArrayList<ClanMemberTeamDonation>();
+		}
+
+		return clanMemberTeamDonations;
+	}
+
 	public List<ClanMemberTeamDonation> getClanMemberTeamDonationForClanIds(
 			Collection<String> clanIds) {
 		List<ClanMemberTeamDonation> clanMemberTeamDonations = null;
