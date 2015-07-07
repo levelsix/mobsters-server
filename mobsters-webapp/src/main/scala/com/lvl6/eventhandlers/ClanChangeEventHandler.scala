@@ -12,7 +12,7 @@ import com.typesafe.scalalogging.slf4j.LazyLogging
 /**
  * @author kelly
  */
-class ClanChangEventHandler extends MessageListener with LazyLogging {
+class ClanChangeEventHandler extends MessageListener with LazyLogging {
 
   @Autowired
   var converter: MessageConverter = null
