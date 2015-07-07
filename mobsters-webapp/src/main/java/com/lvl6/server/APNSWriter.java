@@ -316,17 +316,33 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 		String clan = !clanId.isEmpty() ? "[" + tag + "] " : "";
 		String message = clan + name;
 		
-		int randomNum = 0;
+		int randomNum = (int)(Math.random()*5);
 		if(attackerWon) {
-			randomNum = (int)(Math.random()*5);
 			switch(randomNum) {
-				case 1: message = message + " just completely WRECKED you OH LORD WHY HE WAS TOO YOUNG"; 
+				case 1: message = "You've just been humiliated by " + message + ". Don't let em get away with it!"; 
 						break;
-				case 2: message = message + " just did you dirty, do him dirty back";
+				case 2: message = "You just got spanked by " + message + " . Get back on and tell em you liked it!";
 						break;
-				case 3: message = message + " totally embarassed you in front of all your friends";
+				case 3: message = message + " totally embarassed you in front of all your friends. Win back your honor!";
 						break;
-				default: message = message + " with no regard for humanity just straight executed you";
+				case 4: message = "UTTER DEVASTATION was just unleashed by " + message + " on you. You ok bro?";
+						break;
+				default: message = message + " just defeated you. Go get your revenge";
+						break;
+			}
+		}
+		else {
+			switch(randomNum) {
+				case 1: message = message + " totally just tried to beat you and failed miserably. Get back on and laugh at em";
+						break;
+				case 2: message = message + " just tried to beat you...it was honestly pretty sad. Get back on and end their misery";
+						break;
+				case 3: message = "WOW you strong like a rock! " + message + " weak unlike a rock. Get on and show him how strong "
+						+ "rock is!";
+						break;
+				case 4: message = "Party foul!! " + message + " just tried to get you with your back turned. Go mess em up!";
+						break;
+				default: message = message + " has failed to defeated you. Get on and teach em who's boss";
 						break;
 			}
 		}
