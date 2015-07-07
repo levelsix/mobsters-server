@@ -170,8 +170,7 @@ public class BootPlayerFromClanController extends EventController {
 				//if successful write to clan
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				responses.setUserId(userId);
-				responses.setClanChanged(true);
-				responses.setNewClanId(clanId);
+				responses.changeClansMap().put(userId, clanId);
 			} else {
 				//write to user if fail
 				responses.normalResponseEvents().add(resEvent);

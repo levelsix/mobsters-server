@@ -309,8 +309,7 @@ public class RequestJoinClanController extends EventController {
 					resEventUpdate.setTag(event.getTag());
 					responses.normalResponseEvents().add(resEventUpdate);
 					responses.setUserId(userId);
-					responses.setClanChanged(true);
-					responses.setNewClanId(clanId);
+					responses.changeClansMap().put(userId, clanId);
 
 					//this is so user gets all up to date clan information
 					sendClanData(event, senderProto, userId, cdp, responses);

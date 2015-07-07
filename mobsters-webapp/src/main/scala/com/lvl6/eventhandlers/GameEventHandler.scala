@@ -1,34 +1,29 @@
 package com.lvl6.eventhandlers
 
-import com.typesafe.scalalogging.slf4j.LazyLogging
-import org.springframework.amqp.core.MessageListener
-import com.lvl6.proto.ProtocolsProto.EventProtocolRequest
-import com.lvl6.events.RequestEvent
-import org.springframework.amqp.core.Message
-import com.lvl6.util.EventParser
+import scala.beans.BeanProperty
+import scala.collection.JavaConversions.asScalaBuffer
+
 import org.springframework.beans.factory.annotation.Autowired
-import com.lvl6.server.ApplicationMode
-import com.lvl6.util.ParsedEvent
-import com.lvl6.retrieveutils.UserRetrieveUtils2
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Component
+
 import com.lvl6.events.PreDatabaseRequestEvent
-import com.lvl6.utils.MessagingUtil
-import scala.concurrent.Future
-import com.lvl6.server.concurrent.FutureThreadPool.ec
-import com.lvl6.mobsters.services.PlayersOnlineService
+import com.lvl6.events.response.ForceLogoutResponseEvent
+import com.lvl6.events.response.StartupResponseEvent
 import com.lvl6.mobsters.services.ClientResponseCacheService
-import com.lvl6.server.eventsender.ToClientEvents
-import com.lvl6.server.eventsender.EventWriter
-import com.google.protobuf.GeneratedMessage
-import com.lvl6.events.ResponseEvent
-import scala.collection.JavaConversions._
-import com.lvl6.events.BroadcastResponseEvent
+import com.lvl6.mobsters.services.PlayersOnlineService
+import com.lvl6.retrieveutils.UserRetrieveUtils2
 import com.lvl6.server.APNSWriter
 import com.lvl6.server.dynamodb.tables.CachedClientResponse
-import java.util.Date
-import scala.beans.BeanProperty
-import org.springframework.beans.factory.annotation.Value
-import com.lvl6.events.response.StartupResponseEvent
-import com.lvl6.events.response.ForceLogoutResponseEvent
+import com.lvl6.server.events.ApplicationMode
+import com.lvl6.server.eventsender.EventWriter
+import com.lvl6.server.eventsender.ToClientEvents
+import com.lvl6.util.EventParser
+import com.lvl6.util.ParsedEvent
+import com.lvl6.utils.MessagingUtil
+import com.typesafe.scalalogging.slf4j.LazyLogging
+
+
 
 
 trait GameEventHandler extends LazyLogging  {

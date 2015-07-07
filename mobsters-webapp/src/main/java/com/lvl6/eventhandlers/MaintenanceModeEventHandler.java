@@ -7,19 +7,17 @@ import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.lvl6.server.ApplicationMode;
+import com.lvl6.server.events.ApplicationMode;
 
-public class AmqpServerEventHandler implements MessageListener {
+public class MaintenanceModeEventHandler implements MessageListener {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(AmqpServerEventHandler.class);
-
-	@Autowired
-	MessageConverter converter;
-
+	private static final Logger	log	= LoggerFactory.getLogger(MaintenanceModeEventHandler.class);
 
 	@Autowired
-	ApplicationMode appMode;
+	MessageConverter			converter;
+
+	@Autowired
+	ApplicationMode				appMode;
 
 	public ApplicationMode getAppMode() {
 		return appMode;
@@ -31,12 +29,10 @@ public class AmqpServerEventHandler implements MessageListener {
 
 	@Override
 	public void onMessage(Message message) {
-		ApplicationMode mode = (ApplicationMode) converter
-				.fromMessage(message);
+		ApplicationMode mode = (ApplicationMode) converter.fromMessage(message);
 		appMode.setMaintenanceMode(mode.isMaintenanceMode());
 		appMode.setMessageForUsers(mode.getMessageForUsers());
-		log.warn("Set Application maintainence mode: {} with message: {}",
-				mode.isMaintenanceMode(), mode.getMessageForUsers());
+		log.warn("Set Application maintainence mode: {} with message: {}", mode.isMaintenanceMode(), mode.getMessageForUsers());
 	}
 
 }

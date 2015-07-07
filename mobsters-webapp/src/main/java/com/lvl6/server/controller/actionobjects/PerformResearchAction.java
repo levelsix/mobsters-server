@@ -3,6 +3,7 @@ package com.lvl6.server.controller.actionobjects;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -12,12 +13,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Research;
+import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventResearchProto.PerformResearchResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.SharedEnumConfigProto.ResourceType;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ResearchRetrieveUtils;
@@ -195,6 +197,17 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 					userResearchUuid, research.getId(), timeOfPurchase);
 		} else {
 			boolean isComplete = false;
+			//check if user already has research, don't want to insert two rows. this is
+			//due to the guccigucci situation where they have double research
+			List<ResearchForUser> allUserResearch = researchForUserRetrieveUtil.getAllResearchForUser(userId);
+			for(ResearchForUser rfu : allUserResearch) {
+				Research r = researchRetrieveUtils.getResearchForId(rfu.getResearchId());
+				if(research.getName().equals(r.getName())) {
+					log.error("user trying to build a research when they already have one with the same name,"
+							+ "userId {}, researchId {}", userId, researchId);
+					return false;
+				}
+			}
 			userResearchUuid = insertUtil.insertUserResearch(userId, research,
 					timeOfPurchase, isComplete);
 			if (userResearchUuid != null) {
@@ -263,7 +276,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		details = new HashMap<String, String>();
 
 		if (0 != gemsCost) {
-			currencyDeltas.put(gems, gemsCost);
+			currencyDeltas.put(gems, -1 * gemsCost);
 			curCurrencies.put(gems, user.getGems());
 			reasonsForChanges.put(gems,
 					ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
@@ -274,7 +287,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		if (resourceCost > 0) {
 			if (resourceType == ResourceType.CASH) {
-				currencyDeltas.put(cash, resourceCost);
+				currencyDeltas.put(cash, -1 *resourceCost);
 				curCurrencies.put(cash, user.getCash());
 				reasonsForChanges.put(cash,
 						ControllerConstants.UCHRFC__PERFORMING_RESEARCH);
@@ -283,7 +296,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				details.put(cash, detailSb2.toString());
 
 			} else if (resourceType == ResourceType.OIL) {
-				currencyDeltas.put(oil, resourceCost);
+				currencyDeltas.put(oil, -1 *resourceCost);
 				curCurrencies.put(oil, user.getOil());
 				reasonsForChanges.put(oil,
 						ControllerConstants.UCHRFC__PERFORMING_RESEARCH);

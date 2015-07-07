@@ -42,6 +42,9 @@ import com.lvl6.events.response.StartupResponseEvent
 import com.lvl6.server.eventsender.PreDBResponseEvent
 import com.lvl6.server.dynamodb.tables.CachedClientResponse
 import com.lvl6.events.ResponseEvent
+import org.springframework.amqp.rabbit.core.RabbitTemplate
+import com.lvl6.server.events.ClanChangeServerEvent
+import com.lvl6.server.eventsender.RoutingKeys
 
 @ServerEndpoint(value = "/client/connection")
 class ClientConnection extends GameEventHandler with LazyLogging with MessageListener{
@@ -74,6 +77,8 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   var gameExchange:DirectExchange = null
   @Resource(name="chatmessagesWS")
   var chatExchange:TopicExchange = null
+  @Resource(name = "serverMessagesTemplate")
+  var serverMessagesTemplate:RabbitTemplate = null
   
   
   
@@ -141,8 +146,8 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
         }
       }
     }
-    if(responses.clanChanged) {
-      changeClan(responses.newClanId)
+    if(!responses.changeClansMap.isEmpty) {
+      sendClanChangeServerEvent(responses.changeClansMap)
     }
     //Normal responses can be a response to the requesting player or to another player
     responses.normalResponseEvents.foreach{ revent =>
@@ -185,14 +190,12 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
     if(userId.get.equals(plyrId)) {
       sendToThisSocket(bytes)
     }else {
-      ClientConnections.getConnection(plyrId) match{
-        //If it's not the requester then the player might have a socket on this server
-        case Some(lc)=> lc.sendToThisSocket(bytes)
-        //If they are not on this server send to amqp
-        case None=> {
-          logger.info(s"No connection found on this server for playerId: plyrId  sending to amqp")
-          eventWriter.sendToSinglePlayer(plyrId, bytes)
-        }
+      val sentLocal = onLocalConnection(plyrId){ lc:ClientConnection =>
+        lc.sendToThisSocket(bytes)
+      }
+      if(!sentLocal) {
+        logger.info(s"No connection found on this server for playerId: plyrId  sending to amqp")
+        eventWriter.sendToSinglePlayer(plyrId, bytes)
       }
     }
   }
@@ -201,6 +204,32 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   def sendCachedResponse(cachedResponse:CachedClientResponse)={
     sendToThisSocket(cachedResponse.event)
   }
+  
+  
+  def sendClanChangeServerEvent(changeClanMap:java.util.Map[String, String])={
+    val ccm = changeClanMap.filter{ case(usrId, clnId) =>
+      //If user is connected to this server then filter it so it doesn't get sent to other servers
+      !onLocalConnection(usrId){ lc:ClientConnection =>
+        lc.changeClan(clnId)  
+      }
+    }
+    val ev = new ClanChangeServerEvent()
+    ev.setUserIdToNewClanIdMap(ccm)
+    serverMessagesTemplate.convertAndSend(RoutingKeys.clanChangeRoutingKey, ev)
+  }
+  
+  protected def onLocalConnection(userId:String)(doOnLC:ClientConnection => Unit):Boolean={
+    ClientConnections.getConnection(userId) match{
+      case Some(lc)=> {
+        doOnLC(lc)
+        true
+      }
+      case None=> {
+        false
+      }
+    }      
+  }
+  
   
   override def updatePlayerToServerMaps(parsedEvent:ParsedEvent)={
     playersOnlineService.updatePlayerToServerMaps(parsedEvent.event)

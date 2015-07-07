@@ -155,8 +155,7 @@ public class CreateClanController extends EventController {
 			resEvent.setResponseProto(resBuilder.build());
 			responses.normalResponseEvents().add(resEvent);
 			responses.setUserId(userId);
-			responses.setClanChanged(true);
-			responses.setNewClanId(cca.getClanId());
+			responses.changeClansMap().put(userId, cca.getClanId());
 			resEvent.setResponseProto(resBuilder.build());
 
 			if (ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
