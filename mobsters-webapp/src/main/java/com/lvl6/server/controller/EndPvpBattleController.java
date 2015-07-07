@@ -333,7 +333,7 @@ public class EndPvpBattleController extends EventController {
 					resEventDefender.setTag(0);
 					resEventDefender.setResponseProto(resBuilder
 							.build());
-					responses.normalResponseEvents().add(resEventDefender);
+					responses.apnsResponseEvents().add(resEventDefender);
 				}
 				//regardless of whether the attacker won, his elo will change
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
@@ -349,7 +349,6 @@ public class EndPvpBattleController extends EventController {
 									defender, epba.getDefenderPlfu(), null);
 					resEventUpdateDefender.setTag(0);
 					responses.normalResponseEvents().add(resEventUpdateDefender);
-					responses.apnsResponseEvents().add(resEvent);
 				}
 
 //				if (attackerWon) {
