@@ -211,7 +211,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 //							lastChatTimeContainer,
 //							clan.isRequestToJoinRequired());
 
-					log.info(String.format("ClanDataProto=%s", cdp));
+					log.debug("ClanDataProto={}", cdp);
 					setResponseBuilderStuff(resBuilder, clan, aorrtja.getClanSizeList());
 				}
 
