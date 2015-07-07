@@ -23,6 +23,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.proto.EventItemProto.RedeemVoucherForBattleItemResponseProto.Builder;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.UserDao2;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
@@ -35,7 +36,7 @@ public class RedeemVoucherForBattleItemAction {
 	private String userId;
 	private List<Integer> itemIdsUsed;
 	private List<BattleItemForUserPojo> newBattleItemForUser;
-	@Autowired protected UserDao userDao; 
+	@Autowired protected UserDao2 userDao; 
 	@Autowired protected BattleItemForUserDao bifuDao;
 	@Autowired protected DeleteUtil deleteUtil; 
 	private MiscMethods miscMethods;
@@ -46,7 +47,7 @@ public class RedeemVoucherForBattleItemAction {
 	public RedeemVoucherForBattleItemAction(String userId,
 			List<Integer> itemIdsUsed, List<BattleItemForUserPojo> newBattleItemForUser,
 			ItemRetrieveUtils itemRetrieveUtils,
-			UserDao userDao, BattleItemForUserDao bifuDao,
+			UserDao2 userDao, BattleItemForUserDao bifuDao,
 			UserRetrieveUtils2 userRetrieveUtil, DeleteUtil deleteUtil,
 			HistoryUtils historyUtils, UserBattleItemHistoryDao ubihDao,
 			Date clientTime) {
@@ -182,7 +183,7 @@ public class RedeemVoucherForBattleItemAction {
 		return userDao;
 	}
 
-	public void setUserDao(UserDao userDao) {
+	public void setUserDao(UserDao2 userDao) {
 		this.userDao = userDao;
 	}
 

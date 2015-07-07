@@ -1,6 +1,5 @@
 package com.lvl6.server.controller;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +17,6 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.BattleItemForUserDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserBattleItemHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.BattleItemForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.ControllerConstants;
@@ -30,6 +28,7 @@ import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.UserDao2;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.RedeemVoucherForBattleItemAction;
@@ -71,7 +70,7 @@ public class RedeemVoucherForBattleItemController extends EventController {
 	protected TimeUtils timeUtils;
 	
 	@Autowired
-	protected UserDao userDao;
+	protected UserDao2 userDao;
 	
 	@Autowired
 	protected BattleItemForUserDao bifuDao;

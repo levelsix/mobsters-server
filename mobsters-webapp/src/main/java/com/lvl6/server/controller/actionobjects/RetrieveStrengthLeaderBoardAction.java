@@ -1,19 +1,16 @@
 package com.lvl6.server.controller.actionobjects;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.StrengthLeaderBoard;
-import com.lvl6.mobsters.jooq.daos.service.LeaderBoardService;
 import com.lvl6.proto.EventLeaderBoardProto.RetrieveStrengthLeaderBoardResponseProto.Builder;
 import com.lvl6.proto.LeaderBoardProto.StrengthLeaderBoardProto;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.UserDao2;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component@Scope("prototype")public class RetrieveStrengthLeaderBoardAction {
@@ -22,12 +19,12 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	private String retrieverUserId;
 	private int minRank;
 	private int maxRank;
-	private LeaderBoardService leaderBoard;
+	private UserDao2 leaderBoard;
 	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
 	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils; 
 
 	public RetrieveStrengthLeaderBoardAction( String retrieverUserId, 
-			int minRank, int maxRank, LeaderBoardService leaderBoard,
+			int minRank, int maxRank, UserDao2 leaderBoard,
 			UserRetrieveUtils2 userRetrieveUtils,
 			CreateInfoProtoUtils createInfoProtoUtils)
 	{
