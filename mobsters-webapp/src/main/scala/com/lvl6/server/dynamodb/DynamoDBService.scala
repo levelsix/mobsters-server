@@ -44,6 +44,9 @@ class DynamoDBService extends LazyLogging {
   @Value("${dynamodb.isLocal}")
   var isLocal = false//for testing dynamo locally
   
+  @BeanProperty
+  @Value("${dynamodb.response.caching.enabled}")
+  var cachingEnabled = true //whether or not this class is used
   
   
   def provisionedThroughput:ProvisionedThroughput = {
@@ -104,7 +107,9 @@ class DynamoDBService extends LazyLogging {
   val ttlFilterKey = ":ttlTime"
   @Scheduled(fixedDelay=300000l)
   def checkTTL={
-     tableDefinitions.foreach(checkTTLForTable)   
+      if (cachingEnabled) {
+    	  tableDefinitions.foreach(checkTTLForTable)   
+      }
   }
   
   def checkTTLForTable(tableDef:TableDefinition)={
@@ -159,15 +164,17 @@ class DynamoDBService extends LazyLogging {
   
   @PostConstruct
   def setup={
-    if(isLocal) {
-    	client = new AmazonDynamoDBClient(new BasicAWSCredentials("Fake", "Fake"))
-      client.setEndpoint("http://localhost:8000")
-    }else {
-       client = new AmazonDynamoDBClient()
-       client.setRegion(Region.getRegion(Regions.US_WEST_2))
-    }
-    dynamoDB = new DynamoDB(client)
-    createTables
+	  if (cachingEnabled) {
+		  if(isLocal) {
+			  client = new AmazonDynamoDBClient(new BasicAWSCredentials("Fake", "Fake"))
+			  client.setEndpoint("http://localhost:8000")
+		  }else {
+			  client = new AmazonDynamoDBClient()
+			  client.setRegion(Region.getRegion(Regions.US_WEST_2))
+		  }
+		  dynamoDB = new DynamoDB(client)
+		  createTables
+      }
   }
   
 }
