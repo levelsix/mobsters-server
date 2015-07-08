@@ -1,5 +1,6 @@
 package com.lvl6.server.controller.actionobjects;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanMemberTeamDonationRetrieveUtil;
 import com.lvl6.retrieveutils.MonsterSnapshotForUserRetrieveUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.utilmethods.DeleteUtil;
 
 @Component@Scope("prototype")public class SetClanMemberTeamDonationAction implements StartUpAction {
 	private static Logger log = LoggerFactory.getLogger( SetClanMemberTeamDonationAction.class);
@@ -33,6 +35,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	@Autowired protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
 	@Autowired protected MonsterSnapshotForUserRetrieveUtil monsterSnapshotForUserRetrieveUtil;
 	@Autowired protected CreateInfoProtoUtils createInfoProtoUtils;
+	@Autowired protected DeleteUtil deleteUtil;
 
 	public void wire(ClanDataProto.Builder cdpBuilder,	User user, String userId) {
 		this.cdpBuilder = cdpBuilder;
@@ -94,9 +97,14 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
 			//since for user's team, there's only one donation
 			if (null == donationsToMe || donationsToMe.isEmpty()) {
-				log.error("{} has no donations {}",
-						"fulfilled ClanMemberTeamDonation solicitation",
-						mySolicitation);
+				//since no associated MonsterSnapshot, delete user's solicitation
+				int numDeleted = deleteUtil.deleteClanMemberTeamDonationSolicitation(
+						Collections.singletonList(mySolicitation.getId()));
+				log.error("{} {}.deleted donation. (expected 1) numDeleted={}",
+						new Object[] {
+							"fulfilled ClanMemberTeamDonation solicitation has no donations",
+							userIdToDonationSolicitations.remove(userId),
+							numDeleted } );
 
 			} else if (donationsToMe.size() > 1) {
 				String preface = "fulfilled ClanMemberTeamDonation solicitation";
@@ -145,9 +153,9 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		protofySolicitors(solicitors, c);
 
 		//create protos
-		for (String solicitationId : userIdToDonationSolicitations.keySet()) {
+		for (String solicitatorId : userIdToDonationSolicitations.keySet()) {
 			ClanMemberTeamDonation cmtd = userIdToDonationSolicitations
-					.get(solicitationId);
+					.get(solicitatorId);
 
 			String solicitorId = cmtd.getUserId();
 			MinimumUserProto solicitor = mupSolicitors.get(solicitorId);
