@@ -248,7 +248,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		user.setOil(0);
 		user.setId(defenderId);
 		PvpBattleOutcome results = new PvpBattleOutcome(attacker, attackerElo,
-				user, defenderElo, serverToggleRetrieveUtil);
+				user, defenderElo, serverToggleRetrieveUtil, null);
 
 		attackerWins(defenderElo, results);
 		attackerLoses(attackerElo, results);
