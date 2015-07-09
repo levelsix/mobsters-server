@@ -290,7 +290,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 			allButRetrieverUserIdToMsfuMonsterDropId = monsterStuffUtils
 					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu,
 							monsterLevelInfoRetrieveUtils, retrieverUserId,
-							battleCount);
+							null);
 		} else {
 			allButRetrieverUserIdToMsfuMonsterDropId = new HashMap<String, Integer>();
 		}
