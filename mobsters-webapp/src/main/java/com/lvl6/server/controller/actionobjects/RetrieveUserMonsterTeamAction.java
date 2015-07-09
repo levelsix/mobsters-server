@@ -81,7 +81,8 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			ServerToggleRetrieveUtils serverToggleRetrieveUtil,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils)
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			PvpBattleCountForUserDao2 pbcfuDao)
 	{
 		super();
 		this.retrieverUserId = retrieverUserId;
@@ -98,6 +99,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+		this.pbcfuDao = pbcfuDao;
 	}
 
 	//	//encapsulates the return value from this Action Object

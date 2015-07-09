@@ -42,6 +42,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.PvpBattleCountForUserDao2;
 import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -117,6 +118,10 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 
 	@Autowired
 	private DeleteUtil deleteUtil;
+	
+	@Autowired
+	protected PvpBattleCountForUserDao2 pbcfuDao;
+	
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -251,7 +256,7 @@ public class RetrieveUserMonsterTeamTest extends TestCase {
 				monsterSnapshotForUserRetrieveUtil, hazelcastPvpUtil,
 				pvpLeagueForUserRetrieveUtil,
 				pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
-				monsterStuffUtil, serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil);
+				monsterStuffUtil, serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil, pbcfuDao);
 		RetrieveUserMonsterTeamResponseProto.Builder resBuilder = RetrieveUserMonsterTeamResponseProto
 				.newBuilder();
 		rumta.execute(resBuilder);
