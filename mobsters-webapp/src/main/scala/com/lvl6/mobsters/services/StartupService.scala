@@ -1293,6 +1293,13 @@ class StartupService extends LazyLogging {
               userSalesValue = 1;
             }
           }
+          else {
+            if(inAppPurchaseUtil.checkWhetherToTierDownSalesValue(user.getId(), userSalesValue, salesLastPurchaseTime)) {
+              userSalesValue = userSalesValue - 1;
+              user.setSalesValue(userSalesValue);
+              updateUtil.updateUserSalesValue(user.getId(), userSalesValue, null);
+            }
+          }
         }
         val newMinPrice = priceForSalesPackToBeShown(userSalesValue);
 

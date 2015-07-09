@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,11 +26,13 @@ import com.lvl6.proto.SalesProto.SalesDisplayItemProto;
 import com.lvl6.proto.SalesProto.SalesItemProto;
 import com.lvl6.proto.SalesProto.SalesPackageProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.daos.IapHistoryDao2;
 import com.lvl6.retrieveutils.rarechange.CustomMenuRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.RewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.SalesItemRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.TimeUtils;
 
 @Component
 public class InAppPurchaseUtils {
@@ -46,6 +49,12 @@ public class InAppPurchaseUtils {
 
     @Autowired
     protected RewardRetrieveUtils rewardRetrieveUtils;
+    
+    @Autowired
+    protected TimeUtils timeUtils;
+    
+    @Autowired
+    protected IapHistoryDao2 iapHistoryDao;
 
 
 	public boolean checkIfDuplicateReceipt(JSONObject receiptFromApple,
@@ -67,6 +76,33 @@ public class InAppPurchaseUtils {
 		}
 		else return false;
 	}
+	
+	public boolean checkWhetherToTierDownSalesValue(String userId, int userSalesValue,
+			Date lastPurchaseTime) {
+		int requirementInDays = 0;
+		int numPurchases = iapHistoryDao.getUserPurchasesAtTier(userId, userSalesValue);
+		double constantInFormula = Math.pow(1.3, Math.min(numPurchases-1, 4));
+		
+		if(userSalesValue == 2) {
+			requirementInDays = (int)(5 * constantInFormula);
+		}
+		if(userSalesValue == 3) {
+			requirementInDays = (int)(10 * constantInFormula);
+		}
+		if(userSalesValue >= 4) {
+			requirementInDays = (int)(25 * constantInFormula);
+		}
+		
+		if(requirementInDays == 0) {
+			return false;
+		}
+		
+		if(timeUtils.numDaysDifference(new Date(), lastPurchaseTime) > requirementInDays) {
+			return true;
+		}
+		else return false;
+	}
+	
 
 	/////////////////////////////////CREATING PROTOS/////////////////////////////////
 
