@@ -321,8 +321,13 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		Map<String, PvpUser> idsToPvpUsers = hazelcastPvpUtil
 				.getPvpUsers(userIdz);
 		
+		List<String> userIds = new ArrayList<String>();
+		for(String userId : userIdz) {
+			userIds.add(userId);
+		}
+		
 		List<PvpBattleCountForUserPojo> battleCount = 
-				pbcfuDao.getPvpBattleCountBetweenUsers(userId, (List)userIdz);
+				pbcfuDao.getPvpBattleCountBetweenUsers(userId, userIds);
 
 		for (String defenderId : userIdz) {
 			String defenderEyed = defenderId.toString();
