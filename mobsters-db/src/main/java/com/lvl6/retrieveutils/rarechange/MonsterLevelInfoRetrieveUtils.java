@@ -66,7 +66,7 @@ public class MonsterLevelInfoRetrieveUtils {
 						(new DateTime(battleDate)).toLocalDate());
 
 				if(days.getDays() < 2) {
-					count++;
+					count = count + pbcfur.getCount();
 				}
 			}
 		}
