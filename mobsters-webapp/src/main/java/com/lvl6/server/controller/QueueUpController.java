@@ -17,9 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.QueueUpRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.QueueUpResponseEvent;
-import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.User;
@@ -27,11 +25,11 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventPvpProto.QueueUpRequestProto;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
@@ -43,6 +41,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.PvpBattleCountForUserDao2;
 import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -114,6 +113,9 @@ public class QueueUpController extends EventController {
 	
 	@Autowired
 	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected PvpBattleCountForUserDao2 pbcfuDao;
 
 
 	//	@Autowired
@@ -323,7 +325,7 @@ public class QueueUpController extends EventController {
 					pvpBoardObstacleForUserRetrieveUtil,
 					researchForUserRetrieveUtil,
 					monsterStuffUtils, serverToggleRetrieveUtil,
-					monsterLevelInfoRetrieveUtils);
+					monsterLevelInfoRetrieveUtils, pbcfuDao);
 
 			RetrieveUserMonsterTeamResponseProto.Builder tempResBuilder = RetrieveUserMonsterTeamResponseProto
 					.newBuilder();
