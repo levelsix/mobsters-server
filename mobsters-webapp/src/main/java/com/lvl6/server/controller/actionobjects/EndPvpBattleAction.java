@@ -410,7 +410,6 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 				defenderStorageCashChange, defenderStorageOilChange, cashStolenFromStorage, 
 				cashStolenFromGenerators, oilStolenFromStorage, oilStolenFromGenerators,
 				cancelled, false, nuPvpDmgMultiplier, false, attackerWon, replayId);
-		log.info("PVP BATTLE HISTORY POJO: {}", pbh);
 		pbhDao.insert(pbh);
 	}
 
