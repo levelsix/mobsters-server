@@ -382,7 +382,7 @@ public class QueueUpController extends EventController {
 		if (null != fakeUserMonsters && !fakeUserMonsters.isEmpty()) {
 			int attackerElo = qua.getAttackerElo();
 			List<PvpProto> ppList = createPvpProtosFromFakeUser(
-					fakeUserMonsters, attackerElo);
+					fakeUserMonsters, attackerElo, attackerId);
 			pvpProtoList.addAll(ppList);
 		}
 
@@ -560,7 +560,8 @@ public class QueueUpController extends EventController {
 	}*/
 
 	private List<PvpProto> createPvpProtosFromFakeUser(
-			List<List<MonsterForPvp>> fakeUserMonsters, int attackerElo) {
+			List<List<MonsterForPvp>> fakeUserMonsters, int attackerElo,
+			String attackerId) {
 		log.info("creating fake users for pvp!!!!");
 		List<PvpProto> ppList = new ArrayList<PvpProto>();
 		boolean setElo = serverToggleRetrieveUtil
@@ -570,7 +571,7 @@ public class QueueUpController extends EventController {
 
 		for (List<MonsterForPvp> mons : fakeUserMonsters) {
 			PvpProto user = createFakeUser(mons, setElo, displayBotElo,
-					attackerElo);
+					attackerElo, attackerId);
 			ppList.add(user);
 		}
 
@@ -580,7 +581,7 @@ public class QueueUpController extends EventController {
 
 	//CREATES ONE FAKE USER FOR PVP
 	private PvpProto createFakeUser(List<MonsterForPvp> mfpList,
-			boolean setElo, boolean displayBotElo, int attackerElo) {
+			boolean setElo, boolean displayBotElo, int attackerElo, String attackerId) {
 		//to create the fake user, need userId=0, some random name, empty clan
 		//for lvl do something like (elo / 50)
 		//for cur elo avg out the monsters elos
@@ -604,7 +605,7 @@ public class QueueUpController extends EventController {
 		//			new Object[] { randomName, avgElo, prospectiveCashWinnings,
 		//			prospectiveOilWinnings, lvl } );
 
-		List<Integer> monsterIdsDropped = calculateDrops(mfpList);
+		List<Integer> monsterIdsDropped = calculateDrops(mfpList, attackerId);
 
 		//it's important that monsterIdsDropped be in the same order
 		//as mfpList
@@ -635,7 +636,7 @@ public class QueueUpController extends EventController {
 		return avgElo;
 	}
 
-	private List<Integer> calculateDrops(List<MonsterForPvp> mfpList) {
+	private List<Integer> calculateDrops(List<MonsterForPvp> mfpList, String attackerId) {
 		List<Integer> monsterDropIds = new ArrayList<Integer>();
 
 		for (MonsterForPvp mfp : mfpList) {
@@ -643,7 +644,8 @@ public class QueueUpController extends EventController {
 			int monserLvl = mfp.getMonsterLvl();
 
 			boolean monsterDropped = monsterLevelInfoRetrieveUtils
-					.didPvpMonsterDrop(monsterId, monserLvl);
+					.didPvpMonsterDrop(monsterId, monserLvl, attackerId,
+							null, null);
 
 			int monsterDropId = ControllerConstants.NOT_SET;
 
