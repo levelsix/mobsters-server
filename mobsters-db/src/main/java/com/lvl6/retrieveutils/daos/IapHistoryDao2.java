@@ -33,13 +33,13 @@ public class IapHistoryDao2 extends IapHistoryDao {
 	public int getUserPurchasesAtTier(String userId, int salesValue) {
 		String productId = "";
 		if(salesValue == 2) {
-			productId = IAPValues.SALE20;
+			productId = IAPValues.SALE10;
 		}
 		if(salesValue == 3) {
-			productId = IAPValues.SALE50;
+			productId = IAPValues.SALE20;
 		}
 		if(salesValue >= 4) {
-			productId = IAPValues.SALE100;
+			productId = IAPValues.SALE50;
 		}
 		
 		return using(configuration())
