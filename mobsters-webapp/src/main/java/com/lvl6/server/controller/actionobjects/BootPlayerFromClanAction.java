@@ -16,14 +16,15 @@ import com.lvl6.clansearch.ClanSearch;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.Builder;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils2;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -35,15 +36,15 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private String userId;
 	private String bootedUserId;
 	private boolean lockedClan;
-	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtils;
 	@Autowired protected InsertUtil insertUtil;
 	@Autowired protected UpdateUtil updateUtil;
 	@Autowired protected DeleteUtil deleteUtil;
-	@Autowired protected TimeUtils timeUtils; 
-	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtils; 
-	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
-	@Autowired protected ClanStuffUtils clanStuffUtils; 
-	@Autowired protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil; 
+	@Autowired protected TimeUtils timeUtils;
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtils;
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+	@Autowired protected ClanStuffUtils clanStuffUtils;
+	@Autowired protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
 	private ClanSearch clanSearch;
 	private ServerToggleRetrieveUtils toggle;
 
@@ -108,11 +109,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		List<String> userIds = new ArrayList<String>();
 		userIds.add(userId);
 		userIds.add(bootedUserId);
-		
+
 		Map<String, User> users = userRetrieveUtils.getUsersByIds(userIds);
 		user = users.get(userId);
 		playerToBoot = users.get(bootedUserId);
-		
+
 		if (!lockedClan) {
 			log.error("couldn't obtain clan lock");
 			return false;
@@ -142,7 +143,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		statuses.add(requestingStatus);
 		Map<String, String> userIdsToStatuses = userClanRetrieveUtils
 				.getUserIdsToStatuses(clanId, statuses);
-		Set<String> uniqUserIds = clanStuffUtils.getAuthorizedClanMembers(user, 
+		Set<String> uniqUserIds = clanStuffUtils.getAuthorizedClanMembers(user,
 				userClanRetrieveUtils, userIdsToStatuses, leaderStatus, jrLeaderStatus);
 		String userId = user.getId();
 		if (!uniqUserIds.contains(userId)) {
@@ -152,7 +153,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 
 		//TODO: Consider checking UserClanStatus (userStatus > playerToBootStatus)
-		
+
 		String playerToBootClanId = playerToBoot.getClanId();
 		if (!playerToBootClanId.equals(user.getClanId())) {
 			resBuilder
@@ -189,13 +190,15 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 
 		//need to account for this user leaving clan
-		ExitClanAction eca = new ExitClanAction(bootedUserId, clanId, clanSizeContainer.size() - 1,
-				lastChatPost, timeUtils, updateUtil, clanSearch, toggle);
+//		ExitClanAction eca = new ExitClanAction(bootedUserId, clanId, clanSizeContainer.size() - 1,
+//				lastChatPost, timeUtils, updateUtil, clanSearch, toggle);
+		ExitClanAction eca = AppContext.getBean(ExitClanAction.class);
+		eca.wire(bootedUserId, clanId, clanSizeContainer.size() - 1, lastChatPost);
 		eca.execute();
 
 		return true;
 	}
-	
+
 
 	public User getUser() {
 		return user;

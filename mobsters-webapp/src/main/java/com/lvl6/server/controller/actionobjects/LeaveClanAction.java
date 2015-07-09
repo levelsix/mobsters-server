@@ -23,6 +23,7 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtil;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -35,16 +36,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	private String userId;
 	private String clanId;
 	private boolean lockedClan;
-	@Autowired protected UserRetrieveUtils2 userRetrieveUtils; 
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtils;
 	@Autowired protected InsertUtil insertUtil;
 	@Autowired protected DeleteUtil deleteUtil;
-	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtils; 
-	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils; 
-	@Autowired protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil; 
-	@Autowired protected TimeUtils timeUtils; 
+	@Autowired protected ClanRetrieveUtils2 clanRetrieveUtils;
+	@Autowired protected UserClanRetrieveUtils2 userClanRetrieveUtils;
+	@Autowired protected ClanChatPostRetrieveUtils2 clanChatPostRetrieveUtil;
+	@Autowired protected TimeUtils timeUtils;
 	private ClanSearch clanSearch;
 	private ServerToggleRetrieveUtils toggle;
-	
+
 	public LeaveClanAction(
 			String userId, String clanId,
 			boolean lockedClan, UserRetrieveUtils2 userRetrieveUtil,
@@ -151,7 +152,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		clanSizeContainer.add(userClanMembersInClan);
 		return true;
 	}
-	
+
 	private String getClanOwnerId(String leaderStatus,
 			Map<String, String> userIdsAndStatuses) {
 		String clanOwnerId = null;
@@ -171,7 +172,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 		String clanId = clan.getId();
-		
+
 		String clanOwnerId = clanOwnerIdList.get(0);
 		int clanSize = clanSizeContainer.get(0);
 
@@ -199,13 +200,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		//need to account for this user leaving clan
-		ExitClanAction eca = new ExitClanAction(userId, clanId, clanSize - 1,
-				lastChatPost, timeUtils, UpdateUtils.get(), clanSearch, toggle);
+//		ExitClanAction eca = new ExitClanAction(userId, clanId, clanSize - 1,
+//				lastChatPost, timeUtils, UpdateUtils.get(), clanSearch, toggle);
+		ExitClanAction eca = AppContext.getBean(ExitClanAction.class);
+		eca.wire(userId, clanId, clanSize - 1, lastChatPost);
 		eca.execute();
 
 		return true;
 	}
-	
+
 	private void deleteClan(String clanId, Clan clan, List<String> userIds,
 			User user) {
 		if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
@@ -342,7 +345,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	public void setClanSizeContainer(List<Integer> clanSizeContainer) {
 		this.clanSizeContainer = clanSizeContainer;
 	}
-	
-	
+
+
 
 }

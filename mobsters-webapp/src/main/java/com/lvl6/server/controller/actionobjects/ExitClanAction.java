@@ -25,30 +25,28 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 @Component@Scope("prototype")public class ExitClanAction {
 	private static Logger log = LoggerFactory.getLogger( ExitClanAction.class);
 
-	private String userId;
-	private String clanId;
-	private int clanSize;
-	private Date lastChatPost;
 	@Autowired protected ClanMemberTeamDonationRetrieveUtil clanMemberTeamDonationRetrieveUtil;
 	@Autowired protected TimeUtils timeUtil;
 	@Autowired protected UpdateUtil updateUtil;
 	@Autowired protected DeleteUtil deleteUtil;
-	private ClanSearch clanSearch;
-	private ServerToggleRetrieveUtils toggle;
+	@Autowired private ClanSearch clanSearch;
+	@Autowired private ServerToggleRetrieveUtils toggle;
 
-	public ExitClanAction(String userId, String clanId, int clanSize,
-			Date lastChatPost, TimeUtils timeUtil, UpdateUtil updateUtil,
-			ClanSearch clanSearch,
-			ServerToggleRetrieveUtils toggle) {
-		super();
+	private String userId;
+	private String clanId;
+	private int clanSize;
+	private Date lastChatPost;
+
+	public void wire(
+			String userId,
+			String clanId,
+			int clanSize,
+			Date lastChatPost)
+	{
 		this.userId = userId;
 		this.clanId = clanId;
 		this.clanSize = clanSize;
 		this.lastChatPost = lastChatPost;
-		this.timeUtil = timeUtil;
-		this.updateUtil = updateUtil;
-		this.clanSearch = clanSearch;
-		this.toggle = toggle;
 	}
 
 	public void execute() {

@@ -72,7 +72,7 @@ public class ControllerConstants {
 			0.01F, 0.01F, 0.01F, 0.01F, 0.01F };
 
 	public static final int CLIENT_TIME_MINUTES_CONSTANT_CHECK = 120;
-	
+
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
 
@@ -633,7 +633,7 @@ public class ControllerConstants {
 	"Happy birthday AoC! Buildings will make silver twice as fast all week long!" };
 
 	public static final int STARTUP__QUEST_ID_FOR_FIRST_LOSS_TUTORIAL = 326;
-	public static final String STARTUP__CREDITS_FILE_NAME = "FAQ.3.txt";
+	public static final String STARTUP__CREDITS_FILE_NAME = "Credits.1.txt";
 	public static final String STARTUP__FAQ_FILE_NAME = "FAQ.3.txt";
 
 	public static final String NIB_NAME__LOCK_BOX = "LockBox.4";
