@@ -79,8 +79,11 @@ public class MonsterLevelInfoRetrieveUtils {
 		}
 
 		if (null != mli) {
+			log.info("original drop rate: {}", mli.getPvpDropRate());
+			log.info("count: {}", count);
 			float dropRate = mli.getPvpDropRate() * (float)Math.pow(PVP_COUNT_CONSTANT, count) ;
-
+			log.info("drop rate after count: {}", dropRate);
+			
 			Random rand = ControllerConstants.RAND;
 			float randFloat = rand.nextFloat();
 
