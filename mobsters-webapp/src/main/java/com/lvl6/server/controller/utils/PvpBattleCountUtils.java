@@ -30,7 +30,7 @@ public class PvpBattleCountUtils {
 		for(PvpBattleCountForUserPojo pbcfur : pvpBattleCount) {
 			Date battleDate = new Date(pbcfur.getDate().getTime());
 			if(timeUtils.numDaysDifference(now, battleDate) < 8) {
-				count++;
+				count = count + pbcfur.getCount();
 			}
 		}
 		return count;
