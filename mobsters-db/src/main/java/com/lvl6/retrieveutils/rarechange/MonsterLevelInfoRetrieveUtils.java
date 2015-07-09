@@ -49,6 +49,7 @@ public class MonsterLevelInfoRetrieveUtils {
 				.get(monsterId);
 
 		log.info("battleCounts: {}", battleCounts);
+		log.info("defenderId: {}", defenderId);
 		
 		int count = 0;
 		if(defenderId != null && battleCounts != null) {
