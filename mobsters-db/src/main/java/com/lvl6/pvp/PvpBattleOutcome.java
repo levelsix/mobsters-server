@@ -305,6 +305,8 @@ public class PvpBattleOutcome {
 
 		double finalPercentageToSteal = (winnerLoserCndVal - offset) * scale;
 		double retVal = finalPercentageToSteal * defenderCash;
+		log.info("retVal before count: {}", retVal);
+		log.info("count: {}", count);
 		
 		percentageStealFromGenerator = (float)(finalPercentageToSteal * RESOURCE_GENERATOR_CONSTANT);
 		
@@ -313,6 +315,7 @@ public class PvpBattleOutcome {
 			percentageStealFromGenerator = percentageStealFromGenerator * 
 					(float)Math.pow(DECREASING_AMOUNT_PER_ATTACK, count);
 		}
+		log.info("retVal after count: {}", retVal);
 		log.info("PERCENTAGE TO STEAL FROM GENERATOR IS {}", percentageStealFromGenerator);
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
