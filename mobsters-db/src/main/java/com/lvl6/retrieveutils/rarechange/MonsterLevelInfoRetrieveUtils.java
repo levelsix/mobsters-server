@@ -48,6 +48,8 @@ public class MonsterLevelInfoRetrieveUtils {
 		Map<Integer, MonsterLevelInfo> lvlToMli = enumeratedPartialMonsterLevelInfo
 				.get(monsterId);
 
+		log.info("battleCounts: {}", battleCounts);
+		
 		int count = 0;
 		if(defenderId != null && battleCounts != null) {
 			//copying logic from two utils
