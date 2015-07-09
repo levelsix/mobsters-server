@@ -298,7 +298,7 @@ public class PvpBattleOutcome {
 						(new DateTime(battleDate)).toLocalDate());
 
 				if(days.getDays() < PVP_COUNT_PAST_DAY) {
-					count++;
+					count = count + pbcfur.getCount();
 				}
 			}
 		}
@@ -407,7 +407,7 @@ public class PvpBattleOutcome {
 						(new DateTime(battleDate)).toLocalDate());
 
 				if(days.getDays() < PVP_COUNT_PAST_DAY) {
-					count++;
+					count = count + pbcfur.getCount();
 				}
 			}
 		}
