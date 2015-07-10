@@ -101,7 +101,7 @@ public class InAppPurchaseUtils {
 		}
 		
 		log.info("lastPurchaseTime {}, now {}", lastPurchaseTime, new Date());
-		int numDaysDiff = timeUtils.numDaysDifference(new Date(), lastPurchaseTime);
+		int numDaysDiff = Math.abs(timeUtils.numDaysDifference(new Date(), lastPurchaseTime));
 		log.info("num days diff: {}", numDaysDiff);
 		if(numDaysDiff >= requirementInDays) {
 			log.info("decayed user's sales value");
