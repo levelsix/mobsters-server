@@ -1280,8 +1280,8 @@ class StartupService extends LazyLogging {
         val salesLastPurchaseTime = user.getLastPurchaseTime();
         val now = new Date
                 logger.info("setting regular sales for user");
+        val ts = new Timestamp(now.getTime());
         if(salesLastPurchaseTime == null) {
-          val ts = new Timestamp(now.getTime());
           updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
         }
         else {
@@ -1294,10 +1294,11 @@ class StartupService extends LazyLogging {
             }
           }
           else {
+            logger.info("checking whether to tier down");
             if(inAppPurchaseUtil.checkWhetherToTierDownSalesValue(user.getId(), userSalesValue, salesLastPurchaseTime)) {
               userSalesValue = userSalesValue - 1;
               user.setSalesValue(userSalesValue);
-              updateUtil.updateUserSalesValue(user.getId(), userSalesValue, null);
+              updateUtil.updateUserSalesValue(user.getId(), userSalesValue, ts);
             }
           }
         }

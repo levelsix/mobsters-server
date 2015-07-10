@@ -97,7 +97,8 @@ public class InAppPurchaseUtils {
 			return false;
 		}
 		
-		if(timeUtils.numDaysDifference(new Date(), lastPurchaseTime) > requirementInDays) {
+		if(timeUtils.numDaysDifference(new Date(), lastPurchaseTime) >= requirementInDays) {
+			log.info("decayed user's sales value");
 			return true;
 		}
 		else return false;
