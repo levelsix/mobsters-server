@@ -83,6 +83,8 @@ public class InAppPurchaseUtils {
 		int numPurchases = iapHistoryDao.getUserPurchasesAtTier(userId, userSalesValue);
 		double constantInFormula = Math.pow(1.3, Math.min(numPurchases-1, 4));
 		
+		log.info("numPurchases {}, constantInFormula {}", numPurchases, constantInFormula);
+		
 		if(userSalesValue == 2) {
 			requirementInDays = (int)(5 * constantInFormula);
 		}
