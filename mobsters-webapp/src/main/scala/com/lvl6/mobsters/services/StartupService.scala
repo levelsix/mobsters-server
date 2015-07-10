@@ -1294,11 +1294,9 @@ class StartupService extends LazyLogging {
             }
           }
           else {
-            logger.info("checking whether to tier down");
             if(inAppPurchaseUtil.checkWhetherToTierDownSalesValue(user.getId(), userSalesValue, salesLastPurchaseTime)) {
               userSalesValue = userSalesValue - 1;
               user.setSalesValue(userSalesValue);
-              logger.info("updating user sales value");
               updateUtil.updateUserSalesValue(user.getId(), userSalesValue, ts);
             }
           }

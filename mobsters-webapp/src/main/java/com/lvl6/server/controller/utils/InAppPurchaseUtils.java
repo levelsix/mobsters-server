@@ -83,9 +83,6 @@ public class InAppPurchaseUtils {
 		int numPurchases = iapHistoryDao.getUserPurchasesAtTier(userId, userSalesValue);
 		double constantInFormula = Math.pow(1.3, Math.min(numPurchases-1, 4));
 		
-		log.info("numPurchases {}, constantInFormula {}", numPurchases, constantInFormula);
-		log.info("userSalesValue {}, lastPurchaseTime {}", userSalesValue, lastPurchaseTime);
-		
 		if(userSalesValue == 2) {
 			requirementInDays = (int)(5 * constantInFormula);
 		}
@@ -100,9 +97,7 @@ public class InAppPurchaseUtils {
 			return false;
 		}
 		
-		log.info("lastPurchaseTime {}, now {}", lastPurchaseTime, new Date());
 		int numDaysDiff = Math.abs(timeUtils.numDaysDifference(new Date(), lastPurchaseTime));
-		log.info("num days diff: {}", numDaysDiff);
 		if(numDaysDiff >= requirementInDays) {
 			log.info("decayed user's sales value");
 			return true;
