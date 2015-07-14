@@ -5,6 +5,8 @@ scripts/DBProperties.php
 scripts/referral_code_checks/referral_code_logs
 src/main/resources/KingdomAPNSProdKey.p12
 
+.cache
+
 #java specific
 *.class
 
