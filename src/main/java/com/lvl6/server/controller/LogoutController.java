@@ -15,9 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LogoutRequestEvent;
-import com.lvl6.events.response.SpawnMiniJobResponseEvent;
 import com.lvl6.info.User;
-import com.lvl6.proto.EventMiniJobProto.SpawnMiniJobResponseProto.SpawnMiniJobStatus;
 import com.lvl6.proto.EventUserProto.LogoutRequestProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;

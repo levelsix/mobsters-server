@@ -1,19 +1,12 @@
 package com.lvl6.server.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +20,6 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
@@ -53,7 +45,7 @@ public class InAppPurchaseController extends EventController {
   protected Locker locker;
 
   @Autowired
-  protected InsertUtil insertUtils;
+  protected InsertUtil insertUtil;
   
   @Autowired
   protected UserRetrieveUtils2 userRetrieveUtils;
@@ -230,7 +222,7 @@ public class InAppPurchaseController extends EventController {
       }*/
 
       InAppPurchaseAction iapa = new InAppPurchaseAction(userId, receipt,
-    		  userRetrieveUtils);
+    		  userRetrieveUtils, insertUtil);
       iapa.execute(resBuilder);
       
       InAppPurchaseResponseProto resProto = resBuilder.build();
@@ -379,8 +371,8 @@ public class InAppPurchaseController extends EventController {
 	  this.locker = locker;
   }
 
-  public void setInsertUtils(InsertUtil insertUtils) {
-    this.insertUtils = insertUtils;
+  public void setInsertUtils(InsertUtil insertUtil) {
+    this.insertUtil = insertUtil;
   }
 
   public UserRetrieveUtils2 getUserRetrieveUtils() {

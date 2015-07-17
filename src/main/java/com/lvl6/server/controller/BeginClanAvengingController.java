@@ -21,7 +21,6 @@ import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventClanProto.BeginClanAvengingRequestProto;
 import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto;
 import com.lvl6.proto.EventClanProto.BeginClanAvengingResponseProto.BeginClanAvengingStatus;
-import com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;

@@ -1,8 +1,5 @@
 package com.lvl6.retrieveutils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -21,7 +18,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.google.protobuf.ByteString;
 import com.lvl6.info.TaskForUserClientState;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.util.QueryConstructionUtil;

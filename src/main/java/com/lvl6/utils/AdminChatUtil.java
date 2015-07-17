@@ -32,7 +32,6 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto;
-import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto.PrivateChatPostStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.GameServer;
 import com.lvl6.utils.utilmethods.InsertUtil;

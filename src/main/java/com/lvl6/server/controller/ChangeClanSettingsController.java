@@ -34,7 +34,6 @@ import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
-import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class ChangeClanSettingsController extends EventController {

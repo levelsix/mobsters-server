@@ -23,7 +23,6 @@ import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventClanProto.AvengeClanMateRequestProto;
 import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto;
 import com.lvl6.proto.EventClanProto.AvengeClanMateResponseProto.AvengeClanMateStatus;
-import com.lvl6.proto.EventClanProto.InviteToClanResponseProto.InviteToClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;

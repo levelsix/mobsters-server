@@ -25,7 +25,6 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
-import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.ConnectedPlayer;
 
 public class ServerAdmin implements MessageListener<ServerMessage> {

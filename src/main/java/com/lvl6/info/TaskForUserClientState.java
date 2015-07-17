@@ -1,7 +1,6 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
 public class TaskForUserClientState implements Serializable {
 
