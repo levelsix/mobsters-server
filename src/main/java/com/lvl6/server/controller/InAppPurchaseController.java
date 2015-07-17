@@ -11,7 +11,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.UUID;
 
 import org.json.JSONObject;
@@ -24,7 +23,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.InAppPurchaseRequestEvent;
 import com.lvl6.events.response.InAppPurchaseResponseEvent;
-import com.lvl6.events.response.InviteFbFriendsForSlotsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -33,12 +31,12 @@ import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
-import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
 @Component
@@ -121,6 +119,7 @@ public class InAppPurchaseController extends EventController {
     // Lock this player's ID
     getLocker().lockPlayer(userUuid, this.getClass().getSimpleName());
     try {
+    	/*
       User user = getUserRetrieveUtils().getUserById(userId);
       
       JSONObject response;
@@ -228,8 +227,12 @@ public class InAppPurchaseController extends EventController {
 
       if (!resBuilder.hasStatus()) {
         resBuilder.setStatus(InAppPurchaseStatus.FAIL);
-      }
+      }*/
 
+      InAppPurchaseAction iapa = new InAppPurchaseAction(userId, receipt,
+    		  userRetrieveUtils);
+      iapa.execute(resBuilder);
+      
       InAppPurchaseResponseProto resProto = resBuilder.build();
 
       InAppPurchaseResponseEvent resEvent = new InAppPurchaseResponseEvent(senderProto.getUserUuid());
@@ -237,25 +240,15 @@ public class InAppPurchaseController extends EventController {
       resEvent.setInAppPurchaseResponseProto(resProto);
       server.writeEvent(resEvent);
 
-      /*if (Globals.KABAM_ENABLED()) {
-        if (receiptFromApple != null && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
-          JSONObject logJson = getKabamJsonLogObject(reqProto, resBuilder, receiptFromApple);
-          List<NameValuePair> queryParams = getKabamQueryParams(receipt, user, logJson);
-          doKabamPost(queryParams, 0);
-        }
-      }*/
+      if (InAppPurchaseStatus.SUCCESS.equals(resBuilder.getStatus())) {
+    	  //null PvpLeagueFromUser means will pull from hazelcast instead
+    	  UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+    			  .createUpdateClientUserResponseEventAndUpdateLeaderboard(iapa.getUser(), null, null);
+    	  resEventUpdate.setTag(event.getTag());
+    	  server.writeEvent(resEventUpdate);
+      }
 
-      //null PvpLeagueFromUser means will pull from hazelcast instead
-      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-          .createUpdateClientUserResponseEventAndUpdateLeaderboard(user, null, null);
-      resEventUpdate.setTag(event.getTag());
-      server.writeEvent(resEventUpdate);
-
-      //      //in case user has a mentor, check if user completed mentor's quest
-      //      if (null != receiptFromApple && resBuilder.getStatus() == InAppPurchaseStatus.SUCCESS) {
-      //        MenteeQuestType type = MenteeQuestType.BOUGHT_A_PACKAGE;
-      //        MiscMethods.sendMenteeFinishedQuests(senderProto, type, server);
-      //      }
+      
     } catch (Exception e) {
       log.error("exception in InAppPurchaseController processEvent", e);
       //don't let the client hang
