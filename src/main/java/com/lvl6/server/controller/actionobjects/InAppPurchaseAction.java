@@ -355,6 +355,8 @@ public class InAppPurchaseAction
         realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
         int coinChange = 0;
         
+        log.info("packageName: {}, isBeginnerSale: {}, gemsGained: {}, realLifeCashCost: {}", new Object[] {packageName, isBeginnerSale, gemsGained, realLifeCashCost});
+        
         prevCurrencies = new HashMap<String, Integer>();
         if (0 != gemsGained) {
             prevCurrencies.put(MiscMethods.gems, user.getGems());
