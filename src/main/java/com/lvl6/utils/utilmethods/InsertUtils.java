@@ -290,9 +290,9 @@ public class InsertUtils implements InsertUtil{
                       originalJson.getString(InAppPurchaseAction.ANDROID_PRODUCT_ID));
               insertParams.put(DBConstants.IAP_HISTORY__QUANTITY, 1);
               insertParams.put(DBConstants.IAP_HISTORY__BID,
-                      appleReceipt.getString(InAppPurchaseAction.ANDROID_PACKAGE_NAME));
+                      originalJson.getString(InAppPurchaseAction.ANDROID_PACKAGE_NAME));
               insertParams.put(DBConstants.IAP_HISTORY__PURCHASE_DATE,
-                      new Timestamp(appleReceipt.getLong(InAppPurchaseAction.ANDROID_PURCHASE_TIME)));
+                      new Timestamp(originalJson.getLong(InAppPurchaseAction.ANDROID_PURCHASE_TIME)));
       }
 
     } catch (JSONException e) {
