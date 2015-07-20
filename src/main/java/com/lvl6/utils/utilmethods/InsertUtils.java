@@ -281,7 +281,8 @@ public class InsertUtils implements InsertUtil{
                       appleReceipt.getString(IAPValues.APP_ITEM_ID));
                 }
       } else {
-          JSONObject originalJson = appleReceipt.getJSONObject(InAppPurchaseAction.ANDROID_ORIGINAL_JSON);
+          String origJsonString = appleReceipt.getString(InAppPurchaseAction.ANDROID_ORIGINAL_JSON);
+          JSONObject originalJson = new JSONObject(origJsonString);
 
           insertParams.put(DBConstants.IAP_HISTORY__TRANSACTION_ID,
                   originalJson.getString(InAppPurchaseAction.ANDROID_ORDER_ID));
