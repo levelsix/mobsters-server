@@ -32,6 +32,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.Builder;
 import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseResponseProto.InAppPurchaseStatus;
+import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
@@ -47,26 +48,33 @@ public class InAppPurchaseAction
 
     private static final String ANDROID_KEY_FACTORY_ALGORITHM = "RSA";
     private static final String ANDROID_SIGNATURE_ALGORITHM = "SHA1withRSA";
-    private static final String ANDROID_ORIGINAL_JSON = "originalJson";
-    private static final String ANDROID_SIGNATURE = "signature";
-    private static final String ANDROID_PACKAGE_NAME = "packageName";
+    public static final String ANDROID_ORIGINAL_JSON = "originalJson";
+    public static final String ANDROID_SIGNATURE = "signature";
+    public static final String ANDROID_PACKAGE_NAME = "packageName";
+    public static final String ANDROID_ORDER_ID = "orderId";
+    public static final String ANDROID_PRODUCT_ID = "productId";
+    public static final String ANDROID_PURCHASE_TIME = "purchaseTime";
     
     private String userId;
     private String receipt;
+    private String transactionId;
     private UserRetrieveUtils2 userRetrieveUtil;
     private InsertUtil insertUtil;
+    private IAPHistoryRetrieveUtils iapHistoryRetrieveUtils;
 
     public InAppPurchaseAction(
             String userId,
             String receipt,
             UserRetrieveUtils2 userRetrieveUtil,
-            InsertUtil insertUtil )
+            InsertUtil insertUtil,
+            IAPHistoryRetrieveUtils iapHistoryRetrieveUtils )
     {
         super();
         this.userId = userId;
         this.receipt = receipt;
         this.userRetrieveUtil = userRetrieveUtil;
         this.insertUtil = insertUtil;
+        this.iapHistoryRetrieveUtils = iapHistoryRetrieveUtils;
     }
 
     //	//encapsulates the return value from this Action Object
@@ -155,6 +163,12 @@ public class InAppPurchaseAction
             }
         }
 
+        if (iapHistoryRetrieveUtils.checkIfDuplicateTransaction(transactionId)) {
+            resBuilder.setStatus(InAppPurchaseStatus.DUPLICATE_RECEIPT);
+            log.error("duplicate receipt from user " + user);
+            return false;
+        }
+
         return true;
     }
 
@@ -211,6 +225,7 @@ public class InAppPurchaseAction
             if (response.getInt(IAPValues.STATUS) == 0) {
                 jsonObject = response.getJSONObject(IAPValues.RECEIPT);
                 packageName = jsonObject.getString(IAPValues.PRODUCT_ID);
+                transactionId = jsonObject.getString(IAPValues.TRANSACTION_ID);
                 success = true;
             } else {
                 log.error("problem with in-app purchase that client sent, with receipt {}", receipt);
@@ -248,6 +263,7 @@ public class InAppPurchaseAction
             if (success) {
                 JSONObject signedDataJson = new JSONObject(signedData);
                 packageName = signedDataJson.getString(ANDROID_PACKAGE_NAME);
+                transactionId = jsonObject.getString(ANDROID_ORDER_ID);
             }
         } catch(Exception e) {
             log.error("verifyAppleReceipt",e);
@@ -348,7 +364,7 @@ public class InAppPurchaseAction
         }
         
         if (!insertUtil.insertIAPHistoryElem(jsonObject,
-                gemsGained, coinChange, user, realLifeCashCost)) {
+                gemsGained, coinChange, user, realLifeCashCost, isAppleReceipt)) {
             
             if (isAppleReceipt) {
                 try {

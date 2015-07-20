@@ -35,6 +35,7 @@ import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
+import com.lvl6.server.controller.actionobjects.InAppPurchaseAction;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
@@ -246,17 +247,13 @@ public class InsertUtils implements InsertUtil{
    */
   @Override
   public boolean insertIAPHistoryElem(JSONObject appleReceipt,
-      int diamondChange, int coinChange, User user, double cashCost) {
+      int diamondChange, int coinChange, User user, double cashCost, boolean isAppleReceipt) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     try {
       String id = randomUUID();
       
       insertParams.put(DBConstants.IAP_HISTORY__ID, id);
       insertParams.put(DBConstants.IAP_HISTORY__USER_ID, user.getId());
-      insertParams.put(DBConstants.IAP_HISTORY__TRANSACTION_ID,
-          appleReceipt.getString(IAPValues.TRANSACTION_ID));
-      insertParams.put(DBConstants.IAP_HISTORY__PURCHASE_DATE,
-          new Timestamp(appleReceipt.getLong(IAPValues.PURCHASE_DATE_MS)));
       insertParams.put(DBConstants.IAP_HISTORY__PREMIUMCUR_PURCHASED,
           diamondChange);
       insertParams.put(DBConstants.IAP_HISTORY__REGCUR_PURCHASED,
@@ -264,20 +261,39 @@ public class InsertUtils implements InsertUtil{
       insertParams.put(DBConstants.IAP_HISTORY__CASH_SPENT, cashCost);
       insertParams.put(DBConstants.IAP_HISTORY__UDID, user.getUdid());
       insertParams.put(DBConstants.IAP_HISTORY__FB_ID, user.getFacebookId());
-      
-      insertParams.put(DBConstants.IAP_HISTORY__PRODUCT_ID,
-          appleReceipt.getString(IAPValues.PRODUCT_ID));
-      insertParams.put(DBConstants.IAP_HISTORY__QUANTITY,
-          appleReceipt.getString(IAPValues.QUANTITY));
-      insertParams.put(DBConstants.IAP_HISTORY__BID,
-          appleReceipt.getString(IAPValues.BID));
-      insertParams.put(DBConstants.IAP_HISTORY__BVRS,
-          appleReceipt.getString(IAPValues.BVRS));
 
-      if (appleReceipt.has(IAPValues.APP_ITEM_ID)) {
-        insertParams.put(DBConstants.IAP_HISTORY__APP_ITEM_ID,
-            appleReceipt.getString(IAPValues.APP_ITEM_ID));
+      if (isAppleReceipt) {
+          insertParams.put(DBConstants.IAP_HISTORY__TRANSACTION_ID,
+                  appleReceipt.getString(IAPValues.TRANSACTION_ID));
+              insertParams.put(DBConstants.IAP_HISTORY__PRODUCT_ID,
+                  appleReceipt.getString(IAPValues.PRODUCT_ID));
+              insertParams.put(DBConstants.IAP_HISTORY__QUANTITY,
+                  appleReceipt.getString(IAPValues.QUANTITY));
+              insertParams.put(DBConstants.IAP_HISTORY__BID,
+                  appleReceipt.getString(IAPValues.BID));
+              insertParams.put(DBConstants.IAP_HISTORY__BVRS,
+                  appleReceipt.getString(IAPValues.BVRS));
+              insertParams.put(DBConstants.IAP_HISTORY__PURCHASE_DATE,
+                      new Timestamp(appleReceipt.getLong(IAPValues.PURCHASE_DATE_MS)));
+              
+              if (appleReceipt.has(IAPValues.APP_ITEM_ID)) {
+                  insertParams.put(DBConstants.IAP_HISTORY__APP_ITEM_ID,
+                      appleReceipt.getString(IAPValues.APP_ITEM_ID));
+                }
+      } else {
+          JSONObject originalJson = appleReceipt.getJSONObject(InAppPurchaseAction.ANDROID_ORIGINAL_JSON);
+
+          insertParams.put(DBConstants.IAP_HISTORY__TRANSACTION_ID,
+                  originalJson.getString(InAppPurchaseAction.ANDROID_ORDER_ID));
+              insertParams.put(DBConstants.IAP_HISTORY__PRODUCT_ID,
+                      originalJson.getString(InAppPurchaseAction.ANDROID_PRODUCT_ID));
+              insertParams.put(DBConstants.IAP_HISTORY__QUANTITY, 1);
+              insertParams.put(DBConstants.IAP_HISTORY__BID,
+                      appleReceipt.getString(InAppPurchaseAction.ANDROID_PACKAGE_NAME));
+              insertParams.put(DBConstants.IAP_HISTORY__PURCHASE_DATE,
+                      new Timestamp(appleReceipt.getLong(InAppPurchaseAction.ANDROID_PURCHASE_TIME)));
       }
+
     } catch (JSONException e) {
       log.error("JSON error", e);
       return false;

@@ -63,7 +63,7 @@ public interface InsertUtil {
   		List<Timestamp> retrievedTimeList, List<Boolean> isComplete);
 	
 	public abstract boolean insertIAPHistoryElem(JSONObject appleReceipt,
-			int diamondChange, int coinChange, User user, double cashCost);
+	        int diamondChange, int coinChange, User user, double cashCost, boolean isAppleReceipt);
 
 //	public abstract boolean insertMarketplaceItem(int posterId,
 //			MarketplacePostType postType, int postedEquipId, int diamondCost,

@@ -25,7 +25,7 @@ import com.lvl6.properties.DBConstants;
 	  this.jdbcTemplate = new JdbcTemplate(dataSource);
   }
 
-  public boolean checkIfDuplicateTransaction(long transactionId) {
+  public boolean checkIfDuplicateTransaction(String transactionId) {
     log.debug("checking if transaction already exists for transaction Id" + transactionId);
 
     Object[] values = { transactionId };
