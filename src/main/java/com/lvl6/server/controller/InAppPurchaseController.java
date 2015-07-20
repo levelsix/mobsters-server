@@ -222,7 +222,7 @@ public class InAppPurchaseController extends EventController {
       }*/
 
       InAppPurchaseAction iapa = new InAppPurchaseAction(userId, receipt,
-    		  userRetrieveUtils, insertUtil);
+    		  userRetrieveUtils, insertUtil, iapHistoryRetrieveUtils);
       iapa.execute(resBuilder);
       
       InAppPurchaseResponseProto resProto = resBuilder.build();
