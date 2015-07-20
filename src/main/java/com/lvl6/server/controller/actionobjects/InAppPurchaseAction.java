@@ -262,7 +262,7 @@ public class InAppPurchaseAction
             
             if (success) {
                 JSONObject signedDataJson = new JSONObject(signedData);
-                packageName = signedDataJson.getString(ANDROID_PACKAGE_NAME);
+                packageName = signedDataJson.getString(ANDROID_PRODUCT_ID);
                 transactionId = jsonObject.getString(ANDROID_ORDER_ID);
             }
         } catch(Exception e) {
@@ -355,7 +355,7 @@ public class InAppPurchaseAction
         realLifeCashCost = IAPValues.getCashSpentForPackageName(packageName);
         int coinChange = 0;
         
-        log.info("packageName: {}, isBeginnerSale: {}, gemsGained: {}, realLifeCashCost: {}", new Object[] {packageName, isBeginnerSale, gemsGained, realLifeCashCost});
+        log.info("packageName: {}, p2: {}, isBeginnerSale: {}, gemsGained: {}, realLifeCashCost: {}", new Object[] {packageName, IAPValues.PACKAGE2, isBeginnerSale, gemsGained, realLifeCashCost});
         
         prevCurrencies = new HashMap<String, Integer>();
         if (0 != gemsGained) {
