@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TaskStageHistory extends TableImpl<TaskStageHistoryRecord> {
 
-	private static final long serialVersionUID = 679445031;
+	private static final long serialVersionUID = 1642100813;
 
 	/**
 	 * The reference instance of <code>mobsters.task_stage_history</code>
@@ -112,6 +112,11 @@ public class TaskStageHistory extends TableImpl<TaskStageHistoryRecord> {
 	 * The column <code>mobsters.task_stage_history.attacked_first</code>.
 	 */
 	public final TableField<TaskStageHistoryRecord, Boolean> ATTACKED_FIRST = createField("attacked_first", org.jooq.impl.SQLDataType.BIT.defaulted(true), this, "");
+
+	/**
+	 * The column <code>mobsters.task_stage_history.monster_lvl</code>. the lvl here could be different from task_stage_monster.lvl, specifically in the case of cake kids.
+	 */
+	public final TableField<TaskStageHistoryRecord, Integer> MONSTER_LVL = createField("monster_lvl", org.jooq.impl.SQLDataType.INTEGER, this, "the lvl here could be different from task_stage_monster.lvl, specifically in the case of cake kids.");
 
 	/**
 	 * Create a <code>mobsters.task_stage_history</code> table reference

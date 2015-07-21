@@ -324,6 +324,11 @@ public class TaskStageMonsterRetrieveUtils {
 		String defaultDialogue = rs
 				.getString(DBConstants.TASK_STAGE_MONSTER__DEFAULT_DIALOGUE);
 
+		float userToonHpScale = rs
+				.getFloat(DBConstants.TASK_STAGE_MONSTER__USER_TOON_HP_SCALE);
+		float userToonAtkScale = rs
+				.getFloat(DBConstants.TASK_STAGE_MONSTER__USER_TOON_ATK_SCALE);
+
 		//continue putting new properties above here
 
 		if (null != monsterType) {
@@ -371,12 +376,11 @@ public class TaskStageMonsterRetrieveUtils {
 				minOilDrop, maxOilDrop, puzzlePieceDropRate, level,
 				chanceToAppear, dmgMultiplier, monsterIdDrop, monsterDropLvl,
 				defensiveSkillId, 0, initDialogue, defaultDialogue, initD,
-				defaultD);
+				defaultD, userToonHpScale, userToonAtkScale);
 
 		if (null == monsterType) {
-			log.error(String
-					.format("TaskStageMonster, monster type incorrect, offending tsm=%s",
-							taskStageMonster));
+			log.error("TaskStageMonster, monster type incorrect, offending tsm={}",
+					taskStageMonster);
 		}
 		taskStageMonster.setRand(rand);
 		return taskStageMonster;

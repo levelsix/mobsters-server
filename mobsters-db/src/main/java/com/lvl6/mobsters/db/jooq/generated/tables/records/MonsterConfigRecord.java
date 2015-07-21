@@ -34,7 +34,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @Table(name = "monster_config", schema = "mobsters")
 public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord> implements IMonsterConfig {
 
-	private static final long serialVersionUID = -535735150;
+	private static final long serialVersionUID = -1099659966;
 
 	/**
 	 * Setter for <code>mobsters.monster_config.id</code>.
@@ -228,7 +228,7 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	 * Setter for <code>mobsters.monster_config.max_level</code>.
 	 */
 	@Override
-	public MonsterConfigRecord setMaxLevel(Byte value) {
+	public MonsterConfigRecord setMaxLevel(Short value) {
 		setValue(10, value);
 		return this;
 	}
@@ -236,10 +236,10 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	/**
 	 * Getter for <code>mobsters.monster_config.max_level</code>.
 	 */
-	@Column(name = "max_level", precision = 3)
+	@Column(name = "max_level", precision = 5)
 	@Override
-	public Byte getMaxLevel() {
-		return (Byte) getValue(10);
+	public Short getMaxLevel() {
+		return (Short) getValue(10);
 	}
 
 	/**
@@ -687,7 +687,7 @@ public class MonsterConfigRecord extends UpdatableRecordImpl<MonsterConfigRecord
 	/**
 	 * Create a detached, initialised MonsterConfigRecord
 	 */
-	public MonsterConfigRecord(Integer id, String evolutionGroup, String monsterGroup, String quality, Byte evolutionLevel, String displayName, String element, String imagePrefix, Byte numPuzzlePieces, Integer minutesToCombinePieces, Byte maxLevel, Integer evolutionMonsterId, Integer evolutionCatalystMonsterId, Integer minutesToEvolve, Byte numEvolutionCatalysts, String carrotRecruited, String carrotDefeated, String carrotEvolved, String description, String evolutionCost, String animationType, Integer verticalPixelOffset, String atkSoundFile, Integer atkSoundAnimationFrame, Integer atkAnimationRepeatedFramesStart, Integer atkAnimationRepeatedFramesEnd, String shortName, Double shadowScaleFactor, Integer baseOffensiveSkillId, Integer baseDefensiveSkillId, Integer pvpMonsterDropId) {
+	public MonsterConfigRecord(Integer id, String evolutionGroup, String monsterGroup, String quality, Byte evolutionLevel, String displayName, String element, String imagePrefix, Byte numPuzzlePieces, Integer minutesToCombinePieces, Short maxLevel, Integer evolutionMonsterId, Integer evolutionCatalystMonsterId, Integer minutesToEvolve, Byte numEvolutionCatalysts, String carrotRecruited, String carrotDefeated, String carrotEvolved, String description, String evolutionCost, String animationType, Integer verticalPixelOffset, String atkSoundFile, Integer atkSoundAnimationFrame, Integer atkAnimationRepeatedFramesStart, Integer atkAnimationRepeatedFramesEnd, String shortName, Double shadowScaleFactor, Integer baseOffensiveSkillId, Integer baseDefensiveSkillId, Integer pvpMonsterDropId) {
 		super(MonsterConfig.MONSTER_CONFIG);
 
 		setValue(0, id);

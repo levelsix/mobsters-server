@@ -78,6 +78,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForPlayerLvlConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboard;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboardRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTierRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTimetableConfig;
@@ -102,6 +103,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ObstacleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ObstacleForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.PrerequisiteConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ProfanityConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.PvpBattleCountForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.PvpBattleForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.PvpBattleHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.PvpBoardObstacleForUser;
@@ -193,7 +195,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Mobsters extends SchemaImpl {
 
-	private static final long serialVersionUID = 1392569096;
+	private static final long serialVersionUID = 1033646831;
 
 	/**
 	 * The reference instance of <code>mobsters</code>
@@ -290,6 +292,7 @@ public class Mobsters extends SchemaImpl {
 			MiniEventForUser.MINI_EVENT_FOR_USER,
 			MiniEventGoalConfig.MINI_EVENT_GOAL_CONFIG,
 			MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER,
+			MiniEventLeaderboard.MINI_EVENT_LEADERBOARD,
 			MiniEventLeaderboardRewardConfig.MINI_EVENT_LEADERBOARD_REWARD_CONFIG,
 			MiniEventTierRewardConfig.MINI_EVENT_TIER_REWARD_CONFIG,
 			MiniEventTimetableConfig.MINI_EVENT_TIMETABLE_CONFIG,
@@ -314,6 +317,7 @@ public class Mobsters extends SchemaImpl {
 			ObstacleForUser.OBSTACLE_FOR_USER,
 			PrerequisiteConfig.PREREQUISITE_CONFIG,
 			ProfanityConfig.PROFANITY_CONFIG,
+			PvpBattleCountForUser.PVP_BATTLE_COUNT_FOR_USER,
 			PvpBattleForUser.PVP_BATTLE_FOR_USER,
 			PvpBattleHistory.PVP_BATTLE_HISTORY,
 			PvpBoardObstacleForUser.PVP_BOARD_OBSTACLE_FOR_USER,

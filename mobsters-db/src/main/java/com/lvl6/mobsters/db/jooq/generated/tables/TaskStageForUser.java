@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TaskStageForUser extends TableImpl<TaskStageForUserRecord> {
 
-	private static final long serialVersionUID = -1948910904;
+	private static final long serialVersionUID = -447046647;
 
 	/**
 	 * The reference instance of <code>mobsters.task_stage_for_user</code>
@@ -103,6 +103,11 @@ public class TaskStageForUser extends TableImpl<TaskStageForUserRecord> {
 	 * The column <code>mobsters.task_stage_for_user.attacked_first</code>.
 	 */
 	public final TableField<TaskStageForUserRecord, Boolean> ATTACKED_FIRST = createField("attacked_first", org.jooq.impl.SQLDataType.BIT.defaulted(true), this, "");
+
+	/**
+	 * The column <code>mobsters.task_stage_for_user.monster_lvl</code>. the lvl here could be different from task_stage_monster.lvl, specifically in the case of cake kids.
+	 */
+	public final TableField<TaskStageForUserRecord, Integer> MONSTER_LVL = createField("monster_lvl", org.jooq.impl.SQLDataType.INTEGER, this, "the lvl here could be different from task_stage_monster.lvl, specifically in the case of cake kids.");
 
 	/**
 	 * Create a <code>mobsters.task_stage_for_user</code> table reference

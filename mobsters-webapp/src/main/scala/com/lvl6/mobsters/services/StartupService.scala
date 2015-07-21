@@ -37,7 +37,6 @@ import com.lvl6.info.QuestForUser
 import com.lvl6.info.SalesPackage
 import com.lvl6.info.TaskForUserClientState
 import com.lvl6.info.TaskForUserOngoing
-import com.lvl6.info.TaskStageForUser
 import com.lvl6.info.User
 import com.lvl6.info.UserClan
 import com.lvl6.misc.MiscMethods
@@ -164,6 +163,7 @@ import com.lvl6.spring.AppContext
 import scala.beans.BeanProperty
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesScheduleConfigPojo
 import java.util.Collections
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.TaskStageForUserPojo
 
 case class StartupData(
   resBuilder: Builder,
@@ -806,12 +806,12 @@ class StartupService extends LazyLogging {
       resBuilder.setCurTask(mutp)
       val userTaskId = aTaskForUser.getId
       val taskStages = taskStageForUserRetrieveUtils.getTaskStagesForUserWithTaskForUserId(userTaskId)
-      val stageNumToTsfu = new HashMap[Integer, java.util.List[TaskStageForUser]]()
+      val stageNumToTsfu = new HashMap[Integer, java.util.List[TaskStageForUserPojo]]()
       taskStages.foreach { tsfu =>
         val stageNum = tsfu.getStageNum
         var tsfuList = stageNumToTsfu.get(stageNum)
         if (tsfuList == null) {
-          tsfuList = new ArrayList[TaskStageForUser]()
+          tsfuList = new ArrayList[TaskStageForUserPojo]()
           stageNumToTsfu.put(stageNum, tsfuList)
         }
         tsfuList.add(tsfu)

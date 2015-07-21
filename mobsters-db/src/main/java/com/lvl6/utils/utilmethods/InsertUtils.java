@@ -45,13 +45,13 @@ import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
 import com.lvl6.info.Reward;
 import com.lvl6.info.TaskForUserClientState;
-import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventGoalForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.TaskStageForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
@@ -1027,13 +1027,14 @@ public class InsertUtils implements InsertUtil {
 	}
 	 */
 
+	//TODO: REPLACE SAVING VIA DBCONNECTION WITH A DAO
 	@Override
-	public List<String> insertIntoUserTaskStage(List<TaskStageForUser> tsfuList) {
+	public List<String> insertIntoUserTaskStage(List<TaskStageForUserPojo> tsfuList) {
 		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
 
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		List<String> tsfuIds = new ArrayList<String>();
-		for (TaskStageForUser tsfu : tsfuList) {
+		for (TaskStageForUserPojo tsfu : tsfuList) {
 			String tsfuId = randomUUID();
 			tsfuIds.add(tsfuId);
 
@@ -1041,7 +1042,7 @@ public class InsertUtils implements InsertUtil {
 
 			newRow.put(DBConstants.TASK_STAGE_FOR_USER__ID, tsfuId);
 			newRow.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID,
-					tsfu.getUserTaskId());
+					tsfu.getTaskForUserId());
 			newRow.put(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM,
 					tsfu.getStageNum());
 			newRow.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID,
@@ -1055,11 +1056,13 @@ public class InsertUtils implements InsertUtil {
 			newRow.put(DBConstants.TASK_STAGE_FOR_USER__OIL_GAINED,
 					tsfu.getOilGained());
 			newRow.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED,
-					tsfu.isMonsterPieceDropped());
+					tsfu.getMonsterPieceDropped());
 			newRow.put(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED,
 					tsfu.getItemIdDropped());
 			newRow.put(DBConstants.TASK_STAGE_FOR_USER__ATTACKED_FIRST,
-					tsfu.isAttackedFirst());
+					tsfu.getAttackedFirst());
+			newRow.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_LVL,
+					tsfu.getMonsterLvl());
 
 			newRows.add(newRow);
 		}

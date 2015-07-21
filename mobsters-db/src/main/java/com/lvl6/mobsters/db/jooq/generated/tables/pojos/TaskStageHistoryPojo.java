@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "task_stage_history", schema = "mobsters")
 public class TaskStageHistoryPojo implements ITaskStageHistory {
 
-	private static final long serialVersionUID = 1167990016;
+	private static final long serialVersionUID = -1990610227;
 
 	private String  taskStageForUserId;
 	private String  taskForUserId;
@@ -45,6 +45,7 @@ public class TaskStageHistoryPojo implements ITaskStageHistory {
 	private Integer monsterIdDropped;
 	private Integer monsterDroppedLvl;
 	private Boolean attackedFirst;
+	private Integer monsterLvl;
 
 	public TaskStageHistoryPojo() {}
 
@@ -62,6 +63,7 @@ public class TaskStageHistoryPojo implements ITaskStageHistory {
 		this.monsterIdDropped = value.monsterIdDropped;
 		this.monsterDroppedLvl = value.monsterDroppedLvl;
 		this.attackedFirst = value.attackedFirst;
+		this.monsterLvl = value.monsterLvl;
 	}
 
 	public TaskStageHistoryPojo(
@@ -77,7 +79,8 @@ public class TaskStageHistoryPojo implements ITaskStageHistory {
 		Integer itemIdDropped,
 		Integer monsterIdDropped,
 		Integer monsterDroppedLvl,
-		Boolean attackedFirst
+		Boolean attackedFirst,
+		Integer monsterLvl
 	) {
 		this.taskStageForUserId = taskStageForUserId;
 		this.taskForUserId = taskForUserId;
@@ -92,6 +95,7 @@ public class TaskStageHistoryPojo implements ITaskStageHistory {
 		this.monsterIdDropped = monsterIdDropped;
 		this.monsterDroppedLvl = monsterDroppedLvl;
 		this.attackedFirst = attackedFirst;
+		this.monsterLvl = monsterLvl;
 	}
 
 	@Id
@@ -257,6 +261,18 @@ public class TaskStageHistoryPojo implements ITaskStageHistory {
 		return this;
 	}
 
+	@Column(name = "monster_lvl", precision = 10)
+	@Override
+	public Integer getMonsterLvl() {
+		return this.monsterLvl;
+	}
+
+	@Override
+	public TaskStageHistoryPojo setMonsterLvl(Integer monsterLvl) {
+		this.monsterLvl = monsterLvl;
+		return this;
+	}
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -279,6 +295,7 @@ public class TaskStageHistoryPojo implements ITaskStageHistory {
 		setMonsterIdDropped(from.getMonsterIdDropped());
 		setMonsterDroppedLvl(from.getMonsterDroppedLvl());
 		setAttackedFirst(from.getAttackedFirst());
+		setMonsterLvl(from.getMonsterLvl());
 	}
 
 	/**

@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "monster_config", schema = "mobsters")
 public class MonsterConfigPojo implements IMonsterConfig {
 
-	private static final long serialVersionUID = -1384913296;
+	private static final long serialVersionUID = 1874190650;
 
 	private Integer id;
 	private String  evolutionGroup;
@@ -42,7 +42,7 @@ public class MonsterConfigPojo implements IMonsterConfig {
 	private String  imagePrefix;
 	private Byte    numPuzzlePieces;
 	private Integer minutesToCombinePieces;
-	private Byte    maxLevel;
+	private Short   maxLevel;
 	private Integer evolutionMonsterId;
 	private Integer evolutionCatalystMonsterId;
 	private Integer minutesToEvolve;
@@ -111,7 +111,7 @@ public class MonsterConfigPojo implements IMonsterConfig {
 		String  imagePrefix,
 		Byte    numPuzzlePieces,
 		Integer minutesToCombinePieces,
-		Byte    maxLevel,
+		Short   maxLevel,
 		Integer evolutionMonsterId,
 		Integer evolutionCatalystMonsterId,
 		Integer minutesToEvolve,
@@ -294,14 +294,14 @@ public class MonsterConfigPojo implements IMonsterConfig {
 		return this;
 	}
 
-	@Column(name = "max_level", precision = 3)
+	@Column(name = "max_level", precision = 5)
 	@Override
-	public Byte getMaxLevel() {
+	public Short getMaxLevel() {
 		return this.maxLevel;
 	}
 
 	@Override
-	public MonsterConfigPojo setMaxLevel(Byte maxLevel) {
+	public MonsterConfigPojo setMaxLevel(Short maxLevel) {
 		this.maxLevel = maxLevel;
 		return this;
 	}

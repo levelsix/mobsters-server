@@ -17,9 +17,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record18;
+import org.jooq.Record20;
 import org.jooq.Row;
-import org.jooq.Row18;
+import org.jooq.Row20;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -36,9 +36,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "task_stage_monster_config", schema = "mobsters")
-public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageMonsterConfigRecord> implements Record18<Integer, Integer, Integer, String, Integer, Integer, Integer, Integer, Integer, Double, Integer, Double, Double, Integer, Integer, Integer, String, String>, ITaskStageMonsterConfig {
+public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageMonsterConfigRecord> implements Record20<Integer, Integer, Integer, String, Integer, Integer, Integer, Integer, Integer, Double, Integer, Double, Double, Integer, Integer, Integer, String, String, Double, Double>, ITaskStageMonsterConfig {
 
-	private static final long serialVersionUID = -1276152199;
+	private static final long serialVersionUID = 1987749110;
 
 	/**
 	 * Setter for <code>mobsters.task_stage_monster_config.id</code>.
@@ -372,6 +372,42 @@ public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageM
 		return (String) getValue(17);
 	}
 
+	/**
+	 * Setter for <code>mobsters.task_stage_monster_config.user_toon_hp_scale</code>. used to determine the value of level, specifically in the case of cake kids.
+	 */
+	@Override
+	public TaskStageMonsterConfigRecord setUserToonHpScale(Double value) {
+		setValue(18, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.task_stage_monster_config.user_toon_hp_scale</code>. used to determine the value of level, specifically in the case of cake kids.
+	 */
+	@Column(name = "user_toon_hp_scale", precision = 12)
+	@Override
+	public Double getUserToonHpScale() {
+		return (Double) getValue(18);
+	}
+
+	/**
+	 * Setter for <code>mobsters.task_stage_monster_config.user_toon_atk_scale</code>. used to determine the value of level, specifically in the case of cake kids.
+	 */
+	@Override
+	public TaskStageMonsterConfigRecord setUserToonAtkScale(Double value) {
+		setValue(19, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.task_stage_monster_config.user_toon_atk_scale</code>. used to determine the value of level, specifically in the case of cake kids.
+	 */
+	@Column(name = "user_toon_atk_scale", precision = 12)
+	@Override
+	public Double getUserToonAtkScale() {
+		return (Double) getValue(19);
+	}
+
 	// -------------------------------------------------------------------------
 	// Primary key information
 	// -------------------------------------------------------------------------
@@ -385,23 +421,23 @@ public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageM
 	}
 
 	// -------------------------------------------------------------------------
-	// Record18 type implementation
+	// Record20 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row18<Integer, Integer, Integer, String, Integer, Integer, Integer, Integer, Integer, Double, Integer, Double, Double, Integer, Integer, Integer, String, String> fieldsRow() {
-		return (Row18) super.fieldsRow();
+	public Row20<Integer, Integer, Integer, String, Integer, Integer, Integer, Integer, Integer, Double, Integer, Double, Double, Integer, Integer, Integer, String, String, Double, Double> fieldsRow() {
+		return (Row20) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row18<Integer, Integer, Integer, String, Integer, Integer, Integer, Integer, Integer, Double, Integer, Double, Double, Integer, Integer, Integer, String, String> valuesRow() {
-		return (Row18) super.valuesRow();
+	public Row20<Integer, Integer, Integer, String, Integer, Integer, Integer, Integer, Integer, Double, Integer, Double, Double, Integer, Integer, Integer, String, String, Double, Double> valuesRow() {
+		return (Row20) super.valuesRow();
 	}
 
 	/**
@@ -552,6 +588,22 @@ public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageM
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Field<Double> field19() {
+		return TaskStageMonsterConfig.TASK_STAGE_MONSTER_CONFIG.USER_TOON_HP_SCALE;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Field<Double> field20() {
+		return TaskStageMonsterConfig.TASK_STAGE_MONSTER_CONFIG.USER_TOON_ATK_SCALE;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public Integer value1() {
 		return getId();
 	}
@@ -690,6 +742,22 @@ public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageM
 	@Override
 	public String value18() {
 		return getDefaultDialogue();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Double value19() {
+		return getUserToonHpScale();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Double value20() {
+		return getUserToonAtkScale();
 	}
 
 	/**
@@ -858,7 +926,25 @@ public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageM
 	 * {@inheritDoc}
 	 */
 	@Override
-	public TaskStageMonsterConfigRecord values(Integer value1, Integer value2, Integer value3, String value4, Integer value5, Integer value6, Integer value7, Integer value8, Integer value9, Double value10, Integer value11, Double value12, Double value13, Integer value14, Integer value15, Integer value16, String value17, String value18) {
+	public TaskStageMonsterConfigRecord value19(Double value) {
+		setUserToonHpScale(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public TaskStageMonsterConfigRecord value20(Double value) {
+		setUserToonAtkScale(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public TaskStageMonsterConfigRecord values(Integer value1, Integer value2, Integer value3, String value4, Integer value5, Integer value6, Integer value7, Integer value8, Integer value9, Double value10, Integer value11, Double value12, Double value13, Integer value14, Integer value15, Integer value16, String value17, String value18, Double value19, Double value20) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -877,6 +963,8 @@ public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageM
 		value16(value16);
 		value17(value17);
 		value18(value18);
+		value19(value19);
+		value20(value20);
 		return this;
 	}
 
@@ -907,6 +995,8 @@ public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageM
 		setDefensiveSkillId(from.getDefensiveSkillId());
 		setInitDialogue(from.getInitDialogue());
 		setDefaultDialogue(from.getDefaultDialogue());
+		setUserToonHpScale(from.getUserToonHpScale());
+		setUserToonAtkScale(from.getUserToonAtkScale());
 	}
 
 	/**
@@ -932,7 +1022,7 @@ public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageM
 	/**
 	 * Create a detached, initialised TaskStageMonsterConfigRecord
 	 */
-	public TaskStageMonsterConfigRecord(Integer id, Integer taskStageId, Integer monsterId, String monsterType, Integer expReward, Integer minCashDrop, Integer maxCashDrop, Integer minOilDrop, Integer maxOilDrop, Double puzzlePieceDropRate, Integer level, Double chanceToAppear, Double dmgMultiplier, Integer monsterIdDrop, Integer monsterDropLvl, Integer defensiveSkillId, String initDialogue, String defaultDialogue) {
+	public TaskStageMonsterConfigRecord(Integer id, Integer taskStageId, Integer monsterId, String monsterType, Integer expReward, Integer minCashDrop, Integer maxCashDrop, Integer minOilDrop, Integer maxOilDrop, Double puzzlePieceDropRate, Integer level, Double chanceToAppear, Double dmgMultiplier, Integer monsterIdDrop, Integer monsterDropLvl, Integer defensiveSkillId, String initDialogue, String defaultDialogue, Double userToonHpScale, Double userToonAtkScale) {
 		super(TaskStageMonsterConfig.TASK_STAGE_MONSTER_CONFIG);
 
 		setValue(0, id);
@@ -953,5 +1043,7 @@ public class TaskStageMonsterConfigRecord extends UpdatableRecordImpl<TaskStageM
 		setValue(15, defensiveSkillId);
 		setValue(16, initDialogue);
 		setValue(17, defaultDialogue);
+		setValue(18, userToonHpScale);
+		setValue(19, userToonAtkScale);
 	}
 }

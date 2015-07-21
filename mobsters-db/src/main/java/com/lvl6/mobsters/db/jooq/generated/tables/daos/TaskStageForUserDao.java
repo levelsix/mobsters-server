@@ -134,4 +134,11 @@ public class TaskStageForUserDao extends DAOImpl<TaskStageForUserRecord, TaskSta
 	public List<TaskStageForUserPojo> fetchByAttackedFirst(Boolean... values) {
 		return fetch(TaskStageForUser.TASK_STAGE_FOR_USER.ATTACKED_FIRST, values);
 	}
+
+	/**
+	 * Fetch records that have <code>monster_lvl IN (values)</code>
+	 */
+	public List<TaskStageForUserPojo> fetchByMonsterLvl(Integer... values) {
+		return fetch(TaskStageForUser.TASK_STAGE_FOR_USER.MONSTER_LVL, values);
+	}
 }
