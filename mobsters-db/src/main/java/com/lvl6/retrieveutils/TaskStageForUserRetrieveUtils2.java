@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.TaskStageForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.TaskStageForUserPojo;
 import com.lvl6.properties.DBConstants;
 
 @Component
@@ -35,41 +35,41 @@ public class TaskStageForUserRetrieveUtils2 {
 	}
 
 	//
-	//	public TaskStageForUser getTaskStageForUserWithId(String taskStageForUserId) {
+	//	public TaskStageForUserPojo getTaskStageForUserPojoWithId(String taskStageForUserId) {
 	//		Object[] values = { taskStageForUserId };
 	//		String query = String.format(
 	//			"select * from %s where %s=?",
 	//			TABLE_NAME, DBConstants.TASK_STAGE_FOR_USER__ID);
 	//
-	//		TaskStageForUser tsfu = null;
+	//		TaskStageForUserPojo tsfu = null;
 	//		try {
-	//			List<TaskStageForUser> tsfuList = this.jdbcTemplate
+	//			List<TaskStageForUserPojo> tsfuList = this.jdbcTemplate
 	//				.query(query, values, rowMapper);
 	//			if (null != tsfuList && !tsfuList.isEmpty()) {
 	//				tsfu = tsfuList.get(0);
 	//			}
-	//			
+	//
 	//		} catch (Exception e) {
-	//			log.error("TaskStageForUser retrieve db error.", e);
+	//			log.error("TaskStageForUserPojo retrieve db error.", e);
 	////		} finally {
 	////			DBConnection.get().close(rs, null, conn);
 	//		}
 	//		return tsfu;
 	//	}
 
-	public List<TaskStageForUser> getTaskStagesForUserWithTaskForUserId(
+	public List<TaskStageForUserPojo> getTaskStagesForUserWithTaskForUserId(
 			String taskForUserId) {
 		Object[] values = { taskForUserId };
 		String query = String.format("select * from %s where %s=?", TABLE_NAME,
 				DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID);
 
-		List<TaskStageForUser> tsfuList = null;
+		List<TaskStageForUserPojo> tsfuList = null;
 		try {
 			tsfuList = this.jdbcTemplate.query(query, values, rowMapper);
 
 		} catch (Exception e) {
-			log.error("TaskStageForUser retrieve db error.", e);
-			tsfuList = new ArrayList<TaskStageForUser>();
+			log.error("TaskStageForUserPojo retrieve db error.", e);
+			tsfuList = new ArrayList<TaskStageForUserPojo>();
 			//		} finally {
 			//			DBConnection.get().close(rs, null, conn);
 		}
@@ -81,16 +81,16 @@ public class TaskStageForUserRetrieveUtils2 {
 	//made static final class because http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/jdbc.html
 	//says so (search for "private static final")
 	private static final class UserTaskStageForClientMapper implements
-			RowMapper<TaskStageForUser> {
+			RowMapper<TaskStageForUserPojo> {
 
 		private static List<String> columnsSelected;
 
 		@Override
-		public TaskStageForUser mapRow(ResultSet rs, int rowNum)
+		public TaskStageForUserPojo mapRow(ResultSet rs, int rowNum)
 				throws SQLException {
-			TaskStageForUser tsfu = new TaskStageForUser();
+			TaskStageForUserPojo tsfu = new TaskStageForUserPojo();
 			tsfu.setId(rs.getString(DBConstants.TASK_STAGE_FOR_USER__ID));
-			tsfu.setUserTaskId(rs
+			tsfu.setTaskForUserId(rs
 					.getString(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID));
 			tsfu.setStageNum(rs
 					.getInt(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM));
@@ -122,6 +122,9 @@ public class TaskStageForUserRetrieveUtils2 {
 			tsfu.setAttackedFirst(rs
 					.getBoolean(DBConstants.TASK_STAGE_FOR_USER__ATTACKED_FIRST));
 
+			tsfu.setMonsterLvl(rs.getInt(
+					DBConstants.TASK_STAGE_FOR_USER__MONSTER_LVL));
+
 			return tsfu;
 		}
 
@@ -148,6 +151,8 @@ public class TaskStageForUserRetrieveUtils2 {
 						.add(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED);
 				columnsSelected
 						.add(DBConstants.TASK_STAGE_FOR_USER__ATTACKED_FIRST);
+				columnsSelected
+						.add(DBConstants.TASK_STAGE_FOR_USER__MONSTER_LVL);
 			}
 			return columnsSelected;
 		}

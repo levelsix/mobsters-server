@@ -158,6 +158,17 @@ public interface ITaskStageForUser extends Serializable {
 	@Column(name = "attacked_first", precision = 1)
 	public Boolean getAttackedFirst();
 
+	/**
+	 * Setter for <code>mobsters.task_stage_for_user.monster_lvl</code>. the lvl here could be different from task_stage_monster.lvl, specifically in the case of cake kids.
+	 */
+	public ITaskStageForUser setMonsterLvl(Integer value);
+
+	/**
+	 * Getter for <code>mobsters.task_stage_for_user.monster_lvl</code>. the lvl here could be different from task_stage_monster.lvl, specifically in the case of cake kids.
+	 */
+	@Column(name = "monster_lvl", precision = 10)
+	public Integer getMonsterLvl();
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------

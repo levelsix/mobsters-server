@@ -16,7 +16,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 
-	private static final long serialVersionUID = -858952596036387308L;
+	private static final long serialVersionUID = -8620812769013831704L;
 
 	private static Logger log = LoggerFactory.getLogger(User.class);
 
@@ -1662,6 +1662,22 @@ public class User implements Serializable {
 		this.tangoId = tangoId;
 	}
 
+	public int getHighestToonAtk() {
+		return highestToonAtk;
+	}
+
+	public void setHighestToonAtk(int highestToonAtk) {
+		this.highestToonAtk = highestToonAtk;
+	}
+
+	public int getHighestToonHp() {
+		return highestToonHp;
+	}
+
+	public void setHighestToonHp(int highestToonHp) {
+		this.highestToonHp = highestToonHp;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level
@@ -1698,7 +1714,9 @@ public class User implements Serializable {
 				+ ", totalStrength=" + totalStrength + ", segmentationGroup="
 				+ segmentationGroup + ", gachaCredits=" + gachaCredits
 				+ ", lastTangoGiftSentTime=" + lastTangoGiftSentTime
-				+ ", tangoId=" + tangoId + "]";
+				+ ", tangoId=" + tangoId
+				+ ", highestToonHp=" + highestToonHp
+				+ ", highestToonAtk=" + highestToonAtk + "]";
 	}
 
 }

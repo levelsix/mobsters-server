@@ -12,13 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.IapHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.daos.TaskStageHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.IapHistoryPojo;
-import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.TaskStageHistoryPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
-
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.IAPValues;
 
 @Component
@@ -81,7 +81,7 @@ public class HistoryUtils {
 			userCurrencyHistoryDao.insert(uch);
 		}
 	}
-	
+
 	public void insertUserCurrencyHistoryForGacha(String userId, Date now, int currChange,
 			int currBeforeChange, int currAfterChange, String reason, String detail,
 			UserCurrencyHistoryDao uchDao, String resourceType) {
@@ -97,7 +97,7 @@ public class HistoryUtils {
 		uch.setDetails(detail);
 		uchDao.insert(uch);
 	}
-	
+
 	public UserCurrencyHistoryPojo createUserCurrencyHistory(String userId, Date now,
 			String resourceType, int currChange,
 			int currBeforeChange, int currAfterChange, String reason, String detail)
@@ -115,15 +115,15 @@ public class HistoryUtils {
 
 		return uch;
 	}
-	
+
 	public PvpBattleHistoryPojo createPvpBattleHistory(String attackerId, String defenderId, Date clientDateTime,
 			Date battleStartTime, int attackerEloChange, int attackerEloBefore, int attackerEloAfter,
 			int defenderEloChange, int defenderEloBefore, int defenderEloAfter, int attackerPrevLeague,
 			int attackerCurLeague, int defenderPrevLeague, int defenderCurLeague, int attackerPrevRank,
 			int attackerCurRank, int defenderPrevRank, int defenderCurRank, int attackerStorageCashChange,
 			int attackerStorageOilChange, int defenderStorageCashChange, int defenderStorageOilChange,
-			int cashStolenFromStorage, int cashStolenFromGenerators, int oilStolenFromStorage, 
-			int oilStolenFromGenerators, boolean cancelled, boolean revenge, float nuPvpDmgMultiplier, 
+			int cashStolenFromStorage, int cashStolenFromGenerators, int oilStolenFromStorage,
+			int oilStolenFromGenerators, boolean cancelled, boolean revenge, float nuPvpDmgMultiplier,
 			boolean avenged, boolean attackerWon, String replayId) {
 		PvpBattleHistoryPojo pbh = new PvpBattleHistoryPojo();
 		pbh.setAttackerId(attackerId);
@@ -158,18 +158,23 @@ public class HistoryUtils {
 		pbh.setCashStolenFromGenerators(cashStolenFromGenerators);
 		pbh.setOilStolenFromStorage(oilStolenFromStorage);
 		pbh.setOilStolenFromGenerators(oilStolenFromGenerators);
-		
+
 		pbh.setCancelled(cancelled);
 		pbh.setExactedRevenge(revenge);
 
 		pbh.setPvpDmgMultiplier((double)nuPvpDmgMultiplier);
 		pbh.setClanAvenged(avenged);
-		
+
 		pbh.setAttackerWon(attackerWon);
 		if (null != replayId) {
 			pbh.setReplayId(replayId);
 		}
 		return pbh;
 	}
-		
+
+	public void insertTaskStageHistory(List<TaskStageHistoryPojo> history,
+			TaskStageHistoryDao tshDao)
+	{
+		tshDao.insert(history);
+	}
 }

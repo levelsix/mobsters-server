@@ -37,7 +37,6 @@ import com.lvl6.info.QuestForUser
 import com.lvl6.info.SalesPackage
 import com.lvl6.info.TaskForUserClientState
 import com.lvl6.info.TaskForUserOngoing
-import com.lvl6.info.TaskStageForUser
 import com.lvl6.info.User
 import com.lvl6.info.UserClan
 import com.lvl6.misc.MiscMethods
@@ -164,6 +163,7 @@ import com.lvl6.spring.AppContext
 import scala.beans.BeanProperty
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SalesScheduleConfigPojo
 import java.util.Collections
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.TaskStageForUserPojo
 
 case class StartupData(
   resBuilder: Builder,
@@ -806,12 +806,12 @@ class StartupService extends LazyLogging {
       resBuilder.setCurTask(mutp)
       val userTaskId = aTaskForUser.getId
       val taskStages = taskStageForUserRetrieveUtils.getTaskStagesForUserWithTaskForUserId(userTaskId)
-      val stageNumToTsfu = new HashMap[Integer, java.util.List[TaskStageForUser]]()
+      val stageNumToTsfu = new HashMap[Integer, java.util.List[TaskStageForUserPojo]]()
       taskStages.foreach { tsfu =>
         val stageNum = tsfu.getStageNum
         var tsfuList = stageNumToTsfu.get(stageNum)
         if (tsfuList == null) {
-          tsfuList = new ArrayList[TaskStageForUser]()
+          tsfuList = new ArrayList[TaskStageForUserPojo]()
           stageNumToTsfu.put(stageNum, tsfuList)
         }
         tsfuList.add(tsfu)
@@ -1280,8 +1280,8 @@ class StartupService extends LazyLogging {
         val salesLastPurchaseTime = user.getLastPurchaseTime();
         val now = new Date
                 logger.info("setting regular sales for user");
+        val ts = new Timestamp(now.getTime());
         if(salesLastPurchaseTime == null) {
-          val ts = new Timestamp(now.getTime());
           updateUtil.updateUserSalesLastPurchaseTime(user.getId(), ts);
         }
         else {
@@ -1291,6 +1291,13 @@ class StartupService extends LazyLogging {
               logger.info("updating user sales value, been longer than 5 days");
               updateUtil.updateUserSalesValue(user.getId(), 1, null);
               userSalesValue = 1;
+            }
+          }
+          else {
+            if(inAppPurchaseUtil.checkWhetherToTierDownSalesValue(user.getId(), userSalesValue, salesLastPurchaseTime)) {
+              userSalesValue = userSalesValue - 1;
+              user.setSalesValue(userSalesValue);
+              updateUtil.updateUserSalesValue(user.getId(), userSalesValue, ts);
             }
           }
         }

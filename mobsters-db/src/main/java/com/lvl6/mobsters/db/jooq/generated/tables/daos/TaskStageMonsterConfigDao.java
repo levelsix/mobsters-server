@@ -183,4 +183,18 @@ public class TaskStageMonsterConfigDao extends DAOImpl<TaskStageMonsterConfigRec
 	public List<TaskStageMonsterConfigPojo> fetchByDefaultDialogue(String... values) {
 		return fetch(TaskStageMonsterConfig.TASK_STAGE_MONSTER_CONFIG.DEFAULT_DIALOGUE, values);
 	}
+
+	/**
+	 * Fetch records that have <code>user_toon_hp_scale IN (values)</code>
+	 */
+	public List<TaskStageMonsterConfigPojo> fetchByUserToonHpScale(Double... values) {
+		return fetch(TaskStageMonsterConfig.TASK_STAGE_MONSTER_CONFIG.USER_TOON_HP_SCALE, values);
+	}
+
+	/**
+	 * Fetch records that have <code>user_toon_atk_scale IN (values)</code>
+	 */
+	public List<TaskStageMonsterConfigPojo> fetchByUserToonAtkScale(Double... values) {
+		return fetch(TaskStageMonsterConfig.TASK_STAGE_MONSTER_CONFIG.USER_TOON_ATK_SCALE, values);
+	}
 }

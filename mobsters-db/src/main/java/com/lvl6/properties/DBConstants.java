@@ -743,6 +743,7 @@ public class DBConstants {
 	public static final String TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
 	public static final String TASK_STAGE_FOR_USER__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
 	public static final String TASK_STAGE_FOR_USER__ATTACKED_FIRST = "attacked_first";
+	public static final String TASK_STAGE_FOR_USER__MONSTER_LVL = "monster_lvl";
 
 	/*USER TASK STAGE HISTORY TABLE*/
 	public static final String TASK_STAGE_HISTORY__ID = "task_stage_for_user_id";
@@ -1495,6 +1496,8 @@ public class DBConstants {
 	public static final String TASK_STAGE_MONSTER__DEFENSIVE_SKILL_ID = "defensive_skill_id";
 	public static final String TASK_STAGE_MONSTER__INIT_DIALOGUE = "init_dialogue";
 	public static final String TASK_STAGE_MONSTER__DEFAULT_DIALOGUE = "default_dialogue";
+	public static final String TASK_STAGE_MONSTER__USER_TOON_HP_SCALE = "user_toon_hp_scale";
+	public static final String TASK_STAGE_MONSTER__USER_TOON_ATK_SCALE = "user_toon_atk_scale";
 
 	public static final String TASK_STAGE__ID = GENERIC__ID;
 	public static final String TASK_STAGE__TASK_ID = "task_id";

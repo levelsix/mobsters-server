@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class TaskStageMonster implements Serializable {
 
-	private static final long serialVersionUID = 2948530539491033163L;
+	private static final long serialVersionUID = 3961242446373775607L;
 
 	private int id;
 	private int stageId;
@@ -25,6 +25,8 @@ public class TaskStageMonster implements Serializable {
 	private int defensiveSkillId;
 	private String initDialogue;
 	private String defaultDialogue;
+	private float userToonHpScale;//used to determine the value of level, specifically in the case of cake kids.
+	private float userToonAtkScale;//used to determine the value of level, specifically in the case of cake kids.
 
 	//non persisted information
 	private int offensiveSkillId;
@@ -39,7 +41,8 @@ public class TaskStageMonster implements Serializable {
 			float puzzlePieceDropRate, int level, float chanceToAppear,
 			float dmgMultiplier, int monsterIdDrop, int monsterDropLvl,
 			int defensiveSkillId, int offensiveSkillId, String initDialogue,
-			String defaultDialogue, Dialogue initD, Dialogue defaultD) {
+			String defaultDialogue, Dialogue initD, Dialogue defaultD,
+			float userToonHpScale, float userToonAtkScale) {
 		super();
 		this.id = id;
 		this.stageId = stageId;
@@ -62,6 +65,8 @@ public class TaskStageMonster implements Serializable {
 		this.offensiveSkillId = offensiveSkillId;
 		this.initD = initD;
 		this.defaultD = defaultD;
+		this.userToonHpScale = userToonHpScale;
+		this.userToonAtkScale = userToonAtkScale;
 	}
 
 	//covenience methods--------------------------------------------------------
@@ -285,6 +290,22 @@ public class TaskStageMonster implements Serializable {
 		this.defaultD = defaultD;
 	}
 
+	public float getUserToonHpScale() {
+		return userToonHpScale;
+	}
+
+	public void setUserToonHpScale(int userToonHpScale) {
+		this.userToonHpScale = userToonHpScale;
+	}
+
+	public float getUserToonAtkScale() {
+		return userToonAtkScale;
+	}
+
+	public void setUserToonAtkScale(int userToonAtkScale) {
+		this.userToonAtkScale = userToonAtkScale;
+	}
+
 	@Override
 	public String toString() {
 		return "TaskStageMonster [id=" + id + ", stageId=" + stageId
@@ -299,7 +320,9 @@ public class TaskStageMonster implements Serializable {
 				+ defensiveSkillId + ", initDialogue=" + initDialogue
 				+ ", defaultDialogue=" + defaultDialogue
 				+ ", offensiveSkillId=" + offensiveSkillId + ", initD=" + initD
-				+ ", defaultD=" + defaultD + "]";
+				+ ", defaultD=" + defaultD +
+				", userToonHpScale=" + userToonHpScale
+				+ ", userToonAtkScale=" + userToonAtkScale + "]";
 	}
 
 }

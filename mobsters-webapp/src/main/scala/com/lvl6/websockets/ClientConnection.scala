@@ -336,8 +336,12 @@ class ClientConnection extends GameEventHandler with LazyLogging with MessageLis
   def changeClan(newClanId:String)={
     removeRabbitListener(clanIdListener)
     clanIdListener = None
-    clanId = Some(newClanId)
-    setupRabbitListeners
+    if(newClanId != null && !newClanId.isEmpty()) {
+      clanId = Some(newClanId)
+ 		  setupRabbitListeners
+    }else {
+      clanId = None
+    }
   }
   
   def setupRabbitListeners= {

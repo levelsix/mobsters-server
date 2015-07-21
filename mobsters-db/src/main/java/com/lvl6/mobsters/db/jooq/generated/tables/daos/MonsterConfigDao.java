@@ -131,7 +131,7 @@ public class MonsterConfigDao extends DAOImpl<MonsterConfigRecord, MonsterConfig
 	/**
 	 * Fetch records that have <code>max_level IN (values)</code>
 	 */
-	public List<MonsterConfigPojo> fetchByMaxLevel(Byte... values) {
+	public List<MonsterConfigPojo> fetchByMaxLevel(Short... values) {
 		return fetch(MonsterConfig.MONSTER_CONFIG.MAX_LEVEL, values);
 	}
 
