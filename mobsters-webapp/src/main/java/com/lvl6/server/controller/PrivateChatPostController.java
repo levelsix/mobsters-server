@@ -395,7 +395,7 @@ public class PrivateChatPostController extends EventController {
 					+ " tries to post on wall with owner " + recipientId);
 			return false;
 		}
-		Set<Integer> banned = bannedUserRetrieveUtils.getAllBannedUsers();
+		Set<String> banned = bannedUserRetrieveUtils.getAllBannedUsers();
 		if (null != banned && banned.contains(posterId)) {
 			resBuilder.setStatus(ResponseStatus.FAIL_BANNED);
 			log.warn("banned user tried to send a post. posterId=" + posterId);

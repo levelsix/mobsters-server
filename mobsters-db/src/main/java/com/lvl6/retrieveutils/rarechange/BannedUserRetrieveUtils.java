@@ -20,11 +20,11 @@ public class BannedUserRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(BannedUserRetrieveUtils.class);
 
-	private static Set<Integer> userIds;
+	private static Set<String> userIds;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_BANNED_USER;
 
-	public Set<Integer> getAllBannedUsers() {
+	public Set<String> getAllBannedUsers() {
 		log.debug("retrieving all banned users placed in a set");
 		if (userIds == null) {
 			setStaticBannedUsers();
@@ -45,11 +45,11 @@ public class BannedUserRetrieveUtils {
 					try {
 						rs.last();
 						rs.beforeFirst();
-						Set<Integer> userIdsTemp = new HashSet<Integer>();
+						Set<String> userIdsTemp = new HashSet<String>();
 						while (rs.next()) {
-							Integer profanityTerm = convertRSRowToBannedUser(rs);
-							if (null != profanityTerm)
-								userIdsTemp.add(profanityTerm);
+							String mutedUserId = convertRSRowToBannedUser(rs);
+							if (null != mutedUserId)
+								userIdsTemp.add(mutedUserId);
 						}
 						userIds = userIdsTemp;
 					} catch (SQLException e) {
@@ -71,10 +71,10 @@ public class BannedUserRetrieveUtils {
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private Integer convertRSRowToBannedUser(ResultSet rs)
+	private String convertRSRowToBannedUser(ResultSet rs)
 			throws SQLException {
-		Integer profanityTerm = rs.getInt(DBConstants.BANNED_USER__USER_ID);
+		String userId = rs.getString(DBConstants.BANNED_USER__USER_ID);
 
-		return profanityTerm;
+		return userId;
 	}
 }
