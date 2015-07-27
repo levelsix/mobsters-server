@@ -103,7 +103,7 @@
 		<!-- -->
 
 		<lvl6.application.version.superNumber>1</lvl6.application.version.superNumber>
-		<lvl6.application.version.majorNumber>6</lvl6.application.version.majorNumber>
+		<lvl6.application.version.majorNumber>8</lvl6.application.version.majorNumber>
 		<lvl6.application.version.minorNumber>3</lvl6.application.version.minorNumber>
 		<!-- <lvl6.app.version>${lvl6.application.version.superNumber}.${lvl6.application.version.majorNumber}.${lvl6.application.version.minorNumber}</lvl6.app.version> -->
 
