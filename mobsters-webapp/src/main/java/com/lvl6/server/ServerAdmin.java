@@ -26,6 +26,7 @@ import com.lvl6.events.response.PurgeClientStaticDataResponseEvent;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
+import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils2;
 import com.lvl6.server.events.ApplicationMode;
 import com.lvl6.server.eventsender.EventWriter;
@@ -93,6 +94,9 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 
 	@Autowired
 	protected HazelcastInstance hazel;
+	
+	@Autowired
+	protected HazelcastPvpUtil hazelcastPvpUtil;
 	
 //	@Autowired
 //	protected LeaderBoardImpl leaderboard;
@@ -171,6 +175,11 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 			log.error("Could not obtain lock for reloading instances", e);
 		}
 	}
+	
+	public void reloadPvpUsers() {
+		hazelcastPvpUtil.reloadPvpUserMap();
+	}
+	
 //
 //	public void reloadLeaderboard() {
 //		leaderboard.reload();
