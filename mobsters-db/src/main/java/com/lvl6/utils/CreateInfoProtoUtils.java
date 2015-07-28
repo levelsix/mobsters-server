@@ -31,6 +31,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniJobRefreshItemConfig
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.TaskStageForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.AchievementStuffProto.AchievementProto;
@@ -4652,7 +4653,7 @@ public class CreateInfoProtoUtils {
 	//going by stage number instead of id, maybe because it's human friendly
 	//when looking at the db
 	public TaskStageProto createTaskStageProto(int taskId, int stageNum,
-			List<TaskStageForUser> monsters) {
+			List<TaskStageForUserPojo> monsters) {
 		TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
 
 		TaskStage ts = taskStageRetrieveUtils.getTaskStageForTaskStageId(
@@ -4661,7 +4662,7 @@ public class CreateInfoProtoUtils {
 		tspb.setStageId(taskStageId);
 		tspb.setAttackerAlwaysHitsFirst(ts.isAttackerAlwaysHitsFirst());
 
-		for (TaskStageForUser tsfu : monsters) {
+		for (TaskStageForUserPojo tsfu : monsters) {
 			TaskStageMonsterProto tsmp = createTaskStageMonsterProto(tsfu);
 			tspb.addStageMonsters(tsmp);
 		}
@@ -4864,13 +4865,13 @@ public class CreateInfoProtoUtils {
 	 */
 
 	public TaskStageMonsterProto createTaskStageMonsterProto(
-			TaskStageForUser tsfu) {
+			TaskStageForUserPojo tsfu) {
 		int tsmId = tsfu.getTaskStageMonsterId();
 		TaskStageMonster tsm = taskStageMonsterRetrieveUtils
 				.getTaskStageMonsterForId(tsmId);
 
 		int tsmMonsterId = tsm.getMonsterId();
-		boolean didPieceDrop = tsfu.isMonsterPieceDropped();
+		boolean didPieceDrop = tsfu.getMonsterPieceDropped();
 		//check if monster id exists
 		if (didPieceDrop) {
 			Monster mon = monsterRetrieveUtils
@@ -4897,7 +4898,8 @@ public class CreateInfoProtoUtils {
 		bldr.setPuzzlePieceDropped(didPieceDrop);
 		bldr.setExpReward(tsfu.getExpGained());
 
-		bldr.setLevel(tsm.getLevel());
+		bldr.setLevel(tsfu.getMonsterLvl());
+//		bldr.setLevel(tsm.getLevel());
 		bldr.setDmgMultiplier(tsm.getDmgMultiplier());
 
 		int itemId = tsfu.getItemIdDropped();
@@ -4911,8 +4913,17 @@ public class CreateInfoProtoUtils {
 			bldr.setItemId(itemId);
 		}
 
-		if (tsm.getMonsterIdDrop() > 0) {
-			bldr.setPuzzlePieceMonsterId(tsm.getMonsterIdDrop());
+
+		int monsterIdDrop = tsm.getMonsterIdDrop();
+		if (monsterIdDrop > 0) {
+			Monster mon = monsterRetrieveUtils
+					.getMonsterForMonsterId(monsterIdDrop);
+			if (null == mon) {
+				throw new RuntimeException(
+						"Non existent monsterIdDrop for userTask=" + tsfu);
+			}
+
+			bldr.setPuzzlePieceMonsterId(monsterIdDrop);
 			bldr.setPuzzlePieceMonsterDropLvl(tsm.getMonsterDropLvl());
 		}
 

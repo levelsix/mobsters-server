@@ -98,9 +98,17 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		int retrieverRank = leaderBoard.getUserRank(retrieverUserId);
 		StrengthLeaderBoardProto.Builder b = StrengthLeaderBoardProto.newBuilder();
 		b.setRank(retrieverRank);
-		resBuilder.setSenderLeaderBoardInfo(b.build());
 		
-		resBuilder.addAllLeaderBoardInfo(leaderBoard.getStrengths(minRank, maxRank));
+		List<StrengthLeaderBoardProto> leaderBoardProtos = leaderBoard.getStrengths(minRank, maxRank);
+		resBuilder.addAllLeaderBoardInfo(leaderBoardProtos);
+		
+		for(StrengthLeaderBoardProto slbp : leaderBoardProtos) {
+			if(slbp.getMup().getUserUuid().equals(retrieverUserId)) {
+				retrieverRank = slbp.getRank();
+				b.setRank(retrieverRank);
+			}
+		}
+		resBuilder.setSenderLeaderBoardInfo(b.build());
 	}
 
 

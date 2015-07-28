@@ -236,6 +236,28 @@ public interface ITaskStageMonsterConfig extends Serializable {
 	@Size(max = 65535)
 	public String getDefaultDialogue();
 
+	/**
+	 * Setter for <code>mobsters.task_stage_monster_config.user_toon_hp_scale</code>. used to determine the value of level, specifically in the case of cake kids.
+	 */
+	public ITaskStageMonsterConfig setUserToonHpScale(Double value);
+
+	/**
+	 * Getter for <code>mobsters.task_stage_monster_config.user_toon_hp_scale</code>. used to determine the value of level, specifically in the case of cake kids.
+	 */
+	@Column(name = "user_toon_hp_scale", precision = 12)
+	public Double getUserToonHpScale();
+
+	/**
+	 * Setter for <code>mobsters.task_stage_monster_config.user_toon_atk_scale</code>. used to determine the value of level, specifically in the case of cake kids.
+	 */
+	public ITaskStageMonsterConfig setUserToonAtkScale(Double value);
+
+	/**
+	 * Getter for <code>mobsters.task_stage_monster_config.user_toon_atk_scale</code>. used to determine the value of level, specifically in the case of cake kids.
+	 */
+	@Column(name = "user_toon_atk_scale", precision = 12)
+	public Double getUserToonAtkScale();
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------

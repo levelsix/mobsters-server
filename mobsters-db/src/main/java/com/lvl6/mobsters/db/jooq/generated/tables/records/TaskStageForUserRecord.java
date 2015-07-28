@@ -17,9 +17,9 @@ import javax.validation.constraints.Size;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record11;
+import org.jooq.Record12;
 import org.jooq.Row;
-import org.jooq.Row11;
+import org.jooq.Row12;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -36,9 +36,9 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Entity
 @Table(name = "task_stage_for_user", schema = "mobsters")
-public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUserRecord> implements Record11<String, String, Integer, Integer, String, Integer, Integer, Integer, Boolean, Integer, Boolean>, ITaskStageForUser {
+public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUserRecord> implements Record12<String, String, Integer, Integer, String, Integer, Integer, Integer, Boolean, Integer, Boolean, Integer>, ITaskStageForUser {
 
-	private static final long serialVersionUID = -1560528745;
+	private static final long serialVersionUID = -106273108;
 
 	/**
 	 * Setter for <code>mobsters.task_stage_for_user.id</code>.
@@ -245,6 +245,24 @@ public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUser
 		return (Boolean) getValue(10);
 	}
 
+	/**
+	 * Setter for <code>mobsters.task_stage_for_user.monster_lvl</code>. the lvl here could be different from task_stage_monster.lvl, specifically in the case of cake kids.
+	 */
+	@Override
+	public TaskStageForUserRecord setMonsterLvl(Integer value) {
+		setValue(11, value);
+		return this;
+	}
+
+	/**
+	 * Getter for <code>mobsters.task_stage_for_user.monster_lvl</code>. the lvl here could be different from task_stage_monster.lvl, specifically in the case of cake kids.
+	 */
+	@Column(name = "monster_lvl", precision = 10)
+	@Override
+	public Integer getMonsterLvl() {
+		return (Integer) getValue(11);
+	}
+
 	// -------------------------------------------------------------------------
 	// Primary key information
 	// -------------------------------------------------------------------------
@@ -258,23 +276,23 @@ public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUser
 	}
 
 	// -------------------------------------------------------------------------
-	// Record11 type implementation
+	// Record12 type implementation
 	// -------------------------------------------------------------------------
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row11<String, String, Integer, Integer, String, Integer, Integer, Integer, Boolean, Integer, Boolean> fieldsRow() {
-		return (Row11) super.fieldsRow();
+	public Row12<String, String, Integer, Integer, String, Integer, Integer, Integer, Boolean, Integer, Boolean, Integer> fieldsRow() {
+		return (Row12) super.fieldsRow();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Row11<String, String, Integer, Integer, String, Integer, Integer, Integer, Boolean, Integer, Boolean> valuesRow() {
-		return (Row11) super.valuesRow();
+	public Row12<String, String, Integer, Integer, String, Integer, Integer, Integer, Boolean, Integer, Boolean, Integer> valuesRow() {
+		return (Row12) super.valuesRow();
 	}
 
 	/**
@@ -369,6 +387,14 @@ public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUser
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Field<Integer> field12() {
+		return TaskStageForUser.TASK_STAGE_FOR_USER.MONSTER_LVL;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String value1() {
 		return getId();
 	}
@@ -451,6 +477,14 @@ public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUser
 	@Override
 	public Boolean value11() {
 		return getAttackedFirst();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer value12() {
+		return getMonsterLvl();
 	}
 
 	/**
@@ -556,7 +590,16 @@ public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUser
 	 * {@inheritDoc}
 	 */
 	@Override
-	public TaskStageForUserRecord values(String value1, String value2, Integer value3, Integer value4, String value5, Integer value6, Integer value7, Integer value8, Boolean value9, Integer value10, Boolean value11) {
+	public TaskStageForUserRecord value12(Integer value) {
+		setMonsterLvl(value);
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public TaskStageForUserRecord values(String value1, String value2, Integer value3, Integer value4, String value5, Integer value6, Integer value7, Integer value8, Boolean value9, Integer value10, Boolean value11, Integer value12) {
 		value1(value1);
 		value2(value2);
 		value3(value3);
@@ -568,6 +611,7 @@ public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUser
 		value9(value9);
 		value10(value10);
 		value11(value11);
+		value12(value12);
 		return this;
 	}
 
@@ -591,6 +635,7 @@ public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUser
 		setMonsterPieceDropped(from.getMonsterPieceDropped());
 		setItemIdDropped(from.getItemIdDropped());
 		setAttackedFirst(from.getAttackedFirst());
+		setMonsterLvl(from.getMonsterLvl());
 	}
 
 	/**
@@ -616,7 +661,7 @@ public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUser
 	/**
 	 * Create a detached, initialised TaskStageForUserRecord
 	 */
-	public TaskStageForUserRecord(String id, String taskForUserId, Integer stageNum, Integer taskStageMonsterId, String monsterType, Integer expGained, Integer cashGained, Integer oilGained, Boolean monsterPieceDropped, Integer itemIdDropped, Boolean attackedFirst) {
+	public TaskStageForUserRecord(String id, String taskForUserId, Integer stageNum, Integer taskStageMonsterId, String monsterType, Integer expGained, Integer cashGained, Integer oilGained, Boolean monsterPieceDropped, Integer itemIdDropped, Boolean attackedFirst, Integer monsterLvl) {
 		super(TaskStageForUser.TASK_STAGE_FOR_USER);
 
 		setValue(0, id);
@@ -630,5 +675,6 @@ public class TaskStageForUserRecord extends UpdatableRecordImpl<TaskStageForUser
 		setValue(8, monsterPieceDropped);
 		setValue(9, itemIdDropped);
 		setValue(10, attackedFirst);
+		setValue(11, monsterLvl);
 	}
 }

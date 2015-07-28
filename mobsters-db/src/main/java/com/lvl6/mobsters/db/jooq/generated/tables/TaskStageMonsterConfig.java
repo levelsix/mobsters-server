@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TaskStageMonsterConfig extends TableImpl<TaskStageMonsterConfigRecord> {
 
-	private static final long serialVersionUID = -478754535;
+	private static final long serialVersionUID = 1955424093;
 
 	/**
 	 * The reference instance of <code>mobsters.task_stage_monster_config</code>
@@ -138,6 +138,16 @@ public class TaskStageMonsterConfig extends TableImpl<TaskStageMonsterConfigReco
 	 * The column <code>mobsters.task_stage_monster_config.default_dialogue</code>.
 	 */
 	public final TableField<TaskStageMonsterConfigRecord, String> DEFAULT_DIALOGUE = createField("default_dialogue", org.jooq.impl.SQLDataType.CLOB, this, "");
+
+	/**
+	 * The column <code>mobsters.task_stage_monster_config.user_toon_hp_scale</code>. used to determine the value of level, specifically in the case of cake kids.
+	 */
+	public final TableField<TaskStageMonsterConfigRecord, Double> USER_TOON_HP_SCALE = createField("user_toon_hp_scale", org.jooq.impl.SQLDataType.FLOAT.defaulted(true), this, "used to determine the value of level, specifically in the case of cake kids.");
+
+	/**
+	 * The column <code>mobsters.task_stage_monster_config.user_toon_atk_scale</code>. used to determine the value of level, specifically in the case of cake kids.
+	 */
+	public final TableField<TaskStageMonsterConfigRecord, Double> USER_TOON_ATK_SCALE = createField("user_toon_atk_scale", org.jooq.impl.SQLDataType.FLOAT.defaulted(true), this, "used to determine the value of level, specifically in the case of cake kids.");
 
 	/**
 	 * Create a <code>mobsters.task_stage_monster_config</code> table reference

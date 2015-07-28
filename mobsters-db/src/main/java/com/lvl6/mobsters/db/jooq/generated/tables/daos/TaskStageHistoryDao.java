@@ -148,4 +148,11 @@ public class TaskStageHistoryDao extends DAOImpl<TaskStageHistoryRecord, TaskSta
 	public List<TaskStageHistoryPojo> fetchByAttackedFirst(Boolean... values) {
 		return fetch(TaskStageHistory.TASK_STAGE_HISTORY.ATTACKED_FIRST, values);
 	}
+
+	/**
+	 * Fetch records that have <code>monster_lvl IN (values)</code>
+	 */
+	public List<TaskStageHistoryPojo> fetchByMonsterLvl(Integer... values) {
+		return fetch(TaskStageHistory.TASK_STAGE_HISTORY.MONSTER_LVL, values);
+	}
 }

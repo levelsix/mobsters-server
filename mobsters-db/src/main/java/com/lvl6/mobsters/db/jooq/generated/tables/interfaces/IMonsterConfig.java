@@ -151,13 +151,13 @@ public interface IMonsterConfig extends Serializable {
 	/**
 	 * Setter for <code>mobsters.monster_config.max_level</code>.
 	 */
-	public IMonsterConfig setMaxLevel(Byte value);
+	public IMonsterConfig setMaxLevel(Short value);
 
 	/**
 	 * Getter for <code>mobsters.monster_config.max_level</code>.
 	 */
-	@Column(name = "max_level", precision = 3)
-	public Byte getMaxLevel();
+	@Column(name = "max_level", precision = 5)
+	public Short getMaxLevel();
 
 	/**
 	 * Setter for <code>mobsters.monster_config.evolution_monster_id</code>.

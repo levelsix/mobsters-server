@@ -19,17 +19,16 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndDungeonRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskMapElement;
-import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.TaskStageForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.EndDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto;
@@ -104,7 +103,7 @@ public class EndDungeonController extends EventController {
 
 	@Autowired
 	protected MiscMethods miscMethods;
-	
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
@@ -154,7 +153,7 @@ public class EndDungeonController extends EventController {
 
 		UUID userUuid = null;
 		boolean invalidUuids = true;
-		
+
 		if(reqProto.getClientTime() == 0) {
 			resBuilder.setStatus(ResponseStatus.FAIL_CLIENT_TIME_NOT_SENT);
 			log.error("clientTime not sent");
@@ -164,12 +163,12 @@ public class EndDungeonController extends EventController {
 			responses.normalResponseEvents().add(resEvent);
 			return;
 		}
-		
-		if(timeUtils.numMinutesDifference(currentDate, new Date()) > 
+
+		if(timeUtils.numMinutesDifference(currentDate, new Date()) >
 		ControllerConstants.CLIENT_TIME_MINUTES_CONSTANT_CHECK) {
 			resBuilder.setStatus(ResponseStatus.FAIL_TIME_OUT_OF_SYNC);
 			log.error("time is out of sync > 2 hrs for userId {}", senderProto.getUserUuid());
-			EndDungeonResponseEvent resEvent = 
+			EndDungeonResponseEvent resEvent =
 					new EndDungeonResponseEvent(senderProto.getUserUuid());
 			resEvent.setResponseProto(resBuilder.build());
 			resEvent.setTag(event.getTag());
@@ -241,7 +240,7 @@ public class EndDungeonController extends EventController {
 			if (successful) {
 				String taskForUserId = ut.getId();
 				//the things to delete and store into history
-				List<TaskStageForUser> tsfuList = taskStageForUserRetrieveUtil
+				List<TaskStageForUserPojo> tsfuList = taskStageForUserRetrieveUtil
 						.getTaskStagesForUserWithTaskForUserId(taskForUserId);
 
 				//delete from task_stage_for_user and put into task_stage_history,
@@ -521,7 +520,7 @@ public class EndDungeonController extends EventController {
 	}
 
 	//
-	private void recordStageHistory(List<TaskStageForUser> tsfuList,
+	private void recordStageHistory(List<TaskStageForUserPojo> tsfuList,
 			Set<String> droplessTsfuIds,
 			Map<Integer, Integer> monsterIdToNumPieces,
 			Map<Integer, Map<Integer, Integer>> monsterIdToLvlToQuantity) {
@@ -544,9 +543,9 @@ public class EndDungeonController extends EventController {
 		List<Boolean> attackedFirstList = new ArrayList<Boolean>();
 
 		for (int i = 0; i < tsfuList.size(); i++) {
-			TaskStageForUser tsfu = tsfuList.get(i);
+			TaskStageForUserPojo tsfu = tsfuList.get(i);
 			userTaskStageId.add(tsfu.getId());
-			userTaskId.add(tsfu.getUserTaskId());
+			userTaskId.add(tsfu.getTaskForUserId());
 			stageNum.add(tsfu.getStageNum());
 
 			int tsmId = tsfu.getTaskStageMonsterId();
@@ -555,7 +554,7 @@ public class EndDungeonController extends EventController {
 			expGained.add(tsfu.getExpGained());
 			cashGained.add(tsfu.getCashGained());
 			oilGained.add(tsfu.getOilGained());
-			boolean dropped = tsfu.isMonsterPieceDropped();
+			boolean dropped = tsfu.getMonsterPieceDropped();
 			if (droplessTsfuIds.contains(tsfu.getId())) {
 				dropped = false;
 			}
@@ -567,7 +566,7 @@ public class EndDungeonController extends EventController {
 					.getTaskStageMonsterForId(tsmId);
 			monsterIdDrops.add(tsm.getMonsterIdDrop());
 			monsterDropLvls.add(tsm.getMonsterDropLvl());
-			attackedFirstList.add(tsfu.isAttackedFirst());
+			attackedFirstList.add(tsfu.getAttackedFirst());
 
 			if (!dropped) {
 				//not going to keep track of non dropped monster pieces

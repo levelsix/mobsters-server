@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "task_stage_for_user", schema = "mobsters")
 public class TaskStageForUserPojo implements ITaskStageForUser {
 
-	private static final long serialVersionUID = 2046707309;
+	private static final long serialVersionUID = -554170964;
 
 	private String  id;
 	private String  taskForUserId;
@@ -43,6 +43,7 @@ public class TaskStageForUserPojo implements ITaskStageForUser {
 	private Boolean monsterPieceDropped;
 	private Integer itemIdDropped;
 	private Boolean attackedFirst;
+	private Integer monsterLvl;
 
 	public TaskStageForUserPojo() {}
 
@@ -58,6 +59,7 @@ public class TaskStageForUserPojo implements ITaskStageForUser {
 		this.monsterPieceDropped = value.monsterPieceDropped;
 		this.itemIdDropped = value.itemIdDropped;
 		this.attackedFirst = value.attackedFirst;
+		this.monsterLvl = value.monsterLvl;
 	}
 
 	public TaskStageForUserPojo(
@@ -71,7 +73,8 @@ public class TaskStageForUserPojo implements ITaskStageForUser {
 		Integer oilGained,
 		Boolean monsterPieceDropped,
 		Integer itemIdDropped,
-		Boolean attackedFirst
+		Boolean attackedFirst,
+		Integer monsterLvl
 	) {
 		this.id = id;
 		this.taskForUserId = taskForUserId;
@@ -84,6 +87,7 @@ public class TaskStageForUserPojo implements ITaskStageForUser {
 		this.monsterPieceDropped = monsterPieceDropped;
 		this.itemIdDropped = itemIdDropped;
 		this.attackedFirst = attackedFirst;
+		this.monsterLvl = monsterLvl;
 	}
 
 	@Id
@@ -223,6 +227,18 @@ public class TaskStageForUserPojo implements ITaskStageForUser {
 		return this;
 	}
 
+	@Column(name = "monster_lvl", precision = 10)
+	@Override
+	public Integer getMonsterLvl() {
+		return this.monsterLvl;
+	}
+
+	@Override
+	public TaskStageForUserPojo setMonsterLvl(Integer monsterLvl) {
+		this.monsterLvl = monsterLvl;
+		return this;
+	}
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -243,6 +259,7 @@ public class TaskStageForUserPojo implements ITaskStageForUser {
 		setMonsterPieceDropped(from.getMonsterPieceDropped());
 		setItemIdDropped(from.getItemIdDropped());
 		setAttackedFirst(from.getAttackedFirst());
+		setMonsterLvl(from.getMonsterLvl());
 	}
 
 	/**

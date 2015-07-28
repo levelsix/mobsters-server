@@ -34,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MonsterConfig extends TableImpl<MonsterConfigRecord> {
 
-	private static final long serialVersionUID = -98142399;
+	private static final long serialVersionUID = -118269632;
 
 	/**
 	 * The reference instance of <code>mobsters.monster_config</code>
@@ -102,7 +102,7 @@ public class MonsterConfig extends TableImpl<MonsterConfigRecord> {
 	/**
 	 * The column <code>mobsters.monster_config.max_level</code>.
 	 */
-	public final TableField<MonsterConfigRecord, Byte> MAX_LEVEL = createField("max_level", org.jooq.impl.SQLDataType.TINYINT.defaulted(true), this, "");
+	public final TableField<MonsterConfigRecord, Short> MAX_LEVEL = createField("max_level", org.jooq.impl.SQLDataType.SMALLINT.defaulted(true), this, "");
 
 	/**
 	 * The column <code>mobsters.monster_config.evolution_monster_id</code>.

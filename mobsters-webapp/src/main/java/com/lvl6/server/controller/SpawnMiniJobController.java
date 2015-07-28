@@ -207,10 +207,10 @@ public class SpawnMiniJobController extends EventController {
 			} catch (Exception e2) {
 				log.error("exception2 in SpawnMiniJobController processEvent",
 						e);
-			} finally {
-				if (gotLock) {
-					locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
-				}
+			}
+		} finally {
+			if (gotLock) {
+				locker.unlockPlayer(userUuid, this.getClass().getSimpleName());
 			}
 		}
 	}

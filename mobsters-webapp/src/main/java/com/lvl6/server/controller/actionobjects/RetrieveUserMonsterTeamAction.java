@@ -25,10 +25,11 @@ import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.PvpLeagueForUser;
 import com.lvl6.info.ResearchForUser;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleCountForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterSnapshotProto.SnapshotType;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
 import com.lvl6.pvp.PvpUser;
@@ -40,6 +41,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.PvpBattleCountForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -62,6 +64,8 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 	@Autowired protected MonsterStuffUtils monsterStuffUtils;
 	@Autowired protected ServerToggleRetrieveUtils serverToggleRetrieveUtil;
 	@Autowired protected MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils;
+	@Autowired protected PvpBattleCountForUserDao2 pbcfuDao;
+	
 
 	public RetrieveUserMonsterTeamAction(
 			String retrieverUserId,
@@ -77,7 +81,8 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 			ResearchForUserRetrieveUtils researchForUserRetrieveUtil,
 			MonsterStuffUtils monsterStuffUtils,
 			ServerToggleRetrieveUtils serverToggleRetrieveUtil,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils)
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			PvpBattleCountForUserDao2 pbcfuDao)
 	{
 		super();
 		this.retrieverUserId = retrieverUserId;
@@ -94,6 +99,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 		this.monsterStuffUtils = monsterStuffUtils;
 		this.serverToggleRetrieveUtil = serverToggleRetrieveUtil;
 		this.monsterLevelInfoRetrieveUtils = monsterLevelInfoRetrieveUtils;
+		this.pbcfuDao = pbcfuDao;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -180,11 +186,16 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 		userIdsExceptRetriever.remove(retrieverUserId);
 		allButRetrieverUserIdToUserMonsters = selectMonstersForUsers(userIdsExceptRetriever);
 
+		//retrieve pvpbattlecountforuser info
+		List<PvpBattleCountForUserPojo> battleCount = 
+				pbcfuDao.getPvpBattleCountBetweenUsers(retrieverUserId, userIdsExceptRetriever);
+		
 		//calculate the PvpDrops
 		log.info("calculating the Pvp drops");
 		allButRetrieverUserIdToUserMonsterIdToDroppedId = monsterStuffUtils
 				.calculatePvpDrops(allButRetrieverUserIdToUserMonsters,
-						monsterLevelInfoRetrieveUtils);
+						monsterLevelInfoRetrieveUtils, retrieverUserId,
+						battleCount);
 
 		//calculate the PvpBattleOutcome
 		StartUpResource sup = new StartUpResource(userRetrieveUtil,
@@ -211,7 +222,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 			User u = userIdToUser.get(userId);
 			PvpBattleOutcome potentialResult = new PvpBattleOutcome(
 					retrieveUser, retrieverElo, u, pu.getElo(),
-					serverToggleRetrieveUtil);
+					serverToggleRetrieveUtil, battleCount);
 
 			allButRetrieverUserIdToCashLost.put(userId,
 					potentialResult.getUnsignedCashAttackerWins());
@@ -245,11 +256,12 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 			cmtdIdToAllButRetrieverUserId.put(cmtdId, userId);
 
 			if (allButRetrieverUserIdToCmtd.containsKey(userId)) {
-				log.error("fuck fuck fuck, cmtd={}, existing={}",
-						cmtd, allButRetrieverUserIdToCmtd.get(userId));
+				if(allButRetrieverUserIdToCmtd.get(userId).getClanId().equals(cmtd.getClanId())) {
+					log.error("fuck fuck fuck, cmtd={}, existing={}",
+							cmtd, allButRetrieverUserIdToCmtd.get(userId));
+				}
 			}
 			allButRetrieverUserIdToCmtd.put(userId, cmtd);
-
 		}
 
 		//make it easier to access (via userId) later on
@@ -278,7 +290,8 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 		if (!allButRetrieverUserIdToMsfu.isEmpty()) {
 			allButRetrieverUserIdToMsfuMonsterDropId = monsterStuffUtils
 					.calculateMsfuPvpDrops(allButRetrieverUserIdToMsfu,
-							monsterLevelInfoRetrieveUtils);
+							monsterLevelInfoRetrieveUtils, retrieverUserId,
+							null);
 		} else {
 			allButRetrieverUserIdToMsfuMonsterDropId = new HashMap<String, Integer>();
 		}

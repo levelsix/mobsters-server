@@ -211,7 +211,7 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 //							lastChatTimeContainer,
 //							clan.isRequestToJoinRequired());
 
-					log.info(String.format("ClanDataProto=%s", cdp));
+					log.debug("ClanDataProto={}", cdp);
 					setResponseBuilderStuff(resBuilder, clan, aorrtja.getClanSizeList());
 				}
 
@@ -230,22 +230,22 @@ public class ApproveOrRejectRequestToJoinClanController extends EventController 
 			if (!ResponseStatus.SUCCESS.equals(resBuilder.getStatus())) {
 				responses.normalResponseEvents().add(resEvent);
 			} else {
-				//if success to clan and the requester
+				//if success send to clan, not new guy since new guy is in clan
 				responses.clanResponseEvents().add(new ClanResponseEvent(resEvent, clanId, false));
 				if(accept) {
 					responses.setUserId(userId);
 					responses.changeClansMap().put(requesterId,clanId);
+				} else {
+					// Send message to the new guy if reject
+					ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 = new ApproveOrRejectRequestToJoinClanResponseEvent(
+							requesterId);
+					resEvent2
+					.setResponseProto(resBuilder
+							.build());
+					//in case user is not online write an apns
+					responses.apnsResponseEvents().add(resEvent2);
+					//responses.normalResponseEvents().add(resEvent2);
 				}
-				// Send message to the new guy
-				ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 = new ApproveOrRejectRequestToJoinClanResponseEvent(
-						requesterId);
-				resEvent2
-						.setResponseProto(resBuilder
-								.build());
-				//in case user is not online write an apns
-				responses.apnsResponseEvents().add(resEvent2);
-				//responses.normalResponseEvents().add(resEvent2);
-
 				sendClanData(event, requestMup, accept, requesterId, cdp, responses);
 			}
 		} catch (Exception e) {

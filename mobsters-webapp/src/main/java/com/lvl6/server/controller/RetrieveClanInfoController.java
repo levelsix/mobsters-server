@@ -373,6 +373,7 @@ public class RetrieveClanInfoController extends EventController {
 			}
 			else {
 				if(!openClans.isEmpty()) {
+					Clan c = clanMap.get(openClans.pop());
 					clanList.add(clanMap.get(openClans.pop()));
 				}
 				else {

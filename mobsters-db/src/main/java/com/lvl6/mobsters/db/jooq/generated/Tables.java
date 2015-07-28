@@ -78,6 +78,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForPlayerLvlConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalForUser;
+import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboard;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboardRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTierRewardConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.MiniEventTimetableConfig;
@@ -102,6 +103,7 @@ import com.lvl6.mobsters.db.jooq.generated.tables.ObstacleConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ObstacleForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.PrerequisiteConfig;
 import com.lvl6.mobsters.db.jooq.generated.tables.ProfanityConfig;
+import com.lvl6.mobsters.db.jooq.generated.tables.PvpBattleCountForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.PvpBattleForUser;
 import com.lvl6.mobsters.db.jooq.generated.tables.PvpBattleHistory;
 import com.lvl6.mobsters.db.jooq.generated.tables.PvpBoardObstacleForUser;
@@ -557,6 +559,11 @@ public class Tables {
 	public static final MiniEventGoalForUser MINI_EVENT_GOAL_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.MiniEventGoalForUser.MINI_EVENT_GOAL_FOR_USER;
 
 	/**
+	 * VIEW
+	 */
+	public static final MiniEventLeaderboard MINI_EVENT_LEADERBOARD = com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboard.MINI_EVENT_LEADERBOARD;
+
+	/**
 	 * The table mobsters.mini_event_leaderboard_reward_config
 	 */
 	public static final MiniEventLeaderboardRewardConfig MINI_EVENT_LEADERBOARD_REWARD_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.MiniEventLeaderboardRewardConfig.MINI_EVENT_LEADERBOARD_REWARD_CONFIG;
@@ -675,6 +682,11 @@ public class Tables {
 	 * The table mobsters.profanity_config
 	 */
 	public static final ProfanityConfig PROFANITY_CONFIG = com.lvl6.mobsters.db.jooq.generated.tables.ProfanityConfig.PROFANITY_CONFIG;
+
+	/**
+	 * The table mobsters.pvp_battle_count_for_user
+	 */
+	public static final PvpBattleCountForUser PVP_BATTLE_COUNT_FOR_USER = com.lvl6.mobsters.db.jooq.generated.tables.PvpBattleCountForUser.PVP_BATTLE_COUNT_FOR_USER;
 
 	/**
 	 * The table mobsters.pvp_battle_for_user

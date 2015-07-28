@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "task_stage_monster_config", schema = "mobsters")
 public class TaskStageMonsterConfigPojo implements ITaskStageMonsterConfig {
 
-	private static final long serialVersionUID = 1475445377;
+	private static final long serialVersionUID = 588239303;
 
 	private Integer id;
 	private Integer taskStageId;
@@ -50,6 +50,8 @@ public class TaskStageMonsterConfigPojo implements ITaskStageMonsterConfig {
 	private Integer defensiveSkillId;
 	private String  initDialogue;
 	private String  defaultDialogue;
+	private Double  userToonHpScale;
+	private Double  userToonAtkScale;
 
 	public TaskStageMonsterConfigPojo() {}
 
@@ -72,6 +74,8 @@ public class TaskStageMonsterConfigPojo implements ITaskStageMonsterConfig {
 		this.defensiveSkillId = value.defensiveSkillId;
 		this.initDialogue = value.initDialogue;
 		this.defaultDialogue = value.defaultDialogue;
+		this.userToonHpScale = value.userToonHpScale;
+		this.userToonAtkScale = value.userToonAtkScale;
 	}
 
 	public TaskStageMonsterConfigPojo(
@@ -92,7 +96,9 @@ public class TaskStageMonsterConfigPojo implements ITaskStageMonsterConfig {
 		Integer monsterDropLvl,
 		Integer defensiveSkillId,
 		String  initDialogue,
-		String  defaultDialogue
+		String  defaultDialogue,
+		Double  userToonHpScale,
+		Double  userToonAtkScale
 	) {
 		this.id = id;
 		this.taskStageId = taskStageId;
@@ -112,6 +118,8 @@ public class TaskStageMonsterConfigPojo implements ITaskStageMonsterConfig {
 		this.defensiveSkillId = defensiveSkillId;
 		this.initDialogue = initDialogue;
 		this.defaultDialogue = defaultDialogue;
+		this.userToonHpScale = userToonHpScale;
+		this.userToonAtkScale = userToonAtkScale;
 	}
 
 	@Id
@@ -338,6 +346,30 @@ public class TaskStageMonsterConfigPojo implements ITaskStageMonsterConfig {
 		return this;
 	}
 
+	@Column(name = "user_toon_hp_scale", precision = 12)
+	@Override
+	public Double getUserToonHpScale() {
+		return this.userToonHpScale;
+	}
+
+	@Override
+	public TaskStageMonsterConfigPojo setUserToonHpScale(Double userToonHpScale) {
+		this.userToonHpScale = userToonHpScale;
+		return this;
+	}
+
+	@Column(name = "user_toon_atk_scale", precision = 12)
+	@Override
+	public Double getUserToonAtkScale() {
+		return this.userToonAtkScale;
+	}
+
+	@Override
+	public TaskStageMonsterConfigPojo setUserToonAtkScale(Double userToonAtkScale) {
+		this.userToonAtkScale = userToonAtkScale;
+		return this;
+	}
+
 	// -------------------------------------------------------------------------
 	// FROM and INTO
 	// -------------------------------------------------------------------------
@@ -365,6 +397,8 @@ public class TaskStageMonsterConfigPojo implements ITaskStageMonsterConfig {
 		setDefensiveSkillId(from.getDefensiveSkillId());
 		setInitDialogue(from.getInitDialogue());
 		setDefaultDialogue(from.getDefaultDialogue());
+		setUserToonHpScale(from.getUserToonHpScale());
+		setUserToonAtkScale(from.getUserToonAtkScale());
 	}
 
 	/**

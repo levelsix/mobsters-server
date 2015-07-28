@@ -31,6 +31,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.PvpBattleCountForUserDao2;
 import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
@@ -86,6 +87,9 @@ public class RetrieveUserMonsterTeamController extends EventController {
 
 	@Autowired
 	protected StructureForUserDao2 structureForUserDao;
+	
+	@Autowired
+	protected PvpBattleCountForUserDao2 pbcfuDao;
 
 
 	public RetrieveUserMonsterTeamController() {
@@ -164,7 +168,7 @@ public class RetrieveUserMonsterTeamController extends EventController {
 					pvpLeagueForUserRetrieveUtil,
 					pvpBoardObstacleForUserRetrieveUtil, researchForUserRetrieveUtil,
 					monsterStuffUtils, serverToggleRetrieveUtil,
-					monsterLevelInfoRetrieveUtils);
+					monsterLevelInfoRetrieveUtils, pbcfuDao);
 
 			rumta.execute(resBuilder);
 			if (resBuilder.getStatus().equals(

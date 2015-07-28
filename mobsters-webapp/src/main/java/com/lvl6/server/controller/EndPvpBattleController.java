@@ -18,9 +18,7 @@ import org.springframework.stereotype.Component;
 import com.google.protobuf.ByteString;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndPvpBattleRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.EndPvpBattleResponseEvent;
-import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
@@ -28,15 +26,16 @@ import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.PvpBattleHistoryDao;
 import com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleCountForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleRequestProto;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.pvp.HazelcastPvpUtil;
@@ -48,6 +47,7 @@ import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.PvpBattleCountForUserDao2;
 import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
@@ -56,6 +56,7 @@ import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.EndPvpBattleAction;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.PvpBattleCountUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.server.eventsender.ToClientEvents;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -137,6 +138,13 @@ public class EndPvpBattleController extends EventController {
 
 	@Autowired
 	protected UserCurrencyHistoryDao uchDao;
+	
+	@Autowired
+	protected PvpBattleCountForUserDao2 pbcfuDao;
+
+	@Autowired
+	protected PvpBattleCountUtils pbcUtils;
+
 
 
 	public EndPvpBattleController() {
@@ -276,7 +284,8 @@ public class EndPvpBattleController extends EventController {
 					serverToggleRetrieveUtil, monsterLevelInfoRetrieveUtil,
 					miscMethods, hazelcastPvpUtil, timeUtil, insertUtil, updateUtil,
 					listOfGenerators, oilStolenFromGenerators, cashStolenFromGenerators,
-					sfuDao, historyUtils, pbhDao, uchDao);
+					sfuDao, historyUtils, pbhDao, uchDao, pbcfuDao, timeUtils,
+					pbcUtils);
 
 			epba.execute(resBuilder);
 
@@ -515,14 +524,20 @@ public class EndPvpBattleController extends EventController {
 
 		//need the monsters for the attacker
 		Map<String, List<MonsterForUser>> userIdsToUserMonsters = calculateAttackerMonsters(attackerId);
+		
+		//retrieve battleCounts
+		List<String> defenderIds = new ArrayList<String>();
+		defenderIds.add(defenderId);
+		List<PvpBattleCountForUserPojo> battleCounts = pbcfuDao.getPvpBattleCountBetweenUsers(attackerId, defenderIds);
 
 		//need the drop rates
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(userIdsToUserMonsters, monsterLevelInfoRetrieveUtil);
+				.calculatePvpDrops(userIdsToUserMonsters, monsterLevelInfoRetrieveUtil, attacker.getId(), 
+						battleCounts);
 
 		//need to calculate the resources defender can steal
 		PvpBattleOutcome potentialResult = new PvpBattleOutcome(defender,
-				defenderElo, attacker, attackerElo, serverToggleRetrieveUtil);
+				defenderElo, attacker, attackerElo, serverToggleRetrieveUtil, battleCounts);
 
 		Map<String, Integer> attackerIdsToProspectiveCashWinnings = Collections
 				.singletonMap(attackerId,

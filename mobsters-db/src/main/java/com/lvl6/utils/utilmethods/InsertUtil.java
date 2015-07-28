@@ -34,13 +34,13 @@ import com.lvl6.info.PvpBoardObstacleForUser;
 import com.lvl6.info.Research;
 import com.lvl6.info.Reward;
 import com.lvl6.info.TaskForUserClientState;
-import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForTangoUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.GiftForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.MiniEventGoalForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.SecretGiftForUserPojo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.TaskStageForUserPojo;
 import com.lvl6.proto.ChatProto.ChatScope;
 import com.lvl6.proto.ChatProto.TranslateLanguages;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils.UserTaskCompleted;
@@ -185,7 +185,7 @@ public interface InsertUtil {
 			*/
 
 	public abstract List<String> insertIntoUserTaskStage(
-			List<TaskStageForUser> tsfuList);
+			List<TaskStageForUserPojo> tsfuList);
 
 	public abstract int insertIntoTaskStageHistory(
 			List<String> userTaskStageIds, List<String> userTaskIds,
