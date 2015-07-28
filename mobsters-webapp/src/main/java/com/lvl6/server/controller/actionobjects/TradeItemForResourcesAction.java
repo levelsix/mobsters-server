@@ -35,20 +35,22 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 @Component@Scope("prototype")public class TradeItemForResourcesAction {
 	private static Logger log = LoggerFactory.getLogger( TradeItemForResourcesAction.class);
 
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	@Autowired protected ItemRetrieveUtils itemRetrieveUtils;
+	@Autowired protected UserRetrieveUtils2 userRetrieveUtil;
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected UserCurrencyHistoryDao userCurrencyHistoryDao;
+	@Autowired protected MiscMethods miscMethods;
+	@Autowired protected HistoryUtils historyUtils;
+
 	private String userId;
 	private List<Integer> itemIdsUsed;
 	private List<ItemForUser> nuUserItems;
 	private int maxCash;
 	private int maxOil;
-	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
-	@Autowired protected ItemRetrieveUtils itemRetrieveUtils; 
-	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
-	@Autowired protected UpdateUtil updateUtil;
-	@Autowired protected UserCurrencyHistoryDao userCurrencyHistoryDao;
-	private MiscMethods miscMethods;
 	private int gemsSpent;
-	@Autowired protected HistoryUtils historyUtils; 
-	
+
+	/*
 	public TradeItemForResourcesAction(String userId,
 			List<Integer> itemIdsUsed, List<ItemForUser> nuUserItems,
 			int maxCash, int maxOil,
@@ -70,19 +72,35 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.miscMethods = miscMethods;
 		this.gemsSpent = gemsSpent;
 		this.historyUtils = historyUtils;
+	} */
+
+	public void wire(
+			String userId,
+			List<Integer> itemIdsUsed,
+			List<ItemForUser> nuUserItems,
+			int maxCash,
+			int maxOil,
+			int gemsSpent)
+	{
+		this.userId = userId;
+		this.itemIdsUsed = itemIdsUsed;
+		this.nuUserItems = nuUserItems;
+		this.maxCash = maxCash;
+		this.maxOil = maxOil;
+		this.gemsSpent = gemsSpent;
 	}
 
 	//	//encapsulates the return value from this Action Object
 	//	static class TradeItemForResourcesResource {
-	//		
-	//		
+	//
+	//
 	//		public TradeItemForResourcesResource() {
-	//			
+	//
 	//		}
 	//	}
 	//
 	//	public TradeItemForResourcesResource execute() {
-	//		
+	//
 	//	}
 
 	//derived state
@@ -93,7 +111,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private int cashGained;
 	private int oilGained;
 	private User user;
-	
+
 	private UserCurrencyHistoryPojo cashUserCurrencyHistory;
 	private UserCurrencyHistoryPojo oilUserCurrencyHistory;
 	private UserCurrencyHistoryPojo gemsUserCurrencyHistory;
@@ -129,11 +147,11 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 		resBuilder.setStatus(ResponseStatus.SUCCESS);
 	}
-	
+
 	public void setUpDaos() {
 
 	}
-	
+
 	private boolean verifySyntax(Builder resBuilder) {
 
 		if(gemsSpent == 0) {
@@ -207,7 +225,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			Map<Integer, ItemForUser> inDb = itemForUserRetrieveUtil
 					.getSpecificOrAllItemForUserMap(userId,
 							itemIdToQuantityUsed.keySet());
-			
+
 			if (null == inDb || inDb.size() != nuUserItems.size()) {
 				log.error(String.format("inconsistent itemForUser"));
 				return false;
@@ -243,7 +261,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			log.error(String.format("no user with id=%s", userId));
 			return false;
 		}
-		
+
 		if(user.getGems() < gemsSpent) {
 			log.error("user doesn't have enough gems, userId= {}, gemsSpent={}", userId, gemsSpent);
 			return false;
@@ -310,26 +328,26 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 //			details.put(key.toString(), value);
 //		}
 //	}
-	
+
 	public void prepCurrencyHistory() {
 		uchList = new ArrayList<UserCurrencyHistoryPojo>();
-		
+
 		gemsUserCurrencyHistory = new UserCurrencyHistoryPojo();
 		gemsUserCurrencyHistory.setResourceType(miscMethods.gems);
 		gemsUserCurrencyHistory.setCurrencyBeforeChange(user.getGems());
 		uchList.add(gemsUserCurrencyHistory);
-		
+
 		cashUserCurrencyHistory = new UserCurrencyHistoryPojo();
 		cashUserCurrencyHistory.setResourceType(miscMethods.cash);
 		cashUserCurrencyHistory.setCurrencyBeforeChange(user.getCash());
 		uchList.add(cashUserCurrencyHistory);
-		
+
 		oilUserCurrencyHistory = new UserCurrencyHistoryPojo();
 		oilUserCurrencyHistory.setResourceType(miscMethods.oil);
-		oilUserCurrencyHistory.setCurrencyBeforeChange(user.getOil());		
+		oilUserCurrencyHistory.setCurrencyBeforeChange(user.getOil());
 		uchList.add(oilUserCurrencyHistory);
 	}
-	
+
 	private void insertCurrencyHistory() {
 		Date now = new Date();
 		gemsUserCurrencyHistory.setCurrencyChange(-1 * gemsSpent);
@@ -337,10 +355,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 		cashUserCurrencyHistory.setCurrencyChange(cashGained);
 		cashUserCurrencyHistory.setCurrencyAfterChange(user.getCash());
-		
+
 		oilUserCurrencyHistory.setCurrencyChange(oilGained);
 		oilUserCurrencyHistory.setCurrencyAfterChange(user.getOil());
-		
+
 		String reasonForChange = ControllerConstants.UCHRFC__TRADE_ITEM_FOR_RESOURCES;
 		String details = "";
 		for(Integer itemId : itemIdsUsed) {
