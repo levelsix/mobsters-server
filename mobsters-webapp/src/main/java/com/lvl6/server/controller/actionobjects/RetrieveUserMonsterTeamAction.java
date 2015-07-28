@@ -256,11 +256,12 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 			cmtdIdToAllButRetrieverUserId.put(cmtdId, userId);
 
 			if (allButRetrieverUserIdToCmtd.containsKey(userId)) {
-				log.error("fuck fuck fuck, cmtd={}, existing={}",
-						cmtd, allButRetrieverUserIdToCmtd.get(userId));
+				if(allButRetrieverUserIdToCmtd.get(userId).getClanId().equals(cmtd.getClanId())) {
+					log.error("fuck fuck fuck, cmtd={}, existing={}",
+							cmtd, allButRetrieverUserIdToCmtd.get(userId));
+				}
 			}
 			allButRetrieverUserIdToCmtd.put(userId, cmtd);
-
 		}
 
 		//make it easier to access (via userId) later on
