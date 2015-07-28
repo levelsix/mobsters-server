@@ -43,7 +43,8 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
 	@Autowired protected ItemRetrieveUtils itemRetrieveUtils; 
 	@Autowired protected UserRetrieveUtils2 userRetrieveUtil; 
-	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected UserCurrencyHistoryDao userCurrencyHistoryDao;
 	private MiscMethods miscMethods;
 	private int gemsSpent;
 	@Autowired protected HistoryUtils historyUtils; 
@@ -92,7 +93,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private int cashGained;
 	private int oilGained;
 	private User user;
-	private UserCurrencyHistoryDao userCurrencyHistoryDao;
+	
 	private UserCurrencyHistoryPojo cashUserCurrencyHistory;
 	private UserCurrencyHistoryPojo oilUserCurrencyHistory;
 	private UserCurrencyHistoryPojo gemsUserCurrencyHistory;
@@ -130,9 +131,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	}
 	
 	public void setUpDaos() {
-		Configuration config = new DefaultConfiguration().set(DBConnection.get()
-				.getConnection()).set(SQLDialect.MYSQL);
-		userCurrencyHistoryDao = new UserCurrencyHistoryDao(config);
+
 	}
 	
 	private boolean verifySyntax(Builder resBuilder) {

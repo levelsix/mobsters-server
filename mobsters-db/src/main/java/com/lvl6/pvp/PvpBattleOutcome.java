@@ -1,10 +1,17 @@
 package com.lvl6.pvp;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.apache.commons.math3.distribution.NormalDistribution;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleCountForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 
@@ -19,7 +26,10 @@ public class PvpBattleOutcome {
 	private static double RESOURCE_SCALE_DIVIDEND_MULTIPLE = 0.30D;//changed from 0.4
 
 	private static double RESOURCE_GENERATOR_CONSTANT = 1.67; 
-	//amount multiple stolen from generators relative to storage/status quo															
+	//amount multiple stolen from generators relative to storage/status quo			
+	
+	private static double DECREASING_AMOUNT_PER_ATTACK = 0.67;
+	private static int PVP_COUNT_PAST_DAY = 2;
 	
 	//used in scale and offset calculation
 	private static double OFFSET__VALID_MATCH_RANGE = 2D;
@@ -37,10 +47,12 @@ public class PvpBattleOutcome {
 	private double defenderCash;
 	private double defenderOil;
 	private ServerToggleRetrieveUtils serverToggleRetrieveUtils;
+	private List<PvpBattleCountForUserPojo> battleCount;
 
 	public PvpBattleOutcome(User attacker, int attackerElo,
 			User defender, int defenderElo,
-			ServerToggleRetrieveUtils serverToggleRetrieveUtils)
+			ServerToggleRetrieveUtils serverToggleRetrieveUtils,
+			List<PvpBattleCountForUserPojo> battleCount)
 	{
 		super();
 		this.attacker = attacker;
@@ -52,7 +64,8 @@ public class PvpBattleOutcome {
 		this.defenderCash = defender.getCash();
 		this.defenderOil = defender.getOil();
 		this.serverToggleRetrieveUtils = serverToggleRetrieveUtils;
-
+		this.battleCount = battleCount;
+		
 		setLoggingBoolean();
 	}
 
@@ -266,10 +279,43 @@ public class PvpBattleOutcome {
 					"cashAttackerWins() scaleDividend={}, scaleDivisor={}, scale={}",
 					new Object[] { scaleDividend, scaleDivisor, scale });
 		}
+		
+		int count = 0;
+		//calculating the pvp battle count
+		if(battleCount != null) {
+			List<PvpBattleCountForUserPojo> pvpBattleCount = 
+					new ArrayList<PvpBattleCountForUserPojo>();
+			for(PvpBattleCountForUserPojo pbcfu : battleCount) {
+				if(pbcfu.getDefenderId().equals(defenderId)) {
+					pvpBattleCount.add(pbcfu);
+				}
+			}
+
+			Date now = new Date();
+			for(PvpBattleCountForUserPojo pbcfur : pvpBattleCount) {
+				Date battleDate = new Date(pbcfur.getDate().getTime());
+				Days days = Days.daysBetween((new DateTime(now)).toLocalDate(),
+						(new DateTime(battleDate)).toLocalDate());
+
+				if(days.getDays() < PVP_COUNT_PAST_DAY) {
+					count = count + pbcfur.getCount();
+				}
+			}
+		}
 
 		double finalPercentageToSteal = (winnerLoserCndVal - offset) * scale;
 		double retVal = finalPercentageToSteal * defenderCash;
+		log.info("retVal before count: {}", retVal);
+		log.info("count: {}", count);
+		
 		percentageStealFromGenerator = (float)(finalPercentageToSteal * RESOURCE_GENERATOR_CONSTANT);
+		
+		if(count != 0) {
+			retVal = retVal * Math.pow(DECREASING_AMOUNT_PER_ATTACK, count); 
+			percentageStealFromGenerator = percentageStealFromGenerator * 
+					(float)Math.pow(DECREASING_AMOUNT_PER_ATTACK, count);
+		}
+		log.info("retVal after count: {}", retVal);
 		log.info("PERCENTAGE TO STEAL FROM GENERATOR IS {}", percentageStealFromGenerator);
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...
@@ -334,8 +380,44 @@ public class PvpBattleOutcome {
 					new Object[] { scaleDividend, scaleDivisor, scale });
 		}
 
+		//calculating the pvp battle count
+		List<PvpBattleCountForUserPojo> pvpBattleCount = 
+				new ArrayList<PvpBattleCountForUserPojo>();
+		for(PvpBattleCountForUserPojo pbcfu : battleCount) {
+			if(pbcfu.getDefenderId().equals(defenderId)) {
+				pvpBattleCount.add(pbcfu);
+			}
+		}
+
+		int count = 0;
+		//calculating the pvp battle count
+		if(battleCount != null) {
+			List<PvpBattleCountForUserPojo> pvpBattleCount2 = 
+					new ArrayList<PvpBattleCountForUserPojo>();
+			for(PvpBattleCountForUserPojo pbcfu : battleCount) {
+				if(pbcfu.getDefenderId().equals(defenderId)) {
+					pvpBattleCount2.add(pbcfu);
+				}
+			}
+
+			Date now = new Date();
+			for(PvpBattleCountForUserPojo pbcfur : pvpBattleCount2) {
+				Date battleDate = new Date(pbcfur.getDate().getTime());
+				Days days = Days.daysBetween((new DateTime(now)).toLocalDate(),
+						(new DateTime(battleDate)).toLocalDate());
+
+				if(days.getDays() < PVP_COUNT_PAST_DAY) {
+					count = count + pbcfur.getCount();
+				}
+			}
+		}
+
 		double percentage = (winnerLoserCndVal - offset) * scale;
 		double retVal = percentage * defenderOil;
+		
+		if(count != 0) {
+			retVal = retVal * Math.pow(DECREASING_AMOUNT_PER_ATTACK, count); 
+		}
 		
 		//July 24, 2014. The amount shouldn't be greater than
 		//2 billion...shouldn't be more than one million atm...

@@ -22,6 +22,7 @@ import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.MonsterSnapshotForUser;
 import com.lvl6.info.TaskStageMonster;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleCountForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
@@ -754,13 +755,15 @@ public class MonsterStuffUtils {
 
 	public Map<String, Map<String, Integer>> calculatePvpDrops(
 			Map<String, List<MonsterForUser>> userIdToUserMonsters,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			String attackerId, List<PvpBattleCountForUserPojo> battleCounts) {
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = new HashMap<String, Map<String, Integer>>();
 
 		for (String userId : userIdToUserMonsters.keySet()) {
 			List<MonsterForUser> userMonsters = userIdToUserMonsters
 					.get(userId);
-			Map<String, Integer> monsterDropIds = calculatePvpDropIds(userMonsters, monsterLevelInfoRetrieveUtils);
+			Map<String, Integer> monsterDropIds = calculatePvpDropIds(userMonsters, monsterLevelInfoRetrieveUtils,
+					attackerId, battleCounts);
 
 			userIdToUserMonsterIdToDroppedId.put(userId, monsterDropIds);
 		}
@@ -774,7 +777,8 @@ public class MonsterStuffUtils {
 	 * @return map(userMonsterId -> monsterId or -1 if no drop)
 	 */
 	public Map<String, Integer> calculatePvpDropIds(
-			List<MonsterForUser> userMonsters, MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+			List<MonsterForUser> userMonsters, MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			String attackerId, List<PvpBattleCountForUserPojo> battleCounts) {
 		Map<String, Integer> userMonsterIdToDroppedId = new HashMap<String, Integer>();
 
 		for (MonsterForUser userMonster : userMonsters) {
@@ -784,7 +788,7 @@ public class MonsterStuffUtils {
 
 			//calculate if dropped
 			boolean dropped = monsterLevelInfoRetrieveUtils.didPvpMonsterDrop(
-					monsterId, lvl);
+					monsterId, lvl, attackerId, userMonster.getUserId(), battleCounts);
 
 			//if dropped set monster
 			Monster mon = null;
@@ -808,13 +812,15 @@ public class MonsterStuffUtils {
 
 	public Map<String, Integer> calculateMsfuPvpDrops(
 			Map<String, MonsterSnapshotForUser> userIdToUserMonsterSnapshot,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			String attackerId, List<PvpBattleCountForUserPojo> battleCounts) {
 		Map<String, Integer> userIdToMsfuDroppedId = new HashMap<String, Integer>();
 
 		for (String userId : userIdToUserMonsterSnapshot.keySet()) {
 			MonsterSnapshotForUser msfu = userIdToUserMonsterSnapshot
 					.get(userId);
-			int monsterDropId = calculateMsfuPvpDropIds(msfu, monsterLevelInfoRetrieveUtils);
+			int monsterDropId = calculateMsfuPvpDropIds(msfu, monsterLevelInfoRetrieveUtils,
+					attackerId, userId, battleCounts);
 
 			userIdToMsfuDroppedId.put(userId, monsterDropId);
 		}
@@ -829,14 +835,15 @@ public class MonsterStuffUtils {
 	 */
 	public int calculateMsfuPvpDropIds(
 			MonsterSnapshotForUser userMonsterSnapshot,
-			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils) {
+			MonsterLevelInfoRetrieveUtils monsterLevelInfoRetrieveUtils,
+			String attackerId, String defenderId, List<PvpBattleCountForUserPojo> battleCounts) {
 
 		int monsterId = userMonsterSnapshot.getMonsterId();
 		int lvl = userMonsterSnapshot.getCurrentLvl();
 
 		//calculate if dropped
 		boolean dropped = monsterLevelInfoRetrieveUtils.didPvpMonsterDrop(
-				monsterId, lvl);
+				monsterId, lvl, attackerId, defenderId, battleCounts);
 
 		//if dropped set monster
 		Monster mon = null;

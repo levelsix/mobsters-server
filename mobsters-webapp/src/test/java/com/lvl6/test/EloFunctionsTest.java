@@ -71,13 +71,13 @@ public class EloFunctionsTest extends TestCase {
 
 		//the amount of elo attacker wins should always be non negative
 		PvpBattleOutcome betterOpponent = new PvpBattleOutcome(attacker, elo,
-				defender, getDefenderEloHigh(), serverToggleRetrieveUtil);
+				defender, getDefenderEloHigh(), serverToggleRetrieveUtil, null);
 		int eloWon = betterOpponent.getUnsignedEloAttackerWins();
 		assertTrue("Expected elo won: unsigned elo. Actual: " + eloWon,
 				eloWon >= 0);
 
 		PvpBattleOutcome worseOpponent = new PvpBattleOutcome(attacker, elo,
-				defender, getDefenderEloLow(), serverToggleRetrieveUtil);
+				defender, getDefenderEloLow(), serverToggleRetrieveUtil, null);
 		int eloWonNotMuch = worseOpponent.getUnsignedEloAttackerWins();
 		assertTrue("Expected elo won: unsigned elo. Actual: " + eloWonNotMuch,
 				eloWonNotMuch >= 0);
@@ -127,14 +127,14 @@ public class EloFunctionsTest extends TestCase {
 
 		//the amount of elo attacker wins should always be non negative
 		PvpBattleOutcome betterOpponent = new PvpBattleOutcome(attacker, elo,
-				defender, getDefenderEloHigh(), serverToggleRetrieveUtil);
+				defender, getDefenderEloHigh(), serverToggleRetrieveUtil, null);
 		int eloLostNotMuch = betterOpponent.getUnsignedEloAttackerLoses();
 		assertTrue(
 				"Expected elo lost: unsigned elo. Actual: " + eloLostNotMuch,
 				eloLostNotMuch >= 0);
 
 		PvpBattleOutcome worseOpponent = new PvpBattleOutcome(attacker, elo,
-				defender, getDefenderEloLow(), serverToggleRetrieveUtil);
+				defender, getDefenderEloLow(), serverToggleRetrieveUtil, null);
 		int eloLost = worseOpponent.getUnsignedEloAttackerLoses();
 		assertTrue("Expected elo lost: unsigned elo. Actual: " + eloLost,
 				eloLost >= 0);
@@ -185,13 +185,13 @@ public class EloFunctionsTest extends TestCase {
 
 		//the amount of elo attacker wins should always be non negative
 		PvpBattleOutcome betterOpponent = new PvpBattleOutcome(attacker, elo,
-				defender, getDefenderEloHigh(), serverToggleRetrieveUtil);
+				defender, getDefenderEloHigh(), serverToggleRetrieveUtil, null);
 		int cashWon = betterOpponent.getUnsignedCashAttackerWins();
 		assertTrue("Expected cash won: unsigned cash. Actual: " + cashWon,
 				cashWon >= 0);
 
 		PvpBattleOutcome worseOpponent = new PvpBattleOutcome(attacker, elo,
-				defender, getDefenderEloLow(), serverToggleRetrieveUtil);
+				defender, getDefenderEloLow(), serverToggleRetrieveUtil, null);
 		int cashWonNotMuch = worseOpponent.getUnsignedCashAttackerWins();
 		assertTrue("Expected cash won: unsigned cash. Actual: "
 				+ cashWonNotMuch, cashWonNotMuch >= 0);
@@ -250,13 +250,13 @@ public class EloFunctionsTest extends TestCase {
 
 		//the amount of elo attacker wins should always be non negative
 		PvpBattleOutcome betterOpponent = new PvpBattleOutcome(attacker, elo,
-				defender, getDefenderEloHigh(), serverToggleRetrieveUtil);
+				defender, getDefenderEloHigh(), serverToggleRetrieveUtil, null);
 		int oilWon = betterOpponent.getUnsignedOilAttackerWins();
 		assertTrue("Expected oil won: unsigned oil. Actual: " + oilWon,
 				oilWon >= 0);
 
 		PvpBattleOutcome worseOpponent = new PvpBattleOutcome(attacker, elo,
-				defender, getDefenderEloLow(), serverToggleRetrieveUtil);
+				defender, getDefenderEloLow(), serverToggleRetrieveUtil, null);
 		int oilWonNotMuch = worseOpponent.getUnsignedOilAttackerWins();
 		assertTrue("Expected oil won: unsigned oil. Actual: " + oilWonNotMuch,
 				oilWonNotMuch >= 0);

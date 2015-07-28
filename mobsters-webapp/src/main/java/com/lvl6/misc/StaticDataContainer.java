@@ -375,7 +375,8 @@ public class StaticDataContainer {
 	protected TaskStageRetrieveUtils taskStageRetrieveUtils;
 
 
-
+	@Autowired
+	protected MiniJobRefreshItemConfigDao miniJobRefreshDao;
 
 
 
@@ -1184,9 +1185,6 @@ public class StaticDataContainer {
 	}
 
 	private void setRefreshMiniJobItemPrices(Builder sdpb) {
-		Configuration config = new DefaultConfiguration().set(DBConnection.get()
-				.getConnection()).set(SQLDialect.MYSQL);
-		MiniJobRefreshItemConfigDao miniJobRefreshDao = new MiniJobRefreshItemConfigDao(config);
 		List<MiniJobRefreshItemConfigPojo> mjricList = miniJobRefreshDao.findAll();
 		sdpb.addAllStructureItemPrices(createInfoProtoUtils.
 				createItemGemPriceProtoFromMiniJobs(mjricList));

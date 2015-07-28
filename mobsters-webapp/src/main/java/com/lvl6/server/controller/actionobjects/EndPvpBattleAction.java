@@ -26,9 +26,9 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.UserCurrencyHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventPvpProto.EndPvpBattleResponseProto.Builder;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventPvpProto.StructStolen;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpUser;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
@@ -36,12 +36,14 @@ import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.PvpBattleCountForUserDao2;
 import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PvpLeagueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.PvpBattleCountUtils;
 import com.lvl6.server.controller.utils.ResourceUtil;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.TimeUtils;
@@ -89,6 +91,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	@Autowired protected HistoryUtils historyUtils; 
 	private PvpBattleHistoryDao pbhDao;
 	private UserCurrencyHistoryDao uchDao;
+	private PvpBattleCountForUserDao2 pbcfuDao;
+	private TimeUtils timeUtils;
+	private PvpBattleCountUtils pbcUtils;
 
 
 	public EndPvpBattleAction(String attackerId, String defenderId,
@@ -112,7 +117,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 			UpdateUtil updateUtil, List<StructStolen> listOfGenerators,
 			int oilStolenFromGenerators, int cashStolenFromGenerators,
 			StructureForUserDao2 sfuDao, HistoryUtils historyUtils,
-			PvpBattleHistoryDao pbhDao, UserCurrencyHistoryDao uchDao)
+			PvpBattleHistoryDao pbhDao, UserCurrencyHistoryDao uchDao,
+			PvpBattleCountForUserDao2 pbcfuDao, TimeUtils timeUtils,
+			PvpBattleCountUtils pbcUtils)
 	{
 		super();
 		this.attackerId = attackerId;
@@ -152,6 +159,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.historyUtils = historyUtils;
 		this.pbhDao = pbhDao;
 		this.uchDao = uchDao;
+		this.pbcfuDao = pbcfuDao;
+		this.timeUtils = timeUtils;  
+		this.pbcUtils = pbcUtils;
 	}
 
 	//	//encapsulates the return value from this Action Object
@@ -330,6 +340,10 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		//need to delete PvpBattleForUser
 		int numDeleted = DeleteUtils.get().deletePvpBattleForUser(attackerId);
 		log.info("numDeleted PvpBattleForUser (should be 1): {}", numDeleted);
+		
+		if(attackerWon) {
+			pbcUtils.insertOrUpdatePvpBattleCount(attackerId, defenderId, pbcfuDao, timeUtils);
+		}
 		return true;
 	}
 

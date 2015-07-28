@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.Clan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleCountForUserPojo;
 import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleHistoryPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpHistoryProto;
@@ -28,6 +29,7 @@ import com.lvl6.retrieveutils.BattleReplayForUserRetrieveUtil;
 import com.lvl6.retrieveutils.ClanRetrieveUtils2;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils2;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil2;
+import com.lvl6.retrieveutils.daos.PvpBattleCountForUserDao2;
 import com.lvl6.retrieveutils.daos.PvpBattleHistoryDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ServerToggleRetrieveUtils;
@@ -49,6 +51,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 	@Autowired protected BattleReplayForUserRetrieveUtil battleReplayForUserRetrieveUtil;
 	@Autowired protected HistoryUtils historyUtils;
 	@Autowired protected PvpBattleHistoryDao2 pbhDao;
+	@Autowired protected PvpBattleCountForUserDao2 pbcfuDao;
 
 	
 	protected StartupResponseProto.Builder resBuilder;
@@ -217,7 +220,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		//			"history monster teams=%s", userIdsToUserMonsters));
 
 		Map<String, Map<String, Integer>> userIdToUserMonsterIdToDroppedId = monsterStuffUtils
-				.calculatePvpDrops(userIdsToUserMonsters, monsterLevelInfoRetrieveUtils);
+				.calculatePvpDrops(userIdsToUserMonsters, monsterLevelInfoRetrieveUtils, userId, null);
 
 		attackerIdsToProspectiveCashWinnings = new HashMap<String, Integer>();
 		attackerIdsToProspectiveOilWinnings = new HashMap<String, Integer>();
@@ -317,6 +320,14 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 		Collection<String> userIdz = userIdsToUsers.keySet();
 		Map<String, PvpUser> idsToPvpUsers = hazelcastPvpUtil
 				.getPvpUsers(userIdz);
+		
+		List<String> userIds = new ArrayList<String>();
+		for(String userId : userIdz) {
+			userIds.add(userId);
+		}
+		
+		List<PvpBattleCountForUserPojo> battleCount = 
+				pbcfuDao.getPvpBattleCountBetweenUsers(userId, userIds);
 
 		for (String defenderId : userIdz) {
 			String defenderEyed = defenderId.toString();
@@ -326,7 +337,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
 			PvpBattleOutcome potentialResult = new PvpBattleOutcome(user,
 					attackerElo, defender, defenderPu.getElo(),
-					serverToggleRetrieveUtil);
+					serverToggleRetrieveUtil, battleCount);
 
 			userIdToCashStolen.put(defenderId,
 					potentialResult.getUnsignedCashAttackerWins());

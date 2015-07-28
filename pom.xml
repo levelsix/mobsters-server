@@ -74,14 +74,17 @@
 		<jdbc.password>robashen123</jdbc.password>
 		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
 		<jdbc.idleConnectionTestPeriodInMinutes>1</jdbc.idleConnectionTestPeriodInMinutes>
-		<jdbc.idleMaxAgeInMinutes>5</jdbc.idleMaxAgeInMinutes>
-		<jdbc.maxConnectionsPerPartition>80</jdbc.maxConnectionsPerPartition>
-		<jdbc.minConnectionsPerPartition>2</jdbc.minConnectionsPerPartition>
+		<jdbc.idleMaxAgeInMinutes>2</jdbc.idleMaxAgeInMinutes>
+		<jdbc.maxConnectionsPerPartition>150</jdbc.maxConnectionsPerPartition>
+		<jdbc.minConnectionsPerPartition>20</jdbc.minConnectionsPerPartition>
 		<jdbc.partitionCount>3</jdbc.partitionCount>
-		<jdbc.acquireIncrement>2</jdbc.acquireIncrement>
+		<jdbc.acquireIncrement>10</jdbc.acquireIncrement>
 		<jdbc.statementsCacheSize>500</jdbc.statementsCacheSize>
 		<jdbc.releaseHelperThreads>3</jdbc.releaseHelperThreads>
-
+		<jdbc.maxConnectionAgeInSeconds>120</jdbc.maxConnectionAgeInSeconds>
+		<jdbc.closeConnectionWatch>false</jdbc.closeConnectionWatch>
+		<jdbc.closeConnectionWatchTimeoutInMs>30000</jdbc.closeConnectionWatchTimeoutInMs>
+		<jdbc.connectionTimeoutInMs>60000</jdbc.connectionTimeoutInMs>
 
 		<dynamodb.table.prefix>local</dynamodb.table.prefix>
 		<dynamodb.isLocal>true</dynamodb.isLocal>
