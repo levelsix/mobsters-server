@@ -81,7 +81,7 @@
 		<jdbc.acquireIncrement>10</jdbc.acquireIncrement>
 		<jdbc.statementsCacheSize>500</jdbc.statementsCacheSize>
 		<jdbc.releaseHelperThreads>3</jdbc.releaseHelperThreads>
-		<jdbc.maxConnectionAgeInSeconds>120</jdbc.maxConnectionAgeInSeconds>
+		<jdbc.maxConnectionAgeInSeconds>180</jdbc.maxConnectionAgeInSeconds>
 		<jdbc.closeConnectionWatch>false</jdbc.closeConnectionWatch>
 		<jdbc.closeConnectionWatchTimeoutInMs>30000</jdbc.closeConnectionWatchTimeoutInMs>
 		<jdbc.connectionTimeoutInMs>60000</jdbc.connectionTimeoutInMs>
