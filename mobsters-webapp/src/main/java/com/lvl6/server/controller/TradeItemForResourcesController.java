@@ -25,16 +25,12 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
-import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
-import com.lvl6.retrieveutils.UserRetrieveUtils2;
-import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.actionobjects.TradeItemForResourcesAction;
-import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.ItemUtil;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.TimeUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
 
@@ -50,22 +46,10 @@ public class TradeItemForResourcesController extends EventController {
 	protected Locker locker;
 
 	@Autowired
-	protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	protected TimeUtils timeUtils;
 
 	@Autowired
 	protected MiscMethods miscMethods;
-
-	@Autowired
-	protected UserRetrieveUtils2 userRetrieveUtil;
-
-	@Autowired
-	protected ItemRetrieveUtils itemRetrieveUtils;
-
-	@Autowired
-	protected HistoryUtils historyUtils;
-
-	@Autowired
-	protected TimeUtils timeUtils;
 
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -153,12 +137,13 @@ public class TradeItemForResourcesController extends EventController {
 				nuUserItems = ItemUtil.javafyUserItemProto(nuUserItemsProtos);
 			}
 
-			TradeItemForResourcesAction tifsua = new TradeItemForResourcesAction(
-					userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
-					itemForUserRetrieveUtil, itemRetrieveUtils, userRetrieveUtil,
-					UpdateUtils.get(), miscMethods, gemsSpent, historyUtils);
-
-			tifsua.execute(resBuilder);
+//			TradeItemForResourcesAction tifsua = new TradeItemForResourcesAction(
+//					userId, itemIdsUsed, nuUserItems, maxCash, maxOil,
+//					itemForUserRetrieveUtil, itemRetrieveUtils, userRetrieveUtil,
+//					UpdateUtils.get(), miscMethods, gemsSpent, historyUtils);
+			TradeItemForResourcesAction tifra = AppContext.getBean(TradeItemForResourcesAction.class);
+			tifra.wire(userId, itemIdsUsed, nuUserItems, maxCash, maxOil, gemsSpent);
+			tifra.execute(resBuilder);
 
 			TradeItemForResourcesResponseProto resProto = resBuilder.build();
 			TradeItemForResourcesResponseEvent resEvent = new TradeItemForResourcesResponseEvent(
@@ -169,14 +154,14 @@ public class TradeItemForResourcesController extends EventController {
 
 			if (ResponseStatus.SUCCESS.equals(resBuilder
 					.getStatus())) {
-				User user = tifsua.getUser();
+				User user = tifra.getUser();
 				UpdateClientUserResponseEvent resEventUpdate = miscMethods
 						.createUpdateClientUserResponseEventAndUpdateLeaderboard(
 								user, null, null);
 				resEventUpdate.setTag(event.getTag());
 				responses.normalResponseEvents().add(resEventUpdate);
 
-				writeToCurrencyHistory(userId, date, tifsua);
+				writeToCurrencyHistory(userId, date, tifra);
 			}
 
 		} catch (Exception e) {
@@ -210,23 +195,6 @@ public class TradeItemForResourcesController extends EventController {
 				tifra.getCurrencyDeltas(), tifra.getPreviousCurrencies(),
 				tifra.getCurrentCurrencies(), tifra.getReasons(),
 				tifra.getDetails());
-	}
-
-	public ItemForUserRetrieveUtil getItemForUserRetrieveUtil() {
-		return itemForUserRetrieveUtil;
-	}
-
-	public void setItemForUserRetrieveUtil(
-			ItemForUserRetrieveUtil itemForUserRetrieveUtil) {
-		this.itemForUserRetrieveUtil = itemForUserRetrieveUtil;
-	}
-
-	public UserRetrieveUtils2 getUserRetrieveUtil() {
-		return userRetrieveUtil;
-	}
-
-	public void setUserRetrieveUtil(UserRetrieveUtils2 userRetrieveUtil) {
-		this.userRetrieveUtil = userRetrieveUtil;
 	}
 
 	public Locker getLocker() {
