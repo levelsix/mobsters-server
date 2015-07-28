@@ -1120,6 +1120,9 @@ public class DBConnection {
 
 	/* assumes number of ? in the query = values.size() */
 	public int deleteDirectQueryNaive(String query, List<?> values) {
+		if(values == null || values.isEmpty()) {
+			return 0;
+		}
 		Connection conn = null;
 		PreparedStatement stmt = null;
 
@@ -1311,6 +1314,7 @@ public class DBConnection {
 				}
 			}
 			rs = stmt.executeQuery();
+			stmt.close();
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + values, e);
 		} catch (NullPointerException e) {

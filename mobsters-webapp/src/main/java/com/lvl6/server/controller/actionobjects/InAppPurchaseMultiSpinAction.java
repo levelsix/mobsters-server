@@ -86,6 +86,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	}
 	
 	public void setUpDaos() {
+		//TODO: Autowire these
 		Configuration config = AppContext.get().getBean(DefaultConfiguration.class);//new DefaultConfiguration().set(DBConnection.get().getConnection()).set(SQLDialect.MYSQL);
 		userDao = new UserDao(config);
 		itemConfigDao = new ItemConfigDao(config);

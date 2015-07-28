@@ -17,9 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.QueueUpRequestEvent;
-import com.lvl6.events.response.AchievementProgressResponseEvent;
 import com.lvl6.events.response.QueueUpResponseEvent;
-import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.User;
@@ -27,11 +25,11 @@ import com.lvl6.mobsters.db.jooq.generated.tables.pojos.StructureForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventMonsterProto.RetrieveUserMonsterTeamResponseProto;
-import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.EventPvpProto.QueueUpRequestProto;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.PvpBattleOutcome;
@@ -43,6 +41,7 @@ import com.lvl6.retrieveutils.PvpBoardObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PvpLeagueForUserRetrieveUtil2;
 import com.lvl6.retrieveutils.ResearchForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils2;
+import com.lvl6.retrieveutils.daos.PvpBattleCountForUserDao2;
 import com.lvl6.retrieveutils.daos.StructureForUserDao2;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -114,6 +113,9 @@ public class QueueUpController extends EventController {
 	
 	@Autowired
 	protected TimeUtils timeUtils;
+	
+	@Autowired
+	protected PvpBattleCountForUserDao2 pbcfuDao;
 
 
 	//	@Autowired
@@ -323,7 +325,7 @@ public class QueueUpController extends EventController {
 					pvpBoardObstacleForUserRetrieveUtil,
 					researchForUserRetrieveUtil,
 					monsterStuffUtils, serverToggleRetrieveUtil,
-					monsterLevelInfoRetrieveUtils);
+					monsterLevelInfoRetrieveUtils, pbcfuDao);
 
 			RetrieveUserMonsterTeamResponseProto.Builder tempResBuilder = RetrieveUserMonsterTeamResponseProto
 					.newBuilder();
@@ -382,7 +384,7 @@ public class QueueUpController extends EventController {
 		if (null != fakeUserMonsters && !fakeUserMonsters.isEmpty()) {
 			int attackerElo = qua.getAttackerElo();
 			List<PvpProto> ppList = createPvpProtosFromFakeUser(
-					fakeUserMonsters, attackerElo);
+					fakeUserMonsters, attackerElo, attackerId);
 			pvpProtoList.addAll(ppList);
 		}
 
@@ -560,7 +562,8 @@ public class QueueUpController extends EventController {
 	}*/
 
 	private List<PvpProto> createPvpProtosFromFakeUser(
-			List<List<MonsterForPvp>> fakeUserMonsters, int attackerElo) {
+			List<List<MonsterForPvp>> fakeUserMonsters, int attackerElo,
+			String attackerId) {
 		log.info("creating fake users for pvp!!!!");
 		List<PvpProto> ppList = new ArrayList<PvpProto>();
 		boolean setElo = serverToggleRetrieveUtil
@@ -570,7 +573,7 @@ public class QueueUpController extends EventController {
 
 		for (List<MonsterForPvp> mons : fakeUserMonsters) {
 			PvpProto user = createFakeUser(mons, setElo, displayBotElo,
-					attackerElo);
+					attackerElo, attackerId);
 			ppList.add(user);
 		}
 
@@ -580,7 +583,7 @@ public class QueueUpController extends EventController {
 
 	//CREATES ONE FAKE USER FOR PVP
 	private PvpProto createFakeUser(List<MonsterForPvp> mfpList,
-			boolean setElo, boolean displayBotElo, int attackerElo) {
+			boolean setElo, boolean displayBotElo, int attackerElo, String attackerId) {
 		//to create the fake user, need userId=0, some random name, empty clan
 		//for lvl do something like (elo / 50)
 		//for cur elo avg out the monsters elos
@@ -604,7 +607,7 @@ public class QueueUpController extends EventController {
 		//			new Object[] { randomName, avgElo, prospectiveCashWinnings,
 		//			prospectiveOilWinnings, lvl } );
 
-		List<Integer> monsterIdsDropped = calculateDrops(mfpList);
+		List<Integer> monsterIdsDropped = calculateDrops(mfpList, attackerId);
 
 		//it's important that monsterIdsDropped be in the same order
 		//as mfpList
@@ -635,7 +638,7 @@ public class QueueUpController extends EventController {
 		return avgElo;
 	}
 
-	private List<Integer> calculateDrops(List<MonsterForPvp> mfpList) {
+	private List<Integer> calculateDrops(List<MonsterForPvp> mfpList, String attackerId) {
 		List<Integer> monsterDropIds = new ArrayList<Integer>();
 
 		for (MonsterForPvp mfp : mfpList) {
@@ -643,7 +646,8 @@ public class QueueUpController extends EventController {
 			int monserLvl = mfp.getMonsterLvl();
 
 			boolean monsterDropped = monsterLevelInfoRetrieveUtils
-					.didPvpMonsterDrop(monsterId, monserLvl);
+					.didPvpMonsterDrop(monsterId, monserLvl, attackerId,
+							null, null);
 
 			int monsterDropId = ControllerConstants.NOT_SET;
 

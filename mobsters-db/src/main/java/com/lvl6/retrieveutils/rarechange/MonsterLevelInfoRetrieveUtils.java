@@ -4,25 +4,34 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.mobsters.db.jooq.generated.tables.pojos.PvpBattleCountForUserPojo;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.retrieveutils.daos.PvpBattleCountForUserDao2;
 import com.lvl6.utils.DBConnection;
 
 @Component
 @DependsOn("gameServer")
 public class MonsterLevelInfoRetrieveUtils {
-
+	
+	@Autowired
+	protected PvpBattleCountForUserDao2 pbcfuDao;
+	
 	private static Logger log = LoggerFactory.getLogger(MonsterLevelInfoRetrieveUtils.class);
 
 	private static Map<Integer, Map<Integer, MonsterLevelInfo>> monsterIdToLevelToInfo;
@@ -30,12 +39,43 @@ public class MonsterLevelInfoRetrieveUtils {
 	private static Map<Integer, Map<Integer, MonsterLevelInfo>> enumeratedPartialMonsterLevelInfo;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_LEVEL_INFO_CONFIG;
+	
+	private static final double PVP_COUNT_CONSTANT = 0.67; //this is used for decay in drop % with multiple attacks
 
 	/************************ CONTROLLER LOGIC *************************/
-	public boolean didPvpMonsterDrop(int monsterId, int lvl) {
+	public boolean didPvpMonsterDrop(int monsterId, int lvl, String attackerId,
+			String defenderId, List<PvpBattleCountForUserPojo> battleCounts) {
 		Map<Integer, MonsterLevelInfo> lvlToMli = enumeratedPartialMonsterLevelInfo
 				.get(monsterId);
 
+		log.info("battleCounts: {}", battleCounts);
+		log.info("attackerId : {}", attackerId);
+		log.info("defenderId: {}", defenderId);
+		
+		int count = 0;
+		if(defenderId != null && battleCounts != null) {
+			//copying logic from two utils
+			List<PvpBattleCountForUserPojo> pvpBattleCount = 
+					new ArrayList<PvpBattleCountForUserPojo>();
+			for(PvpBattleCountForUserPojo pbcfu : battleCounts) {
+				if(pbcfu.getDefenderId().equals(defenderId)) {
+					pvpBattleCount.add(pbcfu);
+				}
+			}
+			
+			Date now = new Date();
+			for(PvpBattleCountForUserPojo pbcfur : pvpBattleCount) {
+				Date battleDate = new Date(pbcfur.getDate().getTime());
+				Days days = Days.daysBetween((new DateTime(now)).toLocalDate(),
+						(new DateTime(battleDate)).toLocalDate());
+
+				if(days.getDays() < 2) {
+					count = count + pbcfur.getCount();
+				}
+			}
+		}
+		
+		//use count to alter drop rates
 		boolean dropped = false;
 		MonsterLevelInfo mli = null;
 		if (null != lvlToMli && lvlToMli.containsKey(lvl)) {
@@ -43,8 +83,11 @@ public class MonsterLevelInfoRetrieveUtils {
 		}
 
 		if (null != mli) {
-			float dropRate = mli.getPvpDropRate();
-
+			log.info("original drop rate: {}", mli.getPvpDropRate());
+			log.info("count: {}", count);
+			float dropRate = mli.getPvpDropRate() * (float)Math.pow(PVP_COUNT_CONSTANT, count) ;
+			log.info("drop rate after count: {}", dropRate);
+			
 			Random rand = ControllerConstants.RAND;
 			float randFloat = rand.nextFloat();
 
