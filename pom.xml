@@ -83,7 +83,8 @@
 		<jdbc.releaseHelperThreads>3</jdbc.releaseHelperThreads>
 		<jdbc.maxConnectionAgeInSeconds>120</jdbc.maxConnectionAgeInSeconds>
 		<jdbc.closeConnectionWatch>true</jdbc.closeConnectionWatch>
-		<jdbc.connectionTimeoutInMs>3000</jdbc.connectionTimeoutInMs>
+		<jdbc.closeConnectionWatchTimeoutInMs>30000</jdbc.closeConnectionWatchTimeoutInMs>
+		<jdbc.connectionTimeoutInMs>60000</jdbc.connectionTimeoutInMs>
 
 		<dynamodb.table.prefix>local</dynamodb.table.prefix>
 		<dynamodb.isLocal>true</dynamodb.isLocal>
