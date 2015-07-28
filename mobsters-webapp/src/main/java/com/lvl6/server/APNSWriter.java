@@ -190,7 +190,7 @@ public class APNSWriter extends Wrap implements ApplicationContextAware {
 			service = builder.build();
 			service.start();
 		} catch (Exception e) {
-			log.error("Error getting apns cert.. Invalid SSL Config Exception", e);
+			log.error("Error getting apns cert.. Invalid SSL Config Exception");
 		}
 	}
 
