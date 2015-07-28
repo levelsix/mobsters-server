@@ -38,7 +38,9 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private List<ItemForUser> nuUserItems;
 	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
 	@Autowired protected InsertUtil insertUtil; 
-	@Autowired protected UpdateUtil updateUtil; 
+	@Autowired protected UpdateUtil updateUtil;
+	@Autowired protected UserDao userDao;
+	@Autowired protected UserCurrencyHistoryDao userCurrencyHistoryDao;
 	private int gemsSpent;
 	private MiscMethods miscMethods;
 	@Autowired protected HistoryUtils historyUtils; 
@@ -78,8 +80,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	//derived state
 	private Map<Integer, Integer> itemIdToQuantityUsed;
 	private Map<Integer, Integer> itemIdToNuQuantity;
-	private UserDao userDao;
-	private UserCurrencyHistoryDao userCurrencyHistoryDao;
+	
 	private UserPojo userPojo;
 
 	private List<String> itemForUserUsageIds;
@@ -113,10 +114,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	}
 	
 	public void setUpDaos() {
-		Configuration config = new DefaultConfiguration().set(DBConnection.get()
-				.getConnection()).set(SQLDialect.MYSQL);
-		userDao = new UserDao(config);
-		userCurrencyHistoryDao = new UserCurrencyHistoryDao(config);
+
 	}
 
 	private boolean verifySyntax(Builder resBuilder) {
