@@ -102,6 +102,9 @@
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.TaskStageHistoryDao" id="taskStageHistoryDao">
        <constructor-arg index="0" ref="config" />
     </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.UserDao" id="userDao">
+       <constructor-arg index="0" ref="config" />
+    </bean>
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.UserCurrencyHistoryDao" id="userCurrencyHistoryDao">
        <constructor-arg index="0" ref="config" />
     </bean>
@@ -129,8 +132,13 @@
     <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.SecretGiftConfigDao" id="secretGiftConfigDao">
         <constructor-arg index="0" ref="config" />
     </bean>
-        <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.SalesScheduleConfigDao" id="salesScheduleConfigDao">
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.SalesScheduleConfigDao" id="salesScheduleConfigDao">
         <constructor-arg index="0" ref="config" />
     </bean>
+    <bean class="com.lvl6.mobsters.db.jooq.generated.tables.daos.MiniJobRefreshItemConfigDao" id="miniJobRefreshItemConfigDao">
+        <constructor-arg index="0" ref="config" />
+    </bean>
+    
+    
     
 </beans>
