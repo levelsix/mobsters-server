@@ -76,7 +76,7 @@
 		<jdbc.idleConnectionTestPeriodInMinutes>1</jdbc.idleConnectionTestPeriodInMinutes>
 		<jdbc.idleMaxAgeInMinutes>2</jdbc.idleMaxAgeInMinutes>
 		<jdbc.maxConnectionsPerPartition>150</jdbc.maxConnectionsPerPartition>
-		<jdbc.minConnectionsPerPartition>100</jdbc.minConnectionsPerPartition>
+		<jdbc.minConnectionsPerPartition>20</jdbc.minConnectionsPerPartition>
 		<jdbc.partitionCount>3</jdbc.partitionCount>
 		<jdbc.acquireIncrement>10</jdbc.acquireIncrement>
 		<jdbc.statementsCacheSize>500</jdbc.statementsCacheSize>
