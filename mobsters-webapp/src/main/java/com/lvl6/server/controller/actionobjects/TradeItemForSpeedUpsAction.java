@@ -5,9 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.jooq.Configuration;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DefaultConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,25 +23,26 @@ import com.lvl6.proto.EventItemProto.TradeItemForSpeedUpsResponseProto.Builder;
 import com.lvl6.proto.SharedEnumConfigProto.ResponseStatus;
 import com.lvl6.retrieveutils.ItemForUserRetrieveUtil;
 import com.lvl6.server.controller.utils.HistoryUtils;
-import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.UpdateUtil;
 
 @Component@Scope("prototype")public class TradeItemForSpeedUpsAction {
 	private static Logger log = LoggerFactory.getLogger( TradeItemForSpeedUpsAction.class);
 
-	private String userId;
-	private List<ItemForUserUsage> itemsUsed;
-	private List<ItemForUser> nuUserItems;
-	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil; 
-	@Autowired protected InsertUtil insertUtil; 
+	@Autowired protected ItemForUserRetrieveUtil itemForUserRetrieveUtil;
+	@Autowired protected InsertUtil insertUtil;
 	@Autowired protected UpdateUtil updateUtil;
 	@Autowired protected UserDao userDao;
 	@Autowired protected UserCurrencyHistoryDao userCurrencyHistoryDao;
-	private int gemsSpent;
-	private MiscMethods miscMethods;
-	@Autowired protected HistoryUtils historyUtils; 
+	@Autowired private MiscMethods miscMethods;
+	@Autowired protected HistoryUtils historyUtils;
 
+	private String userId;
+	private List<ItemForUserUsage> itemsUsed;
+	private List<ItemForUser> nuUserItems;
+	private int gemsSpent;
+
+	/*
 	public TradeItemForSpeedUpsAction(String userId,
 			List<ItemForUserUsage> itemsUsed, List<ItemForUser> nuUserItems,
 			ItemForUserRetrieveUtil itemForUserRetrieveUtil,
@@ -63,24 +61,36 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		this.miscMethods = miscMethods;
 		this.historyUtils = historyUtils;
 	}
+	*/
+	public void wire(
+			String userId,
+			List<ItemForUserUsage> itemsUsed,
+			List<ItemForUser> nuUserItems,
+			int gemsSpent)
+	{
+		this.userId = userId;
+		this.itemsUsed = itemsUsed;
+		this.nuUserItems = nuUserItems;
+		this.gemsSpent = gemsSpent;
+	}
 
 	//	//encapsulates the return value from this Action Object
 	//	static class TradeItemForSpeedUpsResource {
-	//		
-	//		
+	//
+	//
 	//		public TradeItemForSpeedUpsResource() {
-	//			
+	//
 	//		}
 	//	}
 	//
 	//	public TradeItemForSpeedUpsResource execute() {
-	//		
+	//
 	//	}
 
 	//derived state
 	private Map<Integer, Integer> itemIdToQuantityUsed;
 	private Map<Integer, Integer> itemIdToNuQuantity;
-	
+
 	private UserPojo userPojo;
 
 	private List<String> itemForUserUsageIds;
@@ -112,7 +122,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		resBuilder.setStatus(ResponseStatus.SUCCESS);
 
 	}
-	
+
 	public void setUpDaos() {
 
 	}
@@ -120,7 +130,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	private boolean verifySyntax(Builder resBuilder) {
 		userPojo = userDao.fetchOneById(userId);
 		if(userPojo.getGems() < gemsSpent) {
-			log.error("user doesn't have enough gem! usergems = {}, gemsSpent={}", 
+			log.error("user doesn't have enough gem! usergems = {}, gemsSpent={}",
 					userPojo.getGems(), gemsSpent);
 			return false;
 		}
@@ -133,15 +143,15 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 
 	private boolean verifySemantics(Builder resBuilder) {
 //		if(gemsSpent == 0) {
-//			
-//		
+//
+//
 //		}
 		return true;
 	}
 
 	private boolean writeChangesToDB(Builder resBuilder) {
 		prepCurrencyHistory();
-		
+
 		//record that user used items
 		itemForUserUsageIds = insertUtil
 				.insertIntoItemForUserUsageGetId(itemsUsed);
@@ -150,7 +160,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		updateUtil.updateItemForUser(nuUserItems);
 		userPojo.setGems(userPojo.getGems() - gemsSpent);
 		userDao.update(userPojo);
-		
+
 		insertCurrencyHistory();
 		return true;
 	}
@@ -169,13 +179,13 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 		}
 		return itemsUsedWithIds;
 	}
-	
+
 	public void prepCurrencyHistory() {
 		gemsUserCurrencyHistory = new UserCurrencyHistoryPojo();
 		gemsUserCurrencyHistory.setResourceType(miscMethods.gems);
 		gemsUserCurrencyHistory.setCurrencyBeforeChange(userPojo.getGems());
 	}
-	
+
 	private void insertCurrencyHistory() {
 		Date now = new Date();
 		gemsUserCurrencyHistory.setCurrencyChange(-1 * gemsSpent);
@@ -294,7 +304,7 @@ import com.lvl6.utils.utilmethods.UpdateUtil;
 	public void setItemsUsedWithIds(List<ItemForUserUsage> itemsUsedWithIds) {
 		this.itemsUsedWithIds = itemsUsedWithIds;
 	}
-	
-	
+
+
 
 }

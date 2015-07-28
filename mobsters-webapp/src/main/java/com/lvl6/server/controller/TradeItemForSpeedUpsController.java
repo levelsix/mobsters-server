@@ -28,6 +28,7 @@ import com.lvl6.server.controller.actionobjects.TradeItemForSpeedUpsAction;
 import com.lvl6.server.controller.utils.HistoryUtils;
 import com.lvl6.server.controller.utils.ItemUtil;
 import com.lvl6.server.eventsender.ToClientEvents;
+import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -121,10 +122,12 @@ public class TradeItemForSpeedUpsController extends EventController {
 				nuUserItems = ItemUtil.javafyUserItemProto(nuUserItemsProtos);
 			}
 
-			TradeItemForSpeedUpsAction tifsua = new TradeItemForSpeedUpsAction(
-					userId, itemsUsed, nuUserItems, itemForUserRetrieveUtil,
-					InsertUtils.get(), UpdateUtils.get(), gemsSpent, miscMethods,
-					historyUtils);
+//			TradeItemForSpeedUpsAction tifsua = new TradeItemForSpeedUpsAction(
+//					userId, itemsUsed, nuUserItems, itemForUserRetrieveUtil,
+//					InsertUtils.get(), UpdateUtils.get(), gemsSpent, miscMethods,
+//					historyUtils);
+			TradeItemForSpeedUpsAction tifsua = AppContext.getBean(TradeItemForSpeedUpsAction.class);
+			tifsua.wire(userId, itemsUsed, nuUserItems, gemsSpent);
 
 			tifsua.execute(resBuilder);
 
