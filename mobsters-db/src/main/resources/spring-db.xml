@@ -36,7 +36,7 @@
 		<property name="acquireIncrement" value="${jdbc.acquireIncrement}" />
 		<property name="statementsCacheSize" value="${jdbc.statementsCacheSize}" />
 		<property name="maxConnectionAgeInSeconds" value="${jdbc.maxConnectionAgeInSeconds}" />
-		<property name="closeConnectionWatch" value="${jdbc.closeConnectionWatch}"
+		<property name="closeConnectionWatch" value="${jdbc.closeConnectionWatch}" />
 		<property name="connectionTimeoutInMs" value="${jdbc.connectionTimeoutInMs}" />
 	</bean>
 
