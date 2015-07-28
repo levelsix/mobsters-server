@@ -36,6 +36,7 @@
 		<property name="acquireIncrement" value="${jdbc.acquireIncrement}" />
 		<property name="statementsCacheSize" value="${jdbc.statementsCacheSize}" />
 		<property name="releaseHelperThreads" value="${jdbc.releaseHelperThreads}" />
+		<property name="maxConnectionAgeInSeconds" value="${jdbc.maxConnectionAgeInSeconds}" />
 	</bean>
 
 	<bean id="dbConnection" class="com.lvl6.utils.DBConnection" scope="singleton"
