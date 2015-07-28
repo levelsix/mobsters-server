@@ -1314,6 +1314,7 @@ public class DBConnection {
 				}
 			}
 			rs = stmt.executeQuery();
+			stmt.close();
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + values, e);
 		} catch (NullPointerException e) {
