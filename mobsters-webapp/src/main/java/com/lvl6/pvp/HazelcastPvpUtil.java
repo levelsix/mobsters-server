@@ -490,6 +490,11 @@ public class HazelcastPvpUtil implements InitializingBean {
 			pvpUserMap.put(userId, user);
 		}
 	}
+	
+	public void reloadPvpUserMap() {
+		pvpUserMap.clear();
+		initializePvpUserMap();
+	}
 
 	public Locker getLocker() {
 		return locker;
