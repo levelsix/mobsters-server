@@ -250,13 +250,11 @@ public class SendGroupChatController extends EventController {
 					}
 				}
 
-				MinimumUserProto mup = createInfoProtoUtils
-						.createMinimumUserProtoFromUserAndClan(user, null);
-				chatProto.setSender(mup);
+				chatProto.setSender(senderProto);
 				chatProto.setScope(scope);
 
 				GroupChatMessageProto gcmp = createInfoProtoUtils
-						.createGroupChatMessageProto(timeOfPost.getTime(), mup,
+						.createGroupChatMessageProto(timeOfPost.getTime(), senderProto,
 								censoredChatMessage, user.isAdmin(), "global msg", translateMap,
 								translationUtils.convertFromLanguageToEnum(detectedLanguage, toggle),
 								translationUtils);
