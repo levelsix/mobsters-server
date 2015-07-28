@@ -270,14 +270,26 @@ public class SetPvpBattleHistoryAction implements StartUpAction {
 			User defender = userIdsToUsers.get(defenderId);
 			PvpUser defenderPu = idsToPvpUsers.get(defenderEyed);
 
-			PvpBattleOutcome potentialResult = new PvpBattleOutcome(user,
-					attackerElo, defender, defenderPu.getElo(),
-					serverToggleRetrieveUtil);
+			int cashStolen = 0;
+			int oilStolen = 0;
+			
+			try {
+				PvpBattleOutcome potentialResult = new PvpBattleOutcome(user,
+						attackerElo, defender, defenderPu.getElo(),
+						serverToggleRetrieveUtil);
+				cashStolen = potentialResult.getUnsignedCashAttackerWins();
+				oilStolen = potentialResult.getUnsignedOilAttackerWins();
+				
+			} catch (Exception e) {
+				log.error("error calculateCashOilRewardFromPvpUsers", e);
+			}
 
 			userIdToCashStolen.put(defenderId,
-					potentialResult.getUnsignedCashAttackerWins());
+					//potentialResult.getUnsignedCashAttackerWins());
+					cashStolen);
 			userIdToOilStolen.put(defenderId,
-					potentialResult.getUnsignedOilAttackerWins());
+					//potentialResult.getUnsignedOilAttackerWins());
+					oilStolen);
 		}
 	}
 

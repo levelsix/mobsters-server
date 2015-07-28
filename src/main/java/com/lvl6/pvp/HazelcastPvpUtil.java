@@ -411,8 +411,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 
 	protected void setupPvpUserMap() {
 
-		boolean gotLock = getLocker().lockHazelcastMap(pvpUserMapName);
+		boolean gotLock = false;
 		try {
+			gotLock = getLocker().lockHazelcastMap(pvpUserMapName);
 			if (gotLock) {
 				boolean pvpUserMapInitialized = false;
 				if (initializationFlagsMap.containsKey(pvpUserMapName)) {
