@@ -214,7 +214,7 @@ public class RetrieveClanInfoController extends EventController {
 
 			List<Clan> clanList = orderRecommendedClans(clanIds);
 
-			log.info(String.format("clanList=%s", clanList));
+			log.debug(String.format("clanList=%s", clanList));
 			setClanProtosWithSize(resBuilder, clanList);
 			return;
 		}

@@ -28,10 +28,10 @@ import com.lvl6.utils.DBConnection;
 @Component
 @DependsOn("gameServer")
 public class MonsterLevelInfoRetrieveUtils {
-	
+
 	@Autowired
 	protected PvpBattleCountForUserDao2 pbcfuDao;
-	
+
 	private static Logger log = LoggerFactory.getLogger(MonsterLevelInfoRetrieveUtils.class);
 
 	private static Map<Integer, Map<Integer, MonsterLevelInfo>> monsterIdToLevelToInfo;
@@ -39,7 +39,7 @@ public class MonsterLevelInfoRetrieveUtils {
 	private static Map<Integer, Map<Integer, MonsterLevelInfo>> enumeratedPartialMonsterLevelInfo;
 
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_LEVEL_INFO_CONFIG;
-	
+
 	private static final double PVP_COUNT_CONSTANT = 0.67; //this is used for decay in drop % with multiple attacks
 
 	/************************ CONTROLLER LOGIC *************************/
@@ -48,21 +48,21 @@ public class MonsterLevelInfoRetrieveUtils {
 		Map<Integer, MonsterLevelInfo> lvlToMli = enumeratedPartialMonsterLevelInfo
 				.get(monsterId);
 
-		log.info("battleCounts: {}", battleCounts);
-		log.info("attackerId : {}", attackerId);
-		log.info("defenderId: {}", defenderId);
-		
+		log.debug("battleCounts: {}", battleCounts);
+		log.debug("attackerId : {}", attackerId);
+		log.debug("defenderId: {}", defenderId);
+
 		int count = 0;
 		if(defenderId != null && battleCounts != null) {
 			//copying logic from two utils
-			List<PvpBattleCountForUserPojo> pvpBattleCount = 
+			List<PvpBattleCountForUserPojo> pvpBattleCount =
 					new ArrayList<PvpBattleCountForUserPojo>();
 			for(PvpBattleCountForUserPojo pbcfu : battleCounts) {
 				if(pbcfu.getDefenderId().equals(defenderId)) {
 					pvpBattleCount.add(pbcfu);
 				}
 			}
-			
+
 			Date now = new Date();
 			for(PvpBattleCountForUserPojo pbcfur : pvpBattleCount) {
 				Date battleDate = new Date(pbcfur.getDate().getTime());
@@ -74,7 +74,7 @@ public class MonsterLevelInfoRetrieveUtils {
 				}
 			}
 		}
-		
+
 		//use count to alter drop rates
 		boolean dropped = false;
 		MonsterLevelInfo mli = null;
@@ -87,7 +87,7 @@ public class MonsterLevelInfoRetrieveUtils {
 			log.info("count: {}", count);
 			float dropRate = mli.getPvpDropRate() * (float)Math.pow(PVP_COUNT_CONSTANT, count) ;
 			log.info("drop rate after count: {}", dropRate);
-			
+
 			Random rand = ControllerConstants.RAND;
 			float randFloat = rand.nextFloat();
 
