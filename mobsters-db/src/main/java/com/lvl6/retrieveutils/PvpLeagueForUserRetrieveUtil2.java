@@ -58,15 +58,15 @@ public class PvpLeagueForUserRetrieveUtil2 {
 	public PvpLeagueForUser getUserPvpLeagueForId(String userId) {
 		PvpLeagueForUser plfu = null;
 		try {
-			List<String> columnsToSelect = UserPvpLeagueForClientMapper
-					.getColumnsSelected();
+			List<String> columnsToSelect = new ArrayList<String>();//UserPvpLeagueForClientMapper
+					//.getColumnsSelected();
 
 			Map<String, Object> equalityConditions = new HashMap<String, Object>();
 			equalityConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID,
 					userId);
 			String conditionDelimiter = queryConstructionUtil.getAnd();
 
-			//query db, "values" is not used 
+			//query db, "values" is not used
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
 			List<Object> values = new ArrayList<Object>();
@@ -99,15 +99,15 @@ public class PvpLeagueForUserRetrieveUtil2 {
 			List<String> userIdList) {
 		Map<String, PvpLeagueForUser> plfuMap = new HashMap<String, PvpLeagueForUser>();
 		try {
-			List<String> columnsToSelect = UserPvpLeagueForClientMapper
-					.getColumnsSelected();
+			List<String> columnsToSelect = new ArrayList<String>();//UserPvpLeagueForClientMapper
+					//.getColumnsSelected();
 
 			Map<String, Collection<?>> inConditions = new HashMap<String, Collection<?>>();
 			inConditions.put(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID,
 					userIdList);
 			String conditionDelimiter = queryConstructionUtil.getAnd();
 
-			//query db, "values" is not used 
+			//query db, "values" is not used
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
 			List<Object> values = new ArrayList<Object>();
@@ -146,7 +146,7 @@ public class PvpLeagueForUserRetrieveUtil2 {
 					userId);
 			String conditionDelimiter = queryConstructionUtil.getAnd();
 
-			//query db, "values" is not used 
+			//query db, "values" is not used
 			//(its purpose is to hold the values that were supposed to be put
 			// into a prepared statement)
 			List<Object> values = new ArrayList<Object>();
@@ -223,31 +223,31 @@ public class PvpLeagueForUserRetrieveUtil2 {
 		}
 
 		//whatever columns are used in map row should appear here as well
-		public static List<String> getColumnsSelected() {
-			if (null == columnsSelected) {
-				columnsSelected = new ArrayList<String>();
-				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID);
-				columnsSelected
-						.add(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID);
-				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__RANK);
-				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ELO);
-				columnsSelected
-						.add(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME);
-				columnsSelected
-						.add(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME);
-				columnsSelected
-						.add(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON);
-				columnsSelected
-						.add(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON);
-				columnsSelected
-						.add(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_LOST);
-				columnsSelected
-						.add(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_LOST);
-				columnsSelected
-						.add(DBConstants.PVP_LEAGUE_FOR_USER__MONSTER_DMG_MULTIPLIER);
-			}
-			return columnsSelected;
-		}
+//		public static List<String> getColumnsSelected() {
+//			if (null == columnsSelected) {
+//				columnsSelected = new ArrayList<String>();
+//				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__USER_ID);
+//				columnsSelected
+//						.add(DBConstants.PVP_LEAGUE_FOR_USER__PVP_LEAGUE_ID);
+//				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__RANK);
+//				columnsSelected.add(DBConstants.PVP_LEAGUE_FOR_USER__ELO);
+//				columnsSelected
+//						.add(DBConstants.PVP_LEAGUE_FOR_USER__SHIELD_END_TIME);
+//				columnsSelected
+//						.add(DBConstants.PVP_LEAGUE_FOR_USER__BATTLE_END_TIME);
+//				columnsSelected
+//						.add(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_WON);
+//				columnsSelected
+//						.add(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_WON);
+//				columnsSelected
+//						.add(DBConstants.PVP_LEAGUE_FOR_USER__ATTACKS_LOST);
+//				columnsSelected
+//						.add(DBConstants.PVP_LEAGUE_FOR_USER__DEFENSES_LOST);
+//				columnsSelected
+//						.add(DBConstants.PVP_LEAGUE_FOR_USER__MONSTER_DMG_MULTIPLIER);
+//			}
+//			return columnsSelected;
+//		}
 	}
 
 	private static final class BattlesWonMapper implements RowMapper<Integer> {
