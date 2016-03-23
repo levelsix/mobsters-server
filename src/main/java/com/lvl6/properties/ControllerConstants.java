@@ -584,10 +584,10 @@ public class ControllerConstants {
 
 	// MAP
 	public static final String TASK_MAP__SECTION_IMAGE_PREFIX = "mapsection";
-	public static final int TASK_MAP__NUMBER_OF_SECTIONS = 15;
+	public static final int TASK_MAP__NUMBER_OF_SECTIONS = 8;
 	public static final float TASK_MAP__SECTION_HEIGHT = 328;
 	public static final float TASK_MAP__TOTAL_WIDTH = 328;
-	public static final float TASK_MAP__TOTAL_HEIGHT = 4819;
+	public static final float TASK_MAP__TOTAL_HEIGHT = 2571;
 
 	public static final AnimatedSpriteOffset[] STARTUP__ANIMATED_SPRITE_OFFSETS = {
 			new AnimatedSpriteOffset("TutorialGuide", new CoordinatePair(0, -5)),
