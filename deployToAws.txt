@@ -1,0 +1,9 @@
+LOCAL MACHINE:
+mvn clean package -P stage-aws1 -DskipTests
+scp -i ~/fantasy-dev.pem mobsters-webapp/target/mobsters-webapp-1.0-SNAPSHOT.war ubuntu@54.201.89.50:~
+
+REMOTE MACHINE:
+sudo rm -rf /var/lib/tomcat8/webapps/*
+sudo cp mobsters-webapp-1.0-SNAPSHOT.war /var/lib/tomcat8/webapps/ROOT.war
+sudo service tomcat8 restart
+tail -f -n 1000 /var/log/tomcat8/catalina.out
