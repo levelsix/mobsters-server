@@ -8,7 +8,9 @@ src/main/resources/KingdomAPNSProdKey.p12
 #java specific
 *.class
 
-
+#intellij
+*.iml
+.idea
 
 #eclipse
 .project
